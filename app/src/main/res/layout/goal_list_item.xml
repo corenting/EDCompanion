@@ -7,19 +7,26 @@
     android:id="@+id/cardView"
     style="@style/CardView"
     card_view:cardCornerRadius="2dp"
-    android:paddingTop="24dp"
-    android:paddingRight="24dp"
-    android:paddingLeft="24dp">
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp" >
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
+        android:paddingRight="24dp"
+        android:paddingLeft="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/quoteItemLayout">
 
         <TextView
             android:id="@+id/titleTextView"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />

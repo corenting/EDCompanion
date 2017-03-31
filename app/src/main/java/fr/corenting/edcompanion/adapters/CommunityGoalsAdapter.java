@@ -45,7 +45,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
     public void clearGoals()
     {
-        parent.setListVisibility(false);
+        parent.endLoading(0);
         goals.clear();
         notifyDataSetChanged();
     }

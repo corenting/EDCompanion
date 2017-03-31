@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,8 +27,6 @@ public class CommunityGoalsFragment extends Fragment {
     public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.emptySwipe)
     public SwipeRefreshLayout emptySwipeRefreshLayout;
-    @BindView(R.id.progressBar)
-    public ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,9 +40,16 @@ public class CommunityGoalsFragment extends Fragment {
         recyclerView.setAdapter(new CommunityGoalsAdapter(this));
 
         //Swipe to refresh setup
+        final CommunityGoalsFragment parent = this;
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                CommunityGoalsAdapter adapter = (CommunityGoalsAdapter) recyclerView.getAdapter();
+                adapter.clearGoals();
+                emptySwipeRefreshLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setRefreshing(true);
+                CommunityGoalsNetwork.getCommunityGoals(parent);
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
@@ -56,10 +60,15 @@ public class CommunityGoalsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // Set visible
-        setListVisibility(false);
+
+        // Setup views
+        emptySwipeRefreshLayout.setVisibility(View.GONE);
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
+
+        // Register event and get the goals
         EventBus.getDefault().register(this);
-        CommunityGoalsNetwork.getCommunityGoals(getView());
+        CommunityGoalsNetwork.getCommunityGoals(this);
     }
 
     @Override
@@ -74,17 +83,14 @@ public class CommunityGoalsFragment extends Fragment {
         adapter.addGoal(goal);
     }
 
-    public void setListVisibility(boolean visibility)
+    public void endLoading(int count)
     {
-        if (visibility) {
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            emptySwipeRefreshLayout.setVisibility(View.GONE);
-        }
-        else {
-            swipeRefreshLayout.setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(false);
+        emptySwipeRefreshLayout.setRefreshing(false);
+        if (count <= 0)
+        {
             emptySwipeRefreshLayout.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setVisibility(View.GONE);
         }
     }
 }
