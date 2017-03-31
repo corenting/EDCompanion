@@ -4,17 +4,17 @@
         <item
             android:id="@+id/nav_cg"
             android:icon="@drawable/ic_flag"
-            android:title="Community Goals" />
+            android:title="@string/community_goals" />
         <item
             android:id="@+id/nav_galnet"
             android:icon="@drawable/ic_newspaper"
-            android:title="Galnet News" />
+            android:title="@string/galnet" />
     </group>
 
     <group android:id="@+id/grp2" android:checkableBehavior="single" >
         <item
             android:id="@+id/navigation_item_2"
             android:icon="@drawable/ic_settings"
-            android:title="Settings" />
+            android:title="@string/settings" />
     </group>
 </menu>

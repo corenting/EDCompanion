@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity
 
         // Select the first item in menu as the fragment was loaded
         navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
+        setTitle(getString(R.string.community_goals));
     }
 
     @Override
@@ -79,7 +80,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -88,10 +88,12 @@ public class MainActivity extends AppCompatActivity
             fragmentManager
                     .beginTransaction().replace(R.id.fragmentContent, new CommunityGoalsFragment())
                     .commit();
+            setTitle(getString(R.string.community_goals));
         } else if (id == R.id.nav_galnet) {
             fragmentManager
                     .beginTransaction().replace(R.id.fragmentContent, new CommunityGoalsFragment())
                     .commit();
+            setTitle(getString(R.string.galnet));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
