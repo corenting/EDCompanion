@@ -3,18 +3,18 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_cg"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_flag"
             android:title="Community Goals" />
         <item
             android:id="@+id/nav_galnet"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_newspaper"
             android:title="Galnet News" />
     </group>
 
     <group android:id="@+id/grp2" android:checkableBehavior="single" >
         <item
             android:id="@+id/navigation_item_2"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_settings"
             android:title="Settings" />
     </group>
 </menu>

@@ -28,10 +28,32 @@ public class CommunityGoalsNetwork {
                                 }
                                 int count = result.get("goals").getAsJsonArray().size();
                                 for (JsonElement elt : result.get("goals").getAsJsonArray()) {
-                                    JsonObject currentGoal = elt.getAsJsonObject();
+                                    JsonObject goal = elt.getAsJsonObject();
                                     CommunityGoal newCg = new CommunityGoal();
 
-                                    newCg.setTitle(currentGoal.get("title").getAsString());
+                                    // Main informations
+                                    newCg.setTitle(goal.get("title").getAsString());
+                                    newCg.setDescription(goal.get("description").getAsString());
+                                    newCg.setReward(goal.get("reward").getAsString());
+                                    newCg.setObjective(goal.get("objective").getAsString());
+                                    newCg.setContributors(goal.get("contributors").getAsInt());
+                                    newCg.setOngoing(goal.get("ongoing").getAsBoolean());
+
+                                    // Tiers
+                                    JsonObject tiersObject = goal.get("tier_progress").getAsJsonObject();
+                                    newCg.setCurrentTier(tiersObject.get("current").getAsInt());
+                                    newCg.setTotalTier(tiersObject.get("total").getAsInt());
+
+                                    // Date
+                                    JsonObject datesObject = goal.get("date").getAsJsonObject();
+                                    newCg.setStartDate(datesObject.get("start").getAsString());
+                                    newCg.setEndDate(datesObject.get("end").getAsString());
+                                    newCg.setRefreshDate(datesObject.get("last_update").getAsString());
+
+                                    // Location
+                                    JsonObject locationSystem = goal.get("location").getAsJsonObject();
+                                    newCg.setStation(locationSystem.get("station").getAsString());
+                                    newCg.setSystem(locationSystem.get("system").getAsString());
 
                                     EventBus.getDefault().post(newCg);
                                 }
