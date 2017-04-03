@@ -6,8 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,13 +24,16 @@ import fr.corenting.edcompanion.R;
 
 public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAdapter.goalsViewHolder> {
 
-    public List<CommunityGoal> goals;
+    private List<CommunityGoal> goals;
     private View.OnClickListener onClickListener;
     private CommunityGoalsFragment parent;
+    private PrettyTime prettyTime;
 
     public CommunityGoalsAdapter(final CommunityGoalsFragment parent) {
         this.parent = parent;
         this.goals = new LinkedList<>();
+        prettyTime = new PrettyTime(Locale.US);
+
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +74,23 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         holder.descriptionTextView.setText(currentGoal.getDescription());
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
 
+        // Last update
+        if (currentGoal.getRefreshDate().equals("finished")) {
+            holder.subtitleTextView.setText(parent.getString(R.string.last_update, currentGoal.getRefreshDate()));
+        }
+        else {
+            try {
+                DateFormat sourceFormat = new SimpleDateFormat("dd MMM yyyy, hh:mma", Locale.US);
+                Date date = sourceFormat.parse(currentGoal.getRefreshDate());
+                holder.subtitleTextView.setText(parent.getString(R.string.last_update, prettyTime.format(date)));
+            }
+            catch (Exception e)
+            {
+                holder.subtitleTextView.setText(parent.getString(R.string.last_update, parent.getString(R.string.unknown)));
+            }
+        }
+
+
         // Remaining
         String remainingText = currentGoal.isOngoing() ? currentGoal.getEndDate() : "Finished";
         holder.remainingTextView.setText(remainingText);
@@ -84,6 +110,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
     public static class goalsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.titleTextView) TextView titleTextView;
+        @BindView(R.id.subtitleTextView) TextView subtitleTextView;
         @BindView(R.id.descriptionTextView) TextView descriptionTextView;
         @BindView(R.id.remainingTextView) TextView remainingTextView;
         @BindView(R.id.tierTextView) TextView tierTextView;

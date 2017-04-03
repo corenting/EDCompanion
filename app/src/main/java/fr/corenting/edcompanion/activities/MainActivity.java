@@ -17,7 +17,7 @@ import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private  FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity
         // Select the first item in menu as the fragment was loaded
         navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
         setTitle(getString(R.string.community_goals));
+        getSupportActionBar().setSubtitle(R.string.data_credits);
     }
 
     @Override
@@ -89,11 +90,13 @@ public class MainActivity extends AppCompatActivity
                     .beginTransaction().replace(R.id.fragmentContent, new CommunityGoalsFragment())
                     .commit();
             setTitle(getString(R.string.community_goals));
+            getSupportActionBar().setSubtitle(R.string.data_credits);
         } else if (id == R.id.nav_galnet) {
             fragmentManager
                     .beginTransaction().replace(R.id.fragmentContent, new CommunityGoalsFragment())
                     .commit();
             setTitle(getString(R.string.galnet));
+            getSupportActionBar().setSubtitle("");
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
