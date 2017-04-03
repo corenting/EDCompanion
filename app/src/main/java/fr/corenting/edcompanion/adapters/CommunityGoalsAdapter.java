@@ -61,19 +61,12 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
     public void onBindViewHolder(final goalsViewHolder holder, final int position) {
         CommunityGoal currentGoal = goals.get(position);
 
-        holder.title.setText(currentGoal.getTitle());
-        holder.description.setText(currentGoal.getDescription());
+        holder.titleTextView.setText(currentGoal.getTitle());
+        holder.descriptionTextView.setText(currentGoal.getDescription());
+        holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
 
         // Remaining
-        String remainingText = "";
-        if (currentGoal.isOngoing())
-        {
-            remainingText = currentGoal.getEndDate();
-        }
-        else
-        {
-            remainingText = "Finished";
-        }
+        String remainingText = currentGoal.isOngoing() ? currentGoal.getEndDate() : "Finished";
         holder.remainingTextView.setText(remainingText);
 
         // Tier
@@ -90,10 +83,11 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
     }
 
     public static class goalsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.titleTextView) TextView title;
-        @BindView(R.id.descriptionTextView) TextView description;
+        @BindView(R.id.titleTextView) TextView titleTextView;
+        @BindView(R.id.descriptionTextView) TextView descriptionTextView;
         @BindView(R.id.remainingTextView) TextView remainingTextView;
         @BindView(R.id.tierTextView) TextView tierTextView;
+        @BindView(R.id.peopleTextView) TextView peopleTextView;
 
         goalsViewHolder(final View view) {
             super(view);

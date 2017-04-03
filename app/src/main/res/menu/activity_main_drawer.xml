@@ -13,8 +13,12 @@
 
     <group android:id="@+id/grp2" android:checkableBehavior="single" >
         <item
-            android:id="@+id/navigation_item_2"
+            android:id="@+id/settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/settings" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/about" />
     </group>
 </menu>
