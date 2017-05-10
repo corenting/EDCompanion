@@ -41,7 +41,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
             public void onClick(View v) {
                 final CommunityGoal goal = goals.get(parent.recyclerView.getChildAdapterPosition(v));
                 Intent i = new Intent(parent.getContext(), CommunityGoalDetailsActivity.class);
-                //i.putExtra("goal", goal);
+                i.putExtra("goal", goal);
                 parent.startActivity(i);
             }
         };

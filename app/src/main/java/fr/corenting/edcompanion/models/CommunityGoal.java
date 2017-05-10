@@ -1,6 +1,9 @@
 package fr.corenting.edcompanion.models;
 
-public class CommunityGoal {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CommunityGoal implements Parcelable {
 
     private boolean ongoing;
     private String title;
@@ -18,6 +21,67 @@ public class CommunityGoal {
     private String startDate;
     private String endDate;
     private String refreshDate;
+
+    public CommunityGoal() {}
+
+    public CommunityGoal(Parcel source) {
+        ongoing = source.readByte() != 0;
+        title = source.readString();
+        description = source.readString();
+        objective = source.readString();
+        reward = source.readString();
+
+        currentTier = source.readInt();
+        totalTier = source.readInt();
+        contributors = source.readInt();
+
+        station = source.readString();
+        system = source.readString();
+
+        startDate = source.readString();
+        endDate = source.readString();
+        refreshDate = source.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (ongoing ? 1 : 0));
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(objective);
+        dest.writeString(reward);
+
+        dest.writeInt(currentTier);
+        dest.writeInt(totalTier);
+        dest.writeInt(contributors);
+
+        dest.writeString(station);
+        dest.writeString(system);
+
+        dest.writeString(startDate);
+        dest.writeString(endDate);
+        dest.writeString(refreshDate);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<CommunityGoal> CREATOR = new Parcelable.Creator<CommunityGoal>()
+    {
+        @Override
+        public CommunityGoal createFromParcel(Parcel source)
+        {
+            return new CommunityGoal(source);
+        }
+
+        @Override
+        public CommunityGoal[] newArray(int size)
+        {
+            return new CommunityGoal[size];
+        }
+    };
 
     public String getTitle() {
         return title;
