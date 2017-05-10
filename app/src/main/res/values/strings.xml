@@ -6,8 +6,6 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_goals_to_display">No goals to display</string>
     <string name="api_url">https://9cw.eu/edcg/api.php</string>
     <string name="download_error">Error while downloading the community goals</string>
@@ -18,4 +16,5 @@
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>
     <string name="data_credits">Data provided by inara.cz</string>
+    <string name="title_activity_community_goal_details">Community goal details</string>
 </resources>

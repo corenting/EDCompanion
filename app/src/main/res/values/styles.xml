@@ -1,7 +1,6 @@
 <resources>
 
-    <style name="Theme.App" parent="Base.Theme.App">
-    </style>
+    <style name="Theme.App" parent="Base.Theme.App"></style>
 
     <style name="Base.Theme.App" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -11,6 +10,11 @@
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.App.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.App.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

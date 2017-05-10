@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.corenting.edcompanion.activities.CommunityGoalDetailsActivity;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.models.CommunityGoal;
 
@@ -37,11 +39,10 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                final CustomTypes.Comic comic = comics.get(parent.recyclerView.getChildAdapterPosition(v));
-                Intent i = new Intent(parent, ComicInfoActivity.class);
-                i.putExtra("comic", comic);
-                parent.startActivityForResult(i, 1);*/
+                final CommunityGoal goal = goals.get(parent.recyclerView.getChildAdapterPosition(v));
+                Intent i = new Intent(parent.getContext(), CommunityGoalDetailsActivity.class);
+                //i.putExtra("goal", goal);
+                parent.startActivity(i);
             }
         };
     }
