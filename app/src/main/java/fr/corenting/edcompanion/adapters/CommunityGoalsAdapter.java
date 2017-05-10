@@ -74,34 +74,9 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         holder.titleTextView.setText(currentGoal.getTitle());
         holder.descriptionTextView.setText(currentGoal.getDescription());
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
-
-        // Last update
-        if (currentGoal.getRefreshDate().equals("finished")) {
-            holder.subtitleTextView.setText(parent.getString(R.string.last_update, currentGoal.getRefreshDate()));
-        }
-        else {
-            try {
-                DateFormat sourceFormat = new SimpleDateFormat("dd MMM yyyy, hh:mma", Locale.US);
-                Date date = sourceFormat.parse(currentGoal.getRefreshDate());
-                holder.subtitleTextView.setText(parent.getString(R.string.last_update, prettyTime.format(date)));
-            }
-            catch (Exception e)
-            {
-                holder.subtitleTextView.setText(parent.getString(R.string.last_update, parent.getString(R.string.unknown)));
-            }
-        }
-
-
-        // Remaining
-        String remainingText = currentGoal.isOngoing() ? currentGoal.getEndDate() : "Finished";
-        holder.remainingTextView.setText(remainingText);
-
-        // Tier
-        String tierText = new StringBuilder()
-                .append(currentGoal.getCurrentTier())
-                .append(" / ")
-                .append(currentGoal.getTotalTier()).toString();
-        holder.tierTextView.setText(tierText);
+        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(parent.getContext()));
+        holder.remainingTextView.setText(currentGoal.getRemainingString());
+        holder.tierTextView.setText(currentGoal.getTierString());
     }
 
     @Override

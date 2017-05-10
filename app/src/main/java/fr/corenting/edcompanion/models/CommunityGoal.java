@@ -1,7 +1,17 @@
 package fr.corenting.edcompanion.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import fr.corenting.edcompanion.R;
 
 public class CommunityGoal implements Parcelable {
 
@@ -22,7 +32,12 @@ public class CommunityGoal implements Parcelable {
     private String endDate;
     private String refreshDate;
 
-    public CommunityGoal() {}
+    // For the string function
+    private PrettyTime prettyTime;
+
+    public CommunityGoal() {
+        prettyTime = new PrettyTime(Locale.US);
+    }
 
     public CommunityGoal(Parcel source) {
         ongoing = source.readByte() != 0;
@@ -41,6 +56,8 @@ public class CommunityGoal implements Parcelable {
         startDate = source.readString();
         endDate = source.readString();
         refreshDate = source.readString();
+
+        prettyTime = new PrettyTime(Locale.US);
     }
 
     @Override
@@ -185,5 +202,35 @@ public class CommunityGoal implements Parcelable {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public boolean refreshIsFinished() {
+        return refreshDate.equals("finished");
+    }
+
+    public String getRefreshDateString(Context ctx) {
+        // Last update
+        if (refreshIsFinished()) {
+            return ctx.getString(R.string.last_update, getRefreshDate());
+        }
+        else {
+            try {
+                DateFormat sourceFormat = new SimpleDateFormat("dd MMM yyyy, hh:mma", Locale.US);
+                Date date = sourceFormat.parse(getRefreshDate());
+                return ctx.getString(R.string.last_update, prettyTime.format(date));
+            }
+            catch (Exception e)
+            {
+                return ctx.getString(R.string.last_update, ctx.getString(R.string.unknown));
+            }
+        }
+    }
+
+    public String getRemainingString() {
+        return isOngoing() ? getEndDate() : "Finished";
+    }
+
+    public String getTierString() {
+        return String.valueOf(getCurrentTier()) + " / " + getTotalTier();
     }
 }
