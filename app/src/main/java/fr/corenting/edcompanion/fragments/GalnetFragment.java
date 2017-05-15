@@ -15,11 +15,11 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
-import fr.corenting.edcompanion.models.CommunityGoal;
-import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
+import fr.corenting.edcompanion.adapters.GalnetAdapter;
+import fr.corenting.edcompanion.models.GalnetNews;
+import fr.corenting.edcompanion.network.GalnetNetwork;
 
-public class CommunityGoalsFragment extends Fragment  {
+public class GalnetFragment extends Fragment  {
 
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
@@ -37,20 +37,20 @@ public class CommunityGoalsFragment extends Fragment  {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new CommunityGoalsAdapter(getContext(), recyclerView, false));
+        recyclerView.setAdapter(new GalnetAdapter(getContext(), recyclerView));
 
         //Swipe to refresh setup
-        final CommunityGoalsFragment parent = this;
+        final GalnetFragment parent = this;
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                CommunityGoalsAdapter adapter = (CommunityGoalsAdapter) recyclerView.getAdapter();
+                GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
                 endLoading(0);
-                adapter.clearGoals();
+                adapter.clearNews();
                 emptySwipeRefreshLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(true);
-                CommunityGoalsNetwork.getCommunityGoals(parent);
+                GalnetNetwork.getNews(parent);
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
@@ -67,9 +67,9 @@ public class CommunityGoalsFragment extends Fragment  {
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
 
-        // Register event and get the goals
+        // Register event and get the news
         EventBus.getDefault().register(this);
-        CommunityGoalsNetwork.getCommunityGoals(this);
+        GalnetNetwork.getNews(this);
     }
 
     @Override
@@ -79,9 +79,9 @@ public class CommunityGoalsFragment extends Fragment  {
     }
 
     @Subscribe
-    public void onCommunityGoalEvent(CommunityGoal goal) {
-        CommunityGoalsAdapter adapter = (CommunityGoalsAdapter) recyclerView.getAdapter();
-        adapter.addGoal(goal);
+    public void onNewsEvent(GalnetNews news) {
+        GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
+        adapter.addNews(news);
     }
 
     public void endLoading(int count)

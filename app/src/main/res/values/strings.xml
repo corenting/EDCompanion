@@ -8,7 +8,8 @@
 
     <string name="no_goals_to_display">No goals to display</string>
     <string name="api_url">https://9cw.eu/edcg/api.php</string>
-    <string name="download_error">Error while downloading the community goals</string>
+    <string name="galnet_rss">https://community.elitedangerous.com/en/galnet-rss</string>
+    <string name="download_error">Error while downloading the content</string>
     <string name="community_goals">Community Goals</string>
     <string name="galnet">Galnet</string>
     <string name="settings">Settings</string>

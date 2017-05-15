@@ -8,19 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.ocpsoft.prettytime.PrettyTime;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.activities.CommunityGoalDetailsActivity;
-import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.models.CommunityGoal;
 
 import fr.corenting.edcompanion.R;
@@ -62,7 +55,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
     @Override
     public goalsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.goal_list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         v.setOnClickListener(onClickListener);
         return new goalsViewHolder(v);
     }

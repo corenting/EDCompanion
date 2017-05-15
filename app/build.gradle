@@ -52,6 +52,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     compile 'com.koushikdutta.ion:ion:2.1.9'
+    compile 'com.einmalfel:earl:1.2.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

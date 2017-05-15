@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
+import fr.corenting.edcompanion.fragments.GalnetFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setSubtitle(R.string.data_credits);
         } else if (id == R.id.nav_galnet) {
             fragmentManager
-                    .beginTransaction().replace(R.id.fragmentContent, new CommunityGoalsFragment())
+                    .beginTransaction().replace(R.id.fragmentContent, new GalnetFragment())
                     .commit();
             setTitle(getString(R.string.galnet));
             getSupportActionBar().setSubtitle("");
