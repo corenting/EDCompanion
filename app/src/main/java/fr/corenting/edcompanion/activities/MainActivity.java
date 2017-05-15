@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -74,10 +75,10 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        /*//noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -98,6 +99,9 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             setTitle(getString(R.string.galnet));
             getSupportActionBar().setSubtitle("");
+        } else if (id == R.id.settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
