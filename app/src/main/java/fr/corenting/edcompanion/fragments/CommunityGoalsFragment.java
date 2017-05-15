@@ -19,7 +19,7 @@ import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
 import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
 
-public class CommunityGoalsFragment extends Fragment {
+public class CommunityGoalsFragment extends Fragment  {
 
     @BindView(R.id.goalsRecyclerView)
     public RecyclerView recyclerView;
@@ -37,7 +37,7 @@ public class CommunityGoalsFragment extends Fragment {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new CommunityGoalsAdapter(this));
+        recyclerView.setAdapter(new CommunityGoalsAdapter(getContext(), recyclerView, false));
 
         //Swipe to refresh setup
         final CommunityGoalsFragment parent = this;
@@ -45,6 +45,7 @@ public class CommunityGoalsFragment extends Fragment {
             @Override
             public void onRefresh() {
                 CommunityGoalsAdapter adapter = (CommunityGoalsAdapter) recyclerView.getAdapter();
+                endLoading(0);
                 adapter.clearGoals();
                 emptySwipeRefreshLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.VISIBLE);

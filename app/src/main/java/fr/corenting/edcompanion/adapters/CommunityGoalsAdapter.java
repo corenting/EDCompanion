@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,21 +29,21 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
     private List<CommunityGoal> goals;
     private View.OnClickListener onClickListener;
-    private CommunityGoalsFragment parent;
-    private PrettyTime prettyTime;
+    private Context context;
+    private boolean isDetailsView;
 
-    public CommunityGoalsAdapter(final CommunityGoalsFragment parent) {
-        this.parent = parent;
+    public CommunityGoalsAdapter(final Context context, final RecyclerView recyclerView, boolean isDetailsView) {
+        this.context = context;
+        this.isDetailsView = isDetailsView;
         this.goals = new LinkedList<>();
-        prettyTime = new PrettyTime(Locale.US);
 
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CommunityGoal goal = goals.get(parent.recyclerView.getChildAdapterPosition(v));
-                Intent i = new Intent(parent.getContext(), CommunityGoalDetailsActivity.class);
+                final CommunityGoal goal = goals.get(recyclerView.getChildAdapterPosition(v));
+                Intent i = new Intent(context, CommunityGoalDetailsActivity.class);
                 i.putExtra("goal", goal);
-                parent.startActivity(i);
+                context.startActivity(i);
             }
         };
     }
@@ -55,7 +56,6 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
     public void clearGoals()
     {
-        parent.endLoading(0);
         goals.clear();
         notifyDataSetChanged();
     }
@@ -73,8 +73,11 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
         holder.titleTextView.setText(currentGoal.getTitle());
         holder.descriptionTextView.setText(currentGoal.getDescription());
+        if (isDetailsView) {
+            holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
+        }
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
-        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(parent.getContext()));
+        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
         holder.remainingTextView.setText(currentGoal.getRemainingString());
         holder.tierTextView.setText(currentGoal.getTierString());
     }
