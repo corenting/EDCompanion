@@ -23,7 +23,7 @@
         <activity
             android:name=".activities.CommunityGoalDetailsActivity"
             android:label="@string/title_activity_community_goal_details"
-            android:theme="@style/Theme.App"/>
+            android:theme="@style/Theme.AppDetails"/>
     </application>
 
 </manifest>

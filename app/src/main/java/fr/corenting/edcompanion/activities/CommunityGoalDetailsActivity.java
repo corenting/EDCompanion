@@ -37,6 +37,7 @@ public class CommunityGoalDetailsActivity extends AppCompatActivity {
 
         // Get the goal
         communityGoal = getIntent().getExtras().getParcelable("goal");
+        getSupportActionBar().setTitle(communityGoal.getTitle());
 
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
