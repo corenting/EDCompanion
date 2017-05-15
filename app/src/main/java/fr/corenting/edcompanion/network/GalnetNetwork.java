@@ -33,7 +33,6 @@ public class GalnetNetwork {
                                 GalnetNews news = new GalnetNews();
                                 news.setContent(i.getDescription().replace("<br />", ""));
                                 news.setTitle(i.getTitle());
-                                news.setDate(i.getPublicationDate().getTime());
                                 EventBus.getDefault().post(news);
                             }
                             fragment.endLoading(feed.getItems().size());

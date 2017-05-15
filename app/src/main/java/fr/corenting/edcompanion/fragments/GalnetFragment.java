@@ -37,7 +37,7 @@ public class GalnetFragment extends Fragment  {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new GalnetAdapter(getContext(), recyclerView));
+        recyclerView.setAdapter(new GalnetAdapter());
 
         //Swipe to refresh setup
         final GalnetFragment parent = this;

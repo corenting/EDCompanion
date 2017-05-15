@@ -7,21 +7,18 @@ public class GalnetNews implements Parcelable {
 
     private String title;
     private String content;
-    private long date;
 
     public GalnetNews() {}
 
     public GalnetNews(Parcel source) {
         title = source.readString();
         content = source.readString();
-        date = source.readLong();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(content);
-        dest.writeLong(date);
     }
 
     @Override
@@ -58,13 +55,5 @@ public class GalnetNews implements Parcelable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public long getDate() {
-        return date;
-    }
-
-    public void setDate(long date) {
-        this.date = date;
     }
 }

@@ -127,7 +127,7 @@
         <TextView
             android:id="@+id/descriptionTextView"
             android:layout_marginTop="18dp"
-            android:maxLines="3"
+            android:maxLines="5"
             android:ellipsize="end"
             android:text="Lorem ipsum"
             android:layout_below="@id/tierContainer"
