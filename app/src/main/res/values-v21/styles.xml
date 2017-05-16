@@ -7,7 +7,4 @@
     <style name="Theme.AppDetails" parent="Base.Theme.App">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
-    <style name="Theme.AppSettings" parent="Base.Theme.AppSettings">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
 </resources>

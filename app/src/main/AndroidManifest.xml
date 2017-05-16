@@ -28,10 +28,6 @@
             android:name=".activities.CommunityGoalDetailsActivity"
             android:label="@string/title_activity_community_goal_details"
             android:theme="@style/Theme.AppDetails" />
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.AppSettings"/>
     </application>
 
 </manifest>

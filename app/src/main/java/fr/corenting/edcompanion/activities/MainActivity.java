@@ -99,9 +99,6 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             setTitle(getString(R.string.galnet));
             getSupportActionBar().setSubtitle("");
-        } else if (id == R.id.settings) {
-            Intent i = new Intent(this, SettingsActivity.class);
-            startActivity(i);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
