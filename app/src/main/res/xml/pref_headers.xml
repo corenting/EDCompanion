@@ -8,7 +8,7 @@
         android:title="@string/pref_header_general" />
 
     <header
-        android:icon="@drawable/ic_info_black_24dp"
+        android:icon="@drawable/ic_info_grey600_24dp"
         android:title="@string/pref_header_about">
         <intent
             android:targetPackage="fr.corenting.edcompanion"

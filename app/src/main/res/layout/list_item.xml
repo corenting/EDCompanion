@@ -52,7 +52,7 @@
                 android:id="@+id/remainingImageView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                card_view:srcCompat="@drawable/ic_remaining" />
+                card_view:srcCompat="@drawable/ic_remaining_grey600_24dp" />
 
             <TextView
                 android:id="@+id/remainingTextView"
@@ -81,7 +81,7 @@
                 android:id="@+id/peopleImageView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                card_view:srcCompat="@drawable/ic_people" />
+                card_view:srcCompat="@drawable/ic_people_grey600_24dp" />
 
             <TextView
                 android:id="@+id/peopleTextView"
@@ -109,7 +109,7 @@
                 android:id="@+id/tierImageView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                card_view:srcCompat="@drawable/ic_tier" />
+                card_view:srcCompat="@drawable/ic_tier_grey600_254dp" />
 
             <TextView
                 android:id="@+id/tierTextView"

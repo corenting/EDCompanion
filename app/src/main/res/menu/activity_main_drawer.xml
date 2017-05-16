@@ -3,11 +3,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_cg"
-            android:icon="@drawable/ic_flag"
+            android:icon="@drawable/ic_flag_grey600_24dp"
             android:title="@string/community_goals" />
         <item
             android:id="@+id/nav_galnet"
-            android:icon="@drawable/ic_newspaper"
+            android:icon="@drawable/ic_newspaper_grey600_24dp"
             android:title="@string/galnet" />
     </group>
 
@@ -18,7 +18,7 @@
             android:title="@string/settings" />
         <item
             android:id="@+id/about"
-            android:icon="@drawable/ic_about"
+            android:icon="@drawable/ic_info_grey600_24dp"
             android:title="@string/about" />
     </group>
 </menu>
