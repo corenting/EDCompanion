@@ -3,7 +3,7 @@
 
     <!--URLs-->
     <string name="api_url">https://9cw.eu/edcg/api.php</string>
-    <string name="galnet_rss">https://community.elitedangerous.com/en/galnet-rss</string>c
+    <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Atom</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>

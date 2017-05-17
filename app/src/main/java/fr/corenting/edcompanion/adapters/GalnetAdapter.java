@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,13 +17,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.GalnetNews;
+import fr.corenting.edcompanion.utils.DateUtils;
 
 public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHolder> {
 
     private List<GalnetNews> news;
+    private Context context;
+    private DateFormat dateFormat;
 
-    public GalnetAdapter() {
+
+    public GalnetAdapter(Context ctx) {
+        this.context = ctx;
         this.news = new LinkedList<>();
+        this.dateFormat = DateFormat.getDateInstance(DateFormat.SHORT,
+                DateUtils.getCurrentLocale(context));
     }
 
     public void addNews(GalnetNews newItem)
@@ -50,7 +59,10 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
         holder.titleTextView.setText(currentNews.getTitle());
         holder.descriptionTextView.setText(currentNews.getContent());
         holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
-        holder.subtitleTextView.setVisibility(View.GONE);
+
+        // Date subtitle
+        Date date = new Date(currentNews.getDateTimestamp());
+        holder.subtitleTextView.setText(dateFormat.format(date));
 
         // Hide the others
         holder.remainingContainer.setVisibility(View.GONE);

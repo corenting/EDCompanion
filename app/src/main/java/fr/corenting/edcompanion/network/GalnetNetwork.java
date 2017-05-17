@@ -31,8 +31,9 @@ public class GalnetNetwork {
                             Feed feed = EarlParser.parseOrThrow(new ByteArrayInputStream(result.getBytes("UTF-8")), Integer.MAX_VALUE);
                             for (Item i : feed.getItems()) {
                                 GalnetNews news = new GalnetNews();
-                                news.setContent(i.getDescription().replace("<br />", ""));
+                                news.setContent(i.getDescription());
                                 news.setTitle(i.getTitle());
+                                news.setDateTimestamp(i.getPublicationDate().getTime());
                                 EventBus.getDefault().post(news);
                             }
                             fragment.endLoading(feed.getItems().size());

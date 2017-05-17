@@ -3,22 +3,28 @@ package fr.corenting.edcompanion.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class GalnetNews implements Parcelable {
 
     private String title;
     private String content;
+    private long dateTimestamp;
 
     public GalnetNews() {}
 
     public GalnetNews(Parcel source) {
         title = source.readString();
         content = source.readString();
+        dateTimestamp = source.readLong();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(content);
+        dest.writeLong(dateTimestamp);
     }
 
     @Override
@@ -55,5 +61,13 @@ public class GalnetNews implements Parcelable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public long getDateTimestamp() {
+        return dateTimestamp;
+    }
+
+    public void setDateTimestamp(long dateTimestamp) {
+        this.dateTimestamp = dateTimestamp;
     }
 }
