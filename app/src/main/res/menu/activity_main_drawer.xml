@@ -13,7 +13,7 @@
 
     <group android:id="@+id/grp2" android:checkableBehavior="single" >
         <item
-            android:id="@+id/about"
+            android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_grey600_24dp"
             android:title="@string/about" />
     </group>

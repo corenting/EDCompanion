@@ -1,26 +1,41 @@
 <resources>
     <string name="app_name">EDCompanion</string>
 
+    <!--URLs-->
+    <string name="api_url">https://9cw.eu/edcg/api.php</string>
+    <string name="galnet_rss">https://community.elitedangerous.com/en/galnet-rss</string>c
+
+    <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
-
-    <string name="no_goals_to_display">No goals to display</string>
-    <string name="api_url">https://9cw.eu/edcg/api.php</string>
-    <string name="galnet_rss">https://community.elitedangerous.com/en/galnet-rss</string>
-    <string name="download_error">Error while downloading the content</string>
     <string name="community_goals">Community Goals</string>
     <string name="galnet">Galnet</string>
-    <string name="settings">Settings</string>
     <string name="about">About</string>
+
+    <!--Errors-->
+    <string name="no_goals_to_display">No goals to display</string>
+    <string name="download_error">Error while downloading the content</string>
+
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>
     <string name="data_credits">Data provided by inara.cz</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
-    <string name="title_activity_settings">Settings</string>
 
-
-    <string name="pref_header_general">General</string>
-    <string name="pref_header_about">About</string>
+    <!--About-->
+    <string name="title_activity_about">About</string>
+    <string name="about_libs" translatable="false">
+        <![CDATA[
+        <a href="https://developer.android.com/topic/libraries/support-library/index.html">Android Support Library</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/JakeWharton/butterknife">Butter Knife</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/ocpsoft/prettytime">prettytime</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/einmalfel/Earl">Earl</a> (<a href="https://github.com/einmalfel/Earl/blob/master/lgpl-3.0.txt">LGPL 3 or later</a>)<br />
+        ]]>
+    </string>
+    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, with no connection with the game or the websites used as sources."</string>
+    <string name="about_libs_title">Libraries used</string>
+    <string name="about_contact_me_title">Contact me</string>
+    <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…) : <a href="mailto:corenting@gmail.com?Subject=%5BANDROID%5D%20EDC">corenting@gmail.com</a>.]]></string>
+    <string name="about_logo_description">App logo</string>
 </resources>

@@ -4,7 +4,6 @@
 
     <application
         android:allowBackup="true"
-        android:configChanges="orientation|keyboardHidden|screenSize"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -17,7 +16,8 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.App">
+            android:theme="@style/Theme.App"
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,13 @@
         </activity>
         <activity
             android:name=".activities.CommunityGoalDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_community_goal_details"
+            android:theme="@style/Theme.AppDetails" />
+        <activity
+            android:name=".activities.AboutActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_about"
             android:theme="@style/Theme.AppDetails" />
     </application>
 
