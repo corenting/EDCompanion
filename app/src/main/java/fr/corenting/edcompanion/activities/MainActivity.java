@@ -84,6 +84,11 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
             drawer.closeDrawer(GravityCompat.START);
             return false;
+        } else if (id == R.id.nav_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+            drawer.closeDrawer(GravityCompat.START);
+            return false;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

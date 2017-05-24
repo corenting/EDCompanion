@@ -31,6 +31,7 @@
         <a href="https://github.com/ocpsoft/prettytime">prettytime</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/einmalfel/Earl">Earl</a> (<a href="https://github.com/einmalfel/Earl/blob/master/lgpl-3.0.txt">LGPL 3 or later</a>)<br />
+        <a href="https://github.com/AndroidDeveloperLB/MaterialPreferenceLibrary">MaterialPreferenceLibrary</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         ]]>
     </string>
     <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, with no connection with the game or the websites used as sources."</string>
@@ -38,4 +39,12 @@
     <string name="about_contact_me_title">Contact me</string>
     <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…) : <a href="mailto:corenting@gmail.com?Subject=%5BANDROID%5D%20EDC">corenting@gmail.com</a>.]]></string>
     <string name="about_logo_description">App logo</string>
+
+    <!--Settings-->
+    <string name="title_activity_settings">Settings</string>
+    <string name="settings_category_title">EDSM (profile tab)</string>
+    <string name="settings_edsm_key_title">API key for EDSM</string>
+    <string name="settings_edsm_key_summary">Your personal EDSM API key</string>
+    <string name="settings_edsm_key">API key</string>
+
 </resources>
