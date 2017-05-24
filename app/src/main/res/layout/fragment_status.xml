@@ -1,0 +1,110 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardView"
+            style="@style/CardView"
+            app:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="2dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp" >
+
+            <RelativeLayout
+                android:id="@+id/itemLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="24dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:id="@+id/commanderNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Player name"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+                <RelativeLayout
+                    android:id="@+id/creditsContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/commanderNameTextView">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/creditsImageView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        card_view:srcCompat="@drawable/ic_attach_money_black_24dp"
+                        android:tint="#757575" />
+
+                    <TextView
+                        android:id="@+id/remainingTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10 credits"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_toEndOf="@+id/creditsImageView"
+                        android:layout_toRightOf="@+id/creditsImageView" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/playerRanks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subtitle"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/creditsContainer"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+                <include
+                    layout="@layout/progress_item"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/playerRanks"
+                    android:id="@+id/federationRankLayout"/>
+
+                <include
+                    layout="@layout/progress_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/federationRankLayout"
+                    android:id="@+id/empireRankLayout"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
