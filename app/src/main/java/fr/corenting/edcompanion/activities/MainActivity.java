@@ -9,12 +9,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
+import fr.corenting.edcompanion.fragments.StatusFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,6 +73,12 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             setTitle(getString(R.string.community_goals));
             getSupportActionBar().setSubtitle(R.string.data_credits);
+        } else if (id == R.id.nav_cmdr) {
+            fragmentManager
+                    .beginTransaction().replace(R.id.fragmentContent, new StatusFragment())
+                    .commit();
+            setTitle(getString(R.string.status));
+            getSupportActionBar().setSubtitle("");
         } else if (id == R.id.nav_galnet) {
             fragmentManager
                     .beginTransaction().replace(R.id.fragmentContent, new GalnetFragment())

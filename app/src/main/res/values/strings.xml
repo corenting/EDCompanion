@@ -4,6 +4,8 @@
     <!--URLs-->
     <string name="api_url">https://9cw.eu/edcg/api.php</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Atom</string>
+    <string name="edsm_credits">https://www.edsm.net/api-commander-v1/get-credits</string>
+    <string name="edsm_ranks">https://www.edsm.net/api-commander-v1/get-ranks</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -15,11 +17,14 @@
     <!--Errors-->
     <string name="no_goals_to_display">No goals to display</string>
     <string name="download_error">Error while downloading the content</string>
+    <string name="commander_error">You need to set your EDSM API key and commander name in the settings</string>
 
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>
     <string name="data_credits">Data provided by inara.cz</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
+    <string name="status">Commander</string>
+
 
     <!--About-->
     <string name="title_activity_about">About</string>
@@ -42,9 +47,12 @@
 
     <!--Settings-->
     <string name="title_activity_settings">Settings</string>
-    <string name="settings_category_title">EDSM (profile tab)</string>
+    <string name="settings_cmdr_category_title">Commander</string>
     <string name="settings_edsm_key_title">API key for EDSM</string>
     <string name="settings_edsm_key_summary">Your personal EDSM API key</string>
     <string name="settings_edsm_key">API key</string>
+    <string name="settings_cmdr_title">Commander name</string>
+    <string name="settings_cmdr_summary">The ingame name of your CMDR</string>
+    <string name="settings_cmdr">CMDR name</string>
 
 </resources>

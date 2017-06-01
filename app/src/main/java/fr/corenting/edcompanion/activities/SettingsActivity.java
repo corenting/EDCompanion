@@ -6,9 +6,6 @@ import com.lb.material_preferences_library.PreferenceActivity;
 
 import fr.corenting.edcompanion.R;
 
-/**
- * Created by corentin.garcia on 24/05/2017.
- */
 
 public class SettingsActivity extends PreferenceActivity {
     @Override

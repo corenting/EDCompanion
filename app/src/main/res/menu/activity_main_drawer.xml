@@ -9,6 +9,10 @@
             android:id="@+id/nav_galnet"
             android:icon="@drawable/ic_newspaper_grey600_24dp"
             android:title="@string/galnet" />
+        <item
+            android:id="@+id/nav_cmdr"
+            android:icon="@drawable/ic_newspaper_grey600_24dp"
+            android:title="@string/status" />
     </group>
 
     <group android:id="@+id/grp2" android:checkableBehavior="single" >
