@@ -17,6 +17,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
 import fr.corenting.edcompanion.network.StatusNetwork;
@@ -26,8 +27,12 @@ public class StatusFragment extends Fragment  {
 
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
+
     @BindView(R.id.creditsTextView)
     public TextView creditsTextView;
+    @BindView(R.id.locationsTextView)
+    public TextView locationsTextView;
+
     @BindView(R.id.federationRankLayout)
     public View federationRankLayout;
     @BindView(R.id.empireRankLayout)
@@ -40,6 +45,7 @@ public class StatusFragment extends Fragment  {
     public View explorationRankLayout;
     @BindView(R.id.arenaRankLayout)
     public View arenaRankLayout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,9 +90,14 @@ public class StatusFragment extends Fragment  {
     }
 
     @Subscribe
-    public void onCreditsEvent(final Credits credits) {
+    public void onCreditsEvent(Credits credits) {
         String amount = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.balance);
         creditsTextView.setText(getResources().getString(R.string.credits, amount));
+    }
+
+    @Subscribe
+    public void onPositionEvent(CommanderPosition position) {
+        locationsTextView.setText(position.SystemName);
     }
 
     @Subscribe

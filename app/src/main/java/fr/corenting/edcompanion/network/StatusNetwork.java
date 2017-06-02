@@ -10,6 +10,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.StatusFragment;
+import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
 import fr.corenting.edcompanion.utils.SettingsUtils;
@@ -25,11 +26,11 @@ public class StatusNetwork {
         } else {
             getCredits(fragment);
             getRanks(fragment);
+            getPosition(fragment);
         }
     }
 
     private static void getRanks(final StatusFragment fragment) {
-
         String url = fragment.getString(R.string.edsm_ranks) +
                 "?apiKey=" + SettingsUtils.getEdsmApiKey(fragment.getContext()) +
                 "&commanderName=" + SettingsUtils.getCommanderName(fragment.getContext());
@@ -84,11 +85,45 @@ public class StatusNetwork {
                             EventBus.getDefault().post(ranks);
                             fragment.endLoading();
                         } catch (Exception ex) {
-                            fragment.endLoading();
                             Snackbar snackbar = Snackbar
                                     .make(fragment.getActivity().findViewById(android.R.id.content),
                                             R.string.download_error, Snackbar.LENGTH_SHORT);
                             snackbar.show();
+                        }
+                    }
+                });
+    }
+
+    private static void getPosition(final StatusFragment fragment) {
+
+        String url = fragment.getString(R.string.edsm_position) +
+                "?apiKey=" + SettingsUtils.getEdsmApiKey(fragment.getContext()) +
+                "&commanderName=" + SettingsUtils.getCommanderName(fragment.getContext());
+        Ion.with(fragment)
+                .load(url)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        try {
+                            if (e != null || result == null) {
+                                throw new Exception();
+                            }
+
+                            // Extract position from json
+                            CommanderPosition res = new CommanderPosition();
+                            res.SystemName = result.get("system").getAsString();
+                            res.FirstDiscover = result.get("firstDiscover").getAsBoolean();
+
+                            // Send to bus and stop loading
+                            EventBus.getDefault().post(res);
+                            fragment.endLoading();
+                        } catch (Exception ex) {
+                            Snackbar snackbar = Snackbar
+                                    .make(fragment.getActivity().findViewById(android.R.id.content),
+                                            R.string.download_error, Snackbar.LENGTH_SHORT);
+                            snackbar.show();
+                            fragment.endLoading();
                         }
                     }
                 });
@@ -119,9 +154,7 @@ public class StatusNetwork {
 
                             // Send to bus and stop loading
                             EventBus.getDefault().post(res);
-                            fragment.endLoading();
                         } catch (Exception ex) {
-                            fragment.endLoading();
                             Snackbar snackbar = Snackbar
                                     .make(fragment.getActivity().findViewById(android.R.id.content),
                                             R.string.download_error, Snackbar.LENGTH_SHORT);

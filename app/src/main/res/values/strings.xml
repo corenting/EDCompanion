@@ -6,6 +6,7 @@
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Atom</string>
     <string name="edsm_credits">https://www.edsm.net/api-commander-v1/get-credits</string>
     <string name="edsm_ranks">https://www.edsm.net/api-commander-v1/get-ranks</string>
+    <string name="edsm_position">https://www.edsm.net/api-logs-v1/get-position</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>

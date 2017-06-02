@@ -79,13 +79,41 @@
                                 android:layout_toRightOf="@+id/creditsImageView" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/locationContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_below="@+id/creditsContainer">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_centerVertical="true"
+                                android:id="@+id/locationImageView"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                card_view:srcCompat="@drawable/elite_map_marker"
+                                android:tint="#757575" />
+
+                            <TextView
+                                android:id="@+id/locationsTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginLeft="4dp"
+                                android:layout_toEndOf="@+id/locationImageView"
+                                android:layout_toRightOf="@+id/locationImageView" />
+                        </RelativeLayout>
+
                         <TextView
                             android:id="@+id/playerRanks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/faction_ranks"
                             android:layout_marginTop="8dp"
-                            android:layout_below="@+id/creditsContainer"
+                            android:layout_below="@+id/locationContainer"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
                         <include
