@@ -11,6 +11,9 @@ import android.widget.TextView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -45,7 +48,9 @@ public class StatusFragment extends Fragment  {
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
 
-        creditsTextView.setText("TEST");
+        // Set temporary text for credit text view during loading
+        creditsTextView.setText(getResources().getString(R.string.credits, "?"));
+
         return v;
     }
 
@@ -70,7 +75,8 @@ public class StatusFragment extends Fragment  {
 
     @Subscribe
     public void onCreditsEvent(final Credits credits) {
-        creditsTextView.setText(credits.balance + " credits");
+        String amount = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.balance);
+        creditsTextView.setText(getResources().getString(R.string.credits, amount));
     }
 
     @Subscribe

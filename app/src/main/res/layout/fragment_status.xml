@@ -48,7 +48,7 @@
                         android:id="@+id/commanderNameTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Player name"
+                        android:text="@string/status"
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
@@ -73,7 +73,6 @@
                             android:id="@+id/creditsTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="\? credits"
                             android:gravity="center_vertical"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                             android:layout_marginStart="4dp"
@@ -86,7 +85,7 @@
                         android:id="@+id/playerRanks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Player ranks"
+                        android:text="@string/player_ranks"
                         android:layout_marginTop="8dp"
                         android:layout_below="@+id/creditsContainer"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
@@ -110,7 +109,7 @@
                         android:id="@+id/factionsRanks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Faction ranks"
+                        android:text="@string/faction_ranks"
                         android:layout_marginTop="8dp"
                         android:layout_below="@+id/empireRankLayout"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />

@@ -13,6 +13,8 @@
     <string name="community_goals">Community Goals</string>
     <string name="galnet">Galnet</string>
     <string name="about">About</string>
+    <string name="status">Commander</string>
+
 
     <!--Errors-->
     <string name="no_goals_to_display">No goals to display</string>
@@ -23,7 +25,7 @@
     <string name="unknown">unknown</string>
     <string name="data_credits">Data provided by inara.cz</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
-    <string name="status">Commander</string>
+    <string name="credits">%1$s credits</string>
 
 
     <!--About-->
@@ -54,5 +56,7 @@
     <string name="settings_cmdr_title">Commander name</string>
     <string name="settings_cmdr_summary">The ingame name of your CMDR</string>
     <string name="settings_cmdr">CMDR name</string>
+    <string name="player_ranks">Player ranks</string>
+    <string name="faction_ranks">Faction ranks</string>
 
 </resources>
