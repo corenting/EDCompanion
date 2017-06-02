@@ -26,6 +26,7 @@
     <string name="data_credits">Data provided by inara.cz</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
     <string name="credits">%1$s credits</string>
+    <string name="rank_progress">%1$d %%</string>
 
 
     <!--About-->

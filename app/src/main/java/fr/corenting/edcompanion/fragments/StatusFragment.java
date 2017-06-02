@@ -20,14 +20,26 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
 import fr.corenting.edcompanion.network.StatusNetwork;
+import fr.corenting.edcompanion.utils.RankViewUtils;
 
 public class StatusFragment extends Fragment  {
 
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
-
     @BindView(R.id.creditsTextView)
     public TextView creditsTextView;
+    @BindView(R.id.federationRankLayout)
+    public View federationRankLayout;
+    @BindView(R.id.empireRankLayout)
+    public View empireRankLayout;
+    @BindView(R.id.combatRankLayout)
+    public View combatRankLayout;
+    @BindView(R.id.tradeRankLayout)
+    public View tradeRankLayout;
+    @BindView(R.id.explorationRankLayout)
+    public View explorationRankLayout;
+    @BindView(R.id.arenaRankLayout)
+    public View arenaRankLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,13 +47,11 @@ public class StatusFragment extends Fragment  {
         View v = inflater.inflate(R.layout.fragment_status, container, false);
         ButterKnife.bind(this, v);
 
-
         //Swipe to refresh setup
         final StatusFragment parent = this;
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                swipeRefreshLayout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(true);
                 StatusNetwork.getAll(parent);
             }
@@ -81,7 +91,13 @@ public class StatusFragment extends Fragment  {
 
     @Subscribe
     public void onRanksEvents(Ranks ranks) {
-        // TODO : update ranks
+        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_empire, ranks.federation.name, ranks.federation.progress);
+        RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire.name, ranks.empire.progress);
+
+        RankViewUtils.setContent(getContext(), combatRankLayout, R.drawable.elite_empire, ranks.combat.name, ranks.combat.progress);
+        RankViewUtils.setContent(getContext(), tradeRankLayout, R.drawable.elite_empire, ranks.trade.name, ranks.trade.progress);
+        RankViewUtils.setContent(getContext(), explorationRankLayout, R.drawable.elite_empire, ranks.explore.name, ranks.explore.progress);
+        RankViewUtils.setContent(getContext(), arenaRankLayout, R.drawable.elite_empire, ranks.combat.name, ranks.combat.progress);
     }
 
     public void endLoading()
