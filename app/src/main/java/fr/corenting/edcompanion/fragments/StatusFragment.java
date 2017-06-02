@@ -91,13 +91,13 @@ public class StatusFragment extends Fragment  {
 
     @Subscribe
     public void onRanksEvents(Ranks ranks) {
-        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_empire, ranks.federation.name, ranks.federation.progress);
+        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation.name, ranks.federation.progress);
         RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire.name, ranks.empire.progress);
 
-        RankViewUtils.setContent(getContext(), combatRankLayout, R.drawable.elite_empire, ranks.combat.name, ranks.combat.progress);
-        RankViewUtils.setContent(getContext(), tradeRankLayout, R.drawable.elite_empire, ranks.trade.name, ranks.trade.progress);
-        RankViewUtils.setContent(getContext(), explorationRankLayout, R.drawable.elite_empire, ranks.explore.name, ranks.explore.progress);
-        RankViewUtils.setContent(getContext(), arenaRankLayout, R.drawable.elite_empire, ranks.combat.name, ranks.combat.progress);
+        RankViewUtils.setContent(getContext(), combatRankLayout, RankViewUtils.getCombatLogoId(ranks.combat.value), ranks.combat.name, ranks.combat.progress);
+        RankViewUtils.setContent(getContext(), tradeRankLayout, RankViewUtils.getTradeLogoId(ranks.combat.value), ranks.trade.name, ranks.trade.progress);
+        RankViewUtils.setContent(getContext(), explorationRankLayout, RankViewUtils.getExplorationLogoId(ranks.explore.value), ranks.explore.name, ranks.explore.progress);
+        RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc.name, ranks.cqc.progress);
     }
 
     public void endLoading()
