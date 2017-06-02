@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
 import fr.corenting.edcompanion.models.CommunityGoal;
+import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class CommunityGoalDetailsActivity extends AppCompatActivity {
 
@@ -20,6 +22,8 @@ public class CommunityGoalDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Set theme first before parent call
+        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_goal_details);
@@ -30,6 +34,7 @@ public class CommunityGoalDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ThemeUtils.setToolbarColor(this, toolbar);
 
         // Get the goal
         communityGoal = getIntent().getExtras().getParcelable("goal");

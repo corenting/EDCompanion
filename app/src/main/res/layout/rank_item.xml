@@ -45,7 +45,7 @@
             android:layout_toStartOf="@+id/progressTextView"
             android:indeterminate="false"
             android:max="100"
-            android:progress="20"
+            android:progress="0"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 

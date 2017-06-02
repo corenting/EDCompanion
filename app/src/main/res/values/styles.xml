@@ -3,7 +3,7 @@
     <style name="Theme.App" parent="Base.Theme.App"></style>
     <style name="Theme.AppDetails" parent="Base.Theme.App"></style>
 
-    <style name="Base.Theme.App" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.Theme.App" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

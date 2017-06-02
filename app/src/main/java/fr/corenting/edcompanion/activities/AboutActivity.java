@@ -4,6 +4,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -12,12 +13,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.utils.ThemeUtils;
 
 
 public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // Set theme first before parent call
+        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
@@ -26,6 +30,7 @@ public class AboutActivity extends AppCompatActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ThemeUtils.setToolbarColor(this, mToolbar);
 
         TextView versionTextView = (TextView) findViewById(R.id.versionTextView);
         TextView libsContentTextView = (TextView) findViewById(R.id.librariesContentTextView);

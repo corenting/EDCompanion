@@ -59,5 +59,9 @@
     <string name="settings_cmdr">CMDR name</string>
     <string name="player_ranks">Player ranks</string>
     <string name="faction_ranks">Faction ranks</string>
+    <string name="settings_display_category_title">Display</string>
+    <string name="settings_dark_theme_title">Dark theme</string>
+    <string name="settings_dark_theme">Dark theme</string>
+    <string name="settings_dark_theme_summary">You need to reload the app after changing theme</string>
 
 </resources>
