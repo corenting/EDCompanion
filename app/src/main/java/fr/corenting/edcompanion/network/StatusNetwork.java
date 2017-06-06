@@ -23,6 +23,7 @@ public class StatusNetwork {
                     .make(fragment.getActivity().findViewById(android.R.id.content),
                             R.string.commander_error, Snackbar.LENGTH_SHORT);
             snackbar.show();
+            fragment.endLoading();
         } else {
             getCredits(fragment);
             getRanks(fragment);
