@@ -16,6 +16,11 @@
     <string name="about">About</string>
     <string name="status">Commander</string>
 
+    <!--Image hints-->
+    <string name="hint_remaining_time">Remaining time</string>
+    <string name="hint_participants">Participants</string>
+    <string name="hint_tiers">Tiers</string>
+    <string name="hint_system">System</string>
 
     <!--Errors-->
     <string name="no_goals_to_display">No goals to display</string>
@@ -64,5 +69,4 @@
     <string name="settings_dark_theme_title">Dark theme</string>
     <string name="settings_dark_theme">Dark theme</string>
     <string name="settings_dark_theme_summary">You need to reload the app after changing theme</string>
-
 </resources>

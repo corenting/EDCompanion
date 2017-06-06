@@ -73,6 +73,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
         holder.remainingTextView.setText(currentGoal.getRemainingString());
         holder.tierTextView.setText(currentGoal.getTierString());
+        holder.locationTextView.setText(currentGoal.getSystem());
     }
 
     @Override
@@ -87,6 +88,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         @BindView(R.id.remainingTextView) TextView remainingTextView;
         @BindView(R.id.tierTextView) TextView tierTextView;
         @BindView(R.id.peopleTextView) TextView peopleTextView;
+        @BindView(R.id.locationTextView) TextView locationTextView;
 
         goalsViewHolder(final View view) {
             super(view);

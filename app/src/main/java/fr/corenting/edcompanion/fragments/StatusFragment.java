@@ -30,7 +30,7 @@ public class StatusFragment extends Fragment  {
 
     @BindView(R.id.creditsTextView)
     public TextView creditsTextView;
-    @BindView(R.id.locationsTextView)
+    @BindView(R.id.locationTextView)
     public TextView locationsTextView;
 
     @BindView(R.id.federationRankLayout)

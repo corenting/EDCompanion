@@ -68,6 +68,7 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
         holder.remainingContainer.setVisibility(View.GONE);
         holder.peopleContainer.setVisibility(View.GONE);
         holder.tierContainer.setVisibility(View.GONE);
+        holder.locationContainer.setVisibility(View.GONE);
     }
 
     @Override
@@ -82,6 +83,7 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
         @BindView(R.id.remainingContainer) RelativeLayout remainingContainer;
         @BindView(R.id.peopleContainer) RelativeLayout peopleContainer;
         @BindView(R.id.tierContainer) RelativeLayout tierContainer;
+        @BindView(R.id.locationContainer) RelativeLayout locationContainer;
 
         newsViewHolder(final View view) {
             super(view);

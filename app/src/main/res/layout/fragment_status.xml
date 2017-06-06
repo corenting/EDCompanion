@@ -96,7 +96,7 @@
                                 android:tint="#757575" />
 
                             <TextView
-                                android:id="@+id/locationsTextView"
+                                android:id="@+id/locationTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"

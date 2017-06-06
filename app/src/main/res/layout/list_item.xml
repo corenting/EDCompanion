@@ -47,11 +47,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_below="@+id/subtitleTextView">
-            <ImageView
+            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"
                 android:id="@+id/remainingImageView"
+                android:contentDescription="@string/hint_remaining_time"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 card_view:srcCompat="@drawable/ic_remaining_grey600_24dp" />
@@ -61,6 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:layout_marginStart="4dp"
@@ -72,15 +75,18 @@
         <RelativeLayout
             android:id="@+id/peopleContainer"
             android:layout_width="100dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/remainingContainer"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
-            <ImageView
+            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"
                 android:id="@+id/peopleImageView"
+                android:contentDescription="@string/hint_participants"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 card_view:srcCompat="@drawable/ic_people_grey600_24dp" />
@@ -90,6 +96,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:layout_marginStart="4dp"
@@ -104,11 +112,12 @@
             android:layout_marginTop="8dp"
             android:id="@+id/tierContainer"
             android:layout_below="@+id/remainingContainer">
-            <ImageView
+            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"
                 android:id="@+id/tierImageView"
+                android:contentDescription="@string/hint_tiers"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 card_view:srcCompat="@drawable/ic_tier_grey600_254dp" />
@@ -118,12 +127,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_toEndOf="@+id/tierImageView"
                 android:layout_toRightOf="@+id/tierImageView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/locationContainer"
+            android:layout_width="100dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tierContainer"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/locationImageView"
+                android:contentDescription="@string/hint_system"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                card_view:srcCompat="@drawable/elite_map_marker"
+                android:tint="#757575" />
+
+            <TextView
+                android:id="@+id/locationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toEndOf="@+id/locationImageView"
+                android:layout_toRightOf="@+id/locationImageView" />
         </RelativeLayout>
 
         <TextView
