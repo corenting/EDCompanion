@@ -22,11 +22,15 @@ import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
 import fr.corenting.edcompanion.network.PlayerStatusNetwork;
 import fr.corenting.edcompanion.utils.RankViewUtils;
+import fr.corenting.edcompanion.utils.SettingsUtils;
 
 public class StatusFragment extends Fragment  {
 
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.commanderNameTextView)
+    public TextView commanderNameTextView;
 
     @BindView(R.id.creditsTextView)
     public TextView creditsTextView;
@@ -66,6 +70,9 @@ public class StatusFragment extends Fragment  {
 
         // Set temporary text for credit text view during loading
         creditsTextView.setText(getResources().getString(R.string.credits, "?"));
+
+        // Set card title to commander name
+        commanderNameTextView.setText(SettingsUtils.getCommanderName(this.getContext()));
 
         return v;
     }

@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.StatusFragment;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
+import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class MainActivity extends AppCompatActivity
@@ -124,7 +126,9 @@ public class MainActivity extends AppCompatActivity
             fragmentManager
                     .beginTransaction().replace(R.id.fragmentContent, new StatusFragment())
                     .commit();
-            setTitle(getString(R.string.status));
+
+            String commanderName = SettingsUtils.getCommanderName(this);
+            setTitle(commanderName.equals("") ?  getString(R.string.status) : commanderName);
             getSupportActionBar().setSubtitle("");
         } else if (id == R.id.nav_galnet_news) {
             // Create the fragment with the arguments
