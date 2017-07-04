@@ -24,7 +24,7 @@ import fr.corenting.edcompanion.network.PlayerStatusNetwork;
 import fr.corenting.edcompanion.utils.RankViewUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 
-public class StatusFragment extends Fragment  {
+public class StatusFragment extends Fragment {
 
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
@@ -99,7 +99,13 @@ public class StatusFragment extends Fragment  {
     @Subscribe
     public void onCreditsEvent(Credits credits) {
         String amount = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.balance);
-        creditsTextView.setText(getResources().getString(R.string.credits, amount));
+
+        if (credits.loan != 0) {
+            String loan = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.loan);
+            creditsTextView.setText(getResources().getString(R.string.credits_with_loan, amount, loan));
+        } else {
+            creditsTextView.setText(getResources().getString(R.string.credits, amount));
+        }
     }
 
     @Subscribe
@@ -118,8 +124,7 @@ public class StatusFragment extends Fragment  {
         RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc.name, ranks.cqc.progress);
     }
 
-    public void endLoading()
-    {
+    public void endLoading() {
         swipeRefreshLayout.setRefreshing(false);
     }
 }
