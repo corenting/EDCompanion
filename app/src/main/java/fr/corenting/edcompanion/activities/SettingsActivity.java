@@ -2,7 +2,6 @@ package fr.corenting.edcompanion.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 
 import com.lb.material_preferences_library.PreferenceActivity;
 

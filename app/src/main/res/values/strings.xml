@@ -6,6 +6,7 @@
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Atom</string>
     <string name="edsm_credits">https://www.edsm.net/api-commander-v1/get-credits</string>
     <string name="edsm_ranks">https://www.edsm.net/api-commander-v1/get-ranks</string>
+    <string name="edsm_server">https://www.edsm.net/api-status-v1/elite-server</string>
     <string name="edsm_position">https://www.edsm.net/api-logs-v1/get-position</string>
 
     <!--Drawer-->
@@ -16,6 +17,8 @@
     <string name="galnet_reports">Galnet reports</string>
     <string name="about">About</string>
     <string name="status">Commander</string>
+    <string name="updating_server_status">Updating server status…</string>
+    <string name="server_status">Game server is %1$s</string>
 
     <!--Image hints-->
     <string name="hint_remaining_time">Remaining time</string>

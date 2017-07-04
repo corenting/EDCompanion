@@ -20,7 +20,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
-import fr.corenting.edcompanion.network.StatusNetwork;
+import fr.corenting.edcompanion.network.PlayerStatusNetwork;
 import fr.corenting.edcompanion.utils.RankViewUtils;
 
 public class StatusFragment extends Fragment  {
@@ -59,7 +59,7 @@ public class StatusFragment extends Fragment  {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                StatusNetwork.getAll(parent);
+                PlayerStatusNetwork.getAll(parent);
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
@@ -80,7 +80,7 @@ public class StatusFragment extends Fragment  {
 
         // Register event and get the news
         EventBus.getDefault().register(this);
-        StatusNetwork.getAll(this);
+        PlayerStatusNetwork.getAll(this);
     }
 
     @Override

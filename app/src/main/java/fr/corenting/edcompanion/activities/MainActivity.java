@@ -11,17 +11,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.StatusFragment;
+import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager;
+    @BindView(R.id.drawer_layout)
+    public DrawerLayout drawer;
+    @BindView(R.id.nav_view)
+    public NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +42,12 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ThemeUtils.setToolbarColor(this, toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -57,11 +68,37 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
         setTitle(getString(R.string.community_goals));
         getSupportActionBar().setSubtitle(R.string.data_credits);
+
+        // Update the server status
+        updateServerStatus();
+    }
+
+    private void updateServerStatus() {
+       TextView textView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        textView.setText(getString(R.string.updating_server_status));
+        ServerStatusNetwork.getStatus(this);
+    }
+
+    @Subscribe
+    public void onServerStatusEvent(String status) {
+        TextView textView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        textView.setText(getString(R.string.server_status, status));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -71,9 +108,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        // Let's update the server status too
+        updateServerStatus();
+
 
         if (id == R.id.nav_cg) {
             fragmentManager

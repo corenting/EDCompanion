@@ -16,7 +16,7 @@ import fr.corenting.edcompanion.models.Ranks;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 
 
-public class StatusNetwork {
+public class PlayerStatusNetwork {
     public static void getAll(final StatusFragment fragment) {
         if (!SettingsUtils.hasValidCmdrParameters(fragment.getActivity())) {
             Snackbar snackbar = Snackbar
