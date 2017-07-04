@@ -24,7 +24,7 @@
     <string name="hint_system">System</string>
 
     <!--Errors-->
-    <string name="no_goals_to_display">No goals to display</string>
+    <string name="nothing_to_display">Nothing to display</string>
     <string name="download_error">Error while downloading the content</string>
     <string name="commander_error">You need to set your EDSM API key and commander name in the settings</string>
 

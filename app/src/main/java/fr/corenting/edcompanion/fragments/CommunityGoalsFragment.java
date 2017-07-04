@@ -31,7 +31,7 @@ public class CommunityGoalsFragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_community_goals, container, false);
+        View v = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, v);
 
         // Recycler view setup
