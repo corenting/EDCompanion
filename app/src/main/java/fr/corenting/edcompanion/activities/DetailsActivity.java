@@ -12,13 +12,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
+import fr.corenting.edcompanion.adapters.GalnetAdapter;
 import fr.corenting.edcompanion.models.CommunityGoal;
+import fr.corenting.edcompanion.models.GalnetNews;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
-public class CommunityGoalDetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity {
 
-    @BindView(R.id.recyclerView) RecyclerView goalsRecyclerView;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
     private CommunityGoal communityGoal;
+    private GalnetNews article;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,7 @@ public class CommunityGoalDetailsActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community_goal_details);
+        setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
 
         // Set toolbar
@@ -36,16 +39,40 @@ public class CommunityGoalDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ThemeUtils.setToolbarColor(this, toolbar);
 
-        // Get the goal
+        // Get the goal or the article
         communityGoal = getIntent().getExtras().getParcelable("goal");
+        if(communityGoal == null) {
+            article = getIntent().getExtras().getParcelable("article");
+            galnetArticleSetup();
+        }
+        else
+        {
+            communityGoalSetup();
+        }
+    }
+
+    private void communityGoalSetup()
+    {
         getSupportActionBar().setTitle(communityGoal.getTitle());
 
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        goalsRecyclerView.setLayoutManager(linearLayoutManager);
-        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, goalsRecyclerView, true);
-        goalsRecyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, true);
+        recyclerView.setAdapter(adapter);
         adapter.addGoal(communityGoal);
+    }
+
+    private void galnetArticleSetup()
+    {
+        getSupportActionBar().setTitle(article.getTitle());
+
+        // Recycler view setup
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, true);
+        recyclerView.setAdapter(adapter);
+        adapter.addNews(article);
     }
 
     @Override

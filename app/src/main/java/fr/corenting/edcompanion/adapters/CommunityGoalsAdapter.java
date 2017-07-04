@@ -13,7 +13,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.corenting.edcompanion.activities.CommunityGoalDetailsActivity;
+import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.models.CommunityGoal;
 
 import fr.corenting.edcompanion.R;
@@ -34,7 +34,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
             @Override
             public void onClick(View v) {
                 final CommunityGoal goal = goals.get(recyclerView.getChildAdapterPosition(v));
-                Intent i = new Intent(context, CommunityGoalDetailsActivity.class);
+                Intent i = new Intent(context, DetailsActivity.class);
                 i.putExtra("goal", goal);
                 context.startActivity(i);
             }

@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.CommunityGoalDetailsActivity"
+            android:name=".activities.DetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_community_goal_details"
             android:theme="@style/Theme.AppDetails" />

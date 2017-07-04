@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.models.GalnetNews;
 import fr.corenting.edcompanion.utils.DateUtils;
 
@@ -23,14 +25,29 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
 
     private List<GalnetNews> news;
     private Context context;
+    private final RecyclerView recyclerView;
     private DateFormat dateFormat;
+    private View.OnClickListener onClickListener;
+    private boolean isDetailsView;
 
 
-    public GalnetAdapter(Context ctx) {
+    public GalnetAdapter(Context ctx, final RecyclerView recyclerView, boolean isDetailsView) {
         this.context = ctx;
+        this.recyclerView = recyclerView;
+        this.isDetailsView = isDetailsView;
         this.news = new LinkedList<>();
         this.dateFormat = DateFormat.getDateInstance(DateFormat.SHORT,
                 DateUtils.getCurrentLocale(context));
+
+        this.onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final GalnetNews article = news.get(recyclerView.getChildAdapterPosition(v));
+                Intent i = new Intent(context, DetailsActivity.class);
+                i.putExtra("article", article);
+                context.startActivity(i);
+            }
+        };
     }
 
     public void addNews(GalnetNews newItem)
@@ -48,6 +65,7 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
     @Override
     public newsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        v.setOnClickListener(onClickListener);
         return new newsViewHolder(v);
     }
 
@@ -58,7 +76,9 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
         // News content
         holder.titleTextView.setText(currentNews.getTitle());
         holder.descriptionTextView.setText(currentNews.getContent());
-        holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
+        if (isDetailsView) {
+            holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
+        }
 
         // Date subtitle
         Date date = new Date(currentNews.getDateTimestamp());
