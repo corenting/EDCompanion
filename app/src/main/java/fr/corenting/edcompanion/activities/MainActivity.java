@@ -87,11 +87,29 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             setTitle(getString(R.string.status));
             getSupportActionBar().setSubtitle("");
-        } else if (id == R.id.nav_galnet) {
+        } else if (id == R.id.nav_galnet_news) {
+            // Create the fragment with the arguments
+            GalnetFragment fragment = new GalnetFragment();
+            Bundle args = new Bundle();
+            args.putBoolean("reportsMode", false);
+            fragment.setArguments(args);
+            // Change fragment
             fragmentManager
-                    .beginTransaction().replace(R.id.fragmentContent, new GalnetFragment())
+                    .beginTransaction().replace(R.id.fragmentContent, fragment)
                     .commit();
             setTitle(getString(R.string.galnet));
+            getSupportActionBar().setSubtitle("");
+        } else if (id == R.id.nav_galnet_reports) {
+            // Create the fragment with the arguments
+            GalnetFragment fragment = new GalnetFragment();
+            Bundle args = new Bundle();
+            args.putBoolean("reportsMode", true);
+            fragment.setArguments(args);
+            // Change fragment
+            fragmentManager
+                    .beginTransaction().replace(R.id.fragmentContent, fragment)
+                    .commit();
+            setTitle(getString(R.string.galnet_reports));
             getSupportActionBar().setSubtitle("");
         } else if (id == R.id.nav_about) {
             Intent i = new Intent(this, AboutActivity.class);

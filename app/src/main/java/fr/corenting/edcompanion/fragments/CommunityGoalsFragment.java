@@ -55,6 +55,8 @@ public class CommunityGoalsFragment extends Fragment  {
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
         emptySwipeRefreshLayout.setOnRefreshListener(listener);
+
+
         return v;
     }
 

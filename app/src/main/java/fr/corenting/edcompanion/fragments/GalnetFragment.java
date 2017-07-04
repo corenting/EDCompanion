@@ -19,7 +19,7 @@ import fr.corenting.edcompanion.adapters.GalnetAdapter;
 import fr.corenting.edcompanion.models.GalnetNews;
 import fr.corenting.edcompanion.network.GalnetNetwork;
 
-public class GalnetFragment extends Fragment  {
+public class GalnetFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
@@ -27,6 +27,7 @@ public class GalnetFragment extends Fragment  {
     public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.emptySwipe)
     public SwipeRefreshLayout emptySwipeRefreshLayout;
+    private boolean reportsMode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +56,10 @@ public class GalnetFragment extends Fragment  {
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
         emptySwipeRefreshLayout.setOnRefreshListener(listener);
+
+        // Check if reports only or not
+        reportsMode = getArguments().getBoolean("reportsMode", false);
+
         return v;
     }
 
@@ -81,15 +86,21 @@ public class GalnetFragment extends Fragment  {
     @Subscribe
     public void onNewsEvent(GalnetNews news) {
         GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
-        adapter.addNews(news);
+        boolean isReport = news.getTitle().matches(".*(Weekly).*(Report).*") ||
+                news.getTitle().contains("Starport Status Update");
+
+        // Add the article or not depending on the mode and the title
+        if (reportsMode && isReport) {
+            adapter.addNews(news);
+        } else if (!reportsMode && !isReport) {
+            adapter.addNews(news);
+        }
     }
 
-    public void endLoading(int count)
-    {
+    public void endLoading(int count) {
         swipeRefreshLayout.setRefreshing(false);
         emptySwipeRefreshLayout.setRefreshing(false);
-        if (count <= 0)
-        {
+        if (count <= 0) {
             emptySwipeRefreshLayout.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setVisibility(View.GONE);
         }
