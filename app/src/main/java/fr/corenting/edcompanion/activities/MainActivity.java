@@ -11,14 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+
+import com.koushikdutta.ion.Ion;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
@@ -56,6 +61,11 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Enable Ion logging in debug
+        if (BuildConfig.DEBUG) {
+            Ion.getDefault(getApplicationContext()).configure().setLogging("EDCompanion networking", Log.DEBUG);
+        }
+
         // Setup navigation view and fake click the first item
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -73,10 +83,19 @@ public class MainActivity extends AppCompatActivity
 
         // Update the server status
         updateServerStatus();
+
+        // Set listener on server status text to refresh it
+        TextView drawerSubtitleTextView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        drawerSubtitleTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateServerStatus();
+            }
+        });
     }
 
     private void updateServerStatus() {
-       TextView textView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        TextView textView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
         textView.setText(getString(R.string.updating_server_status));
         ServerStatusNetwork.getStatus(this);
     }
