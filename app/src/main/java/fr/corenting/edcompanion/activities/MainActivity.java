@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity
             Ion.getDefault(getApplicationContext()).configure().setLogging("EDCompanion networking", Log.DEBUG);
         }
 
+        // Set user agent to name + version of the app
+        Ion.getDefault(getApplicationContext()).configure().userAgent(String.format(getString(R.string.user_agent), BuildConfig.VERSION_NAME, System.getProperty("http.agent")));
+
         // Setup navigation view and fake click the first item
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
