@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -84,16 +86,19 @@ public class GalnetFragment extends Fragment {
     }
 
     @Subscribe
-    public void onNewsEvent(GalnetNews news) {
-        GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
-        boolean isReport = news.getTitle().matches(".*(Weekly).*(Report).*") ||
-                news.getTitle().contains("Starport Status Update");
+    public void onNewsEvent(List<GalnetNews> news) {
+        for (GalnetNews n : news)
+        {
+            GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
+            boolean isReport = n.getTitle().matches(".*(Weekly).*(Report).*") ||
+                    n.getTitle().contains("Starport Status Update");
 
-        // Add the article or not depending on the mode and the title
-        if (reportsMode && isReport) {
-            adapter.addNews(news);
-        } else if (!reportsMode && !isReport) {
-            adapter.addNews(news);
+            // Add the article or not depending on the mode and the title
+            if (reportsMode && isReport) {
+                adapter.addNews(n);
+            } else if (!reportsMode && !isReport) {
+                adapter.addNews(n);
+            }
         }
     }
 

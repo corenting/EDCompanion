@@ -4,7 +4,7 @@
 
     <!--URLs-->
     <string name="api_url">https://9cw.eu/edcg/api.php</string>
-    <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Atom</string>
+    <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
     <string name="edsm_credits">https://www.edsm.net/api-commander-v1/get-credits</string>
     <string name="edsm_ranks">https://www.edsm.net/api-commander-v1/get-ranks</string>
     <string name="edsm_server">https://www.edsm.net/api-status-v1/elite-server</string>
@@ -50,7 +50,6 @@
         <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/ocpsoft/prettytime">prettytime</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
-        <a href="https://github.com/einmalfel/Earl">Earl</a> (<a href="https://github.com/einmalfel/Earl/blob/master/lgpl-3.0.txt">LGPL 3 or later</a>)<br />
         <a href="https://github.com/AndroidDeveloperLB/MaterialPreferenceLibrary">MaterialPreferenceLibrary</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         ]]>
     </string>

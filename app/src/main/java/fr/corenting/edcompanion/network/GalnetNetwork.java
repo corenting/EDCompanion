@@ -2,15 +2,16 @@ package fr.corenting.edcompanion.network;
 
 import android.support.design.widget.Snackbar;
 
-import com.einmalfel.earl.EarlParser;
-import com.einmalfel.earl.Feed;
-import com.einmalfel.earl.Item;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.ByteArrayInputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
@@ -20,23 +21,26 @@ public class GalnetNetwork {
     public static void getNews(final GalnetFragment fragment) {
         Ion.with(fragment)
                 .load(fragment.getString(R.string.galnet_rss))
-                .asString()
-                .setCallback(new FutureCallback<String>() {
+                .asJsonArray()
+                .setCallback(new FutureCallback<JsonArray>() {
                     @Override
-                    public void onCompleted(Exception e, String result) {
+                    public void onCompleted(Exception e, JsonArray result) {
                         try {
                             if (e != null || result == null) {
                                 throw new Exception();
                             }
-                            Feed feed = EarlParser.parseOrThrow(new ByteArrayInputStream(result.getBytes("UTF-8")), Integer.MAX_VALUE);
-                            for (Item i : feed.getItems()) {
+
+                            List<GalnetNews> res = new LinkedList<>();
+                            for (JsonElement item : result) {
+                                JsonObject jsonObject = item.getAsJsonObject();
                                 GalnetNews news = new GalnetNews();
-                                news.setContent(i.getDescription().replace("<br />","\n"));
-                                news.setTitle(i.getTitle());
-                                news.setDateTimestamp(i.getPublicationDate().getTime());
-                                EventBus.getDefault().post(news);
+                                news.setContent(jsonObject.get("content").getAsString().replace("<br />", "\n"));
+                                news.setTitle(jsonObject.get("title").getAsString());
+                                news.setDateTimestamp(jsonObject.get("timestamp").getAsLong());
+                                res.add(news);
                             }
-                            fragment.endLoading(feed.getItems().size());
+                            EventBus.getDefault().post(res);
+                            fragment.endLoading(res.size());
                         } catch (Exception ex) {
                             fragment.endLoading(0);
                             Snackbar snackbar = Snackbar
