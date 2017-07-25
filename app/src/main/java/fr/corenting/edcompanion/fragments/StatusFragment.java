@@ -115,13 +115,13 @@ public class StatusFragment extends Fragment {
 
     @Subscribe
     public void onRanksEvents(Ranks ranks) {
-        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation.name, ranks.federation.progress);
-        RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire.name, ranks.empire.progress);
+        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation.name, ranks.federation.progress, getString(R.string.rank_federation));
+        RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire.name, ranks.empire.progress, getString(R.string.rank_empire));
 
-        RankViewUtils.setContent(getContext(), combatRankLayout, RankViewUtils.getCombatLogoId(ranks.combat.value), ranks.combat.name, ranks.combat.progress);
-        RankViewUtils.setContent(getContext(), tradeRankLayout, RankViewUtils.getTradeLogoId(ranks.combat.value), ranks.trade.name, ranks.trade.progress);
-        RankViewUtils.setContent(getContext(), explorationRankLayout, RankViewUtils.getExplorationLogoId(ranks.explore.value), ranks.explore.name, ranks.explore.progress);
-        RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc.name, ranks.cqc.progress);
+        RankViewUtils.setContent(getContext(), combatRankLayout, RankViewUtils.getCombatLogoId(ranks.combat.value), ranks.combat.name, ranks.combat.progress, getString(R.string.rank_combat));
+        RankViewUtils.setContent(getContext(), tradeRankLayout, RankViewUtils.getTradeLogoId(ranks.combat.value), ranks.trade.name, ranks.trade.progress, getString(R.string.rank_trading));
+        RankViewUtils.setContent(getContext(), explorationRankLayout, RankViewUtils.getExplorationLogoId(ranks.explore.value), ranks.explore.name, ranks.explore.progress, getString(R.string.rank_exploration));
+        RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc.name, ranks.cqc.progress, getString(R.string.rank_arena));
     }
 
     public void endLoading() {

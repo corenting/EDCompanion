@@ -40,6 +40,14 @@
     <string name="credits_with_loan">%1$s credits (with a %2$s credits loan)</string>
     <string name="rank_progress">%1$d %%</string>
 
+    <!--Ranks-->
+    <string name="rank_federation">Federation</string>
+    <string name="rank_empire">Empire</string>
+    <string name="rank_combat">Combat</string>
+    <string name="rank_trading">Trade</string>
+    <string name="rank_exploration">Exploration</string>
+    <string name="rank_arena">Arena</string>
+
 
     <!--About-->
     <string name="title_activity_about">About</string>
