@@ -209,6 +209,7 @@ public class MainActivity extends AppCompatActivity
                 fragmentManager
                         .beginTransaction().replace(R.id.fragmentContent, new StatusFragment(), StatusFragment.STATUS_FRAGMENT_TAG)
                         .commit();
+                break;
             default:
                 fragmentManager.beginTransaction().replace(R.id.fragmentContent,
                         new CommunityGoalsFragment(),
