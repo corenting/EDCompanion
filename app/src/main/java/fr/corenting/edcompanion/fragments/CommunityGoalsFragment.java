@@ -21,6 +21,8 @@ import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
 
 public class CommunityGoalsFragment extends Fragment  {
 
+    public static final String COMMUNITY_GOALS_FRAGMENT_TAG = "community_goals_fragment";
+
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
     @BindView(R.id.swipeContainer)
@@ -58,6 +60,12 @@ public class CommunityGoalsFragment extends Fragment  {
 
 
         return v;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override

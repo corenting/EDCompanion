@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,6 +29,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.StatusFragment;
+import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
@@ -75,9 +77,7 @@ public class MainActivity extends AppCompatActivity
 
         // Set initial fragment
         fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction().replace(R.id.fragmentContent, new CommunityGoalsFragment())
-                .commit();
+        switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
 
         // Select the first item in menu as the fragment was loaded
         navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
@@ -137,57 +137,83 @@ public class MainActivity extends AppCompatActivity
         // Let's update the server status too
         updateServerStatus();
 
-
-        if (id == R.id.nav_cg) {
-            fragmentManager
-                    .beginTransaction().replace(R.id.fragmentContent, new CommunityGoalsFragment())
-                    .commit();
-            setTitle(getString(R.string.community_goals));
-            getSupportActionBar().setSubtitle(R.string.data_credits);
-        } else if (id == R.id.nav_cmdr) {
-            fragmentManager
-                    .beginTransaction().replace(R.id.fragmentContent, new StatusFragment())
-                    .commit();
-
-            String commanderName = SettingsUtils.getCommanderName(this);
-            setTitle(commanderName.equals("") ?  getString(R.string.status) : commanderName);
-            getSupportActionBar().setSubtitle("");
-        } else if (id == R.id.nav_galnet_news) {
-            // Create the fragment with the arguments
-            GalnetFragment fragment = new GalnetFragment();
-            Bundle args = new Bundle();
-            args.putBoolean("reportsMode", false);
-            fragment.setArguments(args);
-            // Change fragment
-            fragmentManager
-                    .beginTransaction().replace(R.id.fragmentContent, fragment)
-                    .commit();
-            setTitle(getString(R.string.galnet));
-            getSupportActionBar().setSubtitle("");
-        } else if (id == R.id.nav_galnet_reports) {
-            // Create the fragment with the arguments
-            GalnetFragment fragment = new GalnetFragment();
-            Bundle args = new Bundle();
-            args.putBoolean("reportsMode", true);
-            fragment.setArguments(args);
-            // Change fragment
-            fragmentManager
-                    .beginTransaction().replace(R.id.fragmentContent, fragment)
-                    .commit();
-            setTitle(getString(R.string.galnet_reports));
-            getSupportActionBar().setSubtitle("");
-        } else if (id == R.id.nav_about) {
-            Intent i = new Intent(this, AboutActivity.class);
-            startActivity(i);
-            drawer.closeDrawer(GravityCompat.START);
-            return false;
-        } else if (id == R.id.nav_settings) {
-            Intent i = new Intent(this, SettingsActivity.class);
-            startActivity(i);
-            drawer.closeDrawer(GravityCompat.START);
-            return false;
+        switch (id) {
+            case R.id.nav_cg:
+                switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
+                setTitle(getString(R.string.community_goals));
+                getSupportActionBar().setSubtitle(R.string.data_credits);
+                break;
+            case R.id.nav_cmdr:
+                switchFragment(StatusFragment.STATUS_FRAGMENT_TAG);
+                String commanderName = SettingsUtils.getCommanderName(this);
+                setTitle(commanderName.equals("") ? getString(R.string.status) : commanderName);
+                getSupportActionBar().setSubtitle("");
+                break;
+            case R.id.nav_galnet_news: {
+                switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG);
+                setTitle(getString(R.string.galnet));
+                getSupportActionBar().setSubtitle("");
+                break;
+            }
+            case R.id.nav_galnet_reports: {
+                switchFragment(GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG);
+                setTitle(getString(R.string.galnet_reports));
+                getSupportActionBar().setSubtitle("");
+                break;
+            }
+            case R.id.nav_about: {
+                Intent i = new Intent(this, AboutActivity.class);
+                startActivity(i);
+                drawer.closeDrawer(GravityCompat.START);
+                return false;
+            }
+            case R.id.nav_settings: {
+                Intent i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
+                drawer.closeDrawer(GravityCompat.START);
+                return false;
+            }
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void switchFragment(String tag)
+    {
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        Bundle args = new Bundle();
+        if (fragment != null)
+        {
+            fragmentManager.beginTransaction().replace(R.id.fragmentContent, fragment, tag).commit();
+        }
+        switch (tag) {
+            case GalnetFragment.GALNET_FRAGMENT_TAG:
+                fragment = new GalnetFragment();
+                args.putBoolean("reportsMode", false);
+                fragment.setArguments(args);
+                // Change fragment
+                fragmentManager
+                        .beginTransaction().replace(R.id.fragmentContent, fragment, GalnetFragment.GALNET_FRAGMENT_TAG)
+                        .commit();
+                break;
+            case GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG:
+                fragment = new GalnetFragment();
+                args.putBoolean("reportsMode", true);
+                fragment.setArguments(args);
+                // Change fragment
+                fragmentManager
+                        .beginTransaction().replace(R.id.fragmentContent, fragment, GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG)
+                        .commit();
+                break;
+            case StatusFragment.STATUS_FRAGMENT_TAG:
+                fragmentManager
+                        .beginTransaction().replace(R.id.fragmentContent, new StatusFragment(), StatusFragment.STATUS_FRAGMENT_TAG)
+                        .commit();
+            default:
+                fragmentManager.beginTransaction().replace(R.id.fragmentContent,
+                        new CommunityGoalsFragment(),
+                        CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG).commit();
+                break;
+        }
     }
 }

@@ -26,6 +26,8 @@ import fr.corenting.edcompanion.utils.SettingsUtils;
 
 public class StatusFragment extends Fragment {
 
+    public static final String STATUS_FRAGMENT_TAG = "status_fragment";
+
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
 
@@ -75,6 +77,12 @@ public class StatusFragment extends Fragment {
         commanderNameTextView.setText(SettingsUtils.getCommanderName(this.getContext()));
 
         return v;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override

@@ -23,6 +23,9 @@ import fr.corenting.edcompanion.network.GalnetNetwork;
 
 public class GalnetFragment extends Fragment {
 
+    public static final String GALNET_FRAGMENT_TAG = "galnet_fragment";
+    public static final String GALNET_REPORTS_FRAGMENT_TAG = "galnet_reports_fragment";
+
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
     @BindView(R.id.swipeContainer)
@@ -63,6 +66,12 @@ public class GalnetFragment extends Fragment {
         reportsMode = getArguments().getBoolean("reportsMode", false);
 
         return v;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
