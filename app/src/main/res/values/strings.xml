@@ -34,6 +34,7 @@
 
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>
+    <string name="Unknown">Unknown</string>
     <string name="data_credits">Data provided by inara.cz</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
     <string name="credits">%1$s credits</string>

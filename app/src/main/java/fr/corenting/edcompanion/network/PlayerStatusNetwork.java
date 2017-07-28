@@ -113,8 +113,16 @@ public class PlayerStatusNetwork {
 
                             // Extract position from json
                             CommanderPosition res = new CommanderPosition();
-                            res.SystemName = result.get("system").getAsString();
-                            res.FirstDiscover = result.get("firstDiscover").getAsBoolean();
+                            if (result.get("system").isJsonNull() || result.get("firstDiscover").isJsonNull())
+                            {
+                                res.SystemName = null;
+                                res.FirstDiscover = false;
+                            }
+                            else
+                            {
+                                res.SystemName = result.get("system").getAsString();
+                                res.FirstDiscover = result.get("firstDiscover").getAsBoolean();
+                            }
 
                             // Send to bus and stop loading
                             EventBus.getDefault().post(res);
@@ -145,13 +153,21 @@ public class PlayerStatusNetwork {
                             if (e != null || result == null) {
                                 throw new Exception();
                             }
-
-                            JsonObject creditsObject = result.getAsJsonArray("credits").get(0).getAsJsonObject();
-
-                            // Extract balance from json
                             Credits res = new Credits();
-                            res.balance = creditsObject.get("balance").getAsInt();
-                            res.loan = creditsObject.get("loan").getAsInt();
+
+
+                            if (!result.has("credits"))
+                            {
+                                res.balance = -1;
+                                res.loan = -1;
+                            }
+                            else
+                            {
+                                // Extract balance from json
+                                JsonObject creditsObject = result.getAsJsonArray("credits").get(0).getAsJsonObject();
+                                res.balance = creditsObject.get("balance").getAsInt();
+                                res.loan = creditsObject.get("loan").getAsInt();
+                            }
 
                             // Send to bus and stop loading
                             EventBus.getDefault().post(res);

@@ -106,8 +106,13 @@ public class StatusFragment extends Fragment {
 
     @Subscribe
     public void onCreditsEvent(Credits credits) {
+        // Check error case
+        if (credits.balance == -1)
+        {
+            creditsTextView.setText(getResources().getString(R.string.Unknown));
+            return;
+        }
         String amount = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.balance);
-
         if (credits.loan != 0) {
             String loan = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.loan);
             creditsTextView.setText(getResources().getString(R.string.credits_with_loan, amount, loan));
@@ -118,7 +123,13 @@ public class StatusFragment extends Fragment {
 
     @Subscribe
     public void onPositionEvent(CommanderPosition position) {
-        locationsTextView.setText(position.SystemName);
+        // Check error case
+        if (position.SystemName == null) {
+            locationsTextView.setText(getResources().getString(R.string.Unknown));
+        }
+        else {
+            locationsTextView.setText(position.SystemName);
+        }
     }
 
     @Subscribe
