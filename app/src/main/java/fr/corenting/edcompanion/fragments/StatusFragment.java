@@ -70,11 +70,14 @@ public class StatusFragment extends Fragment {
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
 
-        // Set temporary text for credit text view during loading
+        // Set temporary text for credit and position text view during loading
         creditsTextView.setText(getResources().getString(R.string.credits, "?"));
+        locationsTextView.setText(getResources().getString(R.string.Unknown));
 
         // Set card title to commander name
-        commanderNameTextView.setText(SettingsUtils.getCommanderName(this.getContext()));
+        String cmdrName = SettingsUtils.getCommanderName(this.getContext());
+        commanderNameTextView.setText(cmdrName == null || cmdrName.length() == 0 ?
+                getResources().getString(R.string.Unknown) : cmdrName);
 
         return v;
     }

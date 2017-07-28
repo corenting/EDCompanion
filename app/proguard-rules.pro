@@ -1,6 +1,10 @@
 # PrettyTime
 -keep class org.ocpsoft.prettytime.i18n.**
 
+# GMS
+-keep public class com.google.android.gms.* { public *; }
+-dontwarn com.google.android.gms.**
+
 # Support appcompat v7
 -keep public class android.support.v7.widget.** { *; }
 -keep public class android.support.v7.internal.widget.** { *; }
