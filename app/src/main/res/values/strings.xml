@@ -18,6 +18,7 @@
     <string name="galnet_reports">Galnet reports</string>
     <string name="about">About</string>
     <string name="status">Commander</string>
+    <string name="find_commodity">Find commodity</string>
     <string name="updating_server_status">Updating server status…</string>
     <string name="server_status">Game server is %1$s</string>
 
@@ -35,7 +36,8 @@
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>
     <string name="Unknown">Unknown</string>
-    <string name="data_credits">Data provided by inara.cz</string>
+    <string name="inara_credits">Data provided by inara.cz</string>
+    <string name="eddb_credits">Data provided by eddb.io</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
     <string name="credits">%1$s credits</string>
     <string name="credits_with_loan">%1$s credits (with a %2$s credits loan)</string>
@@ -49,6 +51,28 @@
     <string name="rank_exploration">Exploration</string>
     <string name="rank_arena">Arena</string>
 
+    <!--Find commodity-->
+    <string name="search_parameters">Search parameters</string>
+    <string name="commodity">Commodity</string>
+    <string name="current_system">Current system</string>
+    <string name="buy_or_sell">Buy or sell</string>
+    <string-array name="buy_or_sell_array">
+        <item>Buy</item>
+        <item>Sell</item>
+    </string-array>
+    <string-array name="landing_pad_array">
+        <item>Any</item>
+        <item>None</item>
+        <item>M</item>
+        <item>L</item>
+    </string-array>
+    <string-array name="yes_no_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string name="include_planetary">Include planetary</string>
+    <string name="landing_pad_size">Landing pad size</string>
+    <string name="close">Close</string>
 
     <!--About-->
     <string name="title_activity_about">About</string>
@@ -61,6 +85,7 @@
         <a href="https://github.com/ocpsoft/prettytime">prettytime</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/AndroidDeveloperLB/MaterialPreferenceLibrary">MaterialPreferenceLibrary</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b">ClickToSelectEditText</a><br />
         ]]>
     </string>
     <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, with no connection with the game or the websites used as sources."</string>

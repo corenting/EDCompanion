@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,9 +27,9 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
+import fr.corenting.edcompanion.fragments.FindCommodityFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.StatusFragment;
-import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
@@ -82,13 +82,13 @@ public class MainActivity extends AppCompatActivity
         // Select the first item in menu as the fragment was loaded
         navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
         setTitle(getString(R.string.community_goals));
-        getSupportActionBar().setSubtitle(R.string.data_credits);
+        getSupportActionBar().setSubtitle(R.string.inara_credits);
 
         // Update the server status
         updateServerStatus();
 
         // Set listener on server status text to refresh it
-        TextView drawerSubtitleTextView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        TextView drawerSubtitleTextView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
         drawerSubtitleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,14 +98,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void updateServerStatus() {
-        TextView textView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
         textView.setText(getString(R.string.updating_server_status));
         ServerStatusNetwork.getStatus(this);
     }
 
     @Subscribe
     public void onServerStatusEvent(String status) {
-        TextView textView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
         textView.setText(getString(R.string.server_status, status));
     }
 
@@ -131,17 +131,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
-        // Let's update the server status too
-        updateServerStatus();
 
         switch (id) {
             case R.id.nav_cg:
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
                 setTitle(getString(R.string.community_goals));
-                getSupportActionBar().setSubtitle(R.string.data_credits);
+                getSupportActionBar().setSubtitle(R.string.inara_credits);
                 break;
             case R.id.nav_cmdr:
                 switchFragment(StatusFragment.STATUS_FRAGMENT_TAG);
@@ -161,6 +158,12 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setSubtitle("");
                 break;
             }
+            case R.id.nav_find_commodity: {
+                switchFragment(FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG);
+                setTitle(getString(R.string.find_commodity));
+                getSupportActionBar().setSubtitle(R.string.eddb_credits);
+                break;
+            }
             case R.id.nav_about: {
                 Intent i = new Intent(this, AboutActivity.class);
                 startActivity(i);
@@ -178,12 +181,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void switchFragment(String tag)
-    {
+    private void switchFragment(String tag) {
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         Bundle args = new Bundle();
-        if (fragment != null)
-        {
+        if (fragment != null) {
             fragmentManager.beginTransaction().replace(R.id.fragmentContent, fragment, tag).commit();
         }
         switch (tag) {
@@ -208,6 +209,11 @@ public class MainActivity extends AppCompatActivity
             case StatusFragment.STATUS_FRAGMENT_TAG:
                 fragmentManager
                         .beginTransaction().replace(R.id.fragmentContent, new StatusFragment(), StatusFragment.STATUS_FRAGMENT_TAG)
+                        .commit();
+                break;
+            case FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG:
+                fragmentManager
+                        .beginTransaction().replace(R.id.fragmentContent, new FindCommodityFragment(), FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG)
                         .commit();
                 break;
             default:
