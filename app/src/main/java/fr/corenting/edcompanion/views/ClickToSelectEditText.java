@@ -1,4 +1,4 @@
-package fr.corenting.edcompanion.views.HintedImageButton.ClickToSelectEditText;
+package fr.corenting.edcompanion.views;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +20,7 @@ public class ClickToSelectEditText extends AppCompatEditText {
 
     List<String> mItems;
     String[] mListableItems;
+    int mSelectedIndex;
     CharSequence mHint;
 
     OnItemSelectedListener<String> onItemSelectedListener;
@@ -53,12 +54,14 @@ public class ClickToSelectEditText extends AppCompatEditText {
     public void setItems(List<String> items) {
         this.mItems = items;
         this.mListableItems = new String[items.size()];
-
         int i = 0;
 
         for (String item : mItems) {
             mListableItems[i++] = item;
         }
+
+        // Default item
+        setText(mListableItems[0]);
 
         configureOnClickListener();
     }
@@ -69,14 +72,15 @@ public class ClickToSelectEditText extends AppCompatEditText {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setTitle(mHint);
-                builder.setItems(mListableItems, new DialogInterface.OnClickListener() {
+                builder.setSingleChoiceItems(mListableItems, 0, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int selectedIndex) {
-                        setText(mListableItems[selectedIndex]);
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        setText(mListableItems[i]);
 
                         if (onItemSelectedListener != null) {
-                            onItemSelectedListener.onItemSelectedListener(mItems.get(selectedIndex), selectedIndex);
+                            onItemSelectedListener.onItemSelectedListener(mItems.get(i), i);
                         }
+                        dialogInterface.dismiss();
                     }
                 });
                 builder.setPositiveButton(R.string.close, null);

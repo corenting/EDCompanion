@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_below="@+id/subtitleTextView">
-            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
+            <fr.corenting.edcompanion.views.HintedImageButton
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"
@@ -81,7 +81,7 @@
             android:layout_alignTop="@+id/remainingContainer"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
-            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
+            <fr.corenting.edcompanion.views.HintedImageButton
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"
@@ -112,7 +112,7 @@
             android:layout_marginTop="8dp"
             android:id="@+id/tierContainer"
             android:layout_below="@+id/remainingContainer">
-            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
+            <fr.corenting.edcompanion.views.HintedImageButton
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"
@@ -146,7 +146,7 @@
             android:layout_alignTop="@+id/tierContainer"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
-            <fr.corenting.edcompanion.views.HintedImageButton.HintedImageButton
+            <fr.corenting.edcompanion.views.HintedImageButton
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"

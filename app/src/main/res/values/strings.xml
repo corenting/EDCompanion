@@ -9,6 +9,8 @@
     <string name="edsm_ranks">https://www.edsm.net/api-commander-v1/get-ranks</string>
     <string name="edsm_server">https://www.edsm.net/api-status-v1/elite-server</string>
     <string name="edsm_position">https://www.edsm.net/api-logs-v1/get-position</string>
+    <string name="edsm_systems">https://www.edsm.net/api-v1/systems</string>
+    <string name="edapi_commodities">https://ed.9cw.eu/commodities/</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -73,6 +75,7 @@
     <string name="include_planetary">Include planetary</string>
     <string name="landing_pad_size">Landing pad size</string>
     <string name="close">Close</string>
+    <string name="search">Search</string>
 
     <!--About-->
     <string name="title_activity_about">About</string>
@@ -86,10 +89,11 @@
         <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/AndroidDeveloperLB/MaterialPreferenceLibrary">MaterialPreferenceLibrary</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b">ClickToSelectEditText</a><br />
+        <a href="http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/">DelayAutoCompleteTextView</a><br />
         ]]>
     </string>
     <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, with no connection with the game or the websites used as sources."</string>
-    <string name="about_libs_title">Libraries used</string>
+    <string name="about_libs_title">Libraries and code used</string>
     <string name="about_contact_me_title">Contact me</string>
     <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…) : <a href="mailto:corenting@gmail.com?Subject=%5BANDROID%5D%20EDC">corenting@gmail.com</a>.]]></string>
     <string name="about_logo_description">App logo</string>

@@ -1,10 +1,13 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -13,7 +16,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.views.HintedImageButton.ClickToSelectEditText.ClickToSelectEditText;
+import fr.corenting.edcompanion.models.NameId;
+import fr.corenting.edcompanion.views.ClickToSelectEditText;
+import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class FindCommodityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -52,7 +58,7 @@ public class FindCommodityAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HeaderViewHolder) {
-            HeaderViewHolder header = (HeaderViewHolder) holder;
+            final HeaderViewHolder header = (HeaderViewHolder) holder;
 
             // Include planetary adapter
             String[] includePlanetaryArray = context.getResources().getStringArray(R.array.yes_no_array);
@@ -83,6 +89,29 @@ public class FindCommodityAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                 }
             });
+
+            // System input
+            header.systemInputEditText.setThreshold(3);
+            header.systemInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
+            header.systemInputEditText.setLoadingIndicator(header.systemInputProgressBar);
+            header.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    header.systemInputEditText.setText(((NameId) adapterView.getItemAtPosition(position)).Name);
+                }
+            });
+
+            // Commodities input
+            header.commodityInputEditText.setThreshold(3);
+            header.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_COMMODITIES));
+            header.commodityInputEditText.setLoadingIndicator(header.systemInputProgressBar);
+            header.commodityInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    header.commodityInputEditText.setText(((NameId) adapterView.getItemAtPosition(position)).Name);
+                }
+            });
+
 
         } else {
             String dataItem = getItem(position);
@@ -119,9 +148,23 @@ public class FindCommodityAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.buyOrSellSpinner) ClickToSelectEditText buyOrSellSpinner;
-        @BindView(R.id.landingPadSizeSpinner) ClickToSelectEditText landingPadSizeSpinner;
-        @BindView(R.id.includePlanetarySpinner) ClickToSelectEditText includePlanetarySpinner;
+
+        @BindView(R.id.commodityInputEditText)
+        DelayAutoCompleteTextView commodityInputEditText;
+        @BindView(R.id.systemInputEditText)
+        DelayAutoCompleteTextView systemInputEditText;
+        @BindView(R.id.commodityInputProgressBar)
+        MaterialProgressBar commodityInputProgressBar;
+        @BindView(R.id.systemInputProgressBar)
+        MaterialProgressBar systemInputProgressBar;
+        @BindView(R.id.buyOrSellSpinner)
+        ClickToSelectEditText buyOrSellSpinner;
+        @BindView(R.id.landingPadSizeSpinner)
+        ClickToSelectEditText landingPadSizeSpinner;
+        @BindView(R.id.includePlanetarySpinner)
+        ClickToSelectEditText includePlanetarySpinner;
+        @BindView(R.id.searchButton)
+        Button searchButton;
 
         public HeaderViewHolder(View view) {
             super(view);

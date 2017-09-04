@@ -1,4 +1,4 @@
-package fr.corenting.edcompanion.views.HintedImageButton;
+package fr.corenting.edcompanion.views;
 
 import android.content.Context;
 import android.text.TextUtils;
