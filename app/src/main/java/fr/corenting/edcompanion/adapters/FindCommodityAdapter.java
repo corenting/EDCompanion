@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,22 +92,20 @@ public class FindCommodityAdapter extends RecyclerView.Adapter<RecyclerView.View
             // System input
             header.systemInputEditText.setThreshold(3);
             header.systemInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
-            header.systemInputEditText.setLoadingIndicator(header.systemInputProgressBar);
             header.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                    header.systemInputEditText.setText(((NameId) adapterView.getItemAtPosition(position)).Name);
+                    header.systemInputEditText.setText((String) adapterView.getItemAtPosition(position));
                 }
             });
 
             // Commodities input
             header.commodityInputEditText.setThreshold(3);
             header.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_COMMODITIES));
-            header.commodityInputEditText.setLoadingIndicator(header.systemInputProgressBar);
             header.commodityInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                    header.commodityInputEditText.setText(((NameId) adapterView.getItemAtPosition(position)).Name);
+                    header.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position));
                 }
             });
 
@@ -153,10 +150,6 @@ public class FindCommodityAdapter extends RecyclerView.Adapter<RecyclerView.View
         DelayAutoCompleteTextView commodityInputEditText;
         @BindView(R.id.systemInputEditText)
         DelayAutoCompleteTextView systemInputEditText;
-        @BindView(R.id.commodityInputProgressBar)
-        MaterialProgressBar commodityInputProgressBar;
-        @BindView(R.id.systemInputProgressBar)
-        MaterialProgressBar systemInputProgressBar;
         @BindView(R.id.buyOrSellSpinner)
         ClickToSelectEditText buyOrSellSpinner;
         @BindView(R.id.landingPadSizeSpinner)

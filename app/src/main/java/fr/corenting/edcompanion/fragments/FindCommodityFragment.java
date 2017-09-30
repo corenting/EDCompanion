@@ -41,6 +41,7 @@ public class FindCommodityFragment extends Fragment{
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                //TODO : refresh list
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
@@ -63,14 +64,10 @@ public class FindCommodityFragment extends Fragment{
         // Setup views
         emptySwipeRefreshLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
-
-        // Register event and get the goals
-        //EventBus.getDefault().register(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        //EventBus.getDefault().unregister(this);
     }
 }

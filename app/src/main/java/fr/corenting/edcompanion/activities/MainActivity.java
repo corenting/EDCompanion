@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
+        expandToolbar();
         switch (id) {
             case R.id.nav_cg:
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
@@ -221,6 +223,13 @@ public class MainActivity extends AppCompatActivity
                         new CommunityGoalsFragment(),
                         CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG).commit();
                 break;
+        }
+    }
+
+    private void expandToolbar() {
+        AppBarLayout appBarLayout = findViewById(R.id.appbar);
+        if (appBarLayout != null) {
+            appBarLayout.setExpanded(true);
         }
     }
 }

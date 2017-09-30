@@ -65,7 +65,9 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
     @Override
     public newsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        v.setOnClickListener(onClickListener);
+        if (!isDetailsView) {
+            v.setOnClickListener(onClickListener);
+        }
         return new newsViewHolder(v);
     }
 

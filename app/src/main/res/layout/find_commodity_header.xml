@@ -45,15 +45,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="textNoSuggestions"
                 android:hint="@string/commodity"/>
-
-            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
-                android:id="@+id/commodityInputProgressBar"
-                style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                app:mpb_progressStyle="circular"
-                android:visibility="gone"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -68,14 +59,6 @@
                 android:inputType="textNoSuggestions"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_system"/>
-            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
-                android:id="@+id/systemInputProgressBar"
-                style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                app:mpb_progressStyle="circular"
-                android:visibility="gone"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
