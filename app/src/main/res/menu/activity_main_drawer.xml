@@ -13,10 +13,10 @@
             android:id="@+id/nav_galnet_reports"
             android:icon="@drawable/elite_galnet"
             android:title="@string/galnet_reports" />
-        <item
+        <!--<item
             android:id="@+id/nav_find_commodity"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/find_commodity" />
+            android:title="@string/find_commodity" />-->
         <item
             android:id="@+id/nav_cmdr"
             android:icon="@drawable/ic_person_black_24dp"

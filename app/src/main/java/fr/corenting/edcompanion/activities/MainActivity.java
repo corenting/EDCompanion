@@ -160,12 +160,12 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setSubtitle("");
                 break;
             }
-            case R.id.nav_find_commodity: {
+          /*  case R.id.nav_find_commodity: {
                 switchFragment(FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG);
                 setTitle(getString(R.string.find_commodity));
                 getSupportActionBar().setSubtitle(R.string.eddb_credits);
                 break;
-            }
+            }*/
             case R.id.nav_about: {
                 Intent i = new Intent(this, AboutActivity.class);
                 startActivity(i);
