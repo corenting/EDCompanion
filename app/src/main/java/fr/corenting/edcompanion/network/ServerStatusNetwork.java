@@ -1,5 +1,7 @@
 package fr.corenting.edcompanion.network;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -8,12 +10,13 @@ import org.greenrobot.eventbus.EventBus;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.MainActivity;
+import fr.corenting.edcompanion.models.ServerStatus;
 
 
 public class ServerStatusNetwork {
-    public static void getStatus(final MainActivity activity) {
-        String url = activity.getString(R.string.edsm_server);
-        Ion.with(activity)
+    public static void getStatus(final Context ctx) {
+        String url = ctx.getString(R.string.edsm_server);
+        Ion.with(ctx)
                 .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
@@ -24,11 +27,10 @@ public class ServerStatusNetwork {
                                 throw new Exception();
                             }
 
-                            String status = result.get("message").getAsString();
-
+                            ServerStatus status = new ServerStatus(result.get("message").getAsString());
                             EventBus.getDefault().post(status);
                         } catch (Exception ex) {
-                            EventBus.getDefault().post(activity.getString(R.string.unknown));
+                            EventBus.getDefault().post(new ServerStatus(ctx.getString(R.string.unknown)));
                         }
                     }
                 });

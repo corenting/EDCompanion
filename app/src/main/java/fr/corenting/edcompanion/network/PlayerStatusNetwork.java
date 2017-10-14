@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.network;
 
-import android.support.design.widget.Snackbar;
+import android.content.Context;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -9,7 +9,6 @@ import com.koushikdutta.ion.Ion;
 import org.greenrobot.eventbus.EventBus;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.fragments.StatusFragment;
 import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
@@ -17,25 +16,13 @@ import fr.corenting.edcompanion.utils.SettingsUtils;
 
 
 public class PlayerStatusNetwork {
-    public static void getAll(final StatusFragment fragment) {
-        if (!SettingsUtils.hasValidCmdrParameters(fragment.getActivity())) {
-            Snackbar snackbar = Snackbar
-                    .make(fragment.getActivity().findViewById(android.R.id.content),
-                            R.string.commander_error, Snackbar.LENGTH_SHORT);
-            snackbar.show();
-            fragment.endLoading();
-        } else {
-            getCredits(fragment);
-            getRanks(fragment);
-            getPosition(fragment);
-        }
-    }
 
-    private static void getRanks(final StatusFragment fragment) {
-        String url = fragment.getString(R.string.edsm_ranks) +
-                "?apiKey=" + SettingsUtils.getEdsmApiKey(fragment.getContext()) +
-                "&commanderName=" + SettingsUtils.getCommanderName(fragment.getContext());
-        Ion.with(fragment)
+
+    public static void getRanks(final Context ctx) {
+        String url = ctx.getString(R.string.edsm_ranks) +
+                "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
+                "&commanderName=" + SettingsUtils.getCommanderName(ctx);
+        Ion.with(ctx)
                 .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
@@ -84,23 +71,19 @@ public class PlayerStatusNetwork {
 
                             // Send to bus and stop loading
                             EventBus.getDefault().post(ranks);
-                            fragment.endLoading();
                         } catch (Exception ex) {
-                            Snackbar snackbar = Snackbar
-                                    .make(fragment.getActivity().findViewById(android.R.id.content),
-                                            R.string.download_error, Snackbar.LENGTH_SHORT);
-                            snackbar.show();
+                            EventBus.getDefault().post(new Ranks());
                         }
                     }
                 });
     }
 
-    private static void getPosition(final StatusFragment fragment) {
+    public static void getPosition(final Context ctx) {
 
-        String url = fragment.getString(R.string.edsm_position) +
-                "?apiKey=" + SettingsUtils.getEdsmApiKey(fragment.getContext()) +
-                "&commanderName=" + SettingsUtils.getCommanderName(fragment.getContext());
-        Ion.with(fragment)
+        String url = ctx.getString(R.string.edsm_position) +
+                "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
+                "&commanderName=" + SettingsUtils.getCommanderName(ctx);
+        Ion.with(ctx)
                 .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
@@ -113,37 +96,29 @@ public class PlayerStatusNetwork {
 
                             // Extract position from json
                             CommanderPosition res = new CommanderPosition();
-                            if (result.get("system").isJsonNull() || result.get("firstDiscover").isJsonNull())
-                            {
+                            if (result.get("system").isJsonNull() || result.get("firstDiscover").isJsonNull()) {
                                 res.SystemName = null;
                                 res.FirstDiscover = false;
-                            }
-                            else
-                            {
+                            } else {
                                 res.SystemName = result.get("system").getAsString();
                                 res.FirstDiscover = result.get("firstDiscover").getAsBoolean();
                             }
 
                             // Send to bus and stop loading
                             EventBus.getDefault().post(res);
-                            fragment.endLoading();
                         } catch (Exception ex) {
-                            Snackbar snackbar = Snackbar
-                                    .make(fragment.getActivity().findViewById(android.R.id.content),
-                                            R.string.download_error, Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                            fragment.endLoading();
+                            EventBus.getDefault().post(new CommanderPosition());
                         }
                     }
                 });
     }
 
-    private static void getCredits(final StatusFragment fragment) {
+    public static void getCredits(final Context ctx) {
 
-        String url = fragment.getString(R.string.edsm_credits) +
-                "?apiKey=" + SettingsUtils.getEdsmApiKey(fragment.getContext()) +
-                "&commanderName=" + SettingsUtils.getCommanderName(fragment.getContext());
-        Ion.with(fragment)
+        String url = ctx.getString(R.string.edsm_credits) +
+                "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
+                "&commanderName=" + SettingsUtils.getCommanderName(ctx);
+        Ion.with(ctx)
                 .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
@@ -156,26 +131,20 @@ public class PlayerStatusNetwork {
                             Credits res = new Credits();
 
 
-                            if (!result.has("credits"))
-                            {
+                            if (!result.has("credits")) {
                                 res.balance = -1;
                                 res.loan = -1;
-                            }
-                            else
-                            {
+                            } else {
                                 // Extract balance from json
                                 JsonObject creditsObject = result.getAsJsonArray("credits").get(0).getAsJsonObject();
                                 res.balance = creditsObject.get("balance").getAsInt();
                                 res.loan = creditsObject.get("loan").getAsInt();
                             }
 
-                            // Send to bus and stop loading
+                            // Send to bus
                             EventBus.getDefault().post(res);
                         } catch (Exception ex) {
-                            Snackbar snackbar = Snackbar
-                                    .make(fragment.getActivity().findViewById(android.R.id.content),
-                                            R.string.download_error, Snackbar.LENGTH_SHORT);
-                            snackbar.show();
+                            EventBus.getDefault().post(new Credits());
                         }
                     }
                 });

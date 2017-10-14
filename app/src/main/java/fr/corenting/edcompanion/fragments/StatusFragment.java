@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -21,8 +22,11 @@ import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
 import fr.corenting.edcompanion.network.PlayerStatusNetwork;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.RankViewUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
+
+import static android.R.attr.fragment;
 
 public class StatusFragment extends Fragment {
 
@@ -60,12 +64,11 @@ public class StatusFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         //Swipe to refresh setup
-        final StatusFragment parent = this;
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                PlayerStatusNetwork.getAll(parent);
+                getAll();
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
@@ -76,7 +79,7 @@ public class StatusFragment extends Fragment {
 
         // Set card title to commander name
         String cmdrName = SettingsUtils.getCommanderName(this.getContext());
-        commanderNameTextView.setText(cmdrName == null || cmdrName.length() == 0 ?
+        commanderNameTextView.setText(cmdrName.length() == 0 ?
                 getResources().getString(R.string.Unknown) : cmdrName);
 
         return v;
@@ -98,7 +101,7 @@ public class StatusFragment extends Fragment {
 
         // Register event and get the news
         EventBus.getDefault().register(this);
-        PlayerStatusNetwork.getAll(this);
+        getAll();
     }
 
     @Override
@@ -109,6 +112,13 @@ public class StatusFragment extends Fragment {
 
     @Subscribe
     public void onCreditsEvent(Credits credits) {
+        endLoading();
+        // Check download error
+        if (credits == null)
+        {
+            NotificationsUtils.displayErrorSnackbar(getActivity());
+        }
+
         // Check error case
         if (credits.balance == -1)
         {
@@ -126,6 +136,13 @@ public class StatusFragment extends Fragment {
 
     @Subscribe
     public void onPositionEvent(CommanderPosition position) {
+        endLoading();
+        // Check download error
+        if (position == null)
+        {
+            NotificationsUtils.displayErrorSnackbar(getActivity());
+        }
+
         // Check error case
         if (position.SystemName == null) {
             locationsTextView.setText(getResources().getString(R.string.Unknown));
@@ -137,6 +154,13 @@ public class StatusFragment extends Fragment {
 
     @Subscribe
     public void onRanksEvents(Ranks ranks) {
+        endLoading();
+        // Check download error
+        if (ranks == null)
+        {
+            NotificationsUtils.displayErrorSnackbar(getActivity());
+        }
+
         RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation.name, ranks.federation.progress, getString(R.string.rank_federation));
         RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire.name, ranks.empire.progress, getString(R.string.rank_empire));
 
@@ -144,6 +168,21 @@ public class StatusFragment extends Fragment {
         RankViewUtils.setContent(getContext(), tradeRankLayout, RankViewUtils.getTradeLogoId(ranks.combat.value), ranks.trade.name, ranks.trade.progress, getString(R.string.rank_trading));
         RankViewUtils.setContent(getContext(), explorationRankLayout, RankViewUtils.getExplorationLogoId(ranks.explore.value), ranks.explore.name, ranks.explore.progress, getString(R.string.rank_exploration));
         RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc.name, ranks.cqc.progress, getString(R.string.rank_arena));
+    }
+
+    private void getAll()
+    {
+        if (!SettingsUtils.hasValidCmdrParameters(getActivity())) {
+            Snackbar snackbar = Snackbar
+                    .make(getActivity().findViewById(android.R.id.content),
+                            R.string.commander_error, Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            endLoading();
+        } else {
+            PlayerStatusNetwork.getCredits(getContext());
+            PlayerStatusNetwork.getRanks(getContext());
+            PlayerStatusNetwork.getPosition(getContext());
+        }
     }
 
     public void endLoading() {

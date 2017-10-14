@@ -31,6 +31,7 @@ import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.FindCommodityFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.StatusFragment;
+import fr.corenting.edcompanion.models.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
@@ -105,9 +106,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Subscribe
-    public void onServerStatusEvent(String status) {
+    public void onServerStatusEvent(ServerStatus status) {
         TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
-        textView.setText(getString(R.string.server_status, status));
+        textView.setText(getString(R.string.server_status, status.Status));
     }
 
     @Override
