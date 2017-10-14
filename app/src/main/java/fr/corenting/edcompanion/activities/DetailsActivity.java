@@ -14,14 +14,14 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
 import fr.corenting.edcompanion.adapters.GalnetAdapter;
 import fr.corenting.edcompanion.models.CommunityGoal;
-import fr.corenting.edcompanion.models.GalnetNews;
+import fr.corenting.edcompanion.models.GalnetArticle;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class DetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     private CommunityGoal communityGoal;
-    private GalnetNews article;
+    private GalnetArticle article;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

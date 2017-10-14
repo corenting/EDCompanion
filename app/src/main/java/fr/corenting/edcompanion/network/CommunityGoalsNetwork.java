@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.network;
 
-import android.support.design.widget.Snackbar;
+import android.content.Context;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,14 +9,17 @@ import com.koushikdutta.ion.Ion;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.models.CommunityGoal;
+import fr.corenting.edcompanion.models.CommunityGoals;
 
 public class CommunityGoalsNetwork {
-    public static void getCommunityGoals(final CommunityGoalsFragment fragment) {
-        Ion.with(fragment)
-                .load(fragment.getString(R.string.api_url))
+    public static void getCommunityGoals(Context ctx) {
+        Ion.with(ctx)
+                .load(ctx.getString(R.string.api_url))
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -25,7 +28,7 @@ public class CommunityGoalsNetwork {
                             if (e != null || result == null) {
                                 throw new Exception();
                             }
-                            int count = result.get("goals").getAsJsonArray().size();
+                            List<CommunityGoal> goalsList = new LinkedList<>();
                             for (JsonElement elt : result.get("goals").getAsJsonArray()) {
                                 JsonObject goal = elt.getAsJsonObject();
                                 CommunityGoal newCg = new CommunityGoal();
@@ -54,15 +57,13 @@ public class CommunityGoalsNetwork {
                                 newCg.setStation(locationSystem.get("station").getAsString());
                                 newCg.setSystem(locationSystem.get("system").getAsString());
 
-                                EventBus.getDefault().post(newCg);
+                                goalsList.add(newCg);
                             }
-                            fragment.endLoading(count);
+                            CommunityGoals goals = new CommunityGoals(true, goalsList);
+                            EventBus.getDefault().post(goals);
                         } catch (Exception ex) {
-                            fragment.endLoading(0);
-                            Snackbar snackbar = Snackbar
-                                    .make(fragment.getActivity().findViewById(android.R.id.content),
-                                            R.string.download_error, Snackbar.LENGTH_SHORT);
-                            snackbar.show();
+                            CommunityGoals goals = new CommunityGoals(false, null);
+                            EventBus.getDefault().post(goals);
                         }
                     }
                 });

@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -25,8 +24,6 @@ import fr.corenting.edcompanion.network.PlayerStatusNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.RankViewUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
-
-import static android.R.attr.fragment;
 
 public class StatusFragment extends Fragment {
 
@@ -73,9 +70,16 @@ public class StatusFragment extends Fragment {
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
 
-        // Set temporary text for credit and position text view during loading
+        // Set temporary text
         creditsTextView.setText(getResources().getString(R.string.credits, "?"));
         locationsTextView.setText(getResources().getString(R.string.Unknown));
+        RankViewUtils.setTempContent(getContext(), federationRankLayout, getString(R.string.rank_federation));
+        RankViewUtils.setTempContent(getContext(), empireRankLayout, getString(R.string.rank_empire));
+
+        RankViewUtils.setTempContent(getContext(), combatRankLayout, getString(R.string.rank_combat));
+        RankViewUtils.setTempContent(getContext(), tradeRankLayout, getString(R.string.rank_trading));
+        RankViewUtils.setTempContent(getContext(), explorationRankLayout, getString(R.string.rank_exploration));
+        RankViewUtils.setTempContent(getContext(), arenaRankLayout, getString(R.string.rank_arena));
 
         // Set card title to commander name
         String cmdrName = SettingsUtils.getCommanderName(this.getContext());
@@ -114,20 +118,21 @@ public class StatusFragment extends Fragment {
     public void onCreditsEvent(Credits credits) {
         endLoading();
         // Check download error
-        if (credits == null)
+        if (!credits.Success)
         {
             NotificationsUtils.displayErrorSnackbar(getActivity());
+            return;
         }
 
         // Check error case
-        if (credits.balance == -1)
+        if (credits.Balance == -1)
         {
             creditsTextView.setText(getResources().getString(R.string.Unknown));
             return;
         }
-        String amount = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.balance);
-        if (credits.loan != 0) {
-            String loan = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.loan);
+        String amount = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.Balance);
+        if (credits.Loan != 0) {
+            String loan = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.Loan);
             creditsTextView.setText(getResources().getString(R.string.credits_with_loan, amount, loan));
         } else {
             creditsTextView.setText(getResources().getString(R.string.credits, amount));
@@ -138,9 +143,10 @@ public class StatusFragment extends Fragment {
     public void onPositionEvent(CommanderPosition position) {
         endLoading();
         // Check download error
-        if (position == null)
+        if (!position.Success)
         {
             NotificationsUtils.displayErrorSnackbar(getActivity());
+            return;
         }
 
         // Check error case
@@ -156,27 +162,25 @@ public class StatusFragment extends Fragment {
     public void onRanksEvents(Ranks ranks) {
         endLoading();
         // Check download error
-        if (ranks == null)
+        if (!ranks.Success)
         {
             NotificationsUtils.displayErrorSnackbar(getActivity());
+            return;
         }
 
-        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation.name, ranks.federation.progress, getString(R.string.rank_federation));
-        RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire.name, ranks.empire.progress, getString(R.string.rank_empire));
+        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation, getString(R.string.rank_federation));
+        RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire, getString(R.string.rank_empire));
 
-        RankViewUtils.setContent(getContext(), combatRankLayout, RankViewUtils.getCombatLogoId(ranks.combat.value), ranks.combat.name, ranks.combat.progress, getString(R.string.rank_combat));
-        RankViewUtils.setContent(getContext(), tradeRankLayout, RankViewUtils.getTradeLogoId(ranks.combat.value), ranks.trade.name, ranks.trade.progress, getString(R.string.rank_trading));
-        RankViewUtils.setContent(getContext(), explorationRankLayout, RankViewUtils.getExplorationLogoId(ranks.explore.value), ranks.explore.name, ranks.explore.progress, getString(R.string.rank_exploration));
-        RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc.name, ranks.cqc.progress, getString(R.string.rank_arena));
+        RankViewUtils.setContent(getContext(), combatRankLayout, RankViewUtils.getCombatLogoId(ranks.combat.value), ranks.combat, getString(R.string.rank_combat));
+        RankViewUtils.setContent(getContext(), tradeRankLayout, RankViewUtils.getTradeLogoId(ranks.combat.value), ranks.trade, getString(R.string.rank_trading));
+        RankViewUtils.setContent(getContext(), explorationRankLayout, RankViewUtils.getExplorationLogoId(ranks.explore.value), ranks.explore, getString(R.string.rank_exploration));
+        RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc, getString(R.string.rank_arena));
     }
 
     private void getAll()
     {
         if (!SettingsUtils.hasValidCmdrParameters(getActivity())) {
-            Snackbar snackbar = Snackbar
-                    .make(getActivity().findViewById(android.R.id.content),
-                            R.string.commander_error, Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            NotificationsUtils.displayErrorSnackbar(getActivity());
             endLoading();
         } else {
             PlayerStatusNetwork.getCredits(getContext());

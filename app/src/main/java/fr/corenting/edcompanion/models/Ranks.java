@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.models;
 
-public class Ranks {
+public class Ranks extends BaseModel {
 
     public Rank combat;
     public Rank trade;

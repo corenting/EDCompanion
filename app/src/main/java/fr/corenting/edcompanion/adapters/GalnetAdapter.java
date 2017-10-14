@@ -18,12 +18,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
-import fr.corenting.edcompanion.models.GalnetNews;
+import fr.corenting.edcompanion.models.GalnetArticle;
 import fr.corenting.edcompanion.utils.DateUtils;
 
 public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHolder> {
 
-    private List<GalnetNews> news;
+    private List<GalnetArticle> news;
     private Context context;
     private final RecyclerView recyclerView;
     private DateFormat dateFormat;
@@ -42,7 +42,7 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
         this.onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final GalnetNews article = news.get(recyclerView.getChildAdapterPosition(v));
+                final GalnetArticle article = news.get(recyclerView.getChildAdapterPosition(v));
                 Intent i = new Intent(context, DetailsActivity.class);
                 i.putExtra("article", article);
                 context.startActivity(i);
@@ -50,7 +50,7 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
         };
     }
 
-    public void addNews(GalnetNews newItem)
+    public void addNews(GalnetArticle newItem)
     {
         news.add(newItem);
         notifyItemInserted(news.size() - 1);
@@ -73,7 +73,7 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
 
     @Override
     public void onBindViewHolder(final newsViewHolder holder, final int position) {
-        GalnetNews currentNews = news.get(position);
+        GalnetArticle currentNews = news.get(position);
 
         // News content
         holder.titleTextView.setText(currentNews.getTitle());

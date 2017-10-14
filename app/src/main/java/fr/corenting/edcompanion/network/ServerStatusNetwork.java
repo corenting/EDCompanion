@@ -9,12 +9,11 @@ import com.koushikdutta.ion.Ion;
 import org.greenrobot.eventbus.EventBus;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.activities.MainActivity;
 import fr.corenting.edcompanion.models.ServerStatus;
 
 
 public class ServerStatusNetwork {
-    public static void getStatus(final Context ctx) {
+    public static void getStatus(Context ctx) {
         String url = ctx.getString(R.string.edsm_server);
         Ion.with(ctx)
                 .load(url)
@@ -26,11 +25,10 @@ public class ServerStatusNetwork {
                             if (e != null || result == null) {
                                 throw new Exception();
                             }
-
-                            ServerStatus status = new ServerStatus(result.get("message").getAsString());
+                            ServerStatus status = new ServerStatus(true, result.get("message").getAsString());
                             EventBus.getDefault().post(status);
                         } catch (Exception ex) {
-                            EventBus.getDefault().post(new ServerStatus(ctx.getString(R.string.unknown)));
+                            EventBus.getDefault().post(new ServerStatus(false, null));
                         }
                     }
                 });

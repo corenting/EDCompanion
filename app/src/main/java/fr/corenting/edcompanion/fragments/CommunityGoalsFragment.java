@@ -17,7 +17,9 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
 import fr.corenting.edcompanion.models.CommunityGoal;
+import fr.corenting.edcompanion.models.CommunityGoals;
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
 
 public class CommunityGoalsFragment extends Fragment  {
 
@@ -52,7 +54,7 @@ public class CommunityGoalsFragment extends Fragment  {
                 emptySwipeRefreshLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(true);
-                CommunityGoalsNetwork.getCommunityGoals(parent);
+                CommunityGoalsNetwork.getCommunityGoals(getContext());
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
@@ -79,7 +81,7 @@ public class CommunityGoalsFragment extends Fragment  {
 
         // Register event and get the goals
         EventBus.getDefault().register(this);
-        CommunityGoalsNetwork.getCommunityGoals(this);
+        CommunityGoalsNetwork.getCommunityGoals(getContext());
     }
 
     @Override
@@ -89,9 +91,18 @@ public class CommunityGoalsFragment extends Fragment  {
     }
 
     @Subscribe
-    public void onCommunityGoalEvent(CommunityGoal goal) {
+    public void onCommunityGoalEvent(CommunityGoals goals) {
+        if (!goals.Success)
+        {
+            endLoading(0);
+            NotificationsUtils.displayErrorSnackbar(getActivity());
+            return;
+        }
+        endLoading(goals.GoalsList.size());
         CommunityGoalsAdapter adapter = (CommunityGoalsAdapter) recyclerView.getAdapter();
-        adapter.addGoal(goal);
+        for (CommunityGoal goal : goals.GoalsList) {
+            adapter.addGoal(goal);
+        }
     }
 
     public void endLoading(int count)

@@ -7,18 +7,30 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.models.Ranks;
 
 public class RankViewUtils {
-    public static void setContent(Context ctx, View rootView, int logoId, String name, int progress, String description) {
-        ImageView logoView = (ImageView) rootView.findViewById(R.id.itemImageView);
-        TextView titleView = (TextView) rootView.findViewById(R.id.titleTextView);
-        TextView progressView = (TextView) rootView.findViewById(R.id.progressTextView);
-        ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+
+    public static void setTempContent(Context ctx, View rootView, String name) {
+        TextView titleView = rootView.findViewById(R.id.titleTextView);
+        TextView progressView = rootView.findViewById(R.id.progressTextView);
+        ProgressBar progressBar = rootView.findViewById(R.id.progressBar);
+
+        titleView.setText(String.format("%s : %s", name, ctx.getString(R.string.unknown)));
+        progressView.setText(ctx.getResources().getString(R.string.rank_progress, 0));
+        progressBar.setProgress(0);
+    }
+
+    public static void setContent(Context ctx, View rootView, int logoId, Ranks.Rank rank, String description) {
+        ImageView logoView = rootView.findViewById(R.id.itemImageView);
+        TextView titleView = rootView.findViewById(R.id.titleTextView);
+        TextView progressView = rootView.findViewById(R.id.progressTextView);
+        ProgressBar progressBar = rootView.findViewById(R.id.progressBar);
 
         logoView.setImageResource(logoId);
-        titleView.setText(String.format("%s : %s", description, name));
-        progressView.setText(ctx.getResources().getString(R.string.rank_progress, progress));
-        progressBar.setProgress(progress);
+        titleView.setText(String.format("%s : %s", description, rank.name));
+        progressView.setText(ctx.getResources().getString(R.string.rank_progress, rank.progress));
+        progressBar.setProgress(rank.progress);
     }
 
     public static int getCombatLogoId(int rankValue) {

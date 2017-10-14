@@ -18,7 +18,7 @@ import fr.corenting.edcompanion.utils.SettingsUtils;
 public class PlayerStatusNetwork {
 
 
-    public static void getRanks(final Context ctx) {
+    public static void getRanks(Context ctx) {
         String url = ctx.getString(R.string.edsm_ranks) +
                 "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
                 "&commanderName=" + SettingsUtils.getCommanderName(ctx);
@@ -70,15 +70,18 @@ public class PlayerStatusNetwork {
                             ranks.empire.value = ranksObject.get("Empire").getAsInt();
 
                             // Send to bus and stop loading
+                            ranks.Success = true;
                             EventBus.getDefault().post(ranks);
                         } catch (Exception ex) {
-                            EventBus.getDefault().post(new Ranks());
+                            Ranks ranks = new Ranks();
+                            ranks.Success = false;
+                            EventBus.getDefault().post(ranks);
                         }
                     }
                 });
     }
 
-    public static void getPosition(final Context ctx) {
+    public static void getPosition(Context ctx) {
 
         String url = ctx.getString(R.string.edsm_position) +
                 "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
@@ -104,16 +107,19 @@ public class PlayerStatusNetwork {
                                 res.FirstDiscover = result.get("firstDiscover").getAsBoolean();
                             }
 
-                            // Send to bus and stop loading
+                            // Send to bus
+                            res.Success = true;
                             EventBus.getDefault().post(res);
                         } catch (Exception ex) {
-                            EventBus.getDefault().post(new CommanderPosition());
+                            CommanderPosition pos = new CommanderPosition();
+                            pos.Success = false;
+                            EventBus.getDefault().post(pos);
                         }
                     }
                 });
     }
 
-    public static void getCredits(final Context ctx) {
+    public static void getCredits(Context ctx) {
 
         String url = ctx.getString(R.string.edsm_credits) +
                 "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
@@ -130,21 +136,23 @@ public class PlayerStatusNetwork {
                             }
                             Credits res = new Credits();
 
-
                             if (!result.has("credits")) {
-                                res.balance = -1;
-                                res.loan = -1;
+                                res.Balance = -1;
+                                res.Loan = -1;
                             } else {
-                                // Extract balance from json
+                                // Extract Balance from json
                                 JsonObject creditsObject = result.getAsJsonArray("credits").get(0).getAsJsonObject();
-                                res.balance = creditsObject.get("balance").getAsInt();
-                                res.loan = creditsObject.get("loan").getAsInt();
+                                res.Balance = creditsObject.get("balance").getAsInt();
+                                res.Loan = creditsObject.get("loan").getAsInt();
                             }
 
                             // Send to bus
+                            res.Success = true;
                             EventBus.getDefault().post(res);
                         } catch (Exception ex) {
-                            EventBus.getDefault().post(new Credits());
+                            Credits res = new Credits();
+                            res.Success = false;
+                            EventBus.getDefault().post(res);
                         }
                     }
                 });

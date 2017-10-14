@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.network;
 
-import android.support.design.widget.Snackbar;
+import android.content.Context;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,13 +14,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.fragments.GalnetFragment;
+import fr.corenting.edcompanion.models.GalnetArticle;
 import fr.corenting.edcompanion.models.GalnetNews;
 
 public class GalnetNetwork {
-    public static void getNews(final GalnetFragment fragment) {
-        Ion.with(fragment)
-                .load(fragment.getString(R.string.galnet_rss))
+    public static void getNews(Context ctx) {
+        Ion.with(ctx)
+                .load(ctx.getString(R.string.galnet_rss))
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
@@ -30,23 +30,20 @@ public class GalnetNetwork {
                                 throw new Exception();
                             }
 
-                            List<GalnetNews> res = new LinkedList<>();
+                            List<GalnetArticle> articles = new LinkedList<>();
                             for (JsonElement item : result) {
                                 JsonObject jsonObject = item.getAsJsonObject();
-                                GalnetNews news = new GalnetNews();
+                                GalnetArticle news = new GalnetArticle();
                                 news.setContent(jsonObject.get("content").getAsString().replace("<br />", "\n"));
                                 news.setTitle(jsonObject.get("title").getAsString());
                                 news.setDateTimestamp(jsonObject.get("timestamp").getAsLong());
-                                res.add(news);
+                                articles.add(news);
                             }
-                            EventBus.getDefault().post(res);
-                            fragment.endLoading(res.size());
+                            GalnetNews news = new GalnetNews(true, articles);
+                            EventBus.getDefault().post(news);
                         } catch (Exception ex) {
-                            fragment.endLoading(0);
-                            Snackbar snackbar = Snackbar
-                                    .make(fragment.getActivity().findViewById(android.R.id.content),
-                                            R.string.download_error, Snackbar.LENGTH_SHORT);
-                            snackbar.show();
+                            GalnetNews news = new GalnetNews(false, null);
+                            EventBus.getDefault().post(news);
                         }
                     }
                 });

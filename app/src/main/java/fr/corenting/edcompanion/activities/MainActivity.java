@@ -107,8 +107,9 @@ public class MainActivity extends AppCompatActivity
 
     @Subscribe
     public void onServerStatusEvent(ServerStatus status) {
+        String content = status.Success ? status.Status : getString(R.string.unknown);
         TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
-        textView.setText(getString(R.string.server_status, status.Status));
+        textView.setText(getString(R.string.server_status, content));
     }
 
     @Override

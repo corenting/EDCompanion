@@ -18,8 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.GalnetAdapter;
+import fr.corenting.edcompanion.models.GalnetArticle;
 import fr.corenting.edcompanion.models.GalnetNews;
 import fr.corenting.edcompanion.network.GalnetNetwork;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
 
 public class GalnetFragment extends Fragment {
 
@@ -46,7 +48,6 @@ public class GalnetFragment extends Fragment {
         recyclerView.setAdapter(new GalnetAdapter(getContext(), recyclerView, false));
 
         //Swipe to refresh setup
-        final GalnetFragment parent = this;
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -56,7 +57,7 @@ public class GalnetFragment extends Fragment {
                 emptySwipeRefreshLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(true);
-                GalnetNetwork.getNews(parent);
+                GalnetNetwork.getNews(getContext());
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
@@ -85,7 +86,7 @@ public class GalnetFragment extends Fragment {
 
         // Register event and get the news
         EventBus.getDefault().register(this);
-        GalnetNetwork.getNews(this);
+        GalnetNetwork.getNews(getContext());
     }
 
     @Override
@@ -95,9 +96,14 @@ public class GalnetFragment extends Fragment {
     }
 
     @Subscribe
-    public void onNewsEvent(List<GalnetNews> news) {
-        for (GalnetNews n : news)
-        {
+    public void onNewsEvent(GalnetNews news) {
+        if (!news.Success) {
+            endLoading(0);
+            NotificationsUtils.displayErrorSnackbar(getActivity());
+            return;
+        }
+        endLoading(news.Articles.size());
+        for (GalnetArticle n : news.Articles) {
             GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
             boolean isReport = n.getTitle().matches(".*(Weekly).*(Report).*") ||
                     n.getTitle().contains("Starport Status Update");
