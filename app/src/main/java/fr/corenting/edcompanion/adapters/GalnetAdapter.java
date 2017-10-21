@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,17 +24,15 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
 
     private List<GalnetArticle> news;
     private Context context;
-    private final RecyclerView recyclerView;
     private DateFormat dateFormat;
     private View.OnClickListener onClickListener;
     private boolean isDetailsView;
 
 
-    public GalnetAdapter(Context ctx, final RecyclerView recyclerView, boolean isDetailsView) {
+    public GalnetAdapter(Context ctx, final RecyclerView recyclerView, final List<GalnetArticle> news, boolean isDetailsView) {
         this.context = ctx;
-        this.recyclerView = recyclerView;
         this.isDetailsView = isDetailsView;
-        this.news = new LinkedList<>();
+        this.news = news;
         this.dateFormat = DateFormat.getDateInstance(DateFormat.SHORT,
                 DateUtils.getCurrentLocale(context));
 
@@ -48,18 +45,6 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
                 context.startActivity(i);
             }
         };
-    }
-
-    public void addNews(GalnetArticle newItem)
-    {
-        news.add(newItem);
-        notifyItemInserted(news.size() - 1);
-    }
-
-    public void clearNews()
-    {
-        news.clear();
-        notifyDataSetChanged();
     }
 
     @Override

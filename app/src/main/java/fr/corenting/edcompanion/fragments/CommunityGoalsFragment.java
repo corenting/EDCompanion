@@ -16,12 +16,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
-import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.models.CommunityGoals;
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class CommunityGoalsFragment extends Fragment  {
+public class CommunityGoalsFragment extends Fragment {
 
     public static final String COMMUNITY_GOALS_FRAGMENT_TAG = "community_goals_fragment";
 
@@ -41,16 +40,13 @@ public class CommunityGoalsFragment extends Fragment  {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new CommunityGoalsAdapter(getContext(), recyclerView, false));
 
         //Swipe to refresh setup
         final CommunityGoalsFragment parent = this;
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                CommunityGoalsAdapter adapter = (CommunityGoalsAdapter) recyclerView.getAdapter();
                 endLoading(0);
-                adapter.clearGoals();
                 emptySwipeRefreshLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(true);
@@ -92,27 +88,26 @@ public class CommunityGoalsFragment extends Fragment  {
 
     @Subscribe
     public void onCommunityGoalEvent(CommunityGoals goals) {
-        if (!goals.Success)
-        {
+        stopSwipeToRefresh();
+        if (!goals.Success) {
             endLoading(0);
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
         endLoading(goals.GoalsList.size());
-        CommunityGoalsAdapter adapter = (CommunityGoalsAdapter) recyclerView.getAdapter();
-        for (CommunityGoal goal : goals.GoalsList) {
-            adapter.addGoal(goal);
-        }
+        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(getContext(), recyclerView, goals.GoalsList, false);
+        recyclerView.setAdapter(adapter);
     }
 
-    public void endLoading(int count)
-    {
-        swipeRefreshLayout.setRefreshing(false);
-        emptySwipeRefreshLayout.setRefreshing(false);
-        if (count <= 0)
-        {
+    private void endLoading(int count) {
+        if (count <= 0) {
             emptySwipeRefreshLayout.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setVisibility(View.GONE);
         }
+    }
+
+    private void stopSwipeToRefresh() {
+        emptySwipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

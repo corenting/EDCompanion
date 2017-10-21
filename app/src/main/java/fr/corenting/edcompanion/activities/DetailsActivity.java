@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -55,24 +58,30 @@ public class DetailsActivity extends AppCompatActivity {
     {
         getSupportActionBar().setTitle(communityGoal.getTitle());
 
+        // Create list with one element
+        List<CommunityGoal> list = new LinkedList<>();
+        list.add(communityGoal);
+
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, true);
+        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, list, true);
         recyclerView.setAdapter(adapter);
-        adapter.addGoal(communityGoal);
     }
 
     private void galnetArticleSetup()
     {
         getSupportActionBar().setTitle(article.getTitle());
 
+        // Create list with one element
+        List<GalnetArticle> list = new LinkedList<>();
+        list.add(article);
+
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, true);
+        GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, list, true);
         recyclerView.setAdapter(adapter);
-        adapter.addNews(article);
     }
 
     @Override

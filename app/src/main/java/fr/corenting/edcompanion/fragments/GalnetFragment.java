@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.LinkedList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -43,15 +45,12 @@ public class GalnetFragment extends Fragment {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new GalnetAdapter(getContext(), recyclerView, false));
 
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
                 endLoading(0);
-                adapter.clearNews();
                 emptySwipeRefreshLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 swipeRefreshLayout.setRefreshing(true);
@@ -95,32 +94,39 @@ public class GalnetFragment extends Fragment {
 
     @Subscribe
     public void onNewsEvent(GalnetNews news) {
+        stopSwipeToRefresh();
         if (!news.Success) {
             endLoading(0);
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
         endLoading(news.Articles.size());
+        GalnetNews copy = new GalnetNews(true, new LinkedList<GalnetArticle>());
+
         for (GalnetArticle n : news.Articles) {
-            GalnetAdapter adapter = (GalnetAdapter) recyclerView.getAdapter();
             boolean isReport = n.getTitle().matches(".*(Weekly).*(Report).*") ||
                     n.getTitle().contains("Starport Status Update");
 
             // Add the article or not depending on the mode and the title
             if (reportsMode && isReport) {
-                adapter.addNews(n);
+                copy.Articles.add(n);
             } else if (!reportsMode && !isReport) {
-                adapter.addNews(n);
+                copy.Articles.add(n);
             }
         }
+        GalnetAdapter adapter =  new GalnetAdapter(getContext(), recyclerView, copy.Articles, false);
+        recyclerView.setAdapter(adapter);
     }
 
-    public void endLoading(int count) {
-        swipeRefreshLayout.setRefreshing(false);
-        emptySwipeRefreshLayout.setRefreshing(false);
+    private void endLoading(int count) {
         if (count <= 0) {
             emptySwipeRefreshLayout.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setVisibility(View.GONE);
         }
+    }
+
+    private void stopSwipeToRefresh() {
+        emptySwipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

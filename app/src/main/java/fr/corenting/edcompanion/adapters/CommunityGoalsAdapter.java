@@ -8,15 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.models.CommunityGoal;
-
-import fr.corenting.edcompanion.R;
 
 public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAdapter.goalsViewHolder> {
 
@@ -25,10 +23,10 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
     private Context context;
     private boolean isDetailsView;
 
-    public CommunityGoalsAdapter(final Context context, final RecyclerView recyclerView, boolean isDetailsView) {
+    public CommunityGoalsAdapter(final Context context, final RecyclerView recyclerView, final List<CommunityGoal> goals, boolean isDetailsView) {
         this.context = context;
         this.isDetailsView = isDetailsView;
-        this.goals = new LinkedList<>();
+        this.goals = goals;
 
         onClickListener = new View.OnClickListener() {
             @Override
@@ -39,18 +37,6 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
                 context.startActivity(i);
             }
         };
-    }
-
-    public void addGoal(CommunityGoal goal)
-    {
-        goals.add(goal);
-        notifyItemInserted(goals.size() - 1);
-    }
-
-    public void clearGoals()
-    {
-        goals.clear();
-        notifyDataSetChanged();
     }
 
     @Override
