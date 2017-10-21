@@ -28,7 +28,6 @@ public class CommunityGoal implements Parcelable {
     private String station;
     private String system;
 
-    private String startDate;
     private String endDate;
     private String refreshDate;
 
@@ -53,7 +52,6 @@ public class CommunityGoal implements Parcelable {
         station = source.readString();
         system = source.readString();
 
-        startDate = source.readString();
         endDate = source.readString();
         refreshDate = source.readString();
 
@@ -75,7 +73,6 @@ public class CommunityGoal implements Parcelable {
         dest.writeString(station);
         dest.writeString(system);
 
-        dest.writeString(startDate);
         dest.writeString(endDate);
         dest.writeString(refreshDate);
     }
@@ -194,14 +191,6 @@ public class CommunityGoal implements Parcelable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
     }
 
     public boolean refreshIsFinished() {

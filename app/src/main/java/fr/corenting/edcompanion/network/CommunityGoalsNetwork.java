@@ -48,7 +48,6 @@ public class CommunityGoalsNetwork {
 
                                 // Date
                                 JsonObject datesObject = goal.get("date").getAsJsonObject();
-                                newCg.setStartDate(datesObject.get("start").getAsString());
                                 newCg.setEndDate(datesObject.get("end").getAsString());
                                 newCg.setRefreshDate(datesObject.get("last_update").getAsString());
 
