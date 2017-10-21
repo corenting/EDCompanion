@@ -4,8 +4,10 @@
         <item name="colorPrimary">@color/darkPrimary</item>
         <item name="colorPrimaryDark">@color/darkPrimaryDark</item>
         <item name="colorAccent">@color/darkAccent</item>
-        <item name="android:listSeparatorTextViewStyle">@style/MPL_PreferenceListHeader</item>
+        <item name="asp_preferenceIconTint">?colorAccent</item>
+        <item name="asp_preferenceDialogIconTint">?asp_preferenceIconTint</item>
         <item name="actionBarTheme">@style/Theme.SettingsActionBar.Light</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
     </style>
 
 </resources>

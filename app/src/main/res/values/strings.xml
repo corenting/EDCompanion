@@ -87,7 +87,7 @@
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/ocpsoft/prettytime">prettytime</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
-        <a href="https://github.com/AndroidDeveloperLB/MaterialPreferenceLibrary">MaterialPreferenceLibrary</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/consp1racy/android-support-preference">android-support-preference</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b">ClickToSelectEditText</a><br />
         <a href="http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/">DelayAutoCompleteTextView</a><br />
         ]]>
@@ -109,7 +109,7 @@
     <string name="settings_cmdr">CMDR name</string>
     <string name="player_ranks">Player ranks</string>
     <string name="faction_ranks">Faction ranks</string>
-    <string name="settings_display_category_title">Display</string>
+    <string name="settings_general_category_title">General</string>
     <string name="settings_dark_theme_title">Dark theme</string>
     <string name="settings_dark_theme">Dark theme</string>
     <string name="settings_dark_theme_summary">You need to reload the app after changing theme</string>
