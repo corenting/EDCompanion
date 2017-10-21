@@ -33,7 +33,7 @@
     <!--Errors-->
     <string name="nothing_to_display">Nothing to display</string>
     <string name="download_error">Error while downloading the content</string>
-    <string name="commander_error">You need to set your EDSM API key and commander name in the settings</string>
+    <string name="edsm_error">You need to set your EDSM API key and commander name in the settings</string>
 
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>

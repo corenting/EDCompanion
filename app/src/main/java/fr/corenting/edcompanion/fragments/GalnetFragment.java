@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -99,7 +97,7 @@ public class GalnetFragment extends Fragment {
     public void onNewsEvent(GalnetNews news) {
         if (!news.Success) {
             endLoading(0);
-            NotificationsUtils.displayErrorSnackbar(getActivity());
+            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
         endLoading(news.Articles.size());

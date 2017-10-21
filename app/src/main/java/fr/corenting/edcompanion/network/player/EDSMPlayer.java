@@ -1,33 +1,63 @@
-package fr.corenting.edcompanion.network;
+package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import org.greenrobot.eventbus.EventBus;
-
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
-import fr.corenting.edcompanion.utils.SettingsUtils;
 
 
-public class PlayerStatusNetwork {
+public class EDSMPlayer extends PlayerNetworkBase {
 
+    private Context context;
 
-    public static void getRanks(Context ctx) {
-        String url = ctx.getString(R.string.edsm_ranks) +
-                "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
-                "&commanderName=" + SettingsUtils.getCommanderName(ctx);
-        Ion.with(ctx)
+    private String apiKey;
+    private String commanderName;
+
+    public EDSMPlayer(Context context) {
+
+        this.context = context;
+        apiKey = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(context.getString(R.string.settings_edsm_key), "");
+        commanderName = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(context.getString(R.string.settings_cmdr), "");
+    }
+
+    private String buildUrlParameters(String urlBase) {
+        return Uri.parse(urlBase)
+                .buildUpon()
+                .appendQueryParameter("apiKey", apiKey)
+                .appendQueryParameter("commanderName", commanderName)
+                .build().toString();
+    }
+
+    @Override
+    public boolean canBeUsed() {
+        return !apiKey.equals("") && !commanderName.equals("");
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return context.getString(R.string.edsm_error);
+    }
+
+    @Override
+    public void getRanks() {
+        String url = buildUrlParameters(context.getString(R.string.edsm_ranks));
+        Ion.with(context)
                 .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+                        Ranks ranks = new Ranks();
                         try {
                             if (e != null || result == null) {
                                 throw new Exception();
@@ -36,8 +66,6 @@ public class PlayerStatusNetwork {
                             JsonObject ranksObject = result.getAsJsonObject("ranks");
                             JsonObject progressObject = result.getAsJsonObject("progress");
                             JsonObject verboseObject = result.getAsJsonObject("ranksVerbose");
-
-                            Ranks ranks = new Ranks();
 
                             // Combat
                             ranks.combat.name = verboseObject.get("Combat").getAsString();
@@ -69,72 +97,64 @@ public class PlayerStatusNetwork {
                             ranks.empire.progress = progressObject.get("Empire").getAsInt();
                             ranks.empire.value = ranksObject.get("Empire").getAsInt();
 
-                            // Send to bus and stop loading
                             ranks.Success = true;
-                            EventBus.getDefault().post(ranks);
-                        } catch (Exception ex) {
-                            Ranks ranks = new Ranks();
+                        } catch (Exception ignored) {
                             ranks.Success = false;
-                            EventBus.getDefault().post(ranks);
                         }
+                        sendResultMessage(ranks);
                     }
                 });
     }
 
-    public static void getPosition(Context ctx) {
+    @Override
+    public void getCommanderPosition() {
 
-        String url = ctx.getString(R.string.edsm_position) +
-                "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
-                "&commanderName=" + SettingsUtils.getCommanderName(ctx);
-        Ion.with(ctx)
+        String url = buildUrlParameters(context.getString(R.string.edsm_position));
+        Ion.with(context)
                 .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+                        CommanderPosition pos = new CommanderPosition();
                         try {
                             if (e != null || result == null) {
                                 throw new Exception();
                             }
 
                             // Extract position from json
-                            CommanderPosition res = new CommanderPosition();
                             if (result.get("system").isJsonNull() || result.get("firstDiscover").isJsonNull()) {
-                                res.SystemName = null;
-                                res.FirstDiscover = false;
+                                pos.SystemName = null;
+                                pos.FirstDiscover = false;
                             } else {
-                                res.SystemName = result.get("system").getAsString();
-                                res.FirstDiscover = result.get("firstDiscover").getAsBoolean();
+                                pos.SystemName = result.get("system").getAsString();
+                                pos.FirstDiscover = result.get("firstDiscover").getAsBoolean();
                             }
 
                             // Send to bus
-                            res.Success = true;
-                            EventBus.getDefault().post(res);
+                            pos.Success = true;
                         } catch (Exception ex) {
-                            CommanderPosition pos = new CommanderPosition();
                             pos.Success = false;
-                            EventBus.getDefault().post(pos);
                         }
+                        sendResultMessage(pos);
                     }
                 });
     }
 
-    public static void getCredits(Context ctx) {
-
-        String url = ctx.getString(R.string.edsm_credits) +
-                "?apiKey=" + SettingsUtils.getEdsmApiKey(ctx) +
-                "&commanderName=" + SettingsUtils.getCommanderName(ctx);
-        Ion.with(ctx)
+    @Override
+    public void getCredits() {
+        String url = buildUrlParameters(context.getString(R.string.edsm_credits));
+        Ion.with(context)
                 .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+                        Credits res = new Credits();
                         try {
                             if (e != null || result == null) {
                                 throw new Exception();
                             }
-                            Credits res = new Credits();
 
                             if (!result.has("credits")) {
                                 res.Balance = -1;
@@ -148,12 +168,10 @@ public class PlayerStatusNetwork {
 
                             // Send to bus
                             res.Success = true;
-                            EventBus.getDefault().post(res);
                         } catch (Exception ex) {
-                            Credits res = new Credits();
                             res.Success = false;
-                            EventBus.getDefault().post(res);
                         }
+                        sendResultMessage(res);
                     }
                 });
     }

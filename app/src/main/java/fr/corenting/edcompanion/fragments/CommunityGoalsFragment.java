@@ -95,7 +95,7 @@ public class CommunityGoalsFragment extends Fragment  {
         if (!goals.Success)
         {
             endLoading(0);
-            NotificationsUtils.displayErrorSnackbar(getActivity());
+            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
         endLoading(goals.GoalsList.size());

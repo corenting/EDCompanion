@@ -20,7 +20,8 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
-import fr.corenting.edcompanion.network.PlayerStatusNetwork;
+import fr.corenting.edcompanion.network.player.EDSMPlayer;
+import fr.corenting.edcompanion.network.player.PlayerNetworkBase;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.RankViewUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
@@ -52,6 +53,8 @@ public class StatusFragment extends Fragment {
     public View explorationRankLayout;
     @BindView(R.id.arenaRankLayout)
     public View arenaRankLayout;
+
+    private PlayerNetworkBase playerNetwork;
 
 
     @Override
@@ -93,6 +96,7 @@ public class StatusFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+
     }
 
     @Override
@@ -109,6 +113,12 @@ public class StatusFragment extends Fragment {
     }
 
     @Override
+    public void onResume()
+    {
+        super.onResume();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
@@ -120,7 +130,7 @@ public class StatusFragment extends Fragment {
         // Check download error
         if (!credits.Success)
         {
-            NotificationsUtils.displayErrorSnackbar(getActivity());
+            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
@@ -145,7 +155,7 @@ public class StatusFragment extends Fragment {
         // Check download error
         if (!position.Success)
         {
-            NotificationsUtils.displayErrorSnackbar(getActivity());
+            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
@@ -164,7 +174,7 @@ public class StatusFragment extends Fragment {
         // Check download error
         if (!ranks.Success)
         {
-            NotificationsUtils.displayErrorSnackbar(getActivity());
+            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
@@ -179,13 +189,16 @@ public class StatusFragment extends Fragment {
 
     private void getAll()
     {
-        if (!SettingsUtils.hasValidCmdrParameters(getActivity())) {
-            NotificationsUtils.displayErrorSnackbar(getActivity());
-            endLoading();
+        // Refresh player network object if settings changed
+        playerNetwork = new EDSMPlayer(getContext());
+        
+        if (playerNetwork.canBeUsed()) {
+            playerNetwork.getCredits();
+            playerNetwork.getRanks();
+            playerNetwork.getCommanderPosition();
         } else {
-            PlayerStatusNetwork.getCredits(getContext());
-            PlayerStatusNetwork.getRanks(getContext());
-            PlayerStatusNetwork.getPosition(getContext());
+            NotificationsUtils.displaySnackbar(getActivity(), playerNetwork.getErrorMessage());
+            endLoading();
         }
     }
 
