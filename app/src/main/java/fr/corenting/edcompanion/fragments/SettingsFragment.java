@@ -121,9 +121,15 @@ public class SettingsFragment extends XpPreferenceFragment {
         Preference newGoalPreference = findPreference(getString(R.string.settings_notifications_new_goal));
         Preference newTierPreference = findPreference(getString(R.string.settings_notifications_new_tier));
         Preference finishedGoalPreference = findPreference(getString(R.string.settings_notifications_finished_goal));
-        newGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
-        newTierPreference.setOnPreferenceChangeListener(notificationsChangeListener);
-        finishedGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+        if (newGoalPreference != null) {
+            newGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+        }
+        if (newTierPreference != null) {
+            newTierPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+        }
+        if (finishedGoalPreference != null) {
+            finishedGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+        }
     }
 
     private void tintSubscreenIcon(String key, int drawableId)
