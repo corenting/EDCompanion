@@ -26,6 +26,26 @@
                 />
         </PreferenceScreen>
     </PreferenceCategory>
+    <PreferenceCategory>
+        <PreferenceScreen
+            android:icon="@drawable/settings_notifications"
+            android:key="@string/settings_notifications_subscreen"
+            android:persistent="false"
+            android:title="@string/settings_notifications_category_title">
+            <CheckBoxPreference
+                android:title="@string/settings_notifications_new_goal_title"
+                android:summary="@string/settings_notifications_new_goal_summary"
+                android:key="@string/settings_notifications_new_goal" />
+            <CheckBoxPreference
+                android:title="@string/settings_notifications_new_tier_title"
+                android:summary="@string/settings_notifications_new_tier_summary"
+                android:key="@string/settings_notifications_new_tier" />
+            <CheckBoxPreference
+                android:title="@string/settings_notifications_finished_goal_title"
+                android:summary="@string/settings_notifications_finished_goal_summary"
+                android:key="@string/settings_notifications_finished_goal" />
+        </PreferenceScreen>
+    </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_general_category_title">
             <CheckBoxPreference

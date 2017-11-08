@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.preference.Preference;
@@ -8,6 +9,9 @@ import android.support.v7.preference.XpPreferenceFragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import net.xpece.android.support.preference.ListPreference;
 import net.xpece.android.support.preference.MultiSelectListPreference;
@@ -21,6 +25,7 @@ import java.util.Set;
 
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 
 public class SettingsFragment extends XpPreferenceFragment {
@@ -80,11 +85,9 @@ public class SettingsFragment extends XpPreferenceFragment {
         // Add preferences from fill
         addPreferencesFromResource(R.xml.settings);
 
-
-        Preference playerSubScreen = findPreference("player_subscreen");
-        PreferenceIconHelper.setup(playerSubScreen, R.drawable.ic_person_black_24dp,
-                ViewUtils.resolveResourceId(playerSubScreen.getContext(),
-                        R.attr.asp_preferenceIconTint, R.color.colorAccent), true);
+        //Tint icons
+        tintSubscreenIcon("player_subscreen", R.drawable.ic_person_black_24dp);
+        tintSubscreenIcon(getString(R.string.settings_notifications_subscreen), R.drawable.settings_notifications);
 
         // Bind the summaries of EditText/List/Dialog/Ringtone preferences to
         // their values. When their values change, their summaries are updated
@@ -97,6 +100,38 @@ public class SettingsFragment extends XpPreferenceFragment {
         // Setup root preference.
         // Use with ReplaceFragment strategy.
         PreferenceScreenNavigationStrategy.ReplaceFragment.onCreatePreferences(this, rootKey);
+
+        // Remove push notifications subscreen if Google Play Services are not available
+        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext()) != ConnectionResult.SUCCESS)
+        {
+            Preference notificationsScreen = findPreference(getString(R.string.settings_notifications_subscreen));
+            notificationsScreen.setVisible(false);
+        }
+
+        // Change Firebase subscriptions on preference change
+        final Context context = getContext();
+        Preference.OnPreferenceChangeListener notificationsChangeListener = new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                NotificationsUtils.refreshPushSubscription(context, preference.getKey(), (Boolean) newValue);
+                return true;
+            }
+        };
+
+        Preference newGoalPreference = findPreference(getString(R.string.settings_notifications_new_goal));
+        Preference newTierPreference = findPreference(getString(R.string.settings_notifications_new_tier));
+        Preference finishedGoalPreference = findPreference(getString(R.string.settings_notifications_finished_goal));
+        newGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+        newTierPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+        finishedGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+    }
+
+    private void tintSubscreenIcon(String key, int drawableId)
+    {
+        Preference playerSubScreen = findPreference(key);
+        PreferenceIconHelper.setup(playerSubScreen,drawableId,
+                ViewUtils.resolveResourceId(playerSubScreen.getContext(),
+                        R.attr.asp_preferenceIconTint, R.color.colorAccent), true);
     }
 
     @Override

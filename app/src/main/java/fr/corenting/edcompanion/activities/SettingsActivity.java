@@ -16,6 +16,9 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 import net.xpece.android.support.preference.PreferenceScreenNavigationStrategy;
 
 import fr.corenting.edcompanion.R;

@@ -33,6 +33,7 @@ import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.StatusFragment;
 import fr.corenting.edcompanion.models.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
@@ -55,7 +56,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ThemeUtils.setToolbarColor(this, toolbar);
 
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         Ion.getDefault(getApplicationContext()).configure().userAgent(String.format(getString(R.string.user_agent), BuildConfig.VERSION_NAME, System.getProperty("http.agent")));
 
         // Setup navigation view and fake click the first item
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Set initial fragment
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity
                 updateServerStatus();
             }
         });
+
+        // Push notifications setup
+        NotificationsUtils.refreshPushSubscriptions(this);
     }
 
     private void updateServerStatus() {

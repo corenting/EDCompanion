@@ -27,14 +27,15 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         //Action bar setup
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ThemeUtils.setToolbarColor(this, mToolbar);
 
-        TextView versionTextView = (TextView) findViewById(R.id.versionTextView);
-        TextView libsContentTextView = (TextView) findViewById(R.id.librariesContentTextView);
-        TextView contactTextView = (TextView) findViewById(R.id.contactTextView);
+        TextView versionTextView = findViewById(R.id.versionTextView);
+        TextView libsContentTextView = findViewById(R.id.librariesContentTextView);
+        TextView iconsContentTextView = findViewById(R.id.iconsContentTextView);
+        TextView contactTextView = findViewById(R.id.contactTextView);
 
         PackageManager manager = getPackageManager();
         PackageInfo info;
@@ -47,6 +48,7 @@ public class AboutActivity extends AppCompatActivity {
         }
         versionTextView.setText(version);
         setHtmlTextView(libsContentTextView, getString(R.string.about_libs));
+        setHtmlTextView(iconsContentTextView, getString(R.string.about_icons));
         setHtmlTextView(contactTextView, getString(R.string.about_contact_me));
     }
 
