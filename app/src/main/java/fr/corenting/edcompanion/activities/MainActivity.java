@@ -33,6 +33,7 @@ import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.StatusFragment;
 import fr.corenting.edcompanion.models.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
+import fr.corenting.edcompanion.utils.ChangelogUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
@@ -102,6 +103,9 @@ public class MainActivity extends AppCompatActivity
 
         // Push notifications setup
         NotificationsUtils.refreshPushSubscriptions(this);
+
+        // Show changelog
+        ChangelogUtils.ShowChangelog(this);
     }
 
     private void updateServerStatus() {
