@@ -100,22 +100,22 @@ public class GalnetFragment extends Fragment {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
-        endLoading(news.Articles.size());
         GalnetNews copy = new GalnetNews(true, new LinkedList<GalnetArticle>());
 
+        int count = 0;
         for (GalnetArticle n : news.Articles) {
             boolean isReport = n.getTitle().matches(".*(Weekly).*(Report).*") ||
                     n.getTitle().contains("Starport Status Update");
 
             // Add the article or not depending on the mode and the title
-            if (reportsMode && isReport) {
+            if ((reportsMode && isReport) || (!reportsMode && !isReport)) {
                 copy.Articles.add(n);
-            } else if (!reportsMode && !isReport) {
-                copy.Articles.add(n);
+                count++;
             }
         }
         GalnetAdapter adapter =  new GalnetAdapter(getContext(), recyclerView, copy.Articles, false);
         recyclerView.setAdapter(adapter);
+        endLoading(count);
     }
 
     private void endLoading(int count) {
