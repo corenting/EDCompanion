@@ -7,6 +7,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.XpPreferenceFragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -97,10 +98,20 @@ public class SettingsFragment extends XpPreferenceFragment {
 
         getPreferenceScreen().setTitle(getActivity().getTitle());
 
+        // Init push preferences
+        try {
+            initPushPreferences();
+        } catch (Exception e) {
+            Log.i(TAG, "Error on push preferences setup");
+        }
+
         // Setup root preference.
         // Use with ReplaceFragment strategy.
         PreferenceScreenNavigationStrategy.ReplaceFragment.onCreatePreferences(this, rootKey);
+    }
 
+    private void initPushPreferences()
+    {
         // Remove push notifications subscreen if Google Play Services are not available
         if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext()) != ConnectionResult.SUCCESS)
         {
