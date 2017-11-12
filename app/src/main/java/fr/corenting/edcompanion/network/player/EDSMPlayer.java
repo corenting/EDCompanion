@@ -2,19 +2,21 @@ package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import net.xpece.android.support.preference.EditTextPreference;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
+import fr.corenting.edcompanion.utils.SettingsUtils;
 
 
-public class EDSMPlayer extends PlayerNetworkBase {
+public class EDSMPlayer extends PlayerNetwork {
 
     private Context context;
 
@@ -24,10 +26,8 @@ public class EDSMPlayer extends PlayerNetworkBase {
     public EDSMPlayer(Context context) {
 
         this.context = context;
-        apiKey = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.settings_edsm_key), "");
-        commanderName = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.settings_cmdr), "");
+        apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
+        commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
     }
 
     private String buildUrlParameters(String urlBase) {
@@ -39,9 +39,39 @@ public class EDSMPlayer extends PlayerNetworkBase {
     }
 
     @Override
-    public boolean canBeUsed() {
-        return !apiKey.equals("") && !commanderName.equals("");
+    public boolean needPassword() {
+        return true;
     }
+
+    @Override
+    public boolean supportFleet() {
+        return false;
+    }
+
+    @Override
+    public boolean supportCredits() {
+        return true;
+    }
+
+    @Override
+    public boolean supportLocation() {
+        return true;
+    }
+
+    @Override
+    public void usernameSettingSetup(EditTextPreference preference) {
+        preference.setTitle(context.getString(R.string.settings_cmdr_username_title));
+        preference.setSummary(context.getString(R.string.settings_cmdr_username_summary));
+        preference.setDialogTitle(context.getString(R.string.settings_cmdr_username_title));
+    }
+
+    @Override
+    public void passwordSettingSetup(EditTextPreference preference) {
+        preference.setTitle(context.getString(R.string.settings_cmdr_edsm_password_title));
+        preference.setSummary(context.getString(R.string.settings_cmdr_edsm_password_summary));
+        preference.setDialogTitle(context.getString(R.string.settings_cmdr_edsm_password_title));
+    }
+
 
     @Override
     public String getErrorMessage() {

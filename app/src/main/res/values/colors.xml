@@ -7,4 +7,7 @@
     <color name="darkPrimary">#607d8b</color>
     <color name="darkPrimaryDark">#455a64</color>
     <color name="darkAccent">#ff5252</color>
+
+    <color name="tabTextSelected">#b2ffffff</color>
+    <color name="tabText">#ffffff</color>
 </resources>

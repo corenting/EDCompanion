@@ -20,7 +20,7 @@
         <item
             android:id="@+id/nav_cmdr"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/status" />
+            android:title="@string/commander" />
     </group>
 
     <group android:id="@+id/grp2" android:checkableBehavior="single" >

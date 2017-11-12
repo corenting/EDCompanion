@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -20,15 +21,15 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
-import fr.corenting.edcompanion.network.player.EDSMPlayer;
-import fr.corenting.edcompanion.network.player.PlayerNetworkBase;
+import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
-import fr.corenting.edcompanion.utils.RankViewUtils;
+import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
+import fr.corenting.edcompanion.utils.RankUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 
-public class StatusFragment extends Fragment {
+public class CommanderStatusFragment extends Fragment {
 
-    public static final String STATUS_FRAGMENT_TAG = "status_fragment";
+    public static final String COMMANDER_STATUS_FRAGMENT = "commander_status_fragment";
 
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
@@ -36,8 +37,13 @@ public class StatusFragment extends Fragment {
     @BindView(R.id.commanderNameTextView)
     public TextView commanderNameTextView;
 
+    @BindView(R.id.creditsContainer)
+    public RelativeLayout creditsContainer;
     @BindView(R.id.creditsTextView)
     public TextView creditsTextView;
+
+    @BindView(R.id.locationContainer)
+    public RelativeLayout locationContainer;
     @BindView(R.id.locationTextView)
     public TextView locationsTextView;
 
@@ -54,13 +60,11 @@ public class StatusFragment extends Fragment {
     @BindView(R.id.arenaRankLayout)
     public View arenaRankLayout;
 
-    private PlayerNetworkBase playerNetwork;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_status, container, false);
+        View v = inflater.inflate(R.layout.fragment_commander_status, container, false);
         ButterKnife.bind(this, v);
 
         //Swipe to refresh setup
@@ -76,18 +80,28 @@ public class StatusFragment extends Fragment {
         // Set temporary text
         creditsTextView.setText(getResources().getString(R.string.credits, "?"));
         locationsTextView.setText(getResources().getString(R.string.Unknown));
-        RankViewUtils.setTempContent(getContext(), federationRankLayout, getString(R.string.rank_federation));
-        RankViewUtils.setTempContent(getContext(), empireRankLayout, getString(R.string.rank_empire));
+        RankUtils.setTempContent(getContext(), federationRankLayout, getString(R.string.rank_federation));
+        RankUtils.setTempContent(getContext(), empireRankLayout, getString(R.string.rank_empire));
 
-        RankViewUtils.setTempContent(getContext(), combatRankLayout, getString(R.string.rank_combat));
-        RankViewUtils.setTempContent(getContext(), tradeRankLayout, getString(R.string.rank_trading));
-        RankViewUtils.setTempContent(getContext(), explorationRankLayout, getString(R.string.rank_exploration));
-        RankViewUtils.setTempContent(getContext(), arenaRankLayout, getString(R.string.rank_arena));
+        RankUtils.setTempContent(getContext(), combatRankLayout, getString(R.string.rank_combat));
+        RankUtils.setTempContent(getContext(), tradeRankLayout, getString(R.string.rank_trading));
+        RankUtils.setTempContent(getContext(), explorationRankLayout, getString(R.string.rank_exploration));
+        RankUtils.setTempContent(getContext(), arenaRankLayout, getString(R.string.rank_arena));
 
         // Set card title to commander name
         String cmdrName = SettingsUtils.getCommanderName(this.getContext());
         commanderNameTextView.setText(cmdrName.length() == 0 ?
                 getResources().getString(R.string.Unknown) : cmdrName);
+
+        // Hide views according to supported informations from source
+        PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
+        if (!playerNetwork.supportCredits())
+        {
+            creditsContainer.setVisibility(View.GONE);
+        }
+        if (!playerNetwork.supportLocation()) {
+            locationContainer.setVisibility(View.GONE);
+        }
 
         return v;
     }
@@ -178,21 +192,21 @@ public class StatusFragment extends Fragment {
             return;
         }
 
-        RankViewUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation, getString(R.string.rank_federation));
-        RankViewUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire, getString(R.string.rank_empire));
+        RankUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation, getString(R.string.rank_federation));
+        RankUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire, getString(R.string.rank_empire));
 
-        RankViewUtils.setContent(getContext(), combatRankLayout, RankViewUtils.getCombatLogoId(ranks.combat.value), ranks.combat, getString(R.string.rank_combat));
-        RankViewUtils.setContent(getContext(), tradeRankLayout, RankViewUtils.getTradeLogoId(ranks.combat.value), ranks.trade, getString(R.string.rank_trading));
-        RankViewUtils.setContent(getContext(), explorationRankLayout, RankViewUtils.getExplorationLogoId(ranks.explore.value), ranks.explore, getString(R.string.rank_exploration));
-        RankViewUtils.setContent(getContext(), arenaRankLayout, RankViewUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc, getString(R.string.rank_arena));
+        RankUtils.setContent(getContext(), combatRankLayout, RankUtils.getCombatLogoId(ranks.combat.value), ranks.combat, getString(R.string.rank_combat));
+        RankUtils.setContent(getContext(), tradeRankLayout, RankUtils.getTradeLogoId(ranks.combat.value), ranks.trade, getString(R.string.rank_trading));
+        RankUtils.setContent(getContext(), explorationRankLayout, RankUtils.getExplorationLogoId(ranks.explore.value), ranks.explore, getString(R.string.rank_exploration));
+        RankUtils.setContent(getContext(), arenaRankLayout, RankUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc, getString(R.string.rank_arena));
     }
 
     private void getAll()
     {
         // Refresh player network object if settings changed
-        playerNetwork = new EDSMPlayer(getContext());
-        
-        if (playerNetwork.canBeUsed()) {
+        PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
+
+        if (PlayerNetworkUtils.setupOk(getContext())) {
             playerNetwork.getCredits();
             playerNetwork.getRanks();
             playerNetwork.getCommanderPosition();

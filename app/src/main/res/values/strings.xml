@@ -11,6 +11,8 @@
     <string name="edsm_position">https://www.edsm.net/api-logs-v1/get-position</string>
     <string name="edsm_systems">https://www.edsm.net/api-v1/systems</string>
     <string name="edapi_commodities">https://ed.9cw.eu/commodities/</string>
+    <string name="inara_api">https://inara.cz/inapi/v1/</string>
+
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -19,7 +21,7 @@
     <string name="galnet">Galnet</string>
     <string name="galnet_reports">Galnet reports</string>
     <string name="about">About</string>
-    <string name="status">Commander</string>
+    <string name="commander">Commander</string>
     <string name="find_commodity">Find commodity</string>
     <string name="updating_server_status">Updating server status…</string>
     <string name="server_status">Game server: %1$s</string>
@@ -33,7 +35,8 @@
     <!--Errors-->
     <string name="nothing_to_display">Nothing to display</string>
     <string name="download_error">Error while downloading the content</string>
-    <string name="edsm_error">You need to set your EDSM API key and commander name in the settings</string>
+    <string name="edsm_error">You need to set your EDSM API key and your commander name in the settings</string>
+    <string name="inara_error">You need to set your commander name in the settings</string>
 
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>
@@ -41,9 +44,12 @@
     <string name="inara_credits">Data provided by inara.cz</string>
     <string name="eddb_credits">Data provided by eddb.io</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
+
+    <!--Commander-->
     <string name="credits">%1$s credits</string>
     <string name="credits_with_loan">%1$s credits (with a %2$s credits loan)</string>
     <string name="rank_progress">%1$d %%</string>
+    <string name="fleet">Fleet</string>
 
     <!--Ranks-->
     <string name="rank_federation">Federation</string>
@@ -52,6 +58,85 @@
     <string name="rank_trading">Trade</string>
     <string name="rank_exploration">Exploration</string>
     <string name="rank_arena">Arena</string>
+    <string-array name="ranks_combat">
+        <item>Harmless</item>
+        <item>Mostly Harmless</item>
+        <item>Novice</item>
+        <item>Competent</item>
+        <item>Expert</item>
+        <item>Master</item>
+        <item>Dangerous</item>
+        <item>Deadly</item>
+        <item>Elite</item>
+    </string-array>
+    <string-array name="ranks_trade">
+        <item>Penniless</item>
+        <item>Mostly Penniless</item>
+        <item>Peddler</item>
+        <item>Dealer</item>
+        <item>Merchant</item>
+        <item>Broker</item>
+        <item>Entrepreneur</item>
+        <item>Tycoon</item>
+        <item>Elite</item>
+    </string-array>
+    <string-array name="ranks_explorer">
+        <item>Aimless</item>
+        <item>Mostly Aimless</item>
+        <item>Scout</item>
+        <item>Surveyor</item>
+        <item>Trailblazer</item>
+        <item>Pathfinder</item>
+        <item>Ranger</item>
+        <item>Pioneer</item>
+        <item>Elite</item>
+    </string-array>
+    <string-array name="ranks_cqc">
+        <item>Helpless</item>
+        <item>Mostly Helpless</item>
+        <item>Amateur</item>
+        <item>Semi Professional</item>
+        <item>Professional</item>
+        <item>Champion</item>
+        <item>Hero</item>
+        <item>Legend</item>
+        <item>Elite</item>
+    </string-array>
+    <string-array name="ranks_federation">
+        <item>None</item>
+        <item>Recruit</item>
+        <item>Cadet</item>
+        <item>Midshipman</item>
+        <item>Petty Officer</item>
+        <item>Chief Petty Officer</item>
+        <item>Warrant Officer</item>
+        <item>Ensign</item>
+        <item>Lieutenant</item>
+        <item>Lieutenant Commander</item>
+        <item>Post Commander</item>
+        <item>Post Captain</item>
+        <item>Rear Admiral</item>
+        <item>Vice Admiral</item>
+        <item>Admiral</item>
+    </string-array>
+    <string-array name="ranks_empire">
+        <item>None</item>
+        <item>Outsider</item>
+        <item>Serf</item>
+        <item>Master</item>
+        <item>Squire</item>
+        <item>Knight</item>
+        <item>Lord</item>
+        <item>Baron</item>
+        <item>Viscount</item>
+        <item>Count</item>
+        <item>Earl</item>
+        <item>Marquis</item>
+        <item>Duke</item>
+        <item>Prince</item>
+        <item>King</item>
+        <item>Admiral</item>
+    </string-array>
 
     <!--Find commodity-->
     <string name="search_parameters">Search parameters</string>
@@ -108,12 +193,15 @@
     <!--Settings-->
     <string name="title_activity_settings">Settings</string>
     <string name="settings_cmdr_category_title">Commander</string>
-    <string name="settings_edsm_key_title">API key for EDSM</string>
-    <string name="settings_edsm_key_summary">Your personal EDSM API key</string>
-    <string name="settings_edsm_key">API key</string>
-    <string name="settings_cmdr_title">Commander name</string>
-    <string name="settings_cmdr_summary">The ingame name of your CMDR</string>
-    <string name="settings_cmdr">CMDR name</string>
+    <string name="settings_cmdr_source">CMDR source</string>
+    <string name="settings_cmdr_source_title">Commander status source</string>
+    <string name="settings_cmdr_source_summary">Choose the source (Frontier, Inara…) you want to use for the commander tab</string>
+    <string name="settings_cmdr_edsm_password_title">API key for EDSM</string>
+    <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of your EDSM settings.</string>
+    <string name="settings_cmdr_username_title">Commander name</string>
+    <string name="settings_cmdr_username_summary">The ingame name of your CMDR</string>
+    <string name="settings_cmdr_password">CMDR password</string>
+    <string name="settings_cmdr_username">CMDR name</string>
     <string name="player_ranks">Player ranks</string>
     <string name="faction_ranks">Faction ranks</string>
     <string name="settings_general_category_title">General</string>
@@ -131,6 +219,7 @@
     <string name="settings_notifications_new_tier">New tier</string>
     <string name="settings_notifications_finished_goal">Finished goal</string>
     <string name="settings_notifications_subscreen">Notifications subscreen</string>
+    <string name="settings_set">%1$s set</string>
 
     <!--Notifications-->
     <string name="notifications_new_goal_channel">New community goals</string>
@@ -138,10 +227,10 @@
     <string name="notifications_new_tier_channel">New tier reached for community goals</string>
     <string name="notifications_finished_goal_channel">Community goal finished</string>
     <string name="notifications_new_tier_channel_description">When a community goal reach a new tier</string>
-    <string name="notifications_finished_goal_channel_description" >When a community goal finish</string>
-    <string name="notifications_new_goal_description" >New community goal</string>
-    <string name="notifications_finished_goal_description" >Community goal finished</string>
-    <string name="notifications_new_tier_description" >Tier %1$d reached</string>
+    <string name="notifications_finished_goal_channel_description">When a community goal finish</string>
+    <string name="notifications_new_goal_description">New community goal</string>
+    <string name="notifications_finished_goal_description">Community goal finished</string>
+    <string name="notifications_new_tier_description">Tier %1$d reached</string>
 
     <!--Changelog-->
     <string name="changelog_title">Changelog</string>

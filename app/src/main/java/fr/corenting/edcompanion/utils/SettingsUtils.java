@@ -11,7 +11,7 @@ public class SettingsUtils {
 
     public static String getCommanderName(Context c) {
         return PreferenceManager.getDefaultSharedPreferences(c)
-                .getString(c.getString(R.string.settings_cmdr), "");
+                .getString(c.getString(R.string.settings_cmdr_username), "");
     }
 
     public static boolean getBoolean(Context c, String key) {
@@ -28,6 +28,19 @@ public class SettingsUtils {
         SharedPreferences preferenceManager = PreferenceManager.getDefaultSharedPreferences(c);
         SharedPreferences.Editor editor = preferenceManager.edit();
         editor.putInt(key, value);
+        editor.apply();
+    }
+
+
+    public static String getString(Context c, String key) {
+        return PreferenceManager.getDefaultSharedPreferences(c)
+                .getString(key, "");
+    }
+
+    public static void setString(Context c, String key, String value) {
+        SharedPreferences preferenceManager = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor editor = preferenceManager.edit();
+        editor.putString(key, value);
         editor.apply();
     }
 }

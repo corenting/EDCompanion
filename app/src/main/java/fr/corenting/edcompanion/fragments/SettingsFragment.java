@@ -14,6 +14,7 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import net.xpece.android.support.preference.EditTextPreference;
 import net.xpece.android.support.preference.ListPreference;
 import net.xpece.android.support.preference.MultiSelectListPreference;
 import net.xpece.android.support.preference.PreferenceDividerDecoration;
@@ -26,7 +27,9 @@ import java.util.Set;
 
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
+import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 
 public class SettingsFragment extends XpPreferenceFragment {
@@ -83,19 +86,29 @@ public class SettingsFragment extends XpPreferenceFragment {
         // so we can create fake headers from the get-go.
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getPreferenceManager().getContext()));
 
-        // Add preferences from fill
+        // Add preferences from file
         addPreferencesFromResource(R.xml.settings);
 
         //Tint icons
         tintSubscreenIcon("player_subscreen", R.drawable.ic_person_black_24dp);
         tintSubscreenIcon(getString(R.string.settings_notifications_subscreen), R.drawable.settings_notifications);
 
-        // Bind the summaries of EditText/List/Dialog/Ringtone preferences to
-        // their values. When their values change, their summaries are updated
-        // to reflect the new value, per the Android Design guidelines.
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_edsm_key)));
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr)));
+        // Setup cmdr preferences
+        initCmdrPreferences(null);
+        ListPreference statusListPreference = (ListPreference) findPreference(getString(R.string.settings_cmdr_source));
+        if (statusListPreference != null) {
+            statusListPreference.setEntries(PlayerNetworkUtils.getSourcesList());
+            statusListPreference.setEntryValues(PlayerNetworkUtils.getSourcesList());
+            statusListPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    initCmdrPreferences((String) newValue);
+                    return true;
+                }
+            });
+        }
 
+        // Set title to activity title
         getPreferenceScreen().setTitle(getActivity().getTitle());
 
         // Init push preferences
@@ -110,11 +123,28 @@ public class SettingsFragment extends XpPreferenceFragment {
         PreferenceScreenNavigationStrategy.ReplaceFragment.onCreatePreferences(this, rootKey);
     }
 
-    private void initPushPreferences()
-    {
+    private void initCmdrPreferences(String newValue) {
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_password)), true);
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)), false);
+
+        // If invoked with a specific value get network for it else get current one
+        PlayerNetwork playerNetwork = newValue != null ? PlayerNetworkUtils.getCurrentPlayerNetwork(getContext(), newValue) : PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
+
+        EditTextPreference passwordPreference = (EditTextPreference) findPreference(getString(R.string.settings_cmdr_password));
+        EditTextPreference usernamePreference = (EditTextPreference) findPreference(getString(R.string.settings_cmdr_username));
+
+        if (passwordPreference != null) {
+            passwordPreference.setVisible(playerNetwork.needPassword());
+            playerNetwork.passwordSettingSetup(passwordPreference);
+        }
+        if (usernamePreference != null) {
+            playerNetwork.usernameSettingSetup(usernamePreference);
+        }
+    }
+
+    private void initPushPreferences() {
         // Remove push notifications subscreen if Google Play Services are not available
-        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext()) != ConnectionResult.SUCCESS)
-        {
+        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext()) != ConnectionResult.SUCCESS) {
             Preference notificationsScreen = findPreference(getString(R.string.settings_notifications_subscreen));
             notificationsScreen.setVisible(false);
         }
@@ -143,10 +173,9 @@ public class SettingsFragment extends XpPreferenceFragment {
         }
     }
 
-    private void tintSubscreenIcon(String key, int drawableId)
-    {
+    private void tintSubscreenIcon(String key, int drawableId) {
         Preference playerSubScreen = findPreference(key);
-        PreferenceIconHelper.setup(playerSubScreen,drawableId,
+        PreferenceIconHelper.setup(playerSubScreen, drawableId,
                 ViewUtils.resolveResourceId(playerSubScreen.getContext(),
                         R.attr.asp_preferenceIconTint, R.color.colorAccent), true);
     }
@@ -159,18 +188,20 @@ public class SettingsFragment extends XpPreferenceFragment {
         getActivity().setTitle(getPreferenceScreen().getTitle());
     }
 
-    /**
-     * Binds a preference's summary to its value. More specifically, when the
-     * preference's value is changed, its summary (line of text below the
-     * preference title) is updated to reflect the value. The summary is also
-     * immediately updated upon calling this method. The exact display format is
-     * dependent on the type of preference.
-     *
-     * @see #sBindPreferenceSummaryToValueListener
-     */
-    private static void bindPreferenceSummaryToValue(Preference preference) {
+    private void bindPreferenceSummaryToValue(Preference preference, boolean privatePref) {
         // Set the listener to watch for value changes.
-        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+        if (!privatePref) {
+            preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+        } else {
+            preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    String name = (String) preference.getTitle();
+                    preference.setSummary(getString(R.string.settings_set, name));
+                    return true;
+                }
+            });
+        }
 
         // Trigger the listener immediately with the preference's
         // current value.

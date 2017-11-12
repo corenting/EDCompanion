@@ -30,7 +30,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.FindCommodityFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
-import fr.corenting.edcompanion.fragments.StatusFragment;
+import fr.corenting.edcompanion.fragments.CommanderFragment;
 import fr.corenting.edcompanion.models.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.ChangelogUtils;
@@ -154,9 +154,9 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setSubtitle(R.string.inara_credits);
                 break;
             case R.id.nav_cmdr:
-                switchFragment(StatusFragment.STATUS_FRAGMENT_TAG);
+                switchFragment(CommanderFragment.COMMANDER_FRAGMENT);
                 String commanderName = SettingsUtils.getCommanderName(this);
-                setTitle(commanderName.equals("") ? getString(R.string.status) : commanderName);
+                setTitle(commanderName.equals("") ? getString(R.string.commander) : commanderName);
                 getSupportActionBar().setSubtitle("");
                 break;
             case R.id.nav_galnet_news: {
@@ -219,9 +219,9 @@ public class MainActivity extends AppCompatActivity
                         .beginTransaction().replace(R.id.fragmentContent, fragment, GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG)
                         .commit();
                 break;
-            case StatusFragment.STATUS_FRAGMENT_TAG:
+            case CommanderFragment.COMMANDER_FRAGMENT:
                 fragmentManager
-                        .beginTransaction().replace(R.id.fragmentContent, new StatusFragment(), StatusFragment.STATUS_FRAGMENT_TAG)
+                        .beginTransaction().replace(R.id.fragmentContent, new CommanderFragment(), CommanderFragment.COMMANDER_FRAGMENT)
                         .commit();
                 break;
             case FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG:

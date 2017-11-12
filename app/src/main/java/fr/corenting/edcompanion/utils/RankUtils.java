@@ -9,7 +9,7 @@ import android.widget.TextView;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Ranks;
 
-public class RankViewUtils {
+public class RankUtils {
 
     public static void setTempContent(Context ctx, View rootView, String name) {
         TextView titleView = rootView.findViewById(R.id.titleTextView);
