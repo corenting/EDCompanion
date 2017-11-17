@@ -1,6 +1,8 @@
 package fr.corenting.edcompanion.activities;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -8,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,8 @@ import com.koushikdutta.ion.Ion;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.BuildConfig;
@@ -38,6 +43,7 @@ import fr.corenting.edcompanion.utils.ChangelogUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
+import fr.corenting.edcompanion.utils.ViewUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,6 +53,8 @@ public class MainActivity extends AppCompatActivity
     public DrawerLayout drawer;
     @BindView(R.id.nav_view)
     public NavigationView navigationView;
+    @BindView(R.id.appBar)
+    public AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,12 +247,26 @@ public class MainActivity extends AppCompatActivity
                         CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG).commit();
                 break;
         }
+
+        // Also set toolbar elevation to prevent shadow with tabLayout
+        if (tag.equals(CommanderFragment.COMMANDER_FRAGMENT)) {
+            setToolbarElevation(0);
+        } else {
+            setToolbarElevation(ViewUtils.dpToPx(this, 4));
+        }
     }
 
     private void expandToolbar() {
-        AppBarLayout appBarLayout = findViewById(R.id.appbar);
+        AppBarLayout appBarLayout = findViewById(R.id.appBar);
         if (appBarLayout != null) {
             appBarLayout.setExpanded(true);
         }
+    }
+
+    private void setToolbarElevation(float elevation) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            appBarLayout.setStateListAnimator(null);
+        }
+        ViewCompat.setElevation(appBarLayout, elevation);
     }
 }
