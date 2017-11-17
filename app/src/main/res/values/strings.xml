@@ -204,6 +204,8 @@
     <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of your EDSM settings.</string>
     <string name="settings_cmdr_username_title">Commander name</string>
     <string name="settings_cmdr_username_summary">The ingame name of your CMDR</string>
+    <string name="settings_cmdr_inara_username_title">Inara profile name</string>
+    <string name="settings_cmdr_inara_username_summary">Your username on Inara</string>
     <string name="settings_cmdr_password">CMDR password</string>
     <string name="settings_cmdr_username">CMDR name</string>
     <string name="player_ranks">Player ranks</string>

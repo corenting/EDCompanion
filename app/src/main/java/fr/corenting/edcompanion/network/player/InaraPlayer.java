@@ -93,9 +93,9 @@ public class InaraPlayer extends PlayerNetwork {
 
     @Override
     public void usernameSettingSetup(EditTextPreference preference) {
-        preference.setTitle(context.getString(R.string.settings_cmdr_username_title));
-        preference.setSummary(context.getString(R.string.settings_cmdr_username_summary));
-        preference.setDialogTitle(context.getString(R.string.settings_cmdr_username_title));
+        preference.setTitle(context.getString(R.string.settings_cmdr_inara_username_title));
+        preference.setSummary(context.getString(R.string.settings_cmdr_inara_username_summary));
+        preference.setDialogTitle(context.getString(R.string.settings_cmdr_inara_username_title));
     }
 
     @Override
