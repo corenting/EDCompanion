@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.orhanobut.hawk.Hawk;
 
 import net.xpece.android.support.preference.EditTextPreference;
 import net.xpece.android.support.preference.ListPreference;
@@ -90,11 +91,13 @@ public class SettingsFragment extends XpPreferenceFragment {
         addPreferencesFromResource(R.xml.settings);
 
         //Tint icons
-        tintSubscreenIcon("player_subscreen", R.drawable.ic_person_black_24dp);
+        tintSubscreenIcon(getString(R.string.settings_player_subscreen), R.drawable.ic_person_black_24dp);
         tintSubscreenIcon(getString(R.string.settings_notifications_subscreen), R.drawable.settings_notifications);
 
         // Setup cmdr preferences
         initCmdrPreferences(null);
+
+        // Init status source list
         ListPreference statusListPreference = (ListPreference) findPreference(getString(R.string.settings_cmdr_source));
         if (statusListPreference != null) {
             statusListPreference.setEntries(PlayerNetworkUtils.getSourcesList());
@@ -124,8 +127,7 @@ public class SettingsFragment extends XpPreferenceFragment {
     }
 
     private void initCmdrPreferences(String newValue) {
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_password)), true);
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)), false);
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)));
 
         // If invoked with a specific value get network for it else get current one
         PlayerNetwork playerNetwork = newValue != null ? PlayerNetworkUtils.getCurrentPlayerNetwork(getContext(), newValue) : PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
@@ -136,6 +138,15 @@ public class SettingsFragment extends XpPreferenceFragment {
         if (passwordPreference != null) {
             passwordPreference.setVisible(playerNetwork.needPassword());
             playerNetwork.passwordSettingSetup(passwordPreference);
+
+            // Custom preference change listener to store with hawk
+            passwordPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Hawk.put(getString(R.string.settings_cmdr_password), newValue);
+                    return true;
+                }
+            });
         }
         if (usernamePreference != null) {
             playerNetwork.usernameSettingSetup(usernamePreference);
@@ -188,20 +199,9 @@ public class SettingsFragment extends XpPreferenceFragment {
         getActivity().setTitle(getPreferenceScreen().getTitle());
     }
 
-    private void bindPreferenceSummaryToValue(Preference preference, boolean privatePref) {
+    private void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
-        if (!privatePref) {
-            preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-        } else {
-            preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    String name = (String) preference.getTitle();
-                    preference.setSummary(getString(R.string.settings_set, name));
-                    return true;
-                }
-            });
-        }
+        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
         // Trigger the listener immediately with the preference's
         // current value.

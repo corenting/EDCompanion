@@ -4,7 +4,7 @@
     <PreferenceCategory>
         <PreferenceScreen
             android:icon="@drawable/ic_person_black_24dp"
-            android:key="player_subscreen"
+            android:key="@string/settings_player_subscreen"
             android:persistent="false"
             android:title="@string/settings_cmdr_category_title">
             <ListPreference
@@ -22,7 +22,8 @@
                 android:inputType="textPassword"
                 android:key="@string/settings_cmdr_password"
                 app:negativeButtonText="@android:string/cancel"
-                app:positiveButtonText="@android:string/ok" />
+                app:positiveButtonText="@android:string/ok"
+                android:persistent="false" />
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory>

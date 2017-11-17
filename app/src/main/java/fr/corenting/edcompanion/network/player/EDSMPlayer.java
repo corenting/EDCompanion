@@ -26,7 +26,7 @@ public class EDSMPlayer extends PlayerNetwork {
     public EDSMPlayer(Context context) {
 
         this.context = context;
-        apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
+        apiKey = SettingsUtils.getSecureString(context, context.getString(R.string.settings_cmdr_password));
         commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
     }
 

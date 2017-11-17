@@ -64,6 +64,7 @@ dependencies {
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     implementation 'com.koushikdutta.ion:ion:2.2.1'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+    implementation 'com.github.orhanobut:hawk:1.23'
     testImplementation 'junit:junit:4.12'
 }
 

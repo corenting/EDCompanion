@@ -41,7 +41,7 @@ public class PlayerNetworkUtils {
 
 
     public static boolean setupOk(Context context) {
-        String apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
+        String apiKey = SettingsUtils.getSecureString(context, context.getString(R.string.settings_cmdr_password));
         String commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
 
         PlayerNetwork network = getCurrentPlayerNetwork(context);

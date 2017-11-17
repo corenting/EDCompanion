@@ -172,6 +172,7 @@
         <a href="https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b">ClickToSelectEditText</a><br />
         <a href="http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/">DelayAutoCompleteTextView</a><br />
         <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/orhanobut/hawk">Hawk</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/ocpsoft/prettytime">prettytime</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
@@ -219,6 +220,7 @@
     <string name="settings_notifications_new_tier">New tier</string>
     <string name="settings_notifications_finished_goal">Finished goal</string>
     <string name="settings_notifications_subscreen">Notifications subscreen</string>
+    <string name="settings_player_subscreen">Player subscreen</string>
     <string name="settings_set">%1$s set</string>
 
     <!--Notifications-->

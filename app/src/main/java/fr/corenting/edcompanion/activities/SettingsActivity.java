@@ -18,6 +18,7 @@ import android.widget.ViewSwitcher;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.orhanobut.hawk.Hawk;
 
 import net.xpece.android.support.preference.PreferenceScreenNavigationStrategy;
 
@@ -84,6 +85,9 @@ public class SettingsActivity extends AppCompatActivity implements
 
         mTitleSwitcher.setInAnimation(this, R.anim.abc_fade_in);
         mTitleSwitcher.setOutAnimation(this, R.anim.abc_fade_out);
+
+        // Init Hawk for password / api key storage
+        Hawk.init(this).build();
     }
 
     @Override
