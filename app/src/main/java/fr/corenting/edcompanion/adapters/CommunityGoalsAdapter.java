@@ -59,7 +59,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         }
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
         holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
-        holder.remainingTextView.setText(currentGoal.getRemainingString());
+        holder.remainingTextView.setText(currentGoal.getEndDate(context));
         holder.tierTextView.setText(currentGoal.getTierString());
         holder.locationTextView.setText(currentGoal.getSystem());
     }

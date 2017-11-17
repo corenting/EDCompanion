@@ -36,7 +36,7 @@ public class PlayerNetworkUtils {
     }
 
     public static String[] getSourcesList() {
-        return new String[]{edsm, inara, frontier};
+        return new String[]{edsm, inara};
     }
 
 

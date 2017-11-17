@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.koushikdutta.ion.Ion;
 
 import org.greenrobot.eventbus.EventBus;
@@ -106,6 +107,9 @@ public class MainActivity extends AppCompatActivity
 
         // Show changelog
         ChangelogUtils.ShowChangelog(this);
+
+        // Init ThreeTen
+        AndroidThreeTen.init(getApplicationContext());
     }
 
     private void updateServerStatus() {

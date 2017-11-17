@@ -40,7 +40,7 @@ public class SettingsUtils {
     }
 
     public static String getSecureString(Context c, String key) {
-        Hawk.init(c).build();
+        Hawk.init(c.getApplicationContext()).build();
         return Hawk.get(key, "");
     }
 

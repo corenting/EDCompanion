@@ -3,7 +3,7 @@
     <string name="user_agent">EDCompanion v%1$s, like %2$s</string>
 
     <!--URLs-->
-    <string name="api_url">https://9cw.eu/edcg/api.php</string>
+    <string name="api_url">https://ed.9cw.eu/v2/community_goals/</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
     <string name="edsm_credits">https://www.edsm.net/api-commander-v1/get-credits</string>
     <string name="edsm_ranks">https://www.edsm.net/api-commander-v1/get-ranks</string>
@@ -20,17 +20,19 @@
     <string name="community_goals">Community Goals</string>
     <string name="galnet">Galnet</string>
     <string name="galnet_reports">Galnet reports</string>
+
     <string name="about">About</string>
     <string name="commander">Commander</string>
     <string name="find_commodity">Find commodity</string>
     <string name="updating_server_status">Updating server status…</string>
     <string name="server_status">Game server: %1$s</string>
 
-    <!--Image hints-->
+    <!--Community goals-->
     <string name="hint_remaining_time">Remaining time</string>
     <string name="hint_participants">Participants</string>
     <string name="hint_tiers">Tiers</string>
     <string name="hint_system">System</string>
+    <string name="finished">Finished</string>
 
     <!--Errors-->
     <string name="nothing_to_display">Nothing to display</string>
@@ -176,6 +178,7 @@
         <a href="https://github.com/koush/ion">Ion</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/ocpsoft/prettytime">prettytime</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/JakeWharton/ThreeTenABP">ThreeTenABP</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         ]]>
     </string>
     <string name="about_icons" translatable="false">

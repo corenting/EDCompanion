@@ -87,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity implements
         mTitleSwitcher.setOutAnimation(this, R.anim.abc_fade_out);
 
         // Init Hawk for password / api key storage
-        Hawk.init(this).build();
+        Hawk.init(getApplicationContext()).build();
     }
 
     @Override

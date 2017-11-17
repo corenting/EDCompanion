@@ -5,6 +5,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.ocpsoft.prettytime.PrettyTime;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,6 +14,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.utils.DateUtils;
 
 public class CommunityGoal implements Parcelable {
 
@@ -177,46 +180,36 @@ public class CommunityGoal implements Parcelable {
         this.objective = objective;
     }
 
-    public String getRefreshDate() {
-        return refreshDate;
-    }
-
     public void setRefreshDate(String refreshDate) {
         this.refreshDate = refreshDate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getEndDate(Context ctx) {
+        if (!ongoing)
+        {
+            return ctx.getString(R.string.finished);
+        }
+        try {
+            Date date = DateUtils.getDateFromIsoDate(endDate);
+            return prettyTime.format(date);
+        }
+        catch (Exception e)
+        {
+            return ctx.getString(R.string.unknown);
+        }
     }
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public boolean refreshIsFinished() {
-        return refreshDate.equals("finished");
-    }
-
     public String getRefreshDateString(Context ctx) {
-        // Last update
-        if (refreshIsFinished()) {
-            return ctx.getString(R.string.last_update, getRefreshDate());
+        try {
+            Date date = DateUtils.getDateFromIsoDate(refreshDate);
+            return ctx.getString(R.string.last_update, prettyTime.format(date));
+        } catch (Exception e) {
+            return ctx.getString(R.string.last_update, ctx.getString(R.string.unknown));
         }
-        else {
-            try {
-                DateFormat sourceFormat = new SimpleDateFormat("dd MMM yyyy, hh:mma", Locale.US);
-                Date date = sourceFormat.parse(getRefreshDate());
-                return ctx.getString(R.string.last_update, prettyTime.format(date));
-            }
-            catch (Exception e)
-            {
-                return ctx.getString(R.string.last_update, ctx.getString(R.string.unknown));
-            }
-        }
-    }
-
-    public String getRemainingString() {
-        return isOngoing() ? getEndDate() : "Finished";
     }
 
     public String getTierString() {

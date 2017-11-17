@@ -4,6 +4,13 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 
+import org.threeten.bp.DateTimeUtils;
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,5 +34,16 @@ public class DateUtils {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'", Locale.US);
         df.setTimeZone(tz);
         return df.format(new Date());
+    }
+
+    public static Date getDateFromIsoDate(String isoDate) {
+        try {
+            Instant date = ZonedDateTime.parse(isoDate, DateTimeFormatter.ISO_DATE_TIME).toInstant();
+            return DateTimeUtils.toDate(date);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }
