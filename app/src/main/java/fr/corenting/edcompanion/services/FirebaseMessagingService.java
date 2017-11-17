@@ -2,6 +2,8 @@ package fr.corenting.edcompanion.services;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
@@ -45,11 +47,16 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
+                R.drawable.ic_notification);
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setPriority(NotificationCompat.PRIORITY_LOW)
-                        .setSmallIcon(R.drawable.notification_icon)
+                        .setLargeIcon(largeIcon)
+                        .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(goalTitle)
+                        .setAutoCancel(true)
                         .setContentText(NotificationsUtils.getNotificationContent(this, type, currentTier))
                         .setContentIntent(contentIntent);
 
