@@ -45,6 +45,11 @@ public class PlayerNetworkUtils {
         String commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
 
         PlayerNetwork network = getCurrentPlayerNetwork(context);
-        return network.needPassword() ? !apiKey.equals("") && !commanderName.equals("") : !apiKey.equals("");
+
+        boolean res = false;
+        if (!commanderName.equals("")) {
+            res = true;
+        }
+        return !(network.needPassword() && apiKey.equals("")) && res;
     }
 }
