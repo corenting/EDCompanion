@@ -31,6 +31,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
+import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 
 public class SettingsFragment extends XpPreferenceFragment {
@@ -139,6 +140,7 @@ public class SettingsFragment extends XpPreferenceFragment {
             passwordPreference.setVisible(playerNetwork.needPassword());
             playerNetwork.passwordSettingSetup(passwordPreference);
 
+            passwordPreference.setText(SettingsUtils.getSecureString(getContext(), getContext().getString(R.string.settings_cmdr_password)));
             // Custom preference change listener to store with hawk
             passwordPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override

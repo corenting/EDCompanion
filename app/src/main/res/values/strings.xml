@@ -198,10 +198,10 @@
     <string name="title_activity_settings">Settings</string>
     <string name="settings_cmdr_category_title">Commander</string>
     <string name="settings_cmdr_source">CMDR source</string>
-    <string name="settings_cmdr_source_title">Commander status source</string>
-    <string name="settings_cmdr_source_summary">Choose the source (Frontier, Inara…) you want to use for the commander tab</string>
+    <string name="settings_cmdr_source_title">Commander data source</string>
+    <string name="settings_cmdr_source_summary">Choose the data source (EDSM, Inara…) you want to use for the commander tab</string>
     <string name="settings_cmdr_edsm_password_title">API key for EDSM</string>
-    <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of your EDSM settings.</string>
+    <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
     <string name="settings_cmdr_username_title">Commander name</string>
     <string name="settings_cmdr_username_summary">The ingame name of your CMDR</string>
     <string name="settings_cmdr_inara_username_title">Inara profile name</string>
@@ -243,14 +243,11 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.3.0.2</b><br />
+            <b>Version 1.4</b><br />
             <ul>
+                <li>Reworked commander tab, you can now use Inara or EDSM to get the data.</li><br />
+                <li>Faster community goals tab thanks to new Inara API</li><br />
                 <li>Bug fixes</li><br />
-            </ul>
-            <b>Version 1.3</b><br />
-            <ul>
-                <li>You can now receive push notifications for community goals updates, go to settings to enable them</li><br />
-                <li>New adaptive icon</li>
             </ul>
         ]]>
     </string>

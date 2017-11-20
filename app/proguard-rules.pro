@@ -1,6 +1,10 @@
 # PrettyTime
 -keep class org.ocpsoft.prettytime.i18n.**
 
+#Gson
+-keep class com.google.gson.** { *; }
+-keepattributes Signature
+
 # GMS
 -keep public class com.google.android.gms.* { public *; }
 -dontwarn com.google.android.gms.**
@@ -43,3 +47,6 @@
 -keep class butterknife.*
 -keepclasseswithmembernames class * { @butterknife.* <methods>; }
 -keepclasseswithmembernames class * { @butterknife.* <fields>; }
+
+# RxJava
+-dontwarn rx.**

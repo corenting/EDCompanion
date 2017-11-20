@@ -78,7 +78,7 @@ public class InaraPlayer extends PlayerNetwork {
 
     @Override
     public boolean supportFleet() {
-        return true;
+        return false;
     }
 
     @Override
