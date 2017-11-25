@@ -2,10 +2,14 @@ package fr.corenting.edcompanion.network;
 
 import android.content.Context;
 
+import com.afollestad.bridge.Bridge;
+import com.afollestad.bridge.BridgeException;
+import com.afollestad.bridge.Callback;
+import com.afollestad.bridge.Request;
+import com.afollestad.bridge.Response;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
+import com.google.gson.JsonParser;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -18,18 +22,18 @@ import fr.corenting.edcompanion.models.CommunityGoals;
 
 public class CommunityGoalsNetwork {
     public static void getCommunityGoals(Context ctx) {
-        Ion.with(ctx)
-                .load(ctx.getString(R.string.api_url))
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+        Bridge.get(ctx.getString(R.string.api_url))
+                .request(new Callback() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void response(Request request, Response response, BridgeException e) {
                         try {
-                            if (e != null || result == null) {
+                            if (e != null) {
                                 throw new Exception();
                             }
+                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
+
                             List<CommunityGoal> goalsList = new LinkedList<>();
-                            for (JsonElement elt : result.get("goals").getAsJsonArray()) {
+                            for (JsonElement elt : json.get("goals").getAsJsonArray()) {
                                 JsonObject goal = elt.getAsJsonObject();
                                 CommunityGoal newCg = new CommunityGoal();
 
@@ -60,6 +64,7 @@ public class CommunityGoalsNetwork {
                             }
                             CommunityGoals goals = new CommunityGoals(true, goalsList);
                             EventBus.getDefault().post(goals);
+
                         } catch (Exception ex) {
                             CommunityGoals goals = new CommunityGoals(false, null);
                             EventBus.getDefault().post(goals);

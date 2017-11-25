@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.activities;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,18 +15,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.afollestad.bridge.Bridge;
 import com.jakewharton.threetenabp.AndroidThreeTen;
-import com.koushikdutta.ion.Ion;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,11 +75,12 @@ public class MainActivity extends AppCompatActivity
 
         //Enable Ion logging in debug
         if (BuildConfig.DEBUG) {
-            Ion.getDefault(getApplicationContext()).configure().setLogging("EDCompanion networking", Log.DEBUG);
+            Bridge.config()
+                    .logging(true);
         }
 
         // Set user agent to name + version of the app
-        Ion.getDefault(getApplicationContext()).configure().userAgent(String.format(getString(R.string.user_agent), BuildConfig.VERSION_NAME, System.getProperty("http.agent")));
+        Bridge.config().defaultHeader("User-Agent", String.format(getString(R.string.user_agent), BuildConfig.VERSION_NAME, System.getProperty("http.agent")));
 
         // Setup navigation view and fake click the first item
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -152,6 +149,14 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        // Cancel all pending requests
+        Bridge.cancelAll().commit();
+
+        super.onPause();
     }
 
     @Override

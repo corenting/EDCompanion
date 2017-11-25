@@ -2,9 +2,13 @@ package fr.corenting.edcompanion.network;
 
 import android.content.Context;
 
+import com.afollestad.bridge.Bridge;
+import com.afollestad.bridge.BridgeException;
+import com.afollestad.bridge.Callback;
+import com.afollestad.bridge.Request;
+import com.afollestad.bridge.Response;
 import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
+import com.google.gson.JsonParser;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -14,21 +18,22 @@ import fr.corenting.edcompanion.models.ServerStatus;
 
 public class ServerStatusNetwork {
     public static void getStatus(Context ctx) {
-        String url = ctx.getString(R.string.edsm_server);
-        Ion.with(ctx)
-                .load(url)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+        Bridge.get(ctx.getString(R.string.edsm_server))
+                .request(new Callback() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void response(Request request, Response response, BridgeException e) {
                         try {
-                            if (e != null || result == null) {
+                            if (e != null) {
                                 throw new Exception();
                             }
-                            ServerStatus status = new ServerStatus(true, result.get("message").getAsString());
+                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
+
+                            ServerStatus status = new ServerStatus(true, json.get("message").getAsString());
                             EventBus.getDefault().post(status);
+
                         } catch (Exception ex) {
                             EventBus.getDefault().post(new ServerStatus(false, null));
+
                         }
                     }
                 });

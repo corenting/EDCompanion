@@ -3,9 +3,13 @@ package fr.corenting.edcompanion.network.player;
 import android.content.Context;
 import android.net.Uri;
 
+import com.afollestad.bridge.Bridge;
+import com.afollestad.bridge.BridgeException;
+import com.afollestad.bridge.Callback;
+import com.afollestad.bridge.Request;
+import com.afollestad.bridge.Response;
 import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
+import com.google.gson.JsonParser;
 
 import net.xpece.android.support.preference.EditTextPreference;
 
@@ -81,21 +85,20 @@ public class EDSMPlayer extends PlayerNetwork {
     @Override
     public void getRanks() {
         String url = buildUrlParameters(context.getString(R.string.edsm_ranks));
-        Ion.with(context)
-                .load(url)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+        Bridge.get(url)
+                .request(new Callback() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void response(Request request, Response response, BridgeException e) {
                         Ranks ranks = new Ranks();
                         try {
-                            if (e != null || result == null) {
+                            if (e != null) {
                                 throw new Exception();
                             }
 
-                            JsonObject ranksObject = result.getAsJsonObject("ranks");
-                            JsonObject progressObject = result.getAsJsonObject("progress");
-                            JsonObject verboseObject = result.getAsJsonObject("ranksVerbose");
+                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
+                            JsonObject ranksObject = json.getAsJsonObject("ranks");
+                            JsonObject progressObject = json.getAsJsonObject("progress");
+                            JsonObject verboseObject = json.getAsJsonObject("ranksVerbose");
 
                             // Combat
                             ranks.combat.name = verboseObject.get("Combat").getAsString();
@@ -128,7 +131,8 @@ public class EDSMPlayer extends PlayerNetwork {
                             ranks.empire.value = ranksObject.get("Empire").getAsInt();
 
                             ranks.Success = true;
-                        } catch (Exception ignored) {
+
+                        } catch (Exception ex) {
                             ranks.Success = false;
                         }
                         sendResultMessage(ranks);
@@ -138,27 +142,25 @@ public class EDSMPlayer extends PlayerNetwork {
 
     @Override
     public void getCommanderPosition() {
-
         String url = buildUrlParameters(context.getString(R.string.edsm_position));
-        Ion.with(context)
-                .load(url)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+        Bridge.get(url)
+                .request(new Callback() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void response(Request request, Response response, BridgeException e) {
                         CommanderPosition pos = new CommanderPosition();
                         try {
-                            if (e != null || result == null) {
+                            if (e != null) {
                                 throw new Exception();
                             }
+                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
 
                             // Extract position from json
-                            if (result.get("system").isJsonNull() || result.get("firstDiscover").isJsonNull()) {
+                            if (json.get("system").isJsonNull() || json.get("firstDiscover").isJsonNull()) {
                                 pos.SystemName = null;
                                 pos.FirstDiscover = false;
                             } else {
-                                pos.SystemName = result.get("system").getAsString();
-                                pos.FirstDiscover = result.get("firstDiscover").getAsBoolean();
+                                pos.SystemName = json.get("system").getAsString();
+                                pos.FirstDiscover = json.get("firstDiscover").getAsBoolean();
                             }
 
                             // Send to bus
@@ -174,24 +176,23 @@ public class EDSMPlayer extends PlayerNetwork {
     @Override
     public void getCredits() {
         String url = buildUrlParameters(context.getString(R.string.edsm_credits));
-        Ion.with(context)
-                .load(url)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+        Bridge.get(url)
+                .request(new Callback() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void response(Request request, Response response, BridgeException e) {
                         Credits res = new Credits();
                         try {
-                            if (e != null || result == null) {
+                            if (e != null) {
                                 throw new Exception();
                             }
+                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
 
-                            if (!result.has("credits")) {
+                            if (!json.has("credits")) {
                                 res.Balance = -1;
                                 res.Loan = -1;
                             } else {
                                 // Extract Balance from json
-                                JsonObject creditsObject = result.getAsJsonArray("credits").get(0).getAsJsonObject();
+                                JsonObject creditsObject = json.getAsJsonArray("credits").get(0).getAsJsonObject();
                                 res.Balance = creditsObject.get("balance").getAsInt();
                                 res.Loan = creditsObject.get("loan").getAsInt();
                             }

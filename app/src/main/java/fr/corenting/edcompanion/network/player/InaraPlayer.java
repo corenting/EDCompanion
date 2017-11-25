@@ -1,27 +1,20 @@
 package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
-import android.net.Uri;
-import android.preference.PreferenceManager;
 
+import com.afollestad.bridge.Bridge;
+import com.afollestad.bridge.BridgeException;
+import com.afollestad.bridge.Callback;
+import com.afollestad.bridge.Request;
+import com.afollestad.bridge.Response;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
+import com.google.gson.JsonParser;
 
 import net.xpece.android.support.preference.EditTextPreference;
 
-import org.json.JSONArray;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.CommanderPosition;
-import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
 import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
@@ -112,22 +105,25 @@ public class InaraPlayer extends PlayerNetwork {
     public void getRanks() {
         JsonObject body = getJsonBody("getCommanderProfile", "searchName", commanderName);
 
-        Ion.with(context)
-                .load(context.getString(R.string.inara_api))
-                .setJsonObjectBody(body)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+        Bridge.post(context.getString(R.string.inara_api))
+                .body(body.toString())
+                .request(new Callback() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void response(Request request, Response response, BridgeException e) {
                         Ranks ranks = new Ranks();
                         try {
-                            if (e != null || result == null || !isValidInaraResponse(result)) {
+                            if (e != null) {
+                                throw new Exception();
+                            }
+                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
+                            if (!isValidInaraResponse(json))
+                            {
                                 throw new Exception();
                             }
 
-                            result = result.get("events").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("eventData");
+                            json = json.get("events").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("eventData");
 
-                            JsonObject ranksObject = result.getAsJsonObject("commanderRanksPilot");
+                            JsonObject ranksObject = json.getAsJsonObject("commanderRanksPilot");
 
                             // Combat
                             ranks.combat.progress = 0;
@@ -160,7 +156,8 @@ public class InaraPlayer extends PlayerNetwork {
                             ranks.empire.name = context.getResources().getStringArray(R.array.ranks_empire)[ranks.empire.value];
 
                             ranks.Success = true;
-                        } catch (Exception ignored) {
+
+                        } catch (Exception ex) {
                             ranks.Success = false;
                         }
                         sendResultMessage(ranks);
