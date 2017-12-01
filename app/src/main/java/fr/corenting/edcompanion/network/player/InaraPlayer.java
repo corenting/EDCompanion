@@ -8,6 +8,7 @@ import com.afollestad.bridge.Callback;
 import com.afollestad.bridge.Request;
 import com.afollestad.bridge.Response;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -116,47 +117,53 @@ public class InaraPlayer extends PlayerNetwork {
                                 throw new Exception();
                             }
                             JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
-                            if (!isValidInaraResponse(json))
-                            {
+                            if (!isValidInaraResponse(json)) {
                                 throw new Exception();
                             }
 
                             json = json.get("events").getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("eventData");
 
-                            JsonObject ranksObject = json.getAsJsonObject("commanderRanksPilot");
+                            JsonArray ranksObject = json.getAsJsonArray("commanderRanksPilot");
 
-                            // Combat
-                            ranks.combat.progress = 0;
-                            ranks.combat.value = ranksObject.get("combat").getAsInt();
-                            ranks.combat.name = context.getResources().getStringArray(R.array.ranks_combat)[ranks.combat.value];
+                            for (JsonElement rank : ranksObject) {
+                                String name = rank.getAsJsonObject().get("rankName").getAsString();
+                                int value = rank.getAsJsonObject().get("rankValue").getAsInt();
+                                int progress = (int) (rank.getAsJsonObject().get("rankProgress").getAsDouble() * 100);
 
-                            // Trade
-                            ranks.trade.progress = 0;
-                            ranks.trade.value = ranksObject.get("trade").getAsInt();
-                            ranks.trade.name = context.getResources().getStringArray(R.array.ranks_trade)[ranks.trade.value];
-
-                            // Explore
-                            ranks.explore.progress = 0;
-                            ranks.explore.value = ranksObject.get("exploration").getAsInt();
-                            ranks.explore.name = context.getResources().getStringArray(R.array.ranks_explorer)[ranks.explore.value];
-
-                            // CQC
-                            ranks.cqc.progress = 0;
-                            ranks.cqc.value = ranksObject.get("cqc").getAsInt();
-                            ranks.cqc.name = context.getResources().getStringArray(R.array.ranks_cqc)[ranks.cqc.value];
-
-                            // Federation
-                            ranks.federation.progress = 0;
-                            ranks.federation.value = ranksObject.get("federation").getAsInt();
-                            ranks.federation.name = context.getResources().getStringArray(R.array.ranks_federation)[ranks.federation.value];
-
-                            // Empire
-                            ranks.empire.progress = 0;
-                            ranks.empire.value = ranksObject.get("empire").getAsInt();
-                            ranks.empire.name = context.getResources().getStringArray(R.array.ranks_empire)[ranks.empire.value];
-
+                                switch (name) {
+                                    case "combat":
+                                        ranks.combat.progress = progress;
+                                        ranks.combat.value = value;
+                                        ranks.combat.name = context.getResources().getStringArray(R.array.ranks_combat)[ranks.combat.value];
+                                        break;
+                                    case "trade":
+                                        ranks.trade.progress = progress;
+                                        ranks.trade.value = value;
+                                        ranks.trade.name = context.getResources().getStringArray(R.array.ranks_trade)[ranks.trade.value];
+                                        break;
+                                    case "exploration":
+                                        ranks.explore.progress = progress;
+                                        ranks.explore.value = value;
+                                        ranks.explore.name = context.getResources().getStringArray(R.array.ranks_explorer)[ranks.explore.value];
+                                        break;
+                                    case "cqc":
+                                        ranks.cqc.progress = progress;
+                                        ranks.cqc.value = value;
+                                        ranks.cqc.name = context.getResources().getStringArray(R.array.ranks_cqc)[ranks.cqc.value];
+                                        break;
+                                    case "empire":
+                                        ranks.empire.progress = progress;
+                                        ranks.empire.value = value;
+                                        ranks.empire.name = context.getResources().getStringArray(R.array.ranks_empire)[ranks.empire.value];
+                                        break;
+                                    case "federation":
+                                        ranks.federation.progress = progress;
+                                        ranks.federation.value = value;
+                                        ranks.federation.name = context.getResources().getStringArray(R.array.ranks_federation)[ranks.federation.value];
+                                        break;
+                                }
+                            }
                             ranks.Success = true;
-
                         } catch (Exception ex) {
                             ranks.Success = false;
                         }

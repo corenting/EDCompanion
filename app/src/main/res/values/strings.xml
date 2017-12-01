@@ -243,11 +243,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.4</b><br />
+            <b>Version 1.4.1</b><br />
             <ul>
-                <li>Reworked commander tab, you can now use Inara or EDSM to get the data.</li><br />
-                <li>Faster community goals tab thanks to new Inara API</li><br />
-                <li>Bug fixes</li><br />
+                <li>Fixed commander tab when using Inara as a source</li><br />
+                <li>Modified library used for network requests</li><br />
             </ul>
         ]]>
     </string>
