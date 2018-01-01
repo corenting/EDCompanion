@@ -46,15 +46,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    ext.supportLibsVersion = "27.0.1"
+    ext.supportLibsVersion = "27.0.2"
 
     implementation "com.android.support:support-compat:$supportLibsVersion"
     implementation "com.android.support:preference-v7:$supportLibsVersion"
     implementation "com.android.support:design:$supportLibsVersion"
     implementation "com.android.support:cardview-v7:$supportLibsVersion"
     implementation "com.android.support:support-vector-drawable:$supportLibsVersion"
-    implementation 'com.google.firebase:firebase-messaging:11.6.0'
-    implementation 'com.google.android.gms:play-services-base:11.6.0'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    implementation 'com.google.android.gms:play-services-base:11.8.0'
 
     implementation('com.afollestad:bridge:5.1.2') {
         exclude group: 'org.json', module: 'json'
