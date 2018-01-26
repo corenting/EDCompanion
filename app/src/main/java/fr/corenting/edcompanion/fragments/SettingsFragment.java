@@ -187,10 +187,13 @@ public class SettingsFragment extends XpPreferenceFragment {
     }
 
     private void tintSubscreenIcon(String key, int drawableId) {
-        Preference playerSubScreen = findPreference(key);
-        PreferenceIconHelper.setup(playerSubScreen, drawableId,
-                ViewUtils.resolveResourceId(playerSubScreen.getContext(),
-                        R.attr.asp_preferenceIconTint, R.color.colorAccent), true);
+        try {
+            Preference playerSubScreen = findPreference(key);
+            PreferenceIconHelper.setup(playerSubScreen, drawableId,
+                    ViewUtils.resolveResourceId(playerSubScreen.getContext(),
+                            R.attr.asp_preferenceIconTint, R.color.colorAccent), true);
+        } catch (Exception e) {
+        }
     }
 
     @Override
