@@ -10,6 +10,6 @@ APKs are available [in the release section](https://github.com/corenting/EDCompa
 
 - Community goals informations from Inara
 - Galnet news and reports
-- Commander informations (credits balance, current system, ranks) from EDSM
+- Commander informations (credits balance, current system, ranks) from EDSM or Inara **for PC players only**.
 - Game server status from EDSM
 - Material design (light or dark theme)
