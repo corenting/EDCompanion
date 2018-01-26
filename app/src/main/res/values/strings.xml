@@ -3,16 +3,17 @@
     <string name="user_agent">EDCompanion v%1$s, like %2$s</string>
 
     <!--URLs-->
-    <string name="api_url">https://ed.9cw.eu/v2/community_goals/</string>
+    <string name="edapi_base">https://ed.9cw.eu/</string>
+    <string name="edapi_cg">v2/community_goals/</string>
+    <string name="edapi_commodities">commodities/</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
-    <string name="edsm_credits">https://www.edsm.net/api-commander-v1/get-credits</string>
-    <string name="edsm_ranks">https://www.edsm.net/api-commander-v1/get-ranks</string>
-    <string name="edsm_server">https://www.edsm.net/api-status-v1/elite-server</string>
-    <string name="edsm_position">https://www.edsm.net/api-logs-v1/get-position</string>
-    <string name="edsm_systems">https://www.edsm.net/api-v1/systems</string>
-    <string name="edapi_commodities">https://ed.9cw.eu/commodities/</string>
+    <string name="edsm_base">https://www.edsm.net/</string>
+    <string name="edsm_credits">api-commander-v1/get-credits</string>
+    <string name="edsm_ranks">api-commander-v1/get-ranks</string>
+    <string name="edsm_server">api-status-v1/elite-server</string>
+    <string name="edsm_position">api-logs-v1/get-position</string>
+    <string name="edsm_systems">api-v1/systems</string>
     <string name="inara_api">https://inara.cz/inapi/v1/</string>
-
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>

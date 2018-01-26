@@ -18,7 +18,7 @@ import fr.corenting.edcompanion.models.ServerStatus;
 
 public class ServerStatusNetwork {
     public static void getStatus(Context ctx) {
-        Bridge.get(ctx.getString(R.string.edsm_server))
+        Bridge.get(ctx.getString(R.string.edsm_base) + ctx.getString(R.string.edsm_server))
                 .request(new Callback() {
                     @Override
                     public void response(Request request, Response response, BridgeException e) {

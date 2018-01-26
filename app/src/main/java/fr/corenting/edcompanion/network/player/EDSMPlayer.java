@@ -35,6 +35,7 @@ public class EDSMPlayer extends PlayerNetwork {
     }
 
     private String buildUrlParameters(String urlBase) {
+        urlBase = context.getString(R.string.edsm_base) + urlBase;
         return Uri.parse(urlBase)
                 .buildUpon()
                 .appendQueryParameter("apiKey", apiKey)

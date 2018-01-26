@@ -22,7 +22,8 @@ import fr.corenting.edcompanion.models.CommunityGoals;
 
 public class CommunityGoalsNetwork {
     public static void getCommunityGoals(Context ctx) {
-        Bridge.get(ctx.getString(R.string.api_url))
+        String url = ctx.getString(R.string.edapi_base) + ctx.getString(R.string.edapi_cg);
+        Bridge.get(url)
                 .request(new Callback() {
                     @Override
                     public void response(Request request, Response response, BridgeException e) {
