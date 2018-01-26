@@ -53,12 +53,14 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         CommunityGoal currentGoal = goals.get(position);
 
         holder.titleTextView.setText(currentGoal.getTitle());
+        holder.objectiveTextView.setText(currentGoal.getObjective());
+        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
+
         holder.descriptionTextView.setText(currentGoal.getDescription());
         if (isDetailsView) {
             holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
         }
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
-        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
         holder.remainingTextView.setText(currentGoal.getEndDate(context));
         holder.tierTextView.setText(currentGoal.getTierString());
         holder.locationTextView.setText(currentGoal.getSystem());
@@ -71,6 +73,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
     public static class goalsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.titleTextView) TextView titleTextView;
+        @BindView(R.id.objectiveTextView) TextView objectiveTextView;
         @BindView(R.id.subtitleTextView) TextView subtitleTextView;
         @BindView(R.id.descriptionTextView) TextView descriptionTextView;
         @BindView(R.id.remainingTextView) TextView remainingTextView;
@@ -81,6 +84,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         goalsViewHolder(final View view) {
             super(view);
             ButterKnife.bind(this, view);
+            objectiveTextView.setVisibility(View.VISIBLE);
         }
     }
 }

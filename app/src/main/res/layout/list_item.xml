@@ -28,17 +28,25 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
         <TextView
+            android:id="@+id/objectiveTextView"
+            android:visibility="gone"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <TextView
             android:id="@+id/subtitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subtitle"
-            android:layout_below="@id/titleTextView"
+            android:layout_below="@id/objectiveTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
         <RelativeLayout
@@ -61,7 +69,6 @@
                 android:id="@+id/remainingTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
@@ -95,7 +102,6 @@
                 android:id="@+id/peopleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
@@ -126,7 +132,6 @@
                 android:id="@+id/tierTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
@@ -161,7 +166,6 @@
                 android:id="@+id/locationTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
@@ -177,7 +181,6 @@
             android:layout_marginTop="18dp"
             android:maxLines="4"
             android:ellipsize="end"
-            android:text="Lorem ipsum"
             android:layout_below="@id/tierContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
