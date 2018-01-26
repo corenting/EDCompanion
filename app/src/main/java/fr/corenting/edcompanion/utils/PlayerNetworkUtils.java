@@ -12,7 +12,6 @@ public class PlayerNetworkUtils {
 
     private static final String edsm = "EDSM";
     private static final String inara = "Inara";
-    private static final String frontier = "Frontier cAPI";
 
     public static PlayerNetwork getCurrentPlayerNetwork(Context context) {
         String current = SettingsUtils.getString(context, context.getResources().getString(R.string.settings_cmdr_source));
