@@ -6,6 +6,7 @@
     <string name="edapi_base">https://ed.9cw.eu/</string>
     <string name="edapi_cg">v2/community_goals/</string>
     <string name="edapi_commodities">commodities/</string>
+    <string name="edapi_distance">distance/</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
     <string name="edsm_base">https://www.edsm.net/</string>
     <string name="edsm_credits">api-commander-v1/get-credits</string>
@@ -21,6 +22,7 @@
     <string name="community_goals">Community Goals</string>
     <string name="galnet">Galnet</string>
     <string name="galnet_reports">Galnet reports</string>
+    <string name="distance_calculator">Distance calculator</string>
 
     <string name="about">About</string>
     <string name="commander">Commander</string>
@@ -40,7 +42,6 @@
     <string name="download_error">Error while downloading the content</string>
     <string name="edsm_error">You need to set your EDSM API key and your commander name in the settings</string>
     <string name="inara_error">You need to set your commander name in the settings</string>
-
     <string name="last_update">Last update : %1$s</string>
     <string name="unknown">unknown</string>
     <string name="Unknown">Unknown</string>
@@ -164,6 +165,13 @@
     <string name="landing_pad_size">Landing pad size</string>
     <string name="close">Close</string>
     <string name="search">Search</string>
+
+    <!--Distance calculator-->
+    <string name="find">Find</string>
+    <string name="first_system">First system</string>
+    <string name="second_system">Second system</string>
+    <string name="distance_result">Distance: %1$f LY</string>
+    <string name="permit_required">Permit required for %1$s</string>
 
     <!--About-->
     <string name="title_activity_about">About</string>

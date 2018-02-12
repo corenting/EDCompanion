@@ -31,6 +31,7 @@ import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommanderFragment;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
+import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
 import fr.corenting.edcompanion.fragments.FindCommodityFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.models.ServerStatus;
@@ -161,13 +162,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
 
         expandToolbar();
-        switch (id) {
+        setTitle(item.getTitle());
+        switch (item.getItemId()) {
             case R.id.nav_cg:
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
-                setTitle(getString(R.string.community_goals));
                 getSupportActionBar().setSubtitle(R.string.inara_credits);
                 break;
             case R.id.nav_cmdr:
@@ -178,14 +178,17 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_galnet_news: {
                 switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG);
-                setTitle(getString(R.string.galnet));
                 getSupportActionBar().setSubtitle("");
                 break;
             }
             case R.id.nav_galnet_reports: {
                 switchFragment(GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG);
-                setTitle(getString(R.string.galnet_reports));
                 getSupportActionBar().setSubtitle("");
+                break;
+            }
+            case R.id.nav_distance_calculator: {
+                switchFragment(DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG);
+                getSupportActionBar().setSubtitle(R.string.eddb_credits);
                 break;
             }
           /*  case R.id.nav_find_commodity: {
@@ -222,34 +225,25 @@ public class MainActivity extends AppCompatActivity
                 fragment = new GalnetFragment();
                 args.putBoolean("reportsMode", false);
                 fragment.setArguments(args);
-                // Change fragment
-                fragmentManager
-                        .beginTransaction().replace(R.id.fragmentContent, fragment, GalnetFragment.GALNET_FRAGMENT_TAG)
-                        .commit();
+                ViewUtils.switchFragment(fragmentManager, fragment, tag);
                 break;
             case GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG:
                 fragment = new GalnetFragment();
                 args.putBoolean("reportsMode", true);
                 fragment.setArguments(args);
-                // Change fragment
-                fragmentManager
-                        .beginTransaction().replace(R.id.fragmentContent, fragment, GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG)
-                        .commit();
+                ViewUtils.switchFragment(fragmentManager, fragment, tag);
                 break;
             case CommanderFragment.COMMANDER_FRAGMENT:
-                fragmentManager
-                        .beginTransaction().replace(R.id.fragmentContent, new CommanderFragment(), CommanderFragment.COMMANDER_FRAGMENT)
-                        .commit();
+                ViewUtils.switchFragment(fragmentManager,  new CommanderFragment(), tag);
                 break;
             case FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG:
-                fragmentManager
-                        .beginTransaction().replace(R.id.fragmentContent, new FindCommodityFragment(), FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG)
-                        .commit();
+                ViewUtils.switchFragment(fragmentManager,  new FindCommodityFragment(), tag);
+                break;
+            case DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG:
+                ViewUtils.switchFragment(fragmentManager,  new DistanceCalculatorFragment(), tag);
                 break;
             default:
-                fragmentManager.beginTransaction().replace(R.id.fragmentContent,
-                        new CommunityGoalsFragment(),
-                        CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG).commit();
+                ViewUtils.switchFragment(fragmentManager,  new CommunityGoalsFragment(), tag);
                 break;
         }
 

@@ -18,7 +18,8 @@ public class AutoCompleteNetwork {
     private static int MAX_RESULTS = 10;
 
     public static List<NameId> searchCommodities(Context context, String filter) {
-        String url = context.getResources().getString(R.string.edapi_commodities) + "?name=" + filter;
+        String url = context.getResources().getString(R.string.edsm_base) +
+                context.getResources().getString(R.string.edapi_commodities) + "?name=" + filter;
         try {
             JsonArray array = new JsonParser().parse(Bridge.get(url).asString()).getAsJsonArray();
             List<NameId> results = new ArrayList<>();
@@ -38,7 +39,8 @@ public class AutoCompleteNetwork {
     }
 
     public static List<NameId> searchSystems(Context context, String filter) {
-        String url = context.getResources().getString(R.string.edsm_systems) + "?systemName=" + filter;
+        String url = context.getResources().getString(R.string.edsm_base) +
+                context.getResources().getString(R.string.edsm_systems) + "?systemName=" + filter;
         try {
             JsonArray array = new JsonParser().parse(Bridge.get(url).asString()).getAsJsonArray();
             List<NameId> results = new ArrayList<>();
