@@ -21,6 +21,7 @@ import fr.corenting.edcompanion.adapters.AutoCompleteAdapter;
 import fr.corenting.edcompanion.models.Distance;
 import fr.corenting.edcompanion.network.DistanceCalculatorNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
+import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 
 public class DistanceCalculatorFragment extends Fragment{
@@ -38,6 +39,8 @@ public class DistanceCalculatorFragment extends Fragment{
     public CardView resultCardView;
     @BindView(R.id.resultTextView)
     public TextView resultTextView;
+    @BindView(R.id.warningTextView)
+    public TextView warningTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,12 +58,29 @@ public class DistanceCalculatorFragment extends Fragment{
 
     @Subscribe
     public void onDistanceEvent(Distance distance) {
-        resultCardView.setVisibility(View.VISIBLE);
-
         // Error
         if (!distance.Success) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
+        }
+
+        resultCardView.setVisibility(View.VISIBLE);
+
+        // Display warning if permits are required
+        if (distance.StartPermitRequired && distance.EndPermitRequired)
+        {
+            warningTextView.setVisibility(View.VISIBLE);
+            warningTextView.setText(getContext().getString(R.string.permit_required_both, distance.StartSystemName, distance.EndSystemName));
+        }
+        else if (distance.StartPermitRequired)
+        {
+            warningTextView.setVisibility(View.VISIBLE);
+            warningTextView.setText(getContext().getString(R.string.permit_required, distance.StartSystemName));
+        }
+        else if (distance.EndPermitRequired)
+        {
+            warningTextView.setVisibility(View.VISIBLE);
+            warningTextView.setText(getContext().getString(R.string.permit_required, distance.EndSystemName));
         }
 
         resultTextView.setText(getContext().getString(R.string.distance_result, distance.Distance));
@@ -75,6 +95,7 @@ public class DistanceCalculatorFragment extends Fragment{
 
     @OnClick(R.id.findButton)
     public void onFindClick(View view) {
+        ViewUtils.hideSoftKeyboard(view.getRootView());
         resultCardView.setVisibility(View.GONE);
         DistanceCalculatorNetwork.getDistance(
                 getContext(),

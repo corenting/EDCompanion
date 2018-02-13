@@ -10,4 +10,6 @@
 
     <color name="tabTextSelected">#b2ffffff</color>
     <color name="tabText">#ffffff</color>
+
+    <color name="warningText">#F44336</color>
 </resources>

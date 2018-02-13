@@ -6,6 +6,8 @@ import android.support.annotation.AttrRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
@@ -38,5 +40,10 @@ public class ViewUtils {
                 .beginTransaction()
                 .replace(R.id.fragmentContent, fragment, tag)
                 .commit();
+    }
+
+    public static void hideSoftKeyboard(View v) {
+        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 }

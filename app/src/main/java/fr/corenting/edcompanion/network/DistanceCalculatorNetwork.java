@@ -14,7 +14,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Distance;
-import fr.corenting.edcompanion.models.ServerStatus;
 
 
 public class DistanceCalculatorNetwork {
@@ -30,20 +29,23 @@ public class DistanceCalculatorNetwork {
                                 throw new Exception();
                             }
                             JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
+                            JsonObject from = json.get("from").getAsJsonObject();
+                            JsonObject to = json.get("to").getAsJsonObject();
 
                             Distance distance = new Distance(
                                     true,
                                     json.get("distance").getAsFloat(),
-                                    json.get("from").getAsJsonObject().get("permit_required").getAsBoolean(),
-                                    json.get("to").getAsJsonObject().get("permit_required").getAsBoolean()
+                                    from.get("name").getAsString(),
+                                    to.get("name").getAsString(),
+                                    from.get("permit_required").getAsBoolean(),
+                                    to.get("permit_required").getAsBoolean()
                             );
 
                             EventBus.getDefault().post(distance);
 
                         } catch (Exception ex) {
-                            Distance distance = new Distance(false, 0, false,false);
+                            Distance distance = new Distance(false, 0, null, null, false, false);
                             EventBus.getDefault().post(distance);
-
                         }
                     }
                 });
