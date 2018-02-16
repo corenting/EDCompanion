@@ -12,4 +12,5 @@ APKs are available [in the release section](https://github.com/corenting/EDCompa
 - Galnet news and reports
 - Commander informations (credits balance, current system, ranks) from EDSM or Inara **for PC players only**.
 - Game server status from EDSM
+- Distance calculator (get the distance between two systems)
 - Material design (light or dark theme)
