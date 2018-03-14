@@ -37,10 +37,6 @@ import fr.corenting.edcompanion.utils.ViewUtils;
 public class SettingsFragment extends XpPreferenceFragment {
     private static final String TAG = SettingsFragment.class.getSimpleName();
 
-    /**
-     * A preference value change listener that updates the preference's summary
-     * to reflect its new value.
-     */
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -53,10 +49,7 @@ public class SettingsFragment extends XpPreferenceFragment {
                 int index = listPreference.findIndexOfValue(stringValue);
 
                 // Set the summary to reflect the new value.
-                preference.setSummary(
-                        index >= 0
-                                ? listPreference.getEntries()[index]
-                                : null);
+                preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
             } else if (preference instanceof MultiSelectListPreference) {
                 String summary = stringValue.trim().substring(1, stringValue.length() - 1); // strip []
                 preference.setSummary(summary);
@@ -191,10 +184,11 @@ public class SettingsFragment extends XpPreferenceFragment {
             Preference playerSubScreen = findPreference(key);
             PreferenceIconHelper.setup(playerSubScreen, drawableId,
                     ViewUtils.resolveResourceId(playerSubScreen.getContext(),
-                            R.attr.asp_preferenceIconTint, R.color.colorAccent), true);
+                            R.attr.iconTint, R.color.colorAccent), true);
         } catch (Exception e) {
         }
     }
+
 
     @Override
     public void onStart() {
@@ -204,7 +198,7 @@ public class SettingsFragment extends XpPreferenceFragment {
         getActivity().setTitle(getPreferenceScreen().getTitle());
     }
 
-    private void bindPreferenceSummaryToValue(Preference preference) {
+    private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
@@ -235,7 +229,8 @@ public class SettingsFragment extends XpPreferenceFragment {
         listView.setPadding(0, padding, 0, padding);
 
         // We're using alternative divider.
-        getListView().addItemDecoration(new PreferenceDividerDecoration(getContext()).drawBottom(false));
+        listView.addItemDecoration(new PreferenceDividerDecoration(getContext())
+                .drawBetweenItems(false).paddingDp(listView.getContext(), 8));
         setDivider(null);
 
         // We don't want this. The children are still focusable.
