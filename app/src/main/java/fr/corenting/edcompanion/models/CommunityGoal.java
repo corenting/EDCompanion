@@ -34,11 +34,9 @@ public class CommunityGoal implements Parcelable {
     private String endDate;
     private String refreshDate;
 
-    // For the string function
-    private PrettyTime prettyTime;
+    public CommunityGoal()
+    {
 
-    public CommunityGoal() {
-        prettyTime = new PrettyTime(Locale.US);
     }
 
     public CommunityGoal(Parcel source) {
@@ -57,8 +55,6 @@ public class CommunityGoal implements Parcelable {
 
         endDate = source.readString();
         refreshDate = source.readString();
-
-        prettyTime = new PrettyTime(Locale.US);
     }
 
     @Override
@@ -184,7 +180,7 @@ public class CommunityGoal implements Parcelable {
         this.refreshDate = refreshDate;
     }
 
-    public String getEndDate(Context ctx) {
+    public String getEndDate(Context ctx, PrettyTime prettyTime) {
         if (!ongoing)
         {
             return ctx.getString(R.string.finished);
@@ -203,7 +199,7 @@ public class CommunityGoal implements Parcelable {
         this.endDate = endDate;
     }
 
-    public String getRefreshDateString(Context ctx) {
+    public String getRefreshDateString(Context ctx, PrettyTime prettyTime) {
         try {
             Date date = DateUtils.getDateFromIsoDate(refreshDate);
             return ctx.getString(R.string.last_update, prettyTime.format(date));
