@@ -21,7 +21,7 @@ public class PlayerNetworkUtils {
 
     public static PlayerNetwork getCurrentPlayerNetwork(Context context, String value) {
         if (value.equals("")) {
-            return new EDSMPlayer(context);
+            return new InaraPlayer(context);
         }
 
         switch (value) {
@@ -30,7 +30,7 @@ public class PlayerNetworkUtils {
             case inara:
                 return new InaraPlayer(context);
             default:
-                return new EDSMPlayer(context);
+                return new InaraPlayer(context);
         }
     }
 
