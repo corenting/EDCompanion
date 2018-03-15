@@ -6,22 +6,26 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 import java.util.List;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 
@@ -184,6 +188,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             addPreferencesFromResource(R.xml.pref_notifications);
             setHasOptionsMenu(true);
+
+            initPushPreferences();
         }
 
         @Override
@@ -194,6 +200,37 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 return true;
             }
             return super.onOptionsItemSelected(item);
+        }
+
+        private void initPushPreferences() {
+
+            // Remove push notifications subscreen if Google Play Services are not available
+            if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getActivity()) != ConnectionResult.SUCCESS) {
+               // TODO : disable preferences when there is no FCM
+            }
+
+            // Change Firebase subscriptions on preference change
+            final Context context = getActivity();
+            Preference.OnPreferenceChangeListener notificationsChangeListener = new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    NotificationsUtils.refreshPushSubscription(context, preference.getKey(), (Boolean) newValue);
+                    return true;
+                }
+            };
+
+            Preference newGoalPreference = findPreference(getString(R.string.settings_notifications_new_goal));
+            Preference newTierPreference = findPreference(getString(R.string.settings_notifications_new_tier));
+            Preference finishedGoalPreference = findPreference(getString(R.string.settings_notifications_finished_goal));
+            if (newGoalPreference != null) {
+                newGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+            }
+            if (newTierPreference != null) {
+                newTierPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+            }
+            if (finishedGoalPreference != null) {
+                finishedGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
+            }
         }
     }
 
@@ -210,6 +247,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             setHasOptionsMenu(true);
 
             initCmdrPreferences(null);
+
+            // Init status source list
+            ListPreference statusListPreference = (ListPreference) findPreference(getString(R.string.settings_cmdr_source));
+            if (statusListPreference != null) {
+                statusListPreference.setEntries(PlayerNetworkUtils.getSourcesList());
+                statusListPreference.setEntryValues(PlayerNetworkUtils.getSourcesList());
+                statusListPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        initCmdrPreferences((String) newValue);
+                        return true;
+                    }
+                });
+            }
         }
 
         @Override
