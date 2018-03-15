@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
+import android.support.v7.preference.EditTextPreference;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.bridge.BridgeException;
@@ -11,8 +12,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import net.xpece.android.support.preference.EditTextPreference;
 
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;

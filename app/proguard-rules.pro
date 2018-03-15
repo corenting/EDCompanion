@@ -27,6 +27,9 @@
 -keep interface android.support.design.** { *; }
 -keep public class android.support.design.R$* { *; }
 
+# Support Settings
+-keep public class * extends android.support.v7.preference.Preference
+
 # Eventbus
 -keepattributes *Annotation*
 -keepclassmembers class ** {

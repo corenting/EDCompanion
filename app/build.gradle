@@ -42,14 +42,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:27.1.0'
+    implementation 'com.android.support:support-vector-drawable:27.1.0'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
     ext.supportLibsVersion = "27.1.0"
-
     implementation "com.android.support:support-compat:$supportLibsVersion"
     implementation "com.android.support:preference-v7:$supportLibsVersion"
+    implementation "com.android.support:preference-v14:$supportLibsVersion"
     implementation "com.android.support:design:$supportLibsVersion"
     implementation "com.android.support:cardview-v7:$supportLibsVersion"
     implementation "com.android.support:support-vector-drawable:$supportLibsVersion"
@@ -59,18 +61,18 @@ dependencies {
     implementation('com.afollestad:bridge:5.1.2') {
         exclude group: 'org.json', module: 'json'
     }
+    implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
-    implementation 'net.xpece.android:support-preference:2.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
-    implementation 'net.xpece.android:support-spinner:2.1.1'
-    implementation 'com.github.orhanobut:hawk:1.23'
     testImplementation 'junit:junit:4.12'
 }
+
+
 
 
 apply plugin: 'com.google.gms.google-services'

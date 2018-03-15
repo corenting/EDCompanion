@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v7.preference.EditTextPreference;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.bridge.BridgeException;
@@ -11,7 +12,6 @@ import com.afollestad.bridge.Response;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import net.xpece.android.support.preference.EditTextPreference;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommanderPosition;
@@ -30,7 +30,7 @@ public class EDSMPlayer extends PlayerNetwork {
     public EDSMPlayer(Context context) {
 
         this.context = context;
-        apiKey = SettingsUtils.getSecureString(context, context.getString(R.string.settings_cmdr_password));
+        apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
         commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
     }
 

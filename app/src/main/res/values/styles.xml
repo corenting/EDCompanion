@@ -7,10 +7,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="asp_preferenceIconTint">?colorAccent</item>
-        <item name="asp_preferenceDialogIconTint">?asp_preferenceIconTint</item>
         <item name="actionBarTheme">@style/Theme.SettingsActionBar.Light</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
     <style name="Theme.SettingsActionBar.Light" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
