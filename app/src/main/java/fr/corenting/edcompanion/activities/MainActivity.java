@@ -32,7 +32,6 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommanderFragment;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
-import fr.corenting.edcompanion.fragments.FindCommodityFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.models.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
@@ -191,12 +190,6 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setSubtitle(R.string.eddb_credits);
                 break;
             }
-          /*  case R.id.nav_find_commodity: {
-                switchFragment(FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG);
-                setTitle(getString(R.string.find_commodity));
-                getSupportActionBar().setSubtitle(R.string.eddb_credits);
-                break;
-            }*/
             case R.id.nav_about: {
                 Intent i = new Intent(this, AboutActivity.class);
                 startActivity(i);
@@ -235,9 +228,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case CommanderFragment.COMMANDER_FRAGMENT:
                 ViewUtils.switchFragment(fragmentManager,  new CommanderFragment(), tag);
-                break;
-            case FindCommodityFragment.FIND_COMMODITY_FRAGMENT_TAG:
-                ViewUtils.switchFragment(fragmentManager,  new FindCommodityFragment(), tag);
                 break;
             case DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager,  new DistanceCalculatorFragment(), tag);

@@ -55,8 +55,10 @@ dependencies {
     implementation "com.android.support:design:$supportLibsVersion"
     implementation "com.android.support:cardview-v7:$supportLibsVersion"
     implementation "com.android.support:support-vector-drawable:$supportLibsVersion"
-    implementation 'com.google.firebase:firebase-messaging:11.8.0'
-    implementation 'com.google.android.gms:play-services-base:11.8.0'
+
+    ext.playServicesVersion = "12.0.1"
+    implementation "com.google.firebase:firebase-messaging:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-base:$playServicesVersion"
 
     implementation('com.afollestad:bridge:5.1.2') {
         exclude group: 'org.json', module: 'json'
@@ -71,8 +73,5 @@ dependencies {
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
     testImplementation 'junit:junit:4.12'
 }
-
-
-
 
 apply plugin: 'com.google.gms.google-services'
