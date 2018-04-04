@@ -18,6 +18,5 @@
         android:inputType="textPassword"
         android:key="@string/settings_cmdr_password"
         android:negativeButtonText="@android:string/cancel"
-        android:positiveButtonText="@android:string/ok"
-        android:persistent="false" />
+        android:positiveButtonText="@android:string/ok" />
 </android.support.v7.preference.PreferenceScreen>
