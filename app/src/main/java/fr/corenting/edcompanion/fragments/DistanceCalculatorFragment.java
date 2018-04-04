@@ -23,8 +23,9 @@ import fr.corenting.edcompanion.network.DistanceCalculatorNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class DistanceCalculatorFragment extends Fragment{
+public class DistanceCalculatorFragment extends Fragment {
 
     public static final String DISTANCE_CALCULATOR_FRAGMENT_TAG = "distance_calculator_fragment";
 
@@ -37,6 +38,8 @@ public class DistanceCalculatorFragment extends Fragment{
     public Button findButton;
     @BindView(R.id.resultCardView)
     public CardView resultCardView;
+    @BindView(R.id.progressBar)
+    public MaterialProgressBar progressBar;
     @BindView(R.id.resultTextView)
     public TextView resultTextView;
     @BindView(R.id.warningTextView)
@@ -52,12 +55,13 @@ public class DistanceCalculatorFragment extends Fragment{
         setAutoComplete(firstSystemEditText);
         setAutoComplete(secondSystemEditText);
 
-        resultCardView.setVisibility(View.GONE);
         return v;
     }
 
     @Subscribe
     public void onDistanceEvent(Distance distance) {
+        progressBar.setVisibility(View.GONE);
+
         // Error
         if (!distance.Success) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
@@ -67,18 +71,13 @@ public class DistanceCalculatorFragment extends Fragment{
         resultCardView.setVisibility(View.VISIBLE);
 
         // Display warning if permits are required
-        if (distance.StartPermitRequired && distance.EndPermitRequired)
-        {
+        if (distance.StartPermitRequired && distance.EndPermitRequired) {
             warningTextView.setVisibility(View.VISIBLE);
             warningTextView.setText(getContext().getString(R.string.permit_required_both, distance.StartSystemName, distance.EndSystemName));
-        }
-        else if (distance.StartPermitRequired)
-        {
+        } else if (distance.StartPermitRequired) {
             warningTextView.setVisibility(View.VISIBLE);
             warningTextView.setText(getContext().getString(R.string.permit_required, distance.StartSystemName));
-        }
-        else if (distance.EndPermitRequired)
-        {
+        } else if (distance.EndPermitRequired) {
             warningTextView.setVisibility(View.VISIBLE);
             warningTextView.setText(getContext().getString(R.string.permit_required, distance.EndSystemName));
         }
@@ -89,7 +88,6 @@ public class DistanceCalculatorFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        // Register event
         EventBus.getDefault().register(this);
     }
 
@@ -97,14 +95,12 @@ public class DistanceCalculatorFragment extends Fragment{
     public void onFindClick(View view) {
         ViewUtils.hideSoftKeyboard(view.getRootView());
         resultCardView.setVisibility(View.GONE);
-        DistanceCalculatorNetwork.getDistance(
-                getContext(),
-                firstSystemEditText.getText().toString(),
-                secondSystemEditText.getText().toString());
+        progressBar.setVisibility(View.VISIBLE);
+
+        DistanceCalculatorNetwork.getDistance(getContext(), firstSystemEditText.getText().toString(), secondSystemEditText.getText().toString());
     }
 
-    private void setAutoComplete(final DelayAutoCompleteTextView editText)
-    {
+    private void setAutoComplete(final DelayAutoCompleteTextView editText) {
         // System input
         editText.setThreshold(3);
         editText.setAdapter(new AutoCompleteAdapter(getContext(), AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));

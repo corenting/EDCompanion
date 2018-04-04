@@ -64,7 +64,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
                     List<NameId> results;
                     if (autocompleteType == TYPE_AUTOCOMPLETE_SYSTEMS) {
-                        results = AutoCompleteNetwork.searchCommodities(context, constraint.toString());
+                        results = AutoCompleteNetwork.searchSystems(context, constraint.toString());
                     }
                     // Add proper cases for future autocomplete types
                     else
