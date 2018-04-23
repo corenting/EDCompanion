@@ -14,28 +14,35 @@ import org.greenrobot.eventbus.EventBus;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.ServerStatus;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMServerStatus;
+import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
+import fr.corenting.edcompanion.utils.RetrofitUtils;
+import retrofit2.Call;
 
 
 public class ServerStatusNetwork {
     public static void getStatus(Context ctx) {
-        Bridge.get(ctx.getString(R.string.edsm_base) + ctx.getString(R.string.edsm_server))
-                .request(new Callback() {
-                    @Override
-                    public void response(Request request, Response response, BridgeException e) {
-                        try {
-                            if (e != null) {
-                                throw new Exception();
-                            }
-                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
+        EDSMRetrofit edsmRetrofit = RetrofitUtils.getEDSMRetrofit(ctx);
+        retrofit2.Callback<EDSMServerStatus> callback = new retrofit2.Callback<EDSMServerStatus>() {
+            @Override
+            public void onResponse(Call<EDSMServerStatus> call, retrofit2.Response<EDSMServerStatus> response) {
+                EDSMServerStatus edsmStatus = response.body();
+                if (!response.isSuccessful() || edsmStatus == null)
+                {
+                    onFailure(call, new Exception("Invalid response"));
+                }
+                else
+                {
+                    ServerStatus serverStatus = new ServerStatus(true, edsmStatus.Message);
+                    EventBus.getDefault().post(serverStatus);
+                }
+            }
 
-                            ServerStatus status = new ServerStatus(true, json.get("message").getAsString());
-                            EventBus.getDefault().post(status);
-
-                        } catch (Exception ex) {
-                            EventBus.getDefault().post(new ServerStatus(false, null));
-
-                        }
-                    }
-                });
+            @Override
+            public void onFailure(Call<EDSMServerStatus> call, Throwable t) {
+                EventBus.getDefault().post(new ServerStatus(false, null));
+            }
+        };
+        edsmRetrofit.getServerStatus().enqueue(callback);
     }
 }

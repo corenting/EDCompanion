@@ -1,28 +1,25 @@
 package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.preference.EditTextPreference;
-
-import com.afollestad.bridge.Bridge;
-import com.afollestad.bridge.BridgeException;
-import com.afollestad.bridge.Callback;
-import com.afollestad.bridge.Request;
-import com.afollestad.bridge.Response;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommanderPosition;
 import fr.corenting.edcompanion.models.Credits;
 import fr.corenting.edcompanion.models.Ranks;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMCredits;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMPosition;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMRanks;
+import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
+import fr.corenting.edcompanion.utils.RetrofitUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
+import retrofit2.Call;
 
 
 public class EDSMPlayer extends PlayerNetwork {
 
     private Context context;
+    private EDSMRetrofit edsmRetrofit;
 
     private String apiKey;
     private String commanderName;
@@ -32,15 +29,7 @@ public class EDSMPlayer extends PlayerNetwork {
         this.context = context;
         apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
         commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
-    }
-
-    private String buildUrlParameters(String urlBase) {
-        urlBase = context.getString(R.string.edsm_base) + urlBase;
-        return Uri.parse(urlBase)
-                .buildUpon()
-                .appendQueryParameter("apiKey", apiKey)
-                .appendQueryParameter("commanderName", commanderName)
-                .build().toString();
+        edsmRetrofit = RetrofitUtils.getEDSMRetrofit(context);
     }
 
     @Override
@@ -85,126 +74,127 @@ public class EDSMPlayer extends PlayerNetwork {
 
     @Override
     public void getRanks() {
-        String url = buildUrlParameters(context.getString(R.string.edsm_ranks));
-        Bridge.get(url)
-                .request(new Callback() {
-                    @Override
-                    public void response(Request request, Response response, BridgeException e) {
-                        Ranks ranks = new Ranks();
-                        try {
-                            if (e != null) {
-                                throw new Exception();
-                            }
+        retrofit2.Callback<EDSMRanks> callback = new retrofit2.Callback<EDSMRanks>() {
+            @Override
+            public void onResponse(Call<EDSMRanks> call, retrofit2.Response<EDSMRanks> response) {
+                EDSMRanks body = response.body();
+                if (!response.isSuccessful() || body == null) {
+                    onFailure(call, new Exception("Invalid response"));
+                } else {
+                    Ranks ranks = new Ranks();
+                    try {
+                        // Combat
+                        ranks.combat.name = body.ranksNames.combat;
+                        ranks.combat.progress = body.progress.combat;
+                        ranks.combat.value = body.ranks.combat;
 
-                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
-                            JsonObject ranksObject = json.getAsJsonObject("ranks");
-                            JsonObject progressObject = json.getAsJsonObject("progress");
-                            JsonObject verboseObject = json.getAsJsonObject("ranksVerbose");
+                        // Trade
+                        ranks.trade.name = body.ranksNames.trade;
+                        ranks.trade.progress = body.progress.trade;
+                        ranks.trade.value = body.ranks.trade;
 
-                            // Combat
-                            ranks.combat.name = verboseObject.get("Combat").getAsString();
-                            ranks.combat.progress = progressObject.get("Combat").getAsInt();
-                            ranks.combat.value = ranksObject.get("Combat").getAsInt();
+                        // Explore
+                        ranks.explore.name = body.ranksNames.explore;
+                        ranks.explore.progress = body.progress.explore;
+                        ranks.explore.value = body.ranks.explore;
 
-                            // Trade
-                            ranks.trade.name = verboseObject.get("Trade").getAsString();
-                            ranks.trade.progress = progressObject.get("Trade").getAsInt();
-                            ranks.trade.value = ranksObject.get("Trade").getAsInt();
+                        // CQC
+                        ranks.cqc.name = body.ranksNames.cqc;
+                        ranks.cqc.progress = body.progress.cqc;
+                        ranks.cqc.value = body.ranks.cqc;
 
-                            // Explore
-                            ranks.explore.name = verboseObject.get("Explore").getAsString();
-                            ranks.explore.progress = progressObject.get("Explore").getAsInt();
-                            ranks.explore.value = ranksObject.get("Explore").getAsInt();
+                        // Federation
+                        ranks.federation.name = body.ranksNames.federation;
+                        ranks.federation.progress = body.progress.federation;
+                        ranks.federation.value = body.ranks.federation;
 
-                            // CQC
-                            ranks.cqc.name = verboseObject.get("CQC").getAsString();
-                            ranks.cqc.progress = progressObject.get("CQC").getAsInt();
-                            ranks.cqc.value = ranksObject.get("CQC").getAsInt();
+                        // Empire
+                        ranks.empire.name = body.ranksNames.empire;
+                        ranks.empire.progress = body.progress.empire;
+                        ranks.empire.value = body.ranks.empire;
 
-                            // Federation
-                            ranks.federation.name = verboseObject.get("Federation").getAsString();
-                            ranks.federation.progress = progressObject.get("Federation").getAsInt();
-                            ranks.federation.value = ranksObject.get("Federation").getAsInt();
+                        ranks.Success = true;
 
-                            // Empire
-                            ranks.empire.name = verboseObject.get("Empire").getAsString();
-                            ranks.empire.progress = progressObject.get("Empire").getAsInt();
-                            ranks.empire.value = ranksObject.get("Empire").getAsInt();
-
-                            ranks.Success = true;
-
-                        } catch (Exception ex) {
-                            ranks.Success = false;
-                        }
-                        sendResultMessage(ranks);
+                    } catch (Exception ex) {
+                        ranks.Success = false;
                     }
-                });
+                    sendResultMessage(ranks);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EDSMRanks> call, Throwable t) {
+                Ranks ranks = new Ranks();
+                ranks.Success = false;
+
+                sendResultMessage(ranks);
+            }
+        };
+        edsmRetrofit.getRanks(apiKey, commanderName).enqueue(callback);
     }
 
     @Override
     public void getCommanderPosition() {
-        String url = buildUrlParameters(context.getString(R.string.edsm_position));
-        Bridge.get(url)
-                .request(new Callback() {
-                    @Override
-                    public void response(Request request, Response response, BridgeException e) {
-                        CommanderPosition pos = new CommanderPosition();
-                        try {
-                            if (e != null) {
-                                throw new Exception();
-                            }
-                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
+        retrofit2.Callback<EDSMPosition> callback = new retrofit2.Callback<EDSMPosition>() {
+            @Override
+            public void onResponse(Call<EDSMPosition> call, retrofit2.Response<EDSMPosition> response) {
+                EDSMPosition body = response.body();
+                if (!response.isSuccessful() || body == null) {
+                    onFailure(call, new Exception("Invalid response"));
+                } else {
+                    CommanderPosition pos = new CommanderPosition();
+                    try {
+                        pos.SystemName = body.system;
+                        pos.FirstDiscover = body.firstDiscover;
 
-                            // Extract position from json
-                            if (json.get("system").isJsonNull() || json.get("firstDiscover").isJsonNull()) {
-                                pos.SystemName = null;
-                                pos.FirstDiscover = false;
-                            } else {
-                                pos.SystemName = json.get("system").getAsString();
-                                pos.FirstDiscover = json.get("firstDiscover").getAsBoolean();
-                            }
-
-                            // Send to bus
-                            pos.Success = true;
-                        } catch (Exception ex) {
-                            pos.Success = false;
-                        }
-                        sendResultMessage(pos);
+                        // Send to bus
+                        pos.Success = true;
+                    } catch (Exception ex) {
+                        pos.Success = false;
                     }
-                });
+                    sendResultMessage(pos);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EDSMPosition> call, Throwable t) {
+                CommanderPosition pos = new CommanderPosition();
+                pos.Success = false;
+                sendResultMessage(pos);
+            }
+        };
+        edsmRetrofit.getPosition(apiKey, commanderName).enqueue(callback);
     }
 
     @Override
     public void getCredits() {
-        String url = buildUrlParameters(context.getString(R.string.edsm_credits));
-        Bridge.get(url)
-                .request(new Callback() {
-                    @Override
-                    public void response(Request request, Response response, BridgeException e) {
-                        Credits res = new Credits();
-                        try {
-                            if (e != null) {
-                                throw new Exception();
-                            }
-                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
-
-                            if (!json.has("credits")) {
-                                res.Balance = -1;
-                                res.Loan = -1;
-                            } else {
-                                // Extract Balance from json
-                                JsonObject creditsObject = json.getAsJsonArray("credits").get(0).getAsJsonObject();
-                                res.Balance = creditsObject.get("balance").getAsInt();
-                                res.Loan = creditsObject.get("loan").getAsInt();
-                            }
-
-                            // Send to bus
-                            res.Success = true;
-                        } catch (Exception ex) {
-                            res.Success = false;
-                        }
-                        sendResultMessage(res);
+        retrofit2.Callback<EDSMCredits> callback = new retrofit2.Callback<EDSMCredits>() {
+            @Override
+            public void onResponse(Call<EDSMCredits> call, retrofit2.Response<EDSMCredits> response) {
+                EDSMCredits body = response.body();
+                if (!response.isSuccessful() || body == null) {
+                    onFailure(call, new Exception("Invalid response"));
+                } else {
+                    Credits res = new Credits();
+                    try {
+                        res.Balance = body.credits.get(0).balance;
+                        res.Loan = body.credits.get(0).loan;
+                        res.Success = true;
+                    } catch (Exception e) {
+                        res.Success = false;
                     }
-                });
+                    sendResultMessage(res);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EDSMCredits> call, Throwable t) {
+                Credits res = new Credits();
+                res.Success = false;
+                sendResultMessage(res);
+            }
+        };
+
+        edsmRetrofit.getCredits(apiKey, commanderName).enqueue(callback);
     }
 }

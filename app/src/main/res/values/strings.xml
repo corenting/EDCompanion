@@ -9,11 +9,6 @@
     <string name="edapi_distance">distance/</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
     <string name="edsm_base">https://www.edsm.net/</string>
-    <string name="edsm_credits">api-commander-v1/get-credits</string>
-    <string name="edsm_ranks">api-commander-v1/get-ranks</string>
-    <string name="edsm_server">api-status-v1/elite-server</string>
-    <string name="edsm_position">api-logs-v1/get-position</string>
-    <string name="edsm_systems">api-v1/systems</string>
     <string name="inara_api">https://inara.cz/inapi/v1/</string>
 
     <!--Drawer-->

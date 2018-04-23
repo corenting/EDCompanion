@@ -16,10 +16,4 @@ public class EDSMPosition extends EDSMBaseResponse {
 
     @SerializedName("firstDiscover")
     public boolean firstDiscover;
-
-    @SerializedName("date")
-    public Date visitDate;
-
-    @SerializedName("coordinates")
-    public SystemCoordinates coordinates;
 }
