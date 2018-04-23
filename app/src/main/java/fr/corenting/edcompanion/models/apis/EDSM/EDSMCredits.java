@@ -12,9 +12,9 @@ public class EDSMCredits extends EDSMBaseResponse {
 
     public class EDSMInnerCredits {
         @SerializedName("balance")
-        public int balance;
+        public long balance;
 
         @SerializedName("loan")
-        public int loan;
+        public long loan;
     }
 }
