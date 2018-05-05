@@ -2,75 +2,77 @@ package fr.corenting.edcompanion.network;
 
 import android.content.Context;
 
-import com.afollestad.bridge.Bridge;
-import com.afollestad.bridge.BridgeException;
-import com.afollestad.bridge.Callback;
-import com.afollestad.bridge.Request;
-import com.afollestad.bridge.Response;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.models.CommunityGoals;
+import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
+import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
+import fr.corenting.edcompanion.utils.RetrofitUtils;
+import retrofit2.Call;
 
 public class CommunityGoalsNetwork {
     public static void getCommunityGoals(Context ctx) {
-        String url = ctx.getString(R.string.edapi_base) + ctx.getString(R.string.edapi_cg);
-        Bridge.get(url)
-                .request(new Callback() {
-                    @Override
-                    public void response(Request request, Response response, BridgeException e) {
-                        try {
-                            if (e != null) {
-                                throw new Exception();
-                            }
-                            JsonObject json = new JsonParser().parse(response.asString()).getAsJsonObject();
 
-                            List<CommunityGoal> goalsList = new LinkedList<>();
-                            for (JsonElement elt : json.get("goals").getAsJsonArray()) {
-                                JsonObject goal = elt.getAsJsonObject();
-                                CommunityGoal newCg = new CommunityGoal();
+        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        retrofit2.Callback<CommunityGoalsResponse> callback = new retrofit2.Callback<CommunityGoalsResponse>() {
+            @Override
+            public void onResponse(Call<CommunityGoalsResponse> call, retrofit2.Response<CommunityGoalsResponse> response) {
+                CommunityGoalsResponse body = response.body();
+                if (response.body() == null)
+                {
+                    onFailure(call, new Exception("Invalid response"));
+                }
+                else
+                {
+                    CommunityGoals goals;
+                    List<CommunityGoal> goalsList = new LinkedList<>();
+                    try {
+                        for (CommunityGoalsResponse.CommunityGoalsItemResponse goal : body.Goals) {
+                            CommunityGoal newCg = new CommunityGoal();
 
-                                // Main informations
-                                newCg.setTitle(goal.get("title").getAsString());
-                                newCg.setDescription(goal.get("description").getAsString());
-                                newCg.setReward(goal.get("reward").getAsString());
-                                newCg.setObjective(goal.get("objective").getAsString());
-                                newCg.setContributors(goal.get("contributors").getAsInt());
-                                newCg.setOngoing(goal.get("ongoing").getAsBoolean());
+                            // Main informations
+                            newCg.setTitle(goal.Title);
+                            newCg.setDescription(goal.Description);
+                            newCg.setReward(goal.Reward);
+                            newCg.setObjective(goal.Objective);
+                            newCg.setContributors(goal.Contributors);
+                            newCg.setOngoing(goal.Ongoing);
 
-                                // Tiers
-                                JsonObject tiersObject = goal.get("tier_progress").getAsJsonObject();
-                                newCg.setCurrentTier(tiersObject.get("current").getAsInt());
-                                newCg.setTotalTier(tiersObject.get("total").getAsInt());
+                            // Tiers
+                            newCg.setCurrentTier(goal.TierProgress.Current);
+                            newCg.setTotalTier(goal.TierProgress.Total);
 
-                                // Date
-                                JsonObject datesObject = goal.get("date").getAsJsonObject();
-                                newCg.setEndDate(datesObject.get("end").getAsString());
-                                newCg.setRefreshDate(datesObject.get("last_update").getAsString());
+                            // Date
+                            newCg.setEndDate(goal.Date.End);
+                            newCg.setRefreshDate(goal.Date.LastUpdate);
 
-                                // Location
-                                JsonObject locationSystem = goal.get("location").getAsJsonObject();
-                                newCg.setStation(locationSystem.get("station").getAsString());
-                                newCg.setSystem(locationSystem.get("system").getAsString());
+                            // Location
+                            newCg.setStation(goal.Location.Station);
+                            newCg.setSystem(goal.Location.System);
 
-                                goalsList.add(newCg);
-                            }
-                            CommunityGoals goals = new CommunityGoals(true, goalsList);
-                            EventBus.getDefault().post(goals);
-
-                        } catch (Exception ex) {
-                            CommunityGoals goals = new CommunityGoals(false, null);
-                            EventBus.getDefault().post(goals);
+                            goalsList.add(newCg);
                         }
+                        goals = new CommunityGoals(true, goalsList);
                     }
-                });
+                    catch (Exception e)
+                    {
+                        goals = new CommunityGoals(false, null);
+                    }
+                    EventBus.getDefault().post(goals);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommunityGoalsResponse> call, Throwable t) {
+                CommunityGoals goals = new CommunityGoals(false, null);
+                EventBus.getDefault().post(goals);
+            }
+        };
+
+        retrofit.getCommunityGoals().enqueue(callback);
     }
 }

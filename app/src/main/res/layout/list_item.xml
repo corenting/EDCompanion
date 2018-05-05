@@ -35,8 +35,6 @@
         <TextView
             android:id="@+id/objectiveTextView"
             android:visibility="gone"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"

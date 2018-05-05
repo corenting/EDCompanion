@@ -4,7 +4,6 @@
 
     <!--URLs-->
     <string name="edapi_base">https://ed.9cw.eu/</string>
-    <string name="edapi_cg">v2/community_goals/</string>
     <string name="edapi_commodities">commodities/</string>
     <string name="edapi_distance">distance/</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
