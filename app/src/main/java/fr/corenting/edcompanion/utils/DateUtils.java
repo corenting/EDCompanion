@@ -31,7 +31,7 @@ public class DateUtils {
 
     public static String getUtcIsoDate(){
         TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'", Locale.US);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
         df.setTimeZone(tz);
         return df.format(new Date());
     }

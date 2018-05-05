@@ -9,7 +9,7 @@
     <string name="edapi_distance">distance/</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
     <string name="edsm_base">https://www.edsm.net/</string>
-    <string name="inara_api">https://inara.cz/inapi/v1/</string>
+    <string name="inara_api_base">https://inara.cz/</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
