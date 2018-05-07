@@ -22,7 +22,7 @@ public class CommunityGoalsNetwork {
             @Override
             public void onResponse(Call<CommunityGoalsResponse> call, retrofit2.Response<CommunityGoalsResponse> response) {
                 CommunityGoalsResponse body = response.body();
-                if (response.body() == null)
+                if (!response.isSuccessful() || body == null)
                 {
                     onFailure(call, new Exception("Invalid response"));
                 }

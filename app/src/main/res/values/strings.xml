@@ -4,8 +4,6 @@
 
     <!--URLs-->
     <string name="edapi_base">https://ed.9cw.eu/</string>
-    <string name="edapi_commodities">commodities/</string>
-    <string name="edapi_distance">distance/</string>
     <string name="galnet_rss">https://9cw.eu/rss-bridge/?action=display&amp;bridge=EliteDangerousGalnet&amp;format=Json</string>
     <string name="edsm_base">https://www.edsm.net/</string>
     <string name="inara_api_base">https://inara.cz/</string>
@@ -136,30 +134,6 @@
         <item>Admiral</item>
     </string-array>
 
-    <!--Find commodity-->
-    <string name="search_parameters">Search parameters</string>
-    <string name="commodity">Commodity</string>
-    <string name="current_system">Current system</string>
-    <string name="buy_or_sell">Buy or sell</string>
-    <string-array name="buy_or_sell_array">
-        <item>Buy</item>
-        <item>Sell</item>
-    </string-array>
-    <string-array name="landing_pad_array">
-        <item>Any</item>
-        <item>None</item>
-        <item>M</item>
-        <item>L</item>
-    </string-array>
-    <string-array name="yes_no_array">
-        <item>Yes</item>
-        <item>No</item>
-    </string-array>
-    <string name="include_planetary">Include planetary</string>
-    <string name="landing_pad_size">Landing pad size</string>
-    <string name="close">Close</string>
-    <string name="search">Search</string>
-
     <!--Distance calculator-->
     <string name="find">Find</string>
     <string name="first_system">First system</string>
@@ -176,7 +150,6 @@
         <a href="https://developer.android.com/topic/libraries/support-library/index.html">Android Support Library</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/JakeWharton/butterknife">Butter Knife</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/afollestad/bridge">Bridge</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
-        <a href="https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b">ClickToSelectEditText</a><br />
         <a href="http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/">DelayAutoCompleteTextView</a><br />
         <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />

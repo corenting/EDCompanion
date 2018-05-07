@@ -2,17 +2,8 @@ package fr.corenting.edcompanion.network;
 
 import android.content.Context;
 
-import com.afollestad.bridge.Bridge;
-import com.afollestad.bridge.BridgeException;
-import com.afollestad.bridge.Callback;
-import com.afollestad.bridge.Request;
-import com.afollestad.bridge.Response;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import org.greenrobot.eventbus.EventBus;
 
-import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.ServerStatus;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMServerStatus;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
