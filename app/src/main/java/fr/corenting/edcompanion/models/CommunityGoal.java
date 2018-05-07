@@ -5,13 +5,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.ocpsoft.prettytime.PrettyTime;
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.DateTimeUtils;
+import org.threeten.bp.Instant;
+import org.threeten.bp.temporal.TemporalField;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.utils.DateUtils;
@@ -26,18 +24,15 @@ public class CommunityGoal implements Parcelable {
 
     private int currentTier;
     private int totalTier;
-    private int contributors;
+    private long contributors;
 
     private String station;
     private String system;
 
-    private String endDate;
-    private String refreshDate;
+    private Instant endDate;
+    private Instant refreshDate;
 
-    public CommunityGoal()
-    {
-
-    }
+    public CommunityGoal() { }
 
     public CommunityGoal(Parcel source) {
         ongoing = source.readByte() != 0;
@@ -53,8 +48,8 @@ public class CommunityGoal implements Parcelable {
         station = source.readString();
         system = source.readString();
 
-        endDate = source.readString();
-        refreshDate = source.readString();
+        endDate = Instant.ofEpochSecond(source.readLong());
+        refreshDate = Instant.ofEpochSecond(source.readLong());
     }
 
     @Override
@@ -67,13 +62,13 @@ public class CommunityGoal implements Parcelable {
 
         dest.writeInt(currentTier);
         dest.writeInt(totalTier);
-        dest.writeInt(contributors);
+        dest.writeLong(contributors);
 
         dest.writeString(station);
         dest.writeString(system);
 
-        dest.writeString(endDate);
-        dest.writeString(refreshDate);
+        dest.writeLong(endDate.getEpochSecond());
+        dest.writeLong(refreshDate.getEpochSecond());
     }
 
     @Override
@@ -144,11 +139,11 @@ public class CommunityGoal implements Parcelable {
         this.ongoing = ongoing;
     }
 
-    public int getContributors() {
+    public long getContributors() {
         return contributors;
     }
 
-    public void setContributors(int contributors) {
+    public void setContributors(long contributors) {
         this.contributors = contributors;
     }
 
@@ -176,8 +171,8 @@ public class CommunityGoal implements Parcelable {
         this.objective = objective;
     }
 
-    public void setRefreshDate(String refreshDate) {
-        this.refreshDate = refreshDate;
+    public void setRefreshDate(Date refreshDate) {
+        this.refreshDate = DateTimeUtils.toInstant(refreshDate);
     }
 
     public String getEndDate(Context ctx, PrettyTime prettyTime) {
@@ -186,8 +181,7 @@ public class CommunityGoal implements Parcelable {
             return ctx.getString(R.string.finished);
         }
         try {
-            Date date = DateUtils.getDateFromIsoDate(endDate);
-            return prettyTime.format(date);
+            return prettyTime.format(DateTimeUtils.toDate(endDate));
         }
         catch (Exception e)
         {
@@ -195,14 +189,13 @@ public class CommunityGoal implements Parcelable {
         }
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEndDate(Date endDate) {
+        this.endDate = DateTimeUtils.toInstant(endDate);
     }
 
     public String getRefreshDateString(Context ctx, PrettyTime prettyTime) {
         try {
-            Date date = DateUtils.getDateFromIsoDate(refreshDate);
-            return ctx.getString(R.string.last_update, prettyTime.format(date));
+            return ctx.getString(R.string.last_update, prettyTime.format(DateTimeUtils.toDate(refreshDate)));
         } catch (Exception e) {
             return ctx.getString(R.string.last_update, ctx.getString(R.string.unknown));
         }
