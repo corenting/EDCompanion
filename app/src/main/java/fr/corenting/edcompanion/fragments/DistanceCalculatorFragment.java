@@ -34,6 +34,10 @@ public class DistanceCalculatorFragment extends Fragment {
     public DelayAutoCompleteTextView firstSystemEditText;
     @BindView(R.id.secondSystemInputEditText)
     public DelayAutoCompleteTextView secondSystemEditText;
+    @BindView(R.id.firstSystemProgressBar)
+    public MaterialProgressBar firstSystemProgressBar;
+    @BindView(R.id.secondSystemProgressBar)
+    public MaterialProgressBar secondSystemProgressBar;
     @BindView(R.id.findButton)
     public Button findButton;
     @BindView(R.id.resultCardView)
@@ -54,6 +58,10 @@ public class DistanceCalculatorFragment extends Fragment {
         // Autocomplete setup
         setAutoComplete(firstSystemEditText);
         setAutoComplete(secondSystemEditText);
+
+        // Set loading indicators
+        firstSystemEditText.setLoadingIndicator(firstSystemProgressBar);
+        secondSystemEditText.setLoadingIndicator(secondSystemProgressBar);
 
         return v;
     }

@@ -55,6 +55,19 @@
                         android:inputType="textNoSuggestions"/>
                 </android.support.design.widget.TextInputLayout>
 
+                <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                    android:id="@+id/firstSystemProgressBar"
+                    style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/titleTextView"
+                    android:indeterminate="true"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:mpb_progressStyle="circular" />
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/secondSystemInputLayout"
                     android:layout_width="match_parent"
@@ -68,6 +81,19 @@
                         android:hint="@string/second_system"
                         android:inputType="textNoSuggestions"/>
                 </android.support.design.widget.TextInputLayout>
+
+                <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                    android:id="@+id/secondSystemProgressBar"
+                    style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/firstSystemInputLayout"
+                    android:indeterminate="true"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:mpb_progressStyle="circular" />
 
                 <Button
                     android:id="@+id/findButton"
