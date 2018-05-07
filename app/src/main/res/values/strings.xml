@@ -217,9 +217,11 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.5</b><br />
+            <b>Version 1.8</b><br />
             <ul>
-                <li>Added distance calculator tool</li><br />
+                <li>Misc. UI changes</li><br />
+                <li>Changed network library used</li><br />
+                <li>Other internal changes</li><br />
             </ul>
         ]]>
     </string>
