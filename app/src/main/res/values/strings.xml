@@ -22,7 +22,7 @@
     <string name="server_status">Game server: %1$s</string>
 
     <!--Community goals-->
-    <string name="hint_remaining_time">Remaining time</string>
+    <string name="hint_end_date">End time</string>
     <string name="hint_participants">Participants</string>
     <string name="hint_tiers">Tiers</string>
     <string name="hint_system">System</string>

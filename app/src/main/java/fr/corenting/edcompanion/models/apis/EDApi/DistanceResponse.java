@@ -2,9 +2,6 @@ package fr.corenting.edcompanion.models.apis.EDApi;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-import java.util.List;
-
 public class DistanceResponse {
     @SerializedName("distance")
     public float Distance;

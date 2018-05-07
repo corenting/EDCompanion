@@ -35,6 +35,9 @@ public class CommunityGoal implements Parcelable {
 
     public CommunityGoal(Parcel source) {
         ongoing = source.readByte() != 0;
+        endDate = Instant.ofEpochSecond(source.readLong());
+        refreshDate = Instant.ofEpochSecond(source.readLong());
+
         title = source.readString();
         description = source.readString();
         objective = source.readString();
@@ -42,18 +45,18 @@ public class CommunityGoal implements Parcelable {
 
         currentTier = source.readInt();
         totalTier = source.readInt();
-        contributors = source.readInt();
+        contributors = source.readLong();
 
         station = source.readString();
         system = source.readString();
-
-        endDate = Instant.ofEpochSecond(source.readLong());
-        refreshDate = Instant.ofEpochSecond(source.readLong());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte((byte) (ongoing ? 1 : 0));
+        dest.writeLong(endDate.getEpochSecond());
+        dest.writeLong(refreshDate.getEpochSecond());
+
         dest.writeString(title);
         dest.writeString(description);
         dest.writeString(objective);
@@ -65,9 +68,6 @@ public class CommunityGoal implements Parcelable {
 
         dest.writeString(station);
         dest.writeString(system);
-
-        dest.writeLong(endDate.getEpochSecond());
-        dest.writeLong(refreshDate.getEpochSecond());
     }
 
     @Override

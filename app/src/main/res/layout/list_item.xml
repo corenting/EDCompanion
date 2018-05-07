@@ -58,7 +58,7 @@
                 android:layout_height="18dp"
                 android:layout_centerVertical="true"
                 android:id="@+id/remainingImageView"
-                android:contentDescription="@string/hint_remaining_time"
+                android:contentDescription="@string/hint_end_date"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 card_view:srcCompat="@drawable/ic_remaining_grey600_24dp" />

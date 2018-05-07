@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 
-import fr.corenting.edcompanion.models.CommunityGoal;
-
 public class CommunityGoalsResponse {
     @SerializedName("goals")
     public List<CommunityGoalsItemResponse> Goals;
