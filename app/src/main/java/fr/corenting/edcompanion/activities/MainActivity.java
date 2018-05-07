@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.afollestad.bridge.Bridge;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,7 +26,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommanderFragment;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
@@ -72,15 +70,6 @@ public class MainActivity extends AppCompatActivity
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        //Enable Ion logging in debug
-        if (BuildConfig.DEBUG) {
-            Bridge.config()
-                    .logging(true);
-        }
-
-        // Set user agent to name + version of the app
-        Bridge.config().defaultHeader("User-Agent", String.format(getString(R.string.user_agent), BuildConfig.VERSION_NAME, System.getProperty("http.agent")));
 
         // Setup navigation view and fake click the first item
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -153,9 +142,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onPause() {
-        // Cancel all pending requests
-        Bridge.cancelAll().commit();
-
         super.onPause();
     }
 

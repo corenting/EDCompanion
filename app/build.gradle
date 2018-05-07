@@ -42,13 +42,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-v4:27.1.1'
+
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
     // Support libs
     ext.supportLibsVersion = "27.1.1"
+    implementation "com.android.support:support-v4:$supportLibsVersion"
     implementation "com.android.support:support-compat:$supportLibsVersion"
     implementation "com.android.support:preference-v7:$supportLibsVersion"
     implementation "com.android.support:preference-v14:$supportLibsVersion"
@@ -68,16 +69,12 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     
     // Other
-    implementation('com.afollestad:bridge:5.1.2') {
-        exclude group: 'org.json', module: 'json'
-    }
-    implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
 
     testImplementation 'junit:junit:4.12'

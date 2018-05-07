@@ -8,10 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.ocpsoft.prettytime.PrettyTime;
-
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +22,6 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
     private View.OnClickListener onClickListener;
     private Context context;
     private boolean isDetailsView;
-    private PrettyTime prettyTime;
 
     public CommunityGoalsAdapter(final Context context, final RecyclerView recyclerView, final List<CommunityGoal> goals, boolean isDetailsView) {
         this.context = context;
@@ -41,8 +37,6 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
                 context.startActivity(i);
             }
         };
-
-        prettyTime = new PrettyTime(Locale.US);
     }
 
     @Override
@@ -60,14 +54,14 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
         holder.titleTextView.setText(currentGoal.getTitle());
         holder.objectiveTextView.setText(currentGoal.getObjective());
-        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context, prettyTime));
+        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
 
         holder.descriptionTextView.setText(currentGoal.getDescription());
         if (isDetailsView) {
             holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
         }
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
-        holder.remainingTextView.setText(currentGoal.getEndDate(context, prettyTime));
+        holder.remainingTextView.setText(currentGoal.getEndDate(context));
         holder.tierTextView.setText(currentGoal.getTierString());
         holder.locationTextView.setText(currentGoal.getSystem());
     }

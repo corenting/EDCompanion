@@ -4,15 +4,14 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.ocpsoft.prettytime.PrettyTime;
 import org.threeten.bp.DateTimeUtils;
 import org.threeten.bp.Instant;
-import org.threeten.bp.temporal.TemporalField;
 
 import java.util.Date;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.utils.DateUtils;
+
+import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class CommunityGoal implements Parcelable {
 
@@ -175,13 +174,14 @@ public class CommunityGoal implements Parcelable {
         this.refreshDate = DateTimeUtils.toInstant(refreshDate);
     }
 
-    public String getEndDate(Context ctx, PrettyTime prettyTime) {
+    public String getEndDate(Context ctx) {
         if (!ongoing)
         {
             return ctx.getString(R.string.finished);
         }
         try {
-            return prettyTime.format(DateTimeUtils.toDate(endDate));
+            return android.text.format.DateUtils.getRelativeTimeSpanString(endDate.toEpochMilli(),
+                    Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE ).toString();
         }
         catch (Exception e)
         {
@@ -193,9 +193,11 @@ public class CommunityGoal implements Parcelable {
         this.endDate = DateTimeUtils.toInstant(endDate);
     }
 
-    public String getRefreshDateString(Context ctx, PrettyTime prettyTime) {
+    public String getRefreshDateString(Context ctx) {
         try {
-            return ctx.getString(R.string.last_update, prettyTime.format(DateTimeUtils.toDate(refreshDate)));
+            String date = android.text.format.DateUtils.getRelativeTimeSpanString(refreshDate.toEpochMilli(),
+                    Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE).toString();
+            return ctx.getString(R.string.last_update, date);
         } catch (Exception e) {
             return ctx.getString(R.string.last_update, ctx.getString(R.string.unknown));
         }
