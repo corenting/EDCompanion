@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 
 public class ViewUtils {
     private static final int[] TEMP_ARRAY = new int[1];

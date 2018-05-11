@@ -68,7 +68,7 @@ public class GalnetAdapter extends RecyclerView.Adapter<GalnetAdapter.newsViewHo
         }
 
         // Date subtitle
-        Date date = new Date((long) currentNews.getDateTimestamp() * 1000);
+        Date date = new Date(currentNews.getDateTimestamp() * 1000);
         holder.subtitleTextView.setText(dateFormat.format(date));
 
         // Hide the others

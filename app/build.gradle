@@ -60,8 +60,8 @@ dependencies {
 
     // Play services / Firebase
     ext.playServicesVersion = "15.0.0"
-    implementation "com.google.firebase:firebase-messaging:$playServicesVersion"
-    implementation "com.google.android.gms:play-services-base:$playServicesVersion"
+    implementation 'com.google.firebase:firebase-messaging:15.0.2'
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
 
     // Retrofit
     ext.retrofitVersion = "2.4.0"

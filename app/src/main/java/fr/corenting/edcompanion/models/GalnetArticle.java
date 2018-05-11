@@ -11,7 +11,7 @@ public class GalnetArticle implements Parcelable {
 
     public GalnetArticle() {}
 
-    public GalnetArticle(Parcel source) {
+    private GalnetArticle(Parcel source) {
         title = source.readString();
         content = source.readString();
         dateTimestamp = source.readLong();

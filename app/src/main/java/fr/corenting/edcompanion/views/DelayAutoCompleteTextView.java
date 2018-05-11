@@ -15,7 +15,6 @@ public class DelayAutoCompleteTextView extends android.support.v7.widget.AppComp
     private static final int MESSAGE_TEXT_CHANGED = 100;
     private static final int DEFAULT_AUTOCOMPLETE_DELAY = 250;
 
-    private int mAutoCompleteDelay = DEFAULT_AUTOCOMPLETE_DELAY;
     private MaterialProgressBar mLoadingIndicator;
 
     private final Handler mHandler = new AutoCompleteHandler(this);
@@ -38,7 +37,7 @@ public class DelayAutoCompleteTextView extends android.support.v7.widget.AppComp
             mLoadingIndicator.setVisibility(View.VISIBLE);
         }
         mHandler.removeMessages(MESSAGE_TEXT_CHANGED);
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(MESSAGE_TEXT_CHANGED, text), mAutoCompleteDelay);
+        mHandler.sendMessageDelayed(mHandler.obtainMessage(MESSAGE_TEXT_CHANGED, text), DEFAULT_AUTOCOMPLETE_DELAY);
     }
 
     @Override
@@ -59,5 +58,5 @@ public class DelayAutoCompleteTextView extends android.support.v7.widget.AppComp
         public void handleMessage(Message msg) {
             view.performFiltering(msg);
         }
-    };
+    }
 }

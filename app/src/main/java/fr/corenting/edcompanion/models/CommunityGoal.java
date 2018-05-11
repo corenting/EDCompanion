@@ -33,7 +33,7 @@ public class CommunityGoal implements Parcelable {
 
     public CommunityGoal() { }
 
-    public CommunityGoal(Parcel source) {
+    private CommunityGoal(Parcel source) {
         ongoing = source.readByte() != 0;
         endDate = Instant.ofEpochSecond(source.readLong());
         refreshDate = Instant.ofEpochSecond(source.readLong());

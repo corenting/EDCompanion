@@ -1,7 +1,7 @@
 <resources>
 
-    <style name="Theme.App" parent="Base.Theme.App"></style>
-    <style name="Theme.AppDetails" parent="Base.Theme.App"></style>
+    <style name="Theme.App" parent="Base.Theme.App"/>
+    <style name="Theme.AppDetails" parent="Base.Theme.App"/>
 
     <style name="Base.Theme.App" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>

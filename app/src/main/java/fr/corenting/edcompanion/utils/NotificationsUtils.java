@@ -16,7 +16,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import fr.corenting.edcompanion.R;
 
@@ -49,7 +48,7 @@ public class NotificationsUtils {
 
     public static void refreshPushSubscriptions(Context c) {
         // Check that Play Services are OK and that Firebase has a token
-        if (!notificationsAreWorking(c)) {
+        if (notificationsNotWorking(c)) {
             return;
         }
 
@@ -65,7 +64,7 @@ public class NotificationsUtils {
 
     public static void refreshPushSubscription(Context c, String preferenceName, boolean enabled) {
         // Check that Play Services are OK and that Firebase has a token
-        if (!notificationsAreWorking(c)) {
+        if (notificationsNotWorking(c)) {
             return;
         }
 
@@ -94,8 +93,8 @@ public class NotificationsUtils {
         }
     }
 
-    private static boolean notificationsAreWorking(Context c) {
-        return !((GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(c) != ConnectionResult.SUCCESS)
+    private static boolean notificationsNotWorking(Context c) {
+        return ((GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(c) != ConnectionResult.SUCCESS)
                 || (FirebaseInstanceId.getInstance().getToken() == null));
     }
 

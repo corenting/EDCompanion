@@ -127,12 +127,6 @@ public class CommanderStatusFragment extends Fragment {
     }
 
     @Override
-    public void onResume()
-    {
-        super.onResume();
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
