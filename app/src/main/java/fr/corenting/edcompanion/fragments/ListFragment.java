@@ -82,7 +82,7 @@ public abstract class ListFragment extends Fragment {
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    private void startLoading() {
+    protected void startLoading() {
         emptySwipeRefreshLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);

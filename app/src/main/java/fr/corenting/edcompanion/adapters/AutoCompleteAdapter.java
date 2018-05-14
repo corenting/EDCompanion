@@ -10,7 +10,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.NameId;
@@ -19,6 +18,7 @@ import fr.corenting.edcompanion.network.AutoCompleteNetwork;
 public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
     public static int TYPE_AUTOCOMPLETE_SYSTEMS = 0;
+    public static int TYPE_AUTOCOMPLETE_SHIPS = 0;
 
     private Context context;
     private List<NameId> resultList = new ArrayList<>();
@@ -66,10 +66,9 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
                     if (autocompleteType == TYPE_AUTOCOMPLETE_SYSTEMS) {
                         results = AutoCompleteNetwork.searchSystems(context, constraint.toString());
                     }
-                    // Add proper cases for future autocomplete types
                     else
                     {
-                        results = new LinkedList<>();
+                        results = AutoCompleteNetwork.searchShips(context, constraint.toString());
                     }
 
                     // Assign the data to the FilterResults

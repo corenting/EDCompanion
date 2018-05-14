@@ -17,10 +17,10 @@
             android:id="@+id/nav_distance_calculator"
             android:icon="@drawable/elite_map_route"
             android:title="@string/distance_calculator" />
-        <!--<item
-            android:id="@+id/nav_find_commodity"
-            android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/find_commodity" />-->
+        <item
+            android:id="@+id/nav_ship_finder"
+            android:icon="@drawable/ic_rocket_black_24dp"
+            android:title="@string/ship_finder" />
         <item
             android:id="@+id/nav_cmdr"
             android:icon="@drawable/ic_person_black_24dp"

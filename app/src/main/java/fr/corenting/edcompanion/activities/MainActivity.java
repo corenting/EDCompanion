@@ -31,7 +31,9 @@ import fr.corenting.edcompanion.fragments.CommanderFragment;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
+import fr.corenting.edcompanion.fragments.ShipFinderFragment;
 import fr.corenting.edcompanion.models.ServerStatus;
+import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.ChangelogUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
@@ -171,6 +173,10 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setSubtitle(R.string.eddb_credits);
                 break;
             }
+            case R.id.nav_ship_finder: {
+                switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG);
+                break;
+            }
             case R.id.nav_about: {
                 Intent i = new Intent(this, AboutActivity.class);
                 startActivity(i);
@@ -212,6 +218,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager,  new DistanceCalculatorFragment(), tag);
+                break;
+            case ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG:
+                ViewUtils.switchFragment(fragmentManager, new ShipFinderFragment(), tag);
                 break;
             default:
                 ViewUtils.switchFragment(fragmentManager,  new CommunityGoalsFragment(), tag);
