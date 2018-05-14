@@ -18,7 +18,7 @@ import fr.corenting.edcompanion.network.AutoCompleteNetwork;
 public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
     public static int TYPE_AUTOCOMPLETE_SYSTEMS = 0;
-    public static int TYPE_AUTOCOMPLETE_SHIPS = 0;
+    public static int TYPE_AUTOCOMPLETE_SHIPS = 1;
 
     private Context context;
     private List<NameId> resultList = new ArrayList<>();

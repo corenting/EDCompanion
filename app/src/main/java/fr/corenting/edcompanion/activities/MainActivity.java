@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity
             }
             case R.id.nav_ship_finder: {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG);
+                getSupportActionBar().setSubtitle(R.string.eddb_credits);
                 break;
             }
             case R.id.nav_about: {

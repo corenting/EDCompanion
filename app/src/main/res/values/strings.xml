@@ -145,10 +145,15 @@
     <string name="current_system">Current system</string>
     <string name="ship">Ship</string>
     <string name="distance_to_star">Distance to star</string>
+    <string name="distance_label">Distance</string>
     <string name="last_update_label">Last update</string>
     <string name="permit_required_label">Permit required</string>
     <string name="landing_pad_label">Landing pad</string>
     <string name="station_type_label">Station type</string>
+    <string name="ship_finder_subtitle">Find the nearest station selling a specific ship</string>
+    <string name="distance_ly">%1$.2f LY</string>
+    <string name="distance_ls">%1$s ls</string>
+
 
     <!--About-->
     <string name="title_activity_about">About</string>

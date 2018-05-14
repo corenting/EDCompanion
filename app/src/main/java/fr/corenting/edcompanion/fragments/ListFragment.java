@@ -62,7 +62,7 @@ public abstract class ListFragment extends Fragment {
         // Setup views
         startLoading();
 
-        // Register event and get the goals
+        // Register eventbus for the list data
         EventBus.getDefault().register(this);
         getData(getContext());
     }

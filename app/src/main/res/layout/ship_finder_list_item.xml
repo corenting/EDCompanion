@@ -43,9 +43,29 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/lastUpdateLabelTextView"
+            android:id="@+id/distanceLabelTextView"
             android:layout_marginTop="8dp"
             android:layout_below="@id/permitRequiredTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/distance_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/distanceTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/permitRequiredTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/distanceLabelTextView"
+            android:layout_toEndOf="@id/distanceLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/lastUpdateLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/distanceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -55,12 +75,11 @@
         <TextView
             android:id="@+id/lastUpdateTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/permitRequiredTextView"
+            android:layout_below="@id/distanceLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/lastUpdateLabelTextView"
             android:layout_toEndOf="@id/lastUpdateLabelTextView"
-            android:text="Toto"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -81,13 +100,32 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/landingPadLabelTextView"
             android:layout_toEndOf="@id/landingPadLabelTextView"
-            android:text="Toto"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/starDistanceLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/landingPadLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/distance_to_star"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/starDistanceTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/landingPadLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/stationTypeLabelTextView"
+            android:layout_toEndOf="@id/stationTypeLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/stationTypeLabelTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/landingPadLabelTextView"
+            android:layout_below="@id/starDistanceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -97,12 +135,11 @@
         <TextView
             android:id="@+id/stationTypeTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/landingPadLabelTextView"
+            android:layout_below="@id/starDistanceLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/stationTypeLabelTextView"
             android:layout_toEndOf="@id/stationTypeLabelTextView"
-            android:text="Toto"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
     </RelativeLayout>

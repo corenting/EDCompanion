@@ -148,9 +148,10 @@ public class CommanderStatusFragment extends Fragment {
             creditsTextView.setText(getResources().getString(R.string.Unknown));
             return;
         }
-        String amount = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.Balance);
+        Locale currentLocale = SettingsUtils.getUserLocale(getContext());
+        String amount = NumberFormat.getIntegerInstance(currentLocale).format(credits.Balance);
         if (credits.Loan != 0) {
-            String loan = NumberFormat.getIntegerInstance(Locale.FRENCH).format(credits.Loan);
+            String loan = NumberFormat.getIntegerInstance(currentLocale).format(credits.Loan);
             creditsTextView.setText(getResources().getString(R.string.credits_with_loan, amount, loan));
         } else {
             creditsTextView.setText(getResources().getString(R.string.credits, amount));

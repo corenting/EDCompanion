@@ -7,16 +7,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
+import org.threeten.bp.Instant;
+
+import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.ShipFinderFragment;
 import fr.corenting.edcompanion.models.ShipFinderResult;
+import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
+
+import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -53,6 +63,8 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             // System autocomplete
             header.systemInputEditText.setThreshold(3);
+            header.systemInputEditText.setLoadingIndicator(header.systemProgressBar);
+
             header.systemInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
             header.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -63,6 +75,7 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             // Ship autocomplete
             header.shipInputEditText.setThreshold(3);
+            header.shipInputEditText.setLoadingIndicator(header.shipProgressBar);
             header.shipInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SHIPS));
             header.shipInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -75,12 +88,43 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             header.findButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    shipFinderFragment.onFindButtonClick((Button) view);
+                    shipFinderFragment.onFindButtonClick((Button) view,
+                            header.systemInputEditText.getText().toString(),
+                            header.shipInputEditText.getText().toString());
                 }
             });
 
         } else {
-            return;
+            ShipFinderResult currentResult = results.get(position - 1);
+            final ResultViewHolder resultViewHolder = (ResultViewHolder) holder;
+
+            // Title, landing pad, station type
+            resultViewHolder.titleTextView.setText(
+                    String.format("%s - %s", currentResult.SystemName, currentResult.StationName)
+            );
+            resultViewHolder.landingPadTextView.setText(currentResult.MaxLandingPad);
+            resultViewHolder.stationTypeTextView.setText(currentResult.Type);
+
+            // Distance and distance to star
+            resultViewHolder.distanceTextView.setText(context.getString(R.string.distance_ly,
+                    currentResult.Distance));
+            resultViewHolder.starDistanceTextView.setText(context.getString(R.string.distance_ls,
+                    NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context)).format(currentResult.DistanceToStar)));
+
+            // Update date
+            String date = android.text.format.DateUtils.getRelativeTimeSpanString(currentResult.LastShipyardUpdate.toEpochMilli(),
+                    Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE).toString();
+            resultViewHolder.lastUpdateTextView.setText(date);
+
+            // Permit state
+            if (currentResult.SystemPermitRequired)
+            {
+                resultViewHolder.permitRequiredTextView.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                resultViewHolder.permitRequiredTextView.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -101,12 +145,34 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return position == 0;
     }
 
-    public void setResults(List<ShipFinderResult> results) {
+    public void setResults(List<ShipFinderResult> newResults) {
         results.clear();
-        this.results = results;
+        results = newResults;
+        notifyDataSetChanged();
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.distanceTextView)
+        TextView distanceTextView;
+
+        @BindView(R.id.titleTextView)
+        TextView titleTextView;
+
+        @BindView(R.id.permitRequiredTextView)
+        TextView permitRequiredTextView;
+
+        @BindView(R.id.lastUpdateTextView)
+        TextView lastUpdateTextView;
+
+        @BindView(R.id.landingPadTextView)
+        TextView landingPadTextView;
+
+        @BindView(R.id.starDistanceTextView)
+        TextView starDistanceTextView;
+
+        @BindView(R.id.stationTypeTextView)
+        TextView stationTypeTextView;
 
         public ResultViewHolder(View view) {
             super(view);
@@ -120,6 +186,12 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @BindView(R.id.shipInputEditText)
         DelayAutoCompleteTextView shipInputEditText;
+
+        @BindView(R.id.systemProgressBar)
+        MaterialProgressBar systemProgressBar;
+
+        @BindView(R.id.shipProgressBar)
+        MaterialProgressBar shipProgressBar;
 
         @BindView(R.id.findButton)
         Button findButton;
