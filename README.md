@@ -14,4 +14,5 @@ APKs are available [in the release section](https://github.com/corenting/EDCompa
 - Game server status from EDSM
 - Material design (light or dark theme)
 - Distance calculator (get the distance between two systems)
+- Ship finder tool (find the nearest station selling a specific ship)
 - No ads, free and open-source
