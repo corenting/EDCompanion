@@ -230,11 +230,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.8</b><br />
+            <b>Version 1.9</b><br />
             <ul>
-                <li>Misc. UI changes</li><br />
-                <li>Changed network library used</li><br />
-                <li>Other internal changes</li><br />
+                <li>Added ship finder tool : find the nearest station selling a specific ship</li><br />
             </ul>
         ]]>
     </string>
