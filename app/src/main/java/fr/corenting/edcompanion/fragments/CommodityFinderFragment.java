@@ -17,24 +17,24 @@ import java.util.LinkedList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.adapters.ShipFinderAdapter;
-import fr.corenting.edcompanion.models.ShipFinderResult;
-import fr.corenting.edcompanion.models.ShipFinderResults;
-import fr.corenting.edcompanion.network.ShipFinderNetwork;
+import fr.corenting.edcompanion.adapters.CommodityFinderAdapter;
+import fr.corenting.edcompanion.models.CommodityFinderResult;
+import fr.corenting.edcompanion.models.CommodityFinderResults;
+import fr.corenting.edcompanion.network.CommodityFinderNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class ShipFinderFragment extends Fragment {
+public class CommodityFinderFragment extends Fragment {
 
-    public static final String SHIP_FINDER_FRAGMENT_TAG = "ship_finder_fragment";
+    public static final String COMMODITY_FINDER_FRAGMENT_TAG = "commodity_finder_fragment";
 
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
     @BindView(R.id.progressBar)
     public MaterialProgressBar progressBar;
 
-    private ShipFinderAdapter shipFinderAdapter;
+    private CommodityFinderAdapter commodityFinderAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,8 +45,8 @@ public class ShipFinderFragment extends Fragment {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        shipFinderAdapter = new ShipFinderAdapter(getContext(), this);
-        recyclerView.setAdapter(shipFinderAdapter);
+        commodityFinderAdapter = new CommodityFinderAdapter(getContext(), this);
+        recyclerView.setAdapter(commodityFinderAdapter);
 
         return v;
     }
@@ -73,19 +73,19 @@ public class ShipFinderFragment extends Fragment {
 
     private void endLoading(boolean isEmpty)
     {
-        shipFinderAdapter.getEmptyTextView().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        commodityFinderAdapter.getEmptyTextView().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         progressBar.setVisibility(View.GONE);
     }
 
     private void startLoading()
     {
-        shipFinderAdapter.setResults(new LinkedList<ShipFinderResult>());
+        commodityFinderAdapter.setResults(new LinkedList<CommodityFinderResult>());
         progressBar.setVisibility(View.VISIBLE);
-        shipFinderAdapter.getEmptyTextView().setVisibility(View.GONE);
+        commodityFinderAdapter.getEmptyTextView().setVisibility(View.GONE);
     }
 
     @Subscribe
-    public void onShipFinderResultEvent(ShipFinderResults results) {
+    public void onShipFinderResultEvent(CommodityFinderResults results) {
         // Error
         if (!results.Success) {
             endLoading(true);
@@ -96,13 +96,20 @@ public class ShipFinderFragment extends Fragment {
         {
             endLoading(results.Results == null || results.Results.size() == 0);
         }
-        shipFinderAdapter.setResults(results.Results);
+        commodityFinderAdapter.setResults(results.Results);
     }
 
-    public void onFindButtonClick(Button button, String systemName, String shipName) {
+    public void onFindButtonClick(Button button, String system, String commodity,
+                                  String landingPad, int minStock) {
         ViewUtils.hideSoftKeyboard(button.getRootView());
         startLoading();
 
-        ShipFinderNetwork.findShip(getContext(), systemName, shipName);
+        // Don't send any as landing pad
+        if (landingPad.equals(getResources().getStringArray(R.array.landing_pad_size)[0]))
+        {
+            landingPad = null;
+        }
+
+        CommodityFinderNetwork.findCommodity(getContext(), system, commodity, landingPad, minStock);
     }
 }

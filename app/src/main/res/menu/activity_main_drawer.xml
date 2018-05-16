@@ -22,6 +22,10 @@
             android:icon="@drawable/ic_rocket_black_24dp"
             android:title="@string/ship_finder" />
         <item
+            android:id="@+id/nav_commodity_finder"
+            android:icon="@drawable/ic_attach_money_black_24dp"
+            android:title="@string/commodity_finder" />
+        <item
             android:id="@+id/nav_cmdr"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/commander" />

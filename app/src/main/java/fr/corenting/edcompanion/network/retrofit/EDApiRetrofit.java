@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.network.retrofit;
 
 import java.util.List;
 
+import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.DistanceResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.GalnetArticleResponse;
@@ -25,6 +26,9 @@ public interface EDApiRetrofit {
 
     @GET("ships")
     Call<List<ShipResponse>> getShips(@Query("name") String shipName);
+
+    @GET("commodities")
+    Call<List<CommodityResponse>> getCommodities(@Query("name") String filter);
 
     @GET("{system}/stations/ships/{ship}")
     Call<List<ShipFinderResponse>> findShip(@Path("system") String system,

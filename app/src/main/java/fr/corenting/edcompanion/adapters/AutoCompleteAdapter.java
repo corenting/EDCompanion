@@ -19,6 +19,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
     public static int TYPE_AUTOCOMPLETE_SYSTEMS = 0;
     public static int TYPE_AUTOCOMPLETE_SHIPS = 1;
+    public static int TYPE_AUTOCOMPLETE_COMMODITIES = 2;
 
     private Context context;
     private List<NameId> resultList = new ArrayList<>();
@@ -66,9 +67,13 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
                     if (autocompleteType == TYPE_AUTOCOMPLETE_SYSTEMS) {
                         results = AutoCompleteNetwork.searchSystems(context, constraint.toString());
                     }
-                    else
+                    else if (autocompleteType == TYPE_AUTOCOMPLETE_SHIPS)
                     {
                         results = AutoCompleteNetwork.searchShips(context, constraint.toString());
+                    }
+                    else
+                    {
+                        results = AutoCompleteNetwork.searchCommodities(context, constraint.toString());
                     }
 
                     // Assign the data to the FilterResults

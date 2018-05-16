@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.NameId;
+import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystem;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
@@ -53,6 +54,31 @@ public class AutoCompleteNetwork {
 
                 for (ShipResponse ship : ships) {
                     NameId newItem = new NameId(ship.Name, 0);
+                    results.add(newItem);
+                    if (results.size() >= MAX_RESULTS) {
+                        break;
+                    }
+                }
+                return results;
+            }
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
+
+    public static List<NameId> searchCommodities(Context context, String filter) {
+        try {
+            EDApiRetrofit edApiRetrofit = RetrofitUtils.getEdApiRetrofit(context);
+            Response<List<CommodityResponse>> response = edApiRetrofit.getCommodities(filter).execute();
+            List<CommodityResponse> commodities = response.body();
+
+            if (!response.isSuccessful() || commodities == null) {
+                return new ArrayList<>();
+            } else {
+                List<NameId> results = new ArrayList<>();
+
+                for (CommodityResponse commodity : commodities) {
+                    NameId newItem = new NameId(commodity.Name, 0);
                     results.add(newItem);
                     if (results.size() >= MAX_RESULTS) {
                         break;

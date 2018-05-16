@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommanderFragment;
+import fr.corenting.edcompanion.fragments.CommodityFinderFragment;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
@@ -173,6 +174,11 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setSubtitle(R.string.eddb_credits);
                 break;
             }
+            case R.id.nav_commodity_finder: {
+                switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG);
+                getSupportActionBar().setSubtitle(R.string.edm_credits);
+                break;
+            }
             case R.id.nav_ship_finder: {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG);
                 getSupportActionBar().setSubtitle(R.string.eddb_credits);
@@ -222,6 +228,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager, new ShipFinderFragment(), tag);
+                break;
+            case CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG:
+                ViewUtils.switchFragment(fragmentManager, new CommodityFinderFragment(), tag);
                 break;
             default:
                 ViewUtils.switchFragment(fragmentManager,  new CommunityGoalsFragment(), tag);
