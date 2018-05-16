@@ -10,12 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.threeten.bp.Instant;
+import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +35,7 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Context context;
     private ShipFinderFragment shipFinderFragment;
     private List<ShipFinderResult> results;
+    private TextView emptyTextView;
 
     public ShipFinderAdapter(final Context context, final ShipFinderFragment shipFinderFragment) {
         this.context = context;
@@ -94,6 +94,9 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
             });
 
+            // Bind empty text view
+            emptyTextView = header.emptyText;
+
         } else {
             ShipFinderResult currentResult = results.get(position - 1);
             final ResultViewHolder resultViewHolder = (ResultViewHolder) holder;
@@ -151,6 +154,10 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
+    public View getEmptyTextView() {
+        return emptyTextView;
+    }
+
     public class ResultViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.distanceTextView)
@@ -195,6 +202,9 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @BindView(R.id.findButton)
         Button findButton;
+
+        @BindView(R.id.emptyText)
+        TextView emptyText;
 
         public HeaderViewHolder(View view) {
             super(view);

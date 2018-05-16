@@ -26,15 +26,5 @@
             android:layout_alignParentBottom="true"
             app:mpb_progressStyle="circular"
             android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/emptyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="124dp"
-            android:text="@string/nothing_to_display"
-            android:visibility="gone"/>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

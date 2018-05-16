@@ -40,12 +40,22 @@
                     android:text="@string/distance_calculator"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
+                <TextView
+                    android:id="@+id/subtitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/distance_calculator_subtitle"
+                    android:layout_below="@id/titleTextView"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/firstSystemInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/titleTextView"
+                    android:layout_below="@id/subtitleTextView"
                     android:layout_marginTop="8dp">
                     <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
                         android:id="@+id/firstSystemInputEditText"
@@ -62,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/titleTextView"
+                    android:layout_below="@id/subtitleTextView"
                     android:indeterminate="true"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"

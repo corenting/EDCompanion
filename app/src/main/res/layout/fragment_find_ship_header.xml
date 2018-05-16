@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/titleTextView"
+                    android:layout_below="@id/subtitleTextView"
                     android:indeterminate="true"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/firstSystemInputLayout"
+                    android:layout_below="@id/systemInputLayout"
                     android:indeterminate="true"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"
@@ -112,6 +112,16 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:text="@string/find" />
+
+                <TextView
+                    android:id="@+id/emptyText"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/findButton"
+                    android:text="@string/nothing_to_display"
+                    android:textAlignment="center"
+                    android:visibility="gone"/>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </RelativeLayout>

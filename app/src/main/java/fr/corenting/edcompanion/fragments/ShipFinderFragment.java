@@ -13,10 +13,13 @@ import android.widget.TextView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.LinkedList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.ShipFinderAdapter;
+import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.ShipFinderResults;
 import fr.corenting.edcompanion.network.ShipFinderNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
@@ -31,8 +34,6 @@ public class ShipFinderFragment extends Fragment {
     public RecyclerView recyclerView;
     @BindView(R.id.progressBar)
     public MaterialProgressBar progressBar;
-    @BindView(R.id.emptyText)
-    public TextView emptyText;
 
     private ShipFinderAdapter shipFinderAdapter;
 
@@ -73,14 +74,15 @@ public class ShipFinderFragment extends Fragment {
 
     private void endLoading(boolean isEmpty)
     {
-        emptyText.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        shipFinderAdapter.getEmptyTextView().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         progressBar.setVisibility(View.GONE);
     }
 
     private void startLoading()
     {
+        shipFinderAdapter.setResults(new LinkedList<ShipFinderResult>());
         progressBar.setVisibility(View.VISIBLE);
-        emptyText.setVisibility(View.GONE);
+        shipFinderAdapter.getEmptyTextView().setVisibility(View.GONE);
     }
 
     @Subscribe

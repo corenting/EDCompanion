@@ -140,6 +140,7 @@
     <string name="distance_result">Distance: %1$.2f LY</string>
     <string name="permit_required">Permit required for %1$s</string>
     <string name="permit_required_both">Permit required for %1$s and %2$s</string>
+    <string name="distance_calculator_subtitle">Get the distance (in LY) between two systems</string>
 
     <!--Ship finder-->
     <string name="current_system">Current system</string>
