@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.models.CommunityGoal;
+import fr.corenting.edcompanion.utils.MiscUtils;
 
 public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAdapter.goalsViewHolder> {
 
@@ -64,6 +65,68 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         holder.remainingTextView.setText(currentGoal.getEndDate(context));
         holder.tierTextView.setText(currentGoal.getTierString());
         holder.locationTextView.setText(currentGoal.getSystem());
+
+        // Set click listeners
+        holder.peopleTextView.setOnLongClickListener(null);
+        holder.peopleTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MiscUtils.putTextInClipboardWithNotification(context,
+                        context.getString(R.string.hint_participants),
+                        holder.peopleTextView.getText().toString());
+                return true;
+            }
+        });
+        holder.remainingTextView.setOnLongClickListener(null);
+        holder.remainingTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MiscUtils.putTextInClipboardWithNotification(context,
+                        context.getString(R.string.hint_end_date),
+                        holder.remainingTextView.getText().toString());
+                return true;
+            }
+        });
+        holder.tierTextView.setOnLongClickListener(null);
+        holder.tierTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MiscUtils.putTextInClipboardWithNotification(context,
+                        context.getString(R.string.hint_tiers),
+                        holder.tierTextView.getText().toString());
+                return true;
+            }
+        });
+        holder.locationTextView.setOnLongClickListener(null);
+        holder.locationTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MiscUtils.putTextInClipboardWithNotification(context,
+                        context.getString(R.string.hint_system),
+                        holder.locationTextView.getText().toString());
+                return true;
+            }
+        });
+        holder.descriptionTextView.setOnLongClickListener(null);
+        holder.descriptionTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MiscUtils.putTextInClipboardWithNotification(context,
+                        context.getString(R.string.community_goal_description),
+                        holder.descriptionTextView.getText().toString());
+                return true;
+            }
+        });
+        holder.objectiveTextView.setOnLongClickListener(null);
+        holder.objectiveTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MiscUtils.putTextInClipboardWithNotification(context,
+                        context.getString(R.string.objective),
+                        holder.objectiveTextView.getText().toString());
+                return true;
+            }
+        });
     }
 
     @Override

@@ -255,4 +255,8 @@
             </ul>
         ]]>
     </string>
+    <string name="content_copied_to_clipboard">Content copied to clipboard !</string>
+    <string name="content_copied_to_clipboard_error">Cannot copy content to clipboard !</string>
+    <string name="community_goal_description">Community goal description</string>
+    <string name="objective">Objective</string>
 </resources>
