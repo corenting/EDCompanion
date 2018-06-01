@@ -32,7 +32,7 @@
             android:maxLines="2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
-        <TextView
+<!--        <TextView
             android:id="@+id/distanceLabelTextView"
             android:layout_marginTop="8dp"
             android:layout_below="@id/titleTextView"
@@ -50,12 +50,12 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/distanceLabelTextView"
             android:layout_toEndOf="@id/distanceLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />-->
 
         <TextView
             android:id="@+id/stockLabelTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/distanceLabelTextView"
+            android:layout_below="@id/titleTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -65,11 +65,11 @@
         <TextView
             android:id="@+id/stockTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/distanceLabelTextView"
+            android:layout_below="@id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/distanceLabelTextView"
-            android:layout_toEndOf="@id/distanceLabelTextView"
+            android:layout_toRightOf="@id/landingPadLabelTextView"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -88,8 +88,8 @@
             android:layout_below="@id/stockLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/distanceLabelTextView"
-            android:layout_toEndOf="@id/distanceLabelTextView"
+            android:layout_toRightOf="@id/landingPadLabelTextView"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView

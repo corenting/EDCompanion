@@ -164,8 +164,8 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         @BindView(R.id.titleTextView)
         TextView titleTextView;
 
-        @BindView(R.id.distanceTextView)
-        TextView distanceTextView;
+      /*  @BindView(R.id.distanceTextView)
+        TextView distanceTextView;*/
 
         @BindView(R.id.stockTextView)
         TextView stockTextView;
