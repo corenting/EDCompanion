@@ -8,8 +8,8 @@ android {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 17
-        versionName "1.9"
+        versionCode 18
+        versionName "1.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -59,7 +59,6 @@ dependencies {
     implementation "com.android.support:support-vector-drawable:$supportLibsVersion"
 
     // Play services / Firebase
-    ext.playServicesVersion = "15.0.0"
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
     implementation 'com.google.android.gms:play-services-base:15.0.1'
 

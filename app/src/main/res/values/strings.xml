@@ -251,9 +251,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.9</b><br />
+            <b>Version 1.10</b><br />
             <ul>
-                <li>Added ship finder tool : find the nearest station selling a specific ship</li><br />
+                <li>Added commodity finder tool : find the nearest station selling a specific commodity</li><br />
+                <li>You can now copy community goal informations (description, system...) with a long press on the text</li><br />
             </ul>
         ]]>
     </string>
