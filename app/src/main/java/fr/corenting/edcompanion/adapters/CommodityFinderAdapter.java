@@ -11,14 +11,13 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommodityFinderFragment;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
+import fr.corenting.edcompanion.models.CommodityFinderResults;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
@@ -31,14 +30,13 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private Context context;
     private CommodityFinderFragment commodityFinderFragment;
-    private List<CommodityFinderResult> results;
+    private CommodityFinderResults results;
     private TextView emptyTextView;
 
     public CommodityFinderAdapter(final Context context,
                                   final CommodityFinderFragment commodityFinderFragment) {
         this.context = context;
         this.commodityFinderFragment = commodityFinderFragment;
-        this.results = new LinkedList<>();
     }
 
     @Override
@@ -120,21 +118,43 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             emptyTextView = header.emptyText;
 
         } else {
-            CommodityFinderResult currentResult = results.get(position - 1);
+            CommodityFinderResult currentResult = results.Results.get(position - 1);
             final ResultViewHolder resultViewHolder = (ResultViewHolder) holder;
             NumberFormat numberFormat = NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context));
 
+            // For price, also display the difference with the avg galactic price
+            String priceDifference = getPriceDifference(results.Commodity.AveragePrice,
+                    currentResult.BuyPrice);
+            String buyPrice = numberFormat.format(currentResult.BuyPrice);
+            resultViewHolder.priceTextView.setText(buyPrice + " (" + priceDifference + "%)");
+
+            // Other informations
             resultViewHolder.titleTextView.setText(String.format("%s - %s", currentResult.System, currentResult.Station));
             resultViewHolder.landingPadTextView.setText(currentResult.LandingPad);
-            resultViewHolder.priceTextView.setText(numberFormat.format(currentResult.BuyPrice));
             resultViewHolder.stockTextView.setText(numberFormat.format(currentResult.Stock));
             //TODO : add distance resultViewHolder.distanceTextView.setText(String.valueOf(currentResult.));
         }
     }
 
+    private static String getPriceDifference(long referencePrice, long stationPrice) {
+
+        float num = (stationPrice - referencePrice);
+        float price = (num / (referencePrice)) * 100;
+        long result = Math.round(price);
+        if (price >= 0) {
+            return "+" + result;
+        } else {
+            return String.valueOf(result);
+        }
+    }
+
     @Override
     public int getItemCount() {
-        return results.size() + 1;
+        if (results == null)
+        {
+            return 1;
+        }
+        return results.Results.size() + 1;
     }
 
     @Override
@@ -149,8 +169,7 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return position == 0;
     }
 
-    public void setResults(List<CommodityFinderResult> newResults) {
-        results.clear();
+    public void setResults(CommodityFinderResults newResults) {
         results = newResults;
         notifyDataSetChanged();
     }

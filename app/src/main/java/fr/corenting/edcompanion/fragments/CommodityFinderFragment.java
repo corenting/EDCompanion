@@ -79,7 +79,7 @@ public class CommodityFinderFragment extends Fragment {
 
     private void startLoading()
     {
-        commodityFinderAdapter.setResults(new LinkedList<CommodityFinderResult>());
+        commodityFinderAdapter.setResults(null);
         progressBar.setVisibility(View.VISIBLE);
         commodityFinderAdapter.getEmptyTextView().setVisibility(View.GONE);
     }
@@ -96,7 +96,7 @@ public class CommodityFinderFragment extends Fragment {
         {
             endLoading(results.Results == null || results.Results.size() == 0);
         }
-        commodityFinderAdapter.setResults(results.Results);
+        commodityFinderAdapter.setResults(results);
     }
 
     public void onFindButtonClick(Button button, String system, String commodity,

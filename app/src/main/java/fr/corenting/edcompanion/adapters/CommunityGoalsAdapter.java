@@ -67,63 +67,22 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         holder.locationTextView.setText(currentGoal.getSystem());
 
         // Set click listeners
-        holder.peopleTextView.setOnLongClickListener(null);
-        holder.peopleTextView.setOnLongClickListener(new View.OnLongClickListener() {
+        setLongClickListener(holder.peopleTextView, R.string.hint_participants);
+        setLongClickListener(holder.remainingTextView, R.string.hint_end_date);
+        setLongClickListener(holder.tierTextView, R.string.hint_tiers);
+        setLongClickListener(holder.locationTextView, R.string.hint_system);
+        setLongClickListener(holder.descriptionTextView, R.string.community_goal_description);
+        setLongClickListener(holder.objectiveTextView, R.string.objective);
+    }
+
+    private void setLongClickListener(final TextView textView, final int labelResId) {
+        textView.setOnLongClickListener(null);
+        textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 MiscUtils.putTextInClipboardWithNotification(context,
-                        context.getString(R.string.hint_participants),
-                        holder.peopleTextView.getText().toString());
-                return true;
-            }
-        });
-        holder.remainingTextView.setOnLongClickListener(null);
-        holder.remainingTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                MiscUtils.putTextInClipboardWithNotification(context,
-                        context.getString(R.string.hint_end_date),
-                        holder.remainingTextView.getText().toString());
-                return true;
-            }
-        });
-        holder.tierTextView.setOnLongClickListener(null);
-        holder.tierTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                MiscUtils.putTextInClipboardWithNotification(context,
-                        context.getString(R.string.hint_tiers),
-                        holder.tierTextView.getText().toString());
-                return true;
-            }
-        });
-        holder.locationTextView.setOnLongClickListener(null);
-        holder.locationTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                MiscUtils.putTextInClipboardWithNotification(context,
-                        context.getString(R.string.hint_system),
-                        holder.locationTextView.getText().toString());
-                return true;
-            }
-        });
-        holder.descriptionTextView.setOnLongClickListener(null);
-        holder.descriptionTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                MiscUtils.putTextInClipboardWithNotification(context,
-                        context.getString(R.string.community_goal_description),
-                        holder.descriptionTextView.getText().toString());
-                return true;
-            }
-        });
-        holder.objectiveTextView.setOnLongClickListener(null);
-        holder.objectiveTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                MiscUtils.putTextInClipboardWithNotification(context,
-                        context.getString(R.string.objective),
-                        holder.objectiveTextView.getText().toString());
+                        context.getString(labelResId),
+                        textView.getText().toString());
                 return true;
             }
         });

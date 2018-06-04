@@ -29,6 +29,8 @@
     <string name="hint_tiers">Tiers</string>
     <string name="hint_system">System</string>
     <string name="finished">Finished</string>
+    <string name="community_goal_description">Community goal description</string>
+    <string name="objective">Objective</string>
 
     <!--Errors-->
     <string name="nothing_to_display">Nothing to display</string>
@@ -255,8 +257,8 @@
             </ul>
         ]]>
     </string>
+
+    <!--Clipboard-->
     <string name="content_copied_to_clipboard">Content copied to clipboard !</string>
     <string name="content_copied_to_clipboard_error">Cannot copy content to clipboard !</string>
-    <string name="community_goal_description">Community goal description</string>
-    <string name="objective">Objective</string>
 </resources>
