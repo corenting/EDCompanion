@@ -59,8 +59,9 @@ dependencies {
     implementation "com.android.support:support-vector-drawable:$supportLibsVersion"
 
     // Play services / Firebase
-    implementation 'com.google.firebase:firebase-messaging:15.0.2'
-    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
 
     // Retrofit
     ext.retrofitVersion = "2.4.0"
@@ -68,9 +69,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     
     // Other
-    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
