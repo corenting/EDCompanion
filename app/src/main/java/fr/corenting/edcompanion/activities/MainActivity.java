@@ -34,7 +34,6 @@ import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.ShipFinderFragment;
 import fr.corenting.edcompanion.models.ServerStatus;
-import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.ChangelogUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
@@ -80,12 +79,12 @@ public class MainActivity extends AppCompatActivity
 
         // Set initial fragment
         fragmentManager = getSupportFragmentManager();
-        switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
-
-        // Select the first item in menu as the fragment was loaded
-        navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
-        setTitle(getString(R.string.community_goals));
-        getSupportActionBar().setSubtitle(R.string.inara_credits);
+        if (savedInstanceState == null) {
+            switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
+            navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
+            setTitle(getString(R.string.community_goals));
+            setActionBarSubtitle(R.string.inara_credits);
+        }
 
         // Update the server status
         updateServerStatus();
@@ -107,6 +106,18 @@ public class MainActivity extends AppCompatActivity
 
         // Init ThreeTen
         AndroidThreeTen.init(getApplicationContext());
+    }
+
+    private void clearActionBarSubtitle() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setSubtitle("");
+        }
+    }
+
+    private void setActionBarSubtitle(int resId) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setSubtitle(getString(resId));
+        }
     }
 
     private void updateServerStatus() {
@@ -148,40 +159,38 @@ public class MainActivity extends AppCompatActivity
 
         expandToolbar();
         setTitle(item.getTitle());
+        clearActionBarSubtitle();
         switch (item.getItemId()) {
             case R.id.nav_cg:
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
-                getSupportActionBar().setSubtitle(R.string.inara_credits);
+                setActionBarSubtitle(R.string.inara_credits);
                 break;
             case R.id.nav_cmdr:
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT);
                 String commanderName = SettingsUtils.getCommanderName(this);
                 setTitle(commanderName.equals("") ? getString(R.string.commander) : commanderName);
-                getSupportActionBar().setSubtitle("");
                 break;
             case R.id.nav_galnet_news: {
                 switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG);
-                getSupportActionBar().setSubtitle("");
                 break;
             }
             case R.id.nav_galnet_reports: {
                 switchFragment(GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG);
-                getSupportActionBar().setSubtitle("");
                 break;
             }
             case R.id.nav_distance_calculator: {
                 switchFragment(DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG);
-                getSupportActionBar().setSubtitle(R.string.eddb_credits);
+                setActionBarSubtitle(R.string.eddb_credits);
                 break;
             }
             case R.id.nav_commodity_finder: {
                 switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG);
-                getSupportActionBar().setSubtitle(R.string.edm_credits);
+                setActionBarSubtitle(R.string.edm_credits);
                 break;
             }
             case R.id.nav_ship_finder: {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG);
-                getSupportActionBar().setSubtitle(R.string.eddb_credits);
+                setActionBarSubtitle(R.string.eddb_credits);
                 break;
             }
             case R.id.nav_about: {
@@ -221,10 +230,10 @@ public class MainActivity extends AppCompatActivity
                 ViewUtils.switchFragment(fragmentManager, fragment, tag);
                 break;
             case CommanderFragment.COMMANDER_FRAGMENT:
-                ViewUtils.switchFragment(fragmentManager,  new CommanderFragment(), tag);
+                ViewUtils.switchFragment(fragmentManager, new CommanderFragment(), tag);
                 break;
             case DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG:
-                ViewUtils.switchFragment(fragmentManager,  new DistanceCalculatorFragment(), tag);
+                ViewUtils.switchFragment(fragmentManager, new DistanceCalculatorFragment(), tag);
                 break;
             case ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager, new ShipFinderFragment(), tag);
@@ -233,7 +242,7 @@ public class MainActivity extends AppCompatActivity
                 ViewUtils.switchFragment(fragmentManager, new CommodityFinderFragment(), tag);
                 break;
             default:
-                ViewUtils.switchFragment(fragmentManager,  new CommunityGoalsFragment(), tag);
+                ViewUtils.switchFragment(fragmentManager, new CommunityGoalsFragment(), tag);
                 break;
         }
 
