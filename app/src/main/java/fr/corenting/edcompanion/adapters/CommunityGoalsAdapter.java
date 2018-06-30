@@ -21,6 +21,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
     private List<CommunityGoal> goals;
     private View.OnClickListener onClickListener;
+
     private Context context;
     private boolean isDetailsView;
 
@@ -32,10 +33,7 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CommunityGoal goal = goals.get(recyclerView.getChildAdapterPosition(v));
-                Intent i = new Intent(context, DetailsActivity.class);
-                i.putExtra("goal", goal);
-                context.startActivity(i);
+                switchToDetailsView(recyclerView.getChildAdapterPosition(v));
             }
         };
     }
@@ -67,15 +65,17 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         holder.locationTextView.setText(currentGoal.getSystem());
 
         // Set click listeners
-        setLongClickListener(holder.peopleTextView, R.string.hint_participants);
-        setLongClickListener(holder.remainingTextView, R.string.hint_end_date);
-        setLongClickListener(holder.tierTextView, R.string.hint_tiers);
-        setLongClickListener(holder.locationTextView, R.string.hint_system);
-        setLongClickListener(holder.descriptionTextView, R.string.community_goal_description);
-        setLongClickListener(holder.objectiveTextView, R.string.objective);
+        setClickListeners(position, holder.peopleTextView, R.string.hint_participants);
+        setClickListeners(position, holder.remainingTextView, R.string.hint_end_date);
+        setClickListeners(position, holder.tierTextView, R.string.hint_tiers);
+        setClickListeners(position, holder.locationTextView, R.string.hint_system);
+        setClickListeners(position, holder.descriptionTextView, R.string.community_goal_description);
+        setClickListeners(position, holder.objectiveTextView, R.string.objective);
     }
 
-    private void setLongClickListener(final TextView textView, final int labelResId) {
+    private void setClickListeners(final int position, final TextView textView,
+                                   final int labelResId) {
+        // Set long click listener for copying informations to clipboard
         textView.setOnLongClickListener(null);
         textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -86,11 +86,27 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
                 return true;
             }
         });
+
+        // Setup a regular click listener for details view
+        textView.setOnClickListener(null);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToDetailsView(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return goals.size();
+    }
+
+    private void switchToDetailsView(int position) {
+        final CommunityGoal goal = goals.get(position);
+        Intent i = new Intent(context, DetailsActivity.class);
+        i.putExtra("goal", goal);
+        context.startActivity(i);
     }
 
     public static class goalsViewHolder extends RecyclerView.ViewHolder {

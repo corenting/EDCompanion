@@ -26,12 +26,10 @@
         </activity>
         <activity
             android:name=".activities.DetailsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_community_goal_details"
             android:theme="@style/Theme.AppDetails" />
         <activity
             android:name=".activities.AboutActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_about"
             android:theme="@style/Theme.AppDetails" />
 
