@@ -10,10 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.threeten.bp.Instant;
-import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,7 +39,7 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public ShipFinderAdapter(final Context context, final ShipFinderFragment shipFinderFragment) {
         this.context = context;
         this.shipFinderFragment = shipFinderFragment;
-        this.results = new LinkedList<>();
+        this.results = new ArrayList<>();
     }
 
     @Override

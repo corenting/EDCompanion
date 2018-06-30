@@ -34,6 +34,9 @@ public class CommunityGoalsResponse {
         @SerializedName("reward")
         public String Reward;
 
+        @SerializedName("rewards")
+        public List<CommunityGoalsRewards> Rewards;
+
         @SerializedName("title")
         public String Title;
 
@@ -62,6 +65,17 @@ public class CommunityGoalsResponse {
 
             @SerializedName("total")
             public int Total;
+        }
+
+        public class CommunityGoalsRewards {
+            @SerializedName("contributorss")
+            public String Contributors;
+
+            @SerializedName("rewards")
+            public String Rewards;
+
+            @SerializedName("tiers")
+            public String Tier;
         }
     }
 }

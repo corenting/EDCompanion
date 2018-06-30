@@ -3,13 +3,13 @@ package fr.corenting.edcompanion.network.player;
 import android.content.Context;
 import android.support.v7.preference.EditTextPreference;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Ranks;
-import fr.corenting.edcompanion.models.apis.Inara.InaraProfileResponse;
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileRequestBody;
+import fr.corenting.edcompanion.models.apis.Inara.InaraProfileResponse;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
 import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
@@ -48,7 +48,7 @@ public class InaraPlayer extends PlayerNetwork {
         profileEvent.EventTimestamp = DateUtils.getUtcIsoDate();
         profileEvent.EventData = new InaraProfileRequestBody.InaraRequestBodyEvent.InaraRequestBodyEventData();
         profileEvent.EventData.SearchName = commanderName;
-        res.events = new LinkedList<>();
+        res.events = new ArrayList<>();
         res.events.add(profileEvent);
 
         return res;
@@ -109,34 +109,34 @@ public class InaraPlayer extends PlayerNetwork {
                                 body.events.get(0).EventData.CommanderRanksPilot) {
                             switch (rank.RankName) {
                                 case "combat":
-                                    ranks.combat.progress = (int) (rank.RankProgress * 100);
-                                    ranks.combat.value = rank.RankValue;
-                                    ranks.combat.name = context.getResources().getStringArray(R.array.ranks_combat)[ranks.combat.value];
+                                    ranks.Combat.progress = (int) (rank.RankProgress * 100);
+                                    ranks.Combat.value = rank.RankValue;
+                                    ranks.Combat.name = context.getResources().getStringArray(R.array.ranks_combat)[ranks.Combat.value];
                                     break;
                                 case "trade":
-                                    ranks.trade.progress = (int) (rank.RankProgress * 100);
-                                    ranks.trade.value = rank.RankValue;
-                                    ranks.trade.name = context.getResources().getStringArray(R.array.ranks_trade)[ranks.trade.value];
+                                    ranks.Trade.progress = (int) (rank.RankProgress * 100);
+                                    ranks.Trade.value = rank.RankValue;
+                                    ranks.Trade.name = context.getResources().getStringArray(R.array.ranks_trade)[ranks.Trade.value];
                                     break;
                                 case "exploration":
-                                    ranks.explore.progress = (int) (rank.RankProgress * 100);
-                                    ranks.explore.value = rank.RankValue;
-                                    ranks.explore.name = context.getResources().getStringArray(R.array.ranks_explorer)[ranks.explore.value];
+                                    ranks.Explore.progress = (int) (rank.RankProgress * 100);
+                                    ranks.Explore.value = rank.RankValue;
+                                    ranks.Explore.name = context.getResources().getStringArray(R.array.ranks_explorer)[ranks.Explore.value];
                                     break;
                                 case "cqc":
-                                    ranks.cqc.progress = (int) (rank.RankProgress * 100);
-                                    ranks.cqc.value = rank.RankValue;
-                                    ranks.cqc.name = context.getResources().getStringArray(R.array.ranks_cqc)[ranks.cqc.value];
+                                    ranks.Cqc.progress = (int) (rank.RankProgress * 100);
+                                    ranks.Cqc.value = rank.RankValue;
+                                    ranks.Cqc.name = context.getResources().getStringArray(R.array.ranks_cqc)[ranks.Cqc.value];
                                     break;
                                 case "empire":
-                                    ranks.empire.progress = (int) (rank.RankProgress * 100);
-                                    ranks.empire.value = rank.RankValue;
-                                    ranks.empire.name = context.getResources().getStringArray(R.array.ranks_empire)[ranks.empire.value];
+                                    ranks.Empire.progress = (int) (rank.RankProgress * 100);
+                                    ranks.Empire.value = rank.RankValue;
+                                    ranks.Empire.name = context.getResources().getStringArray(R.array.ranks_empire)[ranks.Empire.value];
                                     break;
                                 case "federation":
-                                    ranks.federation.progress = (int) (rank.RankProgress * 100);
-                                    ranks.federation.value = rank.RankValue;
-                                    ranks.federation.name = context.getResources().getStringArray(R.array.ranks_federation)[ranks.federation.value];
+                                    ranks.Federation.progress = (int) (rank.RankProgress * 100);
+                                    ranks.Federation.value = rank.RankValue;
+                                    ranks.Federation.name = context.getResources().getStringArray(R.array.ranks_federation)[ranks.Federation.value];
                                     break;
                             }
                         }

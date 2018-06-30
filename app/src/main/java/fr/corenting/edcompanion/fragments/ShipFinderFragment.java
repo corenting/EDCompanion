@@ -12,7 +12,7 @@ import android.widget.Button;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,7 +79,7 @@ public class ShipFinderFragment extends Fragment {
 
     private void startLoading()
     {
-        shipFinderAdapter.setResults(new LinkedList<ShipFinderResult>());
+        shipFinderAdapter.setResults(new ArrayList<ShipFinderResult>());
         progressBar.setVisibility(View.VISIBLE);
         shipFinderAdapter.getEmptyTextView().setVisibility(View.GONE);
     }

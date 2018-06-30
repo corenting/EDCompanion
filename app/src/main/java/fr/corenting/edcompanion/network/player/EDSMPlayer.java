@@ -84,34 +84,34 @@ public class EDSMPlayer extends PlayerNetwork {
                     Ranks ranks = new Ranks();
                     try {
                         // Combat
-                        ranks.combat.name = body.ranksNames.combat;
-                        ranks.combat.progress = body.progress.combat;
-                        ranks.combat.value = body.ranks.combat;
+                        ranks.Combat.name = body.ranksNames.combat;
+                        ranks.Combat.progress = body.progress.combat;
+                        ranks.Combat.value = body.ranks.combat;
 
                         // Trade
-                        ranks.trade.name = body.ranksNames.trade;
-                        ranks.trade.progress = body.progress.trade;
-                        ranks.trade.value = body.ranks.trade;
+                        ranks.Trade.name = body.ranksNames.trade;
+                        ranks.Trade.progress = body.progress.trade;
+                        ranks.Trade.value = body.ranks.trade;
 
                         // Explore
-                        ranks.explore.name = body.ranksNames.explore;
-                        ranks.explore.progress = body.progress.explore;
-                        ranks.explore.value = body.ranks.explore;
+                        ranks.Explore.name = body.ranksNames.explore;
+                        ranks.Explore.progress = body.progress.explore;
+                        ranks.Explore.value = body.ranks.explore;
 
                         // CQC
-                        ranks.cqc.name = body.ranksNames.cqc;
-                        ranks.cqc.progress = body.progress.cqc;
-                        ranks.cqc.value = body.ranks.cqc;
+                        ranks.Cqc.name = body.ranksNames.cqc;
+                        ranks.Cqc.progress = body.progress.cqc;
+                        ranks.Cqc.value = body.ranks.cqc;
 
                         // Federation
-                        ranks.federation.name = body.ranksNames.federation;
-                        ranks.federation.progress = body.progress.federation;
-                        ranks.federation.value = body.ranks.federation;
+                        ranks.Federation.name = body.ranksNames.federation;
+                        ranks.Federation.progress = body.progress.federation;
+                        ranks.Federation.value = body.ranks.federation;
 
                         // Empire
-                        ranks.empire.name = body.ranksNames.empire;
-                        ranks.empire.progress = body.progress.empire;
-                        ranks.empire.value = body.ranks.empire;
+                        ranks.Empire.name = body.ranksNames.empire;
+                        ranks.Empire.progress = body.progress.empire;
+                        ranks.Empire.value = body.ranks.empire;
 
                         ranks.Success = true;
 

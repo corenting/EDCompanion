@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import fr.corenting.edcompanion.adapters.GalnetAdapter;
 import fr.corenting.edcompanion.models.GalnetArticle;
@@ -49,7 +49,7 @@ public class GalnetFragment extends ListFragment {
         }
 
         // Else setup list according to mode
-        GalnetNews copy = new GalnetNews(true, new LinkedList<GalnetArticle>());
+        GalnetNews copy = new GalnetNews(true, new ArrayList<GalnetArticle>());
         int count = 0;
         for (GalnetArticle n : news.Articles) {
             boolean isReport = n.getTitle().matches(".*(Weekly).*(Report).*") ||

@@ -2,21 +2,21 @@ package fr.corenting.edcompanion.models;
 
 public class Ranks extends BaseModel {
 
-    public Rank combat;
-    public Rank trade;
-    public Rank explore;
-    public Rank cqc;
+    public Rank Combat;
+    public Rank Trade;
+    public Rank Explore;
+    public Rank Cqc;
 
-    public Rank federation;
-    public Rank empire;
+    public Rank Federation;
+    public Rank Empire;
 
     public Ranks() {
-        combat = new Rank();
-        trade = new Rank();
-        explore = new Rank();
-        cqc = new Rank();
-        federation = new Rank();
-        empire = new Rank();
+        Combat = new Rank();
+        Trade = new Rank();
+        Explore = new Rank();
+        Cqc = new Rank();
+        Federation = new Rank();
+        Empire = new Rank();
     }
 
     public class Rank {

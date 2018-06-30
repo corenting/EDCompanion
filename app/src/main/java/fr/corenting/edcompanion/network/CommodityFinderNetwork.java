@@ -4,7 +4,7 @@ import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommodityFinderResult;
@@ -76,7 +76,7 @@ public class CommodityFinderNetwork {
 
 
         CommodityFinderResults convertedResults;
-        List<CommodityFinderResult> resultsList = new LinkedList<>();
+        List<CommodityFinderResult> resultsList = new ArrayList<>();
         try {
             for (CommodityFinderResponse.CommodityFinderItem seller : responseBody.Sellers) {
                 CommodityFinderResult newResult = new CommodityFinderResult();

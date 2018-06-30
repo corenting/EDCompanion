@@ -14,7 +14,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.R;
@@ -37,7 +37,7 @@ public class NotificationsUtils {
     }
 
     private static List<Pair<String, Boolean>> getNotificationsTopics(Context c) {
-        List<Pair<String, Boolean>> res = new LinkedList<>();
+        List<Pair<String, Boolean>> res = new ArrayList<>();
 
         res.add(new Pair<>(newGoalTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_new_goal))));
         res.add(new Pair<>(newTierTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_new_tier))));

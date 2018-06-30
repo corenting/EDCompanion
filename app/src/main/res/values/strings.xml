@@ -31,6 +31,10 @@
     <string name="finished">Finished</string>
     <string name="community_goal_description">Community goal description</string>
     <string name="objective">Objective</string>
+    <string name="tier">Tier</string>
+    <string name="contributions">Contributions</string>
+    <string name="reward">Reward</string>
+
 
     <!--Errors-->
     <string name="nothing_to_display">Nothing to display</string>

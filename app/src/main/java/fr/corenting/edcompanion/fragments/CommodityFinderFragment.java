@@ -12,13 +12,10 @@ import android.widget.Button;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.LinkedList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommodityFinderAdapter;
-import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.CommodityFinderResults;
 import fr.corenting.edcompanion.network.CommodityFinderNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;

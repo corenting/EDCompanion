@@ -4,10 +4,11 @@ import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommunityGoal;
+import fr.corenting.edcompanion.models.CommunityGoalReward;
 import fr.corenting.edcompanion.models.CommunityGoals;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
@@ -29,7 +30,7 @@ public class CommunityGoalsNetwork {
                 else
                 {
                     CommunityGoals goals;
-                    List<CommunityGoal> goalsList = new LinkedList<>();
+                    List<CommunityGoal> goalsList = new ArrayList<>();
                     try {
                         for (CommunityGoalsResponse.CommunityGoalsItemResponse goal : body.Goals) {
                             CommunityGoal newCg = new CommunityGoal();
@@ -53,6 +54,16 @@ public class CommunityGoalsNetwork {
                             // Location
                             newCg.setStation(goal.Location.Station);
                             newCg.setSystem(goal.Location.System);
+
+                            // Rewards
+                            List<CommunityGoalReward> rewards = new ArrayList<>();
+                            for (CommunityGoalsResponse.CommunityGoalsItemResponse.CommunityGoalsRewards reward : goal.Rewards) {
+                                CommunityGoalReward newReward = new CommunityGoalReward();
+                                newReward.setContributors(reward.Contributors);
+                                newReward.setRewards(reward.Rewards);
+                                newReward.setTier(reward.Tier);
+                            }
+                            newCg.setRewards(rewards);
 
                             goalsList.add(newCg);
                         }

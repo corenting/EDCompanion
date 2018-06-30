@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(communityGoal.getTitle());
 
         // Create list with one element
-        List<CommunityGoal> list = new LinkedList<>();
+        List<CommunityGoal> list = new ArrayList<>();
         list.add(communityGoal);
 
         // Recycler view setup
@@ -74,7 +74,7 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(article.getTitle());
 
         // Create list with one element
-        List<GalnetArticle> list = new LinkedList<>();
+        List<GalnetArticle> list = new ArrayList<>();
         list.add(article);
 
         // Recycler view setup

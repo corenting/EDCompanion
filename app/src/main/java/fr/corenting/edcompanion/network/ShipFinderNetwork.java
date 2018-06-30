@@ -5,7 +5,7 @@ import android.content.Context;
 import org.greenrobot.eventbus.EventBus;
 import org.threeten.bp.DateTimeUtils;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.ShipFinderResult;
@@ -31,7 +31,7 @@ public class ShipFinderNetwork {
                 }
                 else
                 {
-                    List<ShipFinderResult> resultsList = new LinkedList<>();
+                    List<ShipFinderResult> resultsList = new ArrayList<>();
                     try {
                         for (ShipFinderResponse resultItem : body) {
                             ShipFinderResult convertedItem = new ShipFinderResult();

@@ -187,13 +187,13 @@ public class CommanderStatusFragment extends Fragment {
             return;
         }
 
-        RankUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.federation, getString(R.string.rank_federation));
-        RankUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.empire, getString(R.string.rank_empire));
+        RankUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.Federation, getString(R.string.rank_federation));
+        RankUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.Empire, getString(R.string.rank_empire));
 
-        RankUtils.setContent(getContext(), combatRankLayout, RankUtils.getCombatLogoId(ranks.combat.value), ranks.combat, getString(R.string.rank_combat));
-        RankUtils.setContent(getContext(), tradeRankLayout, RankUtils.getTradeLogoId(ranks.combat.value), ranks.trade, getString(R.string.rank_trading));
-        RankUtils.setContent(getContext(), explorationRankLayout, RankUtils.getExplorationLogoId(ranks.explore.value), ranks.explore, getString(R.string.rank_exploration));
-        RankUtils.setContent(getContext(), arenaRankLayout, RankUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc, getString(R.string.rank_arena));
+        RankUtils.setContent(getContext(), combatRankLayout, RankUtils.getCombatLogoId(ranks.Combat.value), ranks.Combat, getString(R.string.rank_combat));
+        RankUtils.setContent(getContext(), tradeRankLayout, RankUtils.getTradeLogoId(ranks.Trade.value), ranks.Trade, getString(R.string.rank_trading));
+        RankUtils.setContent(getContext(), explorationRankLayout, RankUtils.getExplorationLogoId(ranks.Explore.value), ranks.Explore, getString(R.string.rank_exploration));
+        RankUtils.setContent(getContext(), arenaRankLayout, RankUtils.getCqcLogoId(ranks.Cqc.value), ranks.Cqc, getString(R.string.rank_arena));
     }
 
     private void getAll()

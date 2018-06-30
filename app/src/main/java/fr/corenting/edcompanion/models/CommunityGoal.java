@@ -7,7 +7,9 @@ import android.os.Parcelable;
 import org.threeten.bp.DateTimeUtils;
 import org.threeten.bp.Instant;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import fr.corenting.edcompanion.R;
 
@@ -20,6 +22,7 @@ public class CommunityGoal implements Parcelable {
     private String description;
     private String objective;
     private String reward;
+    private List<CommunityGoalReward> rewards;
 
     private int currentTier;
     private int totalTier;
@@ -42,6 +45,8 @@ public class CommunityGoal implements Parcelable {
         description = source.readString();
         objective = source.readString();
         reward = source.readString();
+        rewards = new ArrayList<>();
+        source.readList(rewards, null);
 
         currentTier = source.readInt();
         totalTier = source.readInt();
@@ -61,6 +66,7 @@ public class CommunityGoal implements Parcelable {
         dest.writeString(description);
         dest.writeString(objective);
         dest.writeString(reward);
+        dest.writeList(rewards);
 
         dest.writeInt(currentTier);
         dest.writeInt(totalTier);
@@ -128,6 +134,14 @@ public class CommunityGoal implements Parcelable {
 
     public void setReward(String reward) {
         this.reward = reward;
+    }
+
+    public List<CommunityGoalReward> getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(List<CommunityGoalReward> rewards) {
+        this.rewards = rewards;
     }
 
     public boolean isOngoing() {

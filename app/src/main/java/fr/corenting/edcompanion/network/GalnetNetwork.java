@@ -4,7 +4,7 @@ import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.GalnetArticle;
@@ -28,7 +28,7 @@ public class GalnetNetwork {
                 } else {
                     GalnetNews news;
                     try {
-                        List<GalnetArticle> articles = new LinkedList<>();
+                        List<GalnetArticle> articles = new ArrayList<>();
                         for (GalnetArticleResponse item : body) {
                             GalnetArticle newArticle = new GalnetArticle();
                             newArticle.setContent(item.Content.replace("<br />", "\n"));
