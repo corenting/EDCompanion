@@ -44,13 +44,16 @@ import fr.corenting.edcompanion.utils.ViewUtils;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FragmentManager fragmentManager;
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawer;
     @BindView(R.id.nav_view)
     public NavigationView navigationView;
     @BindView(R.id.appBar)
     public AppBarLayout appBarLayout;
+
+    private FragmentManager fragmentManager;
+    private CharSequence currentTitle;
+    private CharSequence currentSubtitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +70,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         ThemeUtils.setToolbarColor(this, toolbar);
 
+        // Drawer toggle
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -80,10 +83,12 @@ public class MainActivity extends AppCompatActivity
         // Set initial fragment
         fragmentManager = getSupportFragmentManager();
         if (savedInstanceState == null) {
-            switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
             navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
-            setTitle(getString(R.string.community_goals));
-            setActionBarSubtitle(R.string.inara_credits);
+            switchOnNavigation(getString(R.string.community_goals), R.id.nav_cg);
+        } else {
+            currentTitle = savedInstanceState.getCharSequence("currentTitle");
+            currentSubtitle = savedInstanceState.getCharSequence("currentSubtitle");
+            updateActionBar();
         }
 
         // Update the server status
@@ -108,29 +113,11 @@ public class MainActivity extends AppCompatActivity
         AndroidThreeTen.init(getApplicationContext());
     }
 
-    private void clearActionBarSubtitle() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setSubtitle("");
-        }
-    }
-
-    private void setActionBarSubtitle(int resId) {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setSubtitle(getString(resId));
-        }
-    }
-
-    private void updateServerStatus() {
-        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
-        textView.setText(getString(R.string.updating_server_status));
-        ServerStatusNetwork.getStatus(this);
-    }
-
-    @Subscribe
-    public void onServerStatusEvent(ServerStatus status) {
-        String content = status.Success ? status.Status : getString(R.string.unknown);
-        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
-        textView.setText(getString(R.string.server_status, content));
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putCharSequence("currentTitle", currentTitle);
+        outState.putCharSequence("currentSubtitle", currentSubtitle);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -156,19 +143,56 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        boolean ret = switchOnNavigation(item.getTitle().toString(), item.getItemId());
+        drawer.closeDrawer(GravityCompat.START);
+        return ret;
+    }
 
+    @Override
+    protected void onResume() {
+        updateActionBar();
+        super.onResume();
+    }
+
+    private void updateActionBar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setSubtitle(currentSubtitle);
+            setTitle(currentTitle);
+        }
+    }
+
+    private void updateServerStatus() {
+        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        textView.setText(getString(R.string.updating_server_status));
+        ServerStatusNetwork.getStatus(this);
+    }
+
+    @Subscribe
+    public void onServerStatusEvent(ServerStatus status) {
+        String content = status.Success ? status.Status : getString(R.string.unknown);
+        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        textView.setText(getString(R.string.server_status, content));
+    }
+
+    private boolean switchOnNavigation(String title, int id) {
         expandToolbar();
-        setTitle(item.getTitle());
-        clearActionBarSubtitle();
-        switch (item.getItemId()) {
+
+        // Set title and subtitle default values
+        if (id != R.id.nav_settings && id != R.id.nav_about) {
+            currentTitle = title;
+            currentSubtitle = "";
+        }
+
+        switch (id) {
             case R.id.nav_cg:
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG);
-                setActionBarSubtitle(R.string.inara_credits);
+                currentSubtitle = getString(R.string.inara_credits);
                 break;
             case R.id.nav_cmdr:
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT);
                 String commanderName = SettingsUtils.getCommanderName(this);
-                setTitle(commanderName.equals("") ? getString(R.string.commander) : commanderName);
+                currentTitle = commanderName.equals("") ?
+                        getString(R.string.commander) : commanderName;
                 break;
             case R.id.nav_galnet_news: {
                 switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG);
@@ -180,17 +204,17 @@ public class MainActivity extends AppCompatActivity
             }
             case R.id.nav_distance_calculator: {
                 switchFragment(DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG);
-                setActionBarSubtitle(R.string.eddb_credits);
+                currentSubtitle = getString(R.string.eddb_credits);
                 break;
             }
             case R.id.nav_commodity_finder: {
                 switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG);
-                setActionBarSubtitle(R.string.edm_credits);
+                currentSubtitle = getString(R.string.edm_credits);
                 break;
             }
             case R.id.nav_ship_finder: {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG);
-                setActionBarSubtitle(R.string.eddb_credits);
+                currentSubtitle = getString(R.string.eddb_credits);
                 break;
             }
             case R.id.nav_about: {
@@ -206,7 +230,8 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         }
-        drawer.closeDrawer(GravityCompat.START);
+
+        updateActionBar();
         return true;
     }
 
