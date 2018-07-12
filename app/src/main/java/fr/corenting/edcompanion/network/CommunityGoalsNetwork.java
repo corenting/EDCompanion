@@ -60,8 +60,9 @@ public class CommunityGoalsNetwork {
                             for (CommunityGoalsResponse.CommunityGoalsItemResponse.CommunityGoalsRewards reward : goal.Rewards) {
                                 CommunityGoalReward newReward = new CommunityGoalReward();
                                 newReward.setContributors(reward.Contributors);
-                                newReward.setRewards(reward.Rewards);
+                                newReward.setRewards(reward.Reward);
                                 newReward.setTier(reward.Tier);
+                                rewards.add(newReward);
                             }
                             newCg.setRewards(rewards);
 

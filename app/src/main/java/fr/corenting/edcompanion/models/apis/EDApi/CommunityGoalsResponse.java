@@ -68,13 +68,13 @@ public class CommunityGoalsResponse {
         }
 
         public class CommunityGoalsRewards {
-            @SerializedName("contributorss")
+            @SerializedName("contributors")
             public String Contributors;
 
-            @SerializedName("rewards")
-            public String Rewards;
+            @SerializedName("reward")
+            public String Reward;
 
-            @SerializedName("tiers")
+            @SerializedName("tier")
             public String Tier;
         }
     }

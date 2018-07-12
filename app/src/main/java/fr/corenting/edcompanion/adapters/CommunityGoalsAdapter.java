@@ -51,18 +51,26 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
     public void onBindViewHolder(final goalsViewHolder holder, final int position) {
         CommunityGoal currentGoal = goals.get(position);
 
+        // Content
         holder.titleTextView.setText(currentGoal.getTitle());
         holder.objectiveTextView.setText(currentGoal.getObjective());
         holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
-
-        holder.descriptionTextView.setText(currentGoal.getDescription());
-        if (isDetailsView) {
-            holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
-        }
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
         holder.remainingTextView.setText(currentGoal.getEndDate(context));
         holder.tierTextView.setText(currentGoal.getTierString());
         holder.locationTextView.setText(currentGoal.getSystem());
+
+        // Description
+        if (isDetailsView) {
+            holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
+        }
+        holder.descriptionTextView.setText(currentGoal.getDescription());
+
+        // Rewards table
+        if (currentGoal.getRewards() != null && currentGoal.getRewards().size() != 0) {
+        }
+        else {
+        }
 
         // Set click listeners
         setClickListeners(position, holder.peopleTextView, R.string.hint_participants);

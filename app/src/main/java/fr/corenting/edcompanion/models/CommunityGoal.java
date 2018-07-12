@@ -46,7 +46,7 @@ public class CommunityGoal implements Parcelable {
         objective = source.readString();
         reward = source.readString();
         rewards = new ArrayList<>();
-        source.readList(rewards, null);
+        source.readList(rewards, CommunityGoalReward.class.getClassLoader());
 
         currentTier = source.readInt();
         totalTier = source.readInt();

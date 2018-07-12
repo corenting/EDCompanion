@@ -62,7 +62,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.1'
 
-
     // Retrofit
     ext.retrofitVersion = "2.4.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -72,10 +71,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.evrencoskun.library:tableview:0.8.8'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     testImplementation 'junit:junit:4.12'
 }
