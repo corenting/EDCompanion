@@ -84,14 +84,23 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
 
             // Find button
-            header.findButton.setOnClickListener(new View.OnClickListener() {
+            final Runnable onSubmit = new Runnable() {
                 @Override
-                public void onClick(View view) {
-                    shipFinderFragment.onFindButtonClick((Button) view,
+                public void run() {
+                    shipFinderFragment.onFindButtonClick(header.findButton,
                             header.systemInputEditText.getText().toString(),
                             header.shipInputEditText.getText().toString());
                 }
+            };
+
+            header.findButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onSubmit.run();
+                }
             });
+            header.shipInputEditText.setOnSubmit(onSubmit);
+            header.systemInputEditText.setOnSubmit(onSubmit);
 
             // Bind empty text view
             emptyTextView = header.emptyText;

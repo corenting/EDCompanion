@@ -88,9 +88,9 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
 
             // Find button
-            header.findButton.setOnClickListener(new View.OnClickListener() {
+            final Runnable onSubmit = new Runnable() {
                 @Override
-                public void onClick(View view) {
+                public void run() {
                     // Convert stock value to int
                     String stockString = header.stockInputEditText.getText().toString();
                     int stock = 1;
@@ -106,13 +106,23 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         }
                     }
 
-                    commodityFinderFragment.onFindButtonClick((Button) view,
+                    commodityFinderFragment.onFindButtonClick(header.findButton,
                             header.systemInputEditText.getText().toString(),
                             header.commodityInputEditText.getText().toString(),
                             header.stockInputEditText.getText().toString(),
                             stock);
                 }
+            };
+            header.findButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   onSubmit.run();
+                }
             });
+            header.stockInputEditText.setOnSubmit(onSubmit);
+            header.commodityInputEditText.setOnSubmit(onSubmit);
+            header.systemInputEditText.setOnSubmit(onSubmit);
+
 
             // Bind empty text view
             emptyTextView = header.emptyText;

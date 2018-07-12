@@ -3,8 +3,12 @@ package fr.corenting.edcompanion.views;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -25,10 +29,26 @@ public class DelayAutoCompleteTextView extends android.support.v7.widget.AppComp
 
     public DelayAutoCompleteTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.setInputType(InputType.TYPE_CLASS_TEXT);
+        this.setImeOptions(EditorInfo.IME_ACTION_DONE);
     }
 
     public void setLoadingIndicator(MaterialProgressBar progressBar) {
         mLoadingIndicator = progressBar;
+    }
+
+    public void setOnSubmit(final Runnable onSubmit)
+    {
+        this.setOnEditorActionListener(new OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    onSubmit.run();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
