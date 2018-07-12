@@ -2,12 +2,17 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.evrencoskun.tableview.TableView;
+import com.evrencoskun.tableview.listener.ITableViewListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -15,6 +20,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.models.CommunityGoal;
+import fr.corenting.edcompanion.models.CommunityGoalReward;
 import fr.corenting.edcompanion.utils.MiscUtils;
 
 public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAdapter.goalsViewHolder> {
@@ -68,8 +74,39 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
         // Rewards table
         if (currentGoal.getRewards() != null && currentGoal.getRewards().size() != 0) {
+
+            // Setup view
+            holder.rewardsTableView.setVisibility(View.VISIBLE);
+            holder.rewardsTableView.setShowHorizontalSeparators(false);
+            holder.rewardsTableView.setShowVerticalSeparators(false);
+            holder.rewardsTableView.setRowHeaderWidth(0);
+            holder.rewardsTableView.setEnabled(false);
+            holder.rewardsTableView
+                    .setSelectedColor(context.getResources().getColor(android.R.color.transparent));
+            setTableClickListeners(position, holder.rewardsTableView);
+
+            // Adapter
+            CommunityGoalRewardAdapter adapter = new CommunityGoalRewardAdapter(context);
+            holder.rewardsTableView.setAdapter(adapter);
+
+            // Set item lists
+            List<String> columnHeadersList = new ArrayList<>();
+            columnHeadersList.add(context.getString(R.string.tier));
+            columnHeadersList.add(context.getString(R.string.contributions));
+            columnHeadersList.add(context.getString(R.string.reward));
+            List<String> rowHeadersList = new ArrayList<>();
+            List<List<String>> cellList = new ArrayList<>();
+            for (CommunityGoalReward goalReward : currentGoal.getRewards()) {
+                List<String> item = new ArrayList<>();
+                item.add(goalReward.getTier());
+                item.add(goalReward.getContributors());
+                item.add(goalReward.getRewards());
+                cellList.add(item);
+            }
+            adapter.setAllItems(columnHeadersList, rowHeadersList, cellList);
         }
         else {
+            holder.rewardsTableView.setVisibility(View.GONE);
         }
 
         // Set click listeners
@@ -105,6 +142,41 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         });
     }
 
+    private void setTableClickListeners(final int position, final TableView tableView) {
+        tableView.setTableViewListener(null);
+        tableView.setTableViewListener(new ITableViewListener() {
+            @Override
+            public void onCellClicked(@NonNull RecyclerView.ViewHolder cellView, int column, int row) {
+            }
+
+            @Override
+            public void onCellLongPressed(@NonNull RecyclerView.ViewHolder cellView, int column, int row) {
+
+                CommunityGoalRewardAdapter.CellViewHolder cellViewHolder =
+                        (CommunityGoalRewardAdapter.CellViewHolder) cellView;
+                MiscUtils.putTextInClipboardWithNotification(context,
+                        "",
+                        cellViewHolder.cellTextView.getText().toString());
+            }
+
+            @Override
+            public void onColumnHeaderClicked(@NonNull RecyclerView.ViewHolder columnHeaderView, int column) {
+            }
+
+            @Override
+            public void onColumnHeaderLongPressed(@NonNull RecyclerView.ViewHolder columnHeaderView, int column) {
+            }
+
+            @Override
+            public void onRowHeaderClicked(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
+            }
+
+            @Override
+            public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
+            }
+        });
+    }
+
     @Override
     public int getItemCount() {
         return goals.size();
@@ -126,6 +198,8 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         @BindView(R.id.tierTextView) TextView tierTextView;
         @BindView(R.id.peopleTextView) TextView peopleTextView;
         @BindView(R.id.locationTextView) TextView locationTextView;
+        @BindView(R.id.rewardsTableView) TableView rewardsTableView;
+
 
         goalsViewHolder(final View view) {
             super(view);

@@ -183,6 +183,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <com.evrencoskun.tableview.TableView
+            android:id="@+id/rewardsTableView"
+            android:layout_below="@id/descriptionTextView"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
