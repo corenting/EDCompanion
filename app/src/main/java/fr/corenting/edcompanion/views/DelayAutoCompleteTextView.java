@@ -29,7 +29,7 @@ public class DelayAutoCompleteTextView extends android.support.v7.widget.AppComp
 
     public DelayAutoCompleteTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.setInputType(InputType.TYPE_CLASS_TEXT);
+        this.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         this.setImeOptions(EditorInfo.IME_ACTION_DONE);
     }
 

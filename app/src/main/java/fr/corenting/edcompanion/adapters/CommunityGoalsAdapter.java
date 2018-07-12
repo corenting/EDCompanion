@@ -77,8 +77,6 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
             // Setup view
             holder.rewardsTableView.setVisibility(View.VISIBLE);
-            holder.rewardsTableView.setShowHorizontalSeparators(false);
-            holder.rewardsTableView.setShowVerticalSeparators(false);
             holder.rewardsTableView.setRowHeaderWidth(0);
             holder.rewardsTableView.setEnabled(false);
             holder.rewardsTableView
@@ -147,11 +145,12 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
         tableView.setTableViewListener(new ITableViewListener() {
             @Override
             public void onCellClicked(@NonNull RecyclerView.ViewHolder cellView, int column, int row) {
+                tableView.getSelectionHandler().clearSelection();
             }
 
             @Override
             public void onCellLongPressed(@NonNull RecyclerView.ViewHolder cellView, int column, int row) {
-
+                tableView.getSelectionHandler().clearSelection();
                 CommunityGoalRewardAdapter.CellViewHolder cellViewHolder =
                         (CommunityGoalRewardAdapter.CellViewHolder) cellView;
                 MiscUtils.putTextInClipboardWithNotification(context,
@@ -161,18 +160,22 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
             @Override
             public void onColumnHeaderClicked(@NonNull RecyclerView.ViewHolder columnHeaderView, int column) {
+                tableView.getSelectionHandler().clearSelection();
             }
 
             @Override
             public void onColumnHeaderLongPressed(@NonNull RecyclerView.ViewHolder columnHeaderView, int column) {
+                tableView.getSelectionHandler().clearSelection();
             }
 
             @Override
             public void onRowHeaderClicked(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
+                tableView.getSelectionHandler().clearSelection();
             }
 
             @Override
             public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
+                tableView.getSelectionHandler().clearSelection();
             }
         });
     }

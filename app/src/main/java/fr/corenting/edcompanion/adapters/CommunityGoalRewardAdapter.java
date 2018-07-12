@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.evrencoskun.tableview.adapter.AbstractTableAdapter;
@@ -30,25 +29,31 @@ public class CommunityGoalRewardAdapter extends AbstractTableAdapter<String, Str
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        @Override
+        public void setSelected(SelectionState selectionState) {
+            cellTextView.setBackgroundColor(mContext.getResources()
+                    .getColor(android.R.color.transparent));
+        }
     }
 
 
     @Override
     public AbstractViewHolder onCreateCellViewHolder(ViewGroup parent, int viewType) {
-        return onCreateCellCommon(parent, viewType);
+        return onCreateCellCommon(parent);
     }
 
     @Override
     public AbstractViewHolder onCreateColumnHeaderViewHolder(ViewGroup parent, int viewType) {
-        return onCreateCellCommon(parent, viewType);
+        return onCreateCellCommon(parent);
     }
 
     @Override
     public AbstractViewHolder onCreateRowHeaderViewHolder(ViewGroup parent, int viewType) {
-        return onCreateCellCommon(parent, viewType);
+        return onCreateCellCommon(parent);
     }
 
-    private AbstractViewHolder onCreateCellCommon(ViewGroup parent, int viewType) {
+    private AbstractViewHolder onCreateCellCommon(ViewGroup parent) {
         View layout = LayoutInflater.from(mContext).inflate(R.layout.community_goal_reward_cell,
                 parent, false);
         return new CellViewHolder(layout);
@@ -91,6 +96,7 @@ public class CommunityGoalRewardAdapter extends AbstractTableAdapter<String, Str
         View v = new View(mContext);
         return v;
     }
+
 
     @Override
     public int getColumnHeaderItemViewType(int columnPosition) {

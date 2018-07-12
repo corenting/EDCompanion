@@ -112,6 +112,15 @@ public class DistanceCalculatorFragment extends Fragment {
         // System input
         editText.setThreshold(3);
         editText.setAdapter(new AutoCompleteAdapter(getContext(), AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
+
+        // Listeners
+        Runnable onSubmit = new Runnable() {
+            @Override
+            public void run() {
+                onFindClick(editText);
+            }
+        };
+        editText.setOnSubmit(onSubmit);
         editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
