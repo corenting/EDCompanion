@@ -207,11 +207,11 @@ public class MainActivity extends AppCompatActivity
                 currentSubtitle = getString(R.string.eddb_credits);
                 break;
             }
-            case R.id.nav_commodity_finder: {
+/*            case R.id.nav_commodity_finder: {
                 switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG);
                 currentSubtitle = getString(R.string.edm_credits);
                 break;
-            }
+            }*/
             case R.id.nav_ship_finder: {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG);
                 currentSubtitle = getString(R.string.eddb_credits);
