@@ -256,10 +256,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.11</b><br />
+            <b>Version 1.11.1</b><br />
             <ul>
-                <li>Add community goals rewards</li><br />
-                <li>Removed commodity finder tool temporarily, as the service used is currently down</li><br />
+                <li>Fix bug where community goals could be opened indefinitely</li><br />
             </ul>
         ]]>
     </string>

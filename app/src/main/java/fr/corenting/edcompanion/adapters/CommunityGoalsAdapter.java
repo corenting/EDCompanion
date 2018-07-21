@@ -132,12 +132,14 @@ public class CommunityGoalsAdapter extends RecyclerView.Adapter<CommunityGoalsAd
 
         // Setup a regular click listener for details view
         textView.setOnClickListener(null);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToDetailsView(position);
-            }
-        });
+        if (!isDetailsView) {
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switchToDetailsView(position);
+                }
+            });
+        }
     }
 
     private void setTableClickListeners(final int position, final TableView tableView) {
