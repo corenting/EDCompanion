@@ -32,10 +32,20 @@
             android:maxLines="2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
-<!--        <TextView
-            android:id="@+id/distanceLabelTextView"
+        <TextView
+            android:id="@+id/permitRequiredTextView"
             android:layout_marginTop="8dp"
             android:layout_below="@id/titleTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/permit_required_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/distanceLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/permitRequiredTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -50,12 +60,32 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/distanceLabelTextView"
             android:layout_toEndOf="@id/distanceLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />-->
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/distanceToStarLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/distanceLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/distance_to_star"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/distanceToStarTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/distanceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/distanceLabelTextView"
+            android:layout_toEndOf="@id/distanceLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/stockLabelTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/titleTextView"
+            android:layout_below="@id/distanceToStarLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -65,7 +95,7 @@
         <TextView
             android:id="@+id/stockTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/titleTextView"
+            android:layout_below="@id/distanceToStarLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/landingPadLabelTextView"

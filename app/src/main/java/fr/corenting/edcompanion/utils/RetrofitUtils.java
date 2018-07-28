@@ -7,7 +7,6 @@ import com.google.gson.GsonBuilder;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
-import fr.corenting.edcompanion.network.retrofit.EDMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
 import retrofit2.Retrofit;
@@ -40,15 +39,6 @@ public class RetrofitUtils {
                 .build();
 
         return retrofit.create(InaraRetrofit.class);
-    }
-
-    public static EDMRetrofit getEDMRetrofit(Context ctx)
-    {
-        Retrofit retrofit = getRetrofitInstance()
-                .baseUrl(ctx.getString(R.string.edm_api_base))
-                .build();
-
-        return retrofit.create(EDMRetrofit.class);
     }
 
     private static Retrofit.Builder getRetrofitInstance()

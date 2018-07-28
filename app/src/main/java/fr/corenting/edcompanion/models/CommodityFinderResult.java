@@ -6,5 +6,8 @@ public class CommodityFinderResult {
     public String LandingPad;
     public String Station;
     public String System;
+    public boolean PermitRequired;
     public long Stock;
+    public int DistanceToStar;
+    public float Distance;
 }

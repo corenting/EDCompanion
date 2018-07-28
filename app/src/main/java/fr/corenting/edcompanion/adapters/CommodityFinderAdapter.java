@@ -81,8 +81,7 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             });
 
             // Landing pad size adapter
-            if (header.landingPadSizeSpinner.getItems() == null || header.landingPadSizeSpinner.getItems().size() == 0)
-            {
+            if (header.landingPadSizeSpinner.getItems() == null || header.landingPadSizeSpinner.getItems().size() == 0) {
                 String[] landingPadSizeArray = context.getResources().getStringArray(R.array.landing_pad_size);
                 header.landingPadSizeSpinner.setItems(Arrays.asList(landingPadSizeArray));
             }
@@ -94,14 +93,10 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     // Convert stock value to int
                     String stockString = header.stockInputEditText.getText().toString();
                     int stock = 1;
-                    if (stockString.length() != 0)
-                    {
-                        try
-                        {
+                    if (stockString.length() != 0) {
+                        try {
                             stock = Integer.parseInt(stockString);
-                        }
-                        catch (NumberFormatException e)
-                        {
+                        } catch (NumberFormatException e) {
                             stock = 1;
                         }
                     }
@@ -116,7 +111,7 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             header.findButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   onSubmit.run();
+                    onSubmit.run();
                 }
             });
             header.stockInputEditText.setOnSubmit(onSubmit);
@@ -140,9 +135,13 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             // Other informations
             resultViewHolder.titleTextView.setText(String.format("%s - %s", currentResult.System, currentResult.Station));
+            resultViewHolder.permitRequiredTextView.setVisibility(currentResult.PermitRequired ? View.VISIBLE : View.GONE);
             resultViewHolder.landingPadTextView.setText(currentResult.LandingPad);
             resultViewHolder.stockTextView.setText(numberFormat.format(currentResult.Stock));
-            //TODO : add distance resultViewHolder.distanceTextView.setText(String.valueOf(currentResult.));
+            resultViewHolder.distanceTextView.setText(context.getString(R.string.distance_ly,
+                    currentResult.Distance));
+            resultViewHolder.distanceToStarTextView.setText(context.getString(R.string.distance_ls,
+                    NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context)).format(currentResult.DistanceToStar)));
         }
     }
 
@@ -193,8 +192,14 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         @BindView(R.id.titleTextView)
         TextView titleTextView;
 
-      /*  @BindView(R.id.distanceTextView)
-        TextView distanceTextView;*/
+        @BindView(R.id.permitRequiredTextView)
+        TextView permitRequiredTextView;
+
+        @BindView(R.id.distanceTextView)
+        TextView distanceTextView;
+
+        @BindView(R.id.distanceToStarTextView)
+        TextView distanceToStarTextView;
 
         @BindView(R.id.stockTextView)
         TextView stockTextView;

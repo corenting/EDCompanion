@@ -4,7 +4,6 @@
     <!--URLs-->
     <string name="edapi_base">https://ed.9cw.eu/</string>
     <string name="edsm_base">https://www.edsm.net/</string>
-    <string name="edm_api_base">http://edm.edhits.space/api/</string>
     <string name="inara_api_base">https://inara.cz/</string>
 
     <!--Drawer-->
@@ -46,7 +45,7 @@
     <string name="Unknown">Unknown</string>
     <string name="inara_credits">Data provided by inara.cz</string>
     <string name="eddb_credits">Data provided by eddb.io</string>
-    <string name="edm_credits">Data provided by edm.edhits.space</string>
+    <string name="eddb_eddn_credits">Data provided by eddb.io and EDDN</string>
     <string name="title_activity_community_goal_details">Community goal details</string>
 
     <!--Commander-->
@@ -256,9 +255,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.11.1</b><br />
+            <b>Version 1.12</b><br />
             <ul>
-                <li>Fix bug where community goals could be opened indefinitely</li><br />
+                <li>Re-added the commodity finder tool</li><br />
             </ul>
         ]]>
     </string>
