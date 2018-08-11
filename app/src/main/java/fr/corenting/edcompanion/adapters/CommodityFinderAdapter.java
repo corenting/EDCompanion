@@ -104,7 +104,7 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     commodityFinderFragment.onFindButtonClick(header.findButton,
                             header.systemInputEditText.getText().toString(),
                             header.commodityInputEditText.getText().toString(),
-                            header.stockInputEditText.getText().toString(),
+                            header.landingPadSizeSpinner.getText().toString(),
                             stock);
                 }
             };
