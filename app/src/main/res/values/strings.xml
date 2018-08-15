@@ -256,9 +256,12 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.12</b><br />
+            <b>Version 1.13</b><br />
             <ul>
-                <li>Re-added the commodity finder tool</li><br />
+                <li>Fix landing pad parameter not working in commodity finder</li><br />
+                <li>Add the last update time for each price in the commodity finder</li><br />
+                <li>Add an icon to indicate if the station is a planetary station or not in commodity and ship finders</li><br />
+                <li>Fix timezone handling for dates</li><br />
             </ul>
         ]]>
     </string>
