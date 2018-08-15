@@ -28,9 +28,21 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/isPlanetaryImageView"
+            android:layout_toStartOf="@id/isPlanetaryImageView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+        <ImageView
+            android:id="@+id/isPlanetaryImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_globe_black_24dp" />
 
         <TextView
             android:id="@+id/permitRequiredTextView"
@@ -83,9 +95,49 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/stockLabelTextView"
+            android:id="@+id/lastUpdateLabelTextView"
             android:layout_marginTop="8dp"
             android:layout_below="@id/distanceToStarLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/last_update_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/lastUpdateTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/distanceToStarLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/landingPadLabelTextView"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/landingPadLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/lastUpdateLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/landing_pad_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/landingPadTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/lastUpdateLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/landingPadLabelTextView"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/stockLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/landingPadLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -95,7 +147,7 @@
         <TextView
             android:id="@+id/stockTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/distanceToStarLabelTextView"
+            android:layout_below="@id/landingPadLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/landingPadLabelTextView"
@@ -116,26 +168,6 @@
             android:id="@+id/priceTextView"
             android:layout_marginTop="8dp"
             android:layout_below="@id/stockLabelTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/landingPadLabelTextView"
-            android:layout_toEndOf="@id/landingPadLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
-
-        <TextView
-            android:id="@+id/landingPadLabelTextView"
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/priceLabelTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/landing_pad_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
-
-        <TextView
-            android:id="@+id/landingPadTextView"
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/priceLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/landingPadLabelTextView"

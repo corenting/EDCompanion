@@ -1,13 +1,17 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.threeten.bp.Instant;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
@@ -22,6 +26,8 @@ import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
+
+import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -60,7 +66,6 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             // System autocomplete
             header.systemInputEditText.setThreshold(3);
             header.systemInputEditText.setLoadingIndicator(header.systemProgressBar);
-
             header.systemInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
             header.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -133,9 +138,15 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             String buyPrice = numberFormat.format(currentResult.BuyPrice);
             resultViewHolder.priceTextView.setText(buyPrice + " (" + priceDifference + "%)");
 
+            // Update date
+            String date = android.text.format.DateUtils.getRelativeTimeSpanString(currentResult.LastPriceUpdate.toEpochMilli(),
+                    Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE).toString();
+            resultViewHolder.lastUpdateTextView.setText(date);
+
             // Other informations
             resultViewHolder.titleTextView.setText(String.format("%s - %s", currentResult.System, currentResult.Station));
             resultViewHolder.permitRequiredTextView.setVisibility(currentResult.PermitRequired ? View.VISIBLE : View.GONE);
+            resultViewHolder.isPlanetaryImageView.setVisibility(currentResult.IsPlanetary ? View.VISIBLE : View.GONE);
             resultViewHolder.landingPadTextView.setText(currentResult.LandingPad);
             resultViewHolder.stockTextView.setText(numberFormat.format(currentResult.Stock));
             resultViewHolder.distanceTextView.setText(context.getString(R.string.distance_ly,
@@ -192,6 +203,9 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         @BindView(R.id.titleTextView)
         TextView titleTextView;
 
+        @BindView(R.id.isPlanetaryImageView)
+        ImageView isPlanetaryImageView;
+
         @BindView(R.id.permitRequiredTextView)
         TextView permitRequiredTextView;
 
@@ -209,6 +223,9 @@ public class CommodityFinderAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         @BindView(R.id.landingPadTextView)
         TextView landingPadTextView;
+
+        @BindView(R.id.lastUpdateTextView)
+        TextView lastUpdateTextView;
 
         public ResultViewHolder(View view) {
             super(view);

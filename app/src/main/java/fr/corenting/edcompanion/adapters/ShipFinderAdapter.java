@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.threeten.bp.Instant;
@@ -109,33 +110,24 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ShipFinderResult currentResult = results.get(position - 1);
             final ResultViewHolder resultViewHolder = (ResultViewHolder) holder;
 
-            // Title, landing pad, station type
+            // Title
             resultViewHolder.titleTextView.setText(
                     String.format("%s - %s", currentResult.SystemName, currentResult.StationName)
             );
-            resultViewHolder.landingPadTextView.setText(currentResult.MaxLandingPad);
-            resultViewHolder.stationTypeTextView.setText(currentResult.Type);
 
-            // Distance and distance to star
+            // Other informations
             resultViewHolder.distanceTextView.setText(context.getString(R.string.distance_ly,
                     currentResult.Distance));
             resultViewHolder.starDistanceTextView.setText(context.getString(R.string.distance_ls,
                     NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context)).format(currentResult.DistanceToStar)));
+            resultViewHolder.permitRequiredTextView.setVisibility(currentResult.SystemPermitRequired ? View.VISIBLE : View.GONE);
+            resultViewHolder.isPlanetaryImageView.setVisibility(currentResult.IsPlanetary ? View.VISIBLE : View.GONE);
+            resultViewHolder.landingPadTextView.setText(currentResult.MaxLandingPad);
 
             // Update date
             String date = android.text.format.DateUtils.getRelativeTimeSpanString(currentResult.LastShipyardUpdate.toEpochMilli(),
                     Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE).toString();
             resultViewHolder.lastUpdateTextView.setText(date);
-
-            // Permit state
-            if (currentResult.SystemPermitRequired)
-            {
-                resultViewHolder.permitRequiredTextView.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                resultViewHolder.permitRequiredTextView.setVisibility(View.GONE);
-            }
         }
     }
 
@@ -174,6 +166,9 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         @BindView(R.id.titleTextView)
         TextView titleTextView;
 
+        @BindView(R.id.isPlanetaryImageView)
+        ImageView isPlanetaryImageView;
+
         @BindView(R.id.permitRequiredTextView)
         TextView permitRequiredTextView;
 
@@ -185,9 +180,6 @@ public class ShipFinderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @BindView(R.id.starDistanceTextView)
         TextView starDistanceTextView;
-
-        @BindView(R.id.stationTypeTextView)
-        TextView stationTypeTextView;
 
         public ResultViewHolder(View view) {
             super(view);

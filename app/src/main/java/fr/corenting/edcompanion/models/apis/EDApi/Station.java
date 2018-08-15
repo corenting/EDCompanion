@@ -17,6 +17,9 @@ public class Station {
     @SerializedName("name")
     public String Name;
 
+    @SerializedName("is_planetary")
+    public boolean IsPlanetary;
+
     @SerializedName("type")
     public String Type;
 

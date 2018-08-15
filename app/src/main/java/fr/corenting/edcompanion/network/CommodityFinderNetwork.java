@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.network;
 import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
+import org.threeten.bp.DateTimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class CommodityFinderNetwork {
                 } else {
 
                     // Then get the commodities list to get average price
-                    Callback<List<CommodityResponse>> commodtitiesCallback = new Callback<List<CommodityResponse>>() {
+                    Callback<List<CommodityResponse>> commoditiesCallback = new Callback<List<CommodityResponse>>() {
                         @Override
                         public void onResponse(Call<List<CommodityResponse>> call, Response<List<CommodityResponse>> response) {
                             final List<CommodityResponse> commoditiesResponseBody = response.body();
@@ -55,7 +56,7 @@ public class CommodityFinderNetwork {
                         }
                     };
 
-                    edApiRetrofit.getCommodities(commodity).enqueue(commodtitiesCallback);
+                    edApiRetrofit.getCommodities(commodity).enqueue(commoditiesCallback);
                 }
             }
 
@@ -87,6 +88,8 @@ public class CommodityFinderNetwork {
                 newResult.PermitRequired = seller.Station.System.PermitRequired;
                 newResult.Distance = seller.Distance;
                 newResult.DistanceToStar = seller.DistanceToStar;
+                newResult.IsPlanetary = seller.Station.IsPlanetary;
+                newResult.LastPriceUpdate = DateTimeUtils.toInstant(seller.LastPriceUpdate);
                 resultsList.add(newResult);
             }
             convertedResults = new CommodityFinderResults(true, resultsList,

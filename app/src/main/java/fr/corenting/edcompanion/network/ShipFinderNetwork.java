@@ -40,9 +40,9 @@ public class ShipFinderNetwork {
                             convertedItem.LastShipyardUpdate = DateTimeUtils.toInstant(resultItem.Station.LastShipyardUpdate);
                             convertedItem.MaxLandingPad = resultItem.Station.MaxLandingPad;
                             convertedItem.StationName = resultItem.Station.Name;
-                            convertedItem.Type = resultItem.Station.Type;
                             convertedItem.SystemName = resultItem.Station.System.Name;
                             convertedItem.SystemPermitRequired = resultItem.Station.System.PermitRequired;
+                            convertedItem.IsPlanetary = resultItem.Station.IsPlanetary;
 
                             resultsList.add(convertedItem);
                         }

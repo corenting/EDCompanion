@@ -2,6 +2,8 @@ package fr.corenting.edcompanion.models.apis.EDApi;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class CommodityFinderResponse {
 
     @SerializedName("buy_price")
@@ -18,4 +20,7 @@ public class CommodityFinderResponse {
 
     @SerializedName("supply")
     public long Stock;
+
+    @SerializedName("last_price_update")
+    public Date LastPriceUpdate;
 }

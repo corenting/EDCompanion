@@ -11,5 +11,5 @@ public class ShipFinderResult {
     public String StationName;
     public String SystemName;
     public boolean SystemPermitRequired;
-    public String Type;
+    public boolean IsPlanetary;
 }
