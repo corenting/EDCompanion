@@ -1,7 +1,5 @@
 package fr.corenting.edcompanion.fragments;
 
-import android.content.Context;
-
 import org.greenrobot.eventbus.Subscribe;
 
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
@@ -9,7 +7,7 @@ import fr.corenting.edcompanion.models.CommunityGoals;
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class CommunityGoalsFragment extends ListFragment {
+public class CommunityGoalsFragment extends ListFragment<CommunityGoalsAdapter> {
 
     public static final String COMMUNITY_GOALS_FRAGMENT_TAG = "community_goals_fragment";
 
@@ -22,14 +20,17 @@ public class CommunityGoalsFragment extends ListFragment {
             return;
         }
 
-        // Else setup adapter
         endLoading(false);
-        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(getContext(), recyclerView, goals.GoalsList, false);
-        recyclerView.setAdapter(adapter);
+        recyclerViewAdapter.add(goals.GoalsList);
     }
 
     @Override
-    void getData(Context context) {
+    void getData() {
         CommunityGoalsNetwork.getCommunityGoals(getContext());
+    }
+
+    @Override
+    CommunityGoalsAdapter getAdapter() {
+        return new CommunityGoalsAdapter(getContext(), recyclerView, false);
     }
 }

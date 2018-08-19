@@ -1,7 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import fr.corenting.edcompanion.models.GalnetNews;
 import fr.corenting.edcompanion.network.GalnetNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class GalnetFragment extends ListFragment {
+public class GalnetFragment extends ListFragment<GalnetAdapter> {
 
     public static final String GALNET_FRAGMENT_TAG = "galnet_fragment";
     public static final String GALNET_REPORTS_FRAGMENT_TAG = "galnet_reports_fragment";
@@ -35,8 +35,13 @@ public class GalnetFragment extends ListFragment {
     }
 
     @Override
-    void getData(Context context) {
+    void getData() {
         GalnetNetwork.getNews(getContext());
+    }
+
+    @Override
+    GalnetAdapter getAdapter() {
+        return new GalnetAdapter(getContext(), recyclerView, false);
     }
 
     @Subscribe
@@ -61,8 +66,9 @@ public class GalnetFragment extends ListFragment {
                 count++;
             }
         }
-        GalnetAdapter adapter = new GalnetAdapter(getContext(), recyclerView, copy.Articles, false);
-        recyclerView.setAdapter(adapter);
+
+
         endLoading(count == 0);
+        recyclerViewAdapter.add(copy.Articles);
     }
 }

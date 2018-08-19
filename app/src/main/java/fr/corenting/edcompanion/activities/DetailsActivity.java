@@ -65,8 +65,9 @@ public class DetailsActivity extends AppCompatActivity {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, list, true);
+        CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, true);
         recyclerView.setAdapter(adapter);
+        adapter.add(list);
     }
 
     private void galnetArticleSetup()
@@ -80,8 +81,9 @@ public class DetailsActivity extends AppCompatActivity {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, list, true);
+        GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, true);
         recyclerView.setAdapter(adapter);
+        adapter.add(list);
     }
 
     @Override

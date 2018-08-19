@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,14 +15,18 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.adapters.ListAdapter;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
-public abstract class ListFragment extends Fragment {
+public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragment {
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.emptySwipe)
     public SwipeRefreshLayout emptySwipeRefreshLayout;
+
+    protected TAdapter recyclerViewAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,17 +37,26 @@ public abstract class ListFragment extends Fragment {
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerViewAdapter = getAdapter();
+        recyclerView.setAdapter(recyclerViewAdapter);
 
+        // Animation
+        recyclerView.setItemAnimator(new SlideInLeftAnimator());
+        
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 startLoading();
-                getData(getContext());
+                getData();
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
         emptySwipeRefreshLayout.setOnRefreshListener(listener);
+
+        // Load data
+        startLoading();
+        getData();
 
         return v;
     }
@@ -59,12 +71,8 @@ public abstract class ListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // Setup views
-        startLoading();
-
         // Register eventbus for the list data
         EventBus.getDefault().register(this);
-        getData(getContext());
     }
 
     @Override
@@ -83,10 +91,13 @@ public abstract class ListFragment extends Fragment {
     }
 
     protected void startLoading() {
+        recyclerViewAdapter.removeAll();
         emptySwipeRefreshLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
     }
 
-    abstract void getData(Context context);
+    abstract void getData();
+
+    abstract TAdapter getAdapter();
 }

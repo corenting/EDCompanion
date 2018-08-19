@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.evrencoskun.library:tableview:0.8.8'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+    implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 

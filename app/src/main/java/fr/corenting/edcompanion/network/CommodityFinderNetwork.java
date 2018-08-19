@@ -9,14 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommodityFinderResult;
-import fr.corenting.edcompanion.models.CommodityFinderResults;
-import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
+import fr.corenting.edcompanion.models.ResultsList;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class CommodityFinderNetwork {
@@ -35,47 +32,24 @@ public class CommodityFinderNetwork {
                 if (!response.isSuccessful() || sellersResponseBody == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
-
-                    // Then get the commodities list to get average price
-                    Callback<List<CommodityResponse>> commoditiesCallback = new Callback<List<CommodityResponse>>() {
-                        @Override
-                        public void onResponse(Call<List<CommodityResponse>> call, Response<List<CommodityResponse>> response) {
-                            final List<CommodityResponse> commoditiesResponseBody = response.body();
-                            if (!response.isSuccessful() || commoditiesResponseBody == null) {
-                                onFailure(call, new Exception("Invalid response"));
-                            } else {
-                                processResults(sellersResponseBody, commoditiesResponseBody);
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<CommodityResponse>> call, Throwable t) {
-                            CommodityFinderResults results = new CommodityFinderResults(false,
-                                    null, null);
-                            EventBus.getDefault().post(results);
-                        }
-                    };
-
-                    edApiRetrofit.getCommodities(commodity).enqueue(commoditiesCallback);
+                    processResults(sellersResponseBody);
                 }
             }
 
             @Override
             public void onFailure(Call<List<CommodityFinderResponse>> call, Throwable t) {
-                CommodityFinderResults results = new CommodityFinderResults(false,
-                        null, null);
-                EventBus.getDefault().post(results);
+                EventBus.getDefault().post(new ResultsList<>(false,
+                        new ArrayList<CommodityFinderResult>()));
             }
         };
 
         edApiRetrofit.findCommodity(system, commodity, landingPad, minStock).enqueue(callback);
     }
 
-    private static void processResults(List<CommodityFinderResponse> responseBody,
-                                       List<CommodityResponse> edApiResponseBody) {
+    private static void processResults(List<CommodityFinderResponse> responseBody) {
 
 
-        CommodityFinderResults convertedResults;
+        ResultsList<CommodityFinderResult> convertedResults;
         List<CommodityFinderResult> resultsList = new ArrayList<>();
         try {
             for (CommodityFinderResponse seller : responseBody) {
@@ -92,11 +66,10 @@ public class CommodityFinderNetwork {
                 newResult.LastPriceUpdate = DateTimeUtils.toInstant(seller.LastPriceUpdate);
                 resultsList.add(newResult);
             }
-            convertedResults = new CommodityFinderResults(true, resultsList,
-                    edApiResponseBody.get(0));
+            convertedResults = new ResultsList<>(true, resultsList);
 
         } catch (Exception ex) {
-            convertedResults = new CommodityFinderResults(false, null, null);
+            convertedResults = new ResultsList<>(false, new ArrayList<CommodityFinderResult>());
         }
         EventBus.getDefault().post(convertedResults);
     }

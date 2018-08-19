@@ -66,13 +66,9 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
                     List<NameId> results;
                     if (autocompleteType == TYPE_AUTOCOMPLETE_SYSTEMS) {
                         results = AutoCompleteNetwork.searchSystems(context, constraint.toString());
-                    }
-                    else if (autocompleteType == TYPE_AUTOCOMPLETE_SHIPS)
-                    {
+                    } else if (autocompleteType == TYPE_AUTOCOMPLETE_SHIPS) {
                         results = AutoCompleteNetwork.searchShips(context, constraint.toString());
-                    }
-                    else
-                    {
+                    } else {
                         results = AutoCompleteNetwork.searchCommodities(context, constraint.toString());
                     }
 
@@ -87,10 +83,9 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 if (results != null && results.count > 0) {
                     resultList = (List<NameId>) results.values;
-                    notifyDataSetChanged();
-                } else {
-                    notifyDataSetInvalidated();
                 }
-            }};
+                notifyDataSetInvalidated();
+            }
+        };
     }
 }

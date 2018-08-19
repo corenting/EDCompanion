@@ -95,8 +95,7 @@ public class CommanderStatusFragment extends Fragment {
 
         // Hide views according to supported informations from source
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
-        if (!playerNetwork.supportCredits())
-        {
+        if (!playerNetwork.supportCredits()) {
             creditsContainer.setVisibility(View.GONE);
         }
         if (!playerNetwork.supportLocation()) {
@@ -136,15 +135,13 @@ public class CommanderStatusFragment extends Fragment {
     public void onCreditsEvent(Credits credits) {
         endLoading();
         // Check download error
-        if (!credits.Success)
-        {
+        if (!credits.Success) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
         // Check error case
-        if (credits.Balance == -1)
-        {
+        if (credits.Balance == -1) {
             creditsTextView.setText(getResources().getString(R.string.Unknown));
             return;
         }
@@ -162,8 +159,7 @@ public class CommanderStatusFragment extends Fragment {
     public void onPositionEvent(CommanderPosition position) {
         endLoading();
         // Check download error
-        if (!position.Success)
-        {
+        if (!position.Success) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
@@ -171,8 +167,7 @@ public class CommanderStatusFragment extends Fragment {
         // Check error case
         if (position.SystemName == null) {
             locationsTextView.setText(getResources().getString(R.string.Unknown));
-        }
-        else {
+        } else {
             locationsTextView.setText(position.SystemName);
         }
     }
@@ -181,8 +176,7 @@ public class CommanderStatusFragment extends Fragment {
     public void onRanksEvents(Ranks ranks) {
         endLoading();
         // Check download error
-        if (!ranks.Success)
-        {
+        if (!ranks.Success) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
@@ -196,8 +190,7 @@ public class CommanderStatusFragment extends Fragment {
         RankUtils.setContent(getContext(), arenaRankLayout, RankUtils.getCqcLogoId(ranks.Cqc.value), ranks.Cqc, getString(R.string.rank_arena));
     }
 
-    private void getAll()
-    {
+    private void getAll() {
         // Refresh player network object if settings changed
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
 

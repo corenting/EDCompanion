@@ -8,8 +8,8 @@ import org.threeten.bp.DateTimeUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.corenting.edcompanion.models.ResultsList;
 import fr.corenting.edcompanion.models.ShipFinderResult;
-import fr.corenting.edcompanion.models.ShipFinderResults;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
@@ -24,13 +24,10 @@ public class ShipFinderNetwork {
             @Override
             public void onResponse(Call<List<ShipFinderResponse>> call, retrofit2.Response<List<ShipFinderResponse>> response) {
                 List<ShipFinderResponse> body = response.body();
-                ShipFinderResults convertedResults;
-                if (!response.isSuccessful() || body == null)
-                {
+                ResultsList<ShipFinderResult> convertedResults;
+                if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
-                }
-                else
-                {
+                } else {
                     List<ShipFinderResult> resultsList = new ArrayList<>();
                     try {
                         for (ShipFinderResponse resultItem : body) {
@@ -46,10 +43,10 @@ public class ShipFinderNetwork {
 
                             resultsList.add(convertedItem);
                         }
-                        convertedResults = new ShipFinderResults(true, resultsList );
+                        convertedResults = new ResultsList<>(true, resultsList);
 
                     } catch (Exception ex) {
-                        convertedResults = new ShipFinderResults(false, null );
+                        convertedResults = new ResultsList<>(false, new ArrayList<ShipFinderResult>());
                     }
                     EventBus.getDefault().post(convertedResults);
                 }
@@ -57,8 +54,8 @@ public class ShipFinderNetwork {
 
             @Override
             public void onFailure(Call<List<ShipFinderResponse>> call, Throwable t) {
-                ShipFinderResults results =  new ShipFinderResults(false, null );
-                EventBus.getDefault().post(results);
+                EventBus.getDefault().post(new ResultsList<>(false,
+                        new ArrayList<ShipFinderResult>()));
             }
         };
 
