@@ -1,7 +1,5 @@
 package fr.corenting.edcompanion.fragments;
 
-import android.util.Log;
-
 import org.greenrobot.eventbus.Subscribe;
 
 import fr.corenting.edcompanion.adapters.ShipFinderAdapter;
@@ -15,9 +13,20 @@ public class ShipFinderFragment extends FinderFragment<ShipFinderAdapter> {
 
     public static final String SHIP_FINDER_FRAGMENT_TAG = "ship_finder_fragment";
 
+    private  ShipFinderSearchEvent lastSearch;
+
     @Override
     public ShipFinderAdapter getNewRecyclerViewAdapter() {
         return new ShipFinderAdapter(getContext());
+    }
+
+    @Override
+    public void onSwipeToRefresh() {
+        if (lastSearch != null) {
+            onFindButtonEvent(lastSearch);
+        } else {
+            endLoading(true);
+        }
     }
 
     @Subscribe
@@ -35,6 +44,7 @@ public class ShipFinderFragment extends FinderFragment<ShipFinderAdapter> {
 
     @Subscribe
     public void onFindButtonEvent(ShipFinderSearchEvent event) {
+        lastSearch = event;
         startLoading();
         ShipFinderNetwork.findShip(getContext(), event.SystemName, event.ShipName);
     }

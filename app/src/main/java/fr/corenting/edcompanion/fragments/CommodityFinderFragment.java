@@ -16,6 +16,18 @@ public class CommodityFinderFragment extends FinderFragment<CommodityFinderAdapt
 
     public static final String COMMODITY_FINDER_FRAGMENT_TAG = "commodity_finder_fragment";
 
+    private CommodityFinderSearchEvent lastSearch;
+
+    @Override
+    public void onSwipeToRefresh() {
+        if (lastSearch != null) {
+            onFindButtonEvent(lastSearch);
+        }
+        else {
+            endLoading(true);
+        }
+    }
+
     @Override
     public CommodityFinderAdapter getNewRecyclerViewAdapter() {
         return new CommodityFinderAdapter(getContext());
@@ -44,6 +56,7 @@ public class CommodityFinderFragment extends FinderFragment<CommodityFinderAdapt
             event.LandingPadSize = null;
         }
 
+        lastSearch = event;
         CommodityFinderNetwork.findCommodity(getContext(), event.SystemName, event.CommodityName,
                 event.LandingPadSize, event.Stock);
     }

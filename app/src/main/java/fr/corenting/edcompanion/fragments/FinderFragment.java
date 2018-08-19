@@ -2,33 +2,27 @@ package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.FinderAdapter;
-import fr.corenting.edcompanion.models.BaseModel;
-import fr.corenting.edcompanion.models.ResultsList;
-import fr.corenting.edcompanion.utils.NotificationsUtils;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fragment {
 
+    @BindView(R.id.swipeContainer)
+    public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
-    @BindView(R.id.progressBar)
-    public MaterialProgressBar progressBar;
 
     protected TAdapter recyclerViewAdapter;
 
@@ -44,6 +38,15 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
         recyclerViewAdapter = getNewRecyclerViewAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new SlideInLeftAnimator());
+
+        // Swipe to refresh setup
+        SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onSwipeToRefresh();
+            }
+        };
+        swipeRefreshLayout.setOnRefreshListener(listener);
 
         return v;
     }
@@ -69,14 +72,16 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
 
     protected void endLoading(boolean isEmpty) {
         recyclerViewAdapter.getEmptyTextView().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
-        progressBar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     protected void startLoading() {
         recyclerViewAdapter.clearResults();
-        progressBar.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         recyclerViewAdapter.getEmptyTextView().setVisibility(View.GONE);
     }
 
     public abstract TAdapter getNewRecyclerViewAdapter();
+
+    public abstract void onSwipeToRefresh();
 }
