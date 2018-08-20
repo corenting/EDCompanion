@@ -64,6 +64,7 @@ public class CommodityFinderNetwork {
                 newResult.DistanceToStar = seller.DistanceToStar;
                 newResult.IsPlanetary = seller.Station.IsPlanetary;
                 newResult.LastPriceUpdate = DateTimeUtils.toInstant(seller.LastPriceUpdate);
+                newResult.PriceDifferenceFromAverage = seller.PriceDifferencePercentage;
                 resultsList.add(newResult);
             }
             convertedResults = new ResultsList<>(true, resultsList);

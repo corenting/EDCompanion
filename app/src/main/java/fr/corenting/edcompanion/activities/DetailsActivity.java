@@ -8,8 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,9 +21,8 @@ import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
-    private CommunityGoal communityGoal;
-    private GalnetArticle article;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,48 +40,38 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ThemeUtils.setToolbarColor(this, toolbar);
 
+        // Common recycler view setup
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         // Get the goal or the article
-        communityGoal = getIntent().getExtras().getParcelable("goal");
-        if(communityGoal == null) {
-            article = getIntent().getExtras().getParcelable("article");
-            galnetArticleSetup();
+        CommunityGoal communityGoal = getIntent().getExtras().getParcelable("goal");
+        if (communityGoal == null) {
+            GalnetArticle article = getIntent().getExtras().getParcelable("article");
+            galnetArticleSetup(article);
+        } else {
+            communityGoalSetup(communityGoal);
         }
-        else
-        {
-            communityGoalSetup();
-        }
+
+        recyclerView.smoothScrollToPosition(-10); // because recycler view may not start on top
     }
 
-    private void communityGoalSetup()
-    {
+    private void communityGoalSetup(CommunityGoal communityGoal) {
         getSupportActionBar().setTitle(communityGoal.getTitle());
 
-        // Create list with one element
-        List<CommunityGoal> list = new ArrayList<>();
-        list.add(communityGoal);
-
-        // Recycler view setup
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        // Adapter setup
         CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, true);
         recyclerView.setAdapter(adapter);
-        adapter.add(list);
+        adapter.add(Collections.singletonList(communityGoal));
     }
 
-    private void galnetArticleSetup()
-    {
+    private void galnetArticleSetup(GalnetArticle article) {
         getSupportActionBar().setTitle(article.getTitle());
 
-        // Create list with one element
-        List<GalnetArticle> list = new ArrayList<>();
-        list.add(article);
-
-        // Recycler view setup
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        // Adapter view setup
         GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, true);
         recyclerView.setAdapter(adapter);
-        adapter.add(list);
+        adapter.add(Collections.singletonList(article));
     }
 
     @Override

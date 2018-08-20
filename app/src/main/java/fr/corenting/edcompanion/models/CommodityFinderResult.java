@@ -14,4 +14,5 @@ public class CommodityFinderResult {
     public int DistanceToStar;
     public float Distance;
     public Instant LastPriceUpdate;
+    public int PriceDifferenceFromAverage;
 }

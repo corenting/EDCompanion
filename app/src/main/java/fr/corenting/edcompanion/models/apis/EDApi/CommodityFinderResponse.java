@@ -23,4 +23,7 @@ public class CommodityFinderResponse {
 
     @SerializedName("last_price_update")
     public Date LastPriceUpdate;
+
+    @SerializedName("price_difference_percentage")
+    public int PriceDifferencePercentage;
 }

@@ -128,12 +128,11 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         CommodityFinderResult currentResult = results.get(position - 1);
         NumberFormat numberFormat = NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context));
 
-        // TODO : get price difference from new model
         // For price, also display the difference with the avg galactic price
-        /*String priceDifference = getPriceDifference(results.AveragePrice,
-                currentResult.BuyPrice);
+        String priceDifference = getPriceDifferenceString(numberFormat,
+                currentResult.PriceDifferenceFromAverage);
         String buyPrice = numberFormat.format(currentResult.BuyPrice);
-        holder.priceTextView.setText(buyPrice + " (" + priceDifference + "%)");*/
+        holder.priceTextView.setText(buyPrice + " (" + priceDifference + "%)");
 
         // Update date
         String date = android.text.format.DateUtils.getRelativeTimeSpanString(currentResult.LastPriceUpdate.toEpochMilli(),
@@ -150,6 +149,16 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 currentResult.Distance));
         holder.distanceToStarTextView.setText(context.getString(R.string.distance_ls,
                 NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context)).format(currentResult.DistanceToStar)));
+    }
+
+    private String getPriceDifferenceString(NumberFormat numberFormat, int priceDifference) {
+        String result = numberFormat.format(priceDifference);
+        if (priceDifference >= 0) {
+            return "+" + result;
+        }
+        else {
+            return result;
+        }
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {

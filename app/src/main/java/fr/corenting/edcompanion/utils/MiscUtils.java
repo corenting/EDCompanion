@@ -41,7 +41,7 @@ public class MiscUtils {
                 android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            ctx.startActivity(i);//, bundle);
+            ctx.startActivity(i, bundle);
         } else {
             ctx.startActivity(i);
         }
