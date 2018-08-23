@@ -58,21 +58,31 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
         // Content
         holder.titleTextView.setText(currentGoal.getTitle());
-        holder.objectiveTextView.setText(currentGoal.getObjective());
         holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
         holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
         holder.remainingTextView.setText(currentGoal.getEndDate(context));
         holder.tierTextView.setText(currentGoal.getTierString());
         holder.locationTextView.setText(currentGoal.getSystem());
 
+        // Objective
+        String objective = context.getString(R.string.no_objective_yet);
+        if (currentGoal.getObjective().length() != 0) {
+            objective = currentGoal.getObjective();
+        }
+        holder.objectiveTextView.setText(objective);
+
         // Description
         if (isDetailsView) {
             holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
         }
-        holder.descriptionTextView.setText(currentGoal.getDescription());
+        String description = context.getString(R.string.no_description_yet);
+        if (currentGoal.getDescription().length() != 0) {
+            description = currentGoal.getDescription();
+        }
+        holder.descriptionTextView.setText(description);
 
         // Rewards table
-        if (currentGoal.getRewards() != null && currentGoal.getRewards().size() != 0) {
+        if (currentGoal.getRewards().size() != 0) {
             setRewards(holder, position, currentGoal);
         } else {
             holder.rewardsTableView.setVisibility(View.GONE);

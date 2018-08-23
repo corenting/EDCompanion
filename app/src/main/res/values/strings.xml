@@ -33,6 +33,8 @@
     <string name="tier">Tier</string>
     <string name="contributions">Contributions</string>
     <string name="reward">Reward</string>
+    <string name="no_description_yet">No description yet</string>
+    <string name="no_objective_yet">No objective yet</string>
 
 
     <!--Errors-->
