@@ -3,7 +3,7 @@ package fr.corenting.edcompanion.fragments;
 import org.greenrobot.eventbus.Subscribe;
 
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
-import fr.corenting.edcompanion.models.CommunityGoals;
+import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
@@ -14,7 +14,7 @@ public class CommanderFleetFragment extends ListFragment<CommunityGoalsAdapter> 
     @Subscribe
     public void onCommunityGoalEvent(CommunityGoals goals) {
         // Error
-        if (!goals.Success) {
+        if (!goals.getSuccess()) {
             endLoading(true);
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;

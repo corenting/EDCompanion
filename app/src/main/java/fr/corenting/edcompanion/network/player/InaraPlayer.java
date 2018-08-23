@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.Ranks;
+import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileRequestBody;
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileResponse;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
@@ -102,48 +102,80 @@ public class InaraPlayer extends PlayerNetwork {
                         body.events.size() != 1) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
-                    Ranks ranks = new Ranks();
+                    Ranks ranks;
                     try {
+                        Ranks.Rank combatRank = null;
+                        Ranks.Rank tradeRank = null;
+                        Ranks.Rank exploreRank = null;
+                        Ranks.Rank cqcRank = null;
+                        Ranks.Rank federationRank = null;
+                        Ranks.Rank empireRank = null;
 
                         for (InaraProfileResponse.InaraProfileInnerResponse.InaraProfileResponseRanks rank :
                                 body.events.get(0).EventData.CommanderRanksPilot) {
                             switch (rank.RankName) {
                                 case "combat":
-                                    ranks.Combat.progress = (int) (rank.RankProgress * 100);
-                                    ranks.Combat.value = rank.RankValue;
-                                    ranks.Combat.name = context.getResources().getStringArray(R.array.ranks_combat)[ranks.Combat.value];
+                                    combatRank = new Ranks.Rank(
+                                            context.getResources()
+                                                    .getStringArray(R.array.ranks_combat)
+                                                    [rank.RankValue],
+                                            rank.RankValue,
+                                            (int) (rank.RankProgress * 100)
+                                    );
                                     break;
                                 case "trade":
-                                    ranks.Trade.progress = (int) (rank.RankProgress * 100);
-                                    ranks.Trade.value = rank.RankValue;
-                                    ranks.Trade.name = context.getResources().getStringArray(R.array.ranks_trade)[ranks.Trade.value];
+                                    tradeRank = new Ranks.Rank(
+                                            context.getResources()
+                                                    .getStringArray(R.array.ranks_trade)
+                                                    [rank.RankValue],
+                                            rank.RankValue,
+                                            (int) (rank.RankProgress * 100)
+                                    );
                                     break;
                                 case "exploration":
-                                    ranks.Explore.progress = (int) (rank.RankProgress * 100);
-                                    ranks.Explore.value = rank.RankValue;
-                                    ranks.Explore.name = context.getResources().getStringArray(R.array.ranks_explorer)[ranks.Explore.value];
+                                    exploreRank = new Ranks.Rank(
+                                            context.getResources()
+                                                    .getStringArray(R.array.ranks_explorer)
+                                                    [rank.RankValue],
+                                            rank.RankValue,
+                                            (int) (rank.RankProgress * 100)
+                                    );
                                     break;
                                 case "cqc":
-                                    ranks.Cqc.progress = (int) (rank.RankProgress * 100);
-                                    ranks.Cqc.value = rank.RankValue;
-                                    ranks.Cqc.name = context.getResources().getStringArray(R.array.ranks_cqc)[ranks.Cqc.value];
+                                    cqcRank = new Ranks.Rank(
+                                            context.getResources()
+                                                    .getStringArray(R.array.ranks_cqc)
+                                                    [rank.RankValue],
+                                            rank.RankValue,
+                                            (int) (rank.RankProgress * 100)
+                                    );
                                     break;
                                 case "empire":
-                                    ranks.Empire.progress = (int) (rank.RankProgress * 100);
-                                    ranks.Empire.value = rank.RankValue;
-                                    ranks.Empire.name = context.getResources().getStringArray(R.array.ranks_empire)[ranks.Empire.value];
+                                    empireRank = new Ranks.Rank(
+                                            context.getResources()
+                                                    .getStringArray(R.array.ranks_empire)
+                                                    [rank.RankValue],
+                                            rank.RankValue,
+                                            (int) (rank.RankProgress * 100)
+                                    );
                                     break;
                                 case "federation":
-                                    ranks.Federation.progress = (int) (rank.RankProgress * 100);
-                                    ranks.Federation.value = rank.RankValue;
-                                    ranks.Federation.name = context.getResources().getStringArray(R.array.ranks_federation)[ranks.Federation.value];
+                                    federationRank = new Ranks.Rank(
+                                            context.getResources()
+                                                    .getStringArray(R.array.ranks_federation)
+                                                    [rank.RankValue],
+                                            rank.RankValue,
+                                            (int) (rank.RankProgress * 100)
+                                    );
                                     break;
                             }
                         }
 
-                        ranks.Success = true;
+                        ranks = new Ranks(true, combatRank, tradeRank, exploreRank,
+                                cqcRank, federationRank, empireRank);
                     } catch (Exception e) {
-                        ranks.Success = false;
+                        ranks = new Ranks(false, null, null,
+                                null, null, null, null);
                     }
                     sendResultMessage(ranks);
                 }
@@ -151,8 +183,8 @@ public class InaraPlayer extends PlayerNetwork {
 
             @Override
             public void onFailure(Call<InaraProfileResponse> call, Throwable t) {
-                Ranks ranks = new Ranks();
-                ranks.Success = false;
+                Ranks ranks = new Ranks(false, null, null,
+                        null, null, null, null);
                 sendResultMessage(ranks);
             }
         };

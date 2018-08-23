@@ -7,7 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.Ranks;
+import fr.corenting.edcompanion.models.events.Ranks;
 
 public class RankUtils {
 
@@ -28,9 +28,9 @@ public class RankUtils {
         ProgressBar progressBar = rootView.findViewById(R.id.progressBar);
 
         logoView.setImageResource(logoId);
-        titleView.setText(String.format("%s : %s", description, rank.name));
-        progressView.setText(ctx.getResources().getString(R.string.rank_progress, rank.progress));
-        progressBar.setProgress(rank.progress);
+        titleView.setText(String.format("%s : %s", description, rank.getName()));
+        progressView.setText(ctx.getResources().getString(R.string.rank_progress, rank.getProgress()));
+        progressBar.setProgress(rank.getProgress());
     }
 
     public static int getCombatLogoId(int rankValue) {

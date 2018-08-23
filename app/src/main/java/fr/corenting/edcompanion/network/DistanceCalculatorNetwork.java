@@ -4,7 +4,7 @@ import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
 
-import fr.corenting.edcompanion.models.Distance;
+import fr.corenting.edcompanion.models.events.DistanceSearch;
 import fr.corenting.edcompanion.models.apis.EDApi.DistanceResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
@@ -25,23 +25,23 @@ public class DistanceCalculatorNetwork {
                 }
                 else
                 {
-                    Distance distance;
+                    DistanceSearch distanceSearch;
                     try {
-                        distance = new Distance(true, body.Distance, body.FromSystem.Name,
+                        distanceSearch = new DistanceSearch(true, body.Distance, body.FromSystem.Name,
                                 body.ToSystem.Name, body.FromSystem.PermitRequired, body.ToSystem.PermitRequired);
                     } catch (Exception ex) {
-                        distance = new Distance(false, 0, null,
-                                null, false, false);
+                        distanceSearch = new DistanceSearch(false, 0, "",
+                                "", false, false);
                     }
-                    EventBus.getDefault().post(distance);
+                    EventBus.getDefault().post(distanceSearch);
                 }
             }
 
             @Override
             public void onFailure(Call<DistanceResponse> call, Throwable t) {
-                Distance distance = new Distance(false, 0, null,
-                        null, false, false);
-                EventBus.getDefault().post(distance);
+                DistanceSearch distanceSearch = new DistanceSearch(false, 0, "",
+                        "", false, false);
+                EventBus.getDefault().post(distanceSearch);
             }
         };
         retrofit.getDistance(firstSystem, secondSystem).enqueue(callback);

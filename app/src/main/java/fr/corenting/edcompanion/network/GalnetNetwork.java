@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.GalnetArticle;
-import fr.corenting.edcompanion.models.GalnetNews;
+import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.models.apis.EDApi.GalnetArticleResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
@@ -30,11 +30,7 @@ public class GalnetNetwork {
                     try {
                         List<GalnetArticle> articles = new ArrayList<>();
                         for (GalnetArticleResponse item : body) {
-                            GalnetArticle newArticle = new GalnetArticle();
-                            newArticle.setContent(item.Content.replace("<br />", "\n"));
-                            newArticle.setTitle(item.Title);
-                            newArticle.setDateTimestamp(item.Timestamp);
-                            articles.add(newArticle);
+                            articles.add(GalnetArticle.Companion.fromGalnetArticleResponse(item));
                         }
                         news = new GalnetNews(true, articles);
                     } catch (Exception e) {

@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
-import fr.corenting.edcompanion.models.CommodityFinderSearchEvent;
+import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;
@@ -100,11 +100,12 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                     }
                 }
 
-                CommodityFinderSearchEvent result = new CommodityFinderSearchEvent();
-                result.CommodityName = holder.commodityInputEditText.getText().toString();
-                result.SystemName = holder.systemInputEditText.getText().toString();
-                result.LandingPadSize = holder.landingPadSizeSpinner.getText().toString();
-                result.Stock = stock;
+                CommodityFinderSearch result = new CommodityFinderSearch(
+                        holder.commodityInputEditText.getText().toString(),
+                        holder.systemInputEditText.getText().toString(),
+                        holder.landingPadSizeSpinner.getText().toString(),
+                        stock);
+
                 EventBus.getDefault().post(result);
             }
         };
@@ -126,37 +127,42 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
     @Override
     protected void bindResultViewHolder(ResultViewHolder holder, int position) {
         CommodityFinderResult currentResult = results.get(position - 1);
-        NumberFormat numberFormat = NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context));
+        NumberFormat numberFormat =
+                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context));
 
         // For price, also display the difference with the avg galactic price
         String priceDifference = getPriceDifferenceString(numberFormat,
-                currentResult.PriceDifferenceFromAverage);
-        String buyPrice = numberFormat.format(currentResult.BuyPrice);
+                currentResult.getPriceDifferenceFromAverage());
+        String buyPrice = numberFormat.format(currentResult.getBuyPrice());
         holder.priceTextView.setText(buyPrice + " (" + priceDifference + "%)");
 
         // Update date
-        String date = android.text.format.DateUtils.getRelativeTimeSpanString(currentResult.LastPriceUpdate.toEpochMilli(),
-                Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE).toString();
+        String date = android.text.format.DateUtils.getRelativeTimeSpanString(
+                currentResult.getLastPriceUpdate().toEpochMilli(),Instant.now().toEpochMilli(),
+                0, FORMAT_ABBREV_RELATIVE).toString();
         holder.lastUpdateTextView.setText(date);
 
         // Other informations
-        holder.titleTextView.setText(String.format("%s - %s", currentResult.System, currentResult.Station));
-        holder.permitRequiredTextView.setVisibility(currentResult.PermitRequired ? View.VISIBLE : View.GONE);
-        holder.isPlanetaryImageView.setVisibility(currentResult.IsPlanetary ? View.VISIBLE : View.GONE);
-        holder.landingPadTextView.setText(currentResult.LandingPad);
-        holder.stockTextView.setText(numberFormat.format(currentResult.Stock));
+        holder.titleTextView.setText(String.format("%s - %s", currentResult.getSystem(),
+                currentResult.getStation()));
+        holder.permitRequiredTextView.setVisibility(
+                currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
+        holder.isPlanetaryImageView.setVisibility(
+                currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
+        holder.landingPadTextView.setText(currentResult.getLandingPad());
+        holder.stockTextView.setText(numberFormat.format(currentResult.getStock()));
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,
-                currentResult.Distance));
+                currentResult.getDistance()));
         holder.distanceToStarTextView.setText(context.getString(R.string.distance_ls,
-                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context)).format(currentResult.DistanceToStar)));
+                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context))
+                        .format(currentResult.getDistanceToStar())));
     }
 
     private String getPriceDifferenceString(NumberFormat numberFormat, int priceDifference) {
         String result = numberFormat.format(priceDifference);
         if (priceDifference >= 0) {
             return "+" + result;
-        }
-        else {
+        } else {
             return result;
         }
     }

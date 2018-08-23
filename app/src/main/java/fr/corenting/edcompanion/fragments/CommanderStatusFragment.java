@@ -18,9 +18,9 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.CommanderPosition;
-import fr.corenting.edcompanion.models.Credits;
-import fr.corenting.edcompanion.models.Ranks;
+import fr.corenting.edcompanion.models.events.CommanderPosition;
+import fr.corenting.edcompanion.models.events.Credits;
+import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
@@ -135,21 +135,22 @@ public class CommanderStatusFragment extends Fragment {
     public void onCreditsEvent(Credits credits) {
         endLoading();
         // Check download error
-        if (!credits.Success) {
+        if (!credits.getSuccess()) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
         // Check error case
-        if (credits.Balance == -1) {
+        if (credits.getBalance() == -1) {
             creditsTextView.setText(getResources().getString(R.string.Unknown));
             return;
         }
         Locale currentLocale = SettingsUtils.getUserLocale(getContext());
-        String amount = NumberFormat.getIntegerInstance(currentLocale).format(credits.Balance);
-        if (credits.Loan != 0) {
-            String loan = NumberFormat.getIntegerInstance(currentLocale).format(credits.Loan);
-            creditsTextView.setText(getResources().getString(R.string.credits_with_loan, amount, loan));
+        String amount = NumberFormat.getIntegerInstance(currentLocale).format(credits.getBalance());
+        if (credits.getLoan() != 0) {
+            String loan = NumberFormat.getIntegerInstance(currentLocale).format(credits.getLoan());
+            creditsTextView.setText(getResources().getString(R.string.credits_with_loan,
+                    amount, loan));
         } else {
             creditsTextView.setText(getResources().getString(R.string.credits, amount));
         }
@@ -159,16 +160,16 @@ public class CommanderStatusFragment extends Fragment {
     public void onPositionEvent(CommanderPosition position) {
         endLoading();
         // Check download error
-        if (!position.Success) {
+        if (!position.getSuccess()) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
         // Check error case
-        if (position.SystemName == null) {
+        if (position.getSystemName() == null) {
             locationsTextView.setText(getResources().getString(R.string.Unknown));
         } else {
-            locationsTextView.setText(position.SystemName);
+            locationsTextView.setText(position.getSystemName());
         }
     }
 
@@ -176,18 +177,28 @@ public class CommanderStatusFragment extends Fragment {
     public void onRanksEvents(Ranks ranks) {
         endLoading();
         // Check download error
-        if (!ranks.Success) {
+        if (!ranks.getSuccess()) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
-        RankUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation, ranks.Federation, getString(R.string.rank_federation));
-        RankUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire, ranks.Empire, getString(R.string.rank_empire));
+        RankUtils.setContent(getContext(), federationRankLayout, R.drawable.elite_federation,
+                ranks.getFederation(), getString(R.string.rank_federation));
+        RankUtils.setContent(getContext(), empireRankLayout, R.drawable.elite_empire,
+                ranks.getEmpire(), getString(R.string.rank_empire));
 
-        RankUtils.setContent(getContext(), combatRankLayout, RankUtils.getCombatLogoId(ranks.Combat.value), ranks.Combat, getString(R.string.rank_combat));
-        RankUtils.setContent(getContext(), tradeRankLayout, RankUtils.getTradeLogoId(ranks.Trade.value), ranks.Trade, getString(R.string.rank_trading));
-        RankUtils.setContent(getContext(), explorationRankLayout, RankUtils.getExplorationLogoId(ranks.Explore.value), ranks.Explore, getString(R.string.rank_exploration));
-        RankUtils.setContent(getContext(), arenaRankLayout, RankUtils.getCqcLogoId(ranks.Cqc.value), ranks.Cqc, getString(R.string.rank_arena));
+        RankUtils.setContent(getContext(), combatRankLayout,
+                RankUtils.getCombatLogoId(ranks.getCombat().getValue()), ranks.getCombat(),
+                getString(R.string.rank_combat));
+        RankUtils.setContent(getContext(), tradeRankLayout,
+                RankUtils.getTradeLogoId(ranks.getTrade().getValue()), ranks.getTrade(),
+                getString(R.string.rank_trading));
+        RankUtils.setContent(getContext(), explorationRankLayout,
+                RankUtils.getExplorationLogoId(ranks.getExplore().getValue()),
+                ranks.getExplore(), getString(R.string.rank_exploration));
+        RankUtils.setContent(getContext(), arenaRankLayout,
+                RankUtils.getCqcLogoId(ranks.getCqc().getValue()), ranks.getCqc(),
+                getString(R.string.rank_arena));
     }
 
     private void getAll() {

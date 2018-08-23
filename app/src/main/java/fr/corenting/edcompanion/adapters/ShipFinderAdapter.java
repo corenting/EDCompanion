@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.ShipFinderResult;
-import fr.corenting.edcompanion.models.ShipFinderSearchEvent;
+import fr.corenting.edcompanion.models.events.ShipFinderSearch;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
@@ -82,9 +82,8 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
             public void run() {
                 ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
 
-                ShipFinderSearchEvent result = new ShipFinderSearchEvent();
-                result.ShipName = holder.shipInputEditText.getText().toString();
-                result.SystemName = holder.systemInputEditText.getText().toString();
+                ShipFinderSearch result = new ShipFinderSearch(holder.shipInputEditText.getText().toString(),
+                        holder.systemInputEditText.getText().toString());
                 EventBus.getDefault().post(result);
             }
         };
@@ -108,21 +107,25 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
         // Title
         holder.titleTextView.setText(
-                String.format("%s - %s", currentResult.SystemName, currentResult.StationName)
+                String.format("%s - %s", currentResult.getSystemName(), currentResult.getStationName())
         );
 
         // Other informations
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,
-                currentResult.Distance));
+                currentResult.getDistance()));
         holder.starDistanceTextView.setText(context.getString(R.string.distance_ls,
-                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context)).format(currentResult.DistanceToStar)));
-        holder.permitRequiredTextView.setVisibility(currentResult.SystemPermitRequired ? View.VISIBLE : View.GONE);
-        holder.isPlanetaryImageView.setVisibility(currentResult.IsPlanetary ? View.VISIBLE : View.GONE);
-        holder.landingPadTextView.setText(currentResult.MaxLandingPad);
+                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context))
+                        .format(currentResult.getDistanceToStar())));
+        holder.permitRequiredTextView.setVisibility(
+                currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
+        holder.isPlanetaryImageView.setVisibility(
+                currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
+        holder.landingPadTextView.setText(currentResult.getMaxLandingPad());
 
         // Update date
-        String date = android.text.format.DateUtils.getRelativeTimeSpanString(currentResult.LastShipyardUpdate.toEpochMilli(),
-                Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE).toString();
+        String date = android.text.format.DateUtils.getRelativeTimeSpanString(
+                currentResult.getLastShipyardUpdate().toEpochMilli(), Instant.now().toEpochMilli(),
+                0, FORMAT_ABBREV_RELATIVE).toString();
         holder.lastUpdateTextView.setText(date);
     }
 

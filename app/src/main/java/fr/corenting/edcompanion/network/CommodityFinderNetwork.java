@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommodityFinderResult;
-import fr.corenting.edcompanion.models.ResultsList;
+import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
@@ -53,19 +53,7 @@ public class CommodityFinderNetwork {
         List<CommodityFinderResult> resultsList = new ArrayList<>();
         try {
             for (CommodityFinderResponse seller : responseBody) {
-                CommodityFinderResult newResult = new CommodityFinderResult();
-                newResult.BuyPrice = seller.BuyPrice;
-                newResult.LandingPad = seller.Station.MaxLandingPad;
-                newResult.Station = seller.Station.Name;
-                newResult.Stock = seller.Stock;
-                newResult.System = seller.Station.System.Name;
-                newResult.PermitRequired = seller.Station.System.PermitRequired;
-                newResult.Distance = seller.Distance;
-                newResult.DistanceToStar = seller.DistanceToStar;
-                newResult.IsPlanetary = seller.Station.IsPlanetary;
-                newResult.LastPriceUpdate = DateTimeUtils.toInstant(seller.LastPriceUpdate);
-                newResult.PriceDifferenceFromAverage = seller.PriceDifferencePercentage;
-                resultsList.add(newResult);
+                resultsList.add(CommodityFinderResult.Companion.fromCommodityFinderResponse(seller));
             }
             convertedResults = new ResultsList<>(true, resultsList);
 

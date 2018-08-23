@@ -33,7 +33,7 @@ import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.ShipFinderFragment;
-import fr.corenting.edcompanion.models.ServerStatus;
+import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.ChangelogUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity
 
     @Subscribe
     public void onServerStatusEvent(ServerStatus status) {
-        String content = status.Success ? status.Status : getString(R.string.unknown);
+        String content = status.getSuccess() ? status.getStatus() : getString(R.string.unknown);
         TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
         textView.setText(getString(R.string.server_status, content));
     }

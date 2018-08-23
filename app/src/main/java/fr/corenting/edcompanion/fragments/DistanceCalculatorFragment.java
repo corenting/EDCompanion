@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.AutoCompleteAdapter;
-import fr.corenting.edcompanion.models.Distance;
+import fr.corenting.edcompanion.models.events.DistanceSearch;
 import fr.corenting.edcompanion.network.DistanceCalculatorNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
@@ -67,11 +67,11 @@ public class DistanceCalculatorFragment extends Fragment {
     }
 
     @Subscribe
-    public void onDistanceEvent(Distance distance) {
+    public void onDistanceEvent(DistanceSearch distanceSearch) {
         progressBar.setVisibility(View.GONE);
 
         // Error
-        if (!distance.Success) {
+        if (!distanceSearch.getSuccess()) {
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
@@ -79,18 +79,22 @@ public class DistanceCalculatorFragment extends Fragment {
         resultCardView.setVisibility(View.VISIBLE);
 
         // Display warning if permits are required
-        if (distance.StartPermitRequired && distance.EndPermitRequired) {
+        if (distanceSearch.getStartPermitRequired() && distanceSearch.getEndPermitRequired()) {
             warningTextView.setVisibility(View.VISIBLE);
-            warningTextView.setText(getContext().getString(R.string.permit_required_both, distance.StartSystemName, distance.EndSystemName));
-        } else if (distance.StartPermitRequired) {
+            warningTextView.setText(getContext().getString(R.string.permit_required_both,
+                    distanceSearch.getStartSystemName(), distanceSearch.getEndSystemName()));
+        } else if (distanceSearch.getStartPermitRequired()) {
             warningTextView.setVisibility(View.VISIBLE);
-            warningTextView.setText(getContext().getString(R.string.permit_required, distance.StartSystemName));
-        } else if (distance.EndPermitRequired) {
+            warningTextView.setText(getContext().getString(R.string.permit_required,
+                    distanceSearch.getStartSystemName()));
+        } else if (distanceSearch.getEndPermitRequired()) {
             warningTextView.setVisibility(View.VISIBLE);
-            warningTextView.setText(getContext().getString(R.string.permit_required, distance.EndSystemName));
+            warningTextView.setText(getContext().getString(R.string.permit_required,
+                    distanceSearch.getEndSystemName()));
         }
 
-        resultTextView.setText(getContext().getString(R.string.distance_result, distance.Distance));
+        resultTextView.setText(getContext().getString(R.string.distance_result,
+                distanceSearch.getDistance()));
     }
 
     @Override

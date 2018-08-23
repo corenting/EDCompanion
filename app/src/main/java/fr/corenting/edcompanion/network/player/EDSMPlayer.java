@@ -4,9 +4,9 @@ import android.content.Context;
 import android.support.v7.preference.EditTextPreference;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.CommanderPosition;
-import fr.corenting.edcompanion.models.Credits;
-import fr.corenting.edcompanion.models.Ranks;
+import fr.corenting.edcompanion.models.events.CommanderPosition;
+import fr.corenting.edcompanion.models.events.Credits;
+import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMCredits;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMPosition;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMRanks;
@@ -81,42 +81,38 @@ public class EDSMPlayer extends PlayerNetwork {
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
-                    Ranks ranks = new Ranks();
+                    Ranks ranks;
                     try {
                         // Combat
-                        ranks.Combat.name = body.ranksNames.combat;
-                        ranks.Combat.progress = body.progress.combat;
-                        ranks.Combat.value = body.ranks.combat;
+                        Ranks.Rank combatRank = new Ranks.Rank(body.ranksNames.combat,
+                                body.ranks.combat, body.progress.combat);
 
                         // Trade
-                        ranks.Trade.name = body.ranksNames.trade;
-                        ranks.Trade.progress = body.progress.trade;
-                        ranks.Trade.value = body.ranks.trade;
+                        Ranks.Rank tradeRank = new Ranks.Rank(body.ranksNames.trade,
+                                body.ranks.trade, body.progress.trade);
 
                         // Explore
-                        ranks.Explore.name = body.ranksNames.explore;
-                        ranks.Explore.progress = body.progress.explore;
-                        ranks.Explore.value = body.ranks.explore;
+                        Ranks.Rank exploreRank = new Ranks.Rank(body.ranksNames.explore,
+                                body.ranks.explore, body.progress.explore);
 
                         // CQC
-                        ranks.Cqc.name = body.ranksNames.cqc;
-                        ranks.Cqc.progress = body.progress.cqc;
-                        ranks.Cqc.value = body.ranks.cqc;
+                        Ranks.Rank cqcRank = new Ranks.Rank(body.ranksNames.cqc,
+                                body.ranks.cqc, body.progress.cqc);
 
                         // Federation
-                        ranks.Federation.name = body.ranksNames.federation;
-                        ranks.Federation.progress = body.progress.federation;
-                        ranks.Federation.value = body.ranks.federation;
+                        Ranks.Rank federationRank = new Ranks.Rank(body.ranksNames.federation,
+                                body.ranks.federation, body.progress.federation);
 
                         // Empire
-                        ranks.Empire.name = body.ranksNames.empire;
-                        ranks.Empire.progress = body.progress.empire;
-                        ranks.Empire.value = body.ranks.empire;
+                        Ranks.Rank empireRank = new Ranks.Rank(body.ranksNames.empire,
+                                body.ranks.empire, body.progress.empire);
 
-                        ranks.Success = true;
+                        ranks = new Ranks(true, combatRank, tradeRank, exploreRank,
+                                cqcRank, federationRank, empireRank);
 
                     } catch (Exception ex) {
-                        ranks.Success = false;
+                        ranks = new Ranks(false, null, null,
+                                null, null, null, null);
                     }
                     sendResultMessage(ranks);
                 }
@@ -124,8 +120,8 @@ public class EDSMPlayer extends PlayerNetwork {
 
             @Override
             public void onFailure(Call<EDSMRanks> call, Throwable t) {
-                Ranks ranks = new Ranks();
-                ranks.Success = false;
+                Ranks ranks = new Ranks(false, null, null,
+                        null, null, null, null);
 
                 sendResultMessage(ranks);
             }
@@ -142,15 +138,12 @@ public class EDSMPlayer extends PlayerNetwork {
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
-                    CommanderPosition pos = new CommanderPosition();
+                    CommanderPosition pos;
                     try {
-                        pos.SystemName = body.system;
-                        pos.FirstDiscover = body.firstDiscover;
-
-                        // Send to bus
-                        pos.Success = true;
+                        pos = new CommanderPosition(true, body.system, body.firstDiscover);
                     } catch (Exception ex) {
-                        pos.Success = false;
+                        pos = new CommanderPosition(false, "",
+                                false);
                     }
                     sendResultMessage(pos);
                 }
@@ -158,8 +151,8 @@ public class EDSMPlayer extends PlayerNetwork {
 
             @Override
             public void onFailure(Call<EDSMPosition> call, Throwable t) {
-                CommanderPosition pos = new CommanderPosition();
-                pos.Success = false;
+                CommanderPosition pos = new CommanderPosition(false,
+                        "", false);
                 sendResultMessage(pos);
             }
         };
@@ -175,13 +168,12 @@ public class EDSMPlayer extends PlayerNetwork {
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
-                    Credits res = new Credits();
+                    Credits res;
                     try {
-                        res.Balance = body.credits.get(0).balance;
-                        res.Loan = body.credits.get(0).loan;
-                        res.Success = true;
+                        res = new Credits(true, body.credits.get(0).balance,
+                                body.credits.get(0).loan);
                     } catch (Exception e) {
-                        res.Success = false;
+                        res = new Credits(false, 0, 0);
                     }
                     sendResultMessage(res);
                 }
@@ -189,8 +181,7 @@ public class EDSMPlayer extends PlayerNetwork {
 
             @Override
             public void onFailure(Call<EDSMCredits> call, Throwable t) {
-                Credits res = new Credits();
-                res.Success = false;
+                Credits res = new Credits(false, 0, 0);
                 sendResultMessage(res);
             }
         };

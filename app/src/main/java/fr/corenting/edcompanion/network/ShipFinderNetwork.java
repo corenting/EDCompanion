@@ -8,7 +8,7 @@ import org.threeten.bp.DateTimeUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.corenting.edcompanion.models.ResultsList;
+import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
@@ -31,17 +31,8 @@ public class ShipFinderNetwork {
                     List<ShipFinderResult> resultsList = new ArrayList<>();
                     try {
                         for (ShipFinderResponse resultItem : body) {
-                            ShipFinderResult convertedItem = new ShipFinderResult();
-                            convertedItem.Distance = resultItem.Distance;
-                            convertedItem.DistanceToStar = resultItem.Station.DistanceToStar;
-                            convertedItem.LastShipyardUpdate = DateTimeUtils.toInstant(resultItem.Station.LastShipyardUpdate);
-                            convertedItem.MaxLandingPad = resultItem.Station.MaxLandingPad;
-                            convertedItem.StationName = resultItem.Station.Name;
-                            convertedItem.SystemName = resultItem.Station.System.Name;
-                            convertedItem.SystemPermitRequired = resultItem.Station.System.PermitRequired;
-                            convertedItem.IsPlanetary = resultItem.Station.IsPlanetary;
-
-                            resultsList.add(convertedItem);
+                            resultsList.add(
+                                    ShipFinderResult.Companion.fromShipFinderResponse(resultItem));
                         }
                         convertedResults = new ResultsList<>(true, resultsList);
 

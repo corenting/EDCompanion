@@ -4,7 +4,7 @@ import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
 
-import fr.corenting.edcompanion.models.ServerStatus;
+import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMServerStatus;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;

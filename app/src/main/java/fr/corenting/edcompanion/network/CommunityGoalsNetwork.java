@@ -9,7 +9,7 @@ import java.util.List;
 
 import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.models.CommunityGoalReward;
-import fr.corenting.edcompanion.models.CommunityGoals;
+import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
@@ -33,40 +33,8 @@ public class CommunityGoalsNetwork {
                     List<CommunityGoal> goalsList = new ArrayList<>();
                     try {
                         for (CommunityGoalsResponse.CommunityGoalsItemResponse goal : body.Goals) {
-                            CommunityGoal newCg = new CommunityGoal();
-
-                            // Main informations
-                            newCg.setTitle(goal.Title);
-                            newCg.setDescription(goal.Description);
-                            newCg.setReward(goal.Reward);
-                            newCg.setObjective(goal.Objective);
-                            newCg.setContributors(goal.Contributors);
-                            newCg.setOngoing(goal.Ongoing);
-
-                            // Tiers
-                            newCg.setCurrentTier(goal.TierProgress.Current);
-                            newCg.setTotalTier(goal.TierProgress.Total);
-
-                            // Date
-                            newCg.setEndDate(goal.Date.End);
-                            newCg.setRefreshDate(goal.Date.LastUpdate);
-
-                            // Location
-                            newCg.setStation(goal.Location.Station);
-                            newCg.setSystem(goal.Location.System);
-
-                            // Rewards
-                            List<CommunityGoalReward> rewards = new ArrayList<>();
-                            for (CommunityGoalsResponse.CommunityGoalsItemResponse.CommunityGoalsRewards reward : goal.Rewards) {
-                                CommunityGoalReward newReward = new CommunityGoalReward();
-                                newReward.setContributors(reward.Contributors);
-                                newReward.setRewards(reward.Reward);
-                                newReward.setTier(reward.Tier);
-                                rewards.add(newReward);
-                            }
-                            newCg.setRewards(rewards);
-
-                            goalsList.add(newCg);
+                            goalsList.add(
+                                    CommunityGoal.Companion.fromCommunityGoalsItemResponse(goal));
                         }
                         goals = new CommunityGoals(true, goalsList);
                     }

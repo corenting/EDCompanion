@@ -37,7 +37,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public String getItem(int index) {
-        return resultList.get(index).Name;
+        return resultList.get(index).getName();
     }
 
     @Override

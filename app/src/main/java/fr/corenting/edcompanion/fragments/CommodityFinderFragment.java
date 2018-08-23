@@ -7,8 +7,8 @@ import org.greenrobot.eventbus.Subscribe;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommodityFinderAdapter;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
-import fr.corenting.edcompanion.models.CommodityFinderSearchEvent;
-import fr.corenting.edcompanion.models.ResultsList;
+import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
+import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.network.CommodityFinderNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
@@ -16,14 +16,13 @@ public class CommodityFinderFragment extends FinderFragment<CommodityFinderAdapt
 
     public static final String COMMODITY_FINDER_FRAGMENT_TAG = "commodity_finder_fragment";
 
-    private CommodityFinderSearchEvent lastSearch;
+    private CommodityFinderSearch lastSearch;
 
     @Override
     public void onSwipeToRefresh() {
         if (lastSearch != null) {
             onFindButtonEvent(lastSearch);
-        }
-        else {
+        } else {
             endLoading(true);
         }
     }
@@ -37,27 +36,30 @@ public class CommodityFinderFragment extends FinderFragment<CommodityFinderAdapt
     public void onShipFinderResultEvent(ResultsList<CommodityFinderResult> results) {
         Log.d("Event", "Results called");
         // Error
-        if (!results.Success) {
+        if (!results.getSuccess()) {
             endLoading(true);
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
-        endLoading(results.Results == null || results.Results.size() == 0);
-        recyclerViewAdapter.setResults(results.Results);
+        endLoading(results.getResults().size() == 0);
+        recyclerViewAdapter.setResults(results.getResults());
     }
 
     @Subscribe
-    public void onFindButtonEvent(CommodityFinderSearchEvent event) {
+    public void onFindButtonEvent(CommodityFinderSearch event) {
         startLoading();
 
         // Don't send any as landing pad
-        if (event.LandingPadSize.equals(getResources().getStringArray(R.array.landing_pad_size)[0])) {
-            event.LandingPadSize = null;
+        String landingPadSize = event.getLandingPadSize();
+
+        if (event.getLandingPadSize().equals(
+                getResources().getStringArray(R.array.landing_pad_size)[0])) {
+            landingPadSize = null;
         }
 
         lastSearch = event;
-        CommodityFinderNetwork.findCommodity(getContext(), event.SystemName, event.CommodityName,
-                event.LandingPadSize, event.Stock);
+        CommodityFinderNetwork.findCommodity(getContext(), event.getSystemName(),
+                event.getCommodityName(), landingPadSize, event.getStock());
     }
 }

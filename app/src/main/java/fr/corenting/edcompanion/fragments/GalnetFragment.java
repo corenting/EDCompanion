@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,11 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.corenting.edcompanion.adapters.GalnetAdapter;
 import fr.corenting.edcompanion.models.GalnetArticle;
-import fr.corenting.edcompanion.models.GalnetNews;
+import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.network.GalnetNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
@@ -47,28 +47,28 @@ public class GalnetFragment extends ListFragment<GalnetAdapter> {
     @Subscribe
     public void onNewsEvent(GalnetNews news) {
         // Error case
-        if (!news.Success) {
+        if (!news.getSuccess()) {
             endLoading(true);
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
         }
 
         // Else setup list according to mode
-        GalnetNews copy = new GalnetNews(true, new ArrayList<GalnetArticle>());
+        List<GalnetArticle> newList = new ArrayList<>();
         int count = 0;
-        for (GalnetArticle n : news.Articles) {
+        for (GalnetArticle n : news.getArticles()) {
             boolean isReport = n.getTitle().matches(".*(Weekly).*(Report).*") ||
                     n.getTitle().contains("Starport Status Update");
 
             // Add the article or not depending on the mode and the title
             if ((reportsMode && isReport) || (!reportsMode && !isReport)) {
-                copy.Articles.add(n);
+                newList.add(n);
                 count++;
             }
         }
-
+        GalnetNews copy = new GalnetNews(true, newList);
 
         endLoading(count == 0);
-        recyclerViewAdapter.add(copy.Articles);
+        recyclerViewAdapter.add(copy.getArticles());
     }
 }
