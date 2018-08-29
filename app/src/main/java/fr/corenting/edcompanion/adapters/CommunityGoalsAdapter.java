@@ -45,7 +45,8 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
     @Override
     public goalsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cg_list_item,
+                parent, false);
         if (!isDetailsView) {
             v.setOnClickListener(onClickListener);
         }
@@ -58,11 +59,23 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
         // Content
         holder.titleTextView.setText(currentGoal.getTitle());
-        holder.subtitleTextView.setText(currentGoal.getRefreshDateString(context));
-        holder.peopleTextView.setText(String.valueOf(currentGoal.getContributors()));
-        holder.remainingTextView.setText(currentGoal.getEndDate(context));
-        holder.tierTextView.setText(currentGoal.getTierString());
-        holder.locationTextView.setText(currentGoal.getSystem());
+        holder.updateTextView.setText(currentGoal.getRefreshDateString(context));
+        holder.peopleTextView.setText(context.getString(R.string.contributors,
+                String.valueOf(currentGoal.getContributors())));
+        holder.remainingTextView.setText(context.getString(R.string.end_date,
+                currentGoal.getEndDate(context)));
+        holder.tierTextView.setText(context.getString(R.string.progress,
+                currentGoal.getTierString()));
+
+        // System
+        if (currentGoal.getDistanceToPlayer() != null ) {
+            holder.locationTextView.setText(context.getString(R.string.system_with_player_distance,
+                    currentGoal.getSystem(), currentGoal.getDistanceToPlayer()));
+        }
+        else {
+            holder.locationTextView.setText(context.getString(R.string.system,
+                    currentGoal.getSystem()));
+        }
 
         // Objective
         String objective = context.getString(R.string.no_objective_yet);
@@ -83,7 +96,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
         // Rewards table
         if (currentGoal.getRewards().size() != 0) {
-            setRewards(holder, position, currentGoal);
+            setRewards(holder, currentGoal);
         } else {
             holder.rewardsTableView.setVisibility(View.GONE);
         }
@@ -97,7 +110,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
         setClickListeners(position, holder.objectiveTextView, R.string.objective);
     }
 
-    private void setRewards(goalsViewHolder holder, int position, CommunityGoal goal) {
+    private void setRewards(goalsViewHolder holder, CommunityGoal goal) {
         // Setup view
         holder.rewardsTableView.setVisibility(View.VISIBLE);
         holder.rewardsTableView.setRowHeaderWidth(0);
@@ -205,8 +218,8 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
         TextView titleTextView;
         @BindView(R.id.objectiveTextView)
         TextView objectiveTextView;
-        @BindView(R.id.subtitleTextView)
-        TextView subtitleTextView;
+        @BindView(R.id.updateTextView)
+        TextView updateTextView;
         @BindView(R.id.descriptionTextView)
         TextView descriptionTextView;
         @BindView(R.id.remainingTextView)

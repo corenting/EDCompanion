@@ -5,18 +5,17 @@ import android.os.Parcelable
 import android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse
-import fr.corenting.edcompanion.utils.DateUtils
 import kotlinx.android.parcel.Parcelize
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
-import java.util.ArrayList
 
 @Parcelize
 data class CommunityGoal(val isOngoing: Boolean, val title: String, val description: String,
                          val objective: String, val reward: String,
                          val rewards: List<CommunityGoalReward>, val currentTier: Int,
-                         val totalTier: Int, val contributors: Long, val station: String, val system: String,
-                         val endDate: Instant, val refreshDate: Instant) : Parcelable {
+                         val totalTier: Int, val contributors: Long, val station: String,
+                         val system: String, val endDate: Instant,
+                         val refreshDate: Instant, var distanceToPlayer: Float?) : Parcelable {
 
     fun getTierString(): String {
         return currentTier.toString() + " / " + totalTier
@@ -56,7 +55,7 @@ data class CommunityGoal(val isOngoing: Boolean, val title: String, val descript
                     res.Reward, rewards, res.TierProgress.Current, res.TierProgress.Total,
                     res.Contributors, res.Location.Station, res.Location.System,
                     DateTimeUtils.toInstant(res.Date.End),
-                    DateTimeUtils.toInstant(res.Date.LastUpdate))
+                    DateTimeUtils.toInstant(res.Date.LastUpdate), null)
         }
     }
 }

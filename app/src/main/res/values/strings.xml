@@ -35,14 +35,20 @@
     <string name="reward">Reward</string>
     <string name="no_description_yet">No description yet</string>
     <string name="no_objective_yet">No objective yet</string>
-
+    <string name="cg_player_position_error">Cannot get player distance to the community goals!</string>
+    <string name="cg_player_distance_error">Cannot get player distance to a community goal!</string>
 
     <!--Errors-->
     <string name="nothing_to_display">Nothing to display</string>
     <string name="download_error">Error while downloading the content</string>
     <string name="edsm_error">You need to set your EDSM API key and your commander name in the settings</string>
     <string name="inara_error">You need to set your commander name in the settings</string>
-    <string name="last_update">Last update : %1$s</string>
+    <string name="last_update">Last update: %1$s</string>
+    <string name="system">System: %1$s</string>
+    <string name="system_with_player_distance">System: %1$s (%2$.2f LY from you)</string>
+    <string name="end_date">End date: %1$s</string>
+    <string name="contributors">Contributors: %1$s</string>
+    <string name="progress">Progress: %1$s</string>
     <string name="unknown">unknown</string>
     <string name="Unknown">Unknown</string>
     <string name="inara_credits">Data provided by inara.cz</string>

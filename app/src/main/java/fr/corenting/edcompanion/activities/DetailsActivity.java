@@ -62,7 +62,7 @@ public class DetailsActivity extends AppCompatActivity {
         // Adapter setup
         CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, true);
         recyclerView.setAdapter(adapter);
-        adapter.add(Collections.singletonList(communityGoal));
+        adapter.addItems(Collections.singletonList(communityGoal));
     }
 
     private void galnetArticleSetup(GalnetArticle article) {
@@ -71,7 +71,7 @@ public class DetailsActivity extends AppCompatActivity {
         // Adapter view setup
         GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, true);
         recyclerView.setAdapter(adapter);
-        adapter.add(Collections.singletonList(article));
+        adapter.addItems(Collections.singletonList(article));
     }
 
     @Override

@@ -91,7 +91,7 @@ public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragmen
     }
 
     protected void startLoading() {
-        recyclerViewAdapter.removeAll();
+        recyclerViewAdapter.removeAllItems();
         emptySwipeRefreshLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);

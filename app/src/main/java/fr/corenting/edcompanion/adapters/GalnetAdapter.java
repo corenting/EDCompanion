@@ -2,14 +2,10 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -53,7 +49,8 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
 
     @Override
     public newsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.galnet_list_item,
+                parent, false);
         if (!isDetailsView) {
             v.setOnClickListener(onClickListener);
         }
@@ -73,23 +70,13 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
 
         // Date subtitle
         Date date = new Date(currentNews.getDateTimestamp() * 1000);
-        holder.subtitleTextView.setText(dateFormat.format(date));
-
-        // Hide the others
-        holder.remainingContainer.setVisibility(View.GONE);
-        holder.peopleContainer.setVisibility(View.GONE);
-        holder.tierContainer.setVisibility(View.GONE);
-        holder.locationContainer.setVisibility(View.GONE);
+        holder.dateTextView.setText(dateFormat.format(date));
     }
 
     public static class newsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.titleTextView) TextView titleTextView;
-        @BindView(R.id.subtitleTextView) TextView subtitleTextView;
+        @BindView(R.id.dateTextView) TextView dateTextView;
         @BindView(R.id.descriptionTextView) TextView descriptionTextView;
-        @BindView(R.id.remainingContainer) RelativeLayout remainingContainer;
-        @BindView(R.id.peopleContainer) RelativeLayout peopleContainer;
-        @BindView(R.id.tierContainer) RelativeLayout tierContainer;
-        @BindView(R.id.locationContainer) RelativeLayout locationContainer;
 
         newsViewHolder(final View view) {
             super(view);

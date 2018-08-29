@@ -69,6 +69,6 @@ public class GalnetFragment extends ListFragment<GalnetAdapter> {
         GalnetNews copy = new GalnetNews(true, newList);
 
         endLoading(count == 0);
-        recyclerViewAdapter.add(copy.getArticles());
+        recyclerViewAdapter.addItems(copy.getArticles());
     }
 }

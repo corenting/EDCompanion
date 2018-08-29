@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardView"
+    style="@style/CardView"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="2dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp" >
+
+    <RelativeLayout
+        android:id="@+id/itemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="24dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/objectiveTextView"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <ImageView
+            android:id="@+id/updateImageView"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/objectiveTextView"
+            app:srcCompat="@drawable/ic_update_black_24dp"
+            android:tint="#757575" />
+
+        <TextView
+            android:id="@+id/updateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_below="@+id/objectiveTextView"
+            android:layout_toRightOf="@id/locationImageView"
+            android:layout_toEndOf="@id/locationImageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"/>
+
+        <ImageView
+            android:id="@+id/locationImageView"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/updateTextView"
+            app:srcCompat="@drawable/elite_map_marker"
+            android:tint="#757575" />
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/updateTextView"
+            android:layout_toRightOf="@id/locationImageView"
+            android:layout_toEndOf="@id/locationImageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"/>
+
+        <ImageView
+            android:id="@+id/remainingImageView"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/locationImageView"
+            app:srcCompat="@drawable/ic_remaining_grey600_24dp"
+            android:tint="#757575" />
+
+        <TextView
+            android:id="@+id/remainingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/locationImageView"
+            android:layout_toRightOf="@id/remainingImageView"
+            android:layout_toEndOf="@id/remainingImageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"/>
+
+        <ImageView
+            android:id="@+id/peopleImageView"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/remainingImageView"
+            app:srcCompat="@drawable/ic_people_grey600_24dp"
+            android:tint="#757575" />
+
+        <TextView
+            android:id="@+id/peopleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/remainingImageView"
+            android:layout_toRightOf="@id/peopleImageView"
+            android:layout_toEndOf="@id/peopleImageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"/>
+
+        <ImageView
+            android:id="@+id/tierImageView"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/peopleImageView"
+            app:srcCompat="@drawable/ic_tier_grey600_254dp"
+            android:tint="#757575" />
+
+        <TextView
+            android:id="@+id/tierTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/peopleImageView"
+            android:layout_toRightOf="@id/tierImageView"
+            android:layout_toEndOf="@id/tierImageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"/>
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_marginTop="18dp"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:layout_below="@id/tierImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <com.evrencoskun.tableview.TableView
+            android:id="@+id/rewardsTableView"
+            android:layout_below="@id/descriptionTextView"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
