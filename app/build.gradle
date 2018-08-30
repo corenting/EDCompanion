@@ -11,8 +11,8 @@ android {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 23
-        versionName "1.14"
+        versionCode 24
+        versionName "1.14.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
