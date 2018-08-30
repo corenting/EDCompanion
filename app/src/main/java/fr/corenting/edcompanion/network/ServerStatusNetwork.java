@@ -31,7 +31,7 @@ public class ServerStatusNetwork {
 
             @Override
             public void onFailure(Call<EDSMServerStatus> call, Throwable t) {
-                EventBus.getDefault().post(new ServerStatus(false, null));
+                EventBus.getDefault().post(new ServerStatus(false, ""));
             }
         };
         edsmRetrofit.getServerStatus().enqueue(callback);

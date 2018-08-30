@@ -34,7 +34,7 @@ public class GalnetNetwork {
                         }
                         news = new GalnetNews(true, articles);
                     } catch (Exception e) {
-                        news = new GalnetNews(false, null);
+                        news = new GalnetNews(false, new ArrayList<GalnetArticle>());
                     }
                     EventBus.getDefault().post(news);
                 }
@@ -42,7 +42,7 @@ public class GalnetNetwork {
 
             @Override
             public void onFailure(Call<List<GalnetArticleResponse>> call, Throwable t) {
-                GalnetNews news = new GalnetNews(false, null);
+                GalnetNews news = new GalnetNews(false, new ArrayList<GalnetArticle>());
                 EventBus.getDefault().post(news);
             }
         };

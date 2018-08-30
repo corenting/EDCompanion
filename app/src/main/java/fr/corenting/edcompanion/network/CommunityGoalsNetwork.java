@@ -40,7 +40,7 @@ public class CommunityGoalsNetwork {
                     }
                     catch (Exception e)
                     {
-                        goals = new CommunityGoals(false, null);
+                        goals = new CommunityGoals(false, new ArrayList<CommunityGoal>());
                     }
                     EventBus.getDefault().post(goals);
                 }
@@ -48,7 +48,8 @@ public class CommunityGoalsNetwork {
 
             @Override
             public void onFailure(Call<CommunityGoalsResponse> call, Throwable t) {
-                CommunityGoals goals = new CommunityGoals(false, null);
+                CommunityGoals goals = new CommunityGoals(false,
+                        new ArrayList<CommunityGoal>());
                 EventBus.getDefault().post(goals);
             }
         };
