@@ -11,7 +11,6 @@ import android.util.Pair;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class NotificationsUtils {
 
     public static void refreshPushSubscriptions(Context c) {
         // Check that Play Services are OK and that Firebase has a token
-        if (notificationsNotWorking(c)) {
+        if (pushNotificationsNotWorking(c)) {
             return;
         }
 
@@ -64,7 +63,7 @@ public class NotificationsUtils {
 
     public static void refreshPushSubscription(Context c, String preferenceName, boolean enabled) {
         // Check that Play Services are OK and that Firebase has a token
-        if (notificationsNotWorking(c)) {
+        if (pushNotificationsNotWorking(c)) {
             return;
         }
 
@@ -93,9 +92,9 @@ public class NotificationsUtils {
         }
     }
 
-    private static boolean notificationsNotWorking(Context c) {
-        return ((GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(c) != ConnectionResult.SUCCESS)
-                || (FirebaseInstanceId.getInstance().getToken() == null));
+    public static boolean pushNotificationsNotWorking(Context c) {
+        return GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(c) !=
+                ConnectionResult.SUCCESS;
     }
 
     public static String createNotificationChannel(Context c, String type) {
@@ -109,7 +108,8 @@ public class NotificationsUtils {
         NotificationManager notificationManager =
                 (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
         int importance = NotificationManager.IMPORTANCE_LOW;
-        NotificationChannel mChannel = new NotificationChannel(nameAndDesc.first, nameAndDesc.first, importance);
+        NotificationChannel mChannel = new NotificationChannel(nameAndDesc.first,
+                nameAndDesc.first, importance);
         mChannel.setDescription(nameAndDesc.second);
         notificationManager.createNotificationChannel(mChannel);
         return nameAndDesc.first;

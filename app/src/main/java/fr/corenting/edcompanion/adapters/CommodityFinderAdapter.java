@@ -134,7 +134,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         String priceDifference = getPriceDifferenceString(numberFormat,
                 currentResult.getPriceDifferenceFromAverage());
         String buyPrice = numberFormat.format(currentResult.getBuyPrice());
-        holder.priceTextView.setText(buyPrice + " (" + priceDifference + "%)");
+        holder.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
 
         // Update date
         String date = android.text.format.DateUtils.getRelativeTimeSpanString(

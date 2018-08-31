@@ -3,14 +3,13 @@ package fr.corenting.edcompanion.network;
 import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
-import org.threeten.bp.DateTimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommodityFinderResult;
-import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
+import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
 import retrofit2.Call;

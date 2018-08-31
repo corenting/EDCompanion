@@ -2,26 +2,21 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.evrencoskun.tableview.TableView;
-import com.evrencoskun.tableview.listener.ITableViewListener;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.models.CommunityGoal;
-import fr.corenting.edcompanion.models.CommunityGoalReward;
 import fr.corenting.edcompanion.utils.MiscUtils;
+import fr.corenting.edcompanion.views.TableView;
 
 public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goalsViewHolder, CommunityGoal> {
 
@@ -111,33 +106,13 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
     }
 
     private void setRewards(goalsViewHolder holder, CommunityGoal goal) {
-        // Setup view
-        holder.rewardsTableView.setVisibility(View.VISIBLE);
-        holder.rewardsTableView.setRowHeaderWidth(0);
-        holder.rewardsTableView.setEnabled(false);
-        holder.rewardsTableView
-                .setSelectedColor(context.getResources().getColor(android.R.color.transparent));
-        setTableClickListeners(holder.rewardsTableView);
+        // Set headers
+        holder.rewardsTableView.setHeaders(context.getString(R.string.tier),
+                context.getString(R.string.contributions),
+                context.getString(R.string.reward));
 
-        // Adapter
-        CommunityGoalRewardAdapter adapter = new CommunityGoalRewardAdapter(context);
-        holder.rewardsTableView.setAdapter(adapter);
-
-        // Set item lists
-        List<String> columnHeadersList = new ArrayList<>();
-        columnHeadersList.add(context.getString(R.string.tier));
-        columnHeadersList.add(context.getString(R.string.contributions));
-        columnHeadersList.add(context.getString(R.string.reward));
-        List<String> rowHeadersList = new ArrayList<>();
-        List<List<String>> cellList = new ArrayList<>();
-        for (CommunityGoalReward goalReward : goal.getRewards()) {
-            List<String> item = new ArrayList<>();
-            item.add(goalReward.getTier());
-            item.add(goalReward.getContributors());
-            item.add(goalReward.getRewards());
-            cellList.add(item);
-        }
-        adapter.setAllItems(columnHeadersList, rowHeadersList, cellList);
+        // Set content
+        holder.rewardsTableView.setContent(goal.getRewards());
     }
 
     private void setClickListeners(final int position, final TextView textView,
@@ -163,46 +138,6 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
                 }
             });
         }
-    }
-
-    private void setTableClickListeners(final TableView tableView) {
-        tableView.setTableViewListener(null);
-        tableView.setTableViewListener(new ITableViewListener() {
-            @Override
-            public void onCellClicked(@NonNull RecyclerView.ViewHolder cellView, int column, int row) {
-                tableView.getSelectionHandler().clearSelection();
-            }
-
-            @Override
-            public void onCellLongPressed(@NonNull RecyclerView.ViewHolder cellView, int column, int row) {
-                tableView.getSelectionHandler().clearSelection();
-                CommunityGoalRewardAdapter.CellViewHolder cellViewHolder =
-                        (CommunityGoalRewardAdapter.CellViewHolder) cellView;
-                MiscUtils.putTextInClipboard(context,
-                        "",
-                        cellViewHolder.cellTextView.getText().toString(), true);
-            }
-
-            @Override
-            public void onColumnHeaderClicked(@NonNull RecyclerView.ViewHolder columnHeaderView, int column) {
-                tableView.getSelectionHandler().clearSelection();
-            }
-
-            @Override
-            public void onColumnHeaderLongPressed(@NonNull RecyclerView.ViewHolder columnHeaderView, int column) {
-                tableView.getSelectionHandler().clearSelection();
-            }
-
-            @Override
-            public void onRowHeaderClicked(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
-                tableView.getSelectionHandler().clearSelection();
-            }
-
-            @Override
-            public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
-                tableView.getSelectionHandler().clearSelection();
-            }
-        });
     }
 
     private void switchToDetailsView(int position) {

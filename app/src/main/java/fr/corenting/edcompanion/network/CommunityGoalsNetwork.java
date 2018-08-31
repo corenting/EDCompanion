@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommunityGoal;
-import fr.corenting.edcompanion.models.CommunityGoalReward;
-import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
+import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
 import retrofit2.Call;

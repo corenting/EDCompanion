@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/firstCellTextView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_margin="4dp"
+        android:maxLines="3"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:text="\?"/>
+
+    <TextView
+        android:id="@+id/secondCellTextView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_margin="4dp"
+        android:layout_toRightOf="@id/firstCellTextView"
+        android:layout_toEndOf="@id/firstCellTextView"
+        android:maxLines="3"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:text="\?"/>
+
+    <TextView
+        android:id="@+id/thirdCellTextView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_margin="4dp"
+        android:layout_toRightOf="@id/secondCellTextView"
+        android:layout_toEndOf="@id/secondCellTextView"
+        android:maxLines="3"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:text="\?"/>
+
+</merge>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <fr.corenting.edcompanion.views.RowView
+        android:id="@+id/headerRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <fr.corenting.edcompanion.views.RowView
+        android:id="@+id/firstRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerRow"/>
+
+    <fr.corenting.edcompanion.views.RowView
+        android:id="@+id/secondRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstRow"/>
+
+    <fr.corenting.edcompanion.views.RowView
+        android:id="@+id/thirdRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/secondRow"/>
+
+    <fr.corenting.edcompanion.views.RowView
+        android:id="@+id/fourthRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/thirdRow"/>
+
+    <fr.corenting.edcompanion.views.RowView
+        android:id="@+id/fifthRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fourthRow"/>
+
+    <fr.corenting.edcompanion.views.RowView
+        android:id="@+id/sixthRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fifthRow"/>
+</RelativeLayout>

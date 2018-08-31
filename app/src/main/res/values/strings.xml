@@ -166,7 +166,6 @@
     <string name="last_update_label">Last update</string>
     <string name="permit_required_label">Permit required</string>
     <string name="landing_pad_label">Landing pad</string>
-    <string name="station_type_label">Station type</string>
     <string name="ship_finder_subtitle">Find the nearest station selling a specific ship</string>
     <string name="distance_ly">%1$.2f LY</string>
     <string name="distance_ls">%1$s ls</string>
@@ -199,7 +198,6 @@
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/wasabeef/recyclerview-animators">RecyclerView Animators</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://square.github.io/retrofit/">Retrofit</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
-        <a href="https://github.com/evrencoskun/TableView">TableView</a> (<a href="https://github.com/evrencoskun/TableView/blob/master/LICENSE">MIT License</a>)<br />
         <a href="https://github.com/JakeWharton/ThreeTenABP">ThreeTenABP</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         ]]>
     </string>
@@ -225,9 +223,9 @@
     <string name="settings_cmdr_edsm_password_title">API key for EDSM</string>
     <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
     <string name="settings_cmdr_username_title">Commander name</string>
-    <string name="settings_cmdr_username_summary">The ingame name of your CMDR</string>
+    <string name="settings_cmdr_username_summary">The ingame name of your CMDR (not your EDSM username)</string>
     <string name="settings_cmdr_inara_username_title">Inara profile name</string>
-    <string name="settings_cmdr_inara_username_summary">Your username on Inara</string>
+    <string name="settings_cmdr_inara_username_summary">Your username on Inara (not your CMDR name)</string>
     <string name="settings_cmdr_password">CMDR password</string>
     <string name="settings_cmdr_username">CMDR name</string>
     <string name="player_ranks">Player ranks</string>
@@ -265,11 +263,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.14.1</b><br />
+            <b>Version 1.15</b><br />
             <ul>
-                <li>Reworked community goals display, now with distance from player position to community goal system (only if using EDSM due to API limitations)</li><br />
-                <li>Added some animations</li><br />
-                <li>Internal changes</li><br />
+                <li>Change display method for rewards table</li><br />
+                <li>Bug fixes</li><br />
             </ul>
         ]]>
     </string>

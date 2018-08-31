@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/descriptionTextView"
             android:layout_marginTop="18dp"
-            android:maxLines="4"
+            android:maxLines="5"
             android:ellipsize="end"
             android:layout_below="@id/dateTextView"
             android:layout_width="match_parent"

@@ -17,9 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-
 import java.util.List;
 
 import fr.corenting.edcompanion.R;
@@ -176,7 +173,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         private void initPushPreferences() {
 
             // Remove push notifications subscreen if Google Play Services are not available
-            if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getActivity()) != ConnectionResult.SUCCESS) {
+            if (NotificationsUtils.pushNotificationsNotWorking(getActivity())) {
                // TODO : disable preferences when there is no FCM
             }
 

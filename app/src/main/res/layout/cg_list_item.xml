@@ -157,17 +157,16 @@
         <TextView
             android:id="@+id/descriptionTextView"
             android:layout_marginTop="18dp"
-            android:maxLines="4"
+            android:maxLines="5"
             android:ellipsize="end"
             android:layout_below="@id/tierImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-        <com.evrencoskun.tableview.TableView
+        <fr.corenting.edcompanion.views.TableView
             android:id="@+id/rewardsTableView"
             android:layout_below="@id/descriptionTextView"
-            android:visibility="gone"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

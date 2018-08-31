@@ -19,6 +19,12 @@ import fr.corenting.edcompanion.utils.NotificationsUtils;
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
     @Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        NotificationsUtils.refreshPushSubscriptions(this);
+    }
+
+    @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
