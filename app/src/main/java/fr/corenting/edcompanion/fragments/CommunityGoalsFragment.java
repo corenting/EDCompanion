@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class CommunityGoalsFragment extends ListFragment<CommunityGoalsAdapter> 
 
     public String playerSystemName;
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCommunityGoalEvent(CommunityGoals goals) {
         // Error
         if (!goals.getSuccess()) {
@@ -42,7 +43,7 @@ public class CommunityGoalsFragment extends ListFragment<CommunityGoalsAdapter> 
         }
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPositionEvent(CommanderPosition position) {
         // Check download error
         if (!position.getSuccess()) {
@@ -68,7 +69,7 @@ public class CommunityGoalsFragment extends ListFragment<CommunityGoalsAdapter> 
         }
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDistanceEvent(DistanceSearch distanceSearch) {
         // Error
         if (!distanceSearch.getSuccess() && playerSystemName != null) {

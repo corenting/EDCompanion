@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import fr.corenting.edcompanion.adapters.ShipFinderAdapter;
 import fr.corenting.edcompanion.models.events.ResultsList;
@@ -29,7 +30,7 @@ public class ShipFinderFragment extends FinderFragment<ShipFinderAdapter> {
         }
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShipFinderResultEvent(ResultsList<ShipFinderResult> results) {
         // Error
         if (!results.getSuccess()) {
@@ -42,7 +43,7 @@ public class ShipFinderFragment extends FinderFragment<ShipFinderAdapter> {
         recyclerViewAdapter.setResults(results.getResults());
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFindButtonEvent(ShipFinderSearch event) {
         lastSearch = event;
         startLoading();

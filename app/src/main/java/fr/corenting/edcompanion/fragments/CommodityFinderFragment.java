@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.fragments;
 import android.util.Log;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommodityFinderAdapter;
@@ -32,7 +33,7 @@ public class CommodityFinderFragment extends FinderFragment<CommodityFinderAdapt
         return new CommodityFinderAdapter(getContext());
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShipFinderResultEvent(ResultsList<CommodityFinderResult> results) {
         Log.d("Event", "Results called");
         // Error
@@ -46,7 +47,7 @@ public class CommodityFinderFragment extends FinderFragment<CommodityFinderAdapt
         recyclerViewAdapter.setResults(results.getResults());
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFindButtonEvent(CommodityFinderSearch event) {
         startLoading();
 

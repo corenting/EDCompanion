@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class GalnetFragment extends ListFragment<GalnetAdapter> {
         return new GalnetAdapter(getContext(), recyclerView, false);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNewsEvent(GalnetNews news) {
         // Error case
         if (!news.getSuccess()) {
