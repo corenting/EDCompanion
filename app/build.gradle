@@ -11,8 +11,8 @@ android {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 25
-        versionName "1.15"
+        versionCode 26
+        versionName "1.15.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -80,7 +80,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
-    implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
+    implementation "com.mikepenz:itemanimators:1.0.2"
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

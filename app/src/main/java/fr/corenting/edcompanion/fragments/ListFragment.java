@@ -10,13 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
+import com.mikepenz.itemanimators.SlideInOutRightAnimator;
+import com.mikepenz.itemanimators.SlideLeftAlphaAnimator;
+
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.ListAdapter;
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragment {
     @BindView(R.id.recyclerView)
@@ -41,7 +44,7 @@ public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragmen
         recyclerView.setAdapter(recyclerViewAdapter);
 
         // Animation
-        recyclerView.setItemAnimator(new SlideInLeftAnimator());
+        recyclerView.setItemAnimator(new SlideInOutLeftAnimator(recyclerView));
         
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {

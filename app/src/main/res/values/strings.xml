@@ -195,8 +195,8 @@
         <a href="https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b">ClickToSelectEditText</a><br />
         <a href="http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/">DelayAutoCompleteTextView</a><br />
         <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/mikepenz/ItemAnimators">ItemAnimators</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
-        <a href="https://github.com/wasabeef/recyclerview-animators">RecyclerView Animators</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://square.github.io/retrofit/">Retrofit</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/JakeWharton/ThreeTenABP">ThreeTenABP</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         ]]>
@@ -263,10 +263,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 1.15</b><br />
+            <b>Version 1.15.1</b><br />
             <ul>
-                <li>Change display method for rewards table</li><br />
-                <li>Bug fixes</li><br />
+                <li>Fix crashes in lists</li><br />
             </ul>
         ]]>
     </string>

@@ -76,6 +76,7 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         int size = results.size();
         results.clear();
         notifyItemRangeRemoved(1, size);
+        notifyDataSetChanged();
     }
 
     public TextView getEmptyTextView() {

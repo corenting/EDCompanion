@@ -9,13 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
+import com.mikepenz.itemanimators.SlideInOutRightAnimator;
+import com.mikepenz.itemanimators.SlideLeftAlphaAnimator;
+
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.FinderAdapter;
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fragment {
 
@@ -37,7 +40,7 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerViewAdapter = getNewRecyclerViewAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setItemAnimator(new SlideInLeftAnimator());
+        recyclerView.setItemAnimator(new SlideInOutLeftAnimator(recyclerView));
 
         // Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
