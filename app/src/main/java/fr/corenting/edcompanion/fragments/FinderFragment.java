@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
     public RecyclerView recyclerView;
 
     protected TAdapter recyclerViewAdapter;
+    private Bundle recyclerViewHeaderState;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +40,8 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerViewAdapter = getNewRecyclerViewAdapter();
+        recyclerViewAdapter = savedInstanceState == null ?
+                getNewRecyclerViewAdapter() : recyclerViewAdapter;
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setItemAnimator(new SlideInOutLeftAnimator(recyclerView));
 
@@ -50,7 +53,6 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
-
         return v;
     }
 
@@ -59,7 +61,6 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
-
 
     @Override
     public void onStart() {
@@ -87,4 +88,5 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
     public abstract TAdapter getNewRecyclerViewAdapter();
 
     public abstract void onSwipeToRefresh();
+
 }

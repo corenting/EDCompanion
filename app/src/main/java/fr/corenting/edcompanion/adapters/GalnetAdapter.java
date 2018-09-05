@@ -59,7 +59,7 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
 
     @Override
     public void onBindViewHolder(final newsViewHolder holder, final int position) {
-        GalnetArticle currentNews = dataSet.get(position);
+        GalnetArticle currentNews = dataSet.get(holder.getAdapterPosition());
 
         // News content
         holder.titleTextView.setText(currentNews.getTitle());

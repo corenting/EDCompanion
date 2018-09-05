@@ -13,13 +13,14 @@ import org.threeten.bp.Instant;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
-import fr.corenting.edcompanion.utils.SettingsUtils;
+import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
@@ -29,8 +30,12 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter.HeaderViewHolder, CommodityFinderAdapter.ResultViewHolder, CommodityFinderResult> {
 
+    private final NumberFormat numberFormat;
+
     public CommodityFinderAdapter(Context context) {
         super(context);
+        Locale userLocale = DateUtils.getCurrentLocale(context);
+        numberFormat =  NumberFormat.getIntegerInstance(userLocale);
     }
 
     @Override
@@ -41,6 +46,11 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
     @Override
     protected RecyclerView.ViewHolder getResultViewHolder(View v) {
         return new ResultViewHolder(v);
+    }
+
+    @Override
+    public TextView getEmptyTextView() {
+        return getHeader().emptyText;
     }
 
     @Override
@@ -118,20 +128,14 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         holder.stockInputEditText.setOnSubmit(onSubmit);
         holder.commodityInputEditText.setOnSubmit(onSubmit);
         holder.systemInputEditText.setOnSubmit(onSubmit);
-
-
-        // Bind empty text view
-        emptyTextView = holder.emptyText;
     }
 
     @Override
     protected void bindResultViewHolder(ResultViewHolder holder, int position) {
         CommodityFinderResult currentResult = results.get(position - 1);
-        NumberFormat numberFormat =
-                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context));
 
         // For price, also display the difference with the avg galactic price
-        String priceDifference = getPriceDifferenceString(numberFormat,
+        String priceDifference = getPriceDifferenceString(
                 currentResult.getPriceDifferenceFromAverage());
         String buyPrice = numberFormat.format(currentResult.getBuyPrice());
         holder.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
@@ -153,12 +157,10 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         holder.stockTextView.setText(numberFormat.format(currentResult.getStock()));
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
-        holder.distanceToStarTextView.setText(context.getString(R.string.distance_ls,
-                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context))
+        holder.distanceToStarTextView.setText(context.getString(R.string.distance_ls, numberFormat
                         .format(currentResult.getDistanceToStar())));
     }
-
-    private String getPriceDifferenceString(NumberFormat numberFormat, int priceDifference) {
+    private String getPriceDifferenceString(int priceDifference) {
         String result = numberFormat.format(priceDifference);
         if (priceDifference >= 0) {
             return "+" + result;

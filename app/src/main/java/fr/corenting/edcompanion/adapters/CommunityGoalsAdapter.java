@@ -50,7 +50,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
     @Override
     public void onBindViewHolder(final goalsViewHolder holder, final int position) {
-        CommunityGoal currentGoal = dataSet.get(position);
+        CommunityGoal currentGoal = dataSet.get(holder.getAdapterPosition());
 
         // Content
         holder.titleTextView.setText(currentGoal.getTitle());

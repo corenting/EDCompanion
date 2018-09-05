@@ -44,6 +44,10 @@ import fr.corenting.edcompanion.utils.ViewUtils;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private String KEY_CURRENT_TITLE =  "CURRENT_TITLE";
+    private String KEY_CURRENT_SUBTITLE =  "CURRENT_SUBTITLE";
+    private String KEY_CURRENT_TAG =  "CURRENT_TAG";
+
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawer;
     @BindView(R.id.nav_view)
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager fragmentManager;
     private CharSequence currentTitle;
     private CharSequence currentSubtitle;
+    private String currentFragmentTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +91,11 @@ public class MainActivity extends AppCompatActivity
             navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
             switchOnNavigation(getString(R.string.community_goals), R.id.nav_cg);
         } else {
-            currentTitle = savedInstanceState.getCharSequence("currentTitle");
-            currentSubtitle = savedInstanceState.getCharSequence("currentSubtitle");
+            currentTitle = savedInstanceState.getCharSequence(KEY_CURRENT_TITLE);
+            currentSubtitle = savedInstanceState.getCharSequence(KEY_CURRENT_SUBTITLE);
+            currentFragmentTag = savedInstanceState.getString(KEY_CURRENT_TAG);
+            Fragment fragment = fragmentManager.findFragmentByTag(currentFragmentTag);
+            ViewUtils.switchFragment(fragmentManager, fragment, currentFragmentTag);
             updateActionBar();
         }
 
@@ -95,7 +103,8 @@ public class MainActivity extends AppCompatActivity
         updateServerStatus();
 
         // Set listener on server status text to refresh it
-        TextView drawerSubtitleTextView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        TextView drawerSubtitleTextView = navigationView.getHeaderView(0)
+                .findViewById(R.id.drawerSubtitleTextView);
         drawerSubtitleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,8 +124,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putCharSequence("currentTitle", currentTitle);
-        outState.putCharSequence("currentSubtitle", currentSubtitle);
+        outState.putCharSequence(KEY_CURRENT_TITLE, currentTitle);
+        outState.putCharSequence(KEY_CURRENT_SUBTITLE, currentSubtitle);
+        outState.putString(KEY_CURRENT_TAG, currentFragmentTag);
         super.onSaveInstanceState(outState);
     }
 
@@ -143,9 +153,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        boolean ret = switchOnNavigation(item.getTitle().toString(), item.getItemId());
         drawer.closeDrawer(GravityCompat.START);
-        return ret;
+        return switchOnNavigation(item.getTitle().toString(), item.getItemId());
     }
 
     @Override
@@ -220,13 +229,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_about: {
                 Intent i = new Intent(this, AboutActivity.class);
                 startActivity(i);
-                drawer.closeDrawer(GravityCompat.START);
                 return false;
             }
             case R.id.nav_settings: {
                 Intent i = new Intent(this, SettingsActivity.class);
                 startActivity(i);
-                drawer.closeDrawer(GravityCompat.START);
                 return false;
             }
         }
@@ -236,11 +243,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void switchFragment(String tag) {
+        currentFragmentTag = tag;
+
+        // Get previous fragment if exists
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         Bundle args = new Bundle();
         if (fragment != null) {
-            fragmentManager.beginTransaction().replace(R.id.fragmentContent, fragment, tag).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContent,
+                    fragment, tag).commit();
+            return;
         }
+
+        // Else
         switch (tag) {
             case GalnetFragment.GALNET_FRAGMENT_TAG:
                 fragment = new GalnetFragment();

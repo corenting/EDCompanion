@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.threeten.bp.Instant;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,8 +28,12 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderViewHolder, ShipFinderAdapter.ResultViewHolder, ShipFinderResult> {
 
+    private final NumberFormat numberFormat;
+
     public ShipFinderAdapter(Context context) {
         super(context);
+        Locale userLocale = SettingsUtils.getUserLocale(context);
+        numberFormat = NumberFormat.getIntegerInstance(userLocale);
     }
 
     @Override
@@ -39,6 +44,11 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
     @Override
     protected RecyclerView.ViewHolder getResultViewHolder(View v) {
         return new ResultViewHolder(v);
+    }
+
+    @Override
+    public TextView getEmptyTextView() {
+        return getHeader().emptyText;
     }
 
     @Override
@@ -96,9 +106,6 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         });
         holder.shipInputEditText.setOnSubmit(onSubmit);
         holder.systemInputEditText.setOnSubmit(onSubmit);
-
-        // Bind empty text view
-        emptyTextView = holder.emptyText;
     }
 
     @Override
@@ -114,8 +121,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
         holder.starDistanceTextView.setText(context.getString(R.string.distance_ls,
-                NumberFormat.getIntegerInstance(SettingsUtils.getUserLocale(context))
-                        .format(currentResult.getDistanceToStar())));
+                numberFormat.format(currentResult.getDistanceToStar())));
         holder.permitRequiredTextView.setVisibility(
                 currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
         holder.isPlanetaryImageView.setVisibility(

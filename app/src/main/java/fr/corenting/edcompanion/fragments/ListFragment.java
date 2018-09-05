@@ -40,12 +40,12 @@ public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragmen
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerViewAdapter = getAdapter();
+        recyclerViewAdapter = savedInstanceState == null ? getAdapter() : recyclerViewAdapter;
         recyclerView.setAdapter(recyclerViewAdapter);
 
         // Animation
         recyclerView.setItemAnimator(new SlideInOutLeftAnimator(recyclerView));
-        
+
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -57,9 +57,13 @@ public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragmen
         swipeRefreshLayout.setOnRefreshListener(listener);
         emptySwipeRefreshLayout.setOnRefreshListener(listener);
 
-        // Load data
-        startLoading();
-        getData();
+        // Load data if not restored
+        if (savedInstanceState != null) {
+            endLoading(recyclerViewAdapter.getItemCount() == 0);
+        } else {
+            startLoading();
+            getData();
+        }
 
         return v;
     }
@@ -88,6 +92,10 @@ public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragmen
         if (empty) {
             emptySwipeRefreshLayout.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setVisibility(View.GONE);
+        }
+        else {
+            emptySwipeRefreshLayout.setVisibility(View.GONE);
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
         }
         emptySwipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setRefreshing(false);
