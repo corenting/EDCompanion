@@ -33,6 +33,7 @@ import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
 import fr.corenting.edcompanion.fragments.ShipFinderFragment;
+import fr.corenting.edcompanion.fragments.SystemFinderFragment;
 import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.ChangelogUtils;
@@ -211,6 +212,11 @@ public class MainActivity extends AppCompatActivity
                 switchFragment(GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG);
                 break;
             }
+            case R.id.nav_systems: {
+                switchFragment(SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG);
+                currentSubtitle = getString(R.string.edsm_credits);
+                break;
+            }
             case R.id.nav_distance_calculator: {
                 switchFragment(DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG);
                 currentSubtitle = getString(R.string.eddb_credits);
@@ -267,6 +273,9 @@ public class MainActivity extends AppCompatActivity
                 args.putBoolean("reportsMode", true);
                 fragment.setArguments(args);
                 ViewUtils.switchFragment(fragmentManager, fragment, tag);
+                break;
+            case SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG:
+                ViewUtils.switchFragment(fragmentManager, new SystemFinderFragment(), tag);
                 break;
             case CommanderFragment.COMMANDER_FRAGMENT:
                 ViewUtils.switchFragment(fragmentManager, new CommanderFragment(), tag);

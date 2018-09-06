@@ -20,7 +20,8 @@ public class AutoCompleteNetwork {
     public static List<NameId> searchSystems(Context context, String filter) {
         try {
             EDSMRetrofit edsmRetrofit = RetrofitUtils.getEDSMRetrofit(context);
-            Response<List<EDSMSystem>> response = edsmRetrofit.getSystems(filter, 1).execute();
+            Response<List<EDSMSystem>> response = edsmRetrofit.getSystems(filter, 1,
+                    0, 0).execute();
             List<EDSMSystem> systems = response.body();
             if (!response.isSuccessful() || systems == null) {
                 return new ArrayList<>();

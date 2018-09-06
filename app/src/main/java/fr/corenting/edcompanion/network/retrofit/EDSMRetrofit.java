@@ -28,5 +28,8 @@ public interface EDSMRetrofit {
     Call<EDSMServerStatus> getServerStatus();
 
     @GET("api-v1/systems")
-    Call<List<EDSMSystem>> getSystems(@Query("systemName") String systemName, @Query("showId") int showId);
+    Call<List<EDSMSystem>> getSystems(@Query("systemName") String systemName,
+                                      @Query("showId") int showId,
+                                      @Query("showInformation") int showInformation,
+                                      @Query("showPermit") int showPermit);
 }

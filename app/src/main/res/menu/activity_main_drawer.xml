@@ -14,6 +14,10 @@
             android:icon="@drawable/elite_galnet"
             android:title="@string/galnet_reports" />
         <item
+            android:id="@+id/nav_systems"
+            android:icon="@drawable/ic_globe_black_24dp"
+            android:title="@string/systems" />
+        <item
             android:id="@+id/nav_distance_calculator"
             android:icon="@drawable/elite_map_route"
             android:title="@string/distance_calculator" />

@@ -80,7 +80,7 @@ public class CommanderStatusFragment extends Fragment {
 
         // Set temporary text
         creditsTextView.setText(getResources().getString(R.string.credits, "?"));
-        locationsTextView.setText(getResources().getString(R.string.Unknown));
+        locationsTextView.setText(getResources().getString(R.string.unknown));
         RankUtils.setTempContent(getContext(), federationRankLayout, getString(R.string.rank_federation));
         RankUtils.setTempContent(getContext(), empireRankLayout, getString(R.string.rank_empire));
 
@@ -92,7 +92,7 @@ public class CommanderStatusFragment extends Fragment {
         // Set card title to commander name
         String cmdrName = SettingsUtils.getCommanderName(this.getContext());
         commanderNameTextView.setText(cmdrName.length() == 0 ?
-                getResources().getString(R.string.Unknown) : cmdrName);
+                getResources().getString(R.string.unknown) : cmdrName);
 
         // Hide views according to supported informations from source
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
@@ -143,7 +143,7 @@ public class CommanderStatusFragment extends Fragment {
 
         // Check error case
         if (credits.getBalance() == -1) {
-            creditsTextView.setText(getResources().getString(R.string.Unknown));
+            creditsTextView.setText(getResources().getString(R.string.unknown));
             return;
         }
         Locale currentLocale = SettingsUtils.getUserLocale(getContext());
@@ -168,7 +168,7 @@ public class CommanderStatusFragment extends Fragment {
 
         // Check error case
         if (position.getSystemName() == null) {
-            locationsTextView.setText(getResources().getString(R.string.Unknown));
+            locationsTextView.setText(getResources().getString(R.string.unknown));
         } else {
             locationsTextView.setText(position.getSystemName());
         }
