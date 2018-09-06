@@ -1,10 +1,12 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -12,8 +14,12 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.activities.DetailsActivity;
+import fr.corenting.edcompanion.activities.SystemDetailsActivity;
+import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.models.SystemFinderResult;
 import fr.corenting.edcompanion.models.events.SystemFinderSearch;
+import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
@@ -89,7 +95,7 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
 
     @Override
     protected void bindResultViewHolder(ResultViewHolder holder, int position) {
-        SystemFinderResult currentResult = results.get(position - 1);
+        final SystemFinderResult currentResult = results.get(position - 1);
 
         holder.titleTextView.setText(currentResult.getName());
         holder.permitRequiredTextView.setVisibility(
@@ -99,6 +105,15 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
         holder.securityTextView.setText(getContentOrUnknown(currentResult.getSecurity()));
         holder.governmentTextView.setText(getContentOrUnknown(currentResult.getGovernment()));
         holder.economyTextView.setText(getContentOrUnknown(currentResult.getEconomy()));
+
+        holder.itemLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, SystemDetailsActivity.class);
+                i.putExtra(context.getString(R.string.system_label), currentResult.getName());
+                MiscUtils.startIntentWithFadeAnimation(context, i);
+            }
+        });
     }
 
     private String getContentOrUnknown(String content) {
@@ -107,6 +122,9 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.itemLayout)
+        RelativeLayout itemLayout;
 
         @BindView(R.id.titleTextView)
         TextView titleTextView;

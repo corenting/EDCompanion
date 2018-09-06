@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
@@ -45,6 +46,7 @@ public class RetrofitUtils {
     {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .registerTypeAdapter(EDSMSystemInformation.class, new EDSMDeserializer())
                 .create();
 
         return new Retrofit.Builder()

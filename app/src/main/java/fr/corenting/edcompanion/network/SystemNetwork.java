@@ -8,9 +8,13 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.SystemFinderResult;
+import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystem;
 import fr.corenting.edcompanion.models.events.ResultsList;
+import fr.corenting.edcompanion.models.events.SystemDetails;
+import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.utils.RetrofitUtils;
 import retrofit2.Call;
@@ -53,5 +57,38 @@ public class SystemNetwork {
         };
 
         retrofit.getSystems(system, 1, 1, 1).enqueue(callback);
+    }
+
+    public static void getSystemDetails(Context ctx, String system) {
+        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+
+        retrofit2.Callback<SystemResponse> callback = new retrofit2.Callback<SystemResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SystemResponse> call,
+                                   retrofit2.Response<SystemResponse> response) {
+
+                SystemResponse body = response.body();
+                if (!response.isSuccessful() || body == null) {
+                    onFailure(call, new Exception("Invalid response"));
+                } else {
+                    SystemDetails event;
+                    try {
+                        System convertedSystem = System.Companion.fromSystemResponse(body);
+                        event = new SystemDetails(true, convertedSystem);
+                    } catch (Exception ex) {
+                        event = new SystemDetails(false, null);
+                    }
+                    EventBus.getDefault().post(event);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SystemResponse> call, @NonNull Throwable t) {
+                EventBus.getDefault().post(new ResultsList<>(false,
+                        new ArrayList<SystemFinderResult>()));
+            }
+        };
+
+        retrofit.getSystemDetails(system).enqueue(callback);
     }
 }

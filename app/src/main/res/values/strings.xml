@@ -188,11 +188,18 @@
     <string name="systems">Systems</string>
     <string name="systems_subtitle">Search for a system (click on a result for more details about the system)</string>
     <string name="system_label">System</string>
+    <string name="stations">Stations</string>
     <string name="search">Search</string>
     <string name="allegiance_label">Allegiance</string>
     <string name="security_label">Security</string>
     <string name="government_label">Government</string>
     <string name="economy_label">Economy</string>
+    <string name="coordinates_label">Coordinates</string>
+    <string name="coordinates_num">%1$.5f / %2$.5f / %3$.5f</string>
+    <string name="power_label">Power</string>
+    <string name="state_label">State</string>
+    <string name="population_label">Population</string>
+    <string name="controlling_faction_label">Controlling faction</string>
 
     <!--About-->
     <string name="title_activity_about">About</string>

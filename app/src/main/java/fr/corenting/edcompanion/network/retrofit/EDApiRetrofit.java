@@ -9,6 +9,7 @@ import fr.corenting.edcompanion.models.apis.EDApi.DistanceResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.GalnetArticleResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
+import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -34,6 +35,9 @@ public interface EDApiRetrofit {
     @GET("{system}/stations/ships/{ship}")
     Call<List<ShipFinderResponse>> findShip(@Path("system") String system,
                                             @Path("ship") String ship);
+
+    @GET("system/{system}")
+    Call<SystemResponse> getSystemDetails(@Path("system") String system);
 
     @GET("{system}/stations/commodities/{commodity}")
     Call<List<CommodityFinderResponse>> findCommodity(@Path("system") String system,

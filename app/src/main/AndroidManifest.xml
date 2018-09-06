@@ -28,6 +28,10 @@
             android:label="@string/title_activity_community_goal_details"
             android:theme="@style/Theme.AppDetails" />
         <activity
+            android:name=".activities.SystemDetailsActivity"
+            android:label="@string/system_label"
+            android:theme="@style/Theme.AppDetails" />
+        <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about"
             android:theme="@style/Theme.AppDetails" />

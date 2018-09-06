@@ -24,5 +24,13 @@ public class Station {
     public String Type;
 
     @SerializedName("system")
-    public System System;
+    public StationSystem System;
+
+    public class StationSystem {
+        @SerializedName("name")
+        public String Name;
+
+        @SerializedName("permit_required")
+        public boolean PermitRequired;
+    }
 }

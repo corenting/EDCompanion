@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
-import com.mikepenz.itemanimators.SlideInOutRightAnimator;
-import com.mikepenz.itemanimators.SlideLeftAlphaAnimator;
 
 import org.greenrobot.eventbus.EventBus;
 
