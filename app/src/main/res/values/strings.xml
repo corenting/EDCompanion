@@ -200,6 +200,10 @@
     <string name="state_label">State</string>
     <string name="population_label">Population</string>
     <string name="controlling_faction_label">Controlling faction</string>
+    <string name="factions">Factions</string>
+    <string name="current_state">Current state</string>
+    <string name="no_factions">No factions in this system</string>
+    <string name="influence">Influence</string>
 
     <!--About-->
     <string name="title_activity_about">About</string>

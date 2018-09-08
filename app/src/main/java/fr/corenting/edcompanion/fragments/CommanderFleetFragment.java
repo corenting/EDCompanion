@@ -7,7 +7,7 @@ import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class CommanderFleetFragment extends ListFragment<CommunityGoalsAdapter> {
+public class CommanderFleetFragment extends AbstractListFragment<CommunityGoalsAdapter> {
 
     public static final String COMMANDER_FLEET_FRAGMENT_TAG = "commander_fleet_fragment";
 

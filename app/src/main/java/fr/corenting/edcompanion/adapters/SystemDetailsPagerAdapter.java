@@ -6,9 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.fragments.CommanderFleetFragment;
-import fr.corenting.edcompanion.fragments.CommanderStatusFragment;
 import fr.corenting.edcompanion.fragments.SystemDetailsFragment;
+import fr.corenting.edcompanion.fragments.SystemFactionsFragment;
 
 public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
 
@@ -41,7 +40,7 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new SystemDetailsFragment();
             case 1:
-                return new CommanderFleetFragment();
+                return new SystemFactionsFragment();
             default:
                 return new SystemDetailsFragment();
         }
@@ -53,7 +52,7 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return context.getString(R.string.system_label);
             case 1:
-                return context.getString(R.string.stations);
+                return context.getString(R.string.factions);
             default:
                 return context.getString(R.string.system_label);
 
@@ -65,7 +64,7 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return SystemDetailsFragment.SYSTEM_DETAILS_FRAGMENT;
             case 1:
-                return CommanderFleetFragment.COMMANDER_FLEET_FRAGMENT_TAG;
+                return SystemFactionsFragment.SYSTEM_FACTIONS_FRAGMENT;
             default:
                 return SystemDetailsFragment.SYSTEM_DETAILS_FRAGMENT;
         }

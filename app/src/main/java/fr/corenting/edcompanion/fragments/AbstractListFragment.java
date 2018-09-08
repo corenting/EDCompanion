@@ -1,7 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
-
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.ListAdapter;
 
-public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragment {
+public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends Fragment {
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
     @BindView(R.id.swipeContainer)
@@ -30,7 +30,7 @@ public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragmen
     protected TAdapter recyclerViewAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, v);
@@ -90,8 +90,7 @@ public abstract class ListFragment<TAdapter extends ListAdapter> extends Fragmen
         if (empty) {
             emptySwipeRefreshLayout.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             emptySwipeRefreshLayout.setVisibility(View.GONE);
             swipeRefreshLayout.setVisibility(View.VISIBLE);
         }

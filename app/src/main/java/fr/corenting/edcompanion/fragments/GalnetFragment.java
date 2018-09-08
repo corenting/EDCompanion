@@ -17,7 +17,7 @@ import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.network.GalnetNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class GalnetFragment extends ListFragment<GalnetAdapter> {
+public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
 
     public static final String GALNET_FRAGMENT_TAG = "galnet_fragment";
     public static final String GALNET_REPORTS_FRAGMENT_TAG = "galnet_reports_fragment";

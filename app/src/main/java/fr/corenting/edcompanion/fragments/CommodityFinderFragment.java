@@ -13,7 +13,7 @@ import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.network.CommodityFinderNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class CommodityFinderFragment extends FinderFragment<CommodityFinderAdapter> {
+public class CommodityFinderFragment extends AbstractFinderFragment<CommodityFinderAdapter> {
 
     public static final String COMMODITY_FINDER_FRAGMENT_TAG = "commodity_finder_fragment";
 

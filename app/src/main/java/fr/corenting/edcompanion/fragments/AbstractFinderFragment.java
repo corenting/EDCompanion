@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
-import com.mikepenz.itemanimators.SlideInOutRightAnimator;
-import com.mikepenz.itemanimators.SlideLeftAlphaAnimator;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,7 +19,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.FinderAdapter;
 
-public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fragment {
+public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> extends Fragment {
 
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
@@ -29,10 +27,9 @@ public abstract class FinderFragment<TAdapter extends FinderAdapter> extends Fra
     public RecyclerView recyclerView;
 
     protected TAdapter recyclerViewAdapter;
-    private Bundle recyclerViewHeaderState;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_finder, container, false);
         ButterKnife.bind(this, v);

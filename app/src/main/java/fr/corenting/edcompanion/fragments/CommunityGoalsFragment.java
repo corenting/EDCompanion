@@ -18,7 +18,7 @@ import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 
-public class CommunityGoalsFragment extends ListFragment<CommunityGoalsAdapter> {
+public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsAdapter> {
 
     public static final String COMMUNITY_GOALS_FRAGMENT_TAG = "community_goals_fragment";
 

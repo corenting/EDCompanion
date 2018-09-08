@@ -10,7 +10,7 @@ import fr.corenting.edcompanion.models.events.ShipFinderSearch;
 import fr.corenting.edcompanion.network.ShipFinderNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class ShipFinderFragment extends FinderFragment<ShipFinderAdapter> {
+public class ShipFinderFragment extends AbstractFinderFragment<ShipFinderAdapter> {
 
     public static final String SHIP_FINDER_FRAGMENT_TAG = "ship_finder_fragment";
 

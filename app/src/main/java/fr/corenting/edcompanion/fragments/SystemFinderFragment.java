@@ -10,7 +10,7 @@ import fr.corenting.edcompanion.models.events.SystemFinderSearch;
 import fr.corenting.edcompanion.network.SystemNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class SystemFinderFragment extends FinderFragment<SystemFinderAdapter> {
+public class SystemFinderFragment extends AbstractFinderFragment<SystemFinderAdapter> {
 
     public static final String SYSTEM_FINDER_FRAGMENT_TAG = "system_finder_fragment";
 
