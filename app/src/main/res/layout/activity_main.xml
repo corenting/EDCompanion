@@ -14,7 +14,7 @@
         tools:context="fr.corenting.edcompanion.activities.MainActivity">
 
         <include
-            layout="@layout/app_bar_main"
+            layout="@layout/include_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/app_bar_main"
-            tools:context="fr.corenting.edcompanion.CommunityGoalsActivity">
+            tools:context="fr.corenting.edcompanion.CommunityGoalsActivity"
+            tools:showIn="@layout/app_bar_main">
 
             <FrameLayout
                 android:id="@+id/fragmentContent"

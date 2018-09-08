@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -20,7 +21,8 @@ public class CommunityGoalsNetwork {
         EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
         retrofit2.Callback<CommunityGoalsResponse> callback = new retrofit2.Callback<CommunityGoalsResponse>() {
             @Override
-            public void onResponse(Call<CommunityGoalsResponse> call, retrofit2.Response<CommunityGoalsResponse> response) {
+            public void onResponse(@NonNull Call<CommunityGoalsResponse> call,
+                                   retrofit2.Response<CommunityGoalsResponse> response) {
                 CommunityGoalsResponse body = response.body();
                 if (!response.isSuccessful() || body == null)
                 {
@@ -46,7 +48,7 @@ public class CommunityGoalsNetwork {
             }
 
             @Override
-            public void onFailure(Call<CommunityGoalsResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<CommunityGoalsResponse> call, @NonNull Throwable t) {
                 CommunityGoals goals = new CommunityGoals(false,
                         new ArrayList<CommunityGoal>());
                 EventBus.getDefault().post(goals);

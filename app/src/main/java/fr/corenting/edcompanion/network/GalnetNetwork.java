@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,7 +22,8 @@ public class GalnetNetwork {
 
         retrofit2.Callback<List<GalnetArticleResponse>> callback = new retrofit2.Callback<List<GalnetArticleResponse>>() {
             @Override
-            public void onResponse(Call<List<GalnetArticleResponse>> call, retrofit2.Response<List<GalnetArticleResponse>> response) {
+            public void onResponse(@NonNull Call<List<GalnetArticleResponse>> call,
+                                   retrofit2.Response<List<GalnetArticleResponse>> response) {
                 List<GalnetArticleResponse> body = response.body();
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
@@ -41,7 +43,8 @@ public class GalnetNetwork {
             }
 
             @Override
-            public void onFailure(Call<List<GalnetArticleResponse>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<GalnetArticleResponse>> call,
+                                  @NonNull Throwable t) {
                 GalnetNews news = new GalnetNews(false, new ArrayList<GalnetArticle>());
                 EventBus.getDefault().post(news);
             }

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cardView"
     style="@style/CardView"
     app:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="2dp"
+    app:cardCornerRadius="2dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
@@ -28,11 +27,18 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/isPlanetaryImageView"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+        <ImageView
+            android:id="@+id/isPlanetaryImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_globe_black_24dp" />
 
         <TextView
             android:id="@+id/permitRequiredTextView"
@@ -45,83 +51,117 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/allegianceLabelTextView"
+            android:id="@+id/distanceLabelTextView"
             android:layout_marginTop="8dp"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="@string/allegiance_label"
+            android:text="@string/distance_label"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/allegianceTextView"
+            android:id="@+id/distanceTextView"
             android:layout_marginTop="8dp"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/allegianceLabelTextView"
-            android:layout_toEndOf="@id/allegianceLabelTextView"
+            android:layout_toEndOf="@id/distanceLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/securityLabelTextView"
+            android:id="@+id/distanceToStarLabelTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/allegianceLabelTextView"
+            android:layout_below="@id/distanceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="@string/security_label"
+            android:text="@string/distance_to_star"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/securityTextView"
+            android:id="@+id/distanceToStarTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/allegianceLabelTextView"
+            android:layout_below="@id/distanceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/securityLabelTextView"
-            android:layout_toEndOf="@id/securityLabelTextView"
+            android:layout_toEndOf="@id/distanceLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/governmentLabelTextView"
+            android:id="@+id/lastUpdateLabelTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/securityLabelTextView"
+            android:layout_below="@id/distanceToStarLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="@string/government_label"
+            android:text="@string/last_update_label"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/governmentTextView"
+            android:id="@+id/lastUpdateTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/securityLabelTextView"
+            android:layout_below="@id/distanceToStarLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/governmentLabelTextView"
-            android:layout_toEndOf="@id/governmentLabelTextView"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/economyLabelTextView"
+            android:id="@+id/landingPadLabelTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/governmentLabelTextView"
+            android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="@string/economy_label"
+            android:text="@string/landing_pad_label"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/economyTextView"
+            android:id="@+id/landingPadTextView"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/governmentLabelTextView"
+            android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/economyLabelTextView"
-            android:layout_toEndOf="@id/economyLabelTextView"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/stockLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/landingPadLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/stock_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/stockTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/landingPadLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/priceLabelTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/stockLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/price_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/stockLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
     </RelativeLayout>

@@ -1,180 +1,161 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <RelativeLayout
-        android:id="@+id/container"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeContainer"
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            style="@style/CardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="2dp"
+            app:cardUseCompatPadding="true">
 
-            <android.support.v4.widget.NestedScrollView
+            <RelativeLayout
+                android:id="@+id/itemLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="24dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="24dp">
 
-                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/cardView"
-                    style="@style/CardView"
+                <TextView
+                    android:id="@+id/commanderNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/commander"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+                <RelativeLayout
+                    android:id="@+id/creditsContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/commanderNameTextView"
+                    android:layout_marginTop="8dp">
+
+                    <ImageView
+                        android:id="@+id/creditsImageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:tint="#757575"
+                        app:srcCompat="@drawable/ic_attach_money_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/creditsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_toEndOf="@+id/creditsImageView"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/locationContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/creditsContainer"
+                    android:layout_marginTop="8dp">
+
+                    <ImageView
+                        android:id="@+id/locationImageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:tint="#757575"
+                        app:srcCompat="@drawable/elite_map_marker" />
+
+                    <TextView
+                        android:id="@+id/locationTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_toEndOf="@+id/locationImageView"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/playerRanks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/locationContainer"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/faction_ranks"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+                <include
+                    android:id="@+id/federationRankLayout"
+                    layout="@layout/include_rank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_below="@+id/playerRanks"
+                    android:layout_marginTop="8dp" />
+
+                <include
+                    android:id="@+id/empireRankLayout"
+                    layout="@layout/include_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/federationRankLayout" />
+
+                <TextView
+                    android:id="@+id/factionsRanks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/empireRankLayout"
                     android:layout_marginTop="8dp"
-                    app:cardUseCompatPadding="true"
-                    card_view:cardCornerRadius="2dp">
+                    android:text="@string/player_ranks"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
-                    <RelativeLayout
-                        android:id="@+id/itemLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingBottom="24dp"
-                        android:paddingLeft="24dp"
-                        android:paddingRight="24dp"
-                        android:paddingTop="24dp">
+                <include
+                    android:id="@+id/combatRankLayout"
+                    layout="@layout/include_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/factionsRanks"
+                    android:layout_marginTop="8dp" />
 
-                        <TextView
-                            android:id="@+id/commanderNameTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="2"
-                            android:text="@string/commander"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                <include
+                    android:id="@+id/tradeRankLayout"
+                    layout="@layout/include_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/combatRankLayout" />
 
-                        <RelativeLayout
-                            android:id="@+id/creditsContainer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/commanderNameTextView"
-                            android:layout_marginTop="8dp">
+                <include
+                    android:id="@+id/explorationRankLayout"
+                    layout="@layout/include_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tradeRankLayout" />
 
-                            <ImageView
-                                android:id="@+id/creditsImageView"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true"
-                                android:layout_centerVertical="true"
-                                android:tint="#757575"
-                                card_view:srcCompat="@drawable/ic_attach_money_black_24dp" />
+                <include
+                    android:id="@+id/arenaRankLayout"
+                    layout="@layout/include_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/explorationRankLayout" />
 
-                            <TextView
-                                android:id="@+id/creditsTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
-                                android:layout_marginStart="4dp"
-                                android:layout_toEndOf="@+id/creditsImageView"
-                                android:layout_toRightOf="@+id/creditsImageView"
-                                android:gravity="center_vertical"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
-                        </RelativeLayout>
+            </RelativeLayout>
 
-                        <RelativeLayout
-                            android:id="@+id/locationContainer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/creditsContainer"
-                            android:layout_marginTop="8dp">
-
-                            <ImageView
-                                android:id="@+id/locationImageView"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true"
-                                android:layout_centerVertical="true"
-                                android:tint="#757575"
-                                card_view:srcCompat="@drawable/elite_map_marker" />
-
-                            <TextView
-                                android:id="@+id/locationTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
-                                android:layout_marginStart="4dp"
-                                android:layout_toEndOf="@+id/locationImageView"
-                                android:layout_toRightOf="@+id/locationImageView"
-                                android:gravity="center_vertical"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/playerRanks"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/locationContainer"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/faction_ranks"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
-
-                        <include
-                            android:id="@+id/federationRankLayout"
-                            layout="@layout/rank_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/playerRanks"
-                            android:layout_marginTop="8dp" />
-
-                        <include
-                            android:id="@+id/empireRankLayout"
-                            layout="@layout/rank_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/federationRankLayout" />
-
-                        <TextView
-                            android:id="@+id/factionsRanks"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/empireRankLayout"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/player_ranks"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
-
-                        <include
-                            android:id="@+id/combatRankLayout"
-                            layout="@layout/rank_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/factionsRanks"
-                            android:layout_marginTop="8dp" />
-
-                        <include
-                            android:id="@+id/tradeRankLayout"
-                            layout="@layout/rank_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/combatRankLayout" />
-
-                        <include
-                            android:id="@+id/explorationRankLayout"
-                            layout="@layout/rank_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tradeRankLayout" />
-
-                        <include
-                            android:id="@+id/arenaRankLayout"
-                            layout="@layout/rank_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/explorationRankLayout" />
-
-                    </RelativeLayout>
-
-                </android.support.v7.widget.CardView>
-            </android.support.v4.widget.NestedScrollView>
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

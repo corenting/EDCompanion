@@ -60,7 +60,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
     @Override
     protected int getResultResId() {
-        return R.layout.commodity_finder_list_item;
+        return R.layout.list_item_commodity_finder_result;
     }
 
     @Override

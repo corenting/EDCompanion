@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.preference.EditTextPreference;
 
 import java.util.ArrayList;
@@ -96,7 +97,8 @@ public class InaraPlayer extends PlayerNetwork {
 
         retrofit2.Callback<InaraProfileResponse> callback = new retrofit2.Callback<InaraProfileResponse>() {
             @Override
-            public void onResponse(Call<InaraProfileResponse> call, retrofit2.Response<InaraProfileResponse> response) {
+            public void onResponse(@NonNull Call<InaraProfileResponse> call,
+                                   retrofit2.Response<InaraProfileResponse> response) {
                 InaraProfileResponse body = response.body();
                 if (!response.isSuccessful() || body == null || body.events == null ||
                         body.events.size() != 1) {
@@ -174,17 +176,15 @@ public class InaraPlayer extends PlayerNetwork {
                         ranks = new Ranks(true, combatRank, tradeRank, exploreRank,
                                 cqcRank, federationRank, empireRank);
                     } catch (Exception e) {
-                        ranks = new Ranks(false, null, null,
-                                null, null, null, null);
+                        ranks = new Ranks(false);
                     }
                     sendResultMessage(ranks);
                 }
             }
 
             @Override
-            public void onFailure(Call<InaraProfileResponse> call, Throwable t) {
-                Ranks ranks = new Ranks(false, null, null,
-                        null, null, null, null);
+            public void onFailure(@NonNull Call<InaraProfileResponse> call, @NonNull Throwable t) {
+                Ranks ranks = new Ranks(false);
                 sendResultMessage(ranks);
             }
         };

@@ -49,7 +49,7 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
 
     @Override
     public newsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.galnet_list_item,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_galnet,
                 parent, false);
         if (!isDetailsView) {
             v.setOnClickListener(onClickListener);

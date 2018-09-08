@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/app_bar_main"/>
+    <include layout="@layout/include_app_bar"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_marginTop="16dp"
@@ -25,7 +25,6 @@
                 android:paddingTop="16dp"
                 android:text="@string/app_name"
                 android:id="@+id/appNameTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -35,8 +34,7 @@
                 android:id="@+id/versionTextView"
                 android:layout_alignBottom="@+id/appNameTextView"
                 android:layout_alignBaseline="@+id/appNameTextView"
-                android:layout_toEndOf="@+id/appNameTextView"
-                android:layout_toRightOf="@+id/appNameTextView" />
+                android:layout_toEndOf="@+id/appNameTextView"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,7 +42,6 @@
                 android:text="@string/about_text"
                 android:id="@+id/aboutContentTextView"
                 android:layout_below="@+id/appNameTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -54,7 +51,6 @@
                 android:text="@string/about_libs_title"
                 android:id="@+id/librariesTitleTextView"
                 android:layout_below="@+id/aboutContentTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:paddingTop="16dp" />
 
@@ -63,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/librariesContentTextView"
                 android:layout_below="@+id/librariesTitleTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -73,7 +68,6 @@
                 android:text="@string/about_icons_title"
                 android:id="@+id/iconsTitleTextView"
                 android:layout_below="@+id/librariesContentTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:paddingTop="16dp" />
 
@@ -82,7 +76,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/iconsContentTextView"
                 android:layout_below="@+id/iconsTitleTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -92,7 +85,6 @@
                 android:text="@string/about_contact_me_title"
                 android:id="@+id/contactTitleTextView"
                 android:layout_below="@+id/iconsContentTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:paddingTop="16dp" />
 
@@ -101,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/contactTextView"
                 android:layout_below="@+id/contactTitleTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>

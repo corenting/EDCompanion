@@ -58,7 +58,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
     @Override
     protected int getResultResId() {
-        return R.layout.ship_finder_list_item;
+        return R.layout.list_item_ship_finder_result;
     }
 
     @Override

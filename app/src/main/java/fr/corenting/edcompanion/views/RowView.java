@@ -45,7 +45,7 @@ public class RowView extends RelativeLayout {
     }
 
     private void init() {
-        inflate(getContext(), R.layout.row_view, this);
+        inflate(getContext(), R.layout.view_row, this);
         ButterKnife.bind(this);
 
         setListeners(firstCellTextView);

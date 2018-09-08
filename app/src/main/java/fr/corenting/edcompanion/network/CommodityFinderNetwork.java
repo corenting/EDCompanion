@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -24,7 +25,8 @@ public class CommodityFinderNetwork {
 
         final retrofit2.Callback<List<CommodityFinderResponse>> callback = new retrofit2.Callback<List<CommodityFinderResponse>>() {
             @Override
-            public void onResponse(Call<List<CommodityFinderResponse>> call, retrofit2.Response<List<CommodityFinderResponse>> response) {
+            public void onResponse(@NonNull Call<List<CommodityFinderResponse>> call,
+                                   retrofit2.Response<List<CommodityFinderResponse>> response) {
 
                 // Check response
                 final List<CommodityFinderResponse> sellersResponseBody = response.body();
@@ -36,7 +38,8 @@ public class CommodityFinderNetwork {
             }
 
             @Override
-            public void onFailure(Call<List<CommodityFinderResponse>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<CommodityFinderResponse>> call,
+                                  Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
                         new ArrayList<CommodityFinderResult>()));
             }

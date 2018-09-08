@@ -52,7 +52,7 @@ public class TableView extends RelativeLayout {
     }
 
     private void init() {
-        inflate(getContext(), R.layout.table_view, this);
+        inflate(getContext(), R.layout.view_table, this);
         ButterKnife.bind(this);
     }
 

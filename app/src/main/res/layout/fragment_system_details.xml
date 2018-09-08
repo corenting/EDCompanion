@@ -1,10 +1,6 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,10 +41,8 @@
                             android:id="@+id/systemNameTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toLeftOf="@id/logoImageView"
                             android:layout_toStartOf="@id/logoImageView"
                             android:layout_alignParentStart="true"
-                            android:layout_alignParentLeft="true"
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:text="@string/system_label"
@@ -58,7 +52,6 @@
                             android:id="@+id/logoImageView"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_alignParentRight="true"
                             android:layout_alignParentEnd="true"
                             app:srcCompat="@drawable/ic_globe_black_24dp" />
 
@@ -89,7 +82,6 @@
                             android:layout_below="@id/permitRequiredTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/coordsLabelTextView"
                             android:layout_toEndOf="@id/coordsLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -109,7 +101,6 @@
                             android:layout_below="@id/coordsLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/allegianceLabelTextView"
                             android:layout_toEndOf="@id/allegianceLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -129,7 +120,6 @@
                             android:layout_below="@id/allegianceLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/powerLabelTextView"
                             android:layout_toEndOf="@id/powerLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -149,7 +139,6 @@
                             android:layout_below="@id/powerLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/securityLabelTextView"
                             android:layout_toEndOf="@id/securityLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -169,7 +158,6 @@
                             android:layout_below="@id/securityLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/governmentLabelTextView"
                             android:layout_toEndOf="@id/governmentLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -189,7 +177,6 @@
                             android:layout_below="@id/governmentLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/controllingFactionLabelTextView"
                             android:layout_toEndOf="@id/controllingFactionLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -209,7 +196,6 @@
                             android:layout_below="@id/controllingFactionLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/economyLabelTextView"
                             android:layout_toEndOf="@id/economyLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -229,7 +215,6 @@
                             android:layout_below="@id/economyLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/stateLabelTextView"
                             android:layout_toEndOf="@id/stateLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -249,7 +234,6 @@
                             android:layout_below="@id/stateLabelTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/populationLabelTextView"
                             android:layout_toEndOf="@id/populationLabelTextView"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -259,4 +243,3 @@
             </android.support.v4.widget.NestedScrollView>
         </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>

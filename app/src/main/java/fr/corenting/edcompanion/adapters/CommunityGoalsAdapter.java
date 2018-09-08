@@ -40,7 +40,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
     @Override
     public goalsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cg_list_item,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_community_goal,
                 parent, false);
         if (!isDetailsView) {
             v.setOnClickListener(onClickListener);

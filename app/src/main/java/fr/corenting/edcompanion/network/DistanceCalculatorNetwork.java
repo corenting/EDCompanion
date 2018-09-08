@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -17,7 +18,8 @@ public class DistanceCalculatorNetwork {
 
         retrofit2.Callback<DistanceResponse> callback = new retrofit2.Callback<DistanceResponse>() {
             @Override
-            public void onResponse(Call<DistanceResponse> call, retrofit2.Response<DistanceResponse> response) {
+            public void onResponse(@NonNull Call<DistanceResponse> call,
+                                   retrofit2.Response<DistanceResponse> response) {
                 DistanceResponse body = response.body();
                 if (!response.isSuccessful() || body == null)
                 {
@@ -38,7 +40,7 @@ public class DistanceCalculatorNetwork {
             }
 
             @Override
-            public void onFailure(Call<DistanceResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<DistanceResponse> call, @NonNull Throwable t) {
                 DistanceSearch distanceSearch = new DistanceSearch(false, 0, "",
                         "", false, false);
                 EventBus.getDefault().post(distanceSearch);

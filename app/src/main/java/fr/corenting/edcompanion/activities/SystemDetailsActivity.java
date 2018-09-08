@@ -30,7 +30,7 @@ public class SystemDetailsActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_system_details);
+        setContentView(R.layout.activity_fragments_with_tabs);
         ButterKnife.bind(this);
 
         // Set toolbar

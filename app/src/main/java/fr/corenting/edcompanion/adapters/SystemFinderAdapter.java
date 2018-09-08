@@ -14,9 +14,7 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
-import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.models.SystemFinderResult;
 import fr.corenting.edcompanion.models.events.SystemFinderSearch;
 import fr.corenting.edcompanion.utils.MiscUtils;
@@ -53,7 +51,7 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
 
     @Override
     protected int getResultResId() {
-        return R.layout.system_finder_list_item;
+        return R.layout.list_item_system_finder_result;
     }
 
     @Override
