@@ -11,6 +11,12 @@ public class FactionResponse {
     @SerializedName("state")
     public String State;
 
+    @SerializedName("government")
+    public String Government;
+
+    @SerializedName("allegiance")
+    public String Allegiance;
+
     @SerializedName("updated_at")
     public Date UpdatedAt;
 

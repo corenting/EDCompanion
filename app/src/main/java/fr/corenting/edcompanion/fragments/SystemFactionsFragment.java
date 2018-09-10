@@ -114,29 +114,60 @@ public class SystemFactionsFragment extends Fragment {
         allegianceTextView.setText(system.getAllegiance());
         powerTextView.setText(String.format("%s (%s)", system.getPower(), system.getPowerState()));
 
-        // Factions list
+        // Dont display factions stuff if no factions in system
         if (system.getFactions().size() == 0) {
             factionsListTextView.setText(getString(R.string.no_factions));
+            // TODO : hide chart
             return;
         }
+
+        // List and history chart
+        factionsListTextView.setText(Html.fromHtml(getHtmlFactionsList(system.getFactions())));
+        
+    }
+
+    private String getHtmlFactionsList(List<Faction> factions) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Faction faction : system.getFactions()) {
+        for (Faction faction : factions) {
             // Title
             stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;<b>");
             stringBuilder.append(faction.getName());
             stringBuilder.append("</b><br />");
+
             // Influence
             stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
             stringBuilder.append("<i>");
             stringBuilder.append(getString(R.string.influence));
-            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;</i>");
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>");
             stringBuilder.append(String.format(userLocale, "%.2f",
                     faction.getInfluence() * 100));
             stringBuilder.append("%<br />");
 
-        }
-        factionsListTextView.setText(Html.fromHtml(stringBuilder.toString()));
+            // Allegiance
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+            stringBuilder.append("<i>");
+            stringBuilder.append(getString(R.string.allegiance_label));
+            stringBuilder.append("&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp;</i>");
+            stringBuilder.append(faction.getAllegiance());
+            stringBuilder.append("<br />");
 
+            // Government
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+            stringBuilder.append("<i>");
+            stringBuilder.append(getString(R.string.government_label));
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;</i>");
+            stringBuilder.append(faction.getGovernment());
+            stringBuilder.append("<br />");
+
+            // State
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+            stringBuilder.append("<i>");
+            stringBuilder.append(getString(R.string.state_label));
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>");
+            stringBuilder.append(faction.getState());
+            stringBuilder.append("<br />");
+        }
+        return stringBuilder.toString();
     }
 
     public void endLoading() {
