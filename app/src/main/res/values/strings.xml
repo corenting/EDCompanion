@@ -201,6 +201,7 @@
     <string name="population_label">Population</string>
     <string name="controlling_faction_label">Controlling faction</string>
     <string name="factions">Factions</string>
+    <string name="factions_history">Factions</string>
     <string name="current_state">Current state</string>
     <string name="no_factions">No factions in this system</string>
     <string name="influence">Influence</string>

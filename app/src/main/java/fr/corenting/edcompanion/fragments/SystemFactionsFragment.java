@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,10 +12,19 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Cartesian;
+import com.anychart.enums.TooltipPositionMode;
+import com.anychart.graphics.vector.Stroke;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,10 +34,13 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.Faction;
 import fr.corenting.edcompanion.models.System;
+import fr.corenting.edcompanion.models.SystemHistoryResult;
 import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;
 import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.models.events.SystemDetails;
+import fr.corenting.edcompanion.models.events.SystemHistory;
+import fr.corenting.edcompanion.network.SystemNetwork;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
@@ -49,6 +62,8 @@ public class SystemFactionsFragment extends Fragment {
     public TextView controllingFactionTextView;
     @BindView(R.id.factionsListTextView)
     public TextView factionsListTextView;
+    @BindView(R.id.historyChartView)
+    public AnyChartView historyChartView;
 
     private Locale userLocale;
 
@@ -73,7 +88,6 @@ public class SystemFactionsFragment extends Fragment {
         // Setup views
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
-
         return v;
     }
 
@@ -108,22 +122,51 @@ public class SystemFactionsFragment extends Fragment {
         }
     }
 
+    @Subscribe
+    public void onSystemEvent(SystemHistory systemHistory) {
+        endLoading();
+
+        if (systemHistory.getSuccess()) {
+            bindHistoryChart(systemHistory.getHistory());
+        }
+    }
+
+    private void bindHistoryChart(List<SystemHistoryResult> history) {
+        historyChartView.setVisibility(history.size() == 0 ? View.GONE : View.VISIBLE);
+        if (history.size() == 0) {
+            return;
+        }
+
+        // Chart parameters
+        Cartesian cartesian = AnyChart.line();
+        cartesian.animation(true);
+        cartesian.padding(10d, 20d, 5d, 20d);
+        cartesian.crosshair().enabled(true);
+        cartesian.crosshair()
+                .yLabel(true)
+                .yStroke((Stroke) null, null, null, (String) null, (String) null);
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.yAxis(0).title(getString(R.string.influence));
+        cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
+
+        // Chart data
+        // TODO
+
+        historyChartView.setChart(cartesian);
+    }
+
     private void bindInformations(System system) {
         // Current state
         controllingFactionTextView.setText(system.getControllingFaction());
         allegianceTextView.setText(system.getAllegiance());
         powerTextView.setText(String.format("%s (%s)", system.getPower(), system.getPowerState()));
 
-        // Dont display factions stuff if no factions in system
+        // Factions list
         if (system.getFactions().size() == 0) {
             factionsListTextView.setText(getString(R.string.no_factions));
-            // TODO : hide chart
             return;
         }
-
-        // List and history chart
         factionsListTextView.setText(Html.fromHtml(getHtmlFactionsList(system.getFactions())));
-        
     }
 
     private String getHtmlFactionsList(List<Faction> factions) {

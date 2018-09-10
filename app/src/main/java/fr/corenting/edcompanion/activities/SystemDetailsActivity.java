@@ -64,6 +64,7 @@ public class SystemDetailsActivity extends AppCompatActivity {
 
     public void getData() {
         SystemNetwork.getSystemDetails(this, systemName);
+        SystemNetwork.getSystemHistory(this, systemName);
     }
 
     @Override
