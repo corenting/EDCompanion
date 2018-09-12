@@ -169,7 +169,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_below="@id/cardView"
+                    android:layout_below="@id/factionsCardView"
                     app:cardCornerRadius="2dp"
                     app:cardUseCompatPadding="true">
 
@@ -193,10 +193,10 @@
                             android:text="@string/factions_history"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
-                        <com.anychart.AnyChartView
+                        <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/historyChartView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
                             android:layout_marginTop="8dp"
                             android:layout_below="@id/historyTitleTextView"/>
                     </RelativeLayout>

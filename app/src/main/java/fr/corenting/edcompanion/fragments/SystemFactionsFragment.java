@@ -1,52 +1,60 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Cartesian;
-import com.anychart.enums.TooltipPositionMode;
-import com.anychart.graphics.vector.Stroke;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneOffset;
+import org.threeten.bp.temporal.ChronoField;
+import org.threeten.bp.temporal.TemporalField;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.Faction;
+import fr.corenting.edcompanion.models.FactionHistory;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.SystemHistoryResult;
-import fr.corenting.edcompanion.models.events.CommanderPosition;
-import fr.corenting.edcompanion.models.events.Credits;
-import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.models.events.SystemHistory;
-import fr.corenting.edcompanion.network.SystemNetwork;
-import fr.corenting.edcompanion.network.player.PlayerNetwork;
+import fr.corenting.edcompanion.utils.ColorUtils;
 import fr.corenting.edcompanion.utils.DateUtils;
-import fr.corenting.edcompanion.utils.NotificationsUtils;
-import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
-import fr.corenting.edcompanion.utils.RankUtils;
-import fr.corenting.edcompanion.utils.SettingsUtils;
 
 public class SystemFactionsFragment extends Fragment {
 
@@ -63,7 +71,7 @@ public class SystemFactionsFragment extends Fragment {
     @BindView(R.id.factionsListTextView)
     public TextView factionsListTextView;
     @BindView(R.id.historyChartView)
-    public AnyChartView historyChartView;
+    public LineChart historyChartView;
 
     private Locale userLocale;
 
@@ -113,7 +121,7 @@ public class SystemFactionsFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSystemEvent(SystemDetails systemDetails) {
         endLoading();
 
@@ -122,8 +130,8 @@ public class SystemFactionsFragment extends Fragment {
         }
     }
 
-    @Subscribe
-    public void onSystemEvent(SystemHistory systemHistory) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onHistoryEvent(SystemHistory systemHistory) {
         endLoading();
 
         if (systemHistory.getSuccess()) {
@@ -137,22 +145,108 @@ public class SystemFactionsFragment extends Fragment {
             return;
         }
 
-        // Chart parameters
-        Cartesian cartesian = AnyChart.line();
-        cartesian.animation(true);
-        cartesian.padding(10d, 20d, 5d, 20d);
-        cartesian.crosshair().enabled(true);
-        cartesian.crosshair()
-                .yLabel(true)
-                .yStroke((Stroke) null, null, null, (String) null, (String) null);
-        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-        cartesian.yAxis(0).title(getString(R.string.influence));
-        cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
+        // Modify data for graph
+        LocalDate end = LocalDate.now();
+        LocalDate start = end.minusMonths(1);
+        List<LocalDate> dates = new ArrayList<>();
+        while (end.isAfter(start)) {
+            dates.add(start);
+            start = start.plusDays(1);
+        }
 
-        // Chart data
-        // TODO
+        // For each faction, get history entry for each day of the dates list
+        Map<String, Entry[]> sets = new HashMap<>();
+        for (SystemHistoryResult factionEntry : history) {
+            // Check if faction has history
+            List<FactionHistory> factionHistory = factionEntry.getHistory();
+            if (factionHistory.size() == 0) {
+                continue;
+            }
 
-        historyChartView.setChart(cartesian);
+            // Get entries for this faction
+            Entry[] entries = sets.get(factionEntry.getName());
+            if (entries == null) {
+                entries = new Entry[dates.size() + 1];
+            }
+
+            // For each date in history, add to entry
+            for (FactionHistory historyItem : factionHistory) {
+
+                // Get index of date for array
+                int dateIndex;
+                for (dateIndex = 0; dateIndex < dates.size(); dateIndex++) {
+                    LocalDate date = dates.get(dateIndex);
+                    LocalDate updateDate = historyItem.getUpdateDate().atOffset(ZoneOffset.UTC)
+                            .toLocalDate();
+
+                    if (updateDate.equals(date)) {
+                        break;
+                    }
+                }
+
+                entries[dateIndex] = new Entry(dateIndex, historyItem.getInfluence() * 100
+                        , historyItem);
+            }
+
+            sets.put(factionEntry.getName(), entries);
+        }
+
+        // Get colors
+        List<Integer> colors = ColorUtils.getUniqueColorsList(history.size());
+
+        // Build data sets
+        List<LineDataSet> dataSets = new ArrayList<>();
+        int colorIndex = 0;
+        for (Map.Entry<String, Entry[]> entry : sets.entrySet()) {
+            // Remove empty entry if a date is missing
+            List<Entry> entries = new LinkedList<>(Arrays.asList(entry.getValue()));
+            entries.removeAll(Collections.singleton(null));
+
+            // Create set
+            LineDataSet set = new LineDataSet(entries, entry.getKey());
+            int currentColor = colors.get(colorIndex);
+            set.setColor(currentColor);
+            set.setCircleColor(currentColor);
+            set.setDrawHighlightIndicators(false);
+            dataSets.add(set);
+
+            colorIndex++;
+        }
+
+        // Data
+        LineDataSet[] dataSetsArray = dataSets.toArray(new LineDataSet[dataSets.size()]);
+        LineData data = new LineData(dataSetsArray);
+        historyChartView.setData(data);
+
+        // Empty description to hide default label
+        Description desc = new Description();
+        desc.setText("");
+        historyChartView.setDescription(desc);
+
+        // Misc params
+        historyChartView.getAxisRight().setEnabled(false);
+        historyChartView.getLegend().setWordWrapEnabled(true);
+
+        // TODO : IMarker for labels on click
+
+        // Labels
+        final SparseArray<String> labels = new SparseArray<>();
+        for (int i = 0; i < dates.size(); i++) {
+            LocalDate date = dates.get(i);
+            labels.put(i, date.toString());
+        }
+        historyChartView.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                if ((int) value % 2 == 0) {
+                    return "";
+                }
+                return labels.get((int)value);
+            }
+        });
+
+        historyChartView.notifyDataSetChanged();
+        historyChartView.invalidate();
     }
 
     private void bindInformations(System system) {

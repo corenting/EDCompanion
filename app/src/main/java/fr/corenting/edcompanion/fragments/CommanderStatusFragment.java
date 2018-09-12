@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -132,7 +133,7 @@ public class CommanderStatusFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCreditsEvent(Credits credits) {
         endLoading();
         // Check download error
@@ -157,7 +158,7 @@ public class CommanderStatusFragment extends Fragment {
         }
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPositionEvent(CommanderPosition position) {
         endLoading();
         // Check download error
@@ -174,7 +175,7 @@ public class CommanderStatusFragment extends Fragment {
         }
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRanksEvents(Ranks ranks) {
         endLoading();
         // Check download error

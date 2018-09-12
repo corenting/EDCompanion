@@ -23,6 +23,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity
         ServerStatusNetwork.getStatus(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onServerStatusEvent(ServerStatus status) {
         String content = status.getSuccess() ? status.getStatus() : getString(R.string.unknown);
         TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);

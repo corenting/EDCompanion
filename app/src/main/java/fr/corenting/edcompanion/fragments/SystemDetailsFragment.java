@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -108,7 +109,7 @@ public class SystemDetailsFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSystemEvent(SystemDetails systemDetails) {
         endLoading();
 

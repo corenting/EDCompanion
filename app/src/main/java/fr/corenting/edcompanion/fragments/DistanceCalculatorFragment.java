@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,7 +67,7 @@ public class DistanceCalculatorFragment extends Fragment {
         return v;
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDistanceEvent(DistanceSearch distanceSearch) {
         progressBar.setVisibility(View.GONE);
 

@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
 import fr.corenting.edcompanion.models.events.CommunityGoals;
@@ -11,7 +12,7 @@ public class CommanderFleetFragment extends AbstractListFragment<CommunityGoalsA
 
     public static final String COMMANDER_FLEET_FRAGMENT_TAG = "commander_fleet_fragment";
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCommunityGoalEvent(CommunityGoals goals) {
         // Error
         if (!goals.getSuccess()) {
