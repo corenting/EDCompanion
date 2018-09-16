@@ -2,10 +2,10 @@ package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,21 +18,13 @@ import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.LargeValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.ZoneOffset;
-import org.threeten.bp.temporal.ChronoField;
-import org.threeten.bp.temporal.TemporalField;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,6 +73,13 @@ public class SystemFactionsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_system_factions, container, false);
         ButterKnife.bind(this, v);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -96,7 +95,6 @@ public class SystemFactionsFragment extends Fragment {
         // Setup views
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
-        return v;
     }
 
     @Override

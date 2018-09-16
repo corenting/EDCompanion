@@ -1,5 +1,7 @@
 package fr.corenting.edcompanion.fragments;
 
+import android.util.Log;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 

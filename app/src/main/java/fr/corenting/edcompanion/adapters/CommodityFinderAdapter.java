@@ -21,6 +21,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
 import fr.corenting.edcompanion.utils.DateUtils;
+import fr.corenting.edcompanion.utils.NumberUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
@@ -34,8 +35,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
     public CommodityFinderAdapter(Context context) {
         super(context);
-        Locale userLocale = DateUtils.getCurrentLocale(context);
-        numberFormat =  NumberFormat.getIntegerInstance(userLocale);
+        numberFormat = NumberUtils.getNumberFormat(context);
     }
 
     @Override

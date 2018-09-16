@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.events.ShipFinderSearch;
+import fr.corenting.edcompanion.utils.NumberUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
@@ -32,8 +33,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
     public ShipFinderAdapter(Context context) {
         super(context);
-        Locale userLocale = SettingsUtils.getUserLocale(context);
-        numberFormat = NumberFormat.getIntegerInstance(userLocale);
+        numberFormat = NumberUtils.getNumberFormat(context);
     }
 
     @Override

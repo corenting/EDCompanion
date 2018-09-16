@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.network.SystemNetwork;
+import fr.corenting.edcompanion.utils.NumberUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 
 public class SystemDetailsFragment extends Fragment {
@@ -66,6 +68,13 @@ public class SystemDetailsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_system_details, container, false);
         ButterKnife.bind(this, v);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -81,8 +90,6 @@ public class SystemDetailsFragment extends Fragment {
         // Setup views
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
-
-        return v;
     }
 
     @Override
@@ -91,8 +98,7 @@ public class SystemDetailsFragment extends Fragment {
         setRetainInstance(true);
 
         // Init number format
-        Locale currentLocale = SettingsUtils.getUserLocale(getContext());
-        numberFormat = NumberFormat.getIntegerInstance(currentLocale);
+        numberFormat = NumberUtils.getNumberFormat(getContext());
     }
 
     @Override
@@ -137,11 +143,9 @@ public class SystemDetailsFragment extends Fragment {
         // Logo
         if (system.getAllegiance().equals("Federation")) {
             logoImageView.setImageResource(R.drawable.elite_federation);
-        }
-        else if (system.getAllegiance().equals("Empire")) {
+        } else if (system.getAllegiance().equals("Empire")) {
             logoImageView.setImageResource(R.drawable.elite_empire);
-        }
-        else if (system.getAllegiance().equals("Alliance")) {
+        } else if (system.getAllegiance().equals("Alliance")) {
             logoImageView.setImageResource(R.drawable.elite_alliance);
         }
     }

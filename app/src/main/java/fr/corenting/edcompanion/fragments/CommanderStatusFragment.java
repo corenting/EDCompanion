@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import fr.corenting.edcompanion.models.events.Credits;
 import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
+import fr.corenting.edcompanion.utils.NumberUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.RankUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
@@ -69,6 +71,13 @@ public class CommanderStatusFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_commander_status, container, false);
         ButterKnife.bind(this, v);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -82,12 +91,14 @@ public class CommanderStatusFragment extends Fragment {
         // Set temporary text
         creditsTextView.setText(getResources().getString(R.string.credits, "?"));
         locationsTextView.setText(getResources().getString(R.string.unknown));
-        RankUtils.setTempContent(getContext(), federationRankLayout, getString(R.string.rank_federation));
+        RankUtils.setTempContent(getContext(), federationRankLayout,
+                getString(R.string.rank_federation));
         RankUtils.setTempContent(getContext(), empireRankLayout, getString(R.string.rank_empire));
 
         RankUtils.setTempContent(getContext(), combatRankLayout, getString(R.string.rank_combat));
         RankUtils.setTempContent(getContext(), tradeRankLayout, getString(R.string.rank_trading));
-        RankUtils.setTempContent(getContext(), explorationRankLayout, getString(R.string.rank_exploration));
+        RankUtils.setTempContent(getContext(), explorationRankLayout,
+                getString(R.string.rank_exploration));
         RankUtils.setTempContent(getContext(), arenaRankLayout, getString(R.string.rank_arena));
 
         // Set card title to commander name
@@ -104,7 +115,6 @@ public class CommanderStatusFragment extends Fragment {
             locationContainer.setVisibility(View.GONE);
         }
 
-        return v;
     }
 
     @Override
@@ -147,10 +157,9 @@ public class CommanderStatusFragment extends Fragment {
             creditsTextView.setText(getResources().getString(R.string.unknown));
             return;
         }
-        Locale currentLocale = SettingsUtils.getUserLocale(getContext());
-        String amount = NumberFormat.getIntegerInstance(currentLocale).format(credits.getBalance());
+        String amount = NumberUtils.getNumberFormat(getContext()).format(credits.getBalance());
         if (credits.getLoan() != 0) {
-            String loan = NumberFormat.getIntegerInstance(currentLocale).format(credits.getLoan());
+            String loan = NumberUtils.getNumberFormat(getContext()).format(credits.getLoan());
             creditsTextView.setText(getResources().getString(R.string.credits_with_loan,
                     amount, loan));
         } else {
@@ -167,12 +176,7 @@ public class CommanderStatusFragment extends Fragment {
             return;
         }
 
-        // Check error case
-        if (position.getSystemName() == null) {
-            locationsTextView.setText(getResources().getString(R.string.unknown));
-        } else {
-            locationsTextView.setText(position.getSystemName());
-        }
+        locationsTextView.setText(position.getSystemName());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

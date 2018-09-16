@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -254,7 +255,6 @@ public class MainActivity extends AppCompatActivity
 
         // Get previous fragment if exists
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
-        Bundle args = new Bundle();
         if (fragment != null) {
             fragmentManager.beginTransaction().replace(R.id.fragmentContent,
                     fragment, tag).commit();
@@ -262,6 +262,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         // Else
+        Bundle args = new Bundle();
         switch (tag) {
             case GalnetFragment.GALNET_FRAGMENT_TAG:
                 fragment = new GalnetFragment();

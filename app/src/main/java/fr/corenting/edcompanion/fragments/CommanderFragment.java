@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -30,15 +31,21 @@ public class CommanderFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_commander, container, false);
         ButterKnife.bind(this, v);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // Setup tablayout and viewpager
         viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(), getContext()));
         tabLayout.setupWithViewPager(viewPager);
 
         // Style
         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected), getResources().getColor(R.color.tabText));
-
-        return v;
+        tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
+                getResources().getColor(R.color.tabText));
     }
 
     @Override

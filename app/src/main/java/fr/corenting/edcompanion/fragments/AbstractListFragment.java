@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +36,14 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, v);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -62,8 +71,6 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
             startLoading();
             getData();
         }
-
-        return v;
     }
 
     @Override
