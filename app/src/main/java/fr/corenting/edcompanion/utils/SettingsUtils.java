@@ -4,9 +4,6 @@ package fr.corenting.edcompanion.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.os.ConfigurationCompat;
-
-import java.util.Locale;
 
 import fr.corenting.edcompanion.R;
 
