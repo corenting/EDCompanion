@@ -25,6 +25,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneOffset;
+import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.format.FormatStyle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +42,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.Faction;
+import fr.corenting.edcompanion.models.FactionChartEntryData;
 import fr.corenting.edcompanion.models.FactionHistory;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.SystemHistoryResult;
@@ -47,6 +50,9 @@ import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.models.events.SystemHistory;
 import fr.corenting.edcompanion.utils.ColorUtils;
 import fr.corenting.edcompanion.utils.DateUtils;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
+import fr.corenting.edcompanion.views.GraphMarkerView;
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class SystemFactionsFragment extends Fragment {
 
@@ -62,17 +68,21 @@ public class SystemFactionsFragment extends Fragment {
     public TextView controllingFactionTextView;
     @BindView(R.id.factionsListTextView)
     public TextView factionsListTextView;
+    @BindView(R.id.chartProgressBar)
+    public MaterialProgressBar chartProgressBar;
+    @BindView(R.id.chartErrorTextView)
+    public TextView chartErrorTextView;
     @BindView(R.id.historyChartView)
     public LineChart historyChartView;
 
     private Locale userLocale;
+    private DateTimeFormatter dateFormatter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_system_factions, container, false);
         ButterKnife.bind(this, v);
-
         return v;
     }
 
@@ -103,6 +113,7 @@ public class SystemFactionsFragment extends Fragment {
         setRetainInstance(true);
 
         userLocale = DateUtils.getCurrentLocale(getContext());
+        dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
     }
 
     @Override
@@ -132,9 +143,28 @@ public class SystemFactionsFragment extends Fragment {
     public void onHistoryEvent(SystemHistory systemHistory) {
         endLoading();
 
-        if (systemHistory.getSuccess()) {
-            bindHistoryChart(systemHistory.getHistory());
+        try {
+            if (systemHistory.getSuccess()) {
+                bindHistoryChart(systemHistory.getHistory());
+                chartProgressBar.setVisibility(View.GONE);
+                historyChartView.setVisibility(View.VISIBLE);
+                chartErrorTextView.setVisibility(View.GONE);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            if (getActivity() != null) {
+                NotificationsUtils.displaySnackbar(getActivity(),
+                        this.getString(R.string.no_chart_snackbar_error));
+            }
+            chartProgressBar.setVisibility(View.GONE);
+            historyChartView.setVisibility(View.GONE);
+            chartErrorTextView.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void endLoading() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void bindHistoryChart(List<SystemHistoryResult> history) {
@@ -182,17 +212,18 @@ public class SystemFactionsFragment extends Fragment {
                     }
                 }
 
+                FactionChartEntryData entryData = new FactionChartEntryData(
+                        factionEntry.getName(), historyItem.getState(),
+                        historyItem.getUpdateDate(), historyItem.getInfluence());
                 entries[dateIndex] = new Entry(dateIndex, historyItem.getInfluence() * 100
-                        , historyItem);
+                        , entryData);
             }
 
             sets.put(factionEntry.getName(), entries);
         }
 
-        // Get colors
-        List<Integer> colors = ColorUtils.getUniqueColorsList(history.size());
-
         // Build data sets
+        List<Integer> colors = ColorUtils.getUniqueColorsList(history.size());
         List<LineDataSet> dataSets = new ArrayList<>();
         int colorIndex = 0;
         for (Map.Entry<String, Entry[]> entry : sets.entrySet()) {
@@ -223,23 +254,26 @@ public class SystemFactionsFragment extends Fragment {
 
         // Misc params
         historyChartView.getAxisRight().setEnabled(false);
+        historyChartView.setExtraLeftOffset(10);
+        historyChartView.setExtraRightOffset(50);
         historyChartView.getLegend().setWordWrapEnabled(true);
-
-        // TODO : IMarker for labels on click
+        historyChartView.setMarker(new GraphMarkerView(getContext()));
 
         // Labels
         final SparseArray<String> labels = new SparseArray<>();
         for (int i = 0; i < dates.size(); i++) {
-            LocalDate date = dates.get(i);
-            labels.put(i, date.toString());
+            labels.put(i, dateFormatter.format(dates.get(i)));
         }
         historyChartView.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                if ((int) value % 2 == 0) {
-                    return "";
-                }
-                return labels.get((int)value);
+                return labels.get((int) value);
+            }
+        });
+        historyChartView.getAxisLeft().setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return String.valueOf((int) value) + " %";
             }
         });
 
@@ -303,9 +337,5 @@ public class SystemFactionsFragment extends Fragment {
             stringBuilder.append("<br />");
         }
         return stringBuilder.toString();
-    }
-
-    public void endLoading() {
-        swipeRefreshLayout.setRefreshing(false);
     }
 }

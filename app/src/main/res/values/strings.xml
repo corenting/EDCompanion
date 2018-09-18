@@ -201,9 +201,11 @@
     <string name="population_label">Population</string>
     <string name="controlling_faction_label">Controlling faction</string>
     <string name="factions">Factions</string>
-    <string name="factions_history">Factions history</string>
+    <string name="factions_history">Factions influence history</string>
     <string name="current_state">Current state</string>
     <string name="no_factions">No factions in this system</string>
+    <string name="no_chart_error">No history chart to display</string>
+    <string name="no_chart_snackbar_error">Error while download the history chart</string>
     <string name="influence">Influence</string>
 
     <!--About-->

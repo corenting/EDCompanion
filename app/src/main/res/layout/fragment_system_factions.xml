@@ -118,11 +118,11 @@
                     style="@style/CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/cardView"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_below="@id/cardView"
                     app:cardCornerRadius="2dp"
                     app:cardUseCompatPadding="true">
 
@@ -148,11 +148,11 @@
 
                         <TextView
                             android:id="@+id/factionsListTextView"
-                            android:layout_marginTop="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/factionsTitleTextView"
                             android:layout_alignParentStart="true"
+                            android:layout_below="@id/factionsTitleTextView"
+                            android:layout_marginTop="8dp"
                             android:ellipsize="end"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
@@ -165,11 +165,11 @@
                     style="@style/CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/factionsCardView"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_below="@id/factionsCardView"
                     app:cardCornerRadius="2dp"
                     app:cardUseCompatPadding="true">
 
@@ -193,12 +193,35 @@
                             android:text="@string/factions_history"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
+                        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                            android:id="@+id/chartProgressBar"
+                            style="@style/Widget.MaterialProgressBar.ProgressBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_below="@id/historyTitleTextView"
+                            android:indeterminate="true"
+                            android:layout_centerHorizontal="true"
+                            app:mpb_progressStyle="circular" />
+
+                        <TextView
+                            android:id="@+id/chartErrorTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_below="@id/historyTitleTextView"
+                            android:text="@string/no_chart_error"
+                            android:visibility="gone"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:layout_centerHorizontal="true" />
+
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/historyChartView"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/historyTitleTextView"/>
+                            android:layout_below="@id/historyTitleTextView"
+                            android:layout_marginTop="8dp" />
                     </RelativeLayout>
 
                 </android.support.v7.widget.CardView>

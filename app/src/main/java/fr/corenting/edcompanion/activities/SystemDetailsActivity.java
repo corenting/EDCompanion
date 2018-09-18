@@ -33,8 +33,16 @@ public class SystemDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragments_with_tabs);
         ButterKnife.bind(this);
 
+        // Get system name from intent
+        systemName = "Sol";
+        if (getIntent().getExtras() != null) {
+            systemName = getIntent().getExtras()
+                    .getString(getString(R.string.system_label), "Sol");
+        }
+
         // Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(systemName);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -51,14 +59,8 @@ public class SystemDetailsActivity extends AppCompatActivity {
         tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
                 getResources().getColor(R.color.tabText));
 
-        // Get the goal or the article
-        systemName = "Sol";
-        if (getIntent().getExtras() != null) {
-            systemName = getIntent().getExtras()
-                    .getString(getString(R.string.system_label), "Sol");
-        }
 
-        toolbar.setTitle(systemName);
+
         getData();
     }
 
