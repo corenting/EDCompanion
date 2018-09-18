@@ -13,14 +13,12 @@ import org.threeten.bp.Instant;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
-import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.NumberUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;

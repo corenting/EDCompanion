@@ -53,9 +53,10 @@ public class DistanceCalculatorFragment extends Fragment {
     public TextView warningTextView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_distance_calculator, container, false);
+        View v = inflater.inflate(R.layout.fragment_distance_calculator, container,
+                false);
         ButterKnife.bind(this, v);
 
         return v;

@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +24,7 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         this.results = new ArrayList<>();
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {

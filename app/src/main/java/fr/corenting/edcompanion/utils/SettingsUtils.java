@@ -46,9 +46,4 @@ public class SettingsUtils {
         editor.putString(key, value);
         editor.apply();
     }
-
-    public static Locale getUserLocale(Context ctx)
-    {
-       return ConfigurationCompat.getLocales(ctx.getResources().getConfiguration()).get(0);
-    }
 }

@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +48,9 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
         };
     }
 
+    @NonNull
     @Override
-    public newsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public newsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_galnet,
                 parent, false);
         if (!isDetailsView) {
@@ -58,7 +60,7 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
     }
 
     @Override
-    public void onBindViewHolder(final newsViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final newsViewHolder holder, final int position) {
         GalnetArticle currentNews = dataSet.get(holder.getAdapterPosition());
 
         // News content

@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="fr.corenting.edcompanion.CommunityGoalsActivity"
-            tools:showIn="@layout/app_bar_main">
+            tools:showIn="@layout/include_app_bar">
 
             <FrameLayout
                 android:id="@+id/fragmentContent"

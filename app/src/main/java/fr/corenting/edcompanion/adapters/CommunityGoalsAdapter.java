@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
     }
 
     @Override
-    public goalsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public goalsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_community_goal,
                 parent, false);
         if (!isDetailsView) {
@@ -49,7 +50,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
     }
 
     @Override
-    public void onBindViewHolder(final goalsViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final goalsViewHolder holder, final int position) {
         CommunityGoal currentGoal = dataSet.get(holder.getAdapterPosition());
 
         // Content

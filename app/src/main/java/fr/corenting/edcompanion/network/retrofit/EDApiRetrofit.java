@@ -2,7 +2,6 @@ package fr.corenting.edcompanion.network.retrofit;
 
 import java.util.List;
 
-import fr.corenting.edcompanion.models.SystemHistoryResult;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;

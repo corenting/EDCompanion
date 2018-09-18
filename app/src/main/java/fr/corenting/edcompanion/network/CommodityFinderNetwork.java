@@ -39,7 +39,7 @@ public class CommodityFinderNetwork {
 
             @Override
             public void onFailure(@NonNull Call<List<CommodityFinderResponse>> call,
-                                  Throwable t) {
+                                  @NonNull Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
                         new ArrayList<CommodityFinderResult>()));
             }

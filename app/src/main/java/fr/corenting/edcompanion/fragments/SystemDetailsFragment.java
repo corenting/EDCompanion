@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -17,7 +16,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,9 +23,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.events.SystemDetails;
-import fr.corenting.edcompanion.network.SystemNetwork;
 import fr.corenting.edcompanion.utils.NumberUtils;
-import fr.corenting.edcompanion.utils.SettingsUtils;
 
 public class SystemDetailsFragment extends Fragment {
 
@@ -141,12 +137,16 @@ public class SystemDetailsFragment extends Fragment {
         populationTextView.setText(numberFormat.format(system.getPopulation()));
 
         // Logo
-        if (system.getAllegiance().equals("Federation")) {
-            logoImageView.setImageResource(R.drawable.elite_federation);
-        } else if (system.getAllegiance().equals("Empire")) {
-            logoImageView.setImageResource(R.drawable.elite_empire);
-        } else if (system.getAllegiance().equals("Alliance")) {
-            logoImageView.setImageResource(R.drawable.elite_alliance);
+        switch (system.getAllegiance()) {
+            case "Federation":
+                logoImageView.setImageResource(R.drawable.elite_federation);
+                break;
+            case "Empire":
+                logoImageView.setImageResource(R.drawable.elite_empire);
+                break;
+            case "Alliance":
+                logoImageView.setImageResource(R.drawable.elite_alliance);
+                break;
         }
     }
 
