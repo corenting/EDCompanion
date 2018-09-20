@@ -23,10 +23,7 @@
                     style="@style/CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_margin="8dp"
                     app:cardCornerRadius="2dp"
                     app:cardUseCompatPadding="true">
 
@@ -56,7 +53,6 @@
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/currentStateTextView"
-                            android:layout_marginTop="8dp"
                             android:text="@string/controlling_faction_label"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                             android:textStyle="bold" />
@@ -66,8 +62,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/currentStateTextView"
-                            android:layout_marginTop="8dp"
                             android:layout_toEndOf="@id/controllingFactionLabelTextView"
+                            android:text="@string/unknown"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
                         <TextView
@@ -75,7 +71,6 @@
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/controllingFactionLabelTextView"
-                            android:layout_marginTop="8dp"
                             android:text="@string/allegiance_label"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                             android:textStyle="bold" />
@@ -85,8 +80,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/controllingFactionLabelTextView"
-                            android:layout_marginTop="8dp"
                             android:layout_toEndOf="@id/allegianceLabelTextView"
+                            android:text="@string/unknown"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
                         <TextView
@@ -94,7 +89,6 @@
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/allegianceLabelTextView"
-                            android:layout_marginTop="8dp"
                             android:text="@string/power_label"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                             android:textStyle="bold" />
@@ -104,8 +98,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/allegianceLabelTextView"
-                            android:layout_marginTop="8dp"
                             android:layout_toEndOf="@id/powerLabelTextView"
+                            android:text="@string/unknown"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
 
@@ -119,10 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cardView"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_margin="8dp"
                     app:cardCornerRadius="2dp"
                     app:cardUseCompatPadding="true">
 
@@ -131,10 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:paddingBottom="24dp"
-                        android:paddingLeft="24dp"
-                        android:paddingRight="24dp"
-                        android:paddingTop="24dp">
+                        android:padding="24dp">
 
                         <TextView
                             android:id="@+id/factionsTitleTextView"
@@ -154,6 +142,7 @@
                             android:layout_below="@id/factionsTitleTextView"
                             android:layout_marginTop="8dp"
                             android:ellipsize="end"
+                            android:text="@string/unknown"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
                     </RelativeLayout>
@@ -166,10 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/factionsCardView"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_margin="8dp"
                     app:cardCornerRadius="2dp"
                     app:cardUseCompatPadding="true">
 
@@ -178,10 +164,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:paddingBottom="24dp"
-                        android:paddingLeft="24dp"
-                        android:paddingRight="24dp"
-                        android:paddingTop="24dp">
+                        android:padding="24dp">
 
                         <TextView
                             android:id="@+id/historyTitleTextView"
@@ -198,30 +181,30 @@
                             style="@style/Widget.MaterialProgressBar.ProgressBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:layout_below="@id/historyTitleTextView"
-                            android:indeterminate="true"
                             android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:indeterminate="true"
                             app:mpb_progressStyle="circular" />
 
                         <TextView
                             android:id="@+id/chartErrorTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:layout_below="@id/historyTitleTextView"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
                             android:text="@string/no_chart_error"
-                            android:visibility="gone"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                            android:layout_centerHorizontal="true" />
+                            android:visibility="gone" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/historyChartView"
-                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
                             android:layout_below="@id/historyTitleTextView"
-                            android:layout_marginTop="8dp" />
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone" />
                     </RelativeLayout>
 
                 </android.support.v7.widget.CardView>

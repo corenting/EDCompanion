@@ -8,10 +8,7 @@
     style="@style/CardView"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="2dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="8dp" >
+    android:layout_margin="8dp">
 
     <RelativeLayout
         android:id="@+id/itemLayout"
@@ -52,7 +49,6 @@
 
         <TextView
             android:id="@+id/distanceLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -62,7 +58,6 @@
 
         <TextView
             android:id="@+id/distanceTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +66,6 @@
 
         <TextView
             android:id="@+id/starDistanceLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/distanceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -81,7 +75,6 @@
 
         <TextView
             android:id="@+id/starDistanceTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/distanceLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,7 +83,6 @@
 
         <TextView
             android:id="@+id/lastUpdateLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/starDistanceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -100,7 +92,6 @@
 
         <TextView
             android:id="@+id/lastUpdateTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/starDistanceLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,7 +100,6 @@
 
         <TextView
             android:id="@+id/landingPadLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -119,7 +109,6 @@
 
         <TextView
             android:id="@+id/landingPadTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

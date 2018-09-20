@@ -8,10 +8,7 @@
     style="@style/CardView"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="2dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="8dp" >
+    android:layout_margin="8dp" >
 
     <RelativeLayout
         android:id="@+id/itemLayout"
@@ -44,7 +41,6 @@
 
         <TextView
             android:id="@+id/allegianceLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -54,7 +50,6 @@
 
         <TextView
             android:id="@+id/allegianceTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +58,6 @@
 
         <TextView
             android:id="@+id/securityLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/allegianceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -73,7 +67,6 @@
 
         <TextView
             android:id="@+id/securityTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/allegianceLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +75,6 @@
 
         <TextView
             android:id="@+id/governmentLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/securityLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -92,7 +84,6 @@
 
         <TextView
             android:id="@+id/governmentTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/securityLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +92,6 @@
 
         <TextView
             android:id="@+id/economyLabelTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/governmentLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -111,7 +101,6 @@
 
         <TextView
             android:id="@+id/economyTextView"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/governmentLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

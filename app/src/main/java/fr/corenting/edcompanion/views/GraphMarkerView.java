@@ -13,12 +13,16 @@ import org.threeten.bp.ZoneOffset;
 import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.format.FormatStyle;
 
+import java.util.Locale;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.FactionChartEntryData;
+import fr.corenting.edcompanion.utils.DateUtils;
 
 public class GraphMarkerView extends MarkerView {
 
     private final DateTimeFormatter dateFormatter;
+    private final Locale userLocale;
 
     private TextView factionNameTextView;
     private TextView influenceTextView;
@@ -34,6 +38,7 @@ public class GraphMarkerView extends MarkerView {
         updateDateTextView = findViewById(R.id.updateDateTextView);
 
         dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+        userLocale = DateUtils.getCurrentLocale(context);
     }
 
     @Override
@@ -41,7 +46,8 @@ public class GraphMarkerView extends MarkerView {
         FactionChartEntryData historyItem = (FactionChartEntryData) e.getData();
         factionNameTextView.setText(historyItem.getName());
 
-        influenceTextView.setText(String.format("%s %%", (int) (historyItem.getInfluence() * 100)));
+        influenceTextView.setText(String.format(userLocale,
+                "%.2f %%", historyItem.getInfluence() * 100));
         stateTextView.setText(historyItem.getState());
 
         LocalDateTime date = LocalDateTime.ofInstant(historyItem.getUpdateDate(), ZoneOffset.UTC);

@@ -1,245 +1,232 @@
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeContainer"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v4.widget.NestedScrollView
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
+                style="@style/CardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="2dp"
+                app:cardUseCompatPadding="true">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cardView"
-                    style="@style/CardView"
+                <RelativeLayout
+                    android:id="@+id/itemLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardCornerRadius="2dp">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingTop="24dp">
 
-                    <RelativeLayout
-                        android:id="@+id/itemLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingBottom="24dp"
-                        android:paddingLeft="24dp"
-                        android:paddingRight="24dp"
-                        android:paddingTop="24dp">
+                    <TextView
+                        android:id="@+id/systemNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/logoImageView"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@string/system_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
-                        <TextView
-                            android:id="@+id/systemNameTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toStartOf="@id/logoImageView"
-                            android:layout_alignParentStart="true"
-                            android:ellipsize="end"
-                            android:maxLines="2"
-                            android:text="@string/system_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                    <ImageView
+                        android:id="@+id/logoImageView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        app:srcCompat="@drawable/ic_globe_black_24dp" />
 
-                        <ImageView
-                            android:id="@+id/logoImageView"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_globe_black_24dp" />
+                    <TextView
+                        android:id="@+id/permitRequiredTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/systemNameTextView"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/permit_required_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
-                        <TextView
-                            android:id="@+id/permitRequiredTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/systemNameTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/permit_required_label"
-                            android:visibility="gone"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/coordsLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/permitRequiredTextView"
+                        android:text="@string/coordinates_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/coordsLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/permitRequiredTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/coordinates_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/coordsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/permitRequiredTextView"
+                        android:layout_toEndOf="@id/coordsLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/coordsTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/permitRequiredTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/coordsLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/allegianceLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/coordsLabelTextView"
+                        android:text="@string/allegiance_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/allegianceLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/coordsLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/allegiance_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/allegianceTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/coordsLabelTextView"
+                        android:layout_toEndOf="@id/allegianceLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/allegianceTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/coordsLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/allegianceLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/powerLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/allegianceLabelTextView"
+                        android:text="@string/power_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/powerLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/allegianceLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/power_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/powerTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/allegianceLabelTextView"
+                        android:layout_toEndOf="@id/powerLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/powerTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/allegianceLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/powerLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/securityLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/powerLabelTextView"
+                        android:text="@string/security_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/securityLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/powerLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/security_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/securityTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/powerLabelTextView"
+                        android:layout_toEndOf="@id/securityLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/securityTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/powerLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/securityLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/governmentLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/securityLabelTextView"
+                        android:text="@string/government_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/governmentLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/securityLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/government_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/governmentTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/securityLabelTextView"
+                        android:layout_toEndOf="@id/governmentLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/governmentTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/securityLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/governmentLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/controllingFactionLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/governmentLabelTextView"
+                        android:text="@string/controlling_faction_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/controllingFactionLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/governmentLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/controlling_faction_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/controllingFactionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/governmentLabelTextView"
+                        android:layout_toEndOf="@id/controllingFactionLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/controllingFactionTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/governmentLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/controllingFactionLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/economyLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/controllingFactionLabelTextView"
+                        android:text="@string/economy_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/economyLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/controllingFactionLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/economy_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/economyTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/controllingFactionLabelTextView"
+                        android:layout_toEndOf="@id/economyLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/economyTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/controllingFactionLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/economyLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/stateLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/economyLabelTextView"
+                        android:text="@string/state_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/stateLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/economyLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/state_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/stateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/economyLabelTextView"
+                        android:layout_toEndOf="@id/stateLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/stateTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/economyLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/stateLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/populationLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stateLabelTextView"
+                        android:text="@string/population_label"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/populationLabelTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/stateLabelTextView"
-                            android:layout_width="110dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@string/population_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                    <TextView
+                        android:id="@+id/populationTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stateLabelTextView"
+                        android:layout_toEndOf="@id/populationLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-                        <TextView
-                            android:id="@+id/populationTextView"
-                            android:layout_marginTop="8dp"
-                            android:layout_below="@id/stateLabelTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/populationLabelTextView"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                </RelativeLayout>
 
-                    </RelativeLayout>
-
-                </android.support.v7.widget.CardView>
-            </android.support.v4.widget.NestedScrollView>
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>
