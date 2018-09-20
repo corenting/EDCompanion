@@ -10,6 +10,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="community_goals">Community Goals</string>
+    <string name="community_goal_details">Community goal details</string>
     <string name="galnet">Galnet</string>
     <string name="galnet_reports">Galnet reports</string>
     <string name="distance_calculator">Distance calculator</string>
@@ -21,6 +22,7 @@
     <string name="updating_server_status">Updating server status…</string>
     <string name="server_status">Game server: %1$s</string>
     <string name="ok">OK</string>
+    <string name="unknown">Unknown</string>
 
     <!--Community goals-->
     <string name="hint_end_date">End time</string>
@@ -37,24 +39,26 @@
     <string name="no_objective_yet">No objective yet</string>
     <string name="cg_player_position_error">Cannot get player distance to the community goals!</string>
     <string name="cg_player_distance_error">Cannot get player distance to a community goal!</string>
+    <string name="cg_system_distance">System: %1$s</string>
+    <string name="cg_system_with_player_distance">System: %1$s (%2$.2f LY from you)</string>
+    <string name="cg_end_date">End date: %1$s</string>
+    <string name="cg_contributors">Contributors: %1$s</string>
+    <string name="cg_progress">Progress: %1$s</string>
+    <string name="cg_last_update">Last update: %1$s</string>
 
     <!--Errors-->
     <string name="nothing_to_display">Nothing to display</string>
     <string name="download_error">Error while downloading the content</string>
     <string name="edsm_error">You need to set your EDSM API key and your commander name in the settings</string>
     <string name="inara_error">You need to set your commander name in the settings</string>
-    <string name="last_update">Last update: %1$s</string>
-    <string name="system">System: %1$s</string>
-    <string name="system_with_player_distance">System: %1$s (%2$.2f LY from you)</string>
-    <string name="end_date">End date: %1$s</string>
-    <string name="contributors">Contributors: %1$s</string>
-    <string name="progress">Progress: %1$s</string>
-    <string name="unknown">Unknown</string>
+    <string name="no_chart_error">No history chart to display</string>
+    <string name="no_chart_snackbar_error">Error while download the history chart</string>
+
+    <!--Subtitles-->
     <string name="inara_credits">Data provided by inara.cz</string>
     <string name="eddb_credits">Data provided by eddb.io</string>
     <string name="eddb_eddn_credits">Data provided by eddb.io and EDDN</string>
     <string name="edsm_credits">Data provided by edsm.net</string>
-    <string name="title_activity_community_goal_details">Community goal details</string>
 
     <!--Commander-->
     <string name="credits">%1$s credits</string>
@@ -187,7 +191,8 @@
     <!--Systems-->
     <string name="systems">Systems</string>
     <string name="systems_subtitle">Search for a system (click on a result for more details about the system)</string>
-    <string name="system_label">System</string>
+    <string name="system">System</string>
+    <string name="system_details">System details</string>
     <string name="stations">Stations</string>
     <string name="search">Search</string>
     <string name="allegiance_label">Allegiance</string>
@@ -204,8 +209,6 @@
     <string name="factions_history">Factions influence history</string>
     <string name="current_state">Current state</string>
     <string name="no_factions">No factions in this system</string>
-    <string name="no_chart_error">No history chart to display</string>
-    <string name="no_chart_snackbar_error">Error while download the history chart</string>
     <string name="influence">Influence</string>
 
     <!--About-->
@@ -220,6 +223,7 @@
         <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/mikepenz/ItemAnimators">ItemAnimators</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/PhilJay/MPAndroidChart">MPAndroidChart</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://square.github.io/retrofit/">Retrofit</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/JakeWharton/ThreeTenABP">ThreeTenABP</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         ]]>

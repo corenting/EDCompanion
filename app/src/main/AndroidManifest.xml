@@ -25,11 +25,11 @@
         </activity>
         <activity
             android:name=".activities.DetailsActivity"
-            android:label="@string/title_activity_community_goal_details"
+            android:label="@string/community_goal_details"
             android:theme="@style/Theme.AppDetails" />
         <activity
             android:name=".activities.SystemDetailsActivity"
-            android:label="@string/system_label"
+            android:label="@string/system_details"
             android:theme="@style/Theme.AppDetails" />
         <activity
             android:name=".activities.AboutActivity"

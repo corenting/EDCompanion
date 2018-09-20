@@ -50,11 +50,11 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return context.getString(R.string.system_label);
+                return context.getString(R.string.system);
             case 1:
                 return context.getString(R.string.factions);
             default:
-                return context.getString(R.string.system_label);
+                return context.getString(R.string.system);
 
         }
     }

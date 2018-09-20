@@ -53,7 +53,7 @@
                     android:id="@+id/systemInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/system_label"
+                    android:hint="@string/system"
                     android:inputType="textNoSuggestions" />
             </android.support.design.widget.TextInputLayout>
 

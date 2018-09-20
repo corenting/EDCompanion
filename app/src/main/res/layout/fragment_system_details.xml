@@ -41,7 +41,7 @@
                         android:layout_toStartOf="@id/logoImageView"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@string/system_label"
+                        android:text="@string/system"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
                     <ImageView

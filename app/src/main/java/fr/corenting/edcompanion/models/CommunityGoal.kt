@@ -25,9 +25,9 @@ data class CommunityGoal(val isOngoing: Boolean, val title: String, val descript
         return try {
             val date = android.text.format.DateUtils.getRelativeTimeSpanString(refreshDate.toEpochMilli(),
                     Instant.now().toEpochMilli(), 0, FORMAT_ABBREV_RELATIVE).toString()
-            ctx.getString(R.string.last_update, date)
+            ctx.getString(R.string.cg_last_update, date)
         } catch (e: Exception) {
-            ctx.getString(R.string.last_update, ctx.getString(R.string.unknown))
+            ctx.getString(R.string.cg_last_update, ctx.getString(R.string.unknown))
         }
     }
 

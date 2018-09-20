@@ -98,11 +98,6 @@ public class CommanderStatusFragment extends Fragment {
                 getString(R.string.rank_exploration));
         RankUtils.setTempContent(getContext(), arenaRankLayout, getString(R.string.rank_arena));
 
-        // Set card title to commander name
-        String cmdrName = SettingsUtils.getCommanderName(this.getContext());
-        commanderNameTextView.setText(cmdrName.length() == 0 ?
-                getResources().getString(R.string.unknown) : cmdrName);
-
         // Hide views according to supported informations from source
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
         if (!playerNetwork.supportCredits()) {
@@ -205,6 +200,12 @@ public class CommanderStatusFragment extends Fragment {
     }
 
     private void getAll() {
+        // Refresh player name card title
+        String cmdrName = SettingsUtils.getCommanderName(this.getContext());
+        if (cmdrName.length() != 0) {
+            commanderNameTextView.setText(cmdrName);
+        }
+
         // Refresh player network object if settings changed
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
 

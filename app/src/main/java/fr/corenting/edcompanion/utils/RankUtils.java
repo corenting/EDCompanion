@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.animation.ProgressBarAnimation;
 import fr.corenting.edcompanion.models.events.Ranks;
 
 public class RankUtils {
@@ -30,7 +31,12 @@ public class RankUtils {
         logoView.setImageResource(logoId);
         titleView.setText(String.format("%s : %s", description, rank.getName()));
         progressView.setText(ctx.getResources().getString(R.string.rank_progress, rank.getProgress()));
-        progressBar.setProgress(rank.getProgress());
+
+        // Animate progress bar
+        ProgressBarAnimation anim = new ProgressBarAnimation(progressBar, progressBar.getProgress(),
+                rank.getProgress());
+        anim.setDuration(1000);
+        progressBar.startAnimation(anim);
     }
 
     public static int getCombatLogoId(int rankValue) {

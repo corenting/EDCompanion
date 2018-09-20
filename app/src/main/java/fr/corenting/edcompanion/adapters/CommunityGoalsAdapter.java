@@ -57,19 +57,19 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
         // Content
         holder.titleTextView.setText(currentGoal.getTitle());
         holder.updateTextView.setText(currentGoal.getRefreshDateString(context));
-        holder.peopleTextView.setText(context.getString(R.string.contributors,
+        holder.peopleTextView.setText(context.getString(R.string.cg_contributors,
                 String.valueOf(currentGoal.getContributors())));
-        holder.remainingTextView.setText(context.getString(R.string.end_date,
+        holder.remainingTextView.setText(context.getString(R.string.cg_end_date,
                 currentGoal.getEndDate(context)));
-        holder.tierTextView.setText(context.getString(R.string.progress,
+        holder.tierTextView.setText(context.getString(R.string.cg_progress,
                 currentGoal.getTierString()));
 
         // System
         if (currentGoal.getDistanceToPlayer() != null) {
-            holder.locationTextView.setText(context.getString(R.string.system_with_player_distance,
+            holder.locationTextView.setText(context.getString(R.string.cg_system_with_player_distance,
                     currentGoal.getSystem(), currentGoal.getDistanceToPlayer()));
         } else {
-            holder.locationTextView.setText(context.getString(R.string.system,
+            holder.locationTextView.setText(context.getString(R.string.cg_system_distance,
                     currentGoal.getSystem()));
         }
 

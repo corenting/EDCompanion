@@ -33,7 +33,7 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
         this.context = ctx;
         this.isDetailsView = isDetailsView;
         this.dataSet = new ArrayList<>();
-        this.dateFormat = DateFormat.getDateInstance(DateFormat.SHORT,
+        this.dateFormat = DateFormat.getDateInstance(DateFormat.LONG,
                 DateUtils.getCurrentLocale(context));
 
         this.onClickListener = new View.OnClickListener() {

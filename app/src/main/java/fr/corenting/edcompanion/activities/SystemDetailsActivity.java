@@ -37,12 +37,11 @@ public class SystemDetailsActivity extends AppCompatActivity {
         systemName = "Sol";
         if (getIntent().getExtras() != null) {
             systemName = getIntent().getExtras()
-                    .getString(getString(R.string.system_label), "Sol");
+                    .getString(getString(R.string.system), "Sol");
         }
 
         // Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(systemName);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
