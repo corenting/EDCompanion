@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.utils;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,10 +18,15 @@ public class ViewUtils {
 
     public static void switchFragment(FragmentManager fragmentManager, Fragment fragment, String tag)
     {
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.fragmentContent, fragment, tag)
-                .commit();
+        if (fragmentManager != null && fragment != null && tag != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragmentContent, fragment, tag)
+                    .commit();
+        }
+        else {
+            Log.w("switchFragment", "Error when switching fragment");
+        }
     }
 
     public static void hideSoftKeyboard(View v) {

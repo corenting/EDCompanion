@@ -65,11 +65,10 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
                 currentGoal.getTierString()));
 
         // System
-        if (currentGoal.getDistanceToPlayer() != null ) {
+        if (currentGoal.getDistanceToPlayer() != null) {
             holder.locationTextView.setText(context.getString(R.string.system_with_player_distance,
                     currentGoal.getSystem(), currentGoal.getDistanceToPlayer()));
-        }
-        else {
+        } else {
             holder.locationTextView.setText(context.getString(R.string.system,
                     currentGoal.getSystem()));
         }
@@ -99,12 +98,13 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
         }
 
         // Set click listeners
-        setClickListeners(position, holder.peopleTextView, R.string.hint_participants);
-        setClickListeners(position, holder.remainingTextView, R.string.hint_end_date);
-        setClickListeners(position, holder.tierTextView, R.string.hint_tiers);
-        setClickListeners(position, holder.locationTextView, R.string.hint_system);
-        setClickListeners(position, holder.descriptionTextView, R.string.community_goal_description);
-        setClickListeners(position, holder.objectiveTextView, R.string.objective);
+        setClickListeners(holder.getAdapterPosition(), holder.peopleTextView, R.string.hint_participants);
+        setClickListeners(holder.getAdapterPosition(), holder.remainingTextView, R.string.hint_end_date);
+        setClickListeners(holder.getAdapterPosition(), holder.tierTextView, R.string.hint_tiers);
+        setClickListeners(holder.getAdapterPosition(), holder.locationTextView, R.string.hint_system);
+        setClickListeners(holder.getAdapterPosition(), holder.descriptionTextView,
+                R.string.community_goal_description);
+        setClickListeners(holder.getAdapterPosition(), holder.objectiveTextView, R.string.objective);
     }
 
     private void setRewards(goalsViewHolder holder, CommunityGoal goal) {

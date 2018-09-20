@@ -35,7 +35,6 @@ public class CommodityFinderFragment extends AbstractFinderFragment<CommodityFin
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShipFinderResultEvent(ResultsList<CommodityFinderResult> results) {
-        Log.d("Event", "Results called");
         // Error
         if (!results.getSuccess()) {
             endLoading(true);
