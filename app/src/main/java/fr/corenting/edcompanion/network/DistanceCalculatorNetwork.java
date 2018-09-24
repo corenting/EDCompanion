@@ -8,13 +8,14 @@ import org.greenrobot.eventbus.EventBus;
 import fr.corenting.edcompanion.models.events.DistanceSearch;
 import fr.corenting.edcompanion.models.apis.EDApi.DistanceResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 
 
 public class DistanceCalculatorNetwork {
     public static void getDistance(Context ctx, String firstSystem, String secondSystem) {
-        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<DistanceResponse> callback = new retrofit2.Callback<DistanceResponse>() {
             @Override

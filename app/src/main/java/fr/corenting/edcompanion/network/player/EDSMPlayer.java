@@ -12,7 +12,7 @@ import fr.corenting.edcompanion.models.apis.EDSM.EDSMCredits;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMPosition;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMRanks;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import retrofit2.Call;
 
@@ -30,7 +30,8 @@ public class EDSMPlayer extends PlayerNetwork {
         this.context = context;
         apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
         commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
-        edsmRetrofit = RetrofitUtils.getEDSMRetrofit(context);
+        edsmRetrofit = RetrofitSingleton.getInstance()
+                .getEDSMRetrofit(context.getApplicationContext());
     }
 
     @Override

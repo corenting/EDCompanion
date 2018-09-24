@@ -23,7 +23,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.events.SystemDetails;
-import fr.corenting.edcompanion.utils.NumberUtils;
+import fr.corenting.edcompanion.utils.MathUtils;
 
 public class SystemDetailsFragment extends Fragment {
 
@@ -83,6 +83,9 @@ public class SystemDetailsFragment extends Fragment {
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
 
+        // Init number format
+        numberFormat = MathUtils.getNumberFormat(getContext());
+
         // Setup views
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
@@ -92,9 +95,6 @@ public class SystemDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
-        // Init number format
-        numberFormat = NumberUtils.getNumberFormat(getContext());
     }
 
     @Override

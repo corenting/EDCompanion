@@ -2,6 +2,9 @@
 -keep class com.google.gson.** { *; }
 -keepattributes Signature
 
+# MPAndroidChart
+-keep class com.github.mikephil.charting.** { *; }
+
 # OkHttp
 -keepattributes Signature
 -keepattributes *Annotation*

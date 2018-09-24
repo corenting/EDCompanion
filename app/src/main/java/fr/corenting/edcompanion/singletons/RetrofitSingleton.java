@@ -1,28 +1,57 @@
-package fr.corenting.edcompanion.utils;
+package fr.corenting.edcompanion.singletons;
 
 import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.Serializable;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
+import fr.corenting.edcompanion.utils.EDSMDeserializer;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitUtils {
+// Singleton safe from serialization/reflection...
+// From https://medium.com/exploring-code/how-to-make-the-perfect-singleton-de6b951dfdb0
+public class RetrofitSingleton implements Serializable {
+    private static volatile RetrofitSingleton instance;
 
-    private static EDSMRetrofit edsmRetrofit = null;
-    private static EDApiRetrofit edApiRetrofit = null;
-    private static InaraRetrofit inaraRetrofit = null;
+    private EDSMRetrofit edsmRetrofit;
+    private EDApiRetrofit edApiRetrofit;
+    private InaraRetrofit inaraRetrofit;
+    private Retrofit.Builder retrofitBuilder;
 
-    private static Retrofit.Builder retrofitBuilder = null;
+    // Private constructor.
+    private RetrofitSingleton() {
 
-    public static EDSMRetrofit getEDSMRetrofit(Context ctx)
-    {
+        // Prevent form the reflection api.
+        if (instance != null) {
+            throw new RuntimeException("Use getInstance() method to get an instance of this class.");
+        }
+    }
+
+    public static RetrofitSingleton getInstance() {
+        if (instance == null) {
+            synchronized (RetrofitSingleton.class) {
+                if (instance == null) instance = new RetrofitSingleton();
+            }
+        }
+
+        return instance;
+    }
+
+    //Make singleton from serialize and deserialize operation.
+    protected RetrofitSingleton readResolve() {
+        return getInstance();
+    }
+
+    // Retrofit stuff
+    public EDSMRetrofit getEDSMRetrofit(Context ctx) {
         if (edsmRetrofit != null) {
             return edsmRetrofit;
         }
@@ -35,8 +64,7 @@ public class RetrofitUtils {
         return edsmRetrofit;
     }
 
-    public static EDApiRetrofit getEdApiRetrofit(Context ctx)
-    {
+    public EDApiRetrofit getEdApiRetrofit(Context ctx) {
         if (edApiRetrofit != null) {
             return edApiRetrofit;
         }
@@ -45,11 +73,10 @@ public class RetrofitUtils {
                 .baseUrl(ctx.getString(R.string.edapi_base))
                 .build()
                 .create(EDApiRetrofit.class);
-        return  edApiRetrofit;
+        return edApiRetrofit;
     }
 
-    public static InaraRetrofit getInaraRetrofit(Context ctx)
-    {
+    public InaraRetrofit getInaraRetrofit(Context ctx) {
         if (inaraRetrofit != null) {
             return inaraRetrofit;
         }
@@ -61,8 +88,7 @@ public class RetrofitUtils {
         return inaraRetrofit;
     }
 
-    private static Retrofit.Builder getRetrofitInstance()
-    {
+    private Retrofit.Builder getRetrofitInstance() {
         if (retrofitBuilder != null) {
             return retrofitBuilder;
         }

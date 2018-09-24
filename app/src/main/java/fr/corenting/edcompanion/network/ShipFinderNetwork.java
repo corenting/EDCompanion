@@ -12,13 +12,14 @@ import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
 import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 
 
 public class ShipFinderNetwork {
     public static void findShip(Context ctx, String system, String ship) {
-        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<List<ShipFinderResponse>> callback = new retrofit2.Callback<List<ShipFinderResponse>>() {
             @Override

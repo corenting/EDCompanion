@@ -12,7 +12,7 @@ import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
 import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 
 
@@ -21,7 +21,8 @@ public class CommodityFinderNetwork {
                                      String landingPad, int minStock) {
 
         // Init retrofit instance
-        final EDApiRetrofit edApiRetrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        final EDApiRetrofit edApiRetrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
 
         final retrofit2.Callback<List<CommodityFinderResponse>> callback = new retrofit2.Callback<List<CommodityFinderResponse>>() {
             @Override

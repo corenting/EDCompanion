@@ -15,6 +15,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.NumberFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -22,8 +24,8 @@ import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;
 import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
+import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
-import fr.corenting.edcompanion.utils.NumberUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.RankUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
@@ -61,6 +63,7 @@ public class CommanderStatusFragment extends Fragment {
     @BindView(R.id.arenaRankLayout)
     public View arenaRankLayout;
 
+    private NumberFormat numberFormat;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -74,6 +77,9 @@ public class CommanderStatusFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Number format
+        numberFormat = MathUtils.getNumberFormat(getContext());
 
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
@@ -149,9 +155,10 @@ public class CommanderStatusFragment extends Fragment {
             creditsTextView.setText(getResources().getString(R.string.unknown));
             return;
         }
-        String amount = NumberUtils.getNumberFormat(getContext()).format(credits.getBalance());
+
+        String amount = numberFormat.format(credits.getBalance());
         if (credits.getLoan() != 0) {
-            String loan = NumberUtils.getNumberFormat(getContext()).format(credits.getLoan());
+            String loan = numberFormat.format(credits.getLoan());
             creditsTextView.setText(getResources().getString(R.string.credits_with_loan,
                     amount, loan));
         } else {

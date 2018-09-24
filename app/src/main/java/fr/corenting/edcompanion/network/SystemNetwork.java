@@ -19,12 +19,13 @@ import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.models.events.SystemHistory;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 
 public class SystemNetwork {
     public static void findSystem(Context ctx, String system) {
-        EDSMRetrofit retrofit = RetrofitUtils.getEDSMRetrofit(ctx);
+        EDSMRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEDSMRetrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<List<EDSMSystem>> callback = new retrofit2.Callback<List<EDSMSystem>>() {
             @Override
@@ -63,7 +64,8 @@ public class SystemNetwork {
     }
 
     public static void getSystemDetails(Context ctx, String system) {
-        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<SystemResponse> callback = new retrofit2.Callback<SystemResponse>() {
             @Override
@@ -96,7 +98,8 @@ public class SystemNetwork {
     }
 
     public static void getSystemHistory(Context ctx, String system) {
-        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<List<SystemHistoryResponse>> callback =
                 new retrofit2.Callback<List<SystemHistoryResponse>>() {

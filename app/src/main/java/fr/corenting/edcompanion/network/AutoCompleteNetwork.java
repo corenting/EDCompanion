@@ -11,7 +11,7 @@ import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystem;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Response;
 
 public class AutoCompleteNetwork {
@@ -19,7 +19,8 @@ public class AutoCompleteNetwork {
 
     public static List<NameId> searchSystems(Context context, String filter) {
         try {
-            EDSMRetrofit edsmRetrofit = RetrofitUtils.getEDSMRetrofit(context);
+            EDSMRetrofit edsmRetrofit = RetrofitSingleton.getInstance()
+                    .getEDSMRetrofit(context.getApplicationContext());
             Response<List<EDSMSystem>> response = edsmRetrofit.getSystems(filter, 1,
                     0, 0).execute();
             List<EDSMSystem> systems = response.body();
@@ -44,7 +45,8 @@ public class AutoCompleteNetwork {
 
     public static List<NameId> searchShips(Context context, String filter) {
         try {
-            EDApiRetrofit edApiRetrofit = RetrofitUtils.getEdApiRetrofit(context);
+            EDApiRetrofit edApiRetrofit = RetrofitSingleton.getInstance()
+                    .getEdApiRetrofit(context.getApplicationContext());
             Response<List<ShipResponse>> response = edApiRetrofit.getShips(filter).execute();
             List<ShipResponse> ships = response.body();
 
@@ -69,7 +71,8 @@ public class AutoCompleteNetwork {
 
     public static List<NameId> searchCommodities(Context context, String filter) {
         try {
-            EDApiRetrofit edApiRetrofit = RetrofitUtils.getEdApiRetrofit(context);
+            EDApiRetrofit edApiRetrofit = RetrofitSingleton.getInstance()
+                    .getEdApiRetrofit(context.getApplicationContext());
             Response<List<CommodityResponse>> response = edApiRetrofit.getCommodities(filter).execute();
             List<CommodityResponse> commodities = response.body();
 

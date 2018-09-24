@@ -12,8 +12,8 @@ import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileRequestBody;
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileResponse;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import fr.corenting.edcompanion.utils.DateUtils;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import retrofit2.Call;
 
@@ -30,7 +30,8 @@ public class InaraPlayer extends PlayerNetwork {
         this.context = context;
         commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
 
-        inaraRetrofit = RetrofitUtils.getInaraRetrofit(context);
+        inaraRetrofit = RetrofitSingleton.getInstance()
+                .getInaraRetrofit(context.getApplicationContext());
     }
 
     private InaraProfileRequestBody buildRequestBody() {

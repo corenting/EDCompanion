@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.GalnetArticle;
-import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.models.apis.EDApi.GalnetArticleResponse;
+import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 
 public class GalnetNetwork {
     public static void getNews(Context ctx) {
 
-        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<List<GalnetArticleResponse>> callback = new retrofit2.Callback<List<GalnetArticleResponse>>() {
             @Override

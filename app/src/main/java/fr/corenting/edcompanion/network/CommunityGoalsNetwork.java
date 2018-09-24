@@ -12,13 +12,14 @@ import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
 import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
-import fr.corenting.edcompanion.utils.RetrofitUtils;
+import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 
 public class CommunityGoalsNetwork {
     public static void getCommunityGoals(Context ctx) {
 
-        EDApiRetrofit retrofit = RetrofitUtils.getEdApiRetrofit(ctx);
+        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
         retrofit2.Callback<CommunityGoalsResponse> callback = new retrofit2.Callback<CommunityGoalsResponse>() {
             @Override
             public void onResponse(@NonNull Call<CommunityGoalsResponse> call,
