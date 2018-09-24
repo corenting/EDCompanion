@@ -16,4 +16,5 @@ APKs are available [in the release section](https://github.com/corenting/EDCompa
 - Distance calculator (get the distance between two systems)
 - Ship finder tool (find the nearest station selling a specific ship)
 - Commodity finder tool (find the nearest station selling a specific commodity)
+- Systems search (see system informations and factions informations and history)
 - No ads, free and open-source
