@@ -5,7 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import android.widget.Toast;
 
 import fr.corenting.edcompanion.R;

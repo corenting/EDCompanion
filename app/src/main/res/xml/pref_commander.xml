@@ -1,22 +1,22 @@
-<android.support.v7.preference.PreferenceScreen
+<androidx.preference.PreferenceScreen
     android:icon="@drawable/ic_person_black_24dp"
     android:key="@string/settings_player_subscreen"
     android:title="@string/settings_cmdr_category_title"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
         android:title="@string/settings_cmdr_source_title"
         android:summary="@string/settings_cmdr_source_summary"
         android:key="@string/settings_cmdr_source"
         android:negativeButtonText="@android:string/cancel"
         android:positiveButtonText="@android:string/ok" />
-    <android.support.v7.preference.EditTextPreference
+    <androidx.preference.EditTextPreference
         android:inputType="textNoSuggestions"
         android:key="@string/settings_cmdr_username"
         android:negativeButtonText="@android:string/cancel"
         android:positiveButtonText="@android:string/ok" />
-    <android.support.v7.preference.EditTextPreference
+    <androidx.preference.EditTextPreference
         android:inputType="textPassword"
         android:key="@string/settings_cmdr_password"
         android:negativeButtonText="@android:string/cancel"
         android:positiveButtonText="@android:string/ok" />
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

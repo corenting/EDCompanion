@@ -3,7 +3,7 @@ package fr.corenting.edcompanion.views;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;

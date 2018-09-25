@@ -7,7 +7,7 @@
 
     <include layout="@layout/include_app_bar"/>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -95,5 +95,5 @@
                 android:layout_below="@+id/contactTitleTextView"
                 android:layout_alignParentStart="true" />
         </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

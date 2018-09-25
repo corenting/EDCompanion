@@ -14,7 +14,7 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 // Code from http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/
 
-public class DelayAutoCompleteTextView extends android.support.v7.widget.AppCompatAutoCompleteTextView {
+public class DelayAutoCompleteTextView extends androidx.appcompat.widget.AppCompatAutoCompleteTextView {
 
     private static final int MESSAGE_TEXT_CHANGED = 100;
     private static final int DEFAULT_AUTOCOMPLETE_DELAY = 250;

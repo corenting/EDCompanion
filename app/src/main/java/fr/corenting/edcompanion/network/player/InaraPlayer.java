@@ -1,8 +1,8 @@
 package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.preference.EditTextPreference;
+import androidx.annotation.NonNull;
+import androidx.preference.EditTextPreference;
 
 import java.util.ArrayList;
 

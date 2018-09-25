@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.network.player;
 
-import android.support.v7.preference.EditTextPreference;
+import androidx.preference.EditTextPreference;
 
 import org.greenrobot.eventbus.EventBus;
 

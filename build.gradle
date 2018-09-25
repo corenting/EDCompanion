@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.61'
+    ext.kotlin_version = '1.2.71'
 
     repositories {
         jcenter()
@@ -9,10 +9,10 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.0'
 
         // For Firebase
-        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.google.gms:google-services:4.1.0'
         // Kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
@@ -23,6 +23,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" } // Remove when Butterknife 9.0 is released in stable
     }
 }
 
