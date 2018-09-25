@@ -26,9 +26,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Set theme first before parent call
-        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
-
+        ThemeUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
@@ -38,7 +36,6 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ThemeUtils.setToolbarColor(this, toolbar);
 
         // Common recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

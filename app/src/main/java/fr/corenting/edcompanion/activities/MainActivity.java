@@ -3,9 +3,13 @@ package fr.corenting.edcompanion.activities;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.core.view.GravityCompat;
@@ -15,8 +19,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -46,13 +52,13 @@ import fr.corenting.edcompanion.utils.ViewUtils;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String KEY_CURRENT_TITLE =  "CURRENT_TITLE";
-    private String KEY_CURRENT_SUBTITLE =  "CURRENT_SUBTITLE";
-    private String KEY_CURRENT_TAG =  "CURRENT_TAG";
+    private String KEY_CURRENT_TITLE = "CURRENT_TITLE";
+    private String KEY_CURRENT_SUBTITLE = "CURRENT_SUBTITLE";
+    private String KEY_CURRENT_TAG = "CURRENT_TAG";
 
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.drawerLayout)
     public DrawerLayout drawer;
-    @BindView(R.id.nav_view)
+    @BindView(R.id.navView)
     public NavigationView navigationView;
     @BindView(R.id.appBar)
     public AppBarLayout appBarLayout;
@@ -64,10 +70,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        // Set theme first before parent call
-        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
-
+        ThemeUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -75,7 +78,6 @@ public class MainActivity extends AppCompatActivity
         // Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ThemeUtils.setToolbarColor(this, toolbar);
 
         // Drawer toggle
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,7 +86,6 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         // Setup navigation view and fake click the first item
-        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Set initial fragment
@@ -104,9 +105,15 @@ public class MainActivity extends AppCompatActivity
         // Update the server status
         updateServerStatus();
 
-        // Set listener on server status text to refresh it
+        // Set listener on server status text to refresh it, and set theme
         TextView drawerSubtitleTextView = navigationView.getHeaderView(0)
                 .findViewById(R.id.drawerSubtitleTextView);
+        if (ThemeUtils.isDarkThemeEnabled(this)) {
+            LinearLayout drawerHeader = navigationView.getHeaderView(0)
+                    .findViewById(R.id.headerLinearLayout);
+            drawerHeader.setBackgroundColor(ContextCompat.getColor(this,
+                    R.color.darkPrimary));
+        }
         drawerSubtitleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +188,8 @@ public class MainActivity extends AppCompatActivity
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onServerStatusEvent(ServerStatus status) {
         String content = status.getSuccess() ? status.getStatus() : getString(R.string.unknown);
-        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        TextView textView = navigationView.getHeaderView(0)
+                .findViewById(R.id.drawerSubtitleTextView);
         textView.setText(getString(R.string.server_status, content));
     }
 

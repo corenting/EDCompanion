@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cardView"
-    style="@style/CardView"
+    style="@style/Widget.MaterialComponents.CardView"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="2dp"
-    android:layout_margin="8dp" >
+    android:layout_marginLeft="@dimen/card_spacing"
+    android:layout_marginTop="@dimen/card_spacing"
+    android:layout_marginRight="@dimen/card_spacing" >
 
     <RelativeLayout
         android:id="@+id/itemLayout"
@@ -109,4 +110,4 @@
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

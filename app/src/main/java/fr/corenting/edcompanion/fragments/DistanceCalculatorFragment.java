@@ -1,10 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +8,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,7 +45,7 @@ public class DistanceCalculatorFragment extends Fragment {
     @BindView(R.id.findButton)
     public Button findButton;
     @BindView(R.id.resultCardView)
-    public CardView resultCardView;
+    public MaterialCardView resultCardView;
     @BindView(R.id.progressBar)
     public MaterialProgressBar progressBar;
     @BindView(R.id.resultTextView)

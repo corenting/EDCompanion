@@ -1,17 +1,28 @@
 <resources>
 
-    <style name="Theme.App" parent="Base.Theme.App"/>
-    <style name="Theme.AppDetails" parent="Base.Theme.App"/>
+    <style name="AppTheme" parent="BaseTheme"/>
+    <style name="AppDetailsTheme" parent="BaseTheme"/>
+    <style name="AppDarkDetailsTheme" parent="BaseThemeDark"/>
+    <style name="AppDarkTheme" parent="BaseThemeDark"/>
 
-    <style name="Base.Theme.App" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <!-- Drawer bug due to https://issuetracker.google.com/issues/116170605 is fixed -->
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="actionBarTheme">@style/Theme.SettingsActionBar.Light</item>
+        <item name="actionBarTheme">@style/SettingsActionBar</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
-    <style name="Theme.SettingsActionBar.Light" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="BaseThemeDark" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/darkPrimary</item>
+        <item name="colorPrimaryDark">@color/darkPrimaryDark</item>
+        <item name="colorAccent">@color/darkAccent</item>
+        <item name="actionBarTheme">@style/SettingsActionBar</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+    </style>
+
+    <style name="SettingsActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 </resources>

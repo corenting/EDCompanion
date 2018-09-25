@@ -19,10 +19,7 @@ import fr.corenting.edcompanion.utils.ThemeUtils;
 public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        // Set theme first before parent call
-        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
-
+        ThemeUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
@@ -30,7 +27,6 @@ public class AboutActivity extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ThemeUtils.setToolbarColor(this, mToolbar);
 
         TextView versionTextView = findViewById(R.id.versionTextView);
         TextView libsContentTextView = findViewById(R.id.librariesContentTextView);

@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import fr.corenting.edcompanion.utils.ThemeUtils;
+
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.setTheme(this);
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);

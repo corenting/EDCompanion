@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    style="@style/Widget.MaterialComponents.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cardView"
-    style="@style/CardView"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="2dp"
-    android:layout_margin="8dp">
+    android:layout_marginLeft="@dimen/card_spacing"
+    android:layout_marginTop="@dimen/card_spacing"
+    android:layout_marginRight="@dimen/card_spacing"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:id="@+id/itemLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="24dp"
         android:paddingLeft="24dp"
+        android:paddingTop="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="24dp">
+        android:paddingBottom="24dp">
 
         <TextView
             android:id="@+id/titleTextView"
@@ -37,13 +37,13 @@
 
         <TextView
             android:id="@+id/descriptionTextView"
-            android:layout_marginTop="18dp"
-            android:maxLines="5"
-            android:ellipsize="end"
-            android:layout_below="@id/dateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/dateTextView"
+            android:layout_marginTop="18dp"
+            android:ellipsize="end"
+            android:maxLines="5"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

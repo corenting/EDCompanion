@@ -8,15 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App">
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
 
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.App">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,16 +24,16 @@
         </activity>
         <activity
             android:name=".activities.DetailsActivity"
-            android:label="@string/community_goal_details"
-            android:theme="@style/Theme.AppDetails" />
+            android:theme="@style/AppDetailsTheme"
+            android:label="@string/community_goal_details" />
         <activity
             android:name=".activities.SystemDetailsActivity"
-            android:label="@string/system_details"
-            android:theme="@style/Theme.AppDetails" />
+            android:theme="@style/AppDetailsTheme"
+            android:label="@string/system_details" />
         <activity
             android:name=".activities.AboutActivity"
-            android:label="@string/title_activity_about"
-            android:theme="@style/Theme.AppDetails" />
+            android:theme="@style/AppDetailsTheme"
+            android:label="@string/title_activity_about" />
 
         <service android:name=".services.FirebaseMessagingService">
             <intent-filter>
@@ -44,8 +43,8 @@
 
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.AppDetails" >
+            android:theme="@style/AppDetailsTheme"
+            android:label="@string/title_activity_settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.corenting.edcompanion.activities.MainActivity" />

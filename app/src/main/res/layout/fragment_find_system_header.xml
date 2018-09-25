@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        style="@style/CardView"
+        style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="2dp"
+        android:layout_marginLeft="@dimen/card_spacing"
+        android:layout_marginTop="@dimen/card_spacing"
+        android:layout_marginRight="@dimen/card_spacing"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
@@ -88,5 +89,5 @@
                 android:textAlignment="center"
                 android:visibility="gone" />
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

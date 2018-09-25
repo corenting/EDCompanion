@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff9800</color>
-    <color name="colorPrimaryDark">#ef6c00</color>
-    <color name="colorAccent">#ffab91</color>
+    <color name="colorPrimary">#ffff9800</color>
+    <color name="colorPrimaryDark">#ffef6c00</color>
+    <color name="colorAccent">#ffffab91</color>
 
-    <color name="darkPrimary">#607d8b</color>
-    <color name="darkPrimaryDark">#455a64</color>
-    <color name="darkAccent">#ff5252</color>
+    <color name="darkPrimary">#ff607d8b</color>
+    <color name="darkPrimaryDark">#ff455a64</color>
+    <color name="darkAccent">#ffff5252</color>
 
     <color name="tabTextSelected">#b2ffffff</color>
     <color name="tabText">#ffffff</color>

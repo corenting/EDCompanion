@@ -26,9 +26,7 @@ public class SystemDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Set theme first before parent call
-        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getDarkThemeValue(this));
-
+        ThemeUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragments_with_tabs);
         ButterKnife.bind(this);
@@ -45,7 +43,6 @@ public class SystemDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ThemeUtils.setToolbarColor(this, toolbar);
 
         // Viewpager
         SystemDetailsPagerAdapter pagerAdapter=
