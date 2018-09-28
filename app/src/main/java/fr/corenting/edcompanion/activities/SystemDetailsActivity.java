@@ -1,11 +1,14 @@
 package fr.corenting.edcompanion.activities;
 
 import android.os.Bundle;
+
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 
 import butterknife.BindView;
@@ -45,16 +48,19 @@ public class SystemDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Viewpager
-        SystemDetailsPagerAdapter pagerAdapter=
-                new SystemDetailsPagerAdapter(getSupportFragmentManager(),this);
+        SystemDetailsPagerAdapter pagerAdapter =
+                new SystemDetailsPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(pagerAdapter);
 
         // TabLayout
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        if (ThemeUtils.isDarkThemeEnabled(this)) {
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.darkPrimary));
+        } else {
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
         tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
                 getResources().getColor(R.color.tabText));
-
 
 
         getData();

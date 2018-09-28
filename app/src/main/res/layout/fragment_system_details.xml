@@ -85,7 +85,7 @@
                         android:id="@+id/allegianceLabelTextView"
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/coordsLabelTextView"
+                        android:layout_below="@id/coordsTextView"
                         android:text="@string/allegiance_label"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
@@ -94,7 +94,7 @@
                         android:id="@+id/allegianceTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/coordsLabelTextView"
+                        android:layout_below="@id/coordsTextView"
                         android:layout_toEndOf="@id/allegianceLabelTextView"
                         android:text="@string/unknown"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />

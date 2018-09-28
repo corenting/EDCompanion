@@ -290,10 +290,11 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.0</b><br />
+            <b>Version 2.1</b><br />
             <ul>
-                <li>Add systems search, with faction details and history</li><br />
-                <li>Various fixes and optimisations</li><br />
+                <li>Started updating theme to Material Components</li><br />
+                <li>Disable Firebase Analytics which was enabled by mistake</li><br />
+                <li>Bugfixes</li><br />
             </ul>
         ]]>
     </string>

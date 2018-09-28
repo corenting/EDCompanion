@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
@@ -13,6 +14,7 @@ import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
 import fr.corenting.edcompanion.utils.EDSMDeserializer;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -93,12 +95,19 @@ public class RetrofitSingleton implements Serializable {
             return retrofitBuilder;
         }
 
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .build();
+
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .registerTypeAdapter(EDSMSystemInformation.class, new EDSMDeserializer())
                 .create();
 
         retrofitBuilder = new Retrofit.Builder()
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson));
         return retrofitBuilder;
     }
