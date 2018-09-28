@@ -39,6 +39,10 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
         this.onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = recyclerView.getChildAdapterPosition(v);
+                if (dataSet.size() < position || dataSet.size() == 0) {
+                    return;
+                }
                 final GalnetArticle article = dataSet.get(recyclerView.getChildAdapterPosition(v));
                 Intent i = new Intent(context, DetailsActivity.class);
                 i.putExtra("article", article);

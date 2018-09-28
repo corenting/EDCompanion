@@ -61,8 +61,12 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
                 getData();
             }
         };
-        swipeRefreshLayout.setOnRefreshListener(listener);
-        emptySwipeRefreshLayout.setOnRefreshListener(listener);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setOnRefreshListener(listener);
+        }
+        if (emptySwipeRefreshLayout != null) {
+            emptySwipeRefreshLayout.setOnRefreshListener(listener);
+        }
 
         // Load data if not restored
         if (savedInstanceState != null) {

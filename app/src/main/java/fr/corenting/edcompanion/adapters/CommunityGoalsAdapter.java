@@ -143,6 +143,9 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
     }
 
     private void switchToDetailsView(int position) {
+        if (dataSet.size() < position || dataSet.size() == 0) {
+            return;
+        }
         final CommunityGoal goal = dataSet.get(position);
         Intent i = new Intent(context, DetailsActivity.class);
         i.putExtra("goal", goal);

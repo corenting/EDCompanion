@@ -85,7 +85,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
-    implementation "com.mikepenz:itemanimators:1.0.2"
+    implementation "com.mikepenz:itemanimators:1.1.0"
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
