@@ -1,10 +1,12 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.text.Html;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -83,12 +85,6 @@ public class SystemFactionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_system_factions, container, false);
         ButterKnife.bind(this, v);
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
@@ -105,6 +101,8 @@ public class SystemFactionsFragment extends Fragment {
         // Setup views
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
+
+        return v;
     }
 
     @Override
@@ -267,7 +265,7 @@ public class SystemFactionsFragment extends Fragment {
         historyChartView.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return labels.get((int) value);
+                return labels.get((int) value, "");
             }
         });
         historyChartView.getAxisLeft().setValueFormatter(new IAxisValueFormatter() {

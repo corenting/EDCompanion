@@ -60,13 +60,6 @@ public class DistanceCalculatorFragment extends Fragment {
                 false);
         ButterKnife.bind(this, v);
 
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         // Autocomplete setup
         setAutoComplete(firstSystemEditText);
         setAutoComplete(secondSystemEditText);
@@ -74,6 +67,8 @@ public class DistanceCalculatorFragment extends Fragment {
         // Set loading indicators
         firstSystemEditText.setLoadingIndicator(firstSystemProgressBar);
         secondSystemEditText.setLoadingIndicator(secondSystemProgressBar);
+
+        return v;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

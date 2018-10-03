@@ -1,12 +1,14 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +36,6 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_finder, container, false);
         ButterKnife.bind(this, v);
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -57,6 +53,8 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
+
+        return v;
     }
 
     @Override

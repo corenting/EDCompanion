@@ -36,13 +36,6 @@ public class CommanderFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_commander, container, false);
         ButterKnife.bind(this, v);
 
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         // Setup tablayout and viewpager
         viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(), getContext()));
         tabLayout.setupWithViewPager(viewPager);
@@ -55,6 +48,8 @@ public class CommanderFragment extends Fragment {
         }
         tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
                 getResources().getColor(R.color.tabText));
+
+        return v;
     }
 
     @Override

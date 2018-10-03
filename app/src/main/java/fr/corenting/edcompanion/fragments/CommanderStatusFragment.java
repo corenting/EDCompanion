@@ -1,10 +1,12 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,13 +73,6 @@ public class CommanderStatusFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_commander_status, container, false);
         ButterKnife.bind(this, v);
 
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         // Number format
         numberFormat = MathUtils.getNumberFormat(getContext());
 
@@ -113,13 +108,13 @@ public class CommanderStatusFragment extends Fragment {
             locationContainer.setVisibility(View.GONE);
         }
 
+        return v;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
     }
 
     @Override

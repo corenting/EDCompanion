@@ -1,7 +1,9 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,10 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
         View v = super.onCreateView(inflater, container, savedInstanceState);
 
         // Check if reports only or not
-        reportsMode = getArguments().getBoolean("reportsMode", false);
+        reportsMode = false;
+        if (getArguments() != null) {
+            reportsMode = getArguments().getBoolean("reportsMode", false);
+        }
 
         return v;
     }
