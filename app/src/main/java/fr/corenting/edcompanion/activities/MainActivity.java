@@ -126,9 +126,6 @@ public class MainActivity extends AppCompatActivity
 
         // Show changelog
         ChangelogUtils.ShowChangelog(this);
-
-        // Init ThreeTen
-        AndroidThreeTen.init(getApplicationContext());
     }
 
     @Override
