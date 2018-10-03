@@ -1,11 +1,12 @@
 package fr.corenting.edcompanion.activities;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 
 import java.util.Collections;
@@ -34,27 +35,33 @@ public class DetailsActivity extends AppCompatActivity {
         // Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Common recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // Get the goal or the article
-        CommunityGoal communityGoal = getIntent().getExtras().getParcelable("goal");
-        if (communityGoal == null) {
+        if (getIntent().getExtras() != null) {
+            CommunityGoal communityGoal = getIntent().getExtras().getParcelable("goal");
             GalnetArticle article = getIntent().getExtras().getParcelable("article");
-            galnetArticleSetup(article);
-        } else {
-            communityGoalSetup(communityGoal);
+            if (communityGoal == null && article != null) {
+                galnetArticleSetup(article);
+            } else if (communityGoal != null) {
+                communityGoalSetup(communityGoal);
+            }
         }
 
         recyclerView.smoothScrollToPosition(-10); // because recycler view may not start on top
     }
 
     private void communityGoalSetup(CommunityGoal communityGoal) {
-        getSupportActionBar().setTitle(communityGoal.getTitle());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(communityGoal.getTitle());
+        }
 
         // Adapter setup
         CommunityGoalsAdapter adapter = new CommunityGoalsAdapter(this, recyclerView, true);
@@ -63,7 +70,9 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void galnetArticleSetup(GalnetArticle article) {
-        getSupportActionBar().setTitle(article.getTitle());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(article.getTitle());
+        }
 
         // Adapter view setup
         GalnetAdapter adapter = new GalnetAdapter(this, recyclerView, true);

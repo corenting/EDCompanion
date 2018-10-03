@@ -3,7 +3,6 @@ package fr.corenting.edcompanion.fragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -241,7 +240,7 @@ public class SystemFactionsFragment extends Fragment {
         }
 
         // Data
-        LineDataSet[] dataSetsArray = dataSets.toArray(new LineDataSet[dataSets.size()]);
+        LineDataSet[] dataSetsArray = dataSets.toArray(new LineDataSet[0]);
         LineData data = new LineData(dataSetsArray);
         historyChartView.setData(data);
 
