@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
