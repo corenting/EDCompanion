@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.preference.PreferenceCategory android:title="@string/pref_header_general">
+        <androidx.preference.SwitchPreference
+            android:key="@string/settings_dark_theme"
+            android:summary="@string/settings_dark_theme_summary"
+            android:title="@string/settings_dark_theme_title" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="@string/settings_cmdr_category_title">
+        <androidx.preference.ListPreference
+            android:key="@string/settings_cmdr_source"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/settings_cmdr_source_summary"
+            android:title="@string/settings_cmdr_source_title" />
+        <androidx.preference.EditTextPreference
+            android:inputType="textNoSuggestions"
+            android:key="@string/settings_cmdr_username"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok" />
+        <androidx.preference.EditTextPreference
+            android:inputType="textPassword"
+            android:key="@string/settings_cmdr_password"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/settings_notifications_category_title">
+        <androidx.preference.SwitchPreference
+            android:key="@string/settings_notifications_new_goal"
+            android:summary="@string/settings_notifications_new_goal_summary"
+            android:title="@string/settings_notifications_new_goal_title" />
+        <androidx.preference.SwitchPreference
+            android:key="@string/settings_notifications_new_tier"
+            android:summary="@string/settings_notifications_new_tier_summary"
+            android:title="@string/settings_notifications_new_tier_title" />
+        <androidx.preference.SwitchPreference
+            android:key="@string/settings_notifications_finished_goal"
+            android:summary="@string/settings_notifications_finished_goal_summary"
+            android:title="@string/settings_notifications_finished_goal_title" />
+    </androidx.preference.PreferenceCategory>
+
+
+</androidx.preference.PreferenceScreen>

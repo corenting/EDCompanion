@@ -270,10 +270,7 @@
     <string name="settings_notifications_new_goal">New goal</string>
     <string name="settings_notifications_new_tier">New tier</string>
     <string name="settings_notifications_finished_goal">Finished goal</string>
-    <string name="settings_notifications_subscreen">Notifications subscreen</string>
-    <string name="settings_player_subscreen">Player subscreen</string>
     <string name="pref_header_general">General</string>
-    <string name="pref_header_notifications">Notifications</string>
 
     <!--Notifications-->
     <string name="notifications_new_goal_channel">New community goals</string>

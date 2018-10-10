@@ -1,9 +1,0 @@
-<androidx.preference.PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <androidx.preference.SwitchPreference
-        android:key="@string/settings_dark_theme"
-        android:summary="@string/settings_dark_theme_summary"
-        android:title="@string/settings_dark_theme_title" />
-
-</androidx.preference.PreferenceScreen>
