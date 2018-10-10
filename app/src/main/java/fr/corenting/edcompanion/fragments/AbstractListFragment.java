@@ -93,22 +93,25 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
     }
 
     protected void endLoading(boolean empty) {
-        if (empty) {
-            emptySwipeRefreshLayout.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setVisibility(View.GONE);
-        } else {
-            emptySwipeRefreshLayout.setVisibility(View.GONE);
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
+        if (emptySwipeRefreshLayout != null) {
+            emptySwipeRefreshLayout.setVisibility(empty ? View.VISIBLE : View.GONE);
+            emptySwipeRefreshLayout.setRefreshing(false);
         }
-        emptySwipeRefreshLayout.setRefreshing(false);
-        swipeRefreshLayout.setRefreshing(false);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     protected void startLoading() {
         recyclerViewAdapter.removeAllItems();
-        emptySwipeRefreshLayout.setVisibility(View.GONE);
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(true);
+        if (emptySwipeRefreshLayout != null) {
+            emptySwipeRefreshLayout.setVisibility(View.GONE);
+        }
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(true);
+        }
     }
 
     abstract void getData();

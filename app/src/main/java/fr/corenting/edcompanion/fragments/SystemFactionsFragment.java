@@ -242,6 +242,7 @@ public class SystemFactionsFragment extends Fragment {
         // Data
         LineDataSet[] dataSetsArray = dataSets.toArray(new LineDataSet[0]);
         LineData data = new LineData(dataSetsArray);
+        data.setDrawValues(false);
         historyChartView.setData(data);
 
         // Empty description to hide default label
