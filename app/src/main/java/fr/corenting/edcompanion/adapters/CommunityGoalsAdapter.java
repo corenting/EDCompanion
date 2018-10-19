@@ -2,8 +2,10 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +54,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
     @Override
     public void onBindViewHolder(@NonNull final goalsViewHolder holder, final int position) {
-        CommunityGoal currentGoal = dataSet.get(holder.getAdapterPosition());
+        final CommunityGoal currentGoal = dataSet.get(holder.getAdapterPosition());
 
         // Content
         holder.titleTextView.setText(currentGoal.getTitle());
@@ -72,6 +74,12 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
             holder.locationTextView.setText(context.getString(R.string.cg_system_distance,
                     currentGoal.getSystem()));
         }
+        holder.locationTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MiscUtils.startIntentToSystemDetails(context, currentGoal.getSystem());
+            }
+        });
 
         // Objective
         String objective = context.getString(R.string.no_objective_yet);
@@ -130,9 +138,9 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
             }
         });
 
-        // Setup a regular click listener for details view
-        textView.setOnClickListener(null);
-        if (!isDetailsView) {
+        // Setup a regular click listener for details view except for location text view
+        if (!isDetailsView && textView.getId() != R.id.locationTextView) {
+            textView.setOnClickListener(null);
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

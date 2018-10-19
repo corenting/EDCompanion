@@ -9,6 +9,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import android.widget.Toast;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 
 public class MiscUtils {
 
@@ -45,5 +46,9 @@ public class MiscUtils {
         ctx.startActivity(i, bundle);
     }
 
-
+    public static void startIntentToSystemDetails(Context ctx, String systemName) {
+        Intent i = new Intent(ctx, SystemDetailsActivity.class);
+        i.putExtra(ctx.getString(R.string.system), systemName);
+        ctx.startActivity(i);
+    }
 }

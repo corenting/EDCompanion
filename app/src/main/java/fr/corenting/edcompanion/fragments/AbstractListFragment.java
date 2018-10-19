@@ -104,7 +104,9 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
     }
 
     protected void startLoading() {
-        recyclerViewAdapter.removeAllItems();
+        if (recyclerViewAdapter != null) {
+            recyclerViewAdapter.removeAllItems();
+        }
         if (emptySwipeRefreshLayout != null) {
             emptySwipeRefreshLayout.setVisibility(View.GONE);
         }

@@ -20,12 +20,14 @@ import java.text.NumberFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;
 import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.MathUtils;
+import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.RankUtils;
@@ -198,6 +200,12 @@ public class CommanderStatusFragment extends Fragment {
         RankUtils.setContent(getContext(), arenaRankLayout,
                 RankUtils.getCqcLogoId(ranks.getCqc().getValue()), ranks.getCqc(),
                 getString(R.string.rank_arena));
+    }
+
+    @OnClick(R.id.locationContainer)
+    public void onSystemNameClick() {
+        final String text = locationsTextView.getText().toString();
+        MiscUtils.startIntentToSystemDetails(getContext(), text);
     }
 
     private void getAll() {

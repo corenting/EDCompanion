@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
 
         // For Firebase
         classpath 'com.google.gms:google-services:4.1.0'
@@ -23,7 +23,6 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots" } // Remove when Butterknife 9.0 is released in stable
     }
 }
 
