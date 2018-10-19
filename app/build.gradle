@@ -80,7 +80,7 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
     // LeakCanary
-    ext.leakCanaryVersion = "1.6.1"
+    ext.leakCanaryVersion = "1.6.2"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakCanaryVersion"
