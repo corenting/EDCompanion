@@ -54,12 +54,8 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
                 getData();
             }
         };
-        if (swipeRefreshLayout != null) {
-            swipeRefreshLayout.setOnRefreshListener(listener);
-        }
-        if (emptySwipeRefreshLayout != null) {
-            emptySwipeRefreshLayout.setOnRefreshListener(listener);
-        }
+        swipeRefreshLayout.setOnRefreshListener(listener);
+        emptySwipeRefreshLayout.setOnRefreshListener(listener);
 
         // Load data if not restored
         if (savedInstanceState != null) {
@@ -92,29 +88,41 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
         EventBus.getDefault().unregister(this);
     }
 
-    protected void endLoading(boolean empty) {
-        if (emptySwipeRefreshLayout != null) {
-            emptySwipeRefreshLayout.setVisibility(empty ? View.VISIBLE : View.GONE);
-            emptySwipeRefreshLayout.setRefreshing(false);
-        }
-        if (swipeRefreshLayout != null) {
-            swipeRefreshLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
-            swipeRefreshLayout.setRefreshing(false);
-        }
+    protected void endLoading(final boolean empty) {
+        emptySwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                emptySwipeRefreshLayout.setVisibility(empty ? View.VISIBLE : View.GONE);
+                emptySwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
-    protected void startLoading() {
-        if (recyclerViewAdapter != null) {
-            recyclerViewAdapter.removeAllItems();
-        }
-        if (emptySwipeRefreshLayout != null) {
-            emptySwipeRefreshLayout.setVisibility(View.GONE);
-        }
-        if (swipeRefreshLayout != null) {
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setRefreshing(true);
-        }
+    private void startLoading() {
+        recyclerViewAdapter.removeAllItems();
+
+        emptySwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                emptySwipeRefreshLayout.setVisibility(View.GONE);
+            }
+        });
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
     }
+
 
     abstract void getData();
 
