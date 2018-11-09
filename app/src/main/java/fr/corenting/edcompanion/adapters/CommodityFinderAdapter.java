@@ -1,10 +1,15 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -120,14 +125,24 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 EventBus.getDefault().post(result);
             }
         };
-        holder.findButton.setEnabled(findButtonEnabled);
+
+        // On submit stuff
         holder.findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSubmit.run();
             }
         });
-        holder.stockInputEditText.setOnSubmit(onSubmit);
+        holder.stockInputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    onSubmit.run();
+                    return true;
+                }
+                return false;
+            }
+        });
         holder.commodityInputEditText.setOnSubmit(onSubmit);
         holder.systemInputEditText.setOnSubmit(onSubmit);
     }
@@ -144,7 +159,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
         // Update date
         String date = android.text.format.DateUtils.getRelativeTimeSpanString(
-                currentResult.getLastPriceUpdate().toEpochMilli(),Instant.now().toEpochMilli(),
+                currentResult.getLastPriceUpdate().toEpochMilli(), Instant.now().toEpochMilli(),
                 0, FORMAT_ABBREV_RELATIVE).toString();
         holder.lastUpdateTextView.setText(date);
 
@@ -160,8 +175,9 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
         holder.distanceToStarTextView.setText(context.getString(R.string.distance_ls, numberFormat
-                        .format(currentResult.getDistanceToStar())));
+                .format(currentResult.getDistanceToStar())));
     }
+
     private String getPriceDifferenceString(int priceDifference) {
         String result = numberFormat.format(priceDifference);
         if (priceDifference >= 0) {
@@ -217,7 +233,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         ClickToSelectEditText landingPadSizeSpinner;
 
         @BindView(R.id.stockInputEditText)
-        DelayAutoCompleteTextView stockInputEditText;
+        EditText stockInputEditText;
 
         @BindView(R.id.systemProgressBar)
         MaterialProgressBar systemProgressBar;

@@ -100,7 +100,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
             }
         };
 
-        // On ubmit stuff
+        // On submit stuff
         holder.findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
