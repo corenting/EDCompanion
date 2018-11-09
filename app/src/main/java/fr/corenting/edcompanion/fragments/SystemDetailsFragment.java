@@ -1,8 +1,11 @@
 package fr.corenting.edcompanion.fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -25,6 +28,7 @@ import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.utils.MathUtils;
+import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class SystemDetailsFragment extends Fragment {
 
@@ -83,6 +87,12 @@ public class SystemDetailsFragment extends Fragment {
         // Setup views
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
+
+        // Fix icon on black theme
+        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
+            ImageViewCompat.setImageTintList(logoImageView, ColorStateList.valueOf(
+                    ContextCompat.getColor(getContext(), android.R.color.white)));
+        }
 
         return v;
     }

@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,7 @@ import fr.corenting.edcompanion.models.events.SystemHistory;
 import fr.corenting.edcompanion.utils.ColorUtils;
 import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
+import fr.corenting.edcompanion.utils.ThemeUtils;
 import fr.corenting.edcompanion.views.GraphMarkerView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -249,6 +251,15 @@ public class SystemFactionsFragment extends Fragment {
         Description desc = new Description();
         desc.setText("");
         historyChartView.setDescription(desc);
+
+        // Color for dark theme
+        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
+            int color = Color.parseColor("#ffffff");
+            historyChartView.getAxisLeft().setTextColor(color);
+            historyChartView.getXAxis().setTextColor(color);
+            historyChartView.getLegend().setTextColor(color);
+        }
+
 
         // Misc params
         historyChartView.getAxisRight().setEnabled(false);
