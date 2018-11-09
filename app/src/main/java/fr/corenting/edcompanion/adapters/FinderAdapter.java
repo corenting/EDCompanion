@@ -3,6 +3,8 @@ package fr.corenting.edcompanion.adapters;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +19,13 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
 
     protected Context context;
     private RecyclerView recyclerView;
+    protected boolean findButtonEnabled;
     protected List<TDataType> results;
 
     public FinderAdapter(final Context context) {
         this.context = context;
         this.results = new ArrayList<>();
+        this.findButtonEnabled = true;
     }
 
     @NonNull
@@ -66,6 +70,11 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         return TYPE_ITEM;
     }
 
+    public void setFindButtonEnabled(boolean enabled) {
+        findButtonEnabled = enabled;
+        notifyItemChanged(0);
+    }
+
     @Override
     public int getItemCount() {
         if (results == null)
@@ -75,15 +84,29 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         return results.size() + 1;
     }
 
-    public void setResults(List<TDataType> newResults) {
-        results = newResults;
-        notifyItemRangeInserted(1, newResults.size());
+    public void setResults(final List<TDataType> newResults) {
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                recyclerView.setEnabled(false);
+                results = newResults;
+                notifyItemRangeInserted(1, newResults.size());
+                recyclerView.setEnabled(true);
+            }
+        });
     }
 
     public void clearResults() {
-        int size = results.size();
-        results.clear();
-        notifyItemRangeRemoved(1, size);
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                recyclerView.setEnabled(false);
+                int size = results.size();
+                results.clear();
+                notifyItemRangeRemoved(1, size);
+                recyclerView.setEnabled(true);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked cast")

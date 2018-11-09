@@ -117,6 +117,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 EventBus.getDefault().post(result);
             }
         };
+        holder.findButton.setEnabled(findButtonEnabled);
         holder.findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

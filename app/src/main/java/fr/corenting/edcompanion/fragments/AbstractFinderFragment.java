@@ -75,11 +75,13 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
     }
 
     protected void endLoading(boolean isEmpty) {
+        recyclerViewAdapter.setFindButtonEnabled(true);
         recyclerViewAdapter.getEmptyTextView().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         swipeRefreshLayout.setRefreshing(false);
     }
 
     protected void startLoading() {
+        recyclerViewAdapter.setFindButtonEnabled(false);
         recyclerViewAdapter.clearResults();
         swipeRefreshLayout.setRefreshing(true);
         recyclerViewAdapter.getEmptyTextView().setVisibility(View.GONE);
