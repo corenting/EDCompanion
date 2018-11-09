@@ -6,7 +6,9 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
+
 import com.google.android.material.snackbar.Snackbar;
+
 import android.util.Pair;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -68,20 +70,13 @@ public class NotificationsUtils {
         }
 
         String topic;
-        if (preferenceName.equals(c.getString(R.string.settings_notifications_new_goal)))
-        {
+        if (preferenceName.equals(c.getString(R.string.settings_notifications_new_goal))) {
             topic = newGoalTopic;
-        }
-        else if (preferenceName.equals(c.getString(R.string.settings_notifications_new_tier)))
-        {
+        } else if (preferenceName.equals(c.getString(R.string.settings_notifications_new_tier))) {
             topic = newTierTopic;
-        }
-        else if (preferenceName.equals(c.getString(R.string.settings_notifications_finished_goal)))
-        {
+        } else if (preferenceName.equals(c.getString(R.string.settings_notifications_finished_goal))) {
             topic = finishedGoalTopic;
-        }
-        else
-        {
+        } else {
             return;
         }
 

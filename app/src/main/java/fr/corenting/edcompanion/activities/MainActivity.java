@@ -1,33 +1,28 @@
 package fr.corenting.edcompanion.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.navigation.NavigationView;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -171,6 +166,7 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setSubtitle(currentSubtitle);
             setTitle(currentTitle);
         }
+        fixToolbarElevation();
     }
 
     private void updateServerStatus() {
@@ -296,13 +292,6 @@ public class MainActivity extends AppCompatActivity
                 ViewUtils.switchFragment(fragmentManager, new CommunityGoalsFragment(), tag);
                 break;
         }
-
-        // Also set toolbar elevation to prevent shadow with tabLayout
-        if (tag.equals(CommanderFragment.COMMANDER_FRAGMENT)) {
-            setToolbarElevation(0);
-        } else {
-            setToolbarElevation(ViewUtils.dpToPx(this, 4));
-        }
     }
 
     private void expandToolbar() {
@@ -312,10 +301,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void setToolbarElevation(float elevation) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.setStateListAnimator(null);
+    private void fixToolbarElevation() {
+        // Set toolbar elevation to prevent shadow with tabLayout
+        if (currentFragmentTag.equals(CommanderFragment.COMMANDER_FRAGMENT)) {
+            ViewUtils.setToolbarElevation(appBarLayout, 0);
+        } else {
+            ViewUtils.setToolbarElevation(appBarLayout, ViewUtils.dpToPx(this, 4));
         }
-        ViewCompat.setElevation(appBarLayout, elevation);
     }
 }

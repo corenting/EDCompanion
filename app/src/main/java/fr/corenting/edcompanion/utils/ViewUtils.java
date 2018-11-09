@@ -1,12 +1,18 @@
 package fr.corenting.edcompanion.utils;
 
 import android.content.Context;
+
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import fr.corenting.edcompanion.R;
 
@@ -16,15 +22,13 @@ public class ViewUtils {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
     }
 
-    public static void switchFragment(FragmentManager fragmentManager, Fragment fragment, String tag)
-    {
+    public static void switchFragment(FragmentManager fragmentManager, Fragment fragment, String tag) {
         if (fragmentManager != null && fragment != null && tag != null) {
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.fragmentContent, fragment, tag)
                     .commit();
-        }
-        else {
+        } else {
             Log.w("switchFragment", "Error when switching fragment");
         }
     }
@@ -34,5 +38,12 @@ public class ViewUtils {
         if (imm != null) {
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
+    }
+
+    public static void setToolbarElevation(AppBarLayout appBarLayout, float elevation) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            appBarLayout.setStateListAnimator(null);
+        }
+        ViewCompat.setElevation(appBarLayout, elevation);
     }
 }
