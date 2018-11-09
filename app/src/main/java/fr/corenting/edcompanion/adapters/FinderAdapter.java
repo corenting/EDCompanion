@@ -72,7 +72,6 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
 
     public void setFindButtonEnabled(boolean enabled) {
         findButtonEnabled = enabled;
-        notifyItemChanged(0);
     }
 
     @Override

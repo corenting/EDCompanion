@@ -74,8 +74,8 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
         final Runnable onSubmit = new Runnable() {
             @Override
             public void run() {
-                // Don't launch search on empty strings
-                if ( holder.systemInputEditText.getText() == null ||
+                // Don't launch search on empty strings or if find already in progress
+                if (!findButtonEnabled || holder.systemInputEditText.getText() == null ||
                         holder.systemInputEditText.getText().length() == 0) {
                     return;
                 }
@@ -88,7 +88,6 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
                 EventBus.getDefault().post(result);
             }
         };
-        holder.findButton.setEnabled(findButtonEnabled);
         holder.findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

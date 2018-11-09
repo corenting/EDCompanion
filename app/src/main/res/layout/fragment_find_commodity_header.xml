@@ -118,7 +118,7 @@
                 android:layout_below="@id/landingPadSizeLayout"
                 android:layout_marginTop="8dp">
 
-                <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
+                <EditText
                     android:id="@+id/stockInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

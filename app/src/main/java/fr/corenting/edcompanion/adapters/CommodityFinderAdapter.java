@@ -95,6 +95,10 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         final Runnable onSubmit = new Runnable() {
             @Override
             public void run() {
+                if (!findButtonEnabled) {
+                    return;
+                }
+
                 ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
 
                 // Convert stock value to int
@@ -103,8 +107,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 if (stockString.length() != 0) {
                     try {
                         stock = Integer.parseInt(stockString);
-                    } catch (NumberFormatException e) {
-                        stock = 1;
+                    } catch (NumberFormatException ignored) {
                     }
                 }
 

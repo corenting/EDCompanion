@@ -88,6 +88,10 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         final Runnable onSubmit = new Runnable() {
             @Override
             public void run() {
+                if (!findButtonEnabled) {
+                    return;
+                }
+
                 ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
 
                 ShipFinderSearch result = new ShipFinderSearch(holder.shipInputEditText.getText().toString(),
@@ -96,6 +100,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
             }
         };
 
+        // On ubmit stuff
         holder.findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
