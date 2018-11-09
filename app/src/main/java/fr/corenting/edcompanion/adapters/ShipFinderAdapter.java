@@ -1,7 +1,9 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,7 +27,8 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
-public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderViewHolder, ShipFinderAdapter.ResultViewHolder, ShipFinderResult> {
+public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderViewHolder,
+        ShipFinderAdapter.ResultViewHolder, ShipFinderResult> {
 
     private final NumberFormat numberFormat;
 
@@ -65,18 +68,21 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         holder.systemInputEditText.setThreshold(3);
         holder.systemInputEditText.setLoadingIndicator(holder.systemProgressBar);
 
-        holder.systemInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
+        holder.systemInputEditText.setAdapter(new AutoCompleteAdapter(context,
+                AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
         holder.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                holder.systemInputEditText.setText((String) adapterView.getItemAtPosition(position));
+                holder.systemInputEditText.setText((String) adapterView
+                        .getItemAtPosition(position));
             }
         });
 
         // Ship autocomplete
         holder.shipInputEditText.setThreshold(3);
         holder.shipInputEditText.setLoadingIndicator(holder.shipProgressBar);
-        holder.shipInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SHIPS));
+        holder.shipInputEditText.setAdapter(new AutoCompleteAdapter(context,
+                AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SHIPS));
         holder.shipInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -94,7 +100,8 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
                 ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
 
-                ShipFinderSearch result = new ShipFinderSearch(holder.shipInputEditText.getText().toString(),
+                ShipFinderSearch result = new ShipFinderSearch(
+                        holder.shipInputEditText.getText().toString(),
                         holder.systemInputEditText.getText().toString());
                 EventBus.getDefault().post(result);
             }
@@ -117,7 +124,8 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
         // Title
         holder.titleTextView.setText(
-                String.format("%s - %s", currentResult.getSystemName(), currentResult.getStationName())
+                String.format("%s - %s", currentResult.getSystemName(),
+                        currentResult.getStationName())
         );
 
         // Other informations

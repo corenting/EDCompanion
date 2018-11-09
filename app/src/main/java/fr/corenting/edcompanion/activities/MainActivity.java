@@ -36,6 +36,7 @@ import fr.corenting.edcompanion.fragments.SystemFinderFragment;
 import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.network.ServerStatusNetwork;
 import fr.corenting.edcompanion.utils.ChangelogUtils;
+import fr.corenting.edcompanion.utils.HideKeyboardDrawerListener;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
@@ -73,8 +74,10 @@ public class MainActivity extends AppCompatActivity
 
         // Drawer toggle
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+        drawer.addDrawerListener(new HideKeyboardDrawerListener(drawer.getRootView()));
         toggle.syncState();
 
         // Setup navigation view and fake click the first item
@@ -170,7 +173,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void updateServerStatus() {
-        TextView textView = navigationView.getHeaderView(0).findViewById(R.id.drawerSubtitleTextView);
+        TextView textView = navigationView.getHeaderView(0)
+                .findViewById(R.id.drawerSubtitleTextView);
         textView.setText(getString(R.string.updating_server_status));
         ServerStatusNetwork.getStatus(this);
     }
