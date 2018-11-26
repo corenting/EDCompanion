@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/card_spacing"
+    android:layout_marginTop="@dimen/card_spacing"
+    android:layout_marginRight="@dimen/card_spacing"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/itemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingTop="24dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/logoImageView"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_globe_black_24dp" />
+
+        <TextView
+            android:id="@+id/typeLabelTextView"
+            android:layout_width="110dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTextView"
+            android:text="@string/type_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/typeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTextView"
+            android:layout_toEndOf="@id/typeLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/starDistanceLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeLabelTextView"
+            android:text="@string/distance_to_star"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/starDistanceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeLabelTextView"
+            android:layout_toEndOf="@id/starDistanceLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/landingPadLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/starDistanceLabelTextView"
+            android:text="@string/landing_pad_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/landingPadTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/starDistanceLabelTextView"
+            android:layout_toEndOf="@id/landingPadLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

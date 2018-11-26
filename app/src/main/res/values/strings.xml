@@ -167,6 +167,7 @@
     <string name="ship">Ship</string>
     <string name="distance_to_star">Distance to star</string>
     <string name="distance_label">Distance</string>
+    <string name="type_label">Type</string>
     <string name="last_update_label">Last update</string>
     <string name="permit_required_label">Permit required</string>
     <string name="landing_pad_label">Landing pad</string>

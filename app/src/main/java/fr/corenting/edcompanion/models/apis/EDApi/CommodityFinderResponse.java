@@ -16,7 +16,7 @@ public class CommodityFinderResponse {
     public int DistanceToStar;
 
     @SerializedName("station")
-    public Station Station;
+    public StationResponse Station;
 
     @SerializedName("supply")
     public long Stock;

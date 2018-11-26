@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
@@ -8,15 +9,19 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.corenting.edcompanion.activities.SystemDetailsActivity;
+import fr.corenting.edcompanion.models.Station;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.SystemFinderResult;
 import fr.corenting.edcompanion.models.SystemHistoryResult;
+import fr.corenting.edcompanion.models.apis.EDApi.StationResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystem;
 import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.models.events.SystemHistory;
+import fr.corenting.edcompanion.models.events.SystemStations;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
@@ -138,5 +143,43 @@ public class SystemNetwork {
                 };
 
         retrofit.getSystemHistory(system).enqueue(callback);
+    }
+
+    public static void getSystemStations(Context ctx, String systemName) {
+        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiRetrofit(ctx.getApplicationContext());
+
+        retrofit2.Callback<List<StationResponse>> callback = new retrofit2.Callback<List<StationResponse>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<StationResponse>> call,
+                                   retrofit2.Response<List<StationResponse>> response) {
+
+                List<StationResponse> body = response.body();
+                if (!response.isSuccessful() || body == null) {
+                    onFailure(call, new Exception("Invalid response"));
+                } else {
+                    SystemStations event;
+                    try {
+                        List<Station> results = new ArrayList<>();
+                        for (StationResponse responseItem : body) {
+                            results.add(Station.Companion
+                                    .fromStationResponse(responseItem));
+                        }
+                        event = new SystemStations(true, results);
+                    } catch (Exception ex) {
+                        event = new SystemStations(false, new ArrayList<Station>());
+                    }
+                    EventBus.getDefault().post(event);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<StationResponse>> call, @NonNull Throwable t) {
+                EventBus.getDefault().post(new ResultsList<>(false,
+                        new ArrayList<SystemFinderResult>()));
+            }
+        };
+
+        retrofit.getSystemStations(systemName).enqueue(callback);
     }
 }

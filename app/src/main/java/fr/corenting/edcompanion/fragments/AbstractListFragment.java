@@ -30,6 +30,7 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
     public SwipeRefreshLayout emptySwipeRefreshLayout;
 
     protected TAdapter recyclerViewAdapter;
+    protected boolean loadDataOnCreate = true;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -60,7 +61,7 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
         // Load data if not restored
         if (savedInstanceState != null) {
             endLoading(recyclerViewAdapter.getItemCount() == 0);
-        } else {
+        } else if (loadDataOnCreate) {
             startLoading();
             getData();
         }

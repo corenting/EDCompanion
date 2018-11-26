@@ -3,8 +3,9 @@ package fr.corenting.edcompanion.models.apis.EDApi;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
+import java.util.List;
 
-public class Station {
+public class StationResponse {
     @SerializedName("distance_to_star")
     public int DistanceToStar;
 
@@ -22,6 +23,9 @@ public class Station {
 
     @SerializedName("type")
     public String Type;
+
+    @SerializedName("ships_sold")
+    public List<String> ShipsSold;
 
     @SerializedName("system")
     public StationSystem System;

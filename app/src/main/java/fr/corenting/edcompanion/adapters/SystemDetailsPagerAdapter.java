@@ -1,13 +1,14 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.SystemDetailsFragment;
 import fr.corenting.edcompanion.fragments.SystemFactionsFragment;
+import fr.corenting.edcompanion.fragments.SystemStationsFragment;
 
 public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
 
@@ -22,7 +23,7 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -40,6 +41,8 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new SystemDetailsFragment();
             case 1:
+                return new SystemStationsFragment();
+            case 2:
                 return new SystemFactionsFragment();
             default:
                 return new SystemDetailsFragment();
@@ -52,6 +55,8 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return context.getString(R.string.system);
             case 1:
+                return context.getString(R.string.stations);
+            case 2:
                 return context.getString(R.string.factions);
             default:
                 return context.getString(R.string.system);
@@ -64,6 +69,8 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return SystemDetailsFragment.SYSTEM_DETAILS_FRAGMENT;
             case 1:
+                return SystemStationsFragment.SYSTEM_STATIONS_FRAGMENT_TAG;
+            case 2:
                 return SystemFactionsFragment.SYSTEM_FACTIONS_FRAGMENT;
             default:
                 return SystemDetailsFragment.SYSTEM_DETAILS_FRAGMENT;

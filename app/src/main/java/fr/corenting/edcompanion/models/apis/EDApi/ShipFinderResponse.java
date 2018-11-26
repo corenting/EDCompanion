@@ -7,5 +7,5 @@ public class ShipFinderResponse {
     public float Distance;
 
     @SerializedName("station")
-    public Station Station;
+    public StationResponse Station;
 }
