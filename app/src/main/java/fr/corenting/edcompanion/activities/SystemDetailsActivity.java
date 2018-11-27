@@ -51,6 +51,7 @@ public class SystemDetailsActivity extends AppCompatActivity {
         // Viewpager
         SystemDetailsPagerAdapter pagerAdapter =
                 new SystemDetailsPagerAdapter(getSupportFragmentManager(), this);
+        viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(pagerAdapter);
 
         // TabLayout

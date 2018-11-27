@@ -288,10 +288,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.1.3</b><br />
+            <b>Version 2.2</b><br />
             <ul>
-                <li>Better dark theme support in the system details view.</li><br />
-                <li>Bugfixes</li><br />
+                <li>Added stations list in system details.</li><br />
             </ul>
         ]]>
     </string>
