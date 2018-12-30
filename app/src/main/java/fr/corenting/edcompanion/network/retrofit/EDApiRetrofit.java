@@ -18,7 +18,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface EDApiRetrofit {
-    @GET("v2/community_goals/")
+    @GET("community_goals/v2/")
     Call<CommunityGoalsResponse> getCommunityGoals();
 
     @GET("galnet/")
@@ -34,7 +34,7 @@ public interface EDApiRetrofit {
     @GET("commodities")
     Call<List<CommodityResponse>> getCommodities(@Query("name") String filter);
 
-    @GET("{system}/stations/ships/{ship}")
+    @GET("system/{system}/stations/ships/{ship}")
     Call<List<ShipFinderResponse>> findShip(@Path("system") String system,
                                             @Path("ship") String ship);
 
@@ -47,7 +47,7 @@ public interface EDApiRetrofit {
     @GET("system/{system}/history")
     Call<List<SystemHistoryResponse>> getSystemHistory(@Path("system") String system);
 
-    @GET("{system}/stations/commodities/{commodity}")
+    @GET("system/{system}/stations/commodities/{commodity}")
     Call<List<CommodityFinderResponse>> findCommodity(@Path("system") String system,
                                                       @Path("commodity") String commodity,
                                                       @Query("pad") String minLandingPad,
