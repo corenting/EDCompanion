@@ -289,9 +289,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.2</b><br />
+            <b>Version 2.2.1</b><br />
             <ul>
-                <li>Added stations list in system details.</li><br />
+                <li>Add happiness for factions in system details.</li><br />
             </ul>
         ]]>
     </string>
