@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -14,6 +13,7 @@ import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
+import retrofit2.internal.EverythingIsNonNull;
 
 
 public class ShipFinderNetwork {
@@ -23,7 +23,8 @@ public class ShipFinderNetwork {
 
         retrofit2.Callback<List<ShipFinderResponse>> callback = new retrofit2.Callback<List<ShipFinderResponse>>() {
             @Override
-            public void onResponse(@NonNull Call<List<ShipFinderResponse>> call,
+            @EverythingIsNonNull
+            public void onResponse(Call<List<ShipFinderResponse>> call,
                                    retrofit2.Response<List<ShipFinderResponse>> response) {
                 List<ShipFinderResponse> body = response.body();
                 ResultsList<ShipFinderResult> convertedResults;
@@ -47,8 +48,9 @@ public class ShipFinderNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<ShipFinderResponse>> call,
-                                  @NonNull Throwable t) {
+            @EverythingIsNonNull
+            public void onFailure(Call<List<ShipFinderResponse>> call,
+                                  Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
                         new ArrayList<ShipFinderResult>()));
             }

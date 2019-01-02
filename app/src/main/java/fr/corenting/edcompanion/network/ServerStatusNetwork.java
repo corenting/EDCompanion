@@ -1,15 +1,15 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
-import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMServerStatus;
+import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
+import retrofit2.internal.EverythingIsNonNull;
 
 
 public class ServerStatusNetwork {
@@ -18,7 +18,8 @@ public class ServerStatusNetwork {
                 .getEDSMRetrofit(ctx.getApplicationContext());
         retrofit2.Callback<EDSMServerStatus> callback = new retrofit2.Callback<EDSMServerStatus>() {
             @Override
-            public void onResponse(@NonNull Call<EDSMServerStatus> call,
+            @EverythingIsNonNull
+            public void onResponse(Call<EDSMServerStatus> call,
                                    retrofit2.Response<EDSMServerStatus> response) {
                 EDSMServerStatus edsmStatus = response.body();
                 if (!response.isSuccessful() || edsmStatus == null) {
@@ -30,7 +31,8 @@ public class ServerStatusNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<EDSMServerStatus> call, @NonNull Throwable t) {
+            @EverythingIsNonNull
+            public void onFailure(Call<EDSMServerStatus> call, Throwable t) {
                 EventBus.getDefault().post(new ServerStatus(false, ""));
             }
         };

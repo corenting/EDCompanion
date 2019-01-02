@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.network;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -14,6 +13,7 @@ import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class CommunityGoalsNetwork {
     public static void getCommunityGoals(Context ctx) {
@@ -22,15 +22,13 @@ public class CommunityGoalsNetwork {
                 .getEdApiRetrofit(ctx.getApplicationContext());
         retrofit2.Callback<CommunityGoalsResponse> callback = new retrofit2.Callback<CommunityGoalsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<CommunityGoalsResponse> call,
+            @EverythingIsNonNull
+            public void onResponse(Call<CommunityGoalsResponse> call,
                                    retrofit2.Response<CommunityGoalsResponse> response) {
                 CommunityGoalsResponse body = response.body();
-                if (!response.isSuccessful() || body == null)
-                {
+                if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
-                }
-                else
-                {
+                } else {
                     CommunityGoals goals;
                     List<CommunityGoal> goalsList = new ArrayList<>();
                     try {
@@ -39,9 +37,7 @@ public class CommunityGoalsNetwork {
                                     CommunityGoal.Companion.fromCommunityGoalsItemResponse(goal));
                         }
                         goals = new CommunityGoals(true, goalsList);
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         goals = new CommunityGoals(false, new ArrayList<CommunityGoal>());
                     }
                     EventBus.getDefault().post(goals);
@@ -49,7 +45,8 @@ public class CommunityGoalsNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<CommunityGoalsResponse> call, @NonNull Throwable t) {
+            @EverythingIsNonNull
+            public void onFailure(Call<CommunityGoalsResponse> call, Throwable t) {
                 CommunityGoals goals = new CommunityGoals(false,
                         new ArrayList<CommunityGoal>());
                 EventBus.getDefault().post(goals);

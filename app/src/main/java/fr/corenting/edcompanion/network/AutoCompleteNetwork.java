@@ -73,7 +73,8 @@ public class AutoCompleteNetwork {
         try {
             EDApiRetrofit edApiRetrofit = RetrofitSingleton.getInstance()
                     .getEdApiRetrofit(context.getApplicationContext());
-            Response<List<CommodityResponse>> response = edApiRetrofit.getCommodities(filter).execute();
+            Response<List<CommodityResponse>> response =
+                    edApiRetrofit.getCommodities(filter).execute();
             List<CommodityResponse> commodities = response.body();
 
             if (!response.isSuccessful() || commodities == null) {

@@ -5,11 +5,12 @@ import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 
 data class Faction(val name: String, val state: String, val government: String,
-                   val allegiance: String, val updateDate: Instant, val influence: Float) {
+                   val allegiance: String, val updateDate: Instant, val influence: Float,
+                   val happiness: String) {
     companion object {
         fun fromFactionResponse(res: FactionResponse): Faction {
             return Faction(res.Name, res.State, res.Government, res.Allegiance,
-                    DateTimeUtils.toInstant(res.UpdatedAt), res.Influence)
+                    DateTimeUtils.toInstant(res.UpdatedAt), res.Influence, res.Happiness)
         }
     }
 }

@@ -22,4 +22,7 @@ public class FactionResponse {
 
     @SerializedName("influence")
     public float Influence;
+
+    @SerializedName("happiness")
+    public String Happiness;
 }

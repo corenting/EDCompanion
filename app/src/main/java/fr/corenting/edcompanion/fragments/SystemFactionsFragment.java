@@ -344,6 +344,14 @@ public class SystemFactionsFragment extends Fragment {
             stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>");
             stringBuilder.append(faction.getState());
             stringBuilder.append("<br />");
+
+            // Happiness
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+            stringBuilder.append("<i>");
+            stringBuilder.append(getString(R.string.happiness_label));
+            stringBuilder.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>");
+            stringBuilder.append(faction.getHappiness());
+            stringBuilder.append("<br />");
         }
         return stringBuilder.toString();
     }

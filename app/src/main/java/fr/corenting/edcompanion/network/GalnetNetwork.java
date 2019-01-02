@@ -2,8 +2,6 @@ package fr.corenting.edcompanion.network;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -15,6 +13,7 @@ import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class GalnetNetwork {
     public static void getNews(Context ctx) {
@@ -24,7 +23,8 @@ public class GalnetNetwork {
 
         retrofit2.Callback<List<GalnetArticleResponse>> callback = new retrofit2.Callback<List<GalnetArticleResponse>>() {
             @Override
-            public void onResponse(@NonNull Call<List<GalnetArticleResponse>> call,
+            @EverythingIsNonNull
+            public void onResponse(Call<List<GalnetArticleResponse>> call,
                                    retrofit2.Response<List<GalnetArticleResponse>> response) {
                 List<GalnetArticleResponse> body = response.body();
                 if (!response.isSuccessful() || body == null) {
@@ -45,8 +45,9 @@ public class GalnetNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<GalnetArticleResponse>> call,
-                                  @NonNull Throwable t) {
+            @EverythingIsNonNull
+            public void onFailure(Call<List<GalnetArticleResponse>> call,
+                                  Throwable t) {
                 GalnetNews news = new GalnetNews(false, new ArrayList<GalnetArticle>());
                 EventBus.getDefault().post(news);
             }

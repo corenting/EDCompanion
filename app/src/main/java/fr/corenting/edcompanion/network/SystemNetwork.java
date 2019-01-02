@@ -2,14 +2,11 @@ package fr.corenting.edcompanion.network;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.Station;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.SystemFinderResult;
@@ -26,6 +23,7 @@ import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class SystemNetwork {
     public static void findSystem(Context ctx, String system) {
@@ -34,7 +32,8 @@ public class SystemNetwork {
 
         retrofit2.Callback<List<EDSMSystem>> callback = new retrofit2.Callback<List<EDSMSystem>>() {
             @Override
-            public void onResponse(@NonNull Call<List<EDSMSystem>> call,
+            @EverythingIsNonNull
+            public void onResponse(Call<List<EDSMSystem>> call,
                                    retrofit2.Response<List<EDSMSystem>> response) {
 
                 List<EDSMSystem> body = response.body();
@@ -59,7 +58,8 @@ public class SystemNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<EDSMSystem>> call, @NonNull Throwable t) {
+            @EverythingIsNonNull
+            public void onFailure(Call<List<EDSMSystem>> call, Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
                         new ArrayList<SystemFinderResult>()));
             }
@@ -74,7 +74,8 @@ public class SystemNetwork {
 
         retrofit2.Callback<SystemResponse> callback = new retrofit2.Callback<SystemResponse>() {
             @Override
-            public void onResponse(@NonNull Call<SystemResponse> call,
+            @EverythingIsNonNull
+            public void onResponse(Call<SystemResponse> call,
                                    retrofit2.Response<SystemResponse> response) {
 
                 SystemResponse body = response.body();
@@ -93,7 +94,8 @@ public class SystemNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<SystemResponse> call, @NonNull Throwable t) {
+            @EverythingIsNonNull
+            public void onFailure(Call<SystemResponse> call, Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
                         new ArrayList<SystemFinderResult>()));
             }
@@ -109,7 +111,8 @@ public class SystemNetwork {
         retrofit2.Callback<List<SystemHistoryResponse>> callback =
                 new retrofit2.Callback<List<SystemHistoryResponse>>() {
                     @Override
-                    public void onResponse(@NonNull Call<List<SystemHistoryResponse>> call,
+                    @EverythingIsNonNull
+                    public void onResponse(Call<List<SystemHistoryResponse>> call,
                                            retrofit2.Response<List<SystemHistoryResponse>> response) {
 
                         List<SystemHistoryResponse> body = response.body();
@@ -134,8 +137,9 @@ public class SystemNetwork {
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<List<SystemHistoryResponse>> call,
-                                          @NonNull Throwable t) {
+                    @EverythingIsNonNull
+                    public void onFailure(Call<List<SystemHistoryResponse>> call,
+                                          Throwable t) {
                         EventBus.getDefault().post(new SystemHistory(false,
                                 new ArrayList<SystemHistoryResult>()));
 
@@ -151,7 +155,8 @@ public class SystemNetwork {
 
         retrofit2.Callback<List<StationResponse>> callback = new retrofit2.Callback<List<StationResponse>>() {
             @Override
-            public void onResponse(@NonNull Call<List<StationResponse>> call,
+            @EverythingIsNonNull
+            public void onResponse(Call<List<StationResponse>> call,
                                    retrofit2.Response<List<StationResponse>> response) {
 
                 List<StationResponse> body = response.body();
@@ -174,7 +179,8 @@ public class SystemNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<StationResponse>> call, @NonNull Throwable t) {
+            @EverythingIsNonNull
+            public void onFailure(Call<List<StationResponse>> call, Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
                         new ArrayList<SystemFinderResult>()));
             }
