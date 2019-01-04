@@ -17,39 +17,30 @@ public abstract class ListAdapter<TViewHolder extends RecyclerView.ViewHolder, T
     }
 
     public void removeAllItems() {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.setEnabled(false);
-                int size = dataSet.size();
-                dataSet.clear();
-                notifyItemRangeRemoved(0, size);
-                recyclerView.setEnabled(true);
-            }
+        recyclerView.post(() -> {
+            recyclerView.setEnabled(false);
+            int size = dataSet.size();
+            dataSet.clear();
+            notifyItemRangeRemoved(0, size);
+            recyclerView.setEnabled(true);
         });
     }
 
     public void addItems(final List<TItemType> items) {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.setEnabled(false);
-                dataSet.addAll(items);
-                notifyItemRangeInserted(0, items.size());
-                recyclerView.setEnabled(true);
-            }
+        recyclerView.post(() -> {
+            recyclerView.setEnabled(false);
+            dataSet.addAll(items);
+            notifyItemRangeInserted(0, items.size());
+            recyclerView.setEnabled(true);
         });
     }
 
     public void updateItem(final TItemType item, final int position) {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.setEnabled(false);
-                dataSet.set(position, item);
-                notifyItemChanged(position);
-                recyclerView.setEnabled(true);
-            }
+        recyclerView.post(() -> {
+            recyclerView.setEnabled(false);
+            dataSet.set(position, item);
+            notifyItemChanged(position);
+            recyclerView.setEnabled(true);
         });
     }
 

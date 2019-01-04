@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.internal.EverythingIsNonNull;
 
 public class GalnetNetwork {
-    public static void getNews(Context ctx) {
+    public static void getNews(Context ctx, String language) {
 
         EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiRetrofit(ctx.getApplicationContext());
@@ -52,6 +52,6 @@ public class GalnetNetwork {
                 EventBus.getDefault().post(news);
             }
         };
-        retrofit.getGalnetNews().enqueue(callback);
+        retrofit.getGalnetNews(language).enqueue(callback);
     }
 }

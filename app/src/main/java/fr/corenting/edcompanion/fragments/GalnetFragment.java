@@ -1,9 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +11,14 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.GalnetAdapter;
 import fr.corenting.edcompanion.models.GalnetArticle;
 import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.network.GalnetNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
+import fr.corenting.edcompanion.utils.SettingsUtils;
 
 public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
 
@@ -26,6 +26,7 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
     public static final String GALNET_REPORTS_FRAGMENT_TAG = "galnet_reports_fragment";
 
     private boolean reportsMode;
+    private String language;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -38,12 +39,30 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
             reportsMode = getArguments().getBoolean("reportsMode", false);
         }
 
+        language = getNewsLanguage();
+
         return v;
+    }
+
+    private String getNewsLanguage() {
+        return SettingsUtils.getString(getContext(),
+                getString(R.string.settings_galnet_lang));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Refresh if language changed
+        if (!language.equals(getNewsLanguage())) {
+            language = getNewsLanguage();
+            getData();
+        }
     }
 
     @Override
     void getData() {
-        GalnetNetwork.getNews(getContext());
+        GalnetNetwork.getNews(getContext(), language);
     }
 
     @Override
@@ -76,6 +95,7 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
         GalnetNews copy = new GalnetNews(true, newList);
 
         endLoading(count == 0);
+        recyclerViewAdapter.removeAllItems();
         recyclerViewAdapter.addItems(copy.getArticles());
     }
 }

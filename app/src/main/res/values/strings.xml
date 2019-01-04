@@ -247,6 +247,9 @@
     <string name="title_activity_settings">Settings</string>
     <string name="settings_cmdr_category_title">Commander</string>
     <string name="settings_cmdr_source">CMDR source</string>
+    <string name="settings_galnet_lang">Galnet language</string>
+    <string name="settings_galnet_lang_title">Galnet language</string>
+    <string name="settings_galnet_lang_summary">Change the language used for Galnet news</string>
     <string name="settings_cmdr_source_title">Commander data source</string>
     <string name="settings_cmdr_source_summary">Choose the data source (EDSM, Inara…) you want to use for the commander tab</string>
     <string name="settings_cmdr_edsm_password_title">API key for EDSM</string>
@@ -273,6 +276,16 @@
     <string name="settings_notifications_new_tier">New tier</string>
     <string name="settings_notifications_finished_goal">Finished goal</string>
     <string name="pref_header_general">General</string>
+    <string-array name="settings_galnet_lang_entries">
+        <item>English</item>
+        <item>French</item>
+        <item>German</item>
+    </string-array>
+    <string-array translatable="false" name="settings_galnet_lang_entries_values">
+        <item>en</item>
+        <item>fr</item>
+        <item>de</item>
+    </string-array>
 
     <!--Notifications-->
     <string name="notifications_new_goal_channel">New community goals</string>

@@ -22,7 +22,7 @@ public interface EDApiRetrofit {
     Call<CommunityGoalsResponse> getCommunityGoals();
 
     @GET("galnet/")
-    Call<List<GalnetArticleResponse>> getGalnetNews();
+    Call<List<GalnetArticleResponse>> getGalnetNews(@Query("lang") String language);
 
     @GET("distance/{first}/{second}")
     Call<DistanceResponse> getDistance(@Path("first") String firstSystem,
