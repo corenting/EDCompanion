@@ -39,9 +39,14 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
             reportsMode = getArguments().getBoolean("reportsMode", false);
         }
 
-        language = getNewsLanguage();
-
         return v;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        language = getNewsLanguage();
     }
 
     private String getNewsLanguage() {

@@ -12,8 +12,6 @@
             android:entries="@array/settings_galnet_lang_entries"
             android:entryValues="@array/settings_galnet_lang_entries_values"
             android:key="@string/settings_galnet_lang"
-            android:negativeButtonText="@android:string/cancel"
-            android:positiveButtonText="@android:string/ok"
             android:summary="@string/settings_galnet_lang_summary"
             android:title="@string/settings_galnet_lang_title" />
     </androidx.preference.PreferenceCategory>
