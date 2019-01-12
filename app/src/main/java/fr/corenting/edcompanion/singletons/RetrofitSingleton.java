@@ -12,6 +12,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
+import fr.corenting.edcompanion.network.retrofit.FrontierAuthRetrofit;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
 import fr.corenting.edcompanion.utils.EDSMDeserializer;
 import okhttp3.OkHttpClient;
@@ -26,6 +27,8 @@ public class RetrofitSingleton implements Serializable {
     private EDSMRetrofit edsmRetrofit;
     private EDApiRetrofit edApiRetrofit;
     private InaraRetrofit inaraRetrofit;
+    private FrontierAuthRetrofit frontierAuthRetrofit;
+
     private Retrofit.Builder retrofitBuilder;
 
     // Private constructor.
@@ -88,6 +91,18 @@ public class RetrofitSingleton implements Serializable {
                 .build()
                 .create(InaraRetrofit.class);
         return inaraRetrofit;
+    }
+
+    public FrontierAuthRetrofit getFrontierAuthRetrofit(Context ctx) {
+        if (frontierAuthRetrofit != null) {
+            return frontierAuthRetrofit;
+        }
+
+        frontierAuthRetrofit = getRetrofitInstance()
+                .baseUrl(ctx.getString(R.string.frontier_auth_base))
+                .build()
+                .create(FrontierAuthRetrofit.class);
+        return frontierAuthRetrofit;
     }
 
     private Retrofit.Builder getRetrofitInstance() {

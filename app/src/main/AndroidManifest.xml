@@ -22,6 +22,21 @@
             android:value="false" />
 
         <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/login"
+            android:exported="true"
+            android:theme="@style/AppDetailsTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="edcompanion" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>

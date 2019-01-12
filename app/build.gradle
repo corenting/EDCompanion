@@ -17,6 +17,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "String", "INARA_API_KEY", '"' + INARA_API_KEY + '"'
+        buildConfigField "String", "FRONTIER_AUTH_CLIENT_ID", '"' + FRONTIER_AUTH_CLIENT_ID + '"'
     }
 
     compileOptions {
