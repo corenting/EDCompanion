@@ -180,13 +180,22 @@
     <string name="commodity">Commodity</string>
     <string name="close">Close</string>
     <string name="landing_pad_size">Landing pad size</string>
+    <string name="buy_or_sell">Buy or sell</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
     <string name="stock_label">Stock</string>
+    <string name="demand_label">Demand</string>
     <string name="price_label">Price</string>
     <string name="minimum_stock">Minimum stock</string>
+    <string name="minimum_demand">Minimum demand</string>
     <string-array name="landing_pad_size">
         <item>Any</item>
         <item>M</item>
         <item>L</item>
+    </string-array>
+    <string-array name="buy_sell_array">
+        <item>Buy</item>
+        <item>Sell</item>
     </string-array>
 
     <!--Systems-->

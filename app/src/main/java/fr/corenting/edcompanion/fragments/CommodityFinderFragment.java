@@ -58,6 +58,7 @@ public class CommodityFinderFragment extends AbstractFinderFragment<CommodityFin
 
         lastSearch = event;
         CommodityFinderNetwork.findCommodity(getContext(), event.getSystemName(),
-                event.getCommodityName(), landingPadSize, event.getStock());
+                event.getCommodityName(), landingPadSize, event.getStockOrDemand(),
+                event.isSellingMode());
     }
 }

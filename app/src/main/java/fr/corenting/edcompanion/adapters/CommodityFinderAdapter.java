@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import org.greenrobot.eventbus.EventBus;
 import org.threeten.bp.Instant;
 
@@ -91,9 +93,36 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         });
 
         // Landing pad size adapter
-        if (holder.landingPadSizeSpinner.getItems() == null || holder.landingPadSizeSpinner.getItems().size() == 0) {
-            String[] landingPadSizeArray = context.getResources().getStringArray(R.array.landing_pad_size);
+        if (holder.landingPadSizeSpinner.getItems() == null ||
+                holder.landingPadSizeSpinner.getItems().size() == 0) {
+            String[] landingPadSizeArray = context.getResources()
+                    .getStringArray(R.array.landing_pad_size);
             holder.landingPadSizeSpinner.setItems(Arrays.asList(landingPadSizeArray));
+        }
+
+        // Buy or sell adapter
+        if (holder.buyOrSellSpinner.getItems() == null ||
+                holder.buyOrSellSpinner.getItems().size() == 0) {
+            String[] buySellArray = context.getResources()
+                    .getStringArray(R.array.buy_sell_array);
+            holder.buyOrSellSpinner.setItems(Arrays.asList(buySellArray));
+            holder.buyOrSellSpinner.setOnItemSelectedListener(
+                    new ClickToSelectEditText.OnItemSelectedListener<String>() {
+                        @Override
+                        public void onItemSelectedListener(String item, int selectedIndex) {
+                            if (selectedIndex == 0) {
+                                holder.stockInputLayout.setHint(context
+                                        .getString(R.string.minimum_stock));
+                                holder.stockInputEditText.setHint(context
+                                        .getString(R.string.minimum_stock));
+                            } else {
+                                holder.stockInputLayout.setHint(context
+                                        .getString(R.string.minimum_demand));
+                                holder.stockInputEditText.setHint(context
+                                        .getString(R.string.minimum_demand));
+                            }
+                        }
+                    });
         }
 
         // Find button
@@ -116,11 +145,14 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                     }
                 }
 
+                // Convert buy/sell mode to boolean
+                boolean sellingMode = holder.buyOrSellSpinner.getSelectedIndex() == 1;
+
                 CommodityFinderSearch result = new CommodityFinderSearch(
                         holder.commodityInputEditText.getText().toString(),
                         holder.systemInputEditText.getText().toString(),
                         holder.landingPadSizeSpinner.getText().toString(),
-                        stock);
+                        stock, sellingMode);
 
                 EventBus.getDefault().post(result);
             }
@@ -232,8 +264,14 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         @BindView(R.id.landingPadSizeSpinner)
         ClickToSelectEditText landingPadSizeSpinner;
 
+        @BindView(R.id.buyOrSellSpinner)
+        ClickToSelectEditText buyOrSellSpinner;
+
         @BindView(R.id.stockInputEditText)
         EditText stockInputEditText;
+
+        @BindView(R.id.stockInputLayout)
+        TextInputLayout stockInputLayout;
 
         @BindView(R.id.systemProgressBar)
         MaterialProgressBar systemProgressBar;

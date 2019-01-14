@@ -51,5 +51,7 @@ public interface EDApiRetrofit {
     Call<List<CommodityFinderResponse>> findCommodity(@Path("system") String system,
                                                       @Path("commodity") String commodity,
                                                       @Query("pad") String minLandingPad,
-                                                      @Query("stock") int stock);
+                                                      @Query("stock") int stock,
+                                                      @Query("demand") int demand,
+                                                      @Query("selling") boolean sellingMode);
 }

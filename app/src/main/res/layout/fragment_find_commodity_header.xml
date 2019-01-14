@@ -126,11 +126,25 @@
                     android:inputType="numberSigned" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/buyOrSellLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stockInputLayout"
+                android:layout_marginTop="8dp">
+
+                <fr.corenting.edcompanion.views.ClickToSelectEditText
+                    android:id="@+id/buyOrSellSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/buy_or_sell" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/findButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/stockInputLayout"
+                android:layout_below="@id/buyOrSellLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:text="@string/find" />
