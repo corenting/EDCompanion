@@ -53,5 +53,5 @@ public interface EDApiRetrofit {
                                                       @Query("pad") String minLandingPad,
                                                       @Query("stock") int stock,
                                                       @Query("demand") int demand,
-                                                      @Query("selling") boolean sellingMode);
+                                                      @Query("selling") int sellingMode);
 }

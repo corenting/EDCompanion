@@ -21,6 +21,9 @@ public class CommodityFinderResponse {
     @SerializedName("supply")
     public long Stock;
 
+    @SerializedName("demand")
+    public long Demand;
+
     @SerializedName("last_price_update")
     public Date LastPriceUpdate;
 

@@ -37,6 +37,7 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter.HeaderViewHolder, CommodityFinderAdapter.ResultViewHolder, CommodityFinderResult> {
 
     private final NumberFormat numberFormat;
+    private boolean isSellingMode = false;
 
     public CommodityFinderAdapter(Context context) {
         super(context);
@@ -146,13 +147,13 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 }
 
                 // Convert buy/sell mode to boolean
-                boolean sellingMode = holder.buyOrSellSpinner.getSelectedIndex() == 1;
+                isSellingMode = holder.buyOrSellSpinner.getSelectedIndex() == 1;
 
                 CommodityFinderSearch result = new CommodityFinderSearch(
                         holder.commodityInputEditText.getText().toString(),
                         holder.systemInputEditText.getText().toString(),
                         holder.landingPadSizeSpinner.getText().toString(),
-                        stock, sellingMode);
+                        stock, isSellingMode);
 
                 EventBus.getDefault().post(result);
             }
@@ -203,11 +204,20 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         holder.isPlanetaryImageView.setVisibility(
                 currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
         holder.landingPadTextView.setText(currentResult.getLandingPad());
-        holder.stockTextView.setText(numberFormat.format(currentResult.getStock()));
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
         holder.distanceToStarTextView.setText(context.getString(R.string.distance_ls, numberFormat
                 .format(currentResult.getDistanceToStar())));
+
+        // Set stock/demand depending on mode
+        if (isSellingMode) {
+            holder.stockLabelTextView.setText(R.string.demand_label);
+            holder.stockTextView.setText(numberFormat.format(currentResult.getDemand()));
+        }
+        else {
+            holder.stockLabelTextView.setText(R.string.stock_label);
+            holder.stockTextView.setText(numberFormat.format(currentResult.getStock()));
+        }
     }
 
     private String getPriceDifferenceString(int priceDifference) {
@@ -235,6 +245,9 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
         @BindView(R.id.distanceToStarTextView)
         TextView distanceToStarTextView;
+
+        @BindView(R.id.stockLabelTextView)
+        TextView stockLabelTextView;
 
         @BindView(R.id.stockTextView)
         TextView stockTextView;

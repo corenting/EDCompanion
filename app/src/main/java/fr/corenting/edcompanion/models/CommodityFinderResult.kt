@@ -6,8 +6,9 @@ import org.threeten.bp.Instant
 
 data class CommodityFinderResult(val buyPrice: Long, val landingPad: String, val station: String,
                                  val system: String, val isPermitRequired: Boolean,
-                                 val isPlanetary: Boolean, val stock: Long, val distanceToStar: Int,
-                                 val distance: Float, val lastPriceUpdate: Instant,
+                                 val isPlanetary: Boolean, val stock: Long, val demand: Long,
+                                 val distanceToStar: Int, val distance: Float,
+                                 val lastPriceUpdate: Instant,
                                  val priceDifferenceFromAverage: Int) {
     companion object {
         fun fromCommodityFinderResponse(res: CommodityFinderResponse): CommodityFinderResult {
@@ -19,6 +20,7 @@ data class CommodityFinderResult(val buyPrice: Long, val landingPad: String, val
                     res.Station.System.PermitRequired,
                     res.Station.IsPlanetary,
                     res.Stock,
+                    res.Demand,
                     res.DistanceToStar,
                     res.Distance,
                     DateTimeUtils.toInstant(res.LastPriceUpdate),
