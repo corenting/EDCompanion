@@ -187,8 +187,15 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         // For price, also display the difference with the avg galactic price
         String priceDifference = getPriceDifferenceString(
                 currentResult.getPriceDifferenceFromAverage());
-        String buyPrice = numberFormat.format(currentResult.getBuyPrice());
-        holder.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
+        if (isSellingMode) {
+            String sellPrice = numberFormat.format(currentResult.getSellPrice()c);
+            holder.priceTextView.setText(String.format("%s (%s%%)", sellPrice, priceDifference));
+        }
+        else {
+            String buyPrice = numberFormat.format(currentResult.getBuyPrice());
+            holder.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
+        }
+
 
         // Update date
         String date = android.text.format.DateUtils.getRelativeTimeSpanString(

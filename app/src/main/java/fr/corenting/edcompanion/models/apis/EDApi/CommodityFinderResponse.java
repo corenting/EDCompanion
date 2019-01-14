@@ -9,6 +9,9 @@ public class CommodityFinderResponse {
     @SerializedName("buy_price")
     public long BuyPrice;
 
+    @SerializedName("sell_price")
+    public long SellPrice;
+
     @SerializedName("distance")
     public float Distance;
 

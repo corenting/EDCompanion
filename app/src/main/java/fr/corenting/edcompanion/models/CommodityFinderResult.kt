@@ -4,7 +4,8 @@ import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 
-data class CommodityFinderResult(val buyPrice: Long, val landingPad: String, val station: String,
+data class CommodityFinderResult(val buyPrice: Long, val sellPrice: Long,
+                                 val landingPad: String, val station: String,
                                  val system: String, val isPermitRequired: Boolean,
                                  val isPlanetary: Boolean, val stock: Long, val demand: Long,
                                  val distanceToStar: Int, val distance: Float,
@@ -14,6 +15,7 @@ data class CommodityFinderResult(val buyPrice: Long, val landingPad: String, val
         fun fromCommodityFinderResponse(res: CommodityFinderResponse): CommodityFinderResult {
             return CommodityFinderResult(
                     res.BuyPrice,
+                    res.SellPrice,
                     res.Station.MaxLandingPad,
                     res.Station.Name,
                     res.Station.System.Name,
