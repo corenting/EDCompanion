@@ -311,9 +311,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.2.1</b><br />
+            <b>Version 2.3</b><br />
             <ul>
-                <li>Add happiness for factions in system details.</li><br />
+                <li>Add sell mode to commodity finder tool.</li><br />
+                <li>Add language options for Galnet (english, french or german).</li><br />
             </ul>
         ]]>
     </string>

@@ -188,7 +188,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         String priceDifference = getPriceDifferenceString(
                 currentResult.getPriceDifferenceFromAverage());
         if (isSellingMode) {
-            String sellPrice = numberFormat.format(currentResult.getSellPrice()c);
+            String sellPrice = numberFormat.format(currentResult.getSellPrice());
             holder.priceTextView.setText(String.format("%s (%s%%)", sellPrice, priceDifference));
         }
         else {
