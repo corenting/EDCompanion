@@ -51,6 +51,10 @@ public class ClickToSelectEditText extends AppCompatEditText {
         setInputType(InputType.TYPE_NULL);
     }
 
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
     public void setItems(List<String> items) {
         this.mItems = items;
         this.mListableItems = new String[items.size()];

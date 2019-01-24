@@ -18,7 +18,8 @@ import retrofit2.internal.EverythingIsNonNull;
 
 public class CommodityFinderNetwork {
     public static void findCommodity(Context ctx, String system, final String commodity,
-                                     String landingPad, int minStock) {
+                                     String landingPad, int minStockOrDemand,
+                                     boolean isSellingMode) {
 
         // Init retrofit instance
         final EDApiRetrofit edApiRetrofit = RetrofitSingleton.getInstance()
@@ -48,7 +49,8 @@ public class CommodityFinderNetwork {
             }
         };
 
-        edApiRetrofit.findCommodity(system, commodity, landingPad, minStock).enqueue(callback);
+        edApiRetrofit.findCommodity(system, commodity, landingPad, minStockOrDemand,
+                minStockOrDemand, isSellingMode ? 1 : 0).enqueue(callback);
     }
 
     private static void processResults(List<CommodityFinderResponse> responseBody) {

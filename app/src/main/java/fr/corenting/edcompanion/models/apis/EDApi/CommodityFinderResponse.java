@@ -9,6 +9,9 @@ public class CommodityFinderResponse {
     @SerializedName("buy_price")
     public long BuyPrice;
 
+    @SerializedName("sell_price")
+    public long SellPrice;
+
     @SerializedName("distance")
     public float Distance;
 
@@ -20,6 +23,9 @@ public class CommodityFinderResponse {
 
     @SerializedName("supply")
     public long Stock;
+
+    @SerializedName("demand")
+    public long Demand;
 
     @SerializedName("last_price_update")
     public Date LastPriceUpdate;

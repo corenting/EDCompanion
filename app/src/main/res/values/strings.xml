@@ -181,13 +181,22 @@
     <string name="commodity">Commodity</string>
     <string name="close">Close</string>
     <string name="landing_pad_size">Landing pad size</string>
+    <string name="buy_or_sell">Buy or sell</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
     <string name="stock_label">Stock</string>
+    <string name="demand_label">Demand</string>
     <string name="price_label">Price</string>
     <string name="minimum_stock">Minimum stock</string>
+    <string name="minimum_demand">Minimum demand</string>
     <string-array name="landing_pad_size">
         <item>Any</item>
         <item>M</item>
         <item>L</item>
+    </string-array>
+    <string-array name="buy_sell_array">
+        <item>Buy</item>
+        <item>Sell</item>
     </string-array>
 
     <!--Systems-->
@@ -242,7 +251,7 @@
     <string name="about_libs_title">Libraries and code used</string>
     <string name="about_icons_title">Icons used</string>
     <string name="about_contact_me_title">Contact me</string>
-    <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…) : <a href="mailto:corenting+edc@gmail.com">corenting+edc@gmail.com</a>.]]></string>
+    <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…) : <a href="mailto:edcompanion@corenting.fr">edcompanion@corenting.fr</a>.]]></string>
 
     <!--Settings-->
     <string name="title_activity_settings">Settings</string>
@@ -303,9 +312,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.2.1</b><br />
+            <b>Version 2.3</b><br />
             <ul>
-                <li>Add happiness for factions in system details.</li><br />
+                <li>Add sell mode to commodity finder tool.</li><br />
+                <li>Add language options for Galnet (english, french or german).</li><br />
             </ul>
         ]]>
     </string>
