@@ -6,22 +6,17 @@ import android.util.Base64;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.SystemFinderResult;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystem;
 import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenRequestBody;
 import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenResponse;
 import fr.corenting.edcompanion.models.events.FrontierTokensEvent;
-import fr.corenting.edcompanion.models.events.ResultsList;
-import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.FrontierAuthRetrofit;
-import fr.corenting.edcompanion.utils.SettingsUtils;
+import fr.corenting.edcompanion.utils.OAuthUtils;
 import retrofit2.Call;
 import retrofit2.internal.EverythingIsNonNull;
 
@@ -59,12 +54,6 @@ public class FrontierAuthSingleton implements Serializable {
         return getInstance();
     }
 
-    private void clearData() {
-        codeVerifier = null;
-        codeChallenge = null;
-        requestState = null;
-    }
-
     private void generateCodeVerifierAndChallenge() {
         SecureRandom sr = new SecureRandom();
         byte[] code = new byte[32];
@@ -73,7 +62,7 @@ public class FrontierAuthSingleton implements Serializable {
                 Base64.URL_SAFE | Base64.NO_WRAP | Base64.NO_PADDING);
 
         try {
-            byte[] bytes = codeVerifier.getBytes("US-ASCII");
+            byte[] bytes = codeVerifier.getBytes(StandardCharsets.US_ASCII);
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(bytes, 0, bytes.length);
             byte[] digest = md.digest();
@@ -119,39 +108,32 @@ public class FrontierAuthSingleton implements Serializable {
 
         retrofit2.Callback<FrontierAccessTokenResponse> callback =
                 new retrofit2.Callback<FrontierAccessTokenResponse>() {
-            @Override
-            @EverythingIsNonNull
-            public void onResponse(Call<FrontierAccessTokenResponse> call,
-                                   retrofit2.Response<FrontierAccessTokenResponse> response) {
+                    @Override
+                    @EverythingIsNonNull
+                    public void onResponse(Call<FrontierAccessTokenResponse> call,
+                                           retrofit2.Response<FrontierAccessTokenResponse> response) {
 
-                FrontierAccessTokenResponse body = response.body();
-                if (!response.isSuccessful() || body == null) {
-                    onFailure(call, new Exception("Invalid response"));
-                } else {
-                    SettingsUtils.setString(ctx, ctx.getString(R.string.access_token_key),
-                            body.AccessToken);
-                    SettingsUtils.setString(ctx, ctx.getString(R.string.refresh_token_key),
-                            body.RefreshToken);
+                        FrontierAccessTokenResponse body = response.body();
+                        if (!response.isSuccessful() || body == null) {
+                            onFailure(call, new Exception("Invalid response"));
+                        } else {
+                            OAuthUtils.storeUpdatedTokens(ctx, body.AccessToken, body.RefreshToken);
 
-                    EventBus.getDefault().post(new FrontierTokensEvent(false,
-                            body.AccessToken, body.RefreshToken));
-                }
-            }
+                            EventBus.getDefault().post(new FrontierTokensEvent(true,
+                                    body.AccessToken, body.RefreshToken));
+                        }
+                    }
 
-            @Override
-            @EverythingIsNonNull
-            public void onFailure(Call<FrontierAccessTokenResponse> call, Throwable t) {
-                EventBus.getDefault().post(new FrontierTokensEvent(false,
-                        "", ""));
-            }
-        };
+                    @Override
+                    @EverythingIsNonNull
+                    public void onFailure(Call<FrontierAccessTokenResponse> call, Throwable t) {
+                        EventBus.getDefault().post(new FrontierTokensEvent(false,
+                                "", ""));
+                    }
+                };
 
-        FrontierAccessTokenRequestBody requestBody = new FrontierAccessTokenRequestBody();
-        requestBody.CodeVerifier = codeVerifier;
-        requestBody.GrantType = "authorization_code";
-        requestBody.ClientId = BuildConfig.FRONTIER_AUTH_CLIENT_ID;
-        requestBody.Code = authCode;
-        requestBody.RedirectUri = "edcompanion://oauth";
+        FrontierAccessTokenRequestBody requestBody = OAuthUtils.getAuthorizationCodeRequestBody(ctx,
+                codeVerifier, authCode);
 
         retrofit.getAccessToken(requestBody).enqueue(callback);
     }

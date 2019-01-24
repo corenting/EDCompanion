@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -14,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.events.FrontierTokensEvent;
-import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.singletons.FrontierAuthSingleton;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
@@ -48,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTokensEvent(FrontierTokensEvent tokens) {
         if (tokens.getSuccess()) {
-            // TODO : success
+            // TODO : OK
         }
         else {
             // TODO : failure

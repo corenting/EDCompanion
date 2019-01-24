@@ -6,6 +6,7 @@
     <string name="edsm_base">https://www.edsm.net/</string>
     <string name="inara_api_base">https://inara.cz/</string>
     <string name="frontier_auth_base">https://auth.frontierstore.net/</string>
+    <string name="frontier_api_base">https://companion.orerve.net/</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -329,4 +330,5 @@
     <string name="login">Frontier login</string>
     <string name="access_token_key">access_token_key</string>
     <string name="refresh_token_key">refresh_token_key</string>
+    <string name="login_needed_fake_header">login_needed_fake_header</string>
 </resources>

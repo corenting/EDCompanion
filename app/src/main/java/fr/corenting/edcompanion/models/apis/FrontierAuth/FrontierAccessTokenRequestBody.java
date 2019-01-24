@@ -19,4 +19,7 @@ public class FrontierAccessTokenRequestBody {
 
     @SerializedName("redirect_uri")
     public String RedirectUri;
+
+    @SerializedName("refresh_token")
+    public String RefreshToken;
 }
