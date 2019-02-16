@@ -31,7 +31,6 @@ public class SettingsUtils {
         editor.apply();
     }
 
-
     public static String getString(Context c, String key) {
         return PreferenceManager.getDefaultSharedPreferences(c)
                 .getString(key, "");

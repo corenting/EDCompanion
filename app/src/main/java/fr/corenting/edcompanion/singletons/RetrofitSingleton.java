@@ -6,15 +6,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
+import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
+import fr.corenting.edcompanion.network.retrofit.FrontierAuthRetrofit;
+import fr.corenting.edcompanion.network.retrofit.FrontierRetrofit;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
 import fr.corenting.edcompanion.utils.EDSMDeserializer;
+import fr.corenting.edcompanion.utils.OAuthUtils;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,6 +33,9 @@ public class RetrofitSingleton implements Serializable {
     private EDSMRetrofit edsmRetrofit;
     private EDApiRetrofit edApiRetrofit;
     private InaraRetrofit inaraRetrofit;
+    private FrontierAuthRetrofit frontierAuthRetrofit;
+    private FrontierRetrofit frontierRetrofit;
+
     private Retrofit.Builder retrofitBuilder;
 
     // Private constructor.
@@ -90,25 +100,107 @@ public class RetrofitSingleton implements Serializable {
         return inaraRetrofit;
     }
 
+    public FrontierAuthRetrofit getFrontierAuthRetrofit(Context ctx) {
+        if (frontierAuthRetrofit != null) {
+            return frontierAuthRetrofit;
+        }
+
+        frontierAuthRetrofit = getRetrofitInstance()
+                .baseUrl(ctx.getString(R.string.frontier_auth_base))
+                .build()
+                .create(FrontierAuthRetrofit.class);
+        return frontierAuthRetrofit;
+    }
+
+    public FrontierRetrofit getFrontierRetrofit(Context ctx) {
+        if (frontierRetrofit != null) {
+            return frontierRetrofit;
+        }
+
+        OkHttpClient.Builder httpClient = getCommonOkHttpClientBuilder();
+
+        // Add interceptor for tokens in response
+        httpClient.addInterceptor(chain -> {
+
+            Request request = OAuthUtils.getRequestWithFrontierAuthorization(ctx, chain);
+            Response response = chain.proceed(request);
+
+            // Check if access token expired and renew it if needed
+            if (response.code() == 403) {
+
+                FrontierAccessTokenResponse responseBody = OAuthUtils.makeRefreshRequest(ctx);
+                if (!response.isSuccessful() || responseBody == null) {
+                    // add fake header to let caller know that login is needed again
+                    response.header(ctx.getString(R.string.login_needed_fake_header),
+                            "true");
+                    return response;
+                }
+
+                // Retry request
+                OAuthUtils.storeUpdatedTokens(ctx, responseBody.AccessToken,
+                        responseBody.RefreshToken);
+                response = chain.proceed(request);
+            }
+
+            // If successful, store updated access token
+            if (response.isSuccessful()) {
+                List<String> responseCookies = response.headers().toMultimap().get("Set-Cookie");
+                if (responseCookies != null && responseCookies.size() > 0) {
+                    for (String cookie : responseCookies) {
+                        if (cookie.contains("access_token")) {
+                            String accessToken = cookie.substring(cookie.indexOf("=") + 1,
+                                    cookie.indexOf(";"));
+                            OAuthUtils.storeUpdatedTokens(ctx, accessToken,
+                                    OAuthUtils.getRefreshToken(ctx));
+                        }
+                    }
+                }
+            }
+
+            // If still 403, add fake header to let caller know that login is needed again
+            if (!response.isSuccessful() || response.code() == 403) {
+                // add fake header to let caller know that login is needed again
+                response.header(ctx.getString(R.string.login_needed_fake_header),
+                        "true");
+            }
+
+            return response;
+        });
+
+        Retrofit.Builder customRetrofitBuilder = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(getCommonGsonConverterFactory());
+
+        frontierRetrofit = customRetrofitBuilder
+                .baseUrl(ctx.getString(R.string.frontier_api_base))
+                .build()
+                .create(FrontierRetrofit.class);
+        return frontierRetrofit;
+    }
+
     private Retrofit.Builder getRetrofitInstance() {
         if (retrofitBuilder != null) {
             return retrofitBuilder;
         }
 
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .build();
+        retrofitBuilder = new Retrofit.Builder()
+                .client(getCommonOkHttpClientBuilder().build())
+                .addConverterFactory(getCommonGsonConverterFactory());
+        return retrofitBuilder;
+    }
 
+    private GsonConverterFactory getCommonGsonConverterFactory() {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .registerTypeAdapter(EDSMSystemInformation.class, new EDSMDeserializer())
                 .create();
+        return GsonConverterFactory.create(gson);
+    }
 
-        retrofitBuilder = new Retrofit.Builder()
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson));
-        return retrofitBuilder;
+    private OkHttpClient.Builder getCommonOkHttpClientBuilder() {
+        return new OkHttpClient().newBuilder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS);
     }
 }

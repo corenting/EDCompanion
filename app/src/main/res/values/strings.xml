@@ -5,6 +5,8 @@
     <string name="edapi_base">https://ed.9cw.eu/</string>
     <string name="edsm_base">https://www.edsm.net/</string>
     <string name="inara_api_base">https://inara.cz/</string>
+    <string name="frontier_auth_base">https://auth.frontierstore.net/</string>
+    <string name="frontier_api_base">https://companion.orerve.net/</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -322,4 +324,11 @@
     <!--Clipboard-->
     <string name="content_copied_to_clipboard">Content copied to clipboard !</string>
     <string name="content_copied_to_clipboard_error">Cannot copy content to clipboard !</string>
+
+    <!--Login-->
+    <string name="login_redirect">Redirecting to Frontier auth service…</string>
+    <string name="login">Frontier login</string>
+    <string name="access_token_key">access_token_key</string>
+    <string name="refresh_token_key">refresh_token_key</string>
+    <string name="login_needed_fake_header">login_needed_fake_header</string>
 </resources>
