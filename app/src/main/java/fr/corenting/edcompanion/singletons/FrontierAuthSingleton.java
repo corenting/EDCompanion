@@ -132,7 +132,7 @@ public class FrontierAuthSingleton implements Serializable {
                     }
                 };
 
-        FrontierAccessTokenRequestBody requestBody = OAuthUtils.getAuthorizationCodeRequestBody(ctx,
+        FrontierAccessTokenRequestBody requestBody = OAuthUtils.getAuthorizationCodeRequestBody(
                 codeVerifier, authCode);
 
         retrofit.getAccessToken(requestBody).enqueue(callback);

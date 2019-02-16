@@ -20,7 +20,7 @@ public class OAuthUtils {
                 refreshToken);
     }
 
-    public static String getAccessToken(Context context) {
+    private static String getAccessToken(Context context) {
         return SettingsUtils.getString(context, context.getString(R.string.access_token_key));
     }
 
@@ -28,7 +28,7 @@ public class OAuthUtils {
         return SettingsUtils.getString(context, context.getString(R.string.refresh_token_key));
     }
 
-    public static FrontierAccessTokenRequestBody getRefreshTokenRequestBody(Context ctx) {
+    private static FrontierAccessTokenRequestBody getRefreshTokenRequestBody(Context ctx) {
         FrontierAccessTokenRequestBody requestBody = new FrontierAccessTokenRequestBody();
         requestBody.GrantType = "refresh_token";
         requestBody.ClientId = BuildConfig.FRONTIER_AUTH_CLIENT_ID;
@@ -37,7 +37,8 @@ public class OAuthUtils {
         return requestBody;
     }
 
-    public static FrontierAccessTokenRequestBody getAuthorizationCodeRequestBody(Context ctx, String codeVerifier, String authCode) {
+    public static FrontierAccessTokenRequestBody getAuthorizationCodeRequestBody(String codeVerifier,
+                                                                                 String authCode) {
         FrontierAccessTokenRequestBody requestBody = new FrontierAccessTokenRequestBody();
         requestBody.CodeVerifier = codeVerifier;
         requestBody.GrantType = "authorization_code";
