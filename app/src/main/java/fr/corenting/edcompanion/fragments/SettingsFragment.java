@@ -1,8 +1,12 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -13,6 +17,7 @@ import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
+import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     private static Preference.OnPreferenceChangeListener preferenceChangeListener =
@@ -57,6 +62,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         initPushPreferences();
         initCmdrPreferences(null);
 
+        // Fix icons colors
+        if (ThemeUtils.isDarkThemeEnabled(getActivity())) {
+            fixIconColor(findPreference(getString(R.string.settings_cmdr_help)));
+        }
+    }
+
+    private void fixIconColor(Preference preference) {
+        if (preference != null) {
+            DrawableCompat.setTint(preference.getIcon(),
+                    ContextCompat.getColor(getActivity(), android.R.color.white));
+        }
     }
 
     private static void bindPreferenceSummaryToValue(Preference preference) {
@@ -74,6 +90,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void initCmdrPreferences(String newValue) {
         bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)));
 
+        // Bind help preference
+        Preference helpPreference = findPreference(getString(R.string.settings_cmdr_help));
+        if (helpPreference != null) {
+            helpPreference.setOnPreferenceClickListener(preference -> {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse(getString(R.string.commander_help_url)));
+                startActivity(browserIntent);
+                return true;
+            });
+        }
+
         // If invoked with a specific value get network for it else get current one
         PlayerNetwork playerNetwork = newValue != null ?
                 PlayerNetworkUtils.getCurrentPlayerNetwork(getActivity(), newValue) :
@@ -86,7 +113,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             passwordPreference.setVisible(playerNetwork.needPassword());
             playerNetwork.passwordSettingSetup(passwordPreference);
 
-            passwordPreference.setText(SettingsUtils.getString(getActivity(), getActivity().getString(R.string.settings_cmdr_password)));
+            passwordPreference.setText(SettingsUtils.getString(getActivity(), getActivity()
+                    .getString(R.string.settings_cmdr_password)));
         }
         if (usernamePreference != null) {
             playerNetwork.usernameSettingSetup(usernamePreference);
@@ -95,24 +123,25 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private void initPushPreferences() {
 
-        // Remove push notifications subscreen if Google Play Services are not available
+        // Get preferences
+        Preference newGoalPreference = findPreference(getString(R.string.settings_notifications_new_goal));
+        Preference newTierPreference = findPreference(getString(R.string.settings_notifications_new_tier));
+        Preference finishedGoalPreference = findPreference(getString(R.string.settings_notifications_finished_goal));
+
+        // Disable push notifications settings if Google Play Services are not available
         if (NotificationsUtils.pushNotificationsNotWorking(getActivity())) {
-            // TODO : disable notifications catefories
+            disablePushPreference(newGoalPreference);
+            disablePushPreference(newTierPreference);
+            disablePushPreference(finishedGoalPreference);
         }
 
         // Change Firebase subscriptions on preference change
         final Context context = getActivity();
-        Preference.OnPreferenceChangeListener notificationsChangeListener = new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                NotificationsUtils.refreshPushSubscription(context, preference.getKey(), (Boolean) newValue);
-                return true;
-            }
+        Preference.OnPreferenceChangeListener notificationsChangeListener = (preference, newValue) -> {
+            NotificationsUtils.refreshPushSubscription(context, preference.getKey(), (Boolean) newValue);
+            return true;
         };
 
-        Preference newGoalPreference = findPreference(getString(R.string.settings_notifications_new_goal));
-        Preference newTierPreference = findPreference(getString(R.string.settings_notifications_new_tier));
-        Preference finishedGoalPreference = findPreference(getString(R.string.settings_notifications_finished_goal));
         if (newGoalPreference != null) {
             newGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
         }
@@ -122,5 +151,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (finishedGoalPreference != null) {
             finishedGoalPreference.setOnPreferenceChangeListener(notificationsChangeListener);
         }
+    }
+
+    private void disablePushPreference(Preference preference) {
+        preference.setEnabled(false);
+        preference.setSummary(getString(R.string.settings_notifications_error_summary));
     }
 }

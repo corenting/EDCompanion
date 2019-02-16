@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.preference.PreferenceCategory android:title="@string/pref_header_general">
         <androidx.preference.SwitchPreference
@@ -33,6 +34,11 @@
             android:key="@string/settings_cmdr_password"
             android:negativeButtonText="@android:string/cancel"
             android:positiveButtonText="@android:string/ok" />
+        <androidx.preference.Preference
+            android:key="@string/settings_cmdr_help"
+            android:icon="@drawable/ic_help_black_24dp"
+            android:summary="@string/settings_cmdr_help_summary"
+            android:title="@string/settings_cmdr_help_title"/>
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory android:title="@string/settings_notifications_category_title">

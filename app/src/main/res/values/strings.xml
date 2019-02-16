@@ -7,6 +7,7 @@
     <string name="inara_api_base">https://inara.cz/</string>
     <string name="frontier_auth_base">https://auth.frontierstore.net/</string>
     <string name="frontier_api_base">https://companion.orerve.net/</string>
+    <string name="commander_help_url">https://corenting.fr/edc/commander.html</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -287,6 +288,10 @@
     <string name="settings_notifications_new_tier">New tier</string>
     <string name="settings_notifications_finished_goal">Finished goal</string>
     <string name="pref_header_general">General</string>
+    <string name="settings_cmdr_help">Help</string>
+    <string name="settings_cmdr_help_title">Help</string>
+    <string name="settings_cmdr_help_summary">Help about how to use the commander feature</string>
+    <string name="settings_notifications_error_summary">Google Play Services are needed for this feature to be enabled</string>
     <string-array name="settings_galnet_lang_entries">
         <item>English</item>
         <item>French</item>
