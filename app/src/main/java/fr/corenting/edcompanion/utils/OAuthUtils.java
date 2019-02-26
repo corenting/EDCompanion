@@ -20,7 +20,7 @@ public class OAuthUtils {
                 refreshToken);
     }
 
-    private static String getAccessToken(Context context) {
+    public static String getAccessToken(Context context) {
         return SettingsUtils.getString(context, context.getString(R.string.access_token_key));
     }
 

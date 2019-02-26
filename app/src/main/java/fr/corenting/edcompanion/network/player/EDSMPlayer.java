@@ -35,7 +35,12 @@ public class EDSMPlayer extends PlayerNetwork {
     }
 
     @Override
-    public boolean needPassword() {
+    public boolean useFrontierAuth() {
+        return false;
+    }
+
+    @Override
+    public boolean usePassword() {
         return true;
     }
 

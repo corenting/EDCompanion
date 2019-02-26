@@ -88,8 +88,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void initCmdrPreferences(String newValue) {
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)));
-
         // Bind help preference
         Preference helpPreference = findPreference(getString(R.string.settings_cmdr_help));
         if (helpPreference != null) {
@@ -108,15 +106,28 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         EditTextPreference passwordPreference = (EditTextPreference) findPreference(getString(R.string.settings_cmdr_password));
         EditTextPreference usernamePreference = (EditTextPreference) findPreference(getString(R.string.settings_cmdr_username));
+        Preference frontierPreference = findPreference(getString(R.string.settings_cmdr_oauth));
 
-        if (passwordPreference != null) {
-            passwordPreference.setVisible(playerNetwork.needPassword());
-            playerNetwork.passwordSettingSetup(passwordPreference);
+        // If preferences are null return immediatly
+        if (passwordPreference == null || usernamePreference == null ||
+                frontierPreference == null) {
+            return;
+        }
+
+        if (playerNetwork.useFrontierAuth()) {
+            usernamePreference.setVisible(false);
+            passwordPreference.setVisible(false);
+            frontierPreference.setVisible(true);
+        } else {
+            frontierPreference.setVisible(false);
+            usernamePreference.setVisible(true);
+            passwordPreference.setVisible(playerNetwork.usePassword());
+
+            bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)));
 
             passwordPreference.setText(SettingsUtils.getString(getActivity(), getActivity()
                     .getString(R.string.settings_cmdr_password)));
-        }
-        if (usernamePreference != null) {
+            playerNetwork.passwordSettingSetup(passwordPreference);
             playerNetwork.usernameSettingSetup(usernamePreference);
         }
     }

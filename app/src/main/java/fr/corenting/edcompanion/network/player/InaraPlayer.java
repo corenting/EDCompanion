@@ -57,7 +57,12 @@ public class InaraPlayer extends PlayerNetwork {
     }
 
     @Override
-    public boolean needPassword() {
+    public boolean useFrontierAuth() {
+        return false;
+    }
+
+    @Override
+    public boolean usePassword() {
         return false;
     }
 

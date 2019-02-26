@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.preference.PreferenceCategory android:title="@string/pref_header_general">
         <androidx.preference.SwitchPreference
@@ -24,6 +23,10 @@
             android:positiveButtonText="@android:string/ok"
             android:summary="@string/settings_cmdr_source_summary"
             android:title="@string/settings_cmdr_source_title" />
+        <androidx.preference.Preference
+            android:key="@string/settings_cmdr_oauth"
+            android:summary="@string/settings_cmdr_oauth_summary"
+            android:title="@string/settings_cmdr_oauth_title" />
         <androidx.preference.EditTextPreference
             android:inputType="textNoSuggestions"
             android:key="@string/settings_cmdr_username"
@@ -35,10 +38,10 @@
             android:negativeButtonText="@android:string/cancel"
             android:positiveButtonText="@android:string/ok" />
         <androidx.preference.Preference
-            android:key="@string/settings_cmdr_help"
             android:icon="@drawable/ic_help_black_24dp"
+            android:key="@string/settings_cmdr_help"
             android:summary="@string/settings_cmdr_help_summary"
-            android:title="@string/settings_cmdr_help_title"/>
+            android:title="@string/settings_cmdr_help_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory android:title="@string/settings_notifications_category_title">

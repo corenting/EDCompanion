@@ -6,7 +6,8 @@ import org.greenrobot.eventbus.EventBus;
 
 public abstract class PlayerNetwork {
 
-    public abstract boolean needPassword();
+    public abstract boolean useFrontierAuth();
+    public abstract boolean usePassword();
     public abstract boolean supportFleet();
     public abstract boolean supportCredits();
     public abstract boolean supportLocation();

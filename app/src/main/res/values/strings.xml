@@ -54,6 +54,7 @@
     <string name="download_error">Error while downloading the content</string>
     <string name="edsm_error">You need to set your EDSM API key and your commander name in the settings</string>
     <string name="inara_error">You need to set your commander name in the settings</string>
+    <string name="frontier_error">You need to link your Frontier account in the settings</string>
     <string name="no_chart_error">No history chart to display</string>
     <string name="no_chart_snackbar_error">Error while download the history chart</string>
 
@@ -272,6 +273,9 @@
     <string name="settings_cmdr_inara_username_summary">Your username on Inara (not your CMDR name)</string>
     <string name="settings_cmdr_password">CMDR password</string>
     <string name="settings_cmdr_username">CMDR name</string>
+    <string name="settings_cmdr_oauth">Link your Frontier account</string>
+    <string name="settings_cmdr_oauth_title">Link your Frontier account</string>
+    <string name="settings_cmdr_oauth_summary">Click here to authorize EDCompanion to fetch your CMDR informations</string>
     <string name="player_ranks">Player ranks</string>
     <string name="faction_ranks">Faction ranks</string>
     <string name="settings_dark_theme_title">Dark theme</string>
