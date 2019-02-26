@@ -18,7 +18,6 @@ import java.util.Locale;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.FactionChartEntryData;
 import fr.corenting.edcompanion.utils.DateUtils;
-import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class GraphMarkerView extends MarkerView {
 

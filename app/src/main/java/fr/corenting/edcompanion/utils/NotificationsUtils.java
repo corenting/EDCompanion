@@ -5,20 +5,20 @@ import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
-
-import com.google.android.material.snackbar.Snackbar;
-
 import android.util.Pair;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.activities.SettingsActivity;
 
 public class NotificationsUtils {
 
@@ -34,6 +34,17 @@ public class NotificationsUtils {
         Snackbar snackbar = Snackbar
                 .make(activity.findViewById(android.R.id.content),
                         message, Snackbar.LENGTH_SHORT);
+        snackbar.show();
+    }
+
+    public static void displaySnackbarWithSettingsButton(Activity activity, String message) {
+        Snackbar snackbar = Snackbar
+                .make(activity.findViewById(android.R.id.content),
+                        message, Snackbar.LENGTH_SHORT);
+        snackbar.setAction(R.string.open, v -> {
+            Intent i = new Intent(activity, SettingsActivity.class);
+            activity.startActivity(i);
+        });
         snackbar.show();
     }
 

@@ -3,12 +3,12 @@ package fr.corenting.edcompanion.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import fr.corenting.edcompanion.R;
@@ -28,8 +28,9 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        // Check step
-        if (getIntent() != null && getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+        // Check step (back from browser or just opened)
+        if (getIntent() != null && getIntent().getAction() != null &&
+                getIntent().getAction().equals(Intent.ACTION_VIEW)) {
             Uri uri = getIntent().getData();
 
             if (uri != null) {
@@ -37,18 +38,31 @@ public class LoginActivity extends AppCompatActivity {
                 String state = uri.getQueryParameter("state");
                 launchTokensStep(code, state);
             }
-        }
-        else {
-            launchAuthCodeStep();
+        } else {
+            // Show dialog
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.login_dialog_title)
+                    .setMessage(R.string.login_dialog_text)
+                    .setPositiveButton(android.R.string.ok, (dialog1, which) -> {
+                        dialog1.dismiss();
+                        launchAuthCodeStep();
+                    })
+                    .setNegativeButton(android.R.string.cancel,
+                            (dialog2, which) -> {
+                                dialog2.dismiss();
+                                finish();
+                            })
+                    .create();
+
+            dialog.show();
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onTokensEvent(FrontierTokensEvent tokens) {
+    public void onLoginTokensEvent(FrontierTokensEvent tokens) {
         if (tokens.getSuccess()) {
             // TODO : OK
-        }
-        else {
+        } else {
             // TODO : failure
         }
     }
@@ -85,14 +99,5 @@ public class LoginActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

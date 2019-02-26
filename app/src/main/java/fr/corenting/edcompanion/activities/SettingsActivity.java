@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.activities;
 
 import android.os.Bundle;
-import android.preference.Preference;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;

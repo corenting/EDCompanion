@@ -13,6 +13,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.activities.LoginActivity;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
@@ -118,6 +119,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             usernamePreference.setVisible(false);
             passwordPreference.setVisible(false);
             frontierPreference.setVisible(true);
+
+            frontierPreference.setOnPreferenceClickListener(preference -> {
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                getActivity().startActivity(i);
+                return true;
+            });
         } else {
             frontierPreference.setVisible(false);
             usernamePreference.setVisible(true);

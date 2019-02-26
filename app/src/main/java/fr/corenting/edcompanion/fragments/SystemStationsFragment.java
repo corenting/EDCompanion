@@ -6,7 +6,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.adapters.SystemStationsAdapter;
 import fr.corenting.edcompanion.models.events.SystemStations;
-import fr.corenting.edcompanion.network.SystemNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
 public class SystemStationsFragment extends AbstractListFragment<SystemStationsAdapter> {

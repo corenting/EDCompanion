@@ -223,7 +223,8 @@ public class CommanderStatusFragment extends Fragment {
             playerNetwork.getRanks();
             playerNetwork.getCommanderPosition();
         } else {
-            NotificationsUtils.displaySnackbar(getActivity(), playerNetwork.getErrorMessage());
+            NotificationsUtils.displaySnackbarWithSettingsButton(getActivity(),
+                    playerNetwork.getErrorMessage());
             endLoading();
         }
     }

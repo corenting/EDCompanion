@@ -24,7 +24,6 @@
     <string name="commander">Commander</string>
     <string name="updating_server_status">Updating server status…</string>
     <string name="server_status">Game server: %1$s</string>
-    <string name="ok">OK</string>
     <string name="unknown">Unknown</string>
 
     <!--Community goals-->
@@ -185,8 +184,6 @@
     <string name="close">Close</string>
     <string name="landing_pad_size">Landing pad size</string>
     <string name="buy_or_sell">Buy or sell</string>
-    <string name="buy">Buy</string>
-    <string name="sell">Sell</string>
     <string name="stock_label">Stock</string>
     <string name="demand_label">Demand</string>
     <string name="price_label">Price</string>
@@ -264,7 +261,7 @@
     <string name="settings_galnet_lang_title">Galnet language</string>
     <string name="settings_galnet_lang_summary">Change the language used for Galnet news</string>
     <string name="settings_cmdr_source_title">Commander data source</string>
-    <string name="settings_cmdr_source_summary">Choose the data source (EDSM, Inara…) you want to use for the commander tab</string>
+    <string name="settings_cmdr_source_summary">Choose the data source (Frontier, EDSM or Inara) you want to use for the commander tab</string>
     <string name="settings_cmdr_edsm_password_title">API key for EDSM</string>
     <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
     <string name="settings_cmdr_username_title">Commander name</string>
@@ -340,4 +337,8 @@
     <string name="access_token_key">access_token_key</string>
     <string name="refresh_token_key">refresh_token_key</string>
     <string name="login_needed_fake_header">login_needed_fake_header</string>
+    <string name="login_dialog_title">Frontier login</string>
+    <string name="login_dialog_text">Your browser will open to allow you to connect to your Frontier account.</string>
+    <string name="open">Open</string>
+
 </resources>
