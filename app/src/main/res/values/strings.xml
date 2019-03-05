@@ -67,6 +67,7 @@
     <string name="credits">%1$s credits</string>
     <string name="credits_with_loan">%1$s credits (with a %2$s credits loan)</string>
     <string name="rank_progress">%1$d %%</string>
+    <string name="rank_progress_unknown">%1$s %%</string>
     <string name="fleet">Fleet</string>
 
     <!--Ranks-->
@@ -333,12 +334,18 @@
 
     <!--Login-->
     <string name="login_redirect">Redirecting to Frontier auth service…</string>
+    <string name="adding_account">Adding your account…</string>
+    <string name="account_linked">Account linked!</string>
     <string name="login">Frontier login</string>
     <string name="access_token_key">access_token_key</string>
     <string name="refresh_token_key">refresh_token_key</string>
     <string name="login_needed_fake_header">login_needed_fake_header</string>
+    <string name="login_again_dialog_title">Frontier login needed</string>
+    <string name="login_again_dialog_text">The link with your Frontier account has expired, press OK to login again.</string>
     <string name="login_dialog_title">Frontier login</string>
     <string name="login_dialog_text">Your browser will open to allow you to connect to your Frontier account.</string>
+    <string name="login_dialog_error_title">Frontier login error</string>
+    <string name="login_dialog_error_text">Error while linking your account, please try again.</string>
     <string name="open">Open</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -14,6 +15,9 @@ import okhttp3.Request;
 
 public class OAuthUtils {
     public static void storeUpdatedTokens(Context context, String accessToken, String refreshToken) {
+        Log.d("Tokens", "Access token: " + accessToken);
+        Log.d("Tokens", "Refresh token: " + refreshToken);
+
         SettingsUtils.setString(context, context.getString(R.string.access_token_key),
                 accessToken);
         SettingsUtils.setString(context, context.getString(R.string.refresh_token_key),

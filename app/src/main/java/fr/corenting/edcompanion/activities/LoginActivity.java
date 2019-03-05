@@ -3,6 +3,8 @@ package fr.corenting.edcompanion.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -11,6 +13,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import butterknife.BindView;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.events.FrontierTokensEvent;
 import fr.corenting.edcompanion.singletons.FrontierAuthSingleton;
@@ -18,6 +21,10 @@ import fr.corenting.edcompanion.utils.ThemeUtils;
 
 
 public class LoginActivity extends AppCompatActivity {
+
+    @BindView(R.id.progressTextView)
+    public TextView progressTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.setTheme(this);
@@ -60,10 +67,24 @@ public class LoginActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginTokensEvent(FrontierTokensEvent tokens) {
+        progressTextView.setText(R.string.adding_account);
+
         if (tokens.getSuccess()) {
-            // TODO : OK
+            Toast t = Toast.makeText(this, R.string.account_linked, Toast.LENGTH_SHORT);
+            t.show();
+            finish();
         } else {
-            // TODO : failure
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.login_dialog_error_title)
+                    .setMessage(R.string.login_dialog_error_text)
+                    .setOnCancelListener(d -> finish())
+                    .setOnDismissListener(d -> finish())
+                    .setPositiveButton(android.R.string.ok, (d, which) -> d.dismiss())
+                    .setNegativeButton(android.R.string.cancel,
+                            (d, which) -> d.dismiss())
+                    .create();
+
+            dialog.show();
         }
     }
 

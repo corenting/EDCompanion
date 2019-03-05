@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.activities.SettingsActivity;
 
 public class NotificationsUtils {
 
@@ -37,12 +36,13 @@ public class NotificationsUtils {
         snackbar.show();
     }
 
-    public static void displaySnackbarWithSettingsButton(Activity activity, String message) {
+    public static void displaySnackbarWithActivityButton(Activity activity, String message,
+                                                         Class<?> activityToGo) {
         Snackbar snackbar = Snackbar
                 .make(activity.findViewById(android.R.id.content),
                         message, Snackbar.LENGTH_SHORT);
         snackbar.setAction(R.string.open, v -> {
-            Intent i = new Intent(activity, SettingsActivity.class);
+            Intent i = new Intent(activity, activityToGo);
             activity.startActivity(i);
         });
         snackbar.show();

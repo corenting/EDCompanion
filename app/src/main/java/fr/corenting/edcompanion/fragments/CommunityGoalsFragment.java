@@ -72,7 +72,8 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDistanceEvent(DistanceSearch distanceSearch) {
         // Error
-        if (!distanceSearch.getSuccess() && playerSystemName != null) {
+        if (PlayerNetworkUtils.setupOk(getActivity()) &&
+                !distanceSearch.getSuccess() && playerSystemName != null) {
             NotificationsUtils.displaySnackbar(getActivity(),
                     getString(R.string.cg_player_distance_error));
             return;

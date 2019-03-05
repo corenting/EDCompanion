@@ -18,6 +18,13 @@ public abstract class PlayerNetwork {
 
     public abstract String getErrorMessage();
 
+    // Method to get all informations in one go for commander status
+    public void getCommanderStatus() {
+        getRanks();
+        getCommanderPosition();
+        getCredits();
+    }
+
     public abstract void getRanks();
     public abstract void getCommanderPosition();
     public abstract void getCredits();

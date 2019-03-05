@@ -1,8 +1,10 @@
 package fr.corenting.edcompanion.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -22,13 +24,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.activities.LoginActivity;
+import fr.corenting.edcompanion.activities.SettingsActivity;
 import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;
+import fr.corenting.edcompanion.models.events.FrontierAuthNeeded;
 import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
+import fr.corenting.edcompanion.utils.OAuthUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.RankUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
@@ -163,6 +169,28 @@ public class CommanderStatusFragment extends Fragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginNeededEvent(FrontierAuthNeeded event) {
+        endLoading();
+
+        OAuthUtils.storeUpdatedTokens(getActivity(), "", "");
+
+        // Show dialog
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.login_again_dialog_title)
+                .setMessage(R.string.login_again_dialog_text)
+                .setPositiveButton(android.R.string.ok, (d, which) -> {
+                    d.dismiss();
+                    Intent i = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(i);
+                })
+                .setNegativeButton(android.R.string.cancel,
+                        (d, which) -> d.dismiss())
+                .create();
+
+        dialog.show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPositionEvent(CommanderPosition position) {
         endLoading();
         // Check download error
@@ -219,12 +247,10 @@ public class CommanderStatusFragment extends Fragment {
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
 
         if (PlayerNetworkUtils.setupOk(getContext())) {
-            playerNetwork.getCredits();
-            playerNetwork.getRanks();
-            playerNetwork.getCommanderPosition();
+            playerNetwork.getCommanderStatus();
         } else {
-            NotificationsUtils.displaySnackbarWithSettingsButton(getActivity(),
-                    playerNetwork.getErrorMessage());
+            NotificationsUtils.displaySnackbarWithActivityButton(getActivity(),
+                    playerNetwork.getErrorMessage(), SettingsActivity.class);
             endLoading();
         }
     }

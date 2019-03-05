@@ -30,7 +30,15 @@ public class RankUtils {
 
         logoView.setImageResource(logoId);
         titleView.setText(String.format("%s : %s", description, rank.getName()));
-        progressView.setText(ctx.getResources().getString(R.string.rank_progress, rank.getProgress()));
+
+        // If rank progress is -1 it means it's not supported by the network used so hide it
+        if (rank.getProgress() == -1) {
+            progressView.setText(ctx.getResources().getString(R.string.rank_progress_unknown,
+                    "?"));
+        } else {
+            progressView.setText(ctx.getResources().getString(R.string.rank_progress,
+                    rank.getProgress()));
+        }
 
         // Animate progress bar
         ProgressBarAnimation anim = new ProgressBarAnimation(progressBar, progressBar.getProgress(),
