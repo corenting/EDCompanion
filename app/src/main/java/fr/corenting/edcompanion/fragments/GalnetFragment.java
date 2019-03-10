@@ -23,23 +23,13 @@ import fr.corenting.edcompanion.utils.SettingsUtils;
 public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
 
     public static final String GALNET_FRAGMENT_TAG = "galnet_fragment";
-    public static final String GALNET_REPORTS_FRAGMENT_TAG = "galnet_reports_fragment";
 
-    private boolean reportsMode;
     private String language;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = super.onCreateView(inflater, container, savedInstanceState);
-
-        // Check if reports only or not
-        reportsMode = false;
-        if (getArguments() != null) {
-            reportsMode = getArguments().getBoolean("reportsMode", false);
-        }
-
-        return v;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -84,23 +74,8 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
             return;
         }
 
-        // Else setup list according to mode
-        List<GalnetArticle> newList = new ArrayList<>();
-        int count = 0;
-        for (GalnetArticle n : news.getArticles()) {
-            boolean isReport = n.getTitle().matches(".*(Weekly).*(Report).*") ||
-                    n.getTitle().contains("Starport Status Update");
-
-            // Add the article or not depending on the mode and the title
-            if ((reportsMode && isReport) || (!reportsMode && !isReport)) {
-                newList.add(n);
-                count++;
-            }
-        }
-        GalnetNews copy = new GalnetNews(true, newList);
-
-        endLoading(count == 0);
+        endLoading(news.getArticles().size() == 0);
         recyclerViewAdapter.removeAllItems();
-        recyclerViewAdapter.addItems(copy.getArticles());
+        recyclerViewAdapter.addItems(news.getArticles());
     }
 }

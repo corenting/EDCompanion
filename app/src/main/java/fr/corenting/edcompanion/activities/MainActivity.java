@@ -3,7 +3,6 @@ package fr.corenting.edcompanion.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -109,12 +108,7 @@ public class MainActivity extends AppCompatActivity
             drawerHeader.setBackgroundColor(ContextCompat.getColor(this,
                     R.color.darkPrimary));
         }
-        drawerSubtitleTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateServerStatus();
-            }
-        });
+        drawerSubtitleTextView.setOnClickListener(v -> updateServerStatus());
 
         // Push notifications setup
         NotificationsUtils.refreshPushSubscriptions(this);
@@ -211,10 +205,6 @@ public class MainActivity extends AppCompatActivity
                 switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG);
                 break;
             }
-            case R.id.nav_galnet_reports: {
-                switchFragment(GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG);
-                break;
-            }
             case R.id.nav_systems: {
                 switchFragment(SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG);
                 currentSubtitle = getString(R.string.edsm_credits);
@@ -263,19 +253,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         // Else
-        Bundle args = new Bundle();
         switch (tag) {
             case GalnetFragment.GALNET_FRAGMENT_TAG:
-                fragment = new GalnetFragment();
-                args.putBoolean("reportsMode", false);
-                fragment.setArguments(args);
-                ViewUtils.switchFragment(fragmentManager, fragment, tag);
-                break;
-            case GalnetFragment.GALNET_REPORTS_FRAGMENT_TAG:
-                fragment = new GalnetFragment();
-                args.putBoolean("reportsMode", true);
-                fragment.setArguments(args);
-                ViewUtils.switchFragment(fragmentManager, fragment, tag);
+                ViewUtils.switchFragment(fragmentManager, new GalnetFragment(), tag);
                 break;
             case SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager, new SystemFinderFragment(), tag);
