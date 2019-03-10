@@ -144,23 +144,8 @@ public class RetrofitSingleton implements Serializable {
                 response = chain.proceed(request);
             }
 
-            // If successful, store updated access token
-            if (response.isSuccessful()) {
-                List<String> responseCookies = response.headers().toMultimap().get("Set-Cookie");
-                if (responseCookies != null && responseCookies.size() > 0) {
-                    for (String cookie : responseCookies) {
-                        if (cookie.contains("access_token")) {
-                            String accessToken = cookie.substring(cookie.indexOf("=") + 1,
-                                    cookie.indexOf(";"));
-                            OAuthUtils.storeUpdatedTokens(ctx, accessToken,
-                                    OAuthUtils.getRefreshToken(ctx));
-                        }
-                    }
-                }
-            }
-
             // If still 403, add fake header to let caller know that login is needed again
-            if (!response.isSuccessful() || response.code() == 403) {
+            if (!response.isSuccessful() && response.code() == 403) {
                 EventBus.getDefault().post(new FrontierAuthNeeded(true));
             }
 
