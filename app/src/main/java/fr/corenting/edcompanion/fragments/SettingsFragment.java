@@ -21,6 +21,8 @@ import fr.corenting.edcompanion.utils.SettingsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
+
+    private static final int FRONTIER_LOGIN_REQUEST_CODE = 999;
     private static Preference.OnPreferenceChangeListener preferenceChangeListener =
             (preference, value) -> {
                 String stringValue = value.toString();
@@ -122,7 +124,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
             frontierPreference.setOnPreferenceClickListener(preference -> {
                 Intent i = new Intent(getActivity(), LoginActivity.class);
-                getActivity().startActivity(i);
+                getActivity().startActivityForResult(i, FRONTIER_LOGIN_REQUEST_CODE);
                 return true;
             });
         } else {

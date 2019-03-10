@@ -24,10 +24,12 @@
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/login"
-            android:exported="true"
+            android:launchMode="singleTask"
+            android:noHistory="true"
             android:theme="@style/AppDetailsTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 

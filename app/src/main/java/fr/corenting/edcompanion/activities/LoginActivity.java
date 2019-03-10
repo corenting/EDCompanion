@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.events.FrontierTokensEvent;
 import fr.corenting.edcompanion.singletons.FrontierAuthSingleton;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         ThemeUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         //Action bar setup
         Toolbar mToolbar = findViewById(R.id.toolbar);
@@ -50,13 +53,14 @@ public class LoginActivity extends AppCompatActivity {
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle(R.string.login_dialog_title)
                     .setMessage(R.string.login_dialog_text)
-                    .setPositiveButton(android.R.string.ok, (dialog1, which) -> {
-                        dialog1.dismiss();
-                        launchAuthCodeStep();
-                    })
+                    .setPositiveButton(android.R.string.ok,
+                            (d, which) -> {
+                                d.dismiss();
+                                launchAuthCodeStep();
+                            })
                     .setNegativeButton(android.R.string.cancel,
-                            (dialog2, which) -> {
-                                dialog2.dismiss();
+                            (d, which) -> {
+                                d.dismiss();
                                 finish();
                             })
                     .create();
@@ -67,11 +71,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginTokensEvent(FrontierTokensEvent tokens) {
-        progressTextView.setText(R.string.adding_account);
-
         if (tokens.getSuccess()) {
             Toast t = Toast.makeText(this, R.string.account_linked, Toast.LENGTH_SHORT);
             t.show();
+            setResult(Activity.RESULT_OK);
             finish();
         } else {
             AlertDialog dialog = new AlertDialog.Builder(this)
@@ -88,28 +91,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void launchAuthCodeStep() {
-        // Authorization step
-        String url = FrontierAuthSingleton.getInstance()
-                .getAuthorizationUrl(getApplicationContext());
-
-        launchBrowserIntent(url);
-    }
-
-    private void launchTokensStep(String authCode, String state) {
-        // Tokens exchange step
-        FrontierAuthSingleton.getInstance()
-                .sendTokensRequest(getApplicationContext(), authCode, state);
-
-    }
-
-    private void launchBrowserIntent(String url) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-        browserIntent.setFlags(browserIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-        browserIntent.setData(Uri.parse(url));
-        startActivity(browserIntent);
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -120,5 +101,29 @@ public class LoginActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void launchAuthCodeStep() {
+        // Authorization step
+        String url = FrontierAuthSingleton.getInstance()
+                .getAuthorizationUrl(getApplicationContext());
+
+        launchBrowserIntent(url);
+        finish();
+    }
+
+    private void launchTokensStep(String authCode, String state) {
+        // Tokens exchange step
+        progressTextView.setText(R.string.adding_account);
+        FrontierAuthSingleton.getInstance()
+                .sendTokensRequest(getApplicationContext(), authCode, state);
+
+    }
+
+    private void launchBrowserIntent(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+        browserIntent.setFlags(browserIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        browserIntent.setData(Uri.parse(url));
+        startActivity(browserIntent);
     }
 }

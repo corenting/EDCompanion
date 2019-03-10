@@ -273,7 +273,7 @@
     <string name="settings_cmdr_username">CMDR name</string>
     <string name="settings_cmdr_oauth">Link your Frontier account</string>
     <string name="settings_cmdr_oauth_title">Link your Frontier account</string>
-    <string name="settings_cmdr_oauth_summary">Click here to authorize EDCompanion to fetch your CMDR informations</string>
+    <string name="settings_cmdr_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR informations</string>
     <string name="player_ranks">Player ranks</string>
     <string name="faction_ranks">Faction ranks</string>
     <string name="settings_dark_theme_title">Dark theme</string>
@@ -339,9 +339,8 @@
     <string name="login">Frontier login</string>
     <string name="access_token_key">access_token_key</string>
     <string name="refresh_token_key">refresh_token_key</string>
-    <string name="login_needed_fake_header">login_needed_fake_header</string>
     <string name="login_again_dialog_title">Frontier login needed</string>
-    <string name="login_again_dialog_text">The link with your Frontier account has expired, press OK to login again.</string>
+    <string name="login_again_dialog_text">The session with your Frontier account has expired, press OK to login again.</string>
     <string name="login_dialog_title">Frontier login</string>
     <string name="login_dialog_text">Your browser will open to allow you to connect to your Frontier account.</string>
     <string name="login_dialog_error_title">Frontier login error</string>

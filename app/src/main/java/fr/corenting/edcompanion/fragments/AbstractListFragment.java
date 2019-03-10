@@ -48,19 +48,20 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
         recyclerView.setItemAnimator(new SlideInOutLeftAnimator(recyclerView));
 
         //Swipe to refresh setup
-        SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                startLoading();
-                getData();
-            }
+        SwipeRefreshLayout.OnRefreshListener listener = () -> {
+            startLoading();
+            getData();
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
         emptySwipeRefreshLayout.setOnRefreshListener(listener);
 
         // Load data if not restored
         if (savedInstanceState != null) {
-            endLoading(recyclerViewAdapter.getItemCount() == 0);
+            int count = 0;
+            if (recyclerViewAdapter != null) {
+                count = recyclerViewAdapter.getItemCount();
+            }
+            endLoading(count == 0);
         } else if (loadDataOnCreate) {
             startLoading();
             getData();
@@ -90,38 +91,17 @@ public abstract class AbstractListFragment<TAdapter extends ListAdapter> extends
     }
 
     protected void endLoading(final boolean empty) {
-        emptySwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                emptySwipeRefreshLayout.setVisibility(empty ? View.VISIBLE : View.GONE);
-                emptySwipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+        emptySwipeRefreshLayout.setVisibility(empty ? View.VISIBLE : View.GONE);
+        emptySwipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setVisibility(empty ? View.GONE : View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void startLoading() {
         recyclerViewAdapter.removeAllItems();
-
-        emptySwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                emptySwipeRefreshLayout.setVisibility(View.GONE);
-            }
-        });
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setVisibility(View.VISIBLE);
-                swipeRefreshLayout.setRefreshing(true);
-            }
-        });
+        emptySwipeRefreshLayout.setVisibility(View.GONE);
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
 

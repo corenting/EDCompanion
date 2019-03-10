@@ -125,13 +125,8 @@ public class FrontierPlayer extends PlayerNetwork {
             @Override
             public void onResponse(@NonNull Call<FrontierProfileResponse> call,
                                    retrofit2.Response<FrontierProfileResponse> response) {
-                String loginNeeded =
-                        response.headers().get("ctx.getString(R.string.login_needed_fake_header)");
                 FrontierProfileResponse body = response.body();
-                if (loginNeeded != null) {
-                    sendResultMessage(new FrontierAuthNeeded(true));
-                }
-                else if (!response.isSuccessful() || body == null) {
+                if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
                     CommanderPosition pos;

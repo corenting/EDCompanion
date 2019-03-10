@@ -5,6 +5,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
 import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenResponse;
+import fr.corenting.edcompanion.models.events.FrontierAuthNeeded;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.FrontierAuthRetrofit;
@@ -130,9 +133,8 @@ public class RetrofitSingleton implements Serializable {
 
                 FrontierAccessTokenResponse responseBody = OAuthUtils.makeRefreshRequest(ctx);
                 if (!response.isSuccessful() || responseBody == null) {
-                    // add fake header to let caller know that login is needed again
-                    response.header(ctx.getString(R.string.login_needed_fake_header),
-                            "true");
+                    // Send event to renew login
+                    EventBus.getDefault().post(new FrontierAuthNeeded(true));
                     return response;
                 }
 
@@ -159,9 +161,7 @@ public class RetrofitSingleton implements Serializable {
 
             // If still 403, add fake header to let caller know that login is needed again
             if (!response.isSuccessful() || response.code() == 403) {
-                // add fake header to let caller know that login is needed again
-                response.header(ctx.getString(R.string.login_needed_fake_header),
-                        "true");
+                EventBus.getDefault().post(new FrontierAuthNeeded(true));
             }
 
             return response;
