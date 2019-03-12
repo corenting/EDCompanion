@@ -8,6 +8,7 @@
     android:layout_marginLeft="@dimen/card_spacing"
     android:layout_marginTop="@dimen/card_spacing"
     android:layout_marginRight="@dimen/card_spacing"
+    app:cardCornerRadius="@dimen/card_corner_radius"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -40,9 +41,9 @@
         <TextView
             android:id="@+id/typeLabelTextView"
             android:layout_width="110dp"
-            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
+            android:layout_marginTop="8dp"
             android:text="@string/type_label"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -51,8 +52,8 @@
             android:id="@+id/typeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_below="@id/titleTextView"
+            android:layout_marginTop="8dp"
             android:layout_toEndOf="@id/typeLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 

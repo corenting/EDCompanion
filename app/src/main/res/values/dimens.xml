@@ -6,4 +6,5 @@
     <dimen name="nav_header_height">160dp</dimen>
 
     <dimen name="card_spacing">8dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
 </resources>

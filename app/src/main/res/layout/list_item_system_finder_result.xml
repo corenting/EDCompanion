@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:id="@+id/cardView"
     style="@style/Widget.MaterialComponents.CardView"
-    app:cardUseCompatPadding="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/card_spacing"
     android:layout_marginTop="@dimen/card_spacing"
-    android:layout_marginRight="@dimen/card_spacing" >
+    android:layout_marginRight="@dimen/card_spacing"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:id="@+id/itemLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="24dp"
         android:paddingLeft="24dp"
+        android:paddingTop="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="24dp">
+        android:paddingBottom="24dp">
 
         <TextView
             android:id="@+id/titleTextView"
@@ -32,79 +32,79 @@
 
         <TextView
             android:id="@+id/permitRequiredTextView"
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/titleTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_below="@id/titleTextView"
+            android:layout_marginTop="8dp"
             android:text="@string/permit_required_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/allegianceLabelTextView"
-            android:layout_below="@id/permitRequiredTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_below="@id/permitRequiredTextView"
             android:text="@string/allegiance_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/allegianceTextView"
-            android:layout_below="@id/permitRequiredTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/permitRequiredTextView"
             android:layout_toEndOf="@id/allegianceLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/securityLabelTextView"
-            android:layout_below="@id/allegianceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_below="@id/allegianceLabelTextView"
             android:text="@string/security_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/securityTextView"
-            android:layout_below="@id/allegianceLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/allegianceLabelTextView"
             android:layout_toEndOf="@id/securityLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/governmentLabelTextView"
-            android:layout_below="@id/securityLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_below="@id/securityLabelTextView"
             android:text="@string/government_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/governmentTextView"
-            android:layout_below="@id/securityLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/securityLabelTextView"
             android:layout_toEndOf="@id/governmentLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/economyLabelTextView"
-            android:layout_below="@id/governmentLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_below="@id/governmentLabelTextView"
             android:text="@string/economy_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/economyTextView"
-            android:layout_below="@id/governmentLabelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/governmentLabelTextView"
             android:layout_toEndOf="@id/economyLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 

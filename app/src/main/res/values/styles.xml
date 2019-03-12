@@ -1,9 +1,12 @@
 <resources>
 
-    <style name="AppTheme" parent="BaseTheme"/>
-    <style name="AppDetailsTheme" parent="BaseTheme"/>
-    <style name="AppDarkDetailsTheme" parent="BaseThemeDark"/>
-    <style name="AppDarkTheme" parent="BaseThemeDark"/>
+    <style name="AppTheme" parent="BaseTheme" />
+
+    <style name="AppDetailsTheme" parent="BaseTheme" />
+
+    <style name="AppDarkDetailsTheme" parent="BaseThemeDark" />
+
+    <style name="AppDarkTheme" parent="BaseThemeDark" />
 
     <!-- Drawer bug due to https://issuetracker.google.com/issues/116170605 is fixed -->
     <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

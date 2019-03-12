@@ -129,10 +129,10 @@ public class RetrofitSingleton implements Serializable {
             Response response = chain.proceed(request);
 
             // Check if access token expired and renew it if needed
-            if (response.code() == 403) {
+            if (response.code() == 403 || response.code() == 422) {
 
                 FrontierAccessTokenResponse responseBody = OAuthUtils.makeRefreshRequest(ctx);
-                if (!response.isSuccessful() || responseBody == null) {
+                if (responseBody == null) {
                     // Send event to renew login
                     EventBus.getDefault().post(new FrontierAuthNeeded(true));
                     return response;

@@ -12,6 +12,7 @@
         android:layout_marginLeft="@dimen/card_spacing"
         android:layout_marginTop="@dimen/card_spacing"
         android:layout_marginRight="@dimen/card_spacing"
+        app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout

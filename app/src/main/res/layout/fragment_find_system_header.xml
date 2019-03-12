@@ -12,6 +12,7 @@
         android:layout_marginLeft="@dimen/card_spacing"
         android:layout_marginTop="@dimen/card_spacing"
         android:layout_marginRight="@dimen/card_spacing"
+        app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
@@ -19,10 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="24dp"
             android:paddingLeft="24dp"
+            android:paddingTop="24dp"
             android:paddingRight="24dp"
-            android:paddingTop="24dp">
+            android:paddingBottom="24dp">
 
             <TextView
                 android:id="@+id/titleTextView"
@@ -63,8 +64,8 @@
                 style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@id/subtitleTextView"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:indeterminate="true"
                 android:visibility="gone"
