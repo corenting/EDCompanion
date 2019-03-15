@@ -70,13 +70,10 @@ public class SystemDetailsFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         //Swipe to refresh setup
-        SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                if (getActivity() != null) {
-                    ((SystemDetailsActivity) getActivity()).getData();
-                }
+        SwipeRefreshLayout.OnRefreshListener listener = () -> {
+            swipeRefreshLayout.setRefreshing(true);
+            if (getActivity() != null) {
+                ((SystemDetailsActivity) getActivity()).getData();
             }
         };
         swipeRefreshLayout.setOnRefreshListener(listener);

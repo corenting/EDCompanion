@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
-
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
@@ -42,15 +40,9 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
         recyclerViewAdapter = savedInstanceState == null ?
                 getNewRecyclerViewAdapter() : recyclerViewAdapter;
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setItemAnimator(new SlideInOutLeftAnimator(recyclerView));
 
         // Swipe to refresh setup
-        SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                onSwipeToRefresh();
-            }
-        };
+        SwipeRefreshLayout.OnRefreshListener listener = () -> onSwipeToRefresh();
         swipeRefreshLayout.setOnRefreshListener(listener);
 
         return v;

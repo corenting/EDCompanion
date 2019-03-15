@@ -37,6 +37,6 @@ public class SystemStationsFragment extends AbstractListFragment<SystemStationsA
         }
 
         endLoading(stations.getStations().size() == 0);
-        recyclerViewAdapter.addItems(stations.getStations());
+        recyclerViewAdapter.submitList(stations.getStations());
     }
 }

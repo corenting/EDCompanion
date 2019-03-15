@@ -66,7 +66,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         initCmdrPreferences(null);
 
         // Fix icons colors
-        if (ThemeUtils.isDarkThemeEnabled(getActivity())) {
+        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
             fixIconColor(findPreference(getString(R.string.settings_cmdr_help)));
         }
     }
@@ -74,7 +74,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void fixIconColor(Preference preference) {
         if (preference != null) {
             DrawableCompat.setTint(preference.getIcon(),
-                    ContextCompat.getColor(getActivity(), android.R.color.white));
+                    ContextCompat.getColor(getContext(), android.R.color.white));
         }
     }
 
@@ -104,8 +104,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         // If invoked with a specific value get network for it else get current one
         PlayerNetwork playerNetwork = newValue != null ?
-                PlayerNetworkUtils.getCurrentPlayerNetwork(getActivity(), newValue) :
-                PlayerNetworkUtils.getCurrentPlayerNetwork(getActivity());
+                PlayerNetworkUtils.getCurrentPlayerNetwork(getContext(), newValue) :
+                PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
 
         EditTextPreference passwordPreference = (EditTextPreference) findPreference(getString(R.string.settings_cmdr_password));
         EditTextPreference usernamePreference = (EditTextPreference) findPreference(getString(R.string.settings_cmdr_username));
@@ -123,7 +123,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             frontierPreference.setVisible(true);
 
             frontierPreference.setOnPreferenceClickListener(preference -> {
-                Intent i = new Intent(getActivity(), LoginActivity.class);
+                Intent i = new Intent(getContext(), LoginActivity.class);
                 getActivity().startActivityForResult(i, FRONTIER_LOGIN_REQUEST_CODE);
                 return true;
             });
@@ -134,7 +134,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
             bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)));
 
-            passwordPreference.setText(SettingsUtils.getString(getActivity(), getActivity()
+            passwordPreference.setText(SettingsUtils.getString(getContext(), getContext()
                     .getString(R.string.settings_cmdr_password)));
             playerNetwork.passwordSettingSetup(passwordPreference);
             playerNetwork.usernameSettingSetup(usernamePreference);
@@ -149,14 +149,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         Preference finishedGoalPreference = findPreference(getString(R.string.settings_notifications_finished_goal));
 
         // Disable push notifications settings if Google Play Services are not available
-        if (NotificationsUtils.pushNotificationsNotWorking(getActivity())) {
+        if (NotificationsUtils.pushNotificationsNotWorking(getContext())) {
             disablePushPreference(newGoalPreference);
             disablePushPreference(newTierPreference);
             disablePushPreference(finishedGoalPreference);
         }
 
         // Change Firebase subscriptions on preference change
-        final Context context = getActivity();
+        final Context context = getContext();
         Preference.OnPreferenceChangeListener notificationsChangeListener = (preference, newValue) -> {
             NotificationsUtils.refreshPushSubscription(context, preference.getKey(), (Boolean) newValue);
             return true;

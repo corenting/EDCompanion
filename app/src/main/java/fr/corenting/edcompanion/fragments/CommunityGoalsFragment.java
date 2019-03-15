@@ -23,6 +23,7 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
     public static final String COMMUNITY_GOALS_FRAGMENT_TAG = "community_goals_fragment";
 
     public String playerSystemName;
+    private List<CommunityGoal> communityGoals = new ArrayList<>();
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCommunityGoalEvent(CommunityGoals goals) {
@@ -34,7 +35,8 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
         }
 
         endLoading(false);
-        recyclerViewAdapter.addItems(goals.getGoalsList());
+        communityGoals = goals.getGoalsList();
+        recyclerViewAdapter.submitList(communityGoals);
 
         // Then get distance to player
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
@@ -53,11 +55,10 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
         }
         playerSystemName = position.getSystemName();
 
-        List<CommunityGoal> goals = recyclerViewAdapter.getItems();
         List<String> distancesToCompute = new ArrayList<>();
 
         // Get each system to compute distance for (unique)
-        for (CommunityGoal communityGoal : goals) {
+        for (CommunityGoal communityGoal : communityGoals) {
             if (!distancesToCompute.contains(communityGoal.getSystem())) {
                 distancesToCompute.add(communityGoal.getSystem());
             }
@@ -72,7 +73,7 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDistanceEvent(DistanceSearch distanceSearch) {
         // Error
-        if (PlayerNetworkUtils.setupOk(getActivity()) &&
+        if (PlayerNetworkUtils.setupOk(getContext()) &&
                 !distanceSearch.getSuccess() && playerSystemName != null) {
             NotificationsUtils.displaySnackbar(getActivity(),
                     getString(R.string.cg_player_distance_error));
@@ -80,17 +81,18 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
         }
 
         // Copy list, edit matching item to add distance
-        List<CommunityGoal> goals = recyclerViewAdapter.getItems();
-        for (int i = 0; i < goals.size(); i++) {
-            CommunityGoal communityGoal = goals.get(i);
+        for (int i = 0; i < communityGoals.size(); i++) {
+            CommunityGoal communityGoal = communityGoals.get(i);
 
             if (communityGoal.getSystem().equals(distanceSearch.getEndSystemName()) &&
                     playerSystemName.equals(distanceSearch.getStartSystemName())) {
 
                 communityGoal.setDistanceToPlayer(distanceSearch.getDistance());
-                recyclerViewAdapter.updateItem(communityGoal, i);
             }
         }
+
+        recyclerViewAdapter.submitList(null);
+        recyclerViewAdapter.submitList(communityGoals); // submit a copy for diffutils to work
     }
 
     @Override

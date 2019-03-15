@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,8 +18,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Station;
 import fr.corenting.edcompanion.utils.MathUtils;
 
-public class SystemStationsAdapter extends ListAdapter<SystemStationsAdapter.stationViewHolder,
-        Station> {
+public class SystemStationsAdapter extends androidx.recyclerview.widget.ListAdapter<Station, SystemStationsAdapter.stationViewHolder> {
 
     private final NumberFormat numberFormat;
     private final View.OnClickListener onClickListener;
@@ -27,24 +26,36 @@ public class SystemStationsAdapter extends ListAdapter<SystemStationsAdapter.sta
 
 
     public SystemStationsAdapter(Context ctx, final RecyclerView recyclerView) {
+        // Parent class setup
+        super(new DiffUtil.ItemCallback<Station>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull Station oldItem,
+                                           @NonNull Station newItem) {
+                return areContentsTheSame(oldItem, newItem);
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull Station oldItem,
+                                              @NonNull Station newItem) {
+                return oldItem.getName().equals(newItem.getName()) &&
+                        oldItem.getSystemName().equals(newItem.getSystemName());
+            }
+        });
+
         this.context = ctx;
-        this.dataSet = new ArrayList<>();
         this.numberFormat = MathUtils.getNumberFormat(ctx);
 
-        this.onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = recyclerView.getChildAdapterPosition(v);
-                if (dataSet.size() < position || dataSet.size() == 0) {
-                    return;
-                }
-                final Station station = dataSet.get(recyclerView.getChildAdapterPosition(v));
-                // : TODO : go to station details
-                /*Intent i = new Intent(context, DetailsActivity.class);
-                i.putExtra("article", article);
-
-                MiscUtils.startIntentWithFadeAnimation(context, i);*/
+        this.onClickListener = v -> {
+            int position = recyclerView.getChildAdapterPosition(v);
+            if (getItemCount() < position || getItemCount() == 0) {
+                return;
             }
+            final Station station = getItem(recyclerView.getChildAdapterPosition(v));
+            // : TODO : go to station details
+            /*Intent i = new Intent(context, DetailsActivity.class);
+            i.putExtra("article", article);
+
+            MiscUtils.startIntentWithFadeAnimation(context, i);*/
         };
     }
 
@@ -59,7 +70,7 @@ public class SystemStationsAdapter extends ListAdapter<SystemStationsAdapter.sta
 
     @Override
     public void onBindViewHolder(@NonNull final stationViewHolder holder, final int position) {
-        Station currentStation = dataSet.get(holder.getAdapterPosition());
+        Station currentStation = getItem(holder.getAdapterPosition());
 
         holder.titleTextView.setText(currentStation.getName());
         holder.typeTextView.setText(currentStation.getType());

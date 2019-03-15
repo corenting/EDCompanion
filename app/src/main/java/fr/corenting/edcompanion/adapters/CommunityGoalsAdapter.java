@@ -2,17 +2,17 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -21,7 +21,8 @@ import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.views.TableView;
 
-public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goalsViewHolder, CommunityGoal> {
+public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdapter<CommunityGoal,
+        CommunityGoalsAdapter.goalsViewHolder> {
 
     private View.OnClickListener onClickListener;
 
@@ -29,16 +30,27 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
     private boolean isDetailsView;
 
     public CommunityGoalsAdapter(final Context context, final RecyclerView recyclerView, boolean isDetailsView) {
+        // Parent class setup
+        super(new DiffUtil.ItemCallback<CommunityGoal>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull CommunityGoal oldItem,
+                                           @NonNull CommunityGoal newItem) {
+                return oldItem.getId() == newItem.getId();
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull CommunityGoal oldItem,
+                                              @NonNull CommunityGoal newItem) {
+                return oldItem.getTitle().equals(newItem.getTitle()) &&
+                        oldItem.getDescription().equals(newItem.getDescription()) &&
+                        (oldItem.getDistanceToPlayer() != null || newItem.getDistanceToPlayer() == null);
+            }
+        });
+
         this.context = context;
         this.isDetailsView = isDetailsView;
-        this.dataSet = new ArrayList<>();
 
-        onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToDetailsView(recyclerView.getChildAdapterPosition(v));
-            }
-        };
+        onClickListener = v -> switchToDetailsView(recyclerView.getChildAdapterPosition(v));
     }
 
     @NonNull
@@ -54,7 +66,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
 
     @Override
     public void onBindViewHolder(@NonNull final goalsViewHolder holder, final int position) {
-        final CommunityGoal currentGoal = dataSet.get(holder.getAdapterPosition());
+        final CommunityGoal currentGoal = getItem(holder.getAdapterPosition());
 
         // Content
         holder.titleTextView.setText(currentGoal.getTitle());
@@ -129,32 +141,24 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoalsAdapter.goa
                                    final int labelResId) {
         // Set long click listener for copying informations to clipboard
         textView.setOnLongClickListener(null);
-        textView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                MiscUtils.putTextInClipboard(context, context.getString(labelResId),
-                        textView.getText().toString(), true);
-                return true;
-            }
+        textView.setOnLongClickListener(view -> {
+            MiscUtils.putTextInClipboard(context, context.getString(labelResId),
+                    textView.getText().toString(), true);
+            return true;
         });
 
         // Setup a regular click listener for details view except for location text view
         if (!isDetailsView && textView.getId() != R.id.locationTextView) {
             textView.setOnClickListener(null);
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switchToDetailsView(position);
-                }
-            });
+            textView.setOnClickListener(v -> switchToDetailsView(position));
         }
     }
 
     private void switchToDetailsView(int position) {
-        if (dataSet.size() < position || dataSet.size() == 0) {
+        if (getItemCount() < position || getItemCount() == 0) {
             return;
         }
-        final CommunityGoal goal = dataSet.get(position);
+        final CommunityGoal goal = getItem(position);
         Intent i = new Intent(context, DetailsActivity.class);
         i.putExtra("goal", goal);
 

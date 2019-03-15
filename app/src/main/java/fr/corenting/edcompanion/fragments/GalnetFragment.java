@@ -8,13 +8,9 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.GalnetAdapter;
-import fr.corenting.edcompanion.models.GalnetArticle;
 import fr.corenting.edcompanion.models.events.GalnetNews;
 import fr.corenting.edcompanion.network.GalnetNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
@@ -75,7 +71,6 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
         }
 
         endLoading(news.getArticles().size() == 0);
-        recyclerViewAdapter.removeAllItems();
-        recyclerViewAdapter.addItems(news.getArticles());
+        recyclerViewAdapter.submitList(news.getArticles());
     }
 }

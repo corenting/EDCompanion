@@ -172,15 +172,15 @@ public class CommanderStatusFragment extends Fragment {
     public void onLoginNeededEvent(FrontierAuthNeeded event) {
         endLoading();
 
-        OAuthUtils.storeUpdatedTokens(getActivity(), "", "");
+        OAuthUtils.storeUpdatedTokens(getContext(), "", "");
 
         // Show dialog
-        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
                 .setTitle(R.string.login_again_dialog_title)
                 .setMessage(R.string.login_again_dialog_text)
                 .setPositiveButton(android.R.string.ok, (d, which) -> {
                     d.dismiss();
-                    Intent i = new Intent(getActivity(), LoginActivity.class);
+                    Intent i = new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
                 })
                 .setNegativeButton(android.R.string.cancel,

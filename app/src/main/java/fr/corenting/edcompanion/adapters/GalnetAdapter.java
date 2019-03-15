@@ -2,17 +2,17 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -21,7 +21,8 @@ import fr.corenting.edcompanion.models.GalnetArticle;
 import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.MiscUtils;
 
-public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, GalnetArticle> {
+public class GalnetAdapter extends androidx.recyclerview.widget.ListAdapter<GalnetArticle,
+        GalnetAdapter.newsViewHolder> {
 
     private Context context;
     private DateFormat dateFormat;
@@ -30,18 +31,33 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
 
 
     public GalnetAdapter(Context ctx, final RecyclerView recyclerView, boolean isDetailsView) {
+        // Parent class setup
+        super(new DiffUtil.ItemCallback<GalnetArticle>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull GalnetArticle oldItem,
+                                           @NonNull GalnetArticle newItem) {
+                return areContentsTheSame(oldItem, newItem);
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull GalnetArticle oldItem,
+                                              @NonNull GalnetArticle newItem) {
+                return oldItem.getTitle().equals(newItem.getTitle()) &&
+                        oldItem.getDateTimestamp() == newItem.getDateTimestamp();
+            }
+        });
+
         this.context = ctx;
         this.isDetailsView = isDetailsView;
-        this.dataSet = new ArrayList<>();
         this.dateFormat = DateFormat.getDateInstance(DateFormat.LONG,
                 DateUtils.getCurrentLocale(context));
 
         this.onClickListener = v -> {
             int position = recyclerView.getChildAdapterPosition(v);
-            if (dataSet.size() < position || dataSet.size() == 0) {
+            if (getItemCount() < position || getItemCount() == 0) {
                 return;
             }
-            final GalnetArticle article = dataSet.get(recyclerView.getChildAdapterPosition(v));
+            final GalnetArticle article = getItem(recyclerView.getChildAdapterPosition(v));
             Intent i = new Intent(context, DetailsActivity.class);
             i.putExtra("article", article);
 
@@ -62,7 +78,7 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
 
     @Override
     public void onBindViewHolder(@NonNull final newsViewHolder holder, final int position) {
-        GalnetArticle currentNews = dataSet.get(holder.getAdapterPosition());
+        GalnetArticle currentNews = getItem(holder.getAdapterPosition());
 
         // News content
         holder.titleTextView.setText(currentNews.getTitle());
@@ -77,9 +93,12 @@ public class GalnetAdapter extends ListAdapter<GalnetAdapter.newsViewHolder, Gal
     }
 
     public static class newsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.titleTextView) TextView titleTextView;
-        @BindView(R.id.dateTextView) TextView dateTextView;
-        @BindView(R.id.descriptionTextView) TextView descriptionTextView;
+        @BindView(R.id.titleTextView)
+        TextView titleTextView;
+        @BindView(R.id.dateTextView)
+        TextView dateTextView;
+        @BindView(R.id.descriptionTextView)
+        TextView descriptionTextView;
 
         newsViewHolder(final View view) {
             super(view);
