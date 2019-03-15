@@ -141,6 +141,7 @@ public class RetrofitSingleton implements Serializable {
                 // Retry request
                 OAuthUtils.storeUpdatedTokens(ctx, responseBody.AccessToken,
                         responseBody.RefreshToken);
+                request = OAuthUtils.getRequestWithFrontierAuthorization(ctx, chain);
                 response = chain.proceed(request);
             }
 
