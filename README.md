@@ -10,7 +10,7 @@ APKs are available [in the release section](https://github.com/corenting/EDCompa
 
 - Community goals informations from Inara, with optional push notifications for updates
 - Galnet
-- Commander informations (credits balance, current system, ranks) from Frontier API, EDSM or Inara (for PC players only)
+- Commander informations (credits balance, current system, ranks) from Frontier API, EDSM or Inara
 - Game server status from EDSM
 - Material design (light or dark theme)
 - Distance calculator (get the distance between two systems)
