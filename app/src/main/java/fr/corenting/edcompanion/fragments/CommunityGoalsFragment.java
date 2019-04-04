@@ -22,7 +22,7 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
 
     public static final String COMMUNITY_GOALS_FRAGMENT_TAG = "community_goals_fragment";
 
-    public String playerSystemName;
+    private String playerSystemName;
     private List<CommunityGoal> communityGoals = new ArrayList<>();
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -34,13 +34,13 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
             return;
         }
 
-        endLoading(false);
+        endLoading(goals.getGoalsList().isEmpty());
         communityGoals = goals.getGoalsList();
         recyclerViewAdapter.submitList(communityGoals);
 
         // Then get distance to player
         PlayerNetwork playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(getContext());
-        if (playerNetwork.supportLocation()) {
+        if (PlayerNetworkUtils.setupOk(getContext()) && playerNetwork.supportLocation()) {
             playerNetwork.getCommanderPosition();
         }
     }

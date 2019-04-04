@@ -37,8 +37,8 @@
             android:key="@string/settings_cmdr_password"
             android:negativeButtonText="@android:string/cancel"
             android:positiveButtonText="@android:string/ok" />
+        <!--Re add android:icon="@drawable/ic_help_black_24dp"-->
         <androidx.preference.Preference
-            android:icon="@drawable/ic_help_black_24dp"
             android:key="@string/settings_cmdr_help"
             android:summary="@string/settings_cmdr_help_summary"
             android:title="@string/settings_cmdr_help_title" />
