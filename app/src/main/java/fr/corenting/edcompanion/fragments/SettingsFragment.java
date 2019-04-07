@@ -66,9 +66,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         initCmdrPreferences(null);
 
         // Fix icons colors
-        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
+        /*if (ThemeUtils.isDarkThemeEnabled(getContext())) {
             fixIconColor(findPreference(getString(R.string.settings_cmdr_help)));
-        }
+        }*/
     }
 
     private void fixIconColor(Preference preference) {
