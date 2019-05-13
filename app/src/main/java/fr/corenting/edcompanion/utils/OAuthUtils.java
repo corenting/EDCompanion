@@ -15,8 +15,11 @@ import okhttp3.Request;
 
 public class OAuthUtils {
     public static void storeUpdatedTokens(Context context, String accessToken, String refreshToken) {
-        Log.d("Tokens", "Access token: " + accessToken);
-        Log.d("Tokens", "Refresh token: " + refreshToken);
+
+        if (BuildConfig.DEBUG) {
+            Log.d("Tokens", "Access token: " + accessToken);
+            Log.d("Tokens", "Refresh token: " + refreshToken);
+        }
 
         SettingsUtils.setString(context, context.getString(R.string.access_token_key),
                 accessToken);

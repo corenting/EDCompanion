@@ -198,4 +198,8 @@ public class EDSMPlayer extends PlayerNetwork {
 
         edsmRetrofit.getCredits(apiKey, commanderName).enqueue(callback);
     }
+
+    @Override
+    public void getFleet() {
+    }
 }

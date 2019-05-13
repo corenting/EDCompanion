@@ -28,6 +28,7 @@ public abstract class PlayerNetwork {
     public abstract void getRanks();
     public abstract void getCommanderPosition();
     public abstract void getCredits();
+    public abstract void getFleet();
 
 
     protected void sendResultMessage(Object data) {

@@ -4,12 +4,11 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.preference.EditTextPreference;
+
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMPosition;
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse;
 import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;
-import fr.corenting.edcompanion.models.events.FrontierAuthNeeded;
 import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.retrofit.FrontierRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
@@ -204,5 +203,51 @@ public class FrontierPlayer extends PlayerNetwork {
     @Override
     public void getCredits() {
         // TODO
+    }
+
+    @Override
+    public void getFleet() {
+        retrofit2.Callback<FrontierProfileResponse> callback = new retrofit2.Callback<FrontierProfileResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<FrontierProfileResponse> call,
+                                   retrofit2.Response<FrontierProfileResponse> response) {
+                FrontierProfileResponse body = response.body();
+                if (!response.isSuccessful() || body == null) {
+                    onFailure(call, new Exception("Invalid response"));
+                } else {
+                    CommanderPosition pos;
+                    Credits credits;
+                    Ranks ranks;
+                    try {
+                        pos = new CommanderPosition(true, body.LastSystem.Name,
+                                false);
+                        sendResultMessage(pos);
+
+                        credits = new Credits(true, body.Commander.Credits,
+                                body.Commander.Debt);
+                        sendResultMessage(credits);
+
+                        ranks = getRanksFromApiBody(body);
+                        sendResultMessage(ranks);
+                    } catch (Exception ex) {
+                        onFailure(call, new Exception("Invalid response"));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<FrontierProfileResponse> call, @NonNull Throwable t) {
+                Credits credits = new Credits(false, 0, 0);
+                CommanderPosition pos = new CommanderPosition(false,
+                        "", false);
+                Ranks ranks = new Ranks(false, null, null,
+                        null, null, null, null);
+
+                sendResultMessage(credits);
+                sendResultMessage(pos);
+                sendResultMessage(ranks);
+            }
+        };
+        frontierRetrofit.getProfile().enqueue(callback);
     }
 }

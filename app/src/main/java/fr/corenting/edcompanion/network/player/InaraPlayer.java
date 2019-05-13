@@ -207,4 +207,9 @@ public class InaraPlayer extends PlayerNetwork {
     public void getCredits() {
 
     }
+
+    @Override
+    public void getFleet() {
+
+    }
 }
