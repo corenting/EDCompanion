@@ -9,7 +9,7 @@ public class FrontierProfileResponse {
     public FrontierProfileCommanderResponse Commander;
 
     @SerializedName("lastSystem")
-    public FrontierProfileLastSystemResponse LastSystem;
+    public FrontierProfileSystemResponse LastSystem;
 
     public class FrontierProfileCommanderResponse {
         @SerializedName("name")
@@ -54,7 +54,7 @@ public class FrontierProfileResponse {
         public int Cqc;
     }
 
-    public class FrontierProfileLastSystemResponse {
+    public class FrontierProfileSystemResponse {
         @SerializedName("name")
         public String Name;
     }

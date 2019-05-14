@@ -31,6 +31,7 @@ import fr.corenting.edcompanion.models.events.Credits;
 import fr.corenting.edcompanion.models.events.FrontierAuthNeeded;
 import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.player.PlayerNetwork;
+import fr.corenting.edcompanion.utils.InternalNamingUtils;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
@@ -217,16 +218,16 @@ public class CommanderStatusFragment extends Fragment {
                 ranks.getEmpire(), getString(R.string.rank_empire));
 
         RankUtils.setContent(getContext(), combatRankLayout,
-                RankUtils.getCombatLogoId(ranks.getCombat().getValue()), ranks.getCombat(),
+                InternalNamingUtils.getCombatLogoId(ranks.getCombat().getValue()), ranks.getCombat(),
                 getString(R.string.rank_combat));
         RankUtils.setContent(getContext(), tradeRankLayout,
-                RankUtils.getTradeLogoId(ranks.getTrade().getValue()), ranks.getTrade(),
+                InternalNamingUtils.getTradeLogoId(ranks.getTrade().getValue()), ranks.getTrade(),
                 getString(R.string.rank_trading));
         RankUtils.setContent(getContext(), explorationRankLayout,
-                RankUtils.getExplorationLogoId(ranks.getExplore().getValue()),
+                InternalNamingUtils.getExplorationLogoId(ranks.getExplore().getValue()),
                 ranks.getExplore(), getString(R.string.rank_exploration));
         RankUtils.setContent(getContext(), arenaRankLayout,
-                RankUtils.getCqcLogoId(ranks.getCqc().getValue()), ranks.getCqc(),
+                InternalNamingUtils.getCqcLogoId(ranks.getCqc().getValue()), ranks.getCqc(),
                 getString(R.string.rank_arena));
     }
 

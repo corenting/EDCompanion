@@ -36,7 +36,9 @@ public class CommanderFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         // Setup tablayout and viewpager
-        viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(), getContext()));
+        viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(),
+                getContext()));
+        viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
 
         // Style

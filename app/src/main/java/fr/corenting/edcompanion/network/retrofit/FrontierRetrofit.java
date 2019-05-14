@@ -7,5 +7,8 @@ import retrofit2.http.GET;
 
 public interface FrontierRetrofit {
     @GET("profile")
+    Call<ResponseBody> getProfileRaw();
+
+    @GET("profile")
     Call<FrontierProfileResponse> getProfile();
 }
