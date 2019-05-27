@@ -68,6 +68,10 @@
     <string name="rank_progress">%1$d %%</string>
     <string name="rank_progress_unknown">%1$s %%</string>
     <string name="fleet">Fleet</string>
+    <string name="station_label">Station</string>
+    <string name="current_ship">Current ship</string>
+    <string name="ship_value">Ship value</string>
+    <string name="cargo_value">Cargo value</string>
 
     <!--Ranks-->
     <string name="rank_federation">Federation</string>

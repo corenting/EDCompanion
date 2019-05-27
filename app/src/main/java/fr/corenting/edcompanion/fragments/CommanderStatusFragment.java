@@ -85,12 +85,9 @@ public class CommanderStatusFragment extends Fragment {
         numberFormat = MathUtils.getNumberFormat(getContext());
 
         //Swipe to refresh setup
-        SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                getAll();
-            }
+        SwipeRefreshLayout.OnRefreshListener listener = () -> {
+            swipeRefreshLayout.setRefreshing(true);
+            getAll();
         };
         swipeRefreshLayout.setOnRefreshListener(listener);
 

@@ -3,19 +3,19 @@ package fr.corenting.edcompanion.fragments;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter;
-import fr.corenting.edcompanion.models.events.CommunityGoals;
+import fr.corenting.edcompanion.adapters.CommanderFleetAdapter;
+import fr.corenting.edcompanion.models.events.Fleet;
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
-public class CommanderFleetFragment extends AbstractListFragment<CommunityGoalsAdapter> {
+public class CommanderFleetFragment extends AbstractListFragment<CommanderFleetAdapter> {
 
     public static final String COMMANDER_FLEET_FRAGMENT_TAG = "commander_fleet_fragment";
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onCommunityGoalEvent(CommunityGoals goals) {
+    public void onFleetEvent(Fleet fleet) {
         // Error
-        if (!goals.getSuccess()) {
+        if (!fleet.getSuccess()) {
             endLoading(true);
             NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
             return;
@@ -23,6 +23,7 @@ public class CommanderFleetFragment extends AbstractListFragment<CommunityGoalsA
 
         // Else setup adapter
         endLoading(false);
+        recyclerViewAdapter.submitList(fleet.getShips());
     }
 
     @Override
@@ -31,7 +32,7 @@ public class CommanderFleetFragment extends AbstractListFragment<CommunityGoalsA
     }
 
     @Override
-    CommunityGoalsAdapter getAdapter() {
-        return new CommunityGoalsAdapter(getContext(), recyclerView, false);
+    CommanderFleetAdapter getAdapter() {
+        return new CommanderFleetAdapter(getContext(), recyclerView);
     }
 }

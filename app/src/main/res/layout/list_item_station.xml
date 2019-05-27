@@ -39,7 +39,7 @@
             app:srcCompat="@drawable/ic_globe_black_24dp" />
 
         <TextView
-            android:id="@+id/typeLabelTextView"
+            android:id="@+id/systemLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
@@ -54,14 +54,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
             android:layout_marginTop="8dp"
-            android:layout_toEndOf="@id/typeLabelTextView"
+            android:layout_toEndOf="@id/systemLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/starDistanceLabelTextView"
+            android:id="@+id/stationLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/typeLabelTextView"
+            android:layout_below="@id/systemLabelTextView"
             android:text="@string/distance_to_star"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -70,15 +70,15 @@
             android:id="@+id/starDistanceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/typeLabelTextView"
-            android:layout_toEndOf="@id/starDistanceLabelTextView"
+            android:layout_below="@id/systemLabelTextView"
+            android:layout_toEndOf="@id/stationLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/landingPadLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/starDistanceLabelTextView"
+            android:layout_below="@id/stationLabelTextView"
             android:text="@string/landing_pad_label"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -87,7 +87,7 @@
             android:id="@+id/landingPadTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/starDistanceLabelTextView"
+            android:layout_below="@id/stationLabelTextView"
             android:layout_toEndOf="@id/landingPadLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 

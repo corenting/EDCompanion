@@ -26,94 +26,111 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/isPlanetaryImageView"
+            android:layout_toStartOf="@id/shipImageView"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
         <ImageView
-            android:id="@+id/isPlanetaryImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:id="@+id/shipImageView"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="8dp"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             app:srcCompat="@drawable/ic_globe_black_24dp" />
 
         <TextView
-            android:id="@+id/permitRequiredTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextView"
-            android:layout_marginTop="8dp"
-            android:text="@string/permit_required_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/distanceLabelTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/permitRequiredTextView"
-            android:text="@string/distance_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/distanceTextView"
+            android:id="@+id/subtitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/permitRequiredTextView"
-            android:layout_toEndOf="@id/distanceLabelTextView"
+            android:layout_below="@id/titleTextView"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/shipImageView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/currentShipLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subtitleTextView"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_toStartOf="@id/shipImageView"
+            android:text="@string/current_ship"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/systemLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/currentShipLabelTextView"
+            android:text="@string/system"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/systemTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/currentShipLabelTextView"
+            android:layout_toStartOf="@id/shipImageView"
+            android:layout_toEndOf="@id/systemLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/stationLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/distanceLabelTextView"
-            android:text="@string/distance_to_star"
+            android:layout_below="@id/systemLabelTextView"
+            android:text="@string/station_label"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/starDistanceTextView"
+            android:id="@+id/stationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/distanceLabelTextView"
+            android:layout_below="@id/systemLabelTextView"
+            android:layout_toStartOf="@id/shipImageView"
             android:layout_toEndOf="@id/stationLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/lastUpdateLabelTextView"
+            android:id="@+id/shipValueLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/stationLabelTextView"
-            android:text="@string/last_update_label"
+            android:text="@string/ship_value"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/lastUpdateTextView"
+            android:id="@+id/shipValueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/stationLabelTextView"
-            android:layout_toEndOf="@id/lastUpdateLabelTextView"
+            android:layout_toStartOf="@id/shipImageView"
+            android:layout_toEndOf="@id/shipValueLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/landingPadLabelTextView"
+            android:id="@+id/cargoValueLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lastUpdateLabelTextView"
-            android:text="@string/landing_pad_label"
+            android:layout_below="@id/shipValueLabelTextView"
+            android:text="@string/cargo_value"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/landingPadTextView"
+            android:id="@+id/cargoValueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lastUpdateLabelTextView"
-            android:layout_toEndOf="@id/landingPadLabelTextView"
+            android:layout_below="@id/shipValueLabelTextView"
+            android:layout_toStartOf="@id/shipImageView"
+            android:layout_toEndOf="@id/shipValueLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
     </RelativeLayout>

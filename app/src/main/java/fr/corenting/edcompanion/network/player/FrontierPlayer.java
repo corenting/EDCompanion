@@ -160,6 +160,7 @@ public class FrontierPlayer extends PlayerNetwork {
             boolean isCurrentShip = rawShip.get("id").getAsInt() == currentShipId;
 
             Ship newShip = new Ship(
+                    rawShip.get("id").getAsInt(),
                     InternalNamingUtils.getShipName(rawShip.get("name").getAsString()),
                     shipName,
                     rawShip.get("starsystem").getAsJsonObject().get("name").getAsString(),
@@ -170,10 +171,9 @@ public class FrontierPlayer extends PlayerNetwork {
                     value.get("total").getAsLong(),
                     isCurrentShip);
 
-            if(isCurrentShip) {
+            if (isCurrentShip) {
                 shipsList.add(0, newShip);
-            }
-            else {
+            } else {
                 shipsList.add(newShip);
             }
         }
