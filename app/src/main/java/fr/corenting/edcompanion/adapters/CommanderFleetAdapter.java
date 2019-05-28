@@ -11,15 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.text.NumberFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Ship;
-import fr.corenting.edcompanion.models.Station;
 import fr.corenting.edcompanion.utils.MathUtils;
-import fr.corenting.edcompanion.utils.MiscUtils;
 
 public class CommanderFleetAdapter extends androidx.recyclerview.widget.ListAdapter<Ship,
         CommanderFleetAdapter.shipViewHolder> {
@@ -28,7 +28,7 @@ public class CommanderFleetAdapter extends androidx.recyclerview.widget.ListAdap
     private Context context;
 
 
-    public CommanderFleetAdapter(Context ctx, final RecyclerView recyclerView) {
+    public CommanderFleetAdapter(Context ctx) {
         // Parent class setup
         super(new DiffUtil.ItemCallback<Ship>() {
             @Override
@@ -40,7 +40,7 @@ public class CommanderFleetAdapter extends androidx.recyclerview.widget.ListAdap
             @Override
             public boolean areContentsTheSame(@NonNull Ship oldItem,
                                               @NonNull Ship newItem) {
-                return oldItem.getName().equals(newItem.getId());
+                return oldItem.getId() == newItem.getId();
             }
         });
 
@@ -93,6 +93,13 @@ public class CommanderFleetAdapter extends androidx.recyclerview.widget.ListAdap
             holder.cargoValueTextView.setVisibility(View.GONE);
             holder.cargoValueLabelTextView.setVisibility(View.GONE);
         }
+
+        // Ship picture
+        Glide.with(holder.shipImageView)
+                .load(String.format("https://ed.9cw.eu/ships/picture/%s", currentShip.getModel()))
+                .error(R.drawable.ship_placeholder)
+                .centerCrop()
+                .into(holder.shipImageView);
     }
 
     public static class shipViewHolder extends RecyclerView.ViewHolder {

@@ -236,10 +236,11 @@
         <a href="https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b">ClickToSelectEditText</a><br />
         <a href="http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/">DelayAutoCompleteTextView</a><br />
         <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
-        <a href="https://github.com/square/leakcanary">LeakCanary</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/bumptech/glide">Glide</a> (<a href="https://github.com/bumptech/glide/blob/master/LICENSE">Glide license</a>)<br />
         <a href="https://github.com/DreaminginCodeZH/MaterialProgressBar">MaterialProgressBar</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/PhilJay/MPAndroidChart">MPAndroidChart</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://square.github.io/retrofit/">Retrofit</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
+        <a href="https://github.com/vinc3m1/RoundedImageView">RoundedImageView</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/JakeWharton/ThreeTenABP">ThreeTenABP</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         ]]>
     </string>

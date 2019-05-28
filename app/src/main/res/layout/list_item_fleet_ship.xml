@@ -9,129 +9,129 @@
     android:layout_marginTop="@dimen/card_spacing"
     android:layout_marginRight="@dimen/card_spacing"
     app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
+
     <RelativeLayout
-        android:id="@+id/itemLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingTop="24dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="24dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/shipImageView"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
-
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/shipImageView"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginLeft="8dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="164dp"
+            app:riv_corner_radius_top_left="@dimen/card_corner_radius"
+            app:riv_corner_radius_top_right="@dimen/card_corner_radius"
             app:srcCompat="@drawable/ic_globe_black_24dp" />
 
-        <TextView
-            android:id="@+id/subtitleTextView"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/itemLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextView"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/shipImageView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            android:layout_below="@id/shipImageView"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingTop="24dp"
+            android:paddingRight="24dp"
+            android:paddingBottom="24dp">
 
-        <TextView
-            android:id="@+id/currentShipLabelTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/subtitleTextView"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="8dp"
-            android:layout_toStartOf="@id/shipImageView"
-            android:text="@string/current_ship"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
-        <TextView
-            android:id="@+id/systemLabelTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/currentShipLabelTextView"
-            android:text="@string/system"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/subtitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleTextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
-        <TextView
-            android:id="@+id/systemTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/currentShipLabelTextView"
-            android:layout_toStartOf="@id/shipImageView"
-            android:layout_toEndOf="@id/systemLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/currentShipLabelTextView"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subtitleTextView"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/current_ship"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/stationLabelTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/systemLabelTextView"
-            android:text="@string/station_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/systemLabelTextView"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/currentShipLabelTextView"
+                android:text="@string/system"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/stationTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/systemLabelTextView"
-            android:layout_toStartOf="@id/shipImageView"
-            android:layout_toEndOf="@id/stationLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/systemTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/currentShipLabelTextView"
+                android:layout_toEndOf="@id/systemLabelTextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-        <TextView
-            android:id="@+id/shipValueLabelTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/stationLabelTextView"
-            android:text="@string/ship_value"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/stationLabelTextView"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/systemLabelTextView"
+                android:text="@string/station_label"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/shipValueTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/stationLabelTextView"
-            android:layout_toStartOf="@id/shipImageView"
-            android:layout_toEndOf="@id/shipValueLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/stationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/systemLabelTextView"
+                android:layout_toEndOf="@id/stationLabelTextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
-        <TextView
-            android:id="@+id/cargoValueLabelTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/shipValueLabelTextView"
-            android:text="@string/cargo_value"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/shipValueLabelTextView"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stationLabelTextView"
+                android:text="@string/ship_value"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/cargoValueTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/shipValueLabelTextView"
-            android:layout_toStartOf="@id/shipImageView"
-            android:layout_toEndOf="@id/shipValueLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/shipValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stationLabelTextView"
+                android:layout_toEndOf="@id/shipValueLabelTextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+            <TextView
+                android:id="@+id/cargoValueLabelTextView"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shipValueLabelTextView"
+                android:text="@string/cargo_value"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cargoValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shipValueLabelTextView"
+                android:layout_toEndOf="@id/shipValueLabelTextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

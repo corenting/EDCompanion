@@ -75,23 +75,15 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         holder.systemInputEditText.setThreshold(3);
         holder.systemInputEditText.setLoadingIndicator(holder.systemProgressBar);
         holder.systemInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
-        holder.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                holder.systemInputEditText.setText((String) adapterView.getItemAtPosition(position));
-            }
-        });
+        holder.systemInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
+                holder.systemInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
         // Ship autocomplete
         holder.commodityInputEditText.setThreshold(3);
         holder.commodityInputEditText.setLoadingIndicator(holder.commodityProgressBar);
         holder.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_COMMODITIES));
-        holder.commodityInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                holder.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position));
-            }
-        });
+        holder.commodityInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
+                holder.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
         // Landing pad size adapter
         if (holder.landingPadSizeSpinner.getItems() == null ||
@@ -108,73 +100,59 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                     .getStringArray(R.array.buy_sell_array);
             holder.buyOrSellSpinner.setItems(Arrays.asList(buySellArray));
             holder.buyOrSellSpinner.setOnItemSelectedListener(
-                    new ClickToSelectEditText.OnItemSelectedListener<String>() {
-                        @Override
-                        public void onItemSelectedListener(String item, int selectedIndex) {
-                            if (selectedIndex == 0) {
-                                holder.stockInputLayout.setHint(context
-                                        .getString(R.string.minimum_stock));
-                                holder.stockInputEditText.setHint(context
-                                        .getString(R.string.minimum_stock));
-                            } else {
-                                holder.stockInputLayout.setHint(context
-                                        .getString(R.string.minimum_demand));
-                                holder.stockInputEditText.setHint(context
-                                        .getString(R.string.minimum_demand));
-                            }
+                    (item, selectedIndex) -> {
+                        if (selectedIndex == 0) {
+                            holder.stockInputLayout.setHint(context
+                                    .getString(R.string.minimum_stock));
+                            holder.stockInputEditText.setHint(context
+                                    .getString(R.string.minimum_stock));
+                        } else {
+                            holder.stockInputLayout.setHint(context
+                                    .getString(R.string.minimum_demand));
+                            holder.stockInputEditText.setHint(context
+                                    .getString(R.string.minimum_demand));
                         }
                     });
         }
 
         // Find button
-        final Runnable onSubmit = new Runnable() {
-            @Override
-            public void run() {
-                if (!findButtonEnabled) {
-                    return;
-                }
-
-                ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
-
-                // Convert stock value to int
-                String stockString = holder.stockInputEditText.getText().toString();
-                int stock = 1;
-                if (stockString.length() != 0) {
-                    try {
-                        stock = Integer.parseInt(stockString);
-                    } catch (NumberFormatException ignored) {
-                    }
-                }
-
-                // Convert buy/sell mode to boolean
-                isSellingMode = holder.buyOrSellSpinner.getSelectedIndex() == 1;
-
-                CommodityFinderSearch result = new CommodityFinderSearch(
-                        holder.commodityInputEditText.getText().toString(),
-                        holder.systemInputEditText.getText().toString(),
-                        holder.landingPadSizeSpinner.getText().toString(),
-                        stock, isSellingMode);
-
-                EventBus.getDefault().post(result);
+        final Runnable onSubmit = () -> {
+            if (!findButtonEnabled) {
+                return;
             }
+
+            ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
+
+            // Convert stock value to int
+            String stockString = holder.stockInputEditText.getText().toString();
+            int stock = 0;
+            if (stockString.length() != 0) {
+                try {
+                    stock = Integer.parseInt(stockString);
+                } catch (NumberFormatException ignored) {
+                }
+            }
+
+            // Convert buy/sell mode to boolean
+            isSellingMode = holder.buyOrSellSpinner.getSelectedIndex() == 1;
+
+            CommodityFinderSearch result = new CommodityFinderSearch(
+                    holder.commodityInputEditText.getText().toString(),
+                    holder.systemInputEditText.getText().toString(),
+                    holder.landingPadSizeSpinner.getText().toString(),
+                    stock, isSellingMode);
+
+            EventBus.getDefault().post(result);
         };
 
         // On submit stuff
-        holder.findButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.findButton.setOnClickListener(view -> onSubmit.run());
+        holder.stockInputEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
                 onSubmit.run();
+                return true;
             }
-        });
-        holder.stockInputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    onSubmit.run();
-                    return true;
-                }
-                return false;
-            }
+            return false;
         });
         holder.commodityInputEditText.setOnSubmit(onSubmit);
         holder.systemInputEditText.setOnSubmit(onSubmit);
@@ -190,8 +168,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         if (isSellingMode) {
             String sellPrice = numberFormat.format(currentResult.getSellPrice());
             holder.priceTextView.setText(String.format("%s (%s%%)", sellPrice, priceDifference));
-        }
-        else {
+        } else {
             String buyPrice = numberFormat.format(currentResult.getBuyPrice());
             holder.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
         }
@@ -220,8 +197,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         if (isSellingMode) {
             holder.stockLabelTextView.setText(R.string.demand_label);
             holder.stockTextView.setText(numberFormat.format(currentResult.getDemand()));
-        }
-        else {
+        } else {
             holder.stockLabelTextView.setText(R.string.stock_label);
             holder.stockTextView.setText(numberFormat.format(currentResult.getStock()));
         }
