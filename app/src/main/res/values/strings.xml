@@ -323,10 +323,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.4</b><br />
+            <b>Version 2.5</b><br />
             <ul>
-                <li>You can now get commander informations directly from Frontier by linking your account</li><br />
-                <li>Various bugfixes.</li><br />
+                <li>Added fleet informations to commander screen (only with Frontier login)</li><br />
             </ul>
         ]]>
     </string>
