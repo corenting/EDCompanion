@@ -1,4 +1,6 @@
 # EDCompanion
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcorenting%2FEDCompanion.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcorenting%2FEDCompanion?ref=badge_shield)
+
 
 An unofficial Android companion app for Elite : Dangerous.
 
@@ -18,3 +20,7 @@ APKs are available [in the release section](https://github.com/corenting/EDCompa
 - Commodity finder tool (find the nearest station selling or buying a specific commodity)
 - Systems search (see system informations and factions informations and history)
 - No ads, free and open-source
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcorenting%2FEDCompanion.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcorenting%2FEDCompanion?ref=badge_large)
