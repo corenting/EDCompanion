@@ -9,42 +9,57 @@
     android:layout_marginTop="@dimen/card_spacing"
     android:layout_marginRight="@dimen/card_spacing"
     app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:id="@+id/itemLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingTop="24dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="24dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/galnetImageView"
+            android:layout_width="match_parent"
+            android:layout_height="164dp"
+            app:riv_corner_radius_top_left="@dimen/card_corner_radius"
+            app:riv_corner_radius_top_right="@dimen/card_corner_radius" />
 
-        <TextView
-            android:id="@+id/dateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
-
-        <TextView
-            android:id="@+id/descriptionTextView"
+        <RelativeLayout
+            android:id="@+id/itemLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dateTextView"
-            android:layout_marginTop="18dp"
-            android:ellipsize="end"
-            android:maxLines="5"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:layout_below="@id/galnetImageView"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingTop="24dp"
+            android:paddingRight="24dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleTextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dateTextView"
+                android:layout_marginTop="18dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

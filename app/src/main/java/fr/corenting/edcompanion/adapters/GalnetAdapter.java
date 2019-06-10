@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -13,6 +14,9 @@ import java.util.Date;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -78,18 +82,25 @@ public class GalnetAdapter extends androidx.recyclerview.widget.ListAdapter<Galn
 
     @Override
     public void onBindViewHolder(@NonNull final newsViewHolder holder, final int position) {
-        GalnetArticle currentNews = getItem(holder.getAdapterPosition());
+        GalnetArticle currentArticle = getItem(holder.getAdapterPosition());
 
         // News content
-        holder.titleTextView.setText(currentNews.getTitle());
-        holder.descriptionTextView.setText(currentNews.getContent());
+        holder.titleTextView.setText(currentArticle.getTitle());
+        holder.descriptionTextView.setText(currentArticle.getContent());
         if (isDetailsView) {
             holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
         }
 
         // Date subtitle
-        Date date = new Date(currentNews.getDateTimestamp() * 1000);
+        Date date = new Date(currentArticle.getDateTimestamp() * 1000);
         holder.dateTextView.setText(dateFormat.format(date));
+
+        // Ship picture
+        Glide.with(holder.galnetImageView)
+                .load(currentArticle.getPicture())
+                .error(R.drawable.galnet_placeholder)
+                .centerCrop()
+                .into(holder.galnetImageView);
     }
 
     public static class newsViewHolder extends RecyclerView.ViewHolder {
@@ -99,6 +110,8 @@ public class GalnetAdapter extends androidx.recyclerview.widget.ListAdapter<Galn
         TextView dateTextView;
         @BindView(R.id.descriptionTextView)
         TextView descriptionTextView;
+        @BindView(R.id.galnetImageView)
+        ImageView galnetImageView;
 
         newsViewHolder(final View view) {
             super(view);

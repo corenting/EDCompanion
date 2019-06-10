@@ -12,6 +12,9 @@ public class GalnetArticleResponse {
     @SerializedName("content")
     public String Content;
 
+    @SerializedName("picture")
+    public String Picture;
+
     @SerializedName("timestamp")
     public long Timestamp;
 }

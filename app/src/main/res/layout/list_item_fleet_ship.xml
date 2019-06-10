@@ -12,7 +12,6 @@
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,8 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="164dp"
             app:riv_corner_radius_top_left="@dimen/card_corner_radius"
-            app:riv_corner_radius_top_right="@dimen/card_corner_radius"
-            app:srcCompat="@drawable/ic_globe_black_24dp" />
+            app:riv_corner_radius_top_right="@dimen/card_corner_radius" />
 
         <RelativeLayout
             android:id="@+id/itemLayout"
