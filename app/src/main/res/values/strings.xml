@@ -323,6 +323,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
+            <b>Version 2.5.1</b><br />
+            <ul>
+                <li>Added pictures to Galnet articles</li><br />
+            </ul>
             <b>Version 2.5</b><br />
             <ul>
                 <li>Added fleet informations to commander screen (only with Frontier login)</li><br />
