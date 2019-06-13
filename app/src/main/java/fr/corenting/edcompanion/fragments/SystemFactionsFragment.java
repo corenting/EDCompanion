@@ -2,25 +2,24 @@ package fr.corenting.edcompanion.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.SparseArray;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.text.Html;
-import android.util.SparseArray;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.listener.BarLineChartTouchListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -169,6 +168,29 @@ public class SystemFactionsFragment extends Fragment {
             return;
         }
 
+        // Prevent scrolling being intercepted by viewpager
+        BarLineChartTouchListener touchListener = new BarLineChartTouchListener(historyChartView,
+                historyChartView.getViewPortHandler().getMatrixTouch(), 3F) {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+                    default:
+                        break;
+                }
+                return super.onTouch(v, event);
+            }
+        };
+        historyChartView.setOnTouchListener(touchListener);
+
         // Modify data for graph
         LocalDate end = LocalDate.now();
         LocalDate start = end.minusMonths(1);
@@ -268,20 +290,12 @@ public class SystemFactionsFragment extends Fragment {
         // Labels
         final SparseArray<String> labels = new SparseArray<>();
         for (int i = 0; i < dates.size(); i++) {
-            labels.put(i, dateFormatter.format(dates.get(i)));
+            labels.put(i, DateUtils.removeYearFromDate(
+                    dateFormatter.format(dates.get(i))));
         }
-        historyChartView.getXAxis().setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return labels.get((int) value, "");
-            }
-        });
-        historyChartView.getAxisLeft().setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return String.valueOf((int) value) + " %";
-            }
-        });
+        historyChartView.getXAxis().setValueFormatter((value, axis) -> labels.get((int) value,
+                ""));
+        historyChartView.getAxisLeft().setValueFormatter((value, axis) -> (int) value + " %");
 
         historyChartView.notifyDataSetChanged();
         historyChartView.invalidate();
