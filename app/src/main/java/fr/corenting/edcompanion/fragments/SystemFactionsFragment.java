@@ -19,6 +19,7 @@ import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.listener.BarLineChartTouchListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -293,10 +294,18 @@ public class SystemFactionsFragment extends Fragment {
             labels.put(i, DateUtils.removeYearFromDate(
                     dateFormatter.format(dates.get(i))));
         }
-        historyChartView.getXAxis().setValueFormatter((value, axis) -> labels.get((int) value,
-                ""));
-        historyChartView.getAxisLeft().setValueFormatter((value, axis) -> (int) value + " %");
-
+        historyChartView.getXAxis().setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return labels.get((int) value, "");
+            }
+        });
+        historyChartView.getAxisLeft().setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return (int) value + " %";
+            }
+        });
         historyChartView.notifyDataSetChanged();
         historyChartView.invalidate();
     }

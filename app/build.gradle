@@ -61,7 +61,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.9'
 
     // Retrofit
-    ext.retrofitVersion = "2.5.0"
+    ext.retrofitVersion = "2.6.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
@@ -78,10 +78,10 @@ dependencies {
     // Other
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
 
 repositories {
