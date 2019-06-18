@@ -25,7 +25,7 @@ public class NotificationsUtils {
     private static final String newTierTopic = "new_tier";
     private static final String finishedGoalTopic = "finished_goal";
 
-    public static void displayDownloadErrorSnackbar(Activity activity) {
+    public static void displayGenericDownloadErrorSnackbar(Activity activity) {
         displaySnackbar(activity, activity.getString(R.string.download_error));
     }
 

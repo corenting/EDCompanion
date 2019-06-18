@@ -55,6 +55,7 @@
     <string name="frontier_error">You need to link your Frontier account in the settings</string>
     <string name="no_chart_error">No history chart to display</string>
     <string name="no_chart_snackbar_error">Error while download the history chart</string>
+    <string name="my_location_error">Cannot get your current position</string>
 
     <!--Subtitles-->
     <string name="inara_credits">Data provided by inara.cz</string>

@@ -30,7 +30,7 @@ public class CommunityGoalsFragment extends AbstractListFragment<CommunityGoalsA
         // Error
         if (!goals.getSuccess()) {
             endLoading(true);
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 

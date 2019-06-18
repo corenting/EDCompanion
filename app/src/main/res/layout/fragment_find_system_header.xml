@@ -44,20 +44,12 @@
                 android:text="@string/systems_subtitle"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/systemInputLayout"
+            <fr.corenting.edcompanion.views.SystemInputView
+                android:id="@+id/systemInputView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/subtitleTextView"
-                android:layout_marginTop="8dp">
-
-                <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
-                    android:id="@+id/systemInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/system"
-                    android:inputType="textNoSuggestions" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="8dp" />
 
             <me.zhanghai.android.materialprogressbar.MaterialProgressBar
                 android:id="@+id/systemProgressBar"
@@ -75,7 +67,7 @@
                 android:id="@+id/findButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/systemInputLayout"
+                android:layout_below="@id/systemInputView"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:text="@string/search" />

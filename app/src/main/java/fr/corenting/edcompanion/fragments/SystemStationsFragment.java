@@ -32,7 +32,7 @@ public class SystemStationsFragment extends AbstractListFragment<SystemStationsA
         // Error case
         if (!stations.getSuccess()) {
             endLoading(true);
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 

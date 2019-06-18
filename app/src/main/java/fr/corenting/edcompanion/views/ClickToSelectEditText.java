@@ -1,13 +1,12 @@
 package fr.corenting.edcompanion.views;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Canvas;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatEditText;
 import android.text.InputType;
 import android.util.AttributeSet;
-import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import java.util.List;
 
@@ -71,31 +70,24 @@ public class ClickToSelectEditText extends AppCompatEditText {
         configureOnClickListener();
     }
 
-    public List<String> getItems()
-    {
+    public List<String> getItems() {
         return mItems;
     }
 
     private void configureOnClickListener() {
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setTitle(mHint);
-                builder.setSingleChoiceItems(mListableItems, selectedIndex, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        setText(mListableItems[i]);
-                        selectedIndex = i;
-                        if (onItemSelectedListener != null) {
-                            onItemSelectedListener.onItemSelectedListener(mItems.get(i), i);
-                        }
-                        dialogInterface.dismiss();
-                    }
-                });
-                builder.setPositiveButton(R.string.close, null);
-                builder.create().show();
-            }
+        setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setTitle(mHint);
+            builder.setSingleChoiceItems(mListableItems, selectedIndex, (dialogInterface, i) -> {
+                setText(mListableItems[i]);
+                selectedIndex = i;
+                if (onItemSelectedListener != null) {
+                    onItemSelectedListener.onItemSelectedListener(mItems.get(i), i);
+                }
+                dialogInterface.dismiss();
+            });
+            builder.setPositiveButton(R.string.close, null);
+            builder.create().show();
         });
     }
 

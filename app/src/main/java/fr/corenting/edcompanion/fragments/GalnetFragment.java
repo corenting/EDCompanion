@@ -66,7 +66,7 @@ public class GalnetFragment extends AbstractListFragment<GalnetAdapter> {
         // Error case
         if (!news.getSuccess()) {
             endLoading(true);
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 

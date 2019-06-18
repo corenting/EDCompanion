@@ -146,7 +146,7 @@ public class CommanderStatusFragment extends Fragment {
         endLoading();
         // Check download error
         if (!credits.getSuccess()) {
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 
@@ -193,7 +193,7 @@ public class CommanderStatusFragment extends Fragment {
         endLoading();
         // Check download error
         if (!position.getSuccess()) {
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 
@@ -205,7 +205,7 @@ public class CommanderStatusFragment extends Fragment {
         endLoading();
         // Check download error
         if (!ranks.getSuccess()) {
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 

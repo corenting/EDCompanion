@@ -42,7 +42,7 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
         recyclerView.setAdapter(recyclerViewAdapter);
 
         // Swipe to refresh setup
-        SwipeRefreshLayout.OnRefreshListener listener = () -> onSwipeToRefresh();
+        SwipeRefreshLayout.OnRefreshListener listener = this::onSwipeToRefresh;
         swipeRefreshLayout.setOnRefreshListener(listener);
 
         return v;

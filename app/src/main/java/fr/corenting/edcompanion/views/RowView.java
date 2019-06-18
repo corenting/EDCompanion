@@ -2,10 +2,7 @@ package fr.corenting.edcompanion.views;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Build;
-import androidx.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,12 +35,6 @@ public class RowView extends RelativeLayout {
         init();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public RowView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
     private void init() {
         inflate(getContext(), R.layout.view_row, this);
         ButterKnife.bind(this);
@@ -55,18 +46,15 @@ public class RowView extends RelativeLayout {
 
     private void setListeners(final TextView textView) {
         textView.setOnLongClickListener(null);
-        textView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                MiscUtils.putTextInClipboard(getContext(), "",
-                        textView.getText().toString(), true);
-                return true;
-            }
+        textView.setOnLongClickListener(view -> {
+            MiscUtils.putTextInClipboard(getContext(), "",
+                    textView.getText().toString(), true);
+            return true;
         });
     }
 
     public void setRowContent(String firstCell, String secondCell, String thirdCell,
-                               boolean isHeader) {
+                              boolean isHeader) {
         if (isHeader) {
             firstCellTextView.setTypeface(null, Typeface.BOLD);
             secondCellTextView.setTypeface(null, Typeface.BOLD);

@@ -14,7 +14,8 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 // Code from http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/
 
-public class DelayAutoCompleteTextView extends androidx.appcompat.widget.AppCompatAutoCompleteTextView {
+public class DelayAutoCompleteTextView extends
+        androidx.appcompat.widget.AppCompatAutoCompleteTextView {
 
     private static final int MESSAGE_TEXT_CHANGED = 100;
     private static final int DEFAULT_AUTOCOMPLETE_DELAY = 250;
@@ -37,27 +38,32 @@ public class DelayAutoCompleteTextView extends androidx.appcompat.widget.AppComp
         mLoadingIndicator = progressBar;
     }
 
-    public void setOnSubmit(final Runnable onSubmit)
-    {
-        this.setOnEditorActionListener(new OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    onSubmit.run();
-                    return true;
-                }
-                return false;
+    public MaterialProgressBar getLoadingIndicator() {
+        return mLoadingIndicator;
+    }
+
+    public void setOnSubmit(final Runnable onSubmit) {
+        this.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                onSubmit.run();
+                return true;
             }
+            return false;
         });
     }
 
     @Override
     protected void performFiltering(CharSequence text, int keyCode) {
+        if (keyCode == 0) {
+            mLoadingIndicator.setVisibility(View.GONE);
+            return;
+        }
         if (mLoadingIndicator != null) {
             mLoadingIndicator.setVisibility(View.VISIBLE);
         }
         mHandler.removeMessages(MESSAGE_TEXT_CHANGED);
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(MESSAGE_TEXT_CHANGED, text), DEFAULT_AUTOCOMPLETE_DELAY);
+        mHandler.sendMessageDelayed(mHandler.obtainMessage(MESSAGE_TEXT_CHANGED, text),
+                DEFAULT_AUTOCOMPLETE_DELAY);
     }
 
     @Override
@@ -71,10 +77,10 @@ public class DelayAutoCompleteTextView extends androidx.appcompat.widget.AppComp
     private static class AutoCompleteHandler extends Handler {
         private DelayAutoCompleteTextView view;
 
-        public AutoCompleteHandler(DelayAutoCompleteTextView view)
-        {
+        public AutoCompleteHandler(DelayAutoCompleteTextView view) {
             this.view = view;
         }
+
         public void handleMessage(Message msg) {
             view.performFiltering(msg);
         }

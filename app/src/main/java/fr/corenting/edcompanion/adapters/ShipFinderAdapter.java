@@ -2,8 +2,11 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.ColorStateList;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.events.ShipFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
+import fr.corenting.edcompanion.utils.ThemeUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
@@ -70,50 +74,34 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
         holder.systemInputEditText.setAdapter(new AutoCompleteAdapter(context,
                 AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
-        holder.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        holder.systemInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
                 holder.systemInputEditText.setText((String) adapterView
-                        .getItemAtPosition(position));
-            }
-        });
+                .getItemAtPosition(position)));
 
         // Ship autocomplete
         holder.shipInputEditText.setThreshold(3);
         holder.shipInputEditText.setLoadingIndicator(holder.shipProgressBar);
         holder.shipInputEditText.setAdapter(new AutoCompleteAdapter(context,
                 AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SHIPS));
-        holder.shipInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                holder.shipInputEditText.setText((String) adapterView.getItemAtPosition(position));
-            }
-        });
+        holder.shipInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
+                holder.shipInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
         // Find button
-        final Runnable onSubmit = new Runnable() {
-            @Override
-            public void run() {
-                if (!findButtonEnabled) {
-                    return;
-                }
-
-                ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
-
-                ShipFinderSearch result = new ShipFinderSearch(
-                        holder.shipInputEditText.getText().toString(),
-                        holder.systemInputEditText.getText().toString());
-                EventBus.getDefault().post(result);
+        final Runnable onSubmit = () -> {
+            if (!findButtonEnabled) {
+                return;
             }
+
+            ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
+
+            ShipFinderSearch result = new ShipFinderSearch(
+                    holder.shipInputEditText.getText().toString(),
+                    holder.systemInputEditText.getText().toString());
+            EventBus.getDefault().post(result);
         };
 
         // On submit stuff
-        holder.findButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSubmit.run();
-            }
-        });
+        holder.findButton.setOnClickListener(view -> onSubmit.run());
         holder.shipInputEditText.setOnSubmit(onSubmit);
         holder.systemInputEditText.setOnSubmit(onSubmit);
     }
@@ -127,6 +115,12 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
                 String.format("%s - %s", currentResult.getSystemName(),
                         currentResult.getStationName())
         );
+
+        // Theme button according to theme
+        if (ThemeUtils.isDarkThemeEnabled(context)) {
+            ImageViewCompat.setImageTintList(holder.isPlanetaryImageView, ColorStateList.valueOf(
+                    ContextCompat.getColor(context, android.R.color.white)));
+        }
 
         // Other informations
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,

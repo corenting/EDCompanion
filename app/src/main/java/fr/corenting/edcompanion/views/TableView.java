@@ -1,8 +1,6 @@
 package fr.corenting.edcompanion.views;
 
 import android.content.Context;
-import android.os.Build;
-import androidx.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
@@ -45,12 +43,6 @@ public class TableView extends RelativeLayout {
         init();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public TableView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
     private void init() {
         inflate(getContext(), R.layout.view_table, this);
         ButterKnife.bind(this);
@@ -64,7 +56,7 @@ public class TableView extends RelativeLayout {
         for (int i = 0; i < content.size(); i++) {
             CommunityGoalReward reward = content.get(i);
             RowView rowView;
-            switch(i){
+            switch (i) {
                 case 0:
                     rowView = firstRow;
                     break;

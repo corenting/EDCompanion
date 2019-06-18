@@ -19,7 +19,7 @@ public class CommanderFleetFragment extends AbstractListFragment<CommanderFleetA
         // Error
         if (!fleet.getSuccess()) {
             endLoading(true);
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 

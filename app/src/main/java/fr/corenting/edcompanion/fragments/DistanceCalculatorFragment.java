@@ -76,7 +76,7 @@ public class DistanceCalculatorFragment extends Fragment {
 
         // Error
         if (!distanceSearch.getSuccess()) {
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 

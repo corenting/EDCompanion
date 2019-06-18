@@ -35,7 +35,7 @@ public class SystemFinderFragment extends AbstractFinderFragment<SystemFinderAda
         // Error
         if (!results.getSuccess()) {
             endLoading(true);
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 

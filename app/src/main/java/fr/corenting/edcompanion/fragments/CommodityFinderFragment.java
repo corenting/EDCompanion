@@ -36,7 +36,7 @@ public class CommodityFinderFragment extends AbstractFinderFragment<CommodityFin
         // Error
         if (!results.getSuccess()) {
             endLoading(true);
-            NotificationsUtils.displayDownloadErrorSnackbar(getActivity());
+            NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
 
