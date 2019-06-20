@@ -303,7 +303,7 @@
         <item>French</item>
         <item>German</item>
     </string-array>
-    <string-array translatable="false" name="settings_galnet_lang_entries_values">
+    <string-array name="settings_galnet_lang_entries_values" translatable="false">
         <item>en</item>
         <item>fr</item>
         <item>de</item>
@@ -353,5 +353,6 @@
     <string name="login_dialog_error_title">Frontier login error</string>
     <string name="login_dialog_error_text">Error while linking your account, please try again.</string>
     <string name="open">Open</string>
+    <string name="title_activity_settings2">Settings</string>
 
 </resources>

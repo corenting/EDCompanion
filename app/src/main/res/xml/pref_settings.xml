@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.preference.PreferenceCategory android:title="@string/pref_header_general">
+    <androidx.preference.PreferenceCategory app:title="@string/pref_header_general">
         <androidx.preference.SwitchPreference
-            android:key="@string/settings_dark_theme"
-            android:summary="@string/settings_dark_theme_summary"
-            android:title="@string/settings_dark_theme_title" />
+            app:key="@string/settings_dark_theme"
+            app:summary="@string/settings_dark_theme_summary"
+            app:title="@string/settings_dark_theme_title" />
 
         <androidx.preference.ListPreference
-            android:defaultValue="0"
-            android:entries="@array/settings_galnet_lang_entries"
-            android:entryValues="@array/settings_galnet_lang_entries_values"
-            android:key="@string/settings_galnet_lang"
-            android:summary="@string/settings_galnet_lang_summary"
-            android:title="@string/settings_galnet_lang_title" />
+            app:defaultValue="0"
+            app:entries="@array/settings_galnet_lang_entries"
+            app:entryValues="@array/settings_galnet_lang_entries_values"
+            app:key="@string/settings_galnet_lang"
+            app:summary="@string/settings_galnet_lang_summary"
+            app:title="@string/settings_galnet_lang_title" />
     </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory android:title="@string/settings_cmdr_category_title">
+    <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_category_title">
         <androidx.preference.ListPreference
-            android:key="@string/settings_cmdr_source"
-            android:negativeButtonText="@android:string/cancel"
-            android:positiveButtonText="@android:string/ok"
-            android:summary="@string/settings_cmdr_source_summary"
-            android:title="@string/settings_cmdr_source_title" />
+            app:key="@string/settings_cmdr_source"
+            app:negativeButtonText="@android:string/cancel"
+            app:positiveButtonText="@android:string/ok"
+            app:summary="@string/settings_cmdr_source_summary"
+            app:title="@string/settings_cmdr_source_title" />
         <androidx.preference.Preference
-            android:key="@string/settings_cmdr_oauth"
-            android:summary="@string/settings_cmdr_oauth_summary"
-            android:title="@string/settings_cmdr_oauth_title" />
+            app:key="@string/settings_cmdr_oauth"
+            app:summary="@string/settings_cmdr_oauth_summary"
+            app:title="@string/settings_cmdr_oauth_title" />
         <androidx.preference.EditTextPreference
-            android:inputType="textNoSuggestions"
-            android:key="@string/settings_cmdr_username"
-            android:negativeButtonText="@android:string/cancel"
-            android:positiveButtonText="@android:string/ok" />
+            app:key="@string/settings_cmdr_username"
+            app:negativeButtonText="@android:string/cancel"
+            app:positiveButtonText="@android:string/ok" />
         <androidx.preference.EditTextPreference
-            android:inputType="textPassword"
-            android:key="@string/settings_cmdr_password"
-            android:negativeButtonText="@android:string/cancel"
-            android:positiveButtonText="@android:string/ok" />
-        <!--Re add android:icon="@drawable/ic_help_black_24dp"-->
+            app:key="@string/settings_cmdr_password"
+            app:negativeButtonText="@android:string/cancel"
+            app:positiveButtonText="@android:string/ok" />
         <androidx.preference.Preference
-            android:key="@string/settings_cmdr_help"
-            android:summary="@string/settings_cmdr_help_summary"
-            android:title="@string/settings_cmdr_help_title" />
+            app:key="@string/settings_cmdr_help"
+            app:summary="@string/settings_cmdr_help_summary"
+            app:title="@string/settings_cmdr_help_title" />
     </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory android:title="@string/settings_notifications_category_title">
+    <androidx.preference.PreferenceCategory app:title="@string/settings_notifications_category_title">
         <androidx.preference.SwitchPreference
-            android:key="@string/settings_notifications_new_goal"
-            android:summary="@string/settings_notifications_new_goal_summary"
-            android:title="@string/settings_notifications_new_goal_title" />
+            app:key="@string/settings_notifications_new_goal"
+            app:summary="@string/settings_notifications_new_goal_summary"
+            app:title="@string/settings_notifications_new_goal_title" />
         <androidx.preference.SwitchPreference
-            android:key="@string/settings_notifications_new_tier"
-            android:summary="@string/settings_notifications_new_tier_summary"
-            android:title="@string/settings_notifications_new_tier_title" />
+            app:key="@string/settings_notifications_new_tier"
+            app:summary="@string/settings_notifications_new_tier_summary"
+            app:title="@string/settings_notifications_new_tier_title" />
         <androidx.preference.SwitchPreference
-            android:key="@string/settings_notifications_finished_goal"
-            android:summary="@string/settings_notifications_finished_goal_summary"
-            android:title="@string/settings_notifications_finished_goal_title" />
+            app:key="@string/settings_notifications_finished_goal"
+            app:summary="@string/settings_notifications_finished_goal_summary"
+            app:title="@string/settings_notifications_finished_goal_title" />
     </androidx.preference.PreferenceCategory>
 
 
