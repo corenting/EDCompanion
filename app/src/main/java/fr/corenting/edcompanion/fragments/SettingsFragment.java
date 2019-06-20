@@ -18,7 +18,6 @@ import fr.corenting.edcompanion.network.player.PlayerNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 import fr.corenting.edcompanion.utils.SettingsUtils;
-import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 

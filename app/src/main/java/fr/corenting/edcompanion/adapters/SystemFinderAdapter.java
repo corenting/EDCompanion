@@ -20,7 +20,6 @@ import fr.corenting.edcompanion.models.events.SystemFinderSearch;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.SystemInputView;
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.HeaderViewHolder,
         SystemFinderAdapter.ResultViewHolder, SystemFinderResult> {

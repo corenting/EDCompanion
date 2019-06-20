@@ -20,7 +20,6 @@ import java.util.Set;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Ship;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse;
 import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;

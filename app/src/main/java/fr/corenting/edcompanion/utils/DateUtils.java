@@ -6,7 +6,6 @@ import android.os.Build;
 
 import org.threeten.bp.Instant;
 import org.threeten.bp.Year;
-import org.threeten.bp.format.FormatStyle;
 
 import java.util.Locale;
 

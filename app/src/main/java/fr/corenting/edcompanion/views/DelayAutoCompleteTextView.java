@@ -5,10 +5,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -81,7 +81,7 @@ public class DelayAutoCompleteTextView extends
             this.view = view;
         }
 
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             view.performFiltering(msg);
         }
     }

@@ -8,7 +8,6 @@ import com.google.gson.GsonBuilder;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import fr.corenting.edcompanion.R;
