@@ -52,19 +52,6 @@
                 android:layout_below="@id/subtitleTextView"
                 android:layout_marginTop="8dp" />
 
-
-            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
-                android:id="@+id/systemProgressBar"
-                style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/subtitleTextView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp"
-                android:indeterminate="true"
-                android:visibility="gone"
-                app:mpb_progressStyle="circular" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commodityInputLayout"
                 android:layout_width="match_parent"

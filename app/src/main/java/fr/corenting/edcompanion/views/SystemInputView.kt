@@ -15,9 +15,7 @@ import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils
 import fr.corenting.edcompanion.utils.ThemeUtils
 import kotlinx.android.synthetic.main.view_system_input.view.*
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.EventBusBuilder
 import org.greenrobot.eventbus.Subscribe
 
 
@@ -83,21 +81,18 @@ class SystemInputView : RelativeLayout {
             systemMyLocationButton.visibility = View.GONE
         }
 
-        // Set autocomplete
+        // Set autocomplete view
         systemInputEditText.threshold = 3
         systemInputEditText.setAdapter(AutoCompleteAdapter(context,
                 AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS))
         systemInputEditText.setOnItemClickListener { adapterView, _, position, _ ->
             systemInputEditText.setText(adapterView.getItemAtPosition(position) as String)
         }
+        systemInputEditText.loadingIndicator = progressBar
     }
 
     fun setOnSubmit(runnable: Runnable) {
         systemInputEditText.setOnSubmit(runnable)
-    }
-
-    fun setLoadingIndicator(loadingIndicator: MaterialProgressBar) {
-        systemInputEditText.loadingIndicator = loadingIndicator
     }
 
     fun getText(): Editable {

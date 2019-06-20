@@ -69,9 +69,6 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
-        // System
-        holder.systemInputView.setLoadingIndicator(holder.systemProgressBar);
-
         // Ship autocomplete
         holder.commodityInputEditText.setThreshold(3);
         holder.commodityInputEditText.setLoadingIndicator(holder.commodityProgressBar);
@@ -262,9 +259,6 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
         @BindView(R.id.stockInputLayout)
         TextInputLayout stockInputLayout;
-
-        @BindView(R.id.systemProgressBar)
-        MaterialProgressBar systemProgressBar;
 
         @BindView(R.id.commodityProgressBar)
         MaterialProgressBar commodityProgressBar;

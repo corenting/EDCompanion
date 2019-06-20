@@ -35,10 +35,6 @@ public class DistanceCalculatorFragment extends Fragment {
     public SystemInputView firstSystemInputView;
     @BindView(R.id.secondSystemInputView)
     public SystemInputView secondSystemInputView;
-    @BindView(R.id.firstSystemProgressBar)
-    public MaterialProgressBar firstSystemProgressBar;
-    @BindView(R.id.secondSystemProgressBar)
-    public MaterialProgressBar secondSystemProgressBar;
     @BindView(R.id.findButton)
     public Button findButton;
     @BindView(R.id.resultCardView)
@@ -60,10 +56,6 @@ public class DistanceCalculatorFragment extends Fragment {
         // Autocomplete setup
         setAutocompleteListeners(firstSystemInputView);
         setAutocompleteListeners(secondSystemInputView);
-
-        // Set loading indicators
-        firstSystemInputView.setLoadingIndicator(firstSystemProgressBar);
-        secondSystemInputView.setLoadingIndicator(secondSystemProgressBar);
 
         return v;
     }

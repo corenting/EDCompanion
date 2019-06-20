@@ -56,9 +56,6 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
-        // System
-        holder.systemInputView.setLoadingIndicator(holder.systemProgressBar);
-
         // Find button
         final Runnable onSubmit = () -> {
             // Don't launch search on empty strings or if find already in progress
@@ -134,9 +131,6 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.systemInputView)
         SystemInputView systemInputView;
-
-        @BindView(R.id.systemProgressBar)
-        MaterialProgressBar systemProgressBar;
 
         @BindView(R.id.findButton)
         Button findButton;
