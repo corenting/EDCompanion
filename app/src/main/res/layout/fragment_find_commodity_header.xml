@@ -44,20 +44,13 @@
                 android:text="@string/commodity_finder_subtitle"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/systemInputLayout"
+            <fr.corenting.edcompanion.views.SystemInputView
+                android:id="@+id/systemInputView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/subtitleTextView"
-                android:layout_marginTop="8dp">
-
-                <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
-                    android:id="@+id/systemInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/current_system"
-                    android:inputType="textNoSuggestions" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="8dp"
+                app:hint="@string/current_system" />
 
             <me.zhanghai.android.materialprogressbar.MaterialProgressBar
                 android:id="@+id/systemProgressBar"
@@ -75,7 +68,7 @@
                 android:id="@+id/commodityInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/systemInputLayout"
+                android:layout_below="@id/systemInputView"
                 android:layout_marginTop="8dp">
 
                 <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
@@ -91,7 +84,7 @@
                 style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/systemInputLayout"
+                android:layout_below="@id/systemInputView"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:indeterminate="true"

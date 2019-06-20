@@ -4,6 +4,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.preference.EditTextPreference;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 import fr.corenting.edcompanion.BuildConfig;
@@ -199,7 +201,7 @@ public class InaraPlayer extends PlayerNetwork {
     }
 
     @Override
-    public void getCommanderPosition() {
+    public void getCommanderPosition(EventBus bus) {
 
     }
 

@@ -2,12 +2,12 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,7 +19,7 @@ import fr.corenting.edcompanion.models.SystemFinderResult;
 import fr.corenting.edcompanion.models.events.SystemFinderSearch;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import fr.corenting.edcompanion.views.SystemInputView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.HeaderViewHolder,
@@ -56,45 +56,25 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
-        // System autocomplete
-        holder.systemInputEditText.setThreshold(3);
-        holder.systemInputEditText.setLoadingIndicator(holder.systemProgressBar);
-
-        holder.systemInputEditText.setAdapter(new AutoCompleteAdapter(context,
-                AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
-        holder.systemInputEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                holder.systemInputEditText
-                        .setText((String) adapterView.getItemAtPosition(position));
-            }
-        });
+        // System
+        holder.systemInputView.setLoadingIndicator(holder.systemProgressBar);
 
         // Find button
-        final Runnable onSubmit = new Runnable() {
-            @Override
-            public void run() {
-                // Don't launch search on empty strings or if find already in progress
-                if (!findButtonEnabled || holder.systemInputEditText.getText() == null ||
-                        holder.systemInputEditText.getText().length() == 0) {
-                    return;
-                }
-
-                holder.systemInputEditText.getText().length();
-                ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
-
-                SystemFinderSearch result = new SystemFinderSearch(
-                        holder.systemInputEditText.getText().toString());
-                EventBus.getDefault().post(result);
+        final Runnable onSubmit = () -> {
+            // Don't launch search on empty strings or if find already in progress
+            if (!findButtonEnabled || holder.systemInputView.getText().length() == 0) {
+                return;
             }
+
+            holder.systemInputView.getText().length();
+            ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
+
+            SystemFinderSearch result = new SystemFinderSearch(
+                    holder.systemInputView.getText().toString());
+            EventBus.getDefault().post(result);
         };
-        holder.findButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSubmit.run();
-            }
-        });
-        holder.systemInputEditText.setOnSubmit(onSubmit);
+        holder.findButton.setOnClickListener(view -> onSubmit.run());
+        holder.systemInputView.setOnSubmit(onSubmit);
     }
 
     @Override
@@ -110,13 +90,10 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
         holder.governmentTextView.setText(getContentOrUnknown(currentResult.getGovernment()));
         holder.economyTextView.setText(getContentOrUnknown(currentResult.getEconomy()));
 
-        holder.itemLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, SystemDetailsActivity.class);
-                i.putExtra(context.getString(R.string.system), currentResult.getName());
-                MiscUtils.startIntentWithFadeAnimation(context, i);
-            }
+        holder.itemLayout.setOnClickListener(v -> {
+            Intent i = new Intent(context, SystemDetailsActivity.class);
+            i.putExtra(context.getString(R.string.system), currentResult.getName());
+            MiscUtils.startIntentWithFadeAnimation(context, i);
         });
     }
 
@@ -155,8 +132,8 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.systemInputEditText)
-        DelayAutoCompleteTextView systemInputEditText;
+        @BindView(R.id.systemInputView)
+        SystemInputView systemInputView;
 
         @BindView(R.id.systemProgressBar)
         MaterialProgressBar systemProgressBar;

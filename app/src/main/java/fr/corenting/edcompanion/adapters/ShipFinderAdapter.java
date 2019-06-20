@@ -1,17 +1,15 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.res.ColorStateList;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.threeten.bp.Instant;
@@ -27,6 +25,7 @@ import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import fr.corenting.edcompanion.views.SystemInputView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
@@ -68,15 +67,8 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
-        // System autocomplete
-        holder.systemInputEditText.setThreshold(3);
-        holder.systemInputEditText.setLoadingIndicator(holder.systemProgressBar);
-
-        holder.systemInputEditText.setAdapter(new AutoCompleteAdapter(context,
-                AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
-        holder.systemInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
-                holder.systemInputEditText.setText((String) adapterView
-                .getItemAtPosition(position)));
+        // System
+        holder.systemInputView.setLoadingIndicator(holder.systemProgressBar);
 
         // Ship autocomplete
         holder.shipInputEditText.setThreshold(3);
@@ -96,14 +88,14 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
             ShipFinderSearch result = new ShipFinderSearch(
                     holder.shipInputEditText.getText().toString(),
-                    holder.systemInputEditText.getText().toString());
+                    holder.systemInputView.getText().toString());
             EventBus.getDefault().post(result);
         };
 
         // On submit stuff
         holder.findButton.setOnClickListener(view -> onSubmit.run());
         holder.shipInputEditText.setOnSubmit(onSubmit);
-        holder.systemInputEditText.setOnSubmit(onSubmit);
+        holder.systemInputView.setOnSubmit(onSubmit);
     }
 
     @Override
@@ -170,8 +162,8 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.systemInputEditText)
-        DelayAutoCompleteTextView systemInputEditText;
+        @BindView(R.id.systemInputView)
+        SystemInputView systemInputView;
 
         @BindView(R.id.shipInputEditText)
         DelayAutoCompleteTextView shipInputEditText;

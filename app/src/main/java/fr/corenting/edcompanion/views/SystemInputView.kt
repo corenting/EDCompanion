@@ -3,21 +3,27 @@ package fr.corenting.edcompanion.views
 import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
+import android.text.Editable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import fr.corenting.edcompanion.adapters.AutoCompleteAdapter
 import fr.corenting.edcompanion.models.events.CommanderPosition
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils
 import fr.corenting.edcompanion.utils.ThemeUtils
 import kotlinx.android.synthetic.main.view_system_input.view.*
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.EventBusBuilder
 import org.greenrobot.eventbus.Subscribe
 
 
 class SystemInputView : RelativeLayout {
+
+    private var bus: EventBus = EventBus.builder().build()
 
     constructor(context: Context) : super(context) {
         init()
@@ -34,6 +40,7 @@ class SystemInputView : RelativeLayout {
     }
 
     private fun init(attrs: AttributeSet? = null) {
+
         View.inflate(context, fr.corenting.edcompanion.R.layout.view_system_input, this)
 
         // Theme button according to theme
@@ -43,11 +50,11 @@ class SystemInputView : RelativeLayout {
         }
 
         if (attrs != null) {
-            // Set hint from attributes
             val a = context.obtainStyledAttributes(attrs,
                     fr.corenting.edcompanion.R.styleable.SystemInputView, 0, 0)
 
             try {
+                // Set hint from attributes
                 val hintRef = a.getResourceId(
                         fr.corenting.edcompanion.R.styleable.SystemInputView_hint,
                         -1)
@@ -69,21 +76,41 @@ class SystemInputView : RelativeLayout {
                 if (systemInputEditText.loadingIndicator != null) {
                     systemInputEditText.loadingIndicator.visibility = View.VISIBLE
                 }
-                PlayerNetworkUtils.getCurrentPlayerNetwork(context).getCommanderPosition()
+                PlayerNetworkUtils.getCurrentPlayerNetwork(context).getCommanderPosition(bus)
             }
 
         } else {
             systemMyLocationButton.visibility = View.GONE
         }
+
+        // Set autocomplete
+        systemInputEditText.threshold = 3
+        systemInputEditText.setAdapter(AutoCompleteAdapter(context,
+                AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS))
+        systemInputEditText.setOnItemClickListener { adapterView, _, position, _ ->
+            systemInputEditText.setText(adapterView.getItemAtPosition(position) as String)
+        }
+    }
+
+    fun setOnSubmit(runnable: Runnable) {
+        systemInputEditText.setOnSubmit(runnable)
+    }
+
+    fun setLoadingIndicator(loadingIndicator: MaterialProgressBar) {
+        systemInputEditText.loadingIndicator = loadingIndicator
+    }
+
+    fun getText(): Editable {
+        return systemInputEditText.text
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        EventBus.getDefault().register(this)
+        bus.register(this)
     }
 
     override fun onDetachedFromWindow() {
-        EventBus.getDefault().unregister(this)
+        bus.unregister(this)
         super.onDetachedFromWindow()
     }
 

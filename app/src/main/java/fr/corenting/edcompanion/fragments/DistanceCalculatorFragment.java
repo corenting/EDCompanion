@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,12 +19,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.adapters.AutoCompleteAdapter;
 import fr.corenting.edcompanion.models.events.DistanceSearch;
 import fr.corenting.edcompanion.network.DistanceCalculatorNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import fr.corenting.edcompanion.views.SystemInputView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class DistanceCalculatorFragment extends Fragment {
@@ -33,10 +31,10 @@ public class DistanceCalculatorFragment extends Fragment {
     public static final String DISTANCE_CALCULATOR_FRAGMENT_TAG = "distance_calculator_fragment";
 
 
-    @BindView(R.id.firstSystemInputEditText)
-    public DelayAutoCompleteTextView firstSystemEditText;
-    @BindView(R.id.secondSystemInputEditText)
-    public DelayAutoCompleteTextView secondSystemEditText;
+    @BindView(R.id.firstSystemInputView)
+    public SystemInputView firstSystemInputView;
+    @BindView(R.id.secondSystemInputView)
+    public SystemInputView secondSystemInputView;
     @BindView(R.id.firstSystemProgressBar)
     public MaterialProgressBar firstSystemProgressBar;
     @BindView(R.id.secondSystemProgressBar)
@@ -60,12 +58,12 @@ public class DistanceCalculatorFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         // Autocomplete setup
-        setAutoComplete(firstSystemEditText);
-        setAutoComplete(secondSystemEditText);
+        setAutocompleteListeners(firstSystemInputView);
+        setAutocompleteListeners(secondSystemInputView);
 
         // Set loading indicators
-        firstSystemEditText.setLoadingIndicator(firstSystemProgressBar);
-        secondSystemEditText.setLoadingIndicator(secondSystemProgressBar);
+        firstSystemInputView.setLoadingIndicator(firstSystemProgressBar);
+        secondSystemInputView.setLoadingIndicator(secondSystemProgressBar);
 
         return v;
     }
@@ -113,28 +111,13 @@ public class DistanceCalculatorFragment extends Fragment {
         resultCardView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
 
-        DistanceCalculatorNetwork.getDistance(getContext(), firstSystemEditText.getText().toString(), secondSystemEditText.getText().toString());
+        DistanceCalculatorNetwork.getDistance(getContext(),
+                firstSystemInputView.getText().toString(),
+                secondSystemInputView.getText().toString());
     }
 
-    private void setAutoComplete(final DelayAutoCompleteTextView editText) {
-        // System input
-        editText.setThreshold(3);
-        editText.setAdapter(new AutoCompleteAdapter(getContext(), AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
-
-        // Listeners
-        Runnable onSubmit = new Runnable() {
-            @Override
-            public void run() {
-                onFindClick(editText);
-            }
-        };
-        editText.setOnSubmit(onSubmit);
-        editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                editText.setText((String) adapterView.getItemAtPosition(position));
-            }
-        });
+    private void setAutocompleteListeners(final SystemInputView editText) {
+        editText.setOnSubmit(() -> onFindClick(editText));
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -255,7 +256,7 @@ public class FrontierPlayer extends PlayerNetwork {
     }
 
     @Override
-    public void getCommanderPosition() {
+    public void getCommanderPosition(EventBus bus) {
         retrofit2.Callback<FrontierProfileResponse> callback = new retrofit2.Callback<FrontierProfileResponse>() {
             @Override
             public void onResponse(@NonNull Call<FrontierProfileResponse> call,
@@ -268,7 +269,7 @@ public class FrontierPlayer extends PlayerNetwork {
                     try {
                         pos = new CommanderPosition(true, body.LastSystem.Name,
                                 false);
-                        sendResultMessage(pos);
+                        sendResultMessage(bus, pos);
                     } catch (Exception ex) {
                         onFailure(call, new Exception("Invalid response"));
                     }
@@ -279,7 +280,7 @@ public class FrontierPlayer extends PlayerNetwork {
             public void onFailure(@NonNull Call<FrontierProfileResponse> call, @NonNull Throwable t) {
                 CommanderPosition pos = new CommanderPosition(false,
                         "", false);
-                sendResultMessage(pos);
+                sendResultMessage(bus, pos);
             }
         };
         frontierRetrofit.getProfile().enqueue(callback);

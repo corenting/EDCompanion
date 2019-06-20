@@ -1,17 +1,14 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -30,6 +27,7 @@ import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import fr.corenting.edcompanion.views.SystemInputView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
@@ -71,12 +69,8 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
-        // System autocomplete
-        holder.systemInputEditText.setThreshold(3);
-        holder.systemInputEditText.setLoadingIndicator(holder.systemProgressBar);
-        holder.systemInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS));
-        holder.systemInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
-                holder.systemInputEditText.setText((String) adapterView.getItemAtPosition(position)));
+        // System
+        holder.systemInputView.setLoadingIndicator(holder.systemProgressBar);
 
         // Ship autocomplete
         holder.commodityInputEditText.setThreshold(3);
@@ -138,7 +132,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
             CommodityFinderSearch result = new CommodityFinderSearch(
                     holder.commodityInputEditText.getText().toString(),
-                    holder.systemInputEditText.getText().toString(),
+                    holder.systemInputView.getText().toString(),
                     holder.landingPadSizeSpinner.getText().toString(),
                     stock, isSellingMode);
 
@@ -155,7 +149,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
             return false;
         });
         holder.commodityInputEditText.setOnSubmit(onSubmit);
-        holder.systemInputEditText.setOnSubmit(onSubmit);
+        holder.systemInputView.setOnSubmit(onSubmit);
     }
 
     @Override
@@ -251,8 +245,8 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.systemInputEditText)
-        DelayAutoCompleteTextView systemInputEditText;
+        @BindView(R.id.systemInputView)
+        SystemInputView systemInputView;
 
         @BindView(R.id.commodityInputEditText)
         DelayAutoCompleteTextView commodityInputEditText;

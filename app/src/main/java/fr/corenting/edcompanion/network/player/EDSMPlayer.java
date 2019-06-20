@@ -4,6 +4,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.preference.EditTextPreference;
 
+import org.greenrobot.eventbus.EventBus;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;
@@ -138,7 +140,7 @@ public class EDSMPlayer extends PlayerNetwork {
     }
 
     @Override
-    public void getCommanderPosition() {
+    public void getCommanderPosition(EventBus bus) {
         retrofit2.Callback<EDSMPosition> callback = new retrofit2.Callback<EDSMPosition>() {
             @Override
             public void onResponse(@NonNull Call<EDSMPosition> call,
@@ -154,7 +156,7 @@ public class EDSMPlayer extends PlayerNetwork {
                         pos = new CommanderPosition(false, "",
                                 false);
                     }
-                    sendResultMessage(pos);
+                    sendResultMessage(bus, pos);
                 }
             }
 
@@ -162,7 +164,7 @@ public class EDSMPlayer extends PlayerNetwork {
             public void onFailure(@NonNull Call<EDSMPosition> call, @NonNull Throwable t) {
                 CommanderPosition pos = new CommanderPosition(false,
                         "", false);
-                sendResultMessage(pos);
+                sendResultMessage(bus, pos);
             }
         };
         edsmRetrofit.getPosition(apiKey, commanderName).enqueue(callback);
