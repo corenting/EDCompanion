@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/app_name"
+        android:id="@+id/drawerTitleTextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"/>
 
     <TextView

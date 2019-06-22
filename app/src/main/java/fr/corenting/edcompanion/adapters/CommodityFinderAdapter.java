@@ -27,6 +27,7 @@ import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.ClickToSelectEditText;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import fr.corenting.edcompanion.views.LightDarkImageView;
 import fr.corenting.edcompanion.views.SystemInputView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -209,7 +210,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         TextView titleTextView;
 
         @BindView(R.id.isPlanetaryImageView)
-        ImageView isPlanetaryImageView;
+        LightDarkImageView isPlanetaryImageView;
 
         @BindView(R.id.permitRequiredTextView)
         TextView permitRequiredTextView;

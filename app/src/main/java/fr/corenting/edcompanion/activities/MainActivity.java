@@ -12,6 +12,7 @@ import com.google.android.material.navigation.NavigationView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.w3c.dom.Text;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,6 +23,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -107,6 +109,13 @@ public class MainActivity extends AppCompatActivity
                     .findViewById(R.id.headerLinearLayout);
             drawerHeader.setBackgroundColor(ContextCompat.getColor(this,
                     R.color.darkPrimary));
+
+            // Fix text color
+            TextView drawerTitleTextView = drawerHeader.findViewById(R.id.drawerTitleTextView);
+            drawerTitleTextView.setTextColor(ContextCompat.getColor(this,
+                    android.R.color.white));
+            drawerSubtitleTextView.setTextColor(ContextCompat.getColor(this,
+                    android.R.color.white));
         }
         drawerSubtitleTextView.setOnClickListener(v -> updateServerStatus());
 

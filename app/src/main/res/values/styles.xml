@@ -8,7 +8,6 @@
 
     <style name="AppDarkTheme" parent="BaseThemeDark" />
 
-    <!-- Drawer bug due to https://issuetracker.google.com/issues/116170605 is fixed -->
     <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

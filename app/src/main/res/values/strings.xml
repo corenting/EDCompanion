@@ -184,7 +184,7 @@
     <string name="distance_ls">%1$s ls</string>
 
     <!--Commodity finder-->
-    <string name="commodity_finder_subtitle">Find the nearest station selling a specific commodity</string>
+    <string name="commodity_finder_subtitle">Find the nearest station selling or buying a specific commodity</string>
     <string name="commodity">Commodity</string>
     <string name="close">Close</string>
     <string name="landing_pad_size">Landing pad size</string>
@@ -324,13 +324,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.5.1</b><br />
+            <b>Version 2.6</b><br />
             <ul>
-                <li>Added pictures to Galnet articles</li><br />
-            </ul>
-            <b>Version 2.5</b><br />
-            <ul>
-                <li>Added fleet informations to commander screen (only with Frontier login)</li><br />
+                <li>Add button on system input to use your current location if available</li><br />
+                <li>Dark theme fixes</li><br />
             </ul>
         ]]>
     </string>

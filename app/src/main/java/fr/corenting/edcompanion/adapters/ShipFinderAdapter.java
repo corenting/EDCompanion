@@ -25,6 +25,7 @@ import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
+import fr.corenting.edcompanion.views.LightDarkImageView;
 import fr.corenting.edcompanion.views.SystemInputView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -105,12 +106,6 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
                         currentResult.getStationName())
         );
 
-        // Theme button according to theme
-        if (ThemeUtils.isDarkThemeEnabled(context)) {
-            ImageViewCompat.setImageTintList(holder.isPlanetaryImageView, ColorStateList.valueOf(
-                    ContextCompat.getColor(context, android.R.color.white)));
-        }
-
         // Other informations
         holder.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
@@ -138,7 +133,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         TextView titleTextView;
 
         @BindView(R.id.isPlanetaryImageView)
-        ImageView isPlanetaryImageView;
+        LightDarkImageView isPlanetaryImageView;
 
         @BindView(R.id.permitRequiredTextView)
         TextView permitRequiredTextView;
