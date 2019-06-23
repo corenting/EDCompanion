@@ -54,10 +54,6 @@ public class DelayAutoCompleteTextView extends
 
     @Override
     protected void performFiltering(CharSequence text, int keyCode) {
-        if (keyCode == 0) {
-            mLoadingIndicator.setVisibility(View.GONE);
-            return;
-        }
         if (mLoadingIndicator != null) {
             mLoadingIndicator.setVisibility(View.VISIBLE);
         }
