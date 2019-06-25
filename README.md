@@ -1,7 +1,8 @@
 # EDCompanion
 
 An unofficial Android companion app for Elite : Dangerous.
-Website : https://corenting.github.io/EDCompanion/
+
+Website : https://edcompanion.corenting.fr
 
 ## Download
 
