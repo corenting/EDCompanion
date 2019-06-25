@@ -17,3 +17,7 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 - Systems search (see system informations, factions informations and influence history)
 - Material design (light or dark theme)
 - No ads, free and open-source
+
+## Help
+
+- [Commander feature](https://edcompanion.corenting.fr/commander) : how to get informations about your CMDR in the app
