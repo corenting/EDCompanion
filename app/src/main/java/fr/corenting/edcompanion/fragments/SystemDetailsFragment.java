@@ -29,6 +29,7 @@ import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
+import fr.corenting.edcompanion.views.LightDarkImageView;
 
 public class SystemDetailsFragment extends Fragment {
 
@@ -39,7 +40,7 @@ public class SystemDetailsFragment extends Fragment {
     @BindView(R.id.systemNameTextView)
     public TextView systemNameTextView;
     @BindView(R.id.logoImageView)
-    public ImageView logoImageView;
+    public LightDarkImageView logoImageView;
     @BindView(R.id.permitRequiredTextView)
     public TextView permitRequiredTextView;
     @BindView(R.id.coordsTextView)

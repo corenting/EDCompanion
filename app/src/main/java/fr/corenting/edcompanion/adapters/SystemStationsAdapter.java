@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Station;
 import fr.corenting.edcompanion.utils.MathUtils;
+import fr.corenting.edcompanion.views.LightDarkImageView;
 
 public class SystemStationsAdapter extends androidx.recyclerview.widget.ListAdapter<Station, SystemStationsAdapter.stationViewHolder> {
 
@@ -85,7 +86,7 @@ public class SystemStationsAdapter extends androidx.recyclerview.widget.ListAdap
         @BindView(R.id.titleTextView)
         TextView titleTextView;
         @BindView(R.id.logoImageView)
-        ImageView logoImageView;
+        LightDarkImageView logoImageView;
         @BindView(R.id.typeTextView)
         TextView typeTextView;
         @BindView(R.id.starDistanceTextView)

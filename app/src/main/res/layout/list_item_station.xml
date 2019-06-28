@@ -31,7 +31,7 @@
             android:maxLines="2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
-        <ImageView
+        <fr.corenting.edcompanion.views.LightDarkImageView
             android:id="@+id/logoImageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
