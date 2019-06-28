@@ -7,7 +7,7 @@
     <string name="inara_api_base">https://inara.cz/</string>
     <string name="frontier_auth_base">https://auth.frontierstore.net/</string>
     <string name="frontier_api_base">https://companion.orerve.net/</string>
-    <string name="commander_help_url">https://corenting.fr/edc/commander.html</string>
+    <string name="commander_help_url">https://edcompanion.corenting.fr/commander</string>
 
     <!--Drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
