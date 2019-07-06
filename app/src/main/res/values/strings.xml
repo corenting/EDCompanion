@@ -18,6 +18,7 @@
     <string name="distance_calculator">Distance calculator</string>
     <string name="ship_finder">Ship finder</string>
     <string name="commodity_finder">Commodity finder</string>
+    <string name="commodities_list">Commodities List</string>
 
     <string name="about">About</string>
     <string name="commander">Commander</string>
@@ -203,6 +204,12 @@
         <item>Buy</item>
         <item>Sell</item>
     </string-array>
+
+    <!--Commodities list-->
+    <string name="commodities_list_subtitle">Find the average price of a commodity, the top stations to buy/sell from…</string>
+    <string name="rare_commodity">Rare commodity</string>
+    <string name="average_price">Average price</string>
+
 
     <!--Systems-->
     <string name="systems">Systems</string>

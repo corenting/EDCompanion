@@ -38,7 +38,7 @@ public class CommunityGoalsNetwork {
                         }
                         goals = new CommunityGoals(true, goalsList);
                     } catch (Exception e) {
-                        goals = new CommunityGoals(false, new ArrayList<CommunityGoal>());
+                        goals = new CommunityGoals(false, new ArrayList<>());
                     }
                     EventBus.getDefault().post(goals);
                 }

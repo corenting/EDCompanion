@@ -62,7 +62,6 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
                 return;
             }
 
-            holder.systemInputView.getText().length();
             ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
 
             SystemFinderSearch result = new SystemFinderSearch(

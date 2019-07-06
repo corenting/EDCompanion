@@ -26,6 +26,10 @@
             android:icon="@drawable/ic_attach_money_black_24dp"
             android:title="@string/commodity_finder" />
         <item
+            android:id="@+id/nav_commodities_list"
+            android:icon="@drawable/elite_commodity"
+            android:title="@string/commodities_list" />
+        <item
             android:id="@+id/nav_cmdr"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/commander" />

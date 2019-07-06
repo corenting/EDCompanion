@@ -8,4 +8,8 @@ public class CommodityResponse {
 
     @SerializedName("name")
     public String Name;
+
+
+    @SerializedName("id")
+    public Long Id;
 }

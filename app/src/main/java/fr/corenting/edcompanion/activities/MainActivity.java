@@ -6,14 +6,6 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.navigation.NavigationView;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.w3c.dom.Text;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,10 +16,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.navigation.NavigationView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommanderFragment;
+import fr.corenting.edcompanion.fragments.CommoditiesListFragment;
 import fr.corenting.edcompanion.fragments.CommodityFinderFragment;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
@@ -229,6 +229,10 @@ public class MainActivity extends AppCompatActivity
                 currentSubtitle = getString(R.string.eddb_eddn_credits);
                 break;
             }
+            case R.id.nav_commodities_list: {
+                switchFragment(CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG);
+                break;
+            }
             case R.id.nav_ship_finder: {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG);
                 currentSubtitle = getString(R.string.eddb_credits);
@@ -280,6 +284,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager, new CommodityFinderFragment(), tag);
+                break;
+            case CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG:
+                ViewUtils.switchFragment(fragmentManager, new CommoditiesListFragment(), tag);
                 break;
             default:
                 ViewUtils.switchFragment(fragmentManager, new CommunityGoalsFragment(), tag);

@@ -51,7 +51,7 @@ public class SystemNetwork {
 
                     } catch (Exception ex) {
                         convertedResults = new ResultsList<>(false,
-                                new ArrayList<SystemFinderResult>());
+                                new ArrayList<>());
                     }
                     EventBus.getDefault().post(convertedResults);
                 }
