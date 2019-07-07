@@ -79,7 +79,6 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
             }
 
             ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
-
             CommoditiesListSearch result = new CommoditiesListSearch(
                     holder.commodityInputEditText.getText().toString());
             EventBus.getDefault().post(result);
@@ -101,6 +100,8 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
         holder.titleTextView.setText(currentResult.getName());
         holder.averagePriceTextView.setText(context.getString(R.string.credits,
                 numberFormat.format(currentResult.getAveragePrice())));
+        holder.isRareTextView.setVisibility(currentResult.isRare() ? View.VISIBLE : View.GONE);
+        holder.categoryTextView.setText(currentResult.getCategory().getName());
 
         holder.itemLayout.setOnClickListener(v -> {
             /*Intent i = new Intent(context, SystemDetailsActivity.class);
