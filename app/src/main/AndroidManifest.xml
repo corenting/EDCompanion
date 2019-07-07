@@ -49,6 +49,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.CommodityDetailsActivity"
+            android:label="@string/"
+            android:theme="@style/AppDetailsTheme" />
+        <activity
             android:name=".activities.DetailsActivity"
             android:label="@string/community_goal_details"
             android:theme="@style/AppDetailsTheme" />
