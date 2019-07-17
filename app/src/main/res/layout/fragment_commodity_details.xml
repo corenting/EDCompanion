@@ -1,0 +1,158 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/card_spacing"
+                android:layout_marginTop="@dimen/card_spacing"
+                android:layout_marginRight="@dimen/card_spacing"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:id="@+id/itemLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="24dp"
+                    android:paddingTop="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingBottom="24dp">
+
+                    <TextView
+                        android:id="@+id/commodityNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@string/commodity"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+                    <TextView
+                        android:id="@+id/isRareTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/commodityNameTextView"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/rare_commodity"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/categoryLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/isRareTextView"
+                        android:text="@string/category"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/categoryTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/isRareTextView"
+                        android:layout_toEndOf="@id/categoryLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+                    <TextView
+                        android:id="@+id/averageBuyLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/categoryTextView"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/average_buy_price"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/averageBuyTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/categoryTextView"
+                        android:layout_marginTop="8dp"
+                        android:layout_toEndOf="@id/averageBuyLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+                    <TextView
+                        android:id="@+id/averageSellLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/averageBuyLabelTextView"
+                        android:text="@string/average_sell_price"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/averageSellTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/averageBuyLabelTextView"
+                        android:layout_toEndOf="@id/averageSellLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+                    <TextView
+                        android:id="@+id/minBuyLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/averageSellLabelTextView"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/min_buy_price"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/minBuyTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/averageSellLabelTextView"
+                        android:layout_marginTop="8dp"
+                        android:layout_toEndOf="@id/minBuyLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+                    <TextView
+                        android:id="@+id/maxSellLabelTextView"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/minBuyLabelTextView"
+                        android:text="@string/max_sell_price"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/maxSellTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/minBuyLabelTextView"
+                        android:layout_toEndOf="@id/maxSellLabelTextView"
+                        android:text="@string/unknown"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>

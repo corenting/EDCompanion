@@ -209,10 +209,16 @@
     <string name="commodities_list_subtitle">Find the average price of a commodity, the top stations to buy/sell from…</string>
     <string name="rare_commodity">Rare commodity</string>
     <string name="average_price">Average price</string>
+    <string name="average_buy_price">Average buy price</string>
+    <string name="average_sell_price">Average sell price</string>
+    <string name="min_buy_price">Minimum buy price</string>
+    <string name="max_sell_price">Max sell price</string>
     <string name="informations">Informations</string>
-    <string name="where_to_sell">Where to sell</string>
-    <string name="where_to_buy">Where to buy</string>
+    <string name="where_to_sell">Sell</string>
+    <string name="where_to_buy">Buy</string>
     <string name="commodity_details">Commodity details</string>
+    <string name="category">Category</string>
+
 
     <!--Systems-->
     <string name="systems">Systems</string>

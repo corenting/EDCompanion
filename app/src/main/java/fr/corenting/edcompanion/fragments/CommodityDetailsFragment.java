@@ -1,6 +1,5 @@
 package fr.corenting.edcompanion.fragments;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -26,8 +23,6 @@ import fr.corenting.edcompanion.activities.SystemDetailsActivity;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.utils.MathUtils;
-import fr.corenting.edcompanion.utils.ThemeUtils;
-import fr.corenting.edcompanion.views.LightDarkImageView;
 
 public class CommodityDetailsFragment extends Fragment {
 
@@ -35,30 +30,20 @@ public class CommodityDetailsFragment extends Fragment {
 
     @BindView(R.id.swipeContainer)
     public SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.systemNameTextView)
-    public TextView systemNameTextView;
-    @BindView(R.id.logoImageView)
-    public LightDarkImageView logoImageView;
-    @BindView(R.id.permitRequiredTextView)
-    public TextView permitRequiredTextView;
-    @BindView(R.id.coordsTextView)
-    public TextView coordinatesTextView;
-    @BindView(R.id.allegianceTextView)
-    public TextView allegianceTextView;
-    @BindView(R.id.powerTextView)
-    public TextView powerTextView;
-    @BindView(R.id.securityTextView)
-    public TextView securityTextView;
-    @BindView(R.id.governmentTextView)
-    public TextView governmentTextView;
-    @BindView(R.id.controllingFactionTextView)
-    public TextView controllingFactionTextView;
-    @BindView(R.id.economyTextView)
-    public TextView economyTextView;
-    @BindView(R.id.stateTextView)
-    public TextView stateTextView;
-    @BindView(R.id.populationTextView)
-    public TextView populationTextView;
+    @BindView(R.id.commodityNameTextView)
+    public TextView commodityNameTextView;
+    @BindView(R.id.isRareTextView)
+    public TextView isRareTextView;
+    @BindView(R.id.categoryTextView)
+    public TextView categoryTextView;
+    @BindView(R.id.averageBuyTextView)
+    public TextView averageBuyTextView;
+    @BindView(R.id.averageSellTextView)
+    public TextView averageSellTextView;
+    @BindView(R.id.minBuyTextView)
+    public TextView minBuyTextView;
+    @BindView(R.id.maxSellTextView)
+    public TextView maxSellTextView;
 
     private NumberFormat numberFormat;
 
@@ -83,12 +68,6 @@ public class CommodityDetailsFragment extends Fragment {
         // Setup views
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(true);
-
-        // Fix icon on black theme
-        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
-            ImageViewCompat.setImageTintList(logoImageView, ColorStateList.valueOf(
-                    ContextCompat.getColor(getContext(), android.R.color.white)));
-        }
 
         return v;
     }
@@ -123,33 +102,7 @@ public class CommodityDetailsFragment extends Fragment {
     }
 
     private void bindInformations(System system) {
-
-        // Text
-        systemNameTextView.setText(system.getName());
-        permitRequiredTextView.setVisibility(system.isPermitRequired() ? View.VISIBLE : View.GONE);
-        coordinatesTextView.setText(getString(R.string.coordinates_num, system.getX(),
-                system.getY(), system.getZ()));
-        allegianceTextView.setText(system.getAllegiance());
-        powerTextView.setText(String.format("%s (%s)", system.getPower(), system.getPowerState()));
-        securityTextView.setText(system.getSecurity());
-        governmentTextView.setText(system.getGovernment());
-        controllingFactionTextView.setText(system.getControllingFaction());
-        economyTextView.setText(system.getPrimaryEconomy());
-        stateTextView.setText(system.getState());
-        populationTextView.setText(numberFormat.format(system.getPopulation()));
-
-        // Logo
-        switch (system.getAllegiance()) {
-            case "Federation":
-                logoImageView.setImageResource(R.drawable.elite_federation);
-                break;
-            case "Empire":
-                logoImageView.setImageResource(R.drawable.elite_empire);
-                break;
-            case "Alliance":
-                logoImageView.setImageResource(R.drawable.elite_alliance);
-                break;
-        }
+        // TODO
     }
 
     public void endLoading() {
