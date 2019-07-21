@@ -47,7 +47,7 @@
 
                     <TextView
                         android:id="@+id/isRareTextView"
-                        android:layout_width="110dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/commodityNameTextView"
                         android:layout_marginTop="8dp"
@@ -58,7 +58,7 @@
 
                     <TextView
                         android:id="@+id/categoryLabelTextView"
-                        android:layout_width="110dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/isRareTextView"
                         android:text="@string/category"
@@ -76,7 +76,7 @@
 
                     <TextView
                         android:id="@+id/averageBuyLabelTextView"
-                        android:layout_width="110dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/categoryTextView"
                         android:layout_marginTop="8dp"
@@ -96,7 +96,7 @@
 
                     <TextView
                         android:id="@+id/averageSellLabelTextView"
-                        android:layout_width="110dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/averageBuyLabelTextView"
                         android:text="@string/average_sell_price"
@@ -114,7 +114,7 @@
 
                     <TextView
                         android:id="@+id/minBuyLabelTextView"
-                        android:layout_width="110dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/averageSellLabelTextView"
                         android:layout_marginTop="8dp"
@@ -134,7 +134,7 @@
 
                     <TextView
                         android:id="@+id/maxSellLabelTextView"
-                        android:layout_width="110dp"
+                        android:layout_width="135dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/minBuyLabelTextView"
                         android:text="@string/max_sell_price"

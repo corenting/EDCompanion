@@ -3,19 +3,11 @@ package fr.corenting.edcompanion.fragments;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommoditiesListAdapter;
-import fr.corenting.edcompanion.adapters.CommodityFinderAdapter;
 import fr.corenting.edcompanion.models.CommoditiesListResult;
-import fr.corenting.edcompanion.models.CommodityFinderResult;
-import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.events.CommoditiesListSearch;
-import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
 import fr.corenting.edcompanion.models.events.ResultsList;
-import fr.corenting.edcompanion.models.events.ShipFinderSearch;
-import fr.corenting.edcompanion.network.CommoditiesListNetwork;
-import fr.corenting.edcompanion.network.CommodityFinderNetwork;
-import fr.corenting.edcompanion.network.ShipFinderNetwork;
+import fr.corenting.edcompanion.network.CommoditiesNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 
 public class CommoditiesListFragment extends AbstractFinderFragment<CommoditiesListAdapter> {
@@ -55,6 +47,6 @@ public class CommoditiesListFragment extends AbstractFinderFragment<CommoditiesL
     public void onFindButtonEvent(CommoditiesListSearch event) {
         lastSearch = event;
         startLoading();
-        CommoditiesListNetwork.findCommodity(getContext(), event.getCommodityName());
+        CommoditiesNetwork.findCommodity(getContext(), event.getCommodityName());
     }
 }

@@ -24,7 +24,7 @@ public class CommodityDetailsResponse {
     public long MaximumSellPrice;
 
     @SerializedName("minimum_buy_price")
-    public long MinimumSellPrice;
+    public long MinimumBuyPrice;
 
     @SerializedName("name")
     public String Name;
@@ -39,12 +39,12 @@ public class CommodityDetailsResponse {
     public NameId Category;
 
     @SerializedName("maximum_sellers")
-    public List<CommodityDetailsStation> MaximumSellers;
+    public List<CommodityDetailsStationResponse> MaximumSellers;
 
     @SerializedName("minimum_buyers")
-    public List<CommodityDetailsStation> MinimumBuyers;
+    public List<CommodityDetailsStationResponse> MinimumBuyers;
 
-    public class CommodityDetailsStation {
+    public class CommodityDetailsStationResponse {
 
         @SerializedName("collected_at")
         public Date CollectedAt;

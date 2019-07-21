@@ -50,7 +50,7 @@
         </activity>
         <activity
             android:name=".activities.CommodityDetailsActivity"
-            android:label="@string/"
+            android:label="@string/commodity_details"
             android:theme="@style/AppDetailsTheme" />
         <activity
             android:name=".activities.DetailsActivity"

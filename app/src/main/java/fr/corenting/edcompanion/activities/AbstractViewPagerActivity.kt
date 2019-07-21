@@ -24,7 +24,7 @@ abstract class AbstractViewPagerActivity : AppCompatActivity() {
         // Get data name from intent
         dataName = getDefaultData()
         if (intent.extras != null) {
-            dataName = intent.extras!!.getString(getString(R.string.system), getDefaultData())
+            dataName = intent.extras!!.getString("data", getDefaultData())
         }
 
         // Set toolbar

@@ -18,7 +18,7 @@
     <string name="distance_calculator">Distance calculator</string>
     <string name="ship_finder">Ship finder</string>
     <string name="commodity_finder">Commodity finder</string>
-    <string name="commodities_list">Commodities List</string>
+    <string name="commodities_list">Commodities</string>
 
     <string name="about">About</string>
     <string name="commander">Commander</string>
@@ -212,7 +212,7 @@
     <string name="average_buy_price">Average buy price</string>
     <string name="average_sell_price">Average sell price</string>
     <string name="min_buy_price">Minimum buy price</string>
-    <string name="max_sell_price">Max sell price</string>
+    <string name="max_sell_price">Maximum sell price</string>
     <string name="informations">Informations</string>
     <string name="where_to_sell">Sell</string>
     <string name="where_to_buy">Buy</string>

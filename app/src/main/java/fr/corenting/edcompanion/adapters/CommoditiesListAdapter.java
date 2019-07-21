@@ -1,6 +1,7 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -16,9 +17,11 @@ import java.text.NumberFormat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.activities.CommodityDetailsActivity;
 import fr.corenting.edcompanion.models.CommoditiesListResult;
 import fr.corenting.edcompanion.models.events.CommoditiesListSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
+import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
@@ -104,9 +107,9 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
         holder.categoryTextView.setText(currentResult.getCategory().getName());
 
         holder.itemLayout.setOnClickListener(v -> {
-            /*Intent i = new Intent(context, SystemDetailsActivity.class);
-            i.putExtra(context.getString(R.string.system), currentResult.getName());
-            MiscUtils.startIntentWithFadeAnimation(context, i);*/
+            Intent i = new Intent(context, CommodityDetailsActivity.class);
+            i.putExtra("data", currentResult.getName());
+            MiscUtils.startIntentWithFadeAnimation(context, i);
         });
     }
 

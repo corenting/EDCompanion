@@ -20,8 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
-import fr.corenting.edcompanion.models.System;
-import fr.corenting.edcompanion.models.events.SystemDetails;
+import fr.corenting.edcompanion.models.CommodityDetailsResult;
 import fr.corenting.edcompanion.utils.MathUtils;
 
 public class CommodityDetailsFragment extends Fragment {
@@ -50,7 +49,7 @@ public class CommodityDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_system_details, container, false);
+        View v = inflater.inflate(R.layout.fragment_commodity_details, container, false);
         ButterKnife.bind(this, v);
 
         //Swipe to refresh setup
@@ -92,17 +91,28 @@ public class CommodityDetailsFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
+    // Get results posted from parent activity
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSystemEvent(SystemDetails systemDetails) {
+    public void onCommodityDetailsEvent(CommodityDetailsResult commodityDetailsResult) {
         endLoading();
 
-        if (systemDetails.getSuccess() && systemDetails.getSystem() != null) {
-            bindInformations(systemDetails.getSystem());
-        }
+        bindInformations(commodityDetailsResult);
     }
 
-    private void bindInformations(System system) {
-        // TODO
+    private void bindInformations(CommodityDetailsResult details) {
+        commodityNameTextView.setText(details.getName());
+        isRareTextView.setVisibility(details.isRare() ? View.VISIBLE : View.GONE);
+        categoryTextView.setText(details.getCategory().getName());
+
+        averageBuyTextView.setText(getString(R.string.credits,
+                numberFormat.format(details.getAverageBuyPrice())));
+        averageSellTextView.setText(getString(R.string.credits,
+                numberFormat.format(details.getAverageSellPrice())));
+
+        minBuyTextView.setText(getString(R.string.credits,
+                numberFormat.format(details.getMinimumBuyPrice())));
+        maxSellTextView.setText(getString(R.string.credits,
+                numberFormat.format(details.getMaximumSellPrice())));
     }
 
     public void endLoading() {
