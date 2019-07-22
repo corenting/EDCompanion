@@ -22,7 +22,7 @@ public class InternalNamingUtils {
             case "Federation_Dropship":
                 return "Federal Dropship";
             case "Type9":
-                return "Type-7 Heavy";
+                return "Type-9 Heavy";
             case "BelugaLiner":
                 return "Beluga Liner";
             case "FerDeLance":

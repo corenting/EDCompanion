@@ -3,7 +3,8 @@ package fr.corenting.edcompanion.models
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityDetailsResponse
 
 data class CommodityDetailsResult(val name: String, val id: Long, val averagePrice: Long,
-                                  val isRare: Boolean, val category: NameId, val averageSellPrice: Double,
+                                  val isRare: Boolean, val category: NameId,
+                                  val averageSellPrice: Double,
                                   val averageBuyPrice: Double, val maximumProfit: Long,
                                   val maximumSellPrice: Long, val minimumBuyPrice: Long,
                                   val maximumSellers: List<CommodityDetailsStationResult>,

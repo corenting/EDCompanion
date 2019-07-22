@@ -214,11 +214,13 @@
     <string name="min_buy_price">Minimum buy price</string>
     <string name="max_sell_price">Maximum sell price</string>
     <string name="informations">Informations</string>
-    <string name="where_to_sell">Sell</string>
-    <string name="where_to_buy">Buy</string>
+    <string name="where_to_sell">Where to sell</string>
+    <string name="where_to_buy">Where to buy</string>
     <string name="commodity_details">Commodity details</string>
     <string name="category">Category</string>
-
+    <string name="buy_price">Buy price</string>
+    <string name="sell_price">Sell price</string>
+    <string name="price_difference">Price difference</string>
 
     <!--Systems-->
     <string name="systems">Systems</string>
@@ -340,10 +342,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.6</b><br />
+            <b>Version 2.7</b><br />
             <ul>
-                <li>Add button on system input to use your current location if available</li><br />
-                <li>Dark theme fixes</li><br />
+                <li>Add commodities list : find commodity price, the best places to sell/buy it from...</li><br />
+                <li>Fixed typo with Type9 ships in the fleet tab</li><br />
             </ul>
         ]]>
     </string>

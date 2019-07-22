@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity
             }
             case R.id.nav_commodities_list: {
                 switchFragment(CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG);
+                currentSubtitle = getString(R.string.eddb_eddn_credits);
                 break;
             }
             case R.id.nav_ship_finder: {

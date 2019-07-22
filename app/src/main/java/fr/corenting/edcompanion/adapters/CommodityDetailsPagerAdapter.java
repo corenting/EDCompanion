@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.fragments.CommodityDetailsBuyFragment;
 import fr.corenting.edcompanion.fragments.CommodityDetailsFragment;
+import fr.corenting.edcompanion.fragments.CommodityDetailsSellFragment;
 import fr.corenting.edcompanion.fragments.SystemDetailsFragment;
 import fr.corenting.edcompanion.fragments.SystemFactionsFragment;
 import fr.corenting.edcompanion.fragments.SystemStationsFragment;
@@ -42,6 +44,10 @@ public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             default:
                 return new CommodityDetailsFragment();
+            case 1:
+                return new CommodityDetailsSellFragment();
+            case 2:
+                return new CommodityDetailsBuyFragment();
         }
     }
 
@@ -61,6 +67,10 @@ public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             default:
                 return CommodityDetailsFragment.COMMODITY_DETAILS_FRAGMENT;
+            case 1:
+                return CommodityDetailsSellFragment.COMMODITY_DETAILS_SELL_FRAGMENT_TAG;
+            case 2:
+                return CommodityDetailsBuyFragment.COMMODITY_DETAILS_BUY_FRAGMENT_TAG;
         }
     }
 }

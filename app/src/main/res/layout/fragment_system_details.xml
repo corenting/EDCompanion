@@ -40,6 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
+                        android:layout_marginEnd="8dp"
                         android:layout_toStartOf="@id/logoImageView"
                         android:ellipsize="end"
                         android:maxLines="2"

@@ -155,7 +155,8 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         CommodityFinderResult currentResult = results.get(position - 1);
 
         // For price, also display the difference with the avg galactic price
-        String priceDifference = getPriceDifferenceString(
+        String priceDifference = MathUtils.getPriceDifferenceString(
+                numberFormat,
                 currentResult.getPriceDifferenceFromAverage());
         if (isSellingMode) {
             String sellPrice = numberFormat.format(currentResult.getSellPrice());
@@ -192,15 +193,6 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         } else {
             holder.stockLabelTextView.setText(R.string.stock_label);
             holder.stockTextView.setText(numberFormat.format(currentResult.getStock()));
-        }
-    }
-
-    private String getPriceDifferenceString(int priceDifference) {
-        String result = numberFormat.format(priceDifference);
-        if (priceDifference >= 0) {
-            return "+" + result;
-        } else {
-            return result;
         }
     }
 

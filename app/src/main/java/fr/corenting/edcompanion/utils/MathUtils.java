@@ -11,4 +11,13 @@ public class MathUtils {
         Locale userLocale = DateUtils.getCurrentLocale(context);
         return NumberFormat.getIntegerInstance(userLocale);
     }
+
+    public static String getPriceDifferenceString(NumberFormat numberFormat, int priceDifference) {
+        String result = numberFormat.format(priceDifference);
+        if (priceDifference >= 0) {
+            return "+" + result;
+        } else {
+            return result;
+        }
+    }
 }

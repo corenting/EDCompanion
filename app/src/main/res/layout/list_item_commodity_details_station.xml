@@ -40,10 +40,80 @@
             app:srcCompat="@drawable/ic_globe_black_24dp" />
 
         <TextView
-            android:id="@+id/typeLabelTextView"
+            android:id="@+id/priceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
+            android:layout_marginTop="8dp"
+            android:text="@string/buy_price"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTextView"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/priceLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/stockLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/priceLabelTextView"
+            android:text="@string/demand_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/stockTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/priceLabelTextView"
+            android:layout_toEndOf="@id/stockLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/priceDifferenceLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stockLabelTextView"
+            android:text="@string/price_difference"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/priceDifferenceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stockLabelTextView"
+            android:layout_toEndOf="@id/priceDifferenceLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/lastUpdateLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/priceDifferenceLabelTextView"
+            android:text="@string/last_update_label"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lastUpdateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/priceDifferenceLabelTextView"
+            android:layout_toEndOf="@id/lastUpdateLabelTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/typeLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_marginTop="8dp"
             android:text="@string/type_label"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
@@ -53,7 +123,7 @@
             android:id="@+id/typeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextView"
+            android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@id/typeLabelTextView"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />

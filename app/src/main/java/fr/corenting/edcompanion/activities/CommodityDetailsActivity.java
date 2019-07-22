@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 
 import fr.corenting.edcompanion.adapters.CommodityDetailsPagerAdapter;
 import fr.corenting.edcompanion.models.events.CommodityDetails;
+import fr.corenting.edcompanion.models.events.CommodityDetailsBuy;
+import fr.corenting.edcompanion.models.events.CommodityDetailsSell;
 import fr.corenting.edcompanion.network.CommoditiesNetwork;
 
 public class CommodityDetailsActivity extends AbstractViewPagerActivity {
@@ -36,6 +38,14 @@ public class CommodityDetailsActivity extends AbstractViewPagerActivity {
                 commodityDetailsEvent.getCommodityDetails() != null) {
 
             EventBus.getDefault().post(commodityDetailsEvent.getCommodityDetails());
+            EventBus.getDefault().post(
+                    new CommodityDetailsSell(true,
+                            commodityDetailsEvent.getCommodityDetails().getMaximumSellers())
+            );
+            EventBus.getDefault().post(
+                    new CommodityDetailsBuy(true,
+                            commodityDetailsEvent.getCommodityDetails().getMinimumBuyers())
+            );
         }
     }
 
