@@ -5,14 +5,14 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.1"
 
     defaultConfig {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 41
-        versionName "2.7"
+        versionCode 42
+        versionName "2.7.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 

@@ -87,7 +87,7 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
 
         holder.itemLayout.setOnClickListener(v -> {
             Intent i = new Intent(context, SystemDetailsActivity.class);
-            i.putExtra(context.getString(R.string.system), currentResult.getName());
+            i.putExtra("data", currentResult.getName());
             MiscUtils.startIntentWithFadeAnimation(context, i);
         });
     }

@@ -48,7 +48,7 @@ public class MiscUtils {
 
     public static void startIntentToSystemDetails(Context ctx, String systemName) {
         Intent i = new Intent(ctx, SystemDetailsActivity.class);
-        i.putExtra(ctx.getString(R.string.system), systemName);
+        i.putExtra("data", systemName);
         ctx.startActivity(i);
     }
 }
