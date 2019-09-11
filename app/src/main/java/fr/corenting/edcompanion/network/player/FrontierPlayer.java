@@ -240,10 +240,12 @@ public class FrontierPlayer extends PlayerNetwork {
                                 "", false);
                         Ranks ranks = new Ranks(false, null, null,
                                 null, null, null, null);
+                        Fleet fleet = new Fleet(false, new ArrayList<>());
 
                         sendResultMessage(credits);
                         sendResultMessage(pos);
                         sendResultMessage(ranks);
+                        sendResultMessage(fleet);
                     }
                 };
         frontierRetrofit.getProfileRaw().enqueue(callback);
