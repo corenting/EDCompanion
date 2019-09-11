@@ -142,14 +142,24 @@ public class FrontierPlayer extends PlayerNetwork {
                 .get("currentShipId")
                 .getAsInt();
 
-        Set<Map.Entry<String, JsonElement>> shipsSet = rawProfileResponse.get("ships")
-                .getAsJsonObject().entrySet();
+
+        // Sometimes the cAPI return an array, sometimes an object with indexes
+        List<JsonElement> responseList = new ArrayList<>();
+        if (rawProfileResponse.get("ships").isJsonObject()) {
+            for (Map.Entry<String, JsonElement> entry :
+                    rawProfileResponse.get("ships").getAsJsonObject().entrySet()) {
+                responseList.add(entry.getValue());
+            }
+        } else {
+            for (JsonElement ship : rawProfileResponse.get("ships").getAsJsonArray()) {
+                responseList.add(ship);
+            }
+        }
 
         List<Ship> shipsList = new ArrayList<>();
 
-        for (Map.Entry<String, JsonElement> entry : shipsSet) {
-            JsonObject rawShip = entry.getValue().getAsJsonObject();
-
+        for (JsonElement entry : responseList) {
+            JsonObject rawShip = entry.getAsJsonObject();
 
             String shipName = null;
             if (rawShip.has("shipName")) {
@@ -194,6 +204,7 @@ public class FrontierPlayer extends PlayerNetwork {
                         JsonObject rawResponse = null;
                         try {
                             String responseString = response.body().string();
+
                             rawResponse = new JsonParser()
                                     .parse(responseString).getAsJsonObject();
                             profileResponse = new Gson()
