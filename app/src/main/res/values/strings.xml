@@ -342,9 +342,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.7.2</b><br />
+            <b>Version 2.7.3</b><br />
             <ul>
-                <li>Fix fleet tab not loading for some players</li><br />
+                <li>Fix CMDR tab asking for login too often with Frontier provider</li><br />
             </ul>
         ]]>
     </string>

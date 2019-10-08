@@ -145,7 +145,7 @@ public class RetrofitSingleton implements Serializable {
             }
 
             // If still not ok, need login
-            if (!response.isSuccessful()) {
+            if (!response.isSuccessful() && (response.code() == 403 || response.code() == 422 || response.code() == 401)) {
                 EventBus.getDefault().post(new FrontierAuthNeeded(true));
             }
 
