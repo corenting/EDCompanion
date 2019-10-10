@@ -363,7 +363,7 @@
     <string name="login_again_dialog_title">Frontier login needed</string>
     <string name="login_again_dialog_text">The session with your Frontier account has expired, press OK to login again.</string>
     <string name="login_dialog_title">Frontier login</string>
-    <string name="login_dialog_text">Your browser will open to allow you to connect to your Frontier account.\n\nClick on the logo of the platform you play on to login, or login using your Frontier account if you play on PC without Steam.\n\nPlease note that due to a bug on Frontier side, recent Steam accounts may not work.</string>
+    <string name="login_dialog_text">Your browser will open to allow you to connect to your Frontier account.\n\nClick on the logo of the platform you play on to login, or login using your Frontier account if you play on PC without Steam.</string>
     <string name="login_dialog_error_title">Frontier login error</string>
     <string name="login_dialog_error_text">Error while linking your account, please try again.</string>
     <string name="open">Open</string>
