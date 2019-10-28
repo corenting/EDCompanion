@@ -1,57 +1,33 @@
-# Gson
--keep class com.google.gson.** { *; }
--keepattributes Signature
-
-# MPAndroidChart
--keep class com.github.mikephil.charting.** { *; }
-
-# OkHttp
--keepattributes Signature
--keepattributes *Annotation*
--keep class okhttp3.** { *; }
--keep interface okhttp3.** { *; }
--dontwarn okhttp3.**
-
-# Okio
--keep class sun.misc.Unsafe { *; }
--dontwarn java.nio.file.*
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
--dontwarn okio.**
-
-# GMS
--keep public class com.google.android.gms.* { public *; }
--dontwarn com.google.android.gms.**
-
-# Retrofit
-# Platform calls Class.forName on types which do not exist on Android to determine platform.
--dontnote retrofit2.Platform
-# Platform used when running on Java 8 VMs. Will not be used at runtime.
--dontwarn retrofit2.Platform$Java8
-# Retain generic type information for use by reflection by converters and adapters.
--keepattributes Signature
-# Retain declared checked exceptions for use by a Proxy instance.
--keepattributes Exceptions
-
 # Eventbus
 -keepattributes *Annotation*
--keepclassmembers class ** {
+-keepclassmembers class * {
     @org.greenrobot.eventbus.Subscribe <methods>;
 }
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
--keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
-    <init>(java.lang.Throwable);
+
+# Retrofit
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
 }
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn javax.annotation.**
+-dontwarn kotlin.Unit
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions$*
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
 
-# Parcelables (recommended by doc)
--keepclassmembers class * implements android.os.Parcelable {
-    static ** CREATOR;
+# Gson
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn sun.misc.**
+-keep class fr.corenting.edcompanion.models.** { <fields>; }
+-keep class * implements com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.SerializedName <fields>;
 }
-
-# Butterknife
--keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
--keep class butterknife.*
--keepclasseswithmembernames class * { @butterknife.* <methods>; }
--keepclasseswithmembernames class * { @butterknife.* <fields>; }
-
-# RxJava
--dontwarn rx.**
