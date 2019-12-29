@@ -24,9 +24,6 @@ public class StationResponse {
     @SerializedName("type")
     public String Type;
 
-    @SerializedName("ships_sold")
-    public List<String> ShipsSold;
-
     @SerializedName("system")
     public StationSystem System;
 
