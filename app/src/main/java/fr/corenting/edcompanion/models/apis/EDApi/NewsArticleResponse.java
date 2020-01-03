@@ -2,7 +2,7 @@ package fr.corenting.edcompanion.models.apis.EDApi;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GalnetArticleResponse {
+public class NewsArticleResponse {
     @SerializedName("uri")
     public String Uri;
 

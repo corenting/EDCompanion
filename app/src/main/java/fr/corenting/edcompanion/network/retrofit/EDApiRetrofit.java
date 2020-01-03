@@ -7,7 +7,7 @@ import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.DistanceResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.GalnetArticleResponse;
+import fr.corenting.edcompanion.models.apis.EDApi.NewsArticleResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.StationResponse;
@@ -23,7 +23,10 @@ public interface EDApiRetrofit {
     Call<CommunityGoalsResponse> getCommunityGoals();
 
     @GET("galnet/")
-    Call<List<GalnetArticleResponse>> getGalnetNews(@Query("lang") String language);
+    Call<List<NewsArticleResponse>> getGalnetNews(@Query("lang") String language);
+
+    @GET("news/")
+    Call<List<NewsArticleResponse>> getNews();
 
     @GET("distance/{first}/{second}")
     Call<DistanceResponse> getDistance(@Path("first") String firstSystem,

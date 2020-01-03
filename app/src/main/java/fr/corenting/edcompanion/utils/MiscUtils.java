@@ -4,8 +4,14 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+
 import androidx.core.app.ActivityOptionsCompat;
+
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.corenting.edcompanion.R;
@@ -50,5 +56,14 @@ public class MiscUtils {
         Intent i = new Intent(ctx, SystemDetailsActivity.class);
         i.putExtra("data", systemName);
         ctx.startActivity(i);
+    }
+
+    public static void setTextFromHtml(TextView textView, String text) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            textView.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            textView.setText(Html.fromHtml(text));
+        }
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

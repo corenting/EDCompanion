@@ -10,6 +10,10 @@
             android:icon="@drawable/elite_galnet"
             android:title="@string/galnet" />
         <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_newspaper_black_24dp"
+            android:title="@string/news" />
+        <item
             android:id="@+id/nav_systems"
             android:icon="@drawable/ic_globe_black_24dp"
             android:title="@string/systems" />
@@ -35,7 +39,9 @@
             android:title="@string/commander" />
     </group>
 
-    <group android:id="@+id/grp2" android:checkableBehavior="single" >
+    <group
+        android:id="@+id/grp2"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_grey600_24dp"

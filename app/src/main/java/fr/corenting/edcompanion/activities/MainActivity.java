@@ -32,6 +32,7 @@ import fr.corenting.edcompanion.fragments.CommodityFinderFragment;
 import fr.corenting.edcompanion.fragments.CommunityGoalsFragment;
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment;
 import fr.corenting.edcompanion.fragments.GalnetFragment;
+import fr.corenting.edcompanion.fragments.NewsFragment;
 import fr.corenting.edcompanion.fragments.ShipFinderFragment;
 import fr.corenting.edcompanion.fragments.SystemFinderFragment;
 import fr.corenting.edcompanion.models.events.ServerStatus;
@@ -214,6 +215,10 @@ public class MainActivity extends AppCompatActivity
                 switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG);
                 break;
             }
+            case R.id.nav_news: {
+                switchFragment(NewsFragment.NEWS_FRAGMENT_TAG);
+                break;
+            }
             case R.id.nav_systems: {
                 switchFragment(SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG);
                 currentSubtitle = getString(R.string.edsm_credits);
@@ -270,6 +275,9 @@ public class MainActivity extends AppCompatActivity
         switch (tag) {
             case GalnetFragment.GALNET_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager, new GalnetFragment(), tag);
+                break;
+            case NewsFragment.NEWS_FRAGMENT_TAG:
+                ViewUtils.switchFragment(fragmentManager, new NewsFragment(), tag);
                 break;
             case SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG:
                 ViewUtils.switchFragment(fragmentManager, new SystemFinderFragment(), tag);

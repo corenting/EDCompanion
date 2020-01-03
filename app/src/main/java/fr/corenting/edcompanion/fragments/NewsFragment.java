@@ -10,18 +10,14 @@ import androidx.annotation.NonNull;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.NewsAdapter;
-import fr.corenting.edcompanion.models.events.GalnetNews;
+import fr.corenting.edcompanion.models.events.News;
 import fr.corenting.edcompanion.network.NewsNetwork;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
-import fr.corenting.edcompanion.utils.SettingsUtils;
 
-public class GalnetFragment extends AbstractListFragment<NewsAdapter> {
+public class NewsFragment extends AbstractListFragment<NewsAdapter> {
 
-    public static final String GALNET_FRAGMENT_TAG = "galnet_fragment";
-
-    private String language;
+    public static final String NEWS_FRAGMENT_TAG = "news_fragment";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -30,31 +26,8 @@ public class GalnetFragment extends AbstractListFragment<NewsAdapter> {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        language = getNewsLanguage();
-    }
-
-    private String getNewsLanguage() {
-        return SettingsUtils.getString(getContext(),
-                getString(R.string.settings_galnet_lang));
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Refresh if language changed
-        if (!language.equals(getNewsLanguage())) {
-            language = getNewsLanguage();
-            getData();
-        }
-    }
-
-    @Override
     void getData() {
-        NewsNetwork.getGalnetNews(getContext(), language);
+        NewsNetwork.getNews(getContext());
     }
 
     @Override
@@ -63,7 +36,7 @@ public class GalnetFragment extends AbstractListFragment<NewsAdapter> {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onNewsEvent(GalnetNews news) {
+    public void onNewsEvent(News news) {
         // Error case
         if (!news.getSuccess()) {
             endLoading(true);
