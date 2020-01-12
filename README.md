@@ -1,5 +1,9 @@
 # EDCompanion
 
+[![GitHub release](https://img.shields.io/github/release/corenting/EDCompanion.svg)](https://github.com/corenting/EDCompanion/releases)
+[![GitHub license](https://img.shields.io/github/license/corenting/EDCompanion.svg)](https://github.com/corenting/EDCompanion/blob/master/LICENSE)
+
+
 An unofficial Android companion app for Elite : Dangerous.
 
 Website : https://edcompanion.corenting.fr
