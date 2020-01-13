@@ -343,9 +343,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.7.3</b><br />
+            <b>Version 2.8</b><br />
             <ul>
-                <li>Fix CMDR tab asking for login too often with Frontier provider</li><br />
+                <li>Add "News" tab for non-Galnet news</li><br />
             </ul>
         ]]>
     </string>
