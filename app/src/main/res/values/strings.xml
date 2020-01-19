@@ -343,9 +343,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.8</b><br />
+            <b>Version 2.8.1</b><br />
             <ul>
-                <li>Add "News" tab for non-Galnet news</li><br />
+                <li>Fix crash when using Frontier account</li><br />
             </ul>
         ]]>
     </string>
