@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity
         // Set listener on server status text to refresh it, and set theme
         TextView drawerSubtitleTextView = navigationView.getHeaderView(0)
                 .findViewById(R.id.drawerSubtitleTextView);
+        navigationView.setItemIconTintList(null);
         if (ThemeUtils.isDarkThemeEnabled(this)) {
             LinearLayout drawerHeader = navigationView.getHeaderView(0)
                     .findViewById(R.id.headerLinearLayout);

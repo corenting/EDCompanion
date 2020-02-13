@@ -11,7 +11,6 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView"
-            style="@style/Widget.MaterialComponents.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/card_spacing"
@@ -53,7 +52,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:tint="#757575"
-                        app:srcCompat="@drawable/ic_attach_money_black_24dp" />
+                        app:srcCompat="@drawable/ic_attach_money_gray600_24dp" />
 
                     <TextView
                         android:id="@+id/creditsTextView"

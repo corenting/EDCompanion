@@ -6,16 +6,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="AppDarkTheme" parent="BaseThemeDark">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
     <style name="AppDetailsTheme" parent="BaseTheme">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
-    <style name="AppDarkDetailsTheme" parent="BaseThemeDark">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
 </resources>

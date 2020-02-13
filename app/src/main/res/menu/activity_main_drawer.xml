@@ -11,11 +11,11 @@
             android:title="@string/galnet" />
         <item
             android:id="@+id/nav_news"
-            android:icon="@drawable/ic_newspaper_black_24dp"
+            android:icon="@drawable/ic_newspaper_grey600_24dp"
             android:title="@string/news" />
         <item
             android:id="@+id/nav_systems"
-            android:icon="@drawable/ic_globe_black_24dp"
+            android:icon="@drawable/ic_globe_gray600_24dp"
             android:title="@string/systems" />
         <item
             android:id="@+id/nav_commodities_list"
@@ -27,15 +27,15 @@
             android:title="@string/distance_calculator" />
         <item
             android:id="@+id/nav_ship_finder"
-            android:icon="@drawable/ic_rocket_black_24dp"
+            android:icon="@drawable/ic_rocket_gray600_24dp"
             android:title="@string/ship_finder" />
         <item
             android:id="@+id/nav_commodity_finder"
-            android:icon="@drawable/ic_attach_money_black_24dp"
+            android:icon="@drawable/ic_attach_money_gray600_24dp"
             android:title="@string/commodity_finder" />
         <item
             android:id="@+id/nav_cmdr"
-            android:icon="@drawable/ic_person_black_24dp"
+            android:icon="@drawable/ic_person_gray600_24dp"
             android:title="@string/commander" />
     </group>
 

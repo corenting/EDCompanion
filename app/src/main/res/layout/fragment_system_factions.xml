@@ -20,7 +20,6 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardView"
-                    style="@style/Widget.MaterialComponents.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/card_spacing"
@@ -111,7 +110,6 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/factionsCardView"
-                    style="@style/Widget.MaterialComponents.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cardView"
@@ -155,7 +153,6 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/historyCardView"
-                    style="@style/Widget.MaterialComponents.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/factionsCardView"
