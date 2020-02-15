@@ -70,17 +70,18 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/landingPadSizeLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/commodityInputLayout"
                 android:layout_marginTop="8dp"
                 android:hint="@string/landing_pad_size">
 
-                <fr.corenting.edcompanion.views.ClickToSelectEditText
-                    android:id="@+id/landingPadSizeSpinner"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/landingPadSizeAutoCompleteTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:editable="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -101,17 +102,18 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/buyOrSellLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/stockInputLayout"
                 android:layout_marginTop="8dp"
                 android:hint="@string/buy_or_sell">
 
-                <fr.corenting.edcompanion.views.ClickToSelectEditText
-                    android:id="@+id/buyOrSellSpinner"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/buyOrSellAutoCompleteTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:editable="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton

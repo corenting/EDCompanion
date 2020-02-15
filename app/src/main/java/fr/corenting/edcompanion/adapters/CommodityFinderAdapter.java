@@ -3,11 +3,13 @@ package fr.corenting.edcompanion.adapters;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,11 +27,9 @@ import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-import fr.corenting.edcompanion.views.ClickToSelectEditText;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 import fr.corenting.edcompanion.views.LightDarkImageView;
 import fr.corenting.edcompanion.views.SystemInputView;
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
@@ -77,33 +77,49 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 holder.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
         // Landing pad size adapter
-        if (holder.landingPadSizeSpinner.getItems() == null ||
-                holder.landingPadSizeSpinner.getItems().size() == 0) {
+        if (holder.landingPadSizeAutoCompleteTextView.getAdapter() == null ||
+                holder.landingPadSizeAutoCompleteTextView.getAdapter().getCount() == 0) {
             String[] landingPadSizeArray = context.getResources()
                     .getStringArray(R.array.landing_pad_size);
-            holder.landingPadSizeSpinner.setItems(Arrays.asList(landingPadSizeArray));
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
+                    android.R.layout.simple_dropdown_item_1line, landingPadSizeArray);
+            holder.landingPadSizeAutoCompleteTextView.setAdapter(adapter);
         }
 
         // Buy or sell adapter
-        if (holder.buyOrSellSpinner.getItems() == null ||
-                holder.buyOrSellSpinner.getItems().size() == 0) {
+        if (holder.buyOrSellAutoCompleteTextView.getAdapter() == null ||
+                holder.buyOrSellAutoCompleteTextView.getAdapter().getCount() == 0) {
             String[] buySellArray = context.getResources()
                     .getStringArray(R.array.buy_sell_array);
-            holder.buyOrSellSpinner.setItems(Arrays.asList(buySellArray));
-            holder.buyOrSellSpinner.setOnItemSelectedListener(
-                    (item, selectedIndex) -> {
-                        if (selectedIndex == 0) {
-                            holder.stockInputLayout.setHint(context
-                                    .getString(R.string.minimum_stock));
-                            holder.stockInputEditText.setHint(context
-                                    .getString(R.string.minimum_stock));
-                        } else {
-                            holder.stockInputLayout.setHint(context
-                                    .getString(R.string.minimum_demand));
-                            holder.stockInputEditText.setHint(context
-                                    .getString(R.string.minimum_demand));
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
+                    android.R.layout.simple_dropdown_item_1line, buySellArray);
+            holder.buyOrSellAutoCompleteTextView.setAdapter(adapter);
+
+            holder.buyOrSellAutoCompleteTextView.setOnItemSelectedListener(
+                    new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            if (position == 0) {
+                                holder.stockInputLayout.setHint(context
+                                        .getString(R.string.minimum_stock));
+                                holder.stockInputEditText.setHint(context
+                                        .getString(R.string.minimum_stock));
+                            } else {
+                                holder.stockInputLayout.setHint(context
+                                        .getString(R.string.minimum_demand));
+                                holder.stockInputEditText.setHint(context
+                                        .getString(R.string.minimum_demand));
+                            }
                         }
-                    });
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    }
+            );
         }
 
         // Find button
@@ -125,12 +141,14 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
             }
 
             // Convert buy/sell mode to boolean
-            isSellingMode = holder.buyOrSellSpinner.getSelectedIndex() == 1;
+            String[] buySellArray = context.getResources()
+                    .getStringArray(R.array.buy_sell_array);
+            isSellingMode = holder.buyOrSellAutoCompleteTextView.getText().toString() == buySellArray[1];
 
             CommodityFinderSearch result = new CommodityFinderSearch(
                     holder.commodityInputEditText.getText().toString(),
                     holder.systemInputView.getText().toString(),
-                    holder.landingPadSizeSpinner.getText().toString(),
+                    holder.landingPadSizeAutoCompleteTextView.getText().toString(),
                     stock, isSellingMode);
 
             EventBus.getDefault().post(result);
@@ -240,11 +258,11 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         @BindView(R.id.commodityInputEditText)
         DelayAutoCompleteTextView commodityInputEditText;
 
-        @BindView(R.id.landingPadSizeSpinner)
-        ClickToSelectEditText landingPadSizeSpinner;
+        @BindView(R.id.landingPadSizeAutoCompleteTextView)
+        AppCompatAutoCompleteTextView landingPadSizeAutoCompleteTextView;
 
-        @BindView(R.id.buyOrSellSpinner)
-        ClickToSelectEditText buyOrSellSpinner;
+        @BindView(R.id.buyOrSellAutoCompleteTextView)
+        AppCompatAutoCompleteTextView buyOrSellAutoCompleteTextView;
 
         @BindView(R.id.stockInputEditText)
         EditText stockInputEditText;
