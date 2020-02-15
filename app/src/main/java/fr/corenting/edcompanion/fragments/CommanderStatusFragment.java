@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -173,7 +175,7 @@ public class CommanderStatusFragment extends Fragment {
         OAuthUtils.storeUpdatedTokens(getContext(), "", "");
 
         // Show dialog
-        AlertDialog dialog = new AlertDialog.Builder(getContext())
+        AlertDialog dialog = new MaterialAlertDialogBuilder(getContext())
                 .setTitle(R.string.login_again_dialog_title)
                 .setMessage(R.string.login_again_dialog_text)
                 .setPositiveButton(android.R.string.ok, (d, which) -> {

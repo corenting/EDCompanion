@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
             LinearLayout drawerHeader = navigationView.getHeaderView(0)
                     .findViewById(R.id.headerLinearLayout);
             drawerHeader.setBackgroundColor(ContextCompat.getColor(this,
-                    R.color.darkPrimary));
+                    R.color.primaryColorDark));
 
             // Fix text color
             TextView drawerTitleTextView = drawerHeader.findViewById(R.id.drawerTitleTextView);

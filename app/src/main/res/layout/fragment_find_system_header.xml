@@ -31,7 +31,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@string/systems"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
                 android:id="@+id/subtitleTextView"
@@ -41,7 +41,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@string/systems_subtitle"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             <fr.corenting.edcompanion.views.SystemInputView
                 android:id="@+id/systemInputView"

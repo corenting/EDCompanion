@@ -41,14 +41,14 @@
                 android:layout_alignParentStart="true"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
                 android:id="@+id/subtitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/titleTextView"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
             <TextView
                 android:id="@+id/currentShipLabelTextView"
@@ -58,7 +58,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="8dp"
                 android:text="@string/current_ship"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
 
             <TextView
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/currentShipLabelTextView"
                 android:text="@string/system"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/currentShipLabelTextView"
                 android:layout_toEndOf="@id/systemLabelTextView"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
                 android:id="@+id/stationLabelTextView"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/systemLabelTextView"
                 android:text="@string/station_label"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
 
             <TextView
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/systemLabelTextView"
                 android:layout_toEndOf="@id/stationLabelTextView"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
                 android:id="@+id/shipValueLabelTextView"
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/stationLabelTextView"
                 android:text="@string/ship_value"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
 
             <TextView
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/stationLabelTextView"
                 android:layout_toEndOf="@id/shipValueLabelTextView"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
                 android:id="@+id/cargoValueLabelTextView"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/shipValueLabelTextView"
                 android:text="@string/cargo_value"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
 
             <TextView
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/shipValueLabelTextView"
                 android:layout_toEndOf="@id/shipValueLabelTextView"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
         </RelativeLayout>
 
     </RelativeLayout>

@@ -44,7 +44,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text="@string/system"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                     <fr.corenting.edcompanion.views.LightDarkImageView
                         android:id="@+id/logoImageView"
@@ -60,7 +60,7 @@
                         android:layout_below="@id/systemNameTextView"
                         android:layout_marginTop="8dp"
                         android:text="@string/permit_required_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold"
                         android:visibility="gone" />
 
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/permitRequiredTextView"
                         android:text="@string/coordinates_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -80,7 +80,7 @@
                         android:layout_below="@id/permitRequiredTextView"
                         android:layout_toEndOf="@id/coordsLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/allegianceLabelTextView"
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/coordsTextView"
                         android:text="@string/allegiance_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -98,7 +98,7 @@
                         android:layout_below="@id/coordsTextView"
                         android:layout_toEndOf="@id/allegianceLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/powerLabelTextView"
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/allegianceLabelTextView"
                         android:text="@string/power_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -116,7 +116,7 @@
                         android:layout_below="@id/allegianceLabelTextView"
                         android:layout_toEndOf="@id/powerLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/securityLabelTextView"
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/powerLabelTextView"
                         android:text="@string/security_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -134,7 +134,7 @@
                         android:layout_below="@id/powerLabelTextView"
                         android:layout_toEndOf="@id/securityLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/governmentLabelTextView"
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/securityLabelTextView"
                         android:text="@string/government_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -152,7 +152,7 @@
                         android:layout_below="@id/securityLabelTextView"
                         android:layout_toEndOf="@id/governmentLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/controllingFactionLabelTextView"
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/governmentLabelTextView"
                         android:text="@string/controlling_faction_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -170,7 +170,7 @@
                         android:layout_below="@id/governmentLabelTextView"
                         android:layout_toEndOf="@id/controllingFactionLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/economyLabelTextView"
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/controllingFactionLabelTextView"
                         android:text="@string/economy_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -188,7 +188,7 @@
                         android:layout_below="@id/controllingFactionLabelTextView"
                         android:layout_toEndOf="@id/economyLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/stateLabelTextView"
@@ -196,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/economyLabelTextView"
                         android:text="@string/state_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -206,7 +206,7 @@
                         android:layout_below="@id/economyLabelTextView"
                         android:layout_toEndOf="@id/stateLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/populationLabelTextView"
@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/stateLabelTextView"
                         android:text="@string/population_label"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -224,7 +224,7 @@
                         android:layout_below="@id/stateLabelTextView"
                         android:layout_toEndOf="@id/populationLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>
 

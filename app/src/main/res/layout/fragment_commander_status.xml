@@ -36,7 +36,7 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="@string/commander"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <RelativeLayout
                     android:id="@+id/creditsContainer"
@@ -61,7 +61,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_toEndOf="@+id/creditsImageView"
                         android:gravity="center_vertical"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -87,7 +87,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_toEndOf="@+id/locationImageView"
                         android:gravity="center_vertical"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                 </RelativeLayout>
 
                 <TextView
@@ -97,7 +97,7 @@
                     android:layout_below="@+id/locationContainer"
                     android:layout_marginTop="8dp"
                     android:text="@string/faction_ranks"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <include
                     android:id="@+id/federationRankLayout"
@@ -121,7 +121,7 @@
                     android:layout_below="@+id/empireRankLayout"
                     android:layout_marginTop="8dp"
                     android:text="@string/player_ranks"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <include
                     android:id="@+id/combatRankLayout"

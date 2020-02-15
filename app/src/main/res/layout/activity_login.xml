@@ -29,6 +29,6 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="8dp"
             android:text="@string/login_redirect"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </RelativeLayout>
 </LinearLayout>

@@ -27,7 +27,7 @@
             android:layout_alignParentStart="true"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
             android:id="@+id/permitRequiredTextView"
@@ -36,7 +36,7 @@
             android:layout_below="@id/titleTextView"
             android:layout_marginTop="8dp"
             android:text="@string/permit_required_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/permitRequiredTextView"
             android:text="@string/allegiance_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_toEndOf="@id/allegianceLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/securityLabelTextView"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/allegianceLabelTextView"
             android:text="@string/security_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/allegianceLabelTextView"
             android:layout_toEndOf="@id/securityLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/governmentLabelTextView"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/securityLabelTextView"
             android:text="@string/government_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/securityLabelTextView"
             android:layout_toEndOf="@id/governmentLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/economyLabelTextView"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/governmentLabelTextView"
             android:text="@string/economy_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/governmentLabelTextView"
             android:layout_toEndOf="@id/economyLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </RelativeLayout>
 

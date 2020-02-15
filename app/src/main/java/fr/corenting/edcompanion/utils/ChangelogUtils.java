@@ -4,6 +4,9 @@ import android.content.Context;
 import android.text.Html;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
 
@@ -21,7 +24,7 @@ public class ChangelogUtils {
         }
 
         // Else show dialog
-        AlertDialog dialog = new AlertDialog.Builder(c)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(c)
                 .setTitle(R.string.changelog_title)
                 .setMessage(Html.fromHtml(c.getString(R.string.changelog_message)))
                 .setPositiveButton(android.R.string.ok,

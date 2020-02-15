@@ -28,7 +28,7 @@
             android:layout_toStartOf="@id/isPlanetaryImageView"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <fr.corenting.edcompanion.views.LightDarkImageView
             android:id="@+id/isPlanetaryImageView"
@@ -44,7 +44,7 @@
             android:layout_below="@id/titleTextView"
             android:layout_marginTop="8dp"
             android:text="@string/permit_required_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/permitRequiredTextView"
             android:text="@string/distance_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/permitRequiredTextView"
             android:layout_toEndOf="@id/distanceLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/distanceToStarLabelTextView"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/distanceLabelTextView"
             android:text="@string/distance_to_star"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/distanceTextView"
             android:layout_toEndOf="@id/distanceLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/lastUpdateLabelTextView"
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/distanceToStarLabelTextView"
             android:text="@string/last_update_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/distanceToStarLabelTextView"
             android:layout_toEndOf="@id/landingPadLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/landingPadLabelTextView"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/lastUpdateLabelTextView"
             android:text="@string/landing_pad_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_toEndOf="@id/landingPadLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/stockLabelTextView"
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/landingPadLabelTextView"
             android:text="@string/stock_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/landingPadLabelTextView"
             android:layout_toEndOf="@id/landingPadLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/priceLabelTextView"
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/stockLabelTextView"
             android:text="@string/price_label"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/stockLabelTextView"
             android:layout_toEndOf="@id/landingPadLabelTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </RelativeLayout>
 

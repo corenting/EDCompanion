@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -77,7 +78,7 @@ public class ClickToSelectEditText extends TextInputEditText {
 
     private void configureOnClickListener() {
         setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            AlertDialog.Builder builder = new MaterialAlertDialogBuilder(view.getContext());
             builder.setTitle(mHint);
             builder.setSingleChoiceItems(mListableItems, selectedIndex, (dialogInterface, i) -> {
                 setText(mListableItems[i]);

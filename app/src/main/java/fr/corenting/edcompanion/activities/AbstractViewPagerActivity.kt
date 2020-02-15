@@ -42,10 +42,9 @@ abstract class AbstractViewPagerActivity : AppCompatActivity() {
         // TabLayout
         tabLayout.setupWithViewPager(viewPager)
         if (ThemeUtils.isDarkThemeEnabled(this)) {
-
-            tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.darkPrimary))
+            tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColorDark))
         } else {
-            tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
+            tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor))
         }
         tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.tabTextSelected),
                 ContextCompat.getColor(this, R.color.tabText))

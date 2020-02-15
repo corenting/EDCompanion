@@ -14,6 +14,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
@@ -50,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         } else {
             // Show dialog
-            AlertDialog dialog = new AlertDialog.Builder(this)
+            AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.login_dialog_title)
                     .setMessage(R.string.login_dialog_text)
                     .setPositiveButton(android.R.string.ok,
@@ -77,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             setResult(Activity.RESULT_OK);
             finish();
         } else {
-            AlertDialog dialog = new AlertDialog.Builder(this)
+            AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.login_dialog_error_title)
                     .setMessage(R.string.login_dialog_error_text)
                     .setOnCancelListener(d -> finish())

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:maxLines="3"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/secondCellTextView"
@@ -19,7 +19,7 @@
         android:layout_margin="4dp"
         android:layout_toEndOf="@id/firstCellTextView"
         android:maxLines="3"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/thirdCellTextView"
@@ -28,6 +28,6 @@
         android:layout_margin="4dp"
         android:layout_toEndOf="@id/secondCellTextView"
         android:maxLines="3"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </merge>

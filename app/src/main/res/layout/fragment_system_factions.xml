@@ -46,7 +46,7 @@
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:text="@string/current_state"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
 
                         <TextView
@@ -55,7 +55,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/currentStateTextView"
                             android:text="@string/controlling_faction_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textStyle="bold" />
 
                         <TextView
@@ -65,7 +65,7 @@
                             android:layout_below="@id/currentStateTextView"
                             android:layout_toEndOf="@id/controllingFactionLabelTextView"
                             android:text="@string/unknown"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                         <TextView
                             android:id="@+id/allegianceLabelTextView"
@@ -73,7 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/controllingFactionLabelTextView"
                             android:text="@string/allegiance_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textStyle="bold" />
 
                         <TextView
@@ -83,7 +83,7 @@
                             android:layout_below="@id/controllingFactionLabelTextView"
                             android:layout_toEndOf="@id/allegianceLabelTextView"
                             android:text="@string/unknown"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                         <TextView
                             android:id="@+id/powerLabelTextView"
@@ -91,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/allegianceLabelTextView"
                             android:text="@string/power_label"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textStyle="bold" />
 
                         <TextView
@@ -101,7 +101,7 @@
                             android:layout_below="@id/allegianceLabelTextView"
                             android:layout_toEndOf="@id/powerLabelTextView"
                             android:text="@string/unknown"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
                     </RelativeLayout>
@@ -134,7 +134,7 @@
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:text="@string/factions"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                         <TextView
                             android:id="@+id/factionsListTextView"
@@ -145,7 +145,7 @@
                             android:layout_marginTop="8dp"
                             android:ellipsize="end"
                             android:text="@string/unknown"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     </RelativeLayout>
 
@@ -177,7 +177,7 @@
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:text="@string/factions_history"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                         <me.zhanghai.android.materialprogressbar.MaterialProgressBar
                             android:id="@+id/chartProgressBar"
@@ -198,7 +198,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="8dp"
                             android:text="@string/no_chart_error"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:visibility="gone" />
 
                         <com.github.mikephil.charting.charts.LineChart

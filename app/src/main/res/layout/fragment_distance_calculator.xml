@@ -31,7 +31,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@string/distance_calculator"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
                 android:id="@+id/subtitleTextView"
@@ -41,7 +41,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@string/distance_calculator_subtitle"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             <fr.corenting.edcompanion.views.SystemInputView
                 android:id="@+id/firstSystemInputView"
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
                 android:id="@+id/warningTextView"
@@ -118,7 +118,7 @@
                 android:layout_below="@id/resultTextView"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/warningText" />
 
         </RelativeLayout>

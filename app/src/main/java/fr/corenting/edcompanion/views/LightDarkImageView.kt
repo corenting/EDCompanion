@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.utils.ThemeUtils
 
 class LightDarkImageView : AppCompatImageView {
@@ -27,6 +28,10 @@ class LightDarkImageView : AppCompatImageView {
         if (ThemeUtils.isDarkThemeEnabled(context)) {
             ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(
                     ContextCompat.getColor(context, android.R.color.white)))
+        }
+        else {
+            ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(
+                    ContextCompat.getColor(context, android.R.color.black)))
         }
     }
 }

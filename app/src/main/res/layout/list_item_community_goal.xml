@@ -26,14 +26,14 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
             android:id="@+id/objectiveTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:visibility="gone" />
 
         <ImageView
@@ -55,7 +55,7 @@
             android:layout_toEndOf="@id/locationImageView"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <ImageView
             android:id="@+id/locationImageView"
@@ -76,7 +76,7 @@
             android:layout_toEndOf="@id/locationImageView"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <ImageView
             android:id="@+id/remainingImageView"
@@ -97,7 +97,7 @@
             android:layout_toEndOf="@id/remainingImageView"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <ImageView
             android:id="@+id/peopleImageView"
@@ -118,7 +118,7 @@
             android:layout_toEndOf="@id/peopleImageView"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <ImageView
             android:id="@+id/tierImageView"
@@ -139,7 +139,7 @@
             android:layout_toEndOf="@id/tierImageView"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <TextView
             android:id="@+id/descriptionTextView"
@@ -149,7 +149,7 @@
             android:layout_marginTop="18dp"
             android:ellipsize="end"
             android:maxLines="5"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <fr.corenting.edcompanion.views.TableView
             android:id="@+id/rewardsTableView"

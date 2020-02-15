@@ -43,9 +43,9 @@ public class CommanderFragment extends Fragment {
 
         // Style
         if (ThemeUtils.isDarkThemeEnabled(getContext())) {
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.darkPrimary));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColorDark));
         } else {
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColor));
         }
         tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
                 getResources().getColor(R.color.tabText));

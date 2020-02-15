@@ -42,7 +42,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text="@string/commodity"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                     <TextView
                         android:id="@+id/isRareTextView"
@@ -51,7 +51,7 @@
                         android:layout_below="@id/commodityNameTextView"
                         android:layout_marginTop="8dp"
                         android:text="@string/rare_commodity"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold"
                         android:visibility="gone" />
 
@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/isRareTextView"
                         android:text="@string/category"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -71,7 +71,7 @@
                         android:layout_below="@id/isRareTextView"
                         android:layout_toEndOf="@id/categoryLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/averageBuyLabelTextView"
@@ -80,7 +80,7 @@
                         android:layout_below="@id/categoryTextView"
                         android:layout_marginTop="8dp"
                         android:text="@string/average_buy_price"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -91,7 +91,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_toEndOf="@id/averageBuyLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/averageSellLabelTextView"
@@ -99,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/averageBuyLabelTextView"
                         android:text="@string/average_sell_price"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -109,7 +109,7 @@
                         android:layout_below="@id/averageBuyLabelTextView"
                         android:layout_toEndOf="@id/averageSellLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/minBuyLabelTextView"
@@ -118,7 +118,7 @@
                         android:layout_below="@id/averageSellLabelTextView"
                         android:layout_marginTop="8dp"
                         android:text="@string/min_buy_price"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -129,7 +129,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_toEndOf="@id/minBuyLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <TextView
                         android:id="@+id/maxSellLabelTextView"
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/minBuyLabelTextView"
                         android:text="@string/max_sell_price"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold" />
 
                     <TextView
@@ -147,7 +147,7 @@
                         android:layout_below="@id/minBuyLabelTextView"
                         android:layout_toEndOf="@id/maxSellLabelTextView"
                         android:text="@string/unknown"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>
 
