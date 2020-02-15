@@ -71,9 +71,6 @@ class SystemInputView : RelativeLayout {
             systemMyLocationButton.visibility = View.VISIBLE
 
             systemMyLocationButton.setOnClickListener {
-                if (systemInputEditText.loadingIndicator != null) {
-                    systemInputEditText.loadingIndicator.visibility = View.VISIBLE
-                }
                 PlayerNetworkUtils.getCurrentPlayerNetwork(context).getCommanderPosition(bus)
             }
 
@@ -88,7 +85,6 @@ class SystemInputView : RelativeLayout {
         systemInputEditText.setOnItemClickListener { adapterView, _, position, _ ->
             systemInputEditText.setText(adapterView.getItemAtPosition(position) as String)
         }
-        systemInputEditText.loadingIndicator = progressBar
     }
 
     fun setOnSubmit(runnable: Runnable) {

@@ -53,72 +53,65 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commodityInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/systemInputView"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:hint="@string/commodity">
 
                 <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
                     android:id="@+id/commodityInputEditText"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/commodity"
                     android:inputType="textNoSuggestions" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
-                android:id="@+id/commodityProgressBar"
-                style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/systemInputView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp"
-                android:indeterminate="true"
-                android:visibility="gone"
-                app:mpb_progressStyle="circular" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/landingPadSizeLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/commodityInputLayout"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:hint="@string/landing_pad_size">
 
                 <fr.corenting.edcompanion.views.ClickToSelectEditText
                     android:id="@+id/landingPadSizeSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/landing_pad_size" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/stockInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/landingPadSizeLayout"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:hint="@string/minimum_stock">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/stockInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/minimum_stock"
                     android:inputType="numberSigned" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/buyOrSellLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/stockInputLayout"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:hint="@string/buy_or_sell">
 
                 <fr.corenting.edcompanion.views.ClickToSelectEditText
                     android:id="@+id/buyOrSellSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/buy_or_sell" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

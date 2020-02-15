@@ -70,7 +70,6 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
         // Ship autocomplete
         holder.shipInputEditText.setThreshold(3);
-        holder.shipInputEditText.setLoadingIndicator(holder.shipProgressBar);
         holder.shipInputEditText.setAdapter(new AutoCompleteAdapter(context,
                 AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SHIPS));
         holder.shipInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
@@ -159,9 +158,6 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
         @BindView(R.id.shipInputEditText)
         DelayAutoCompleteTextView shipInputEditText;
-
-        @BindView(R.id.shipProgressBar)
-        MaterialProgressBar shipProgressBar;
 
         @BindView(R.id.findButton)
         Button findButton;

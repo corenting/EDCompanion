@@ -72,7 +72,6 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
         // Ship autocomplete
         holder.commodityInputEditText.setThreshold(3);
-        holder.commodityInputEditText.setLoadingIndicator(holder.commodityProgressBar);
         holder.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_COMMODITIES));
         holder.commodityInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
                 holder.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
@@ -252,9 +251,6 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
         @BindView(R.id.stockInputLayout)
         TextInputLayout stockInputLayout;
-
-        @BindView(R.id.commodityProgressBar)
-        MaterialProgressBar commodityProgressBar;
 
         @BindView(R.id.findButton)
         Button findButton;

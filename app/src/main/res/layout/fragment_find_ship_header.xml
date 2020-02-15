@@ -45,38 +45,28 @@
 
             <fr.corenting.edcompanion.views.SystemInputView
                 android:id="@+id/systemInputView"
-                app:hint="@string/current_system"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/subtitleTextView"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                app:hint="@string/current_system" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commodityInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/systemInputView"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:hint="@string/ship">
 
                 <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
                     android:id="@+id/shipInputEditText"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/ship"
                     android:inputType="textNoSuggestions" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
-                android:id="@+id/shipProgressBar"
-                style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/systemInputView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp"
-                android:indeterminate="true"
-                android:visibility="gone"
-                app:mpb_progressStyle="circular" />
 
             <Button
                 android:id="@+id/findButton"

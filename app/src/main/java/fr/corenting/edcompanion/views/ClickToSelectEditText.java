@@ -6,7 +6,8 @@ import android.text.InputType;
 import android.util.AttributeSet;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatEditText;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import fr.corenting.edcompanion.R;
 // Code from https://gist.github.com/rodrigohenriques/77398a81b5d01ac71c3b
 // By rodrigohenriques
 
-public class ClickToSelectEditText extends AppCompatEditText {
+public class ClickToSelectEditText extends TextInputEditText {
 
     List<String> mItems;
     String[] mListableItems;
