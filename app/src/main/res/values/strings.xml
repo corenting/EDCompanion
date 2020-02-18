@@ -341,9 +341,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.8.1</b><br />
+            <b>Version 2.9</b><br />
             <ul>
-                <li>Fix crash when using Frontier account</li><br />
+                <li>Update app theme to better fit new Android guidelines</li><br />
             </ul>
         ]]>
     </string>
