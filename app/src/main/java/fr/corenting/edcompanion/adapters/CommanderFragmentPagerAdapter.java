@@ -18,7 +18,7 @@ public class CommanderFragmentPagerAdapter extends FragmentPagerAdapter {
     private Context context;
 
     public CommanderFragmentPagerAdapter(FragmentManager fm, Context context) {
-        super(fm);
+        super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         fragmentManager = fm;
         this.context = context;
         playerNetwork = PlayerNetworkUtils.getCurrentPlayerNetwork(context);

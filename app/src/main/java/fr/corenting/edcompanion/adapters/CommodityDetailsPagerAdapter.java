@@ -17,7 +17,7 @@ public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
     private Context context;
 
     public CommodityDetailsPagerAdapter(FragmentManager fm, Context context) {
-        super(fm);
+        super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.fragmentManager = fm;
         this.context = context;
     }
