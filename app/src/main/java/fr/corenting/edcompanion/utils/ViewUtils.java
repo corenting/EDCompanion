@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.utils;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -40,9 +39,7 @@ public class ViewUtils {
     }
 
     public static void setToolbarElevation(AppBarLayout appBarLayout, float elevation) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.setStateListAnimator(null);
-        }
+        appBarLayout.setStateListAnimator(null);
         ViewCompat.setElevation(appBarLayout, elevation);
     }
 }
