@@ -24,7 +24,6 @@ import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter.HeaderViewHolder,
         CommoditiesListAdapter.ResultViewHolder, CommoditiesListResult> {

@@ -1,14 +1,10 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -22,12 +18,10 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.events.ShipFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
-import fr.corenting.edcompanion.utils.ThemeUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 import fr.corenting.edcompanion.views.LightDarkImageView;
 import fr.corenting.edcompanion.views.SystemInputView;
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 

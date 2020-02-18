@@ -10,9 +10,6 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommodityDetailsBuyFragment;
 import fr.corenting.edcompanion.fragments.CommodityDetailsFragment;
 import fr.corenting.edcompanion.fragments.CommodityDetailsSellFragment;
-import fr.corenting.edcompanion.fragments.SystemDetailsFragment;
-import fr.corenting.edcompanion.fragments.SystemFactionsFragment;
-import fr.corenting.edcompanion.fragments.SystemStationsFragment;
 
 public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
 

@@ -48,7 +48,6 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
     }
 
     @Override
-    @SuppressWarnings("unchecked cast")
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (isHeader(holder.getAdapterPosition())) {
             bindHeaderViewHolder((THeaderViewHolder) holder);

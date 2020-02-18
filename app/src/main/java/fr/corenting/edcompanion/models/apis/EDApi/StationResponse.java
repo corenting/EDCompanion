@@ -3,7 +3,6 @@ package fr.corenting.edcompanion.models.apis.EDApi;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
-import java.util.List;
 
 public class StationResponse {
     @SerializedName("distance_to_star")

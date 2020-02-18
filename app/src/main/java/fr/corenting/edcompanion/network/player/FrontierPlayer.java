@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.Ship;

@@ -12,13 +12,13 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.threeten.bp.Instant;
 
 import java.text.NumberFormat;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -265,7 +265,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         AppCompatAutoCompleteTextView buyOrSellAutoCompleteTextView;
 
         @BindView(R.id.stockInputEditText)
-        EditText stockInputEditText;
+        TextInputEditText stockInputEditText;
 
         @BindView(R.id.stockInputLayout)
         TextInputLayout stockInputLayout;

@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
         NotificationsUtils.refreshPushSubscriptions(this);
 
         // Show changelog
-        ChangelogUtils.ShowChangelog(this);
+        ChangelogUtils.INSTANCE.showChangelog(this);
     }
 
     @Override
