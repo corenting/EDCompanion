@@ -62,5 +62,4 @@ abstract class AbstractViewPagerActivity : AppCompatActivity() {
     abstract fun getDefaultData(): String
     abstract fun getPagerAdapter(): FragmentPagerAdapter
     abstract fun getData()
-
 }

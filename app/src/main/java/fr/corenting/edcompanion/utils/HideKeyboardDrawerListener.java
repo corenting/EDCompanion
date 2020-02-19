@@ -5,7 +5,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class HideKeyboardDrawerListener implements  DrawerLayout.DrawerListener {
+public class HideKeyboardDrawerListener implements DrawerLayout.DrawerListener {
 
     private View rootView;
 

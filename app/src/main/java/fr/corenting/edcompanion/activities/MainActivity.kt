@@ -1,0 +1,260 @@
+package fr.corenting.edcompanion.activities
+
+import android.content.Intent
+import android.os.Bundle
+import android.view.MenuItem
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.navigation.NavigationView
+import fr.corenting.edcompanion.R
+import fr.corenting.edcompanion.fragments.*
+import fr.corenting.edcompanion.models.events.ServerStatus
+import fr.corenting.edcompanion.network.ServerStatusNetwork
+import fr.corenting.edcompanion.utils.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.include_app_bar.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    companion object {
+        private const val KEY_CURRENT_TITLE = "CURRENT_TITLE"
+        private const val KEY_CURRENT_SUBTITLE = "CURRENT_SUBTITLE"
+        private const val KEY_CURRENT_TAG = "CURRENT_TAG"
+    }
+
+    private lateinit var fragmentManager: FragmentManager
+    private lateinit var currentTitle: CharSequence
+    private lateinit var currentSubtitle: CharSequence
+    private lateinit var currentFragmentTag: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeUtils.setTheme(this)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Set toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // Drawer toggle
+        val toggle = ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        drawerLayout.addDrawerListener(HideKeyboardDrawerListener(drawerLayout.rootView))
+        toggle.syncState()
+
+        // Setup navigation view and fake click the first item
+        navView.setNavigationItemSelectedListener(this)
+
+        // Set initial fragment
+        fragmentManager = supportFragmentManager
+        if (savedInstanceState == null) {
+            navView.setCheckedItem(navView.menu.getItem(0).itemId)
+            switchOnNavigation(getString(R.string.community_goals), R.id.nav_cg)
+        } else {
+            currentTitle = savedInstanceState.getCharSequence(KEY_CURRENT_TITLE).toString()
+            currentSubtitle = savedInstanceState.getCharSequence(KEY_CURRENT_SUBTITLE).toString()
+            currentFragmentTag = savedInstanceState.getString(KEY_CURRENT_TAG).toString()
+            val fragment = fragmentManager.findFragmentByTag(currentFragmentTag)
+            ViewUtils.switchFragment(fragmentManager, fragment, currentFragmentTag)
+            updateActionBar()
+        }
+
+        // Update the server status
+        updateServerStatus()
+
+        // Set listener on server status text to refresh it, and set theme
+        val drawerSubtitleTextView = navView.getHeaderView(0)
+                .findViewById<TextView>(R.id.drawerSubtitleTextView)
+        navView.itemIconTintList = null
+        if (ThemeUtils.isDarkThemeEnabled(this)) {
+            val drawerHeader = navView.getHeaderView(0)
+                    .findViewById<LinearLayout>(R.id.headerLinearLayout)
+            drawerHeader.setBackgroundColor(ContextCompat.getColor(this,
+                    R.color.primaryColorDark))
+
+            // Fix text color
+            val drawerTitleTextView = drawerHeader.findViewById<TextView>(R.id.drawerTitleTextView)
+            drawerTitleTextView.setTextColor(ContextCompat.getColor(this,
+                    android.R.color.white))
+            drawerSubtitleTextView.setTextColor(ContextCompat.getColor(this,
+                    android.R.color.white))
+        }
+        drawerSubtitleTextView.setOnClickListener { v -> updateServerStatus() }
+
+        // Push notifications setup
+        NotificationsUtils.refreshPushSubscriptions(this)
+
+        // Show changelog
+        ChangelogUtils.showChangelog(this)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putCharSequence(KEY_CURRENT_TITLE, currentTitle)
+        outState.putCharSequence(KEY_CURRENT_SUBTITLE, currentSubtitle)
+        outState.putString(KEY_CURRENT_TAG, currentFragmentTag)
+        super.onSaveInstanceState(outState)
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return switchOnNavigation(item.title.toString(), item.itemId)
+    }
+
+    override fun onResume() {
+        updateActionBar()
+        super.onResume()
+    }
+
+    private fun updateActionBar() {
+        supportActionBar?.subtitle = currentSubtitle
+        title = currentTitle
+        fixToolbarElevation()
+    }
+
+    private fun updateServerStatus() {
+        val textView = navView.getHeaderView(0)
+                .findViewById<TextView>(R.id.drawerSubtitleTextView)
+        textView.text = getString(R.string.updating_server_status)
+        ServerStatusNetwork.getStatus(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onServerStatusEvent(status: ServerStatus) {
+        val content = if (status.success) status.status else getString(R.string.unknown)
+        val textView = navView.getHeaderView(0)
+                .findViewById<TextView>(R.id.drawerSubtitleTextView)
+        textView.text = getString(R.string.server_status, content)
+    }
+
+    private fun switchOnNavigation(title: String, id: Int): Boolean {
+        expandToolbar()
+
+        // Set title and subtitle default values
+        if (id != R.id.nav_settings && id != R.id.nav_about) {
+            currentTitle = title
+            currentSubtitle = ""
+        }
+
+        when (id) {
+            R.id.nav_cg -> {
+                switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG)
+                currentSubtitle = getString(R.string.inara_credits)
+            }
+            R.id.nav_cmdr -> {
+                switchFragment(CommanderFragment.COMMANDER_FRAGMENT)
+                val commanderName = SettingsUtils.getCommanderName(this)
+                currentTitle = if (commanderName == "")
+                    getString(R.string.commander)
+                else
+                    commanderName
+            }
+            R.id.nav_galnet_news -> {
+                switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG)
+            }
+            R.id.nav_news -> {
+                switchFragment(NewsFragment.NEWS_FRAGMENT_TAG)
+            }
+            R.id.nav_systems -> {
+                switchFragment(SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG)
+                currentSubtitle = getString(R.string.edsm_credits)
+            }
+            R.id.nav_distance_calculator -> {
+                switchFragment(DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG)
+                currentSubtitle = getString(R.string.eddb_credits)
+            }
+            R.id.nav_commodity_finder -> {
+                switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG)
+                currentSubtitle = getString(R.string.eddb_eddn_credits)
+            }
+            R.id.nav_commodities_list -> {
+                switchFragment(CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG)
+                currentSubtitle = getString(R.string.eddb_eddn_credits)
+            }
+            R.id.nav_ship_finder -> {
+                switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG)
+                currentSubtitle = getString(R.string.eddb_credits)
+            }
+            R.id.nav_about -> {
+                val i = Intent(this, AboutActivity::class.java)
+                startActivity(i)
+                return false
+            }
+            R.id.nav_settings -> {
+                val i = Intent(this, SettingsActivity::class.java)
+                startActivity(i)
+                return false
+            }
+        }
+
+        updateActionBar()
+        return true
+    }
+
+    private fun switchFragment(tag: String) {
+        currentFragmentTag = tag
+
+        // Get previous fragment if exists
+        val fragment = fragmentManager.findFragmentByTag(tag)
+        if (fragment != null) {
+            fragmentManager.beginTransaction().replace(R.id.fragmentContent, fragment, tag).commit()
+            return
+        }
+
+        // Else
+        when (tag) {
+            GalnetFragment.GALNET_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, GalnetFragment(), tag)
+            NewsFragment.NEWS_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, NewsFragment(), tag)
+            SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, SystemFinderFragment(), tag)
+            CommanderFragment.COMMANDER_FRAGMENT -> ViewUtils.switchFragment(fragmentManager, CommanderFragment(), tag)
+            DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, DistanceCalculatorFragment(), tag)
+            ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, ShipFinderFragment(), tag)
+            CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, CommodityFinderFragment(), tag)
+            CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, CommoditiesListFragment(), tag)
+            else -> ViewUtils.switchFragment(fragmentManager, CommunityGoalsFragment(), tag)
+        }
+    }
+
+    private fun expandToolbar() {
+        val appBarLayout = findViewById<AppBarLayout>(R.id.appBar)
+        appBarLayout?.setExpanded(true)
+    }
+
+    private fun fixToolbarElevation() {
+        // Set toolbar elevation to prevent shadow with tabLayout
+        if (currentFragmentTag == CommanderFragment.COMMANDER_FRAGMENT) {
+            ViewUtils.setToolbarElevation(appBar, 0f)
+        } else {
+            ViewUtils.setToolbarElevation(appBar, ViewUtils.dpToPx(this, 4))
+        }
+    }
+}
