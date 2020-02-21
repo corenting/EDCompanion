@@ -1,5 +1,6 @@
 ---
 title: EDCompanion
+layout: page
 ---
 
 # Download the app
