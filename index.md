@@ -1,3 +1,5 @@
+# EDCompanion
+
 ## Download the app
 
 You can download the app on Google Play Store (recommended : auto-updates and smaller download size) here :
