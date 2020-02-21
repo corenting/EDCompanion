@@ -1,4 +1,4 @@
-## Commander feature
+# Commander feature
 
 The commander tab of EDCompanion allows you to see statistics about your in-game CMDR. Multiple providers can be used to get informations from the game:
 - Frontier API (directly from the game API without using any third-party services)
@@ -8,7 +8,7 @@ The commander tab of EDCompanion allows you to see statistics about your in-game
 Please note that EDSM and Inara are third-party companion websites. They are not affiliated with EDCompanion or Frontier Developments.
 If you want to use them, **you need to create an account** on these service. You also need to **sync your game data to these services**, which will not be covered here.
 
-### Providers comparison
+## Providers comparison
 
 The data available varies between the different services :
 
