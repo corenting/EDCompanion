@@ -71,8 +71,8 @@ class LoginActivity : AppCompatActivity() {
             val dialog = MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.login_dialog_error_title)
                     .setMessage(R.string.login_dialog_error_text)
-                    .setOnCancelListener { d -> finish() }
-                    .setOnDismissListener { d -> finish() }
+                    .setOnCancelListener { finish() }
+                    .setOnDismissListener { finish() }
                     .setPositiveButton(android.R.string.ok) { d, _ -> d.dismiss() }
                     .setNegativeButton(android.R.string.cancel) { d, _ -> d.dismiss() }
                     .create()

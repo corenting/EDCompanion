@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawerSubtitleTextView.setTextColor(ContextCompat.getColor(this,
                     android.R.color.white))
         }
-        drawerSubtitleTextView.setOnClickListener { v -> updateServerStatus() }
+        drawerSubtitleTextView.setOnClickListener { updateServerStatus() }
 
         // Push notifications setup
         NotificationsUtils.refreshPushSubscriptions(this)
