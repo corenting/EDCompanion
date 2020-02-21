@@ -1,5 +1,5 @@
 ---
-title: EDCompanion - An Android companion app for Elite Dangerous
+title: EDCompanion
 ---
 
 # Download the app
