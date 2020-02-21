@@ -1,4 +1,8 @@
-# Commander feature
+---
+title: Commander feature
+---
+
+## How it works
 
 The commander tab of EDCompanion allows you to see statistics about your in-game CMDR. Multiple providers can be used to get informations from the game:
 - Frontier API (directly from the game API without using any third-party services)
