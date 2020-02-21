@@ -14,7 +14,7 @@ import fr.corenting.edcompanion.models.SystemHistoryResult;
 import fr.corenting.edcompanion.models.apis.EDApi.StationResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystem;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemResponse;
 import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.models.events.SystemHistory;
@@ -30,20 +30,20 @@ public class SystemNetwork {
         EDSMRetrofit retrofit = RetrofitSingleton.getInstance()
                 .getEDSMRetrofit(ctx.getApplicationContext());
 
-        retrofit2.Callback<List<EDSMSystem>> callback = new retrofit2.Callback<List<EDSMSystem>>() {
+        retrofit2.Callback<List<EDSMSystemResponse>> callback = new retrofit2.Callback<List<EDSMSystemResponse>>() {
             @Override
             @EverythingIsNonNull
-            public void onResponse(Call<List<EDSMSystem>> call,
-                                   retrofit2.Response<List<EDSMSystem>> response) {
+            public void onResponse(Call<List<EDSMSystemResponse>> call,
+                                   retrofit2.Response<List<EDSMSystemResponse>> response) {
 
-                List<EDSMSystem> body = response.body();
+                List<EDSMSystemResponse> body = response.body();
                 ResultsList<SystemFinderResult> convertedResults;
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
                     List<SystemFinderResult> resultsList = new ArrayList<>();
                     try {
-                        for (EDSMSystem resultItem : body) {
+                        for (EDSMSystemResponse resultItem : body) {
                             resultsList.add(
                                     SystemFinderResult.Companion.fromEDSMSystem(resultItem));
                         }
@@ -59,7 +59,7 @@ public class SystemNetwork {
 
             @Override
             @EverythingIsNonNull
-            public void onFailure(Call<List<EDSMSystem>> call, Throwable t) {
+            public void onFailure(Call<List<EDSMSystemResponse>> call, Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
                         new ArrayList<SystemFinderResult>()));
             }

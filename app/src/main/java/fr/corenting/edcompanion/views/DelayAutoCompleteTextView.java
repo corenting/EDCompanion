@@ -20,7 +20,7 @@ public class DelayAutoCompleteTextView extends
     private final Handler mHandler = new AutoCompleteHandler(this);
 
     private void performFiltering(Message msg) {
-        DelayAutoCompleteTextView.super.performFiltering((CharSequence) msg.obj, msg.arg1);
+        super.performFiltering((CharSequence) msg.obj, msg.arg1);
     }
 
     public DelayAutoCompleteTextView(Context context, AttributeSet attrs) {

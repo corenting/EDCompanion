@@ -8,20 +8,20 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformationResponse;
 
-public class EDSMDeserializer implements JsonDeserializer<EDSMSystemInformation> {
+public class EDSMDeserializer implements JsonDeserializer<EDSMSystemInformationResponse> {
 
     @Override
-    public EDSMSystemInformation deserialize(JsonElement element, Type type,
-                                             JsonDeserializationContext deserializationContext)
+    public EDSMSystemInformationResponse deserialize(JsonElement element, Type type,
+                                                     JsonDeserializationContext deserializationContext)
             throws JsonParseException {
         if (element.isJsonArray()) {
             return null;
         }
         else {
             Gson gson = new Gson();
-            return gson.fromJson(element.getAsJsonObject(), EDSMSystemInformation.class);
+            return gson.fromJson(element.getAsJsonObject(), EDSMSystemInformationResponse.class);
         }
     }
 

@@ -2,7 +2,7 @@ package fr.corenting.edcompanion.models.apis.EDSM;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EDSMServerStatus {
+public class EDSMServerStatusResponse {
     @SerializedName("type")
     public String Type;
     @SerializedName("message")

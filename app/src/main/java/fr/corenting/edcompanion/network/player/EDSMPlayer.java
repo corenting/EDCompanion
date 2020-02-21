@@ -10,9 +10,9 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.events.CommanderPosition;
 import fr.corenting.edcompanion.models.events.Credits;
 import fr.corenting.edcompanion.models.events.Ranks;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMCredits;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMPosition;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMRanks;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMCreditsResponse;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMPositionResponse;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMRanksResponse;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import fr.corenting.edcompanion.utils.SettingsUtils;
@@ -83,11 +83,11 @@ public class EDSMPlayer extends PlayerNetwork {
 
     @Override
     public void getRanks() {
-        retrofit2.Callback<EDSMRanks> callback = new retrofit2.Callback<EDSMRanks>() {
+        retrofit2.Callback<EDSMRanksResponse> callback = new retrofit2.Callback<EDSMRanksResponse>() {
             @Override
-            public void onResponse(@NonNull Call<EDSMRanks> call,
-                                   retrofit2.Response<EDSMRanks> response) {
-                EDSMRanks body = response.body();
+            public void onResponse(@NonNull Call<EDSMRanksResponse> call,
+                                   retrofit2.Response<EDSMRanksResponse> response) {
+                EDSMRanksResponse body = response.body();
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
@@ -129,7 +129,7 @@ public class EDSMPlayer extends PlayerNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<EDSMRanks> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<EDSMRanksResponse> call, @NonNull Throwable t) {
                 Ranks ranks = new Ranks(false, null, null,
                         null, null, null, null);
 
@@ -141,11 +141,11 @@ public class EDSMPlayer extends PlayerNetwork {
 
     @Override
     public void getCommanderPosition(EventBus bus) {
-        retrofit2.Callback<EDSMPosition> callback = new retrofit2.Callback<EDSMPosition>() {
+        retrofit2.Callback<EDSMPositionResponse> callback = new retrofit2.Callback<EDSMPositionResponse>() {
             @Override
-            public void onResponse(@NonNull Call<EDSMPosition> call,
-                                   retrofit2.Response<EDSMPosition> response) {
-                EDSMPosition body = response.body();
+            public void onResponse(@NonNull Call<EDSMPositionResponse> call,
+                                   retrofit2.Response<EDSMPositionResponse> response) {
+                EDSMPositionResponse body = response.body();
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
@@ -161,7 +161,7 @@ public class EDSMPlayer extends PlayerNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<EDSMPosition> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<EDSMPositionResponse> call, @NonNull Throwable t) {
                 CommanderPosition pos = new CommanderPosition(false,
                         "", false);
                 sendResultMessage(bus, pos);
@@ -172,11 +172,11 @@ public class EDSMPlayer extends PlayerNetwork {
 
     @Override
     public void getCredits() {
-        retrofit2.Callback<EDSMCredits> callback = new retrofit2.Callback<EDSMCredits>() {
+        retrofit2.Callback<EDSMCreditsResponse> callback = new retrofit2.Callback<EDSMCreditsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<EDSMCredits> call,
-                                   retrofit2.Response<EDSMCredits> response) {
-                EDSMCredits body = response.body();
+            public void onResponse(@NonNull Call<EDSMCreditsResponse> call,
+                                   retrofit2.Response<EDSMCreditsResponse> response) {
+                EDSMCreditsResponse body = response.body();
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
@@ -192,7 +192,7 @@ public class EDSMPlayer extends PlayerNetwork {
             }
 
             @Override
-            public void onFailure(@NonNull Call<EDSMCredits> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<EDSMCreditsResponse> call, @NonNull Throwable t) {
                 Credits res = new Credits(false, 0, 0);
                 sendResultMessage(res);
             }

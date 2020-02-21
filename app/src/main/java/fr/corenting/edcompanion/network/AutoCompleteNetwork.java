@@ -8,7 +8,7 @@ import java.util.List;
 import fr.corenting.edcompanion.models.NameId;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystem;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemResponse;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
@@ -21,15 +21,15 @@ public class AutoCompleteNetwork {
         try {
             EDSMRetrofit edsmRetrofit = RetrofitSingleton.getInstance()
                     .getEDSMRetrofit(context.getApplicationContext());
-            Response<List<EDSMSystem>> response = edsmRetrofit.getSystems(filter, 1,
+            Response<List<EDSMSystemResponse>> response = edsmRetrofit.getSystems(filter, 1,
                     0, 0).execute();
-            List<EDSMSystem> systems = response.body();
+            List<EDSMSystemResponse> systems = response.body();
             if (!response.isSuccessful() || systems == null) {
                 return new ArrayList<>();
             } else {
                 List<NameId> results = new ArrayList<>();
 
-                for (EDSMSystem sys : systems) {
+                for (EDSMSystemResponse sys : systems) {
                     NameId newItem = new NameId(sys.Name, 0);
                     results.add(newItem);
                     if (results.size() >= MAX_RESULTS) {

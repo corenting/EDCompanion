@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformation;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformationResponse;
 import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenResponse;
 import fr.corenting.edcompanion.models.events.FrontierAuthNeeded;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
@@ -178,7 +178,7 @@ public class RetrofitSingleton implements Serializable {
     private GsonConverterFactory getCommonGsonConverterFactory() {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .registerTypeAdapter(EDSMSystemInformation.class, new EDSMDeserializer())
+                .registerTypeAdapter(EDSMSystemInformationResponse.class, new EDSMDeserializer())
                 .create();
         return GsonConverterFactory.create(gson);
     }

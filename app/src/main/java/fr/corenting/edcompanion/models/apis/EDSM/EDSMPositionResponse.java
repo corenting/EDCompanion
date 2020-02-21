@@ -2,7 +2,7 @@ package fr.corenting.edcompanion.models.apis.EDSM;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EDSMPosition extends EDSMBaseResponse {
+public class EDSMPositionResponse extends EDSMBaseResponse {
 
     @SerializedName("system")
     public String system;

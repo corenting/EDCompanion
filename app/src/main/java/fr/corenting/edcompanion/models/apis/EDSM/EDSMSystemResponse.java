@@ -2,7 +2,7 @@ package fr.corenting.edcompanion.models.apis.EDSM;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EDSMSystem {
+public class EDSMSystemResponse {
     @SerializedName("name")
     public String Name;
 
@@ -13,5 +13,5 @@ public class EDSMSystem {
     public boolean PermitRequired;
 
     @SerializedName("information")
-    public EDSMSystemInformation Information;
+    public EDSMSystemInformationResponse Information;
 }

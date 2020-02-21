@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class EDSMCredits extends EDSMBaseResponse {
+public class EDSMCreditsResponse extends EDSMBaseResponse {
 
     @SerializedName("credits")
     public List<EDSMInnerCredits> credits;

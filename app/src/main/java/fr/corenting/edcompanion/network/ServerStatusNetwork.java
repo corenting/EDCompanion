@@ -4,7 +4,7 @@ import android.content.Context;
 
 import org.greenrobot.eventbus.EventBus;
 
-import fr.corenting.edcompanion.models.apis.EDSM.EDSMServerStatus;
+import fr.corenting.edcompanion.models.apis.EDSM.EDSMServerStatusResponse;
 import fr.corenting.edcompanion.models.events.ServerStatus;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
@@ -16,12 +16,12 @@ public class ServerStatusNetwork {
     public static void getStatus(Context ctx) {
         EDSMRetrofit edsmRetrofit = RetrofitSingleton.getInstance()
                 .getEDSMRetrofit(ctx.getApplicationContext());
-        retrofit2.Callback<EDSMServerStatus> callback = new retrofit2.Callback<EDSMServerStatus>() {
+        retrofit2.Callback<EDSMServerStatusResponse> callback = new retrofit2.Callback<EDSMServerStatusResponse>() {
             @Override
             @EverythingIsNonNull
-            public void onResponse(Call<EDSMServerStatus> call,
-                                   retrofit2.Response<EDSMServerStatus> response) {
-                EDSMServerStatus edsmStatus = response.body();
+            public void onResponse(Call<EDSMServerStatusResponse> call,
+                                   retrofit2.Response<EDSMServerStatusResponse> response) {
+                EDSMServerStatusResponse edsmStatus = response.body();
                 if (!response.isSuccessful() || edsmStatus == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
@@ -32,7 +32,7 @@ public class ServerStatusNetwork {
 
             @Override
             @EverythingIsNonNull
-            public void onFailure(Call<EDSMServerStatus> call, Throwable t) {
+            public void onFailure(Call<EDSMServerStatusResponse> call, Throwable t) {
                 EventBus.getDefault().post(new ServerStatus(false, ""));
             }
         };
