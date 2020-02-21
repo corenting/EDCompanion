@@ -18,9 +18,7 @@ class SettingsActivity : AppCompatActivity() {
         //Action bar setup
         val mToolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(mToolbar)
-        if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.content, SettingsFragment())

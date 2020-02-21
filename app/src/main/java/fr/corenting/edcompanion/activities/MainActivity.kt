@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fragmentManager = supportFragmentManager
         if (savedInstanceState == null) {
             navView.setCheckedItem(navView.menu.getItem(0).itemId)
-            switchOnNavigation(getString(R.string.community_goals), R.id.nav_cg)
+            switchOnNavigation(getString(R.string.galnet), R.id.nav_galnet_news)
         } else {
             currentTitle = savedInstanceState.getCharSequence(KEY_CURRENT_TITLE).toString()
             currentSubtitle = savedInstanceState.getCharSequence(KEY_CURRENT_SUBTITLE).toString()

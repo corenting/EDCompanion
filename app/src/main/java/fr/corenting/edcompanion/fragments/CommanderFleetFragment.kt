@@ -35,7 +35,7 @@ class CommanderFleetFragment : AbstractListFragment<CommanderFleetAdapter>() {
         if (PlayerNetworkUtils.setupOk(context)) {
             playerNetwork.getCommanderStatus()
         } else {
-            NotificationsUtils.displaySnackbarWithActivityButton(activity!!,
+            NotificationsUtils.displaySnackbarWithActivityButton(activity,
                     playerNetwork.errorMessage, SettingsActivity::class.java)
             endLoading(true)
         }
