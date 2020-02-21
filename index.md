@@ -1,6 +1,8 @@
-# EDCompanion
+---
+title: EDCompanion - An Android companion app for Elite Dangerous
+---
 
-## Download the app
+# Download the app
 
 You can download the app on Google Play Store (recommended : auto-updates and smaller download size) here :
 
@@ -8,7 +10,7 @@ You can download the app on Google Play Store (recommended : auto-updates and sm
 
 Alternatively, you can download the latest APK from the [Github releases](https://github.com/corenting/EDCompanion/releases).
 
-## Features
+# Features
 
 - Community goals informations from Inara, with optional push notifications for updates
 - Galnet news (in French, German or English)
@@ -20,6 +22,6 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 - Material design (light or dark theme)
 - No ads, free and open-source
 
-## Help
+# Help
 
 - [Commander feature](https://edcompanion.corenting.fr/commander) : how to get informations about your CMDR in the app
