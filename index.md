@@ -3,6 +3,9 @@ title: EDCompanion
 layout: page
 ---
 
+An Android companion app for Elite Dangerous.
+
+
 # Download the app
 
 You can download the app on Google Play Store (recommended : auto-updates and smaller download size) here :
@@ -15,6 +18,7 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 
 - Community goals informations from Inara, with optional push notifications for updates
 - Galnet news (in French, German or English)
+- News from elitedangerous.com
 - Commander informations (credits balance, current system, ranks, ships) from Frontier API, EDSM or Inara
 - Distance calculator (get the distance between two systems)
 - Ship finder tool (find the nearest station selling a specific ship)
