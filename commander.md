@@ -1,5 +1,6 @@
 ---
 title: Commander feature
+layout: page
 ---
 
 ## How it works
