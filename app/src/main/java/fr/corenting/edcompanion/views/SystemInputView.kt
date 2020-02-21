@@ -2,18 +2,14 @@ package fr.corenting.edcompanion.views
 
 import android.app.Activity
 import android.content.Context
-import android.content.res.ColorStateList
 import android.text.Editable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
-import androidx.core.content.ContextCompat
-import androidx.core.widget.ImageViewCompat
 import fr.corenting.edcompanion.adapters.AutoCompleteAdapter
 import fr.corenting.edcompanion.models.events.CommanderPosition
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils
-import fr.corenting.edcompanion.utils.ThemeUtils
 import kotlinx.android.synthetic.main.view_system_input.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -38,14 +34,8 @@ class SystemInputView : RelativeLayout {
     }
 
     private fun init(attrs: AttributeSet? = null) {
-
         View.inflate(context, fr.corenting.edcompanion.R.layout.view_system_input, this)
 
-        // Theme button according to theme
-        if (ThemeUtils.isDarkThemeEnabled(context)) {
-            ImageViewCompat.setImageTintList(systemMyLocationButton, ColorStateList.valueOf(
-                    ContextCompat.getColor(context!!, android.R.color.white)))
-        }
 
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs,
@@ -68,14 +58,13 @@ class SystemInputView : RelativeLayout {
         // Check if position can be get from commander
         if (PlayerNetworkUtils.setupOk(context) &&
                 PlayerNetworkUtils.getCurrentPlayerNetwork(context).supportLocation()) {
-            systemMyLocationButton.visibility = View.VISIBLE
 
-            systemMyLocationButton.setOnClickListener {
+            systemInputLayout.isEndIconVisible = true
+            systemInputLayout.setEndIconOnClickListener {
                 PlayerNetworkUtils.getCurrentPlayerNetwork(context).getCommanderPosition(bus)
             }
-
         } else {
-            systemMyLocationButton.visibility = View.GONE
+            systemInputLayout.isEndIconVisible = false
         }
 
         // Set autocomplete view
