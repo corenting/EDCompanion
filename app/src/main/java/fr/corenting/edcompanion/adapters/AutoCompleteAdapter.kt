@@ -31,14 +31,17 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var convertView = convertView
-        if (convertView == null) {
+        val view:View?
+        view = if (convertView == null) {
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(android.R.layout.simple_dropdown_item_1line, parent,
+            inflater.inflate(android.R.layout.simple_dropdown_item_1line, parent,
                     false)
         }
-        (convertView?.findViewById<View>(android.R.id.text1) as TextView).text = getItem(position)
-        return convertView
+        else {
+            convertView
+        }
+        (view?.findViewById<View>(android.R.id.text1) as TextView).text = getItem(position)
+        return view
     }
 
     override fun getFilter(): Filter {

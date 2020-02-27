@@ -176,13 +176,11 @@ public class SystemFactionsFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
                         v.getParent().requestDisallowInterceptTouchEvent(true);
                         break;
                     case MotionEvent.ACTION_UP:
                         v.getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        v.getParent().requestDisallowInterceptTouchEvent(true);
                         break;
                     default:
                         break;
@@ -286,7 +284,11 @@ public class SystemFactionsFragment extends Fragment {
         historyChartView.setExtraLeftOffset(10);
         historyChartView.setExtraRightOffset(50);
         historyChartView.getLegend().setWordWrapEnabled(true);
-        historyChartView.setMarker(new GraphMarkerView(getContext()));
+
+        // Marker view
+        GraphMarkerView graphMarker = new GraphMarkerView(getContext());
+        graphMarker.setChartView(historyChartView);
+        historyChartView.setMarker(graphMarker);
 
         // Labels
         final SparseArray<String> labels = new SparseArray<>();
