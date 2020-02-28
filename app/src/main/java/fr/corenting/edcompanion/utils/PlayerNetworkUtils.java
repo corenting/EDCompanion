@@ -31,10 +31,8 @@ public class PlayerNetworkUtils {
                 return new EDSMPlayer(context);
             case inara:
                 return new InaraPlayer(context);
-            case frontier:
-                return new FrontierPlayer(context);
             default:
-                return new InaraPlayer(context);
+                return new FrontierPlayer(context);
         }
     }
 
