@@ -8,6 +8,8 @@ public abstract class PlayerNetwork {
 
     public abstract boolean useFrontierAuth();
 
+    public abstract boolean useUsername();
+
     public abstract boolean usePassword();
 
     public abstract boolean supportFleet();

@@ -96,7 +96,7 @@ public class CommanderFleetAdapter extends androidx.recyclerview.widget.ListAdap
 
         // Ship picture
         Glide.with(holder.shipImageView)
-                .load(String.format("https://ed.9cw.eu/ships/picture/%s", currentShip.getModel()))
+                .load(String.format("https://ed-api.9cw.eu/ships/%s/picture", currentShip.getModel()))
                 .error(R.drawable.ship_placeholder)
                 .centerCrop()
                 .into(holder.shipImageView);

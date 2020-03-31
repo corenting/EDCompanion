@@ -50,6 +50,11 @@ public class FrontierPlayer extends PlayerNetwork {
     }
 
     @Override
+    public boolean useUsername() {
+        return false;
+    }
+
+    @Override
     public boolean usePassword() {
         return false;
     }

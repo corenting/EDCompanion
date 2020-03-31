@@ -62,7 +62,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         } else {
             frontierPreference.isVisible = false
-            usernamePreference.isVisible = true
+            usernamePreference.isVisible = playerNetwork.useUsername()
             passwordPreference.isVisible = playerNetwork.usePassword()
             bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)))
             passwordPreference.text = SettingsUtils.getString(context, context?.getString(R.string.settings_cmdr_password))

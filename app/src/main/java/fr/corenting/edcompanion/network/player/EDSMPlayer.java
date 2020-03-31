@@ -42,6 +42,11 @@ public class EDSMPlayer extends PlayerNetwork {
     }
 
     @Override
+    public boolean useUsername() {
+        return true;
+    }
+
+    @Override
     public boolean usePassword() {
         return true;
     }

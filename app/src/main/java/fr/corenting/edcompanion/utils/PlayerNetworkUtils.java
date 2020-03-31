@@ -42,14 +42,17 @@ public class PlayerNetworkUtils {
 
 
     public static boolean setupOk(Context context) {
-        String apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
-        String commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
+        String password = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
+        String username = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
         PlayerNetwork network = getCurrentPlayerNetwork(context);
 
-        if (network.getClass() == FrontierPlayer.class) {
+        if (network.useFrontierAuth()) {
             return !OAuthUtils.getAccessToken(context).equals("");
-        } else {
-            return !(network.usePassword() && apiKey.equals("")) && !commanderName.equals("");
+        } else if (network.useUsername() && network.usePassword()) {
+            return !username.equals("") && !password.equals("");
+        } else if (network.usePassword()) {
+            return !password.equals("");
         }
+        return false;
     }
 }

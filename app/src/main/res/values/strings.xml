@@ -2,7 +2,7 @@
     <string name="app_name">EDCompanion</string>
 
     <!--URLs-->
-    <string name="edapi_base">https://ed.9cw.eu/</string>
+    <string name="edapi_base">https://ed-api.9cw.eu/</string>
     <string name="edsm_base">https://www.edsm.net/</string>
     <string name="inara_api_base">https://inara.cz/</string>
     <string name="frontier_auth_base">https://auth.frontierstore.net/</string>
@@ -284,12 +284,12 @@
     <string name="settings_galnet_lang_summary">Change the language used for Galnet news</string>
     <string name="settings_cmdr_source_title">Commander data source</string>
     <string name="settings_cmdr_source_summary">Choose the data source (Frontier, EDSM or Inara) you want to use for the commander tab</string>
-    <string name="settings_cmdr_edsm_password_title">API key for EDSM</string>
+    <string name="settings_cmdr_edsm_password_title">EDSM API key</string>
     <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
     <string name="settings_cmdr_username_title">Commander name</string>
     <string name="settings_cmdr_username_summary">The ingame name of your CMDR (not your EDSM username)</string>
-    <string name="settings_cmdr_inara_username_title">Inara profile name</string>
-    <string name="settings_cmdr_inara_username_summary">Your username on Inara (not your CMDR name)</string>
+    <string name="settings_cmdr_inara_password_title">Inara API key</string>
+    <string name="settings_cmdr_inara_password_summary">Your personal Inara API key. You can find it in the "Inara API" tab of the inara.cz website settings</string>
     <string name="settings_cmdr_password">CMDR password</string>
     <string name="settings_cmdr_username">CMDR name</string>
     <string name="settings_cmdr_oauth">Link your Frontier account</string>

@@ -41,7 +41,7 @@ public class InaraPlayer extends PlayerNetwork {
 
         // Build header
         res.header = new InaraProfileRequestBody.InaraRequestBodyHeader();
-        res.header.ApiKey = BuildConfig.INARA_API_KEY;
+        res.header.ApiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
         res.header.ApplicationName = context.getString(R.string.app_name);
         res.header.ApplicationVersion = BuildConfig.VERSION_NAME;
         res.header.IsDeveloped = BuildConfig.DEBUG;
@@ -51,7 +51,7 @@ public class InaraPlayer extends PlayerNetwork {
         profileEvent.EventName = "getCommanderProfile";
         profileEvent.EventTimestamp = DateUtils.getUtcIsoDate();
         profileEvent.EventData = new InaraProfileRequestBody.InaraRequestBodyEvent.InaraRequestBodyEventData();
-        profileEvent.EventData.SearchName = commanderName;
+        profileEvent.EventData.SearchName = null;
         res.events = new ArrayList<>();
         res.events.add(profileEvent);
 
@@ -64,8 +64,13 @@ public class InaraPlayer extends PlayerNetwork {
     }
 
     @Override
-    public boolean usePassword() {
+    public boolean useUsername() {
         return false;
+    }
+
+    @Override
+    public boolean usePassword() {
+        return true;
     }
 
     @Override
@@ -85,13 +90,13 @@ public class InaraPlayer extends PlayerNetwork {
 
     @Override
     public void usernameSettingSetup(EditTextPreference preference) {
-        preference.setTitle(context.getString(R.string.settings_cmdr_inara_username_title));
-        preference.setSummary(context.getString(R.string.settings_cmdr_inara_username_summary));
-        preference.setDialogTitle(context.getString(R.string.settings_cmdr_inara_username_title));
     }
 
     @Override
     public void passwordSettingSetup(EditTextPreference preference) {
+        preference.setTitle(context.getString(R.string.settings_cmdr_inara_password_title));
+        preference.setSummary(context.getString(R.string.settings_cmdr_inara_password_summary));
+        preference.setDialogTitle(context.getString(R.string.settings_cmdr_inara_password_title));
 
     }
 
