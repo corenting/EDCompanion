@@ -47,7 +47,7 @@ data class CommunityGoal(val isOngoing: Boolean, val id: Long, val title: String
     }
 
     companion object {
-        fun fromCommunityGoalsItemResponse(res: CommunityGoalsResponse.CommunityGoalsItemResponse):
+        fun fromCommunityGoalsItemResponse(res: CommunityGoalsResponse):
                 CommunityGoal {
 
             val rewards = res.Rewards.map {

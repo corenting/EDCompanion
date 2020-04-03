@@ -50,7 +50,7 @@ public class CommodityFinderNetwork {
         };
 
         edApiRetrofit.findCommodity(system, commodity, landingPad, minStockOrDemand,
-                minStockOrDemand, isSellingMode ? 1 : 0).enqueue(callback);
+                minStockOrDemand, isSellingMode).enqueue(callback);
     }
 
     private static void processResults(List<CommodityFinderResponse> responseBody) {
@@ -65,7 +65,7 @@ public class CommodityFinderNetwork {
             convertedResults = new ResultsList<>(true, resultsList);
 
         } catch (Exception ex) {
-            convertedResults = new ResultsList<>(false, new ArrayList<CommodityFinderResult>());
+            convertedResults = new ResultsList<>(false, new ArrayList<>());
         }
         EventBus.getDefault().post(convertedResults);
     }

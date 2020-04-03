@@ -20,35 +20,34 @@ public class CommunityGoalsNetwork {
 
         EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiRetrofit(ctx.getApplicationContext());
-        retrofit2.Callback<CommunityGoalsResponse> callback = new retrofit2.Callback<CommunityGoalsResponse>() {
+        retrofit2.Callback<List<CommunityGoalsResponse>> callback = new retrofit2.Callback<List<CommunityGoalsResponse>>() {
             @Override
             @EverythingIsNonNull
-            public void onResponse(Call<CommunityGoalsResponse> call,
-                                   retrofit2.Response<CommunityGoalsResponse> response) {
-                CommunityGoalsResponse body = response.body();
+            public void onResponse(Call<List<CommunityGoalsResponse>> call,
+                                   retrofit2.Response<List<CommunityGoalsResponse>> response) {
+                List<CommunityGoalsResponse> body = response.body();
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
-                    CommunityGoals goals;
+                    CommunityGoals goalsEvent;
                     List<CommunityGoal> goalsList = new ArrayList<>();
                     try {
-                        for (CommunityGoalsResponse.CommunityGoalsItemResponse goal : body.Goals) {
-                            goalsList.add(
-                                    CommunityGoal.Companion.fromCommunityGoalsItemResponse(goal));
+                        for (CommunityGoalsResponse goal : body) {
+                            goalsList.add(CommunityGoal.Companion.fromCommunityGoalsItemResponse(goal));
                         }
-                        goals = new CommunityGoals(true, goalsList);
+                        goalsEvent = new CommunityGoals(true, goalsList);
                     } catch (Exception e) {
-                        goals = new CommunityGoals(false, new ArrayList<>());
+                        goalsEvent = new CommunityGoals(false, new ArrayList<>());
                     }
-                    EventBus.getDefault().post(goals);
+                    EventBus.getDefault().post(goalsEvent);
                 }
             }
 
             @Override
             @EverythingIsNonNull
-            public void onFailure(Call<CommunityGoalsResponse> call, Throwable t) {
+            public void onFailure(Call<List<CommunityGoalsResponse>> call, Throwable t) {
                 CommunityGoals goals = new CommunityGoals(false,
-                        new ArrayList<CommunityGoal>());
+                        new ArrayList<>());
                 EventBus.getDefault().post(goals);
             }
         };

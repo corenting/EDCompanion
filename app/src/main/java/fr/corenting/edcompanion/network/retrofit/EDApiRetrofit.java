@@ -19,8 +19,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface EDApiRetrofit {
-    @GET("community_goals/v2/")
-    Call<CommunityGoalsResponse> getCommunityGoals();
+    @GET("community_goals/")
+    Call<List<CommunityGoalsResponse>> getCommunityGoals();
 
     @GET("galnet/")
     Call<List<NewsArticleResponse>> getGalnetNews(@Query("lang") String language);
@@ -28,21 +28,21 @@ public interface EDApiRetrofit {
     @GET("news/")
     Call<List<NewsArticleResponse>> getNews();
 
-    @GET("distance/{first}/{second}")
-    Call<DistanceResponse> getDistance(@Path("first") String firstSystem,
-                                       @Path("second") String secondSystem);
+    @GET("distance_calculator/")
+    Call<DistanceResponse> getDistance(@Query("firstSystem") String firstSystem,
+                                       @Query("secondSystem") String secondSystem);
 
-    @GET("ships")
+    @GET("ships/")
     Call<List<ShipResponse>> getShips(@Query("name") String shipName);
 
-    @GET("commodities")
+    @GET("commodities/")
     Call<List<CommodityResponse>> getCommodities(@Query("name") String filter);
 
     @GET("commodities/{name}")
     Call<CommodityDetailsResponse> getCommodityDetails(@Path("name") String name);
 
-    @GET("system/{system}/stations/ships/{ship}")
-    Call<List<ShipFinderResponse>> findShip(@Path("system") String system,
+    @GET("ship_finder/")
+    Call<List<ShipFinderResponse>> findShip(@Path("referenceSystem") String system,
                                             @Path("ship") String ship);
 
     @GET("system/{system}")
@@ -54,11 +54,11 @@ public interface EDApiRetrofit {
     @GET("system/{system}/history")
     Call<List<SystemHistoryResponse>> getSystemHistory(@Path("system") String system);
 
-    @GET("system/{system}/stations/commodities/{commodity}")
-    Call<List<CommodityFinderResponse>> findCommodity(@Path("system") String system,
-                                                      @Path("commodity") String commodity,
+    @GET("commodity_finder/")
+    Call<List<CommodityFinderResponse>> findCommodity(@Path("referenceSystem") String system,
+                                                      @Path("commodityName") String commodity,
                                                       @Query("pad") String minLandingPad,
                                                       @Query("stock") int stock,
                                                       @Query("demand") int demand,
-                                                      @Query("selling") int sellingMode);
+                                                      @Query("selling") boolean sellingMode);
 }
