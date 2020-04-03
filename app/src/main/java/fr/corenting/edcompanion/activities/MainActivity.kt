@@ -166,10 +166,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         when (id) {
-            R.id.nav_cg -> {
+      /*      R.id.nav_cg -> {
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG)
                 currentSubtitle = getString(R.string.inara_credits)
-            }
+            }*/
             R.id.nav_cmdr -> {
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT)
                 val commanderName = SettingsUtils.getCommanderName(this)
