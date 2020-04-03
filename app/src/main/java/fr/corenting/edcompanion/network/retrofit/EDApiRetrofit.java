@@ -42,8 +42,8 @@ public interface EDApiRetrofit {
     Call<CommodityDetailsResponse> getCommodityDetails(@Path("name") String name);
 
     @GET("ship_finder/")
-    Call<List<ShipFinderResponse>> findShip(@Path("referenceSystem") String system,
-                                            @Path("ship") String ship);
+    Call<List<ShipFinderResponse>> findShip(@Query("referenceSystem") String system,
+                                            @Query("ship") String ship);
 
     @GET("system/{system}")
     Call<SystemResponse> getSystemDetails(@Path("system") String system);
@@ -55,8 +55,8 @@ public interface EDApiRetrofit {
     Call<List<SystemHistoryResponse>> getSystemHistory(@Path("system") String system);
 
     @GET("commodity_finder/")
-    Call<List<CommodityFinderResponse>> findCommodity(@Path("referenceSystem") String system,
-                                                      @Path("commodityName") String commodity,
+    Call<List<CommodityFinderResponse>> findCommodity(@Query("referenceSystem") String system,
+                                                      @Query("commodityName") String commodity,
                                                       @Query("pad") String minLandingPad,
                                                       @Query("stock") int stock,
                                                       @Query("demand") int demand,
