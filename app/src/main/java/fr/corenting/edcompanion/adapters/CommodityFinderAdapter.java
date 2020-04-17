@@ -143,7 +143,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
             // Convert buy/sell mode to boolean
             String[] buySellArray = context.getResources()
                     .getStringArray(R.array.buy_sell_array);
-            isSellingMode = holder.buyOrSellAutoCompleteTextView.getText().toString() == buySellArray[1];
+            isSellingMode = holder.buyOrSellAutoCompleteTextView.getText().toString().equals(buySellArray[1]);
 
             CommodityFinderSearch result = new CommodityFinderSearch(
                     holder.commodityInputEditText.getText().toString(),
