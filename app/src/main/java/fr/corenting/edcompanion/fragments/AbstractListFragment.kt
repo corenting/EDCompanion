@@ -26,7 +26,10 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
         // Recycler view setup
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
-        recyclerViewAdapter = if (savedInstanceState == null) getNewRecyclerViewAdapter() else recyclerViewAdapter
+        recyclerViewAdapter = when {
+            savedInstanceState == null || !this::recyclerViewAdapter.isInitialized -> getNewRecyclerViewAdapter()
+            else -> recyclerViewAdapter
+        }
         recyclerView.adapter = recyclerViewAdapter
 
         //Swipe to refresh setup
