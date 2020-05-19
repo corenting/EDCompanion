@@ -65,7 +65,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.4.1'
 
     // Retrofit
-    ext.retrofitVersion = '2.8.1'
+    ext.retrofitVersion = '2.8.2'
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
