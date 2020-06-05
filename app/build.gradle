@@ -62,7 +62,7 @@ dependencies {
 
     // Play services / Firebase
     implementation 'com.google.firebase:firebase-messaging:20.2.0'
-    implementation 'com.google.firebase:firebase-core:17.4.2'
+    implementation 'com.google.firebase:firebase-core:17.4.3'
 
     // Retrofit
     ext.retrofitVersion = '2.9.0'
