@@ -35,12 +35,13 @@ public class RankUtils {
         if (rank.getProgress() == -1) {
             progressView.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-        } else {
-            progressView.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.VISIBLE);
-            progressView.setText(ctx.getResources().getString(R.string.rank_progress,
-                    rank.getProgress()));
+            return;
         }
+
+        progressView.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        progressView.setText(ctx.getResources().getString(R.string.rank_progress,
+                rank.getProgress()));
 
         // Animate progress bar
         ProgressBarAnimation anim = new ProgressBarAnimation(progressBar, progressBar.getProgress(),

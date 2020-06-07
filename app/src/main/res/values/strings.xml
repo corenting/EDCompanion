@@ -340,10 +340,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.10</b><br />
+            <b>Version 2.11</b><br />
             <ul>
-                <li>Removed community goals tab temporarily for a rework while there are none</li><br />
-                <li>If using Inara for commander data, you now need to use an API key</li><br />
+                <li>Switch default tab to "News" as Galnet is not currently updated by Frontier</li><br />
                 <li>Internal changes</li><br />
             </ul>
         ]]>
