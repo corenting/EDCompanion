@@ -69,7 +69,6 @@
     <string name="credits">%1$s credits</string>
     <string name="credits_with_loan">%1$s credits (with a %2$s credits loan)</string>
     <string name="rank_progress">%1$d %%</string>
-    <string name="rank_progress_unknown">%1$s %%</string>
     <string name="fleet">Fleet</string>
     <string name="station_label">Station</string>
     <string name="current_ship">Current ship</string>

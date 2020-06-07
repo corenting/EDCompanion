@@ -1,5 +1,6 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ndroid="http://schemas.android.com/tools"
     android:id="@+id/swipeContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -91,20 +92,20 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/playerRanks"
+                    android:id="@+id/factionsRanks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/locationContainer"
                     android:layout_marginTop="8dp"
                     android:text="@string/faction_ranks"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                 <include
                     android:id="@+id/federationRankLayout"
                     layout="@layout/include_rank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/playerRanks"
+                    android:layout_below="@+id/factionsRanks"
                     android:layout_marginTop="8dp" />
 
                 <include
@@ -115,20 +116,20 @@
                     android:layout_below="@+id/federationRankLayout" />
 
                 <TextView
-                    android:id="@+id/factionsRanks"
+                    android:id="@+id/playersRank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/empireRankLayout"
                     android:layout_marginTop="8dp"
                     android:text="@string/player_ranks"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                 <include
                     android:id="@+id/combatRankLayout"
                     layout="@layout/include_rank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/factionsRanks"
+                    android:layout_below="@+id/playersRank"
                     android:layout_marginTop="8dp" />
 
                 <include

@@ -10,7 +10,6 @@
         android:id="@+id/itemImageView"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:tint="#757575"
         app:srcCompat="@drawable/elite_empire" />
@@ -33,22 +32,24 @@
             style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/titleTextView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="4dp"
             android:layout_toStartOf="@+id/progressTextView"
             android:indeterminate="false"
-            app:mpb_progressStyle="horizontal"
             android:max="100"
             android:progress="0"
-            android:layout_alignParentEnd="true" />
+            android:visibility="invisible"
+            app:mpb_progressStyle="horizontal" />
 
         <TextView
             android:id="@+id/progressTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:layout_alignBaseline="@id/titleTextView"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:text=""
+            android:visibility="invisible" />
     </RelativeLayout>
 </RelativeLayout>

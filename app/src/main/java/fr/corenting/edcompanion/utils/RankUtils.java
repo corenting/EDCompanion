@@ -33,9 +33,11 @@ public class RankUtils {
 
         // If rank progress is -1 it means it's not supported by the network used so hide it
         if (rank.getProgress() == -1) {
-            progressView.setText(ctx.getResources().getString(R.string.rank_progress_unknown,
-                    "?"));
+            progressView.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
         } else {
+            progressView.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             progressView.setText(ctx.getResources().getString(R.string.rank_progress,
                     rank.getProgress()));
         }
