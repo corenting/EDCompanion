@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fragmentManager = supportFragmentManager
         if (savedInstanceState == null) {
             navView.setCheckedItem(navView.menu.getItem(0).itemId)
-            switchOnNavigation(getString(R.string.galnet), R.id.nav_galnet_news)
+            switchOnNavigation(getString(R.string.news), R.id.nav_news)
         } else {
             currentTitle = savedInstanceState.getCharSequence(KEY_CURRENT_TITLE).toString()
             currentSubtitle = savedInstanceState.getCharSequence(KEY_CURRENT_SUBTITLE).toString()
@@ -166,10 +166,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         when (id) {
-      /*      R.id.nav_cg -> {
+           R.id.nav_cg -> {
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG)
                 currentSubtitle = getString(R.string.inara_credits)
-            }*/
+            }
             R.id.nav_cmdr -> {
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT)
                 val commanderName = SettingsUtils.getCommanderName(this)
