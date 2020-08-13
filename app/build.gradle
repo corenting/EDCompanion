@@ -70,7 +70,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Butterknife
-    ext.butterKnifeVersion = '10.2.1'
+    ext.butterKnifeVersion = '10.2.3'
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
