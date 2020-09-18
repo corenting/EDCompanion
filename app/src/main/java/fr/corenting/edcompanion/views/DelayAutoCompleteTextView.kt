@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 
 // Code from http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/
-class DelayAutoCompleteTextView(context: Context?, attrs: AttributeSet?) :
+class DelayAutoCompleteTextView(context: Context, attrs: AttributeSet) :
         AppCompatAutoCompleteTextView(context, attrs) {
 
     private val mHandler: Handler = AutoCompleteHandler(this)

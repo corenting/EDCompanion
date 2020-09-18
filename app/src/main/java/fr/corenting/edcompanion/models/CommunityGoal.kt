@@ -50,8 +50,15 @@ data class CommunityGoal(val isOngoing: Boolean, val id: Long, val title: String
         fun fromCommunityGoalsItemResponse(res: CommunityGoalsResponse):
                 CommunityGoal {
 
-            val rewards = res.Rewards.map {
-                CommunityGoalReward(it.Contributors, it.Reward, it.Tier)
+            val rewards: List<CommunityGoalReward> = when {
+                res.Rewards != null -> {
+                    res.Rewards.map {
+                        CommunityGoalReward(it.Contributors, it.Reward, it.Tier)
+                    }
+                }
+                else -> {
+                    emptyList()
+                }
             }
 
             return CommunityGoal(res.Ongoing, res.Id, res.Title, res.Description, res.Objective,
