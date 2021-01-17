@@ -367,5 +367,7 @@
     <string name="login_dialog_error_title">Frontier login error</string>
     <string name="login_dialog_error_text">Error while linking your account, please try again.</string>
     <string name="open">Open</string>
+    <string name="first_system_cache_key">first_system_cache_key</string>
+    <string name="second_system_cache_key">second_system_cache_key</string>
 
 </resources>

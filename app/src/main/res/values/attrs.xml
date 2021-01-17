@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="SystemInputView">
         <attr name="hint" format="reference" />
+        <attr name="cacheKey" format="string" />
     </declare-styleable>
 </resources>

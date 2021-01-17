@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/subtitleTextView"
                 android:layout_marginTop="8dp"
+                app:cacheKey="@string/first_system_cache_key"
                 app:hint="@string/first_system" />
 
             <fr.corenting.edcompanion.views.SystemInputView
@@ -57,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/firstSystemInputView"
                 android:layout_marginTop="8dp"
+                app:cacheKey="@string/second_system_cache_key"
                 app:hint="@string/second_system" />
 
             <com.google.android.material.button.MaterialButton

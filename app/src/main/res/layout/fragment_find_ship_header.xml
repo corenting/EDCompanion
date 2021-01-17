@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/subtitleTextView"
                 android:layout_marginTop="8dp"
+                app:cacheKey="@string/first_system_cache_key"
                 app:hint="@string/current_system" />
 
             <com.google.android.material.textfield.TextInputLayout
