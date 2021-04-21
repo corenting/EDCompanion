@@ -81,7 +81,7 @@ dependencies {
     // Other
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.3.1'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
