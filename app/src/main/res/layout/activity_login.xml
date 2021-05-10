@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_app_bar" />
+    <include
+        android:id="@+id/include_app_bar"
+        layout="@layout/include_app_bar" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -3,49 +3,55 @@ package fr.corenting.edcompanion.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentPagerAdapter
-import butterknife.ButterKnife
 import fr.corenting.edcompanion.R
+import fr.corenting.edcompanion.databinding.ActivityFragmentsWithTabsBinding
 import fr.corenting.edcompanion.utils.ThemeUtils
-import kotlinx.android.synthetic.main.activity_fragments_with_tabs.*
 
 abstract class AbstractViewPagerActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityFragmentsWithTabsBinding
     protected lateinit var dataName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.setTheme(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fragments_with_tabs)
-        ButterKnife.bind(this)
+        binding = ActivityFragmentsWithTabsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Get data name from intent
         dataName = getDefaultData()
         dataName = intent.extras?.getString("data", getDefaultData()).toString()
 
         // Set toolbar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         if (supportActionBar != null) {
             supportActionBar?.setDisplayShowHomeEnabled(true)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
         // Viewpager
-        viewPager.offscreenPageLimit = 4
-        viewPager.adapter = getPagerAdapter()
+        binding.viewPager.offscreenPageLimit = 4
+        binding.viewPager.adapter = getPagerAdapter()
 
         // TabLayout
-        tabLayout.setupWithViewPager(viewPager)
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
         if (ThemeUtils.isDarkThemeEnabled(this)) {
-            tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColorDark))
+            binding.tabLayout.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.primaryColorDark
+                )
+            )
         } else {
-            tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor))
+            binding.tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor))
         }
-        tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.tabTextSelected),
-                ContextCompat.getColor(this, R.color.tabText))
+        binding.tabLayout.setTabTextColors(
+            ContextCompat.getColor(this, R.color.tabTextSelected),
+            ContextCompat.getColor(this, R.color.tabText)
+        )
 
         getData()
     }

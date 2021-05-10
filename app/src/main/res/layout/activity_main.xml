@@ -14,6 +14,7 @@
         tools:context=".activities.MainActivity">
 
         <include
+            android:id="@+id/include_app_bar"
             layout="@layout/include_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

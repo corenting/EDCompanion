@@ -3,33 +3,33 @@ package fr.corenting.edcompanion.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import butterknife.ButterKnife
-import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter
 import fr.corenting.edcompanion.adapters.NewsAdapter
+import fr.corenting.edcompanion.databinding.ActivityDetailsBinding
 import fr.corenting.edcompanion.models.CommunityGoal
 import fr.corenting.edcompanion.models.NewsArticle
 import fr.corenting.edcompanion.utils.ThemeUtils
-import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityDetailsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.setTheme(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
-        ButterKnife.bind(this)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Set toolbar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeAppBar.toolbar)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Common recycler view setup
         val linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = linearLayoutManager
+        binding.recyclerView.layoutManager = linearLayoutManager
 
         // Get the goal or the article
         if (intent.extras != null) {
@@ -42,15 +42,15 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-        recyclerView.smoothScrollToPosition(-10) // because recycler view may not start on top
+        binding.recyclerView.smoothScrollToPosition(-10) // because recycler view may not start on top
     }
 
     private fun communityGoalSetup(communityGoal: CommunityGoal) {
         supportActionBar?.title = communityGoal.title
 
         // Adapter setup
-        val adapter = CommunityGoalsAdapter(this, recyclerView, true)
-        recyclerView.adapter = adapter
+        val adapter = CommunityGoalsAdapter(this, binding.recyclerView, true)
+        binding.recyclerView.adapter = adapter
         adapter.submitList(listOf(communityGoal))
     }
 
@@ -58,8 +58,8 @@ class DetailsActivity : AppCompatActivity() {
         supportActionBar?.title = article.title
 
         // Adapter view setup
-        val adapter = NewsAdapter(this, recyclerView, true)
-        recyclerView.adapter = adapter
+        val adapter = NewsAdapter(this, binding.recyclerView, true)
+        binding.recyclerView.adapter = adapter
         adapter.submitList(listOf(article))
     }
 

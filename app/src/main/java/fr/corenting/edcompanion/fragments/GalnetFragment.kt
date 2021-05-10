@@ -7,7 +7,6 @@ import fr.corenting.edcompanion.models.events.GalnetNews
 import fr.corenting.edcompanion.network.NewsNetwork
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.SettingsUtils
-import kotlinx.android.synthetic.main.fragment_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -38,7 +37,7 @@ class GalnetFragment : AbstractListFragment<NewsAdapter>() {
     }
 
     override fun getNewRecyclerViewAdapter(): NewsAdapter {
-        return NewsAdapter(context, recyclerView, false)
+        return NewsAdapter(context, binding.recyclerView, false)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -2,7 +2,7 @@ package fr.corenting.edcompanion.models
 
 import android.os.Parcelable
 import fr.corenting.edcompanion.models.apis.EDApi.NewsArticleResponse
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class NewsArticle(val title: String, val content: String, val picture: String?,

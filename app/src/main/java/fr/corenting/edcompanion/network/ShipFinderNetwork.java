@@ -41,7 +41,7 @@ public class ShipFinderNetwork {
 
                     } catch (Exception ex) {
                         convertedResults = new ResultsList<>(false,
-                                new ArrayList<ShipFinderResult>());
+                                new ArrayList<>());
                     }
                     EventBus.getDefault().post(convertedResults);
                 }

@@ -3,15 +3,18 @@ package fr.corenting.edcompanion.views
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
-import butterknife.ButterKnife
 import fr.corenting.edcompanion.R
+import fr.corenting.edcompanion.databinding.ViewRowBinding
 import fr.corenting.edcompanion.utils.MiscUtils
-import kotlinx.android.synthetic.main.view_row.view.*
 
 class RowView : RelativeLayout {
+
+    private var binding: ViewRowBinding = ViewRowBinding.inflate(LayoutInflater.from(context), this)
+
     constructor(context: Context?) :
             super(context) {
         init()
@@ -29,30 +32,33 @@ class RowView : RelativeLayout {
 
     private fun init() {
         View.inflate(context, R.layout.view_row, this)
-        ButterKnife.bind(this)
-        setListeners(firstCellTextView)
-        setListeners(secondCellTextView)
-        setListeners(thirdCellTextView)
+        setListeners(binding.firstCellTextView)
+        setListeners(binding.secondCellTextView)
+        setListeners(binding.thirdCellTextView)
     }
 
     private fun setListeners(textView: TextView) {
         textView.setOnLongClickListener(null)
         textView.setOnLongClickListener {
-            MiscUtils.putTextInClipboard(context, "",
-                    textView.text.toString(), true)
+            MiscUtils.putTextInClipboard(
+                context, "",
+                textView.text.toString(), true
+            )
             true
         }
     }
 
-    fun setRowContent(firstCell: String, secondCell: String, thirdCell: String,
-                      isHeader: Boolean) {
+    fun setRowContent(
+        firstCell: String, secondCell: String, thirdCell: String,
+        isHeader: Boolean
+    ) {
         if (isHeader) {
-            firstCellTextView.setTypeface(null, Typeface.BOLD)
-            secondCellTextView.setTypeface(null, Typeface.BOLD)
-            thirdCellTextView.setTypeface(null, Typeface.BOLD)
+            binding.firstCellTextView.setTypeface(null, Typeface.BOLD)
+            binding.secondCellTextView.setTypeface(null, Typeface.BOLD)
+            binding.thirdCellTextView.setTypeface(null, Typeface.BOLD)
         }
-        firstCellTextView.text = firstCell
-        secondCellTextView.text = secondCell
-        thirdCellTextView.text = thirdCell
+        binding.firstCellTextView.text = firstCell
+        binding.secondCellTextView.text = secondCell
+        binding.thirdCellTextView.text = thirdCell
     }
 }

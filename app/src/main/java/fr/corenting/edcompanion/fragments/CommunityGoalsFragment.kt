@@ -10,7 +10,6 @@ import fr.corenting.edcompanion.network.CommunityGoalsNetwork
 import fr.corenting.edcompanion.network.DistanceCalculatorNetwork
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils
-import kotlinx.android.synthetic.main.fragment_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
@@ -21,7 +20,7 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
     private var communityGoals: List<CommunityGoal> = ArrayList()
 
     override fun getNewRecyclerViewAdapter(): CommunityGoalsAdapter {
-        return CommunityGoalsAdapter(context, recyclerView, false)
+        return CommunityGoalsAdapter(context, binding.recyclerView, false)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

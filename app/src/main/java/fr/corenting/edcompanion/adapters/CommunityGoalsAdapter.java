@@ -10,13 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
 import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.utils.MiscUtils;
-import fr.corenting.edcompanion.views.TableView;
 
 public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdapter<CommunityGoal,
         CommunityGoalsAdapter.goalsViewHolder> {
@@ -83,12 +83,7 @@ public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdap
             holder.locationTextView.setText(context.getString(R.string.cg_system_distance,
                     currentGoal.getSystem()));
         }
-        holder.locationTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MiscUtils.startIntentToSystemDetails(context, currentGoal.getSystem());
-            }
-        });
+        holder.locationTextView.setOnClickListener(v -> MiscUtils.startIntentToSystemDetails(context, currentGoal.getSystem()));
 
         // Objective
         String objective = context.getString(R.string.no_objective_yet);
@@ -107,13 +102,6 @@ public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdap
         }
         holder.descriptionTextView.setText(description);
 
-        // Rewards table
-        if (currentGoal.getRewards().size() != 0) {
-            setRewards(holder, currentGoal);
-        } else {
-            holder.rewardsTableView.setVisibility(View.GONE);
-        }
-
         // Set click listeners
         setClickListeners(holder.getAdapterPosition(), holder.peopleTextView, R.string.hint_participants);
         setClickListeners(holder.getAdapterPosition(), holder.remainingTextView, R.string.hint_end_date);
@@ -122,16 +110,6 @@ public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdap
         setClickListeners(holder.getAdapterPosition(), holder.descriptionTextView,
                 R.string.community_goal_description);
         setClickListeners(holder.getAdapterPosition(), holder.objectiveTextView, R.string.objective);
-    }
-
-    private void setRewards(goalsViewHolder holder, CommunityGoal goal) {
-        // Set headers
-        holder.rewardsTableView.setHeaders(context.getString(R.string.tier),
-                context.getString(R.string.contributions),
-                context.getString(R.string.reward));
-
-        // Set content
-        holder.rewardsTableView.setContent(goal.getRewards());
     }
 
     private void setClickListeners(final int position, final TextView textView,
@@ -179,8 +157,6 @@ public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdap
         TextView peopleTextView;
         @BindView(R.id.locationTextView)
         TextView locationTextView;
-        @BindView(R.id.rewardsTableView)
-        TableView rewardsTableView;
 
 
         goalsViewHolder(final View view) {

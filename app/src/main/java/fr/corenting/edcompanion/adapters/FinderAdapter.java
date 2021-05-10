@@ -82,27 +82,21 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
     }
 
     public void setResults(final List<TDataType> newResults) {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.setEnabled(false);
-                results = newResults;
-                notifyItemRangeInserted(1, newResults.size());
-                recyclerView.setEnabled(true);
-            }
+        recyclerView.post(() -> {
+            recyclerView.setEnabled(false);
+            results = newResults;
+            notifyItemRangeInserted(1, newResults.size());
+            recyclerView.setEnabled(true);
         });
     }
 
     public void clearResults() {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.setEnabled(false);
-                int size = results.size();
-                results.clear();
-                notifyItemRangeRemoved(1, size);
-                recyclerView.setEnabled(true);
-            }
+        recyclerView.post(() -> {
+            recyclerView.setEnabled(false);
+            int size = results.size();
+            results.clear();
+            notifyItemRangeRemoved(1, size);
+            recyclerView.setEnabled(true);
         });
     }
 

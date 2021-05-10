@@ -5,20 +5,23 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.adapters.AutoCompleteAdapter
+import fr.corenting.edcompanion.databinding.ViewSystemInputBinding
 import fr.corenting.edcompanion.models.events.CommanderPosition
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.PlayerNetworkUtils
 import fr.corenting.edcompanion.utils.SettingsUtils
-import kotlinx.android.synthetic.main.view_system_input.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 
 class SystemInputView : RelativeLayout {
+
+    private lateinit var binding: ViewSystemInputBinding
 
     private var bus: EventBus = EventBus.builder().build()
 
@@ -37,8 +40,7 @@ class SystemInputView : RelativeLayout {
     }
 
     private fun init(attrs: AttributeSet? = null) {
-        View.inflate(context, R.layout.view_system_input, this)
-
+        binding = ViewSystemInputBinding.inflate(LayoutInflater.from(context), this)
 
         if (attrs != null) {
             val a = context.obtainStyledAttributes(
@@ -53,8 +55,8 @@ class SystemInputView : RelativeLayout {
                     -1
                 )
                 if (hintRef != -1) {
-                    systemInputEditText.setHint(hintRef)
-                    systemInputLayout.hint = context.getString(hintRef)
+                    binding.systemInputEditText.setHint(hintRef)
+                    binding.systemInputLayout.hint = context.getString(hintRef)
                 }
 
                 // Cache system name to display on different screens
@@ -76,30 +78,30 @@ class SystemInputView : RelativeLayout {
             PlayerNetworkUtils.getCurrentPlayerNetwork(context).supportLocation()
         ) {
 
-            systemInputLayout.isEndIconVisible = true
-            systemInputLayout.setEndIconOnClickListener {
+            binding.systemInputLayout.isEndIconVisible = true
+            binding.systemInputLayout.setEndIconOnClickListener {
                 PlayerNetworkUtils.getCurrentPlayerNetwork(context).getCommanderPosition(bus)
             }
         } else {
-            systemInputLayout.isEndIconVisible = false
+            binding.systemInputLayout.isEndIconVisible = false
         }
 
         // Set autocomplete view
-        systemInputEditText.threshold = 3
-        systemInputEditText.setAdapter(
+        binding.systemInputEditText.threshold = 3
+        binding.systemInputEditText.setAdapter(
             AutoCompleteAdapter(
                 context,
                 AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SYSTEMS
             )
         )
-        systemInputEditText.setOnItemClickListener { adapterView, _, position, _ ->
-            systemInputEditText.setText(adapterView.getItemAtPosition(position) as String)
+        binding.systemInputEditText.setOnItemClickListener { adapterView, _, position, _ ->
+            binding.systemInputEditText.setText(adapterView.getItemAtPosition(position) as String)
         }
     }
 
     private fun setCache(cacheKey: String) {
         // Set listener
-        systemInputEditText.addTextChangedListener(object : TextWatcher {
+        binding.systemInputEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 SettingsUtils.setString(context, cacheKey, s.toString())
             }
@@ -114,16 +116,16 @@ class SystemInputView : RelativeLayout {
         // Fetch and set existing value if any
         val existingValue = SettingsUtils.getString(context, cacheKey)
         if (!existingValue.isNullOrEmpty()) {
-            systemInputEditText.setText(existingValue)
+            binding.systemInputEditText.setText(existingValue)
         }
     }
 
     fun setOnSubmit(runnable: Runnable) {
-        systemInputEditText.setOnSubmit(runnable)
+        binding.systemInputEditText.setOnSubmit(runnable)
     }
 
     fun getText(): Editable {
-        return systemInputEditText.text
+        return binding.systemInputEditText.text
     }
 
     override fun onAttachedToWindow() {
@@ -139,7 +141,7 @@ class SystemInputView : RelativeLayout {
     @Subscribe
     fun onCommanderPositionEvent(event: CommanderPosition) {
         if (event.success) {
-            systemInputEditText.setText(event.systemName)
+            binding.systemInputEditText.setText(event.systemName)
         } else {
             val activity = this.findViewById<View>(android.R.id.content).context as Activity
             NotificationsUtils.displaySnackbar(

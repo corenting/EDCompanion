@@ -7,7 +7,6 @@ import fr.corenting.edcompanion.activities.SystemDetailsActivity
 import fr.corenting.edcompanion.adapters.SystemStationsAdapter
 import fr.corenting.edcompanion.models.events.SystemStations
 import fr.corenting.edcompanion.utils.NotificationsUtils
-import kotlinx.android.synthetic.main.fragment_list.*
 
 class SystemStationsFragment : AbstractListFragment<SystemStationsAdapter>() {
     init {
@@ -15,7 +14,7 @@ class SystemStationsFragment : AbstractListFragment<SystemStationsAdapter>() {
     }
 
     override fun getNewRecyclerViewAdapter(): SystemStationsAdapter {
-        return SystemStationsAdapter(context, recyclerView)
+        return SystemStationsAdapter(context, binding.recyclerView)
     }
 
     override fun getData() {

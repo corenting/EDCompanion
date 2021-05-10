@@ -14,12 +14,11 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 import fr.corenting.edcompanion.R
+import fr.corenting.edcompanion.databinding.ActivityMainBinding
 import fr.corenting.edcompanion.fragments.*
 import fr.corenting.edcompanion.models.events.ServerStatus
 import fr.corenting.edcompanion.network.ServerStatusNetwork
 import fr.corenting.edcompanion.utils.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.include_app_bar.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -32,6 +31,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         private const val KEY_CURRENT_TAG = "CURRENT_TAG"
     }
 
+    private lateinit var binding: ActivityMainBinding
+
     private lateinit var fragmentManager: FragmentManager
     private lateinit var currentTitle: CharSequence
     private lateinit var currentSubtitle: CharSequence
@@ -40,7 +41,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.setTheme(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Set toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -48,19 +51,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Drawer toggle
         val toggle = ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        drawerLayout.addDrawerListener(HideKeyboardDrawerListener(drawerLayout.rootView))
+            this, binding.drawerLayout, toolbar, R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        binding.drawerLayout.addDrawerListener(HideKeyboardDrawerListener(binding.drawerLayout.rootView))
         toggle.syncState()
 
         // Setup navigation view and fake click the first item
-        navView.setNavigationItemSelectedListener(this)
+        binding.navView.setNavigationItemSelectedListener(this)
 
         // Set initial fragment
         fragmentManager = supportFragmentManager
         if (savedInstanceState == null) {
-            navView.setCheckedItem(navView.menu.getItem(0).itemId)
+            binding.navView.setCheckedItem(binding.navView.menu.getItem(0).itemId)
             switchOnNavigation(getString(R.string.galnet), R.id.nav_galnet_news)
         } else {
             currentTitle = savedInstanceState.getCharSequence(KEY_CURRENT_TITLE).toString()
@@ -75,21 +79,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         updateServerStatus()
 
         // Set listener on server status text to refresh it, and set theme
-        val drawerSubtitleTextView = navView.getHeaderView(0)
-                .findViewById<TextView>(R.id.drawerSubtitleTextView)
-        navView.itemIconTintList = null
+        val drawerSubtitleTextView = binding.navView.getHeaderView(0)
+            .findViewById<TextView>(R.id.drawerSubtitleTextView)
+        binding.navView.itemIconTintList = null
         if (ThemeUtils.isDarkThemeEnabled(this)) {
-            val drawerHeader = navView.getHeaderView(0)
-                    .findViewById<LinearLayout>(R.id.headerLinearLayout)
-            drawerHeader.setBackgroundColor(ContextCompat.getColor(this,
-                    R.color.primaryColorDark))
+            val drawerHeader = binding.navView.getHeaderView(0)
+                .findViewById<LinearLayout>(R.id.headerLinearLayout)
+            drawerHeader.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.primaryColorDark
+                )
+            )
 
             // Fix text color
             val drawerTitleTextView = drawerHeader.findViewById<TextView>(R.id.drawerTitleTextView)
-            drawerTitleTextView.setTextColor(ContextCompat.getColor(this,
-                    android.R.color.white))
-            drawerSubtitleTextView.setTextColor(ContextCompat.getColor(this,
-                    android.R.color.white))
+            drawerTitleTextView.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    android.R.color.white
+                )
+            )
+            drawerSubtitleTextView.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    android.R.color.white
+                )
+            )
         }
         drawerSubtitleTextView.setOnClickListener { updateServerStatus() }
 
@@ -118,15 +134,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        drawerLayout.closeDrawer(GravityCompat.START)
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
         return switchOnNavigation(item.title.toString(), item.itemId)
     }
 
@@ -142,8 +158,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun updateServerStatus() {
-        val textView = navView.getHeaderView(0)
-                .findViewById<TextView>(R.id.drawerSubtitleTextView)
+        val textView = binding.navView.getHeaderView(0)
+            .findViewById<TextView>(R.id.drawerSubtitleTextView)
         textView.text = getString(R.string.updating_server_status)
         ServerStatusNetwork.getStatus(this)
     }
@@ -151,8 +167,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onServerStatusEvent(status: ServerStatus) {
         val content = if (status.success) status.status else getString(R.string.unknown)
-        val textView = navView.getHeaderView(0)
-                .findViewById<TextView>(R.id.drawerSubtitleTextView)
+        val textView = binding.navView.getHeaderView(0)
+            .findViewById<TextView>(R.id.drawerSubtitleTextView)
         textView.text = getString(R.string.server_status, content)
     }
 
@@ -166,7 +182,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         when (id) {
-           R.id.nav_cg -> {
+            R.id.nav_cg -> {
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG)
                 currentSubtitle = getString(R.string.inara_credits)
             }
@@ -232,14 +248,46 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Else
         when (tag) {
-            GalnetFragment.GALNET_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, GalnetFragment(), tag)
-            NewsFragment.NEWS_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, NewsFragment(), tag)
-            SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, SystemFinderFragment(), tag)
-            CommanderFragment.COMMANDER_FRAGMENT -> ViewUtils.switchFragment(fragmentManager, CommanderFragment(), tag)
-            DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, DistanceCalculatorFragment(), tag)
-            ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, ShipFinderFragment(), tag)
-            CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, CommodityFinderFragment(), tag)
-            CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG -> ViewUtils.switchFragment(fragmentManager, CommoditiesListFragment(), tag)
+            GalnetFragment.GALNET_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                GalnetFragment(),
+                tag
+            )
+            NewsFragment.NEWS_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                NewsFragment(),
+                tag
+            )
+            SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                SystemFinderFragment(),
+                tag
+            )
+            CommanderFragment.COMMANDER_FRAGMENT -> ViewUtils.switchFragment(
+                fragmentManager,
+                CommanderFragment(),
+                tag
+            )
+            DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                DistanceCalculatorFragment(),
+                tag
+            )
+            ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                ShipFinderFragment(),
+                tag
+            )
+            CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                CommodityFinderFragment(),
+                tag
+            )
+            CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                CommoditiesListFragment(),
+                tag
+            )
             else -> ViewUtils.switchFragment(fragmentManager, CommunityGoalsFragment(), tag)
         }
     }
@@ -252,9 +300,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun fixToolbarElevation() {
         // Set toolbar elevation to prevent shadow with tabLayout
         if (currentFragmentTag == CommanderFragment.COMMANDER_FRAGMENT) {
-            ViewUtils.setToolbarElevation(appBar, 0f)
+            ViewUtils.setToolbarElevation(binding.includeAppBar.appBar, 0f)
         } else {
-            ViewUtils.setToolbarElevation(appBar, ViewUtils.dpToPx(this, 4))
+            ViewUtils.setToolbarElevation(binding.includeAppBar.appBar, ViewUtils.dpToPx(this, 4))
         }
     }
 }

@@ -1,23 +1,16 @@
 package fr.corenting.edcompanion.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-
 import fr.corenting.edcompanion.adapters.NewsAdapter
 import fr.corenting.edcompanion.models.events.News
 import fr.corenting.edcompanion.network.NewsNetwork
 import fr.corenting.edcompanion.utils.NotificationsUtils
-import kotlinx.android.synthetic.main.fragment_list.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class NewsFragment : AbstractListFragment<NewsAdapter>() {
 
     override fun getNewRecyclerViewAdapter(): NewsAdapter {
-        return NewsAdapter(context, recyclerView, false)
+        return NewsAdapter(context, binding.recyclerView, false)
     }
 
     override fun getData() {

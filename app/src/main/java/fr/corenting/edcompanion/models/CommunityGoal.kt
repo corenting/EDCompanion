@@ -5,7 +5,7 @@ import android.os.Parcelable
 import android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 

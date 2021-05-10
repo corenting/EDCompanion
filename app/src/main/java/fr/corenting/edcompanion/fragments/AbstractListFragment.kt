@@ -6,18 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import fr.corenting.edcompanion.R
-import kotlinx.android.synthetic.main.fragment_list.*
+import fr.corenting.edcompanion.databinding.FragmentListBinding
 import org.greenrobot.eventbus.EventBus
 
-abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.ListAdapter<*, *>> : Fragment() {
+abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.ListAdapter<*, *>> :
+    Fragment() {
+
+    private var _binding: FragmentListBinding? = null
+    protected val binding get() = _binding!!
 
     protected lateinit var recyclerViewAdapter: TAdapter
     protected var loadDataOnCreate = true
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_list, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,20 +32,20 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
 
         // Recycler view setup
         val linearLayoutManager = LinearLayoutManager(context)
-        recyclerView.layoutManager = linearLayoutManager
+        binding.recyclerView.layoutManager = linearLayoutManager
         recyclerViewAdapter = when {
             savedInstanceState == null || !this::recyclerViewAdapter.isInitialized -> getNewRecyclerViewAdapter()
             else -> recyclerViewAdapter
         }
-        recyclerView.adapter = recyclerViewAdapter
+        binding.recyclerView.adapter = recyclerViewAdapter
 
         //Swipe to refresh setup
         val listener = {
             startLoading()
             getData()
         }
-        swipeContainer.setOnRefreshListener(listener)
-        emptySwipe.setOnRefreshListener(listener)
+        binding.swipeContainer.setOnRefreshListener(listener)
+        binding.emptySwipe.setOnRefreshListener(listener)
 
         // Load data if not restored
         if (savedInstanceState != null) {
@@ -48,6 +55,11 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
             startLoading()
             getData()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,16 +80,16 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
     }
 
     protected fun endLoading(empty: Boolean) {
-        emptySwipe.visibility = if (empty) View.VISIBLE else View.GONE
-        emptySwipe.isRefreshing = false
-        swipeContainer.visibility = if (empty) View.GONE else View.VISIBLE
-        swipeContainer.isRefreshing = false
+        binding.emptySwipe.visibility = if (empty) View.VISIBLE else View.GONE
+        binding.emptySwipe.isRefreshing = false
+        binding.swipeContainer.visibility = if (empty) View.GONE else View.VISIBLE
+        binding.swipeContainer.isRefreshing = false
     }
 
     private fun startLoading() {
-        emptySwipe.visibility = View.GONE
-        swipeContainer.visibility = View.VISIBLE
-        swipeContainer.isRefreshing = true
+        binding.emptySwipe.visibility = View.GONE
+        binding.swipeContainer.visibility = View.VISIBLE
+        binding.swipeContainer.isRefreshing = true
     }
 
 

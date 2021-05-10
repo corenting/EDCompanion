@@ -130,7 +130,7 @@ public class SystemNetwork {
                                 event = new SystemHistory(true, results);
                             } catch (Exception ex) {
                                 event = new SystemHistory(false,
-                                        new ArrayList<SystemHistoryResult>());
+                                        new ArrayList<>());
                             }
                             EventBus.getDefault().post(event);
                         }
@@ -141,7 +141,7 @@ public class SystemNetwork {
                     public void onFailure(Call<List<SystemHistoryResponse>> call,
                                           Throwable t) {
                         EventBus.getDefault().post(new SystemHistory(false,
-                                new ArrayList<SystemHistoryResult>()));
+                                new ArrayList<>()));
 
                     }
                 };
@@ -172,7 +172,7 @@ public class SystemNetwork {
                         }
                         event = new SystemStations(true, results);
                     } catch (Exception ex) {
-                        event = new SystemStations(false, new ArrayList<Station>());
+                        event = new SystemStations(false, new ArrayList<>());
                     }
                     EventBus.getDefault().post(event);
                 }
