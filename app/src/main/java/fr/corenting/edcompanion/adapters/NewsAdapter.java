@@ -5,11 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.text.DateFormat;
-import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -17,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import java.text.DateFormat;
+import java.util.Date;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
+import fr.corenting.edcompanion.databinding.ListItemGalnetBinding;
 import fr.corenting.edcompanion.models.NewsArticle;
 import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.MiscUtils;
@@ -72,12 +69,11 @@ public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsAr
     @NonNull
     @Override
     public newsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_galnet,
-                parent, false);
+        ListItemGalnetBinding itemBinding = ListItemGalnetBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         if (!isDetailsView) {
-            v.setOnClickListener(onClickListener);
+            itemBinding.getRoot().setOnClickListener(onClickListener);
         }
-        return new newsViewHolder(v);
+        return new newsViewHolder(itemBinding);
     }
 
     @Override
@@ -85,37 +81,30 @@ public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsAr
         NewsArticle currentArticle = getItem(holder.getAdapterPosition());
 
         // News content
-        holder.titleTextView.setText(currentArticle.getTitle());
-        MiscUtils.setTextFromHtml(holder.descriptionTextView, currentArticle.getContent());
+        holder.viewBinding.titleTextView.setText(currentArticle.getTitle());
+        MiscUtils.setTextFromHtml(holder.viewBinding.descriptionTextView, currentArticle.getContent());
         if (isDetailsView) {
-            holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
+            holder.viewBinding.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
         }
 
         // Date subtitle
         Date date = new Date(currentArticle.getDateTimestamp() * 1000);
-        holder.dateTextView.setText(dateFormat.format(date));
+        holder.viewBinding.dateTextView.setText(dateFormat.format(date));
 
         // Ship picture
-        Glide.with(holder.galnetImageView)
+        Glide.with(holder.viewBinding.galnetImageView)
                 .load(currentArticle.getPicture())
                 .error(R.drawable.galnet_placeholder)
                 .centerCrop()
-                .into(holder.galnetImageView);
+                .into(holder.viewBinding.galnetImageView);
     }
 
     public static class newsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.titleTextView)
-        TextView titleTextView;
-        @BindView(R.id.dateTextView)
-        TextView dateTextView;
-        @BindView(R.id.descriptionTextView)
-        TextView descriptionTextView;
-        @BindView(R.id.galnetImageView)
-        ImageView galnetImageView;
+        private final ListItemGalnetBinding viewBinding;
 
-        newsViewHolder(final View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        newsViewHolder(final ListItemGalnetBinding viewBinding) {
+            super(viewBinding.getRoot());
+            this.viewBinding = viewBinding;
         }
     }
 }
