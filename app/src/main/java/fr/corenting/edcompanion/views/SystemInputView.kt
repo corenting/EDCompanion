@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
-import androidx.core.widget.addTextChangedListener
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.adapters.AutoCompleteAdapter
 import fr.corenting.edcompanion.models.events.CommanderPosition
@@ -38,7 +37,7 @@ class SystemInputView : RelativeLayout {
     }
 
     private fun init(attrs: AttributeSet? = null) {
-        View.inflate(context, fr.corenting.edcompanion.R.layout.view_system_input, this)
+        View.inflate(context, R.layout.view_system_input, this)
 
 
         if (attrs != null) {
