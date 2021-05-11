@@ -9,22 +9,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
+import fr.corenting.edcompanion.databinding.ListItemCommunityGoalBinding;
 import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.utils.MiscUtils;
 
-public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdapter<CommunityGoal,
+public class CommunityGoalsAdapter extends ListAdapter<CommunityGoal,
         CommunityGoalsAdapter.goalsViewHolder> {
 
-    private View.OnClickListener onClickListener;
+    private final View.OnClickListener onClickListener;
 
-    private Context context;
-    private boolean isDetailsView;
+    private final Context context;
+    private final boolean isDetailsView;
 
     public CommunityGoalsAdapter(final Context context, final RecyclerView recyclerView, boolean isDetailsView) {
         // Parent class setup
@@ -53,12 +53,12 @@ public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdap
     @NonNull
     @Override
     public goalsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_community_goal,
-                parent, false);
+        ListItemCommunityGoalBinding itemBinding = ListItemCommunityGoalBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+
         if (!isDetailsView) {
-            v.setOnClickListener(onClickListener);
+            itemBinding.getRoot().setOnClickListener(onClickListener);
         }
-        return new goalsViewHolder(v);
+        return new goalsViewHolder(itemBinding);
     }
 
     @Override
@@ -66,50 +66,50 @@ public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdap
         final CommunityGoal currentGoal = getItem(holder.getAdapterPosition());
 
         // Content
-        holder.titleTextView.setText(currentGoal.getTitle());
-        holder.updateTextView.setText(currentGoal.getRefreshDateString(context));
-        holder.peopleTextView.setText(context.getString(R.string.cg_contributors,
+        holder.viewBinding.titleTextView.setText(currentGoal.getTitle());
+        holder.viewBinding.updateTextView.setText(currentGoal.getRefreshDateString(context));
+        holder.viewBinding.peopleTextView.setText(context.getString(R.string.cg_contributors,
                 String.valueOf(currentGoal.getContributors())));
-        holder.remainingTextView.setText(context.getString(R.string.cg_end_date,
+        holder.viewBinding.remainingTextView.setText(context.getString(R.string.cg_end_date,
                 currentGoal.getEndDate(context)));
-        holder.tierTextView.setText(context.getString(R.string.cg_progress,
+        holder.viewBinding.tierTextView.setText(context.getString(R.string.cg_progress,
                 currentGoal.getTierString()));
 
         // System
         if (currentGoal.getDistanceToPlayer() != null) {
-            holder.locationTextView.setText(context.getString(R.string.cg_system_with_player_distance,
+            holder.viewBinding.locationTextView.setText(context.getString(R.string.cg_system_with_player_distance,
                     currentGoal.getSystem(), currentGoal.getDistanceToPlayer()));
         } else {
-            holder.locationTextView.setText(context.getString(R.string.cg_system_distance,
+            holder.viewBinding.locationTextView.setText(context.getString(R.string.cg_system_distance,
                     currentGoal.getSystem()));
         }
-        holder.locationTextView.setOnClickListener(v -> MiscUtils.startIntentToSystemDetails(context, currentGoal.getSystem()));
+        holder.viewBinding.locationTextView.setOnClickListener(v -> MiscUtils.startIntentToSystemDetails(context, currentGoal.getSystem()));
 
         // Objective
         String objective = context.getString(R.string.no_objective_yet);
         if (currentGoal.getObjective().length() != 0) {
             objective = currentGoal.getObjective();
         }
-        holder.objectiveTextView.setText(objective);
+        holder.viewBinding.objectiveTextView.setText(objective);
 
         // Description
         if (isDetailsView) {
-            holder.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
+            holder.viewBinding.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
         }
         String description = context.getString(R.string.no_description_yet);
         if (currentGoal.getDescription().length() != 0) {
             description = currentGoal.getDescription();
         }
-        holder.descriptionTextView.setText(description);
+        holder.viewBinding.descriptionTextView.setText(description);
 
         // Set click listeners
-        setClickListeners(holder.getAdapterPosition(), holder.peopleTextView, R.string.hint_participants);
-        setClickListeners(holder.getAdapterPosition(), holder.remainingTextView, R.string.hint_end_date);
-        setClickListeners(holder.getAdapterPosition(), holder.tierTextView, R.string.hint_tiers);
-        setClickListeners(holder.getAdapterPosition(), holder.locationTextView, R.string.hint_system);
-        setClickListeners(holder.getAdapterPosition(), holder.descriptionTextView,
+        setClickListeners(holder.getAdapterPosition(), holder.viewBinding.peopleTextView, R.string.hint_participants);
+        setClickListeners(holder.getAdapterPosition(), holder.viewBinding.remainingTextView, R.string.hint_end_date);
+        setClickListeners(holder.getAdapterPosition(), holder.viewBinding.tierTextView, R.string.hint_tiers);
+        setClickListeners(holder.getAdapterPosition(), holder.viewBinding.locationTextView, R.string.hint_system);
+        setClickListeners(holder.getAdapterPosition(), holder.viewBinding.descriptionTextView,
                 R.string.community_goal_description);
-        setClickListeners(holder.getAdapterPosition(), holder.objectiveTextView, R.string.objective);
+        setClickListeners(holder.getAdapterPosition(), holder.viewBinding.objectiveTextView, R.string.objective);
     }
 
     private void setClickListeners(final int position, final TextView textView,
@@ -141,28 +141,12 @@ public class CommunityGoalsAdapter extends androidx.recyclerview.widget.ListAdap
     }
 
     public static class goalsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.titleTextView)
-        TextView titleTextView;
-        @BindView(R.id.objectiveTextView)
-        TextView objectiveTextView;
-        @BindView(R.id.updateTextView)
-        TextView updateTextView;
-        @BindView(R.id.descriptionTextView)
-        TextView descriptionTextView;
-        @BindView(R.id.remainingTextView)
-        TextView remainingTextView;
-        @BindView(R.id.tierTextView)
-        TextView tierTextView;
-        @BindView(R.id.peopleTextView)
-        TextView peopleTextView;
-        @BindView(R.id.locationTextView)
-        TextView locationTextView;
+        private final ListItemCommunityGoalBinding viewBinding;
 
-
-        goalsViewHolder(final View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            objectiveTextView.setVisibility(View.VISIBLE);
+        goalsViewHolder(final ListItemCommunityGoalBinding viewBinding) {
+            super(viewBinding.getRoot());
+            this.viewBinding = viewBinding;
+            viewBinding.objectiveTextView.setVisibility(View.VISIBLE);
         }
     }
 }

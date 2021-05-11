@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +19,7 @@ import fr.corenting.edcompanion.databinding.ListItemFleetShipBinding;
 import fr.corenting.edcompanion.models.Ship;
 import fr.corenting.edcompanion.utils.MathUtils;
 
-public class CommanderFleetAdapter extends androidx.recyclerview.widget.ListAdapter<Ship,
+public class CommanderFleetAdapter extends ListAdapter<Ship,
         CommanderFleetAdapter.shipViewHolder> {
 
     private final NumberFormat numberFormat;

@@ -25,10 +25,10 @@ import fr.corenting.edcompanion.utils.MiscUtils;
 public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsArticle,
         NewsAdapter.newsViewHolder> {
 
-    private Context context;
-    private DateFormat dateFormat;
-    private View.OnClickListener onClickListener;
-    private boolean isDetailsView;
+    private final Context context;
+    private final DateFormat dateFormat;
+    private final View.OnClickListener onClickListener;
+    private final boolean isDetailsView;
 
 
     public NewsAdapter(Context ctx, final RecyclerView recyclerView, boolean isDetailsView) {
