@@ -12,7 +12,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:4.2.0'
 
         // For Firebase
-        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.google.gms:google-services:4.3.6'
         // Kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
