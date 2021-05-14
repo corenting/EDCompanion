@@ -13,8 +13,8 @@ import fr.corenting.edcompanion.fragments.CommodityDetailsSellFragment;
 
 public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
 
-    private FragmentManager fragmentManager;
-    private Context context;
+    private final FragmentManager fragmentManager;
+    private final Context context;
 
     public CommodityDetailsPagerAdapter(FragmentManager fm, Context context) {
         super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

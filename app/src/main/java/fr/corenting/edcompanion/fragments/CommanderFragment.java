@@ -1,61 +1,57 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommanderFragmentPagerAdapter;
+import fr.corenting.edcompanion.databinding.FragmentCommanderBinding;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 
 public class CommanderFragment extends Fragment {
 
     public static final String COMMANDER_FRAGMENT = "commander_fragment";
 
-    @BindView(R.id.viewPager)
-    public ViewPager viewPager;
-
-    @BindView(R.id.tabLayout)
-    public TabLayout tabLayout;
+    private FragmentCommanderBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_commander, container, false);
-        ButterKnife.bind(this, v);
+        binding = FragmentCommanderBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
         // Setup tablayout and viewpager
-        viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(),
+        binding.viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(),
                 getContext()));
-        viewPager.setOffscreenPageLimit(2);
-        tabLayout.setupWithViewPager(viewPager);
+        binding.viewPager.setOffscreenPageLimit(2);
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
 
         // Style
         if (ThemeUtils.isDarkThemeEnabled(getContext())) {
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColorDark));
+            binding.tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColorDark));
         } else {
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColor));
+            binding.tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColor));
         }
-        tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
+        binding.tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
                 getResources().getColor(R.color.tabText));
 
-        return v;
+        return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

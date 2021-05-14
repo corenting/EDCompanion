@@ -6,14 +6,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0'
-
-        // For Firebase
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath 'com.google.gms:google-services:4.3.5'
-        // Kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }

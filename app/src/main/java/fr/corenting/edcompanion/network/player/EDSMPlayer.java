@@ -21,11 +21,11 @@ import retrofit2.Call;
 
 public class EDSMPlayer extends PlayerNetwork {
 
-    private Context context;
-    private EDSMRetrofit edsmRetrofit;
+    private final Context context;
+    private final EDSMRetrofit edsmRetrofit;
 
-    private String apiKey;
-    private String commanderName;
+    private final String apiKey;
+    private final String commanderName;
 
     public EDSMPlayer(Context context) {
 

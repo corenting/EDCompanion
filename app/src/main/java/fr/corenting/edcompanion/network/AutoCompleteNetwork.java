@@ -15,7 +15,7 @@ import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Response;
 
 public class AutoCompleteNetwork {
-    private static int MAX_RESULTS = 10;
+    private static final int MAX_RESULTS = 10;
 
     public static List<NameId> searchSystems(Context context, String filter) {
         try {

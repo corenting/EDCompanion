@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 
@@ -58,8 +59,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     // Play services / Firebase
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.google.firebase:firebase-core:19.0.0'
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 
     // Retrofit
     ext.retrofitVersion = '2.9.0'
@@ -88,5 +89,3 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
-apply plugin: 'com.google.gms.google-services'

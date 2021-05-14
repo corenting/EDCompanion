@@ -101,7 +101,7 @@ public class CommanderFleetAdapter extends ListAdapter<Ship,
     }
 
     public static class shipViewHolder extends RecyclerView.ViewHolder {
-        private ListItemFleetShipBinding viewBinding;
+        private final ListItemFleetShipBinding viewBinding;
 
         shipViewHolder(final ListItemFleetShipBinding viewBinding) {
             super(viewBinding.getRoot());

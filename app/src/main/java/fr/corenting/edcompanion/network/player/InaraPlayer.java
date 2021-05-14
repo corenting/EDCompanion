@@ -22,10 +22,10 @@ import retrofit2.Call;
 
 public class InaraPlayer extends PlayerNetwork {
 
-    private Context context;
-    private InaraRetrofit inaraRetrofit;
+    private final Context context;
+    private final InaraRetrofit inaraRetrofit;
 
-    private String commanderName;
+    private final String commanderName;
 
     public InaraPlayer(Context context) {
 

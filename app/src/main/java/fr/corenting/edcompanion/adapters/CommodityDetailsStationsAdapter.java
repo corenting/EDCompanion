@@ -25,7 +25,7 @@ public class CommodityDetailsStationsAdapter extends androidx.recyclerview.widge
 
     private final NumberFormat numberFormat;
     private final boolean isSellMode;
-    private Context context;
+    private final Context context;
 
 
     public CommodityDetailsStationsAdapter(Context ctx, boolean isSellMode) {

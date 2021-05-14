@@ -3,7 +3,6 @@ package fr.corenting.edcompanion.models
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityDetailsResponse
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
-import java.util.*
 
 data class CommodityDetailsStationResult(val collectedAt: Instant, val demand: Long?, val supply: Long?,
                                          val buyPrice: Long, val sellPrice: Long,

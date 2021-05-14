@@ -1,51 +1,44 @@
 package fr.corenting.edcompanion.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import org.greenrobot.eventbus.EventBus;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.FinderAdapter;
+import fr.corenting.edcompanion.databinding.FragmentFinderBinding;
 
 public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> extends Fragment {
 
-    @BindView(R.id.swipeContainer)
-    public SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.recyclerView)
-    public RecyclerView recyclerView;
+    private FragmentFinderBinding binding;
 
     protected TAdapter recyclerViewAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_finder, container, false);
-        ButterKnife.bind(this, v);
+        binding = FragmentFinderBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
         // Recycler view setup
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
         recyclerViewAdapter = savedInstanceState == null ?
                 getNewRecyclerViewAdapter() : recyclerViewAdapter;
-        recyclerView.setAdapter(recyclerViewAdapter);
+        binding.recyclerView.setAdapter(recyclerViewAdapter);
 
         // Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = this::onSwipeToRefresh;
-        swipeRefreshLayout.setOnRefreshListener(listener);
+        binding.swipeContainer.setOnRefreshListener(listener);
 
-        return v;
+        return view;
     }
 
     @Override
@@ -66,16 +59,22 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
     protected void endLoading(boolean isEmpty) {
         recyclerViewAdapter.setFindButtonEnabled(true);
         recyclerViewAdapter.getEmptyTextView().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
-        swipeRefreshLayout.setRefreshing(false);
+        binding.swipeContainer.setRefreshing(false);
     }
 
     protected void startLoading() {
         recyclerViewAdapter.setFindButtonEnabled(false);
         recyclerViewAdapter.clearResults();
-        swipeRefreshLayout.setRefreshing(true);
+        binding.swipeContainer.setRefreshing(true);
         recyclerViewAdapter.getEmptyTextView().setVisibility(View.GONE);
     }
 

@@ -20,7 +20,7 @@ public class SystemStationsAdapter extends androidx.recyclerview.widget.ListAdap
 
     private final NumberFormat numberFormat;
     private final View.OnClickListener onClickListener;
-    private Context context;
+    private final Context context;
 
 
     public SystemStationsAdapter(Context ctx, final RecyclerView recyclerView) {

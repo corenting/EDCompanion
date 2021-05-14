@@ -34,8 +34,8 @@ import retrofit2.Response;
 
 public class FrontierPlayer extends PlayerNetwork {
 
-    private Context context;
-    private FrontierRetrofit frontierRetrofit;
+    private final Context context;
+    private final FrontierRetrofit frontierRetrofit;
 
     public FrontierPlayer(Context context) {
 

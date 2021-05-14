@@ -16,7 +16,7 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
-    protected Context context;
+    protected final Context context;
     private RecyclerView recyclerView;
     protected boolean findButtonEnabled;
     protected List<TDataType> results;

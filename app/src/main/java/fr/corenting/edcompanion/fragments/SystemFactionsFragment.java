@@ -8,13 +8,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -39,10 +37,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
+import fr.corenting.edcompanion.databinding.FragmentSystemFactionsBinding;
 import fr.corenting.edcompanion.models.Faction;
 import fr.corenting.edcompanion.models.FactionChartEntryData;
 import fr.corenting.edcompanion.models.FactionHistory;
@@ -55,52 +52,36 @@ import fr.corenting.edcompanion.utils.DateUtils;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.ThemeUtils;
 import fr.corenting.edcompanion.views.GraphMarkerView;
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class SystemFactionsFragment extends Fragment {
 
     public static final String SYSTEM_FACTIONS_FRAGMENT = "system_factions_fragment";
 
-    @BindView(R.id.swipeContainer)
-    public SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.allegianceTextView)
-    public TextView allegianceTextView;
-    @BindView(R.id.powerTextView)
-    public TextView powerTextView;
-    @BindView(R.id.controllingFactionTextView)
-    public TextView controllingFactionTextView;
-    @BindView(R.id.factionsListTextView)
-    public TextView factionsListTextView;
-    @BindView(R.id.chartProgressBar)
-    public MaterialProgressBar chartProgressBar;
-    @BindView(R.id.chartErrorTextView)
-    public TextView chartErrorTextView;
-    @BindView(R.id.historyChartView)
-    public LineChart historyChartView;
-
+    private FragmentSystemFactionsBinding binding;
     private Locale userLocale;
     private DateTimeFormatter dateFormatter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_system_factions, container, false);
-        ButterKnife.bind(this, v);
+        binding = FragmentSystemFactionsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
 
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = () -> {
-            swipeRefreshLayout.setRefreshing(true);
+            binding.swipeContainer.setRefreshing(true);
             if (getActivity() != null) {
                 ((SystemDetailsActivity) getActivity()).getData();
             }
         };
-        swipeRefreshLayout.setOnRefreshListener(listener);
+        binding.swipeContainer.setOnRefreshListener(listener);
 
         // Setup views
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(true);
+        binding.swipeContainer.setVisibility(View.VISIBLE);
+        binding.swipeContainer.setRefreshing(true);
 
-        return v;
+        return view;
     }
 
     @Override
@@ -110,6 +91,12 @@ public class SystemFactionsFragment extends Fragment {
 
         userLocale = DateUtils.getCurrentLocale(getContext());
         dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override
@@ -142,9 +129,9 @@ public class SystemFactionsFragment extends Fragment {
         try {
             if (systemHistory.getSuccess()) {
                 bindHistoryChart(systemHistory.getHistory());
-                chartProgressBar.setVisibility(View.GONE);
-                historyChartView.setVisibility(View.VISIBLE);
-                chartErrorTextView.setVisibility(View.GONE);
+                binding.chartProgressBar.setVisibility(View.GONE);
+                binding.historyChartView.setVisibility(View.VISIBLE);
+                binding.chartErrorTextView.setVisibility(View.GONE);
             } else {
                 throw new Exception();
             }
@@ -153,25 +140,25 @@ public class SystemFactionsFragment extends Fragment {
                 NotificationsUtils.displaySnackbar(getActivity(),
                         this.getString(R.string.no_chart_snackbar_error));
             }
-            chartProgressBar.setVisibility(View.GONE);
-            historyChartView.setVisibility(View.GONE);
-            chartErrorTextView.setVisibility(View.VISIBLE);
+            binding.chartProgressBar.setVisibility(View.GONE);
+            binding.historyChartView.setVisibility(View.GONE);
+            binding.chartErrorTextView.setVisibility(View.VISIBLE);
         }
     }
 
     public void endLoading() {
-        swipeRefreshLayout.setRefreshing(false);
+        binding.swipeContainer.setRefreshing(false);
     }
 
     private void bindHistoryChart(List<SystemHistoryResult> history) {
-        historyChartView.setVisibility(history.size() == 0 ? View.GONE : View.VISIBLE);
+        binding.historyChartView.setVisibility(history.size() == 0 ? View.GONE : View.VISIBLE);
         if (history.size() == 0) {
             return;
         }
 
         // Prevent scrolling being intercepted by viewpager
-        BarLineChartTouchListener touchListener = new BarLineChartTouchListener(historyChartView,
-                historyChartView.getViewPortHandler().getMatrixTouch(), 3F) {
+        BarLineChartTouchListener touchListener = new BarLineChartTouchListener(binding.historyChartView,
+                binding.historyChartView.getViewPortHandler().getMatrixTouch(), 3F) {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -188,7 +175,7 @@ public class SystemFactionsFragment extends Fragment {
                 return super.onTouch(v, event);
             }
         };
-        historyChartView.setOnTouchListener(touchListener);
+        binding.historyChartView.setOnTouchListener(touchListener);
 
         // Modify data for graph
         LocalDate end = LocalDate.now();
@@ -263,32 +250,32 @@ public class SystemFactionsFragment extends Fragment {
         LineDataSet[] dataSetsArray = dataSets.toArray(new LineDataSet[0]);
         LineData data = new LineData(dataSetsArray);
         data.setDrawValues(false);
-        historyChartView.setData(data);
+        binding.historyChartView.setData(data);
 
         // Empty description to hide default label
         Description desc = new Description();
         desc.setText("");
-        historyChartView.setDescription(desc);
+        binding.historyChartView.setDescription(desc);
 
         // Color for dark theme
         if (ThemeUtils.isDarkThemeEnabled(getContext())) {
             int color = Color.parseColor("#ffffff");
-            historyChartView.getAxisLeft().setTextColor(color);
-            historyChartView.getXAxis().setTextColor(color);
-            historyChartView.getLegend().setTextColor(color);
+            binding.historyChartView.getAxisLeft().setTextColor(color);
+            binding.historyChartView.getXAxis().setTextColor(color);
+            binding.historyChartView.getLegend().setTextColor(color);
         }
 
 
         // Misc params
-        historyChartView.getAxisRight().setEnabled(false);
-        historyChartView.setExtraLeftOffset(10);
-        historyChartView.setExtraRightOffset(50);
-        historyChartView.getLegend().setWordWrapEnabled(true);
+        binding.historyChartView.getAxisRight().setEnabled(false);
+        binding.historyChartView.setExtraLeftOffset(10);
+        binding.historyChartView.setExtraRightOffset(50);
+        binding.historyChartView.getLegend().setWordWrapEnabled(true);
 
         // Marker view
         GraphMarkerView graphMarker = new GraphMarkerView(getContext());
-        graphMarker.setChartView(historyChartView);
-        historyChartView.setMarker(graphMarker);
+        graphMarker.setChartView(binding.historyChartView);
+        binding.historyChartView.setMarker(graphMarker);
 
         // Labels
         final SparseArray<String> labels = new SparseArray<>();
@@ -296,34 +283,34 @@ public class SystemFactionsFragment extends Fragment {
             labels.put(i, DateUtils.removeYearFromDate(
                     dateFormatter.format(dates.get(i))));
         }
-        historyChartView.getXAxis().setValueFormatter(new ValueFormatter() {
+        binding.historyChartView.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 return labels.get((int) value, "");
             }
         });
-        historyChartView.getAxisLeft().setValueFormatter(new ValueFormatter() {
+        binding.historyChartView.getAxisLeft().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 return (int) value + " %";
             }
         });
-        historyChartView.notifyDataSetChanged();
-        historyChartView.invalidate();
+        binding.historyChartView.notifyDataSetChanged();
+        binding.historyChartView.invalidate();
     }
 
     private void bindInformations(System system) {
         // Current state
-        controllingFactionTextView.setText(system.getControllingFaction());
-        allegianceTextView.setText(system.getAllegiance());
-        powerTextView.setText(String.format("%s (%s)", system.getPower(), system.getPowerState()));
+        binding.controllingFactionTextView.setText(system.getControllingFaction());
+        binding.allegianceTextView.setText(system.getAllegiance());
+        binding.powerTextView.setText(String.format("%s (%s)", system.getPower(), system.getPowerState()));
 
         // Factions list
         if (system.getFactions().size() == 0) {
-            factionsListTextView.setText(getString(R.string.no_factions));
+            binding.factionsListTextView.setText(getString(R.string.no_factions));
             return;
         }
-        factionsListTextView.setText(Html.fromHtml(getHtmlFactionsList(system.getFactions())));
+        binding.factionsListTextView.setText(Html.fromHtml(getHtmlFactionsList(system.getFactions())));
     }
 
     private String getHtmlFactionsList(List<Faction> factions) {

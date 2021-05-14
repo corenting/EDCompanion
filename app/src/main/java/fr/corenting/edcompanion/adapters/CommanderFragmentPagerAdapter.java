@@ -13,9 +13,9 @@ import fr.corenting.edcompanion.utils.PlayerNetworkUtils;
 
 public class CommanderFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private PlayerNetwork playerNetwork;
-    private FragmentManager fragmentManager;
-    private Context context;
+    private final PlayerNetwork playerNetwork;
+    private final FragmentManager fragmentManager;
+    private final Context context;
 
     public CommanderFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

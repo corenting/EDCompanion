@@ -146,7 +146,7 @@ class SystemInputView : RelativeLayout {
             val activity = this.findViewById<View>(android.R.id.content).context as Activity
             NotificationsUtils.displaySnackbar(
                 activity,
-                context.getString(fr.corenting.edcompanion.R.string.my_location_error)
+                context.getString(R.string.my_location_error)
             )
 
         }
