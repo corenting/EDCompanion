@@ -250,7 +250,6 @@
     <string name="about_libs" translatable="false">
         <![CDATA[
         <a href="https://developer.android.com/jetpack/androidx/">AndroidX</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
-        <a href="https://github.com/JakeWharton/butterknife">Butter Knife</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/">DelayAutoCompleteTextView</a><br />
         <a href="https://github.com/greenrobot/EventBus">EventBus</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>)<br />
         <a href="https://github.com/bumptech/glide">Glide</a> (<a href="https://github.com/bumptech/glide/blob/master/LICENSE">Glide license</a>)<br />

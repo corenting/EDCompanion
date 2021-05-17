@@ -2,28 +2,28 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.NumberFormat;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.CommodityDetailsActivity;
+import fr.corenting.edcompanion.databinding.FragmentListCommoditiesHeaderBinding;
+import fr.corenting.edcompanion.databinding.ListItemCommoditiesListResultBinding;
 import fr.corenting.edcompanion.models.CommoditiesListResult;
 import fr.corenting.edcompanion.models.events.CommoditiesListSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
 
 public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter.HeaderViewHolder,
         CommoditiesListAdapter.ResultViewHolder, CommoditiesListResult> {
@@ -38,54 +38,41 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
     }
 
     @Override
-    protected RecyclerView.ViewHolder getNewHeaderViewHolder(View v) {
-        return new HeaderViewHolder(v);
+    protected RecyclerView.ViewHolder getHeaderViewHolder(@NonNull @NotNull ViewGroup parent) {
+        FragmentListCommoditiesHeaderBinding headerBinding = FragmentListCommoditiesHeaderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new HeaderViewHolder(headerBinding);
     }
 
     @Override
-    protected RecyclerView.ViewHolder getResultViewHolder(View v) {
-        return new ResultViewHolder(v);
-    }
-
-    @Override
-    public TextView getEmptyTextView() {
-        return getHeader().emptyText;
-    }
-
-    @Override
-    protected int getHeaderResId() {
-        return R.layout.fragment_list_commodities_header;
-    }
-
-    @Override
-    protected int getResultResId() {
-        return R.layout.list_item_commodities_list_result;
+    protected RecyclerView.ViewHolder getResultViewHolder(@NonNull @NotNull ViewGroup parent) {
+        ListItemCommoditiesListResultBinding resultBinding = ListItemCommoditiesListResultBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ResultViewHolder(resultBinding);
     }
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
         // Commodity autocomplete
-        holder.commodityInputEditText.setThreshold(3);
-        holder.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context,
+        holder.binding.commodityInputEditText.setThreshold(3);
+        holder.binding.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context,
                 AutoCompleteAdapter.TYPE_AUTOCOMPLETE_COMMODITIES));
-        holder.commodityInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
-                holder.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
+        holder.binding.commodityInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
+                holder.binding.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
         // Find button
         final Runnable onSubmit = () -> {
             // Don't launch search on empty strings or if find already in progress
-            if (!findButtonEnabled || holder.commodityInputEditText.getText() != null &&
-                    holder.commodityInputEditText.getText().length() == 0) {
+            if (!findButtonEnabled || holder.binding.commodityInputEditText.getText() != null &&
+                    holder.binding.commodityInputEditText.getText().length() == 0) {
                 return;
             }
 
-            ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
+            ViewUtils.hideSoftKeyboard(holder.binding.findButton.getRootView());
             CommoditiesListSearch result = new CommoditiesListSearch(
-                    holder.commodityInputEditText.getText().toString());
+                    holder.binding.commodityInputEditText.getText().toString());
             EventBus.getDefault().post(result);
         };
-        holder.findButton.setOnClickListener(view -> onSubmit.run());
-        holder.commodityInputEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
+        holder.binding.findButton.setOnClickListener(view -> onSubmit.run());
+        holder.binding.commodityInputEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 onSubmit.run();
                 return true;
@@ -98,13 +85,13 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
     protected void bindResultViewHolder(ResultViewHolder holder, int position) {
         final CommoditiesListResult currentResult = results.get(position - 1);
 
-        holder.titleTextView.setText(currentResult.getName());
-        holder.averagePriceTextView.setText(context.getString(R.string.credits,
+        holder.binding.titleTextView.setText(currentResult.getName());
+        holder.binding.averagePriceTextView.setText(context.getString(R.string.credits,
                 numberFormat.format(currentResult.getAveragePrice())));
-        holder.isRareTextView.setVisibility(currentResult.isRare() ? View.VISIBLE : View.GONE);
-        holder.categoryTextView.setText(currentResult.getCategory().getName());
+        holder.binding.isRareTextView.setVisibility(currentResult.isRare() ? View.VISIBLE : View.GONE);
+        holder.binding.categoryTextView.setText(currentResult.getCategory().getName());
 
-        holder.itemLayout.setOnClickListener(v -> {
+        holder.binding.itemLayout.setOnClickListener(v -> {
             Intent i = new Intent(context, CommodityDetailsActivity.class);
             i.putExtra("data", currentResult.getName());
             MiscUtils.startIntentWithFadeAnimation(context, i);
@@ -112,41 +99,20 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
+        private final ListItemCommoditiesListResultBinding binding;
 
-        @BindView(R.id.itemLayout)
-        RelativeLayout itemLayout;
-
-        @BindView(R.id.titleTextView)
-        TextView titleTextView;
-
-        @BindView(R.id.categoryTextView)
-        TextView categoryTextView;
-
-        @BindView(R.id.averagePriceTextView)
-        TextView averagePriceTextView;
-
-        @BindView(R.id.isRareTextView)
-        TextView isRareTextView;
-
-        public ResultViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public ResultViewHolder(ListItemCommoditiesListResultBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.commodityInputEditText)
-        DelayAutoCompleteTextView commodityInputEditText;
+        private final FragmentListCommoditiesHeaderBinding binding;
 
-        @BindView(R.id.findButton)
-        Button findButton;
-
-        @BindView(R.id.emptyText)
-        TextView emptyText;
-
-        public HeaderViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public HeaderViewHolder(FragmentListCommoditiesHeaderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

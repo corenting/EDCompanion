@@ -1,34 +1,29 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
 import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 import org.threeten.bp.Instant;
 
 import java.text.NumberFormat;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.databinding.FragmentFindCommodityHeaderBinding;
+import fr.corenting.edcompanion.databinding.ListItemCommodityFinderResultBinding;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
-import fr.corenting.edcompanion.views.LightDarkImageView;
-import fr.corenting.edcompanion.views.SystemInputView;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
@@ -43,72 +38,59 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
     }
 
     @Override
-    protected RecyclerView.ViewHolder getNewHeaderViewHolder(View v) {
-        return new HeaderViewHolder(v);
+    protected RecyclerView.ViewHolder getHeaderViewHolder(@NotNull ViewGroup parent) {
+        FragmentFindCommodityHeaderBinding headerBinding = FragmentFindCommodityHeaderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new HeaderViewHolder(headerBinding);
     }
 
     @Override
-    protected RecyclerView.ViewHolder getResultViewHolder(View v) {
-        return new ResultViewHolder(v);
-    }
-
-    @Override
-    public TextView getEmptyTextView() {
-        return getHeader().emptyText;
-    }
-
-    @Override
-    protected int getHeaderResId() {
-        return R.layout.fragment_find_commodity_header;
-    }
-
-    @Override
-    protected int getResultResId() {
-        return R.layout.list_item_commodity_finder_result;
+    protected RecyclerView.ViewHolder getResultViewHolder(@NonNull @NotNull ViewGroup parent) {
+        ListItemCommodityFinderResultBinding resultBinding = ListItemCommodityFinderResultBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ResultViewHolder(resultBinding);
     }
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
         // Ship autocomplete
-        holder.commodityInputEditText.setThreshold(3);
-        holder.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_COMMODITIES));
-        holder.commodityInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
-                holder.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
+        holder.binding.commodityInputEditText.setThreshold(3);
+        holder.binding.commodityInputEditText.setAdapter(new AutoCompleteAdapter(context, AutoCompleteAdapter.TYPE_AUTOCOMPLETE_COMMODITIES));
+        holder.binding.commodityInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
+                holder.binding.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
         // Landing pad size adapter
-        if (holder.landingPadSizeAutoCompleteTextView.getAdapter() == null ||
-                holder.landingPadSizeAutoCompleteTextView.getAdapter().getCount() == 0) {
+        if (holder.binding.landingPadSizeAutoCompleteTextView.getAdapter() == null ||
+                holder.binding.landingPadSizeAutoCompleteTextView.getAdapter().getCount() == 0) {
             String[] landingPadSizeArray = context.getResources()
                     .getStringArray(R.array.landing_pad_size);
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                     android.R.layout.simple_dropdown_item_1line, landingPadSizeArray);
-            holder.landingPadSizeAutoCompleteTextView.setAdapter(adapter);
+            holder.binding.landingPadSizeAutoCompleteTextView.setAdapter(adapter);
         }
 
         // Buy or sell adapter
-        if (holder.buyOrSellAutoCompleteTextView.getAdapter() == null ||
-                holder.buyOrSellAutoCompleteTextView.getAdapter().getCount() == 0) {
+        if (holder.binding.buyOrSellAutoCompleteTextView.getAdapter() == null ||
+                holder.binding.buyOrSellAutoCompleteTextView.getAdapter().getCount() == 0) {
             String[] buySellArray = context.getResources()
                     .getStringArray(R.array.buy_sell_array);
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                     android.R.layout.simple_dropdown_item_1line, buySellArray);
-            holder.buyOrSellAutoCompleteTextView.setAdapter(adapter);
+            holder.binding.buyOrSellAutoCompleteTextView.setAdapter(adapter);
 
-            holder.buyOrSellAutoCompleteTextView.setOnItemSelectedListener(
+            holder.binding.buyOrSellAutoCompleteTextView.setOnItemSelectedListener(
                     new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             if (position == 0) {
-                                holder.stockInputLayout.setHint(context
+                                holder.binding.stockInputLayout.setHint(context
                                         .getString(R.string.minimum_stock));
-                                holder.stockInputEditText.setHint(context
+                                holder.binding.stockInputEditText.setHint(context
                                         .getString(R.string.minimum_stock));
                             } else {
-                                holder.stockInputLayout.setHint(context
+                                holder.binding.stockInputLayout.setHint(context
                                         .getString(R.string.minimum_demand));
-                                holder.stockInputEditText.setHint(context
+                                holder.binding.stockInputEditText.setHint(context
                                         .getString(R.string.minimum_demand));
                             }
                         }
@@ -127,10 +109,10 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 return;
             }
 
-            ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
+            ViewUtils.hideSoftKeyboard(holder.binding.findButton.getRootView());
 
             // Convert stock value to int
-            String stockString = holder.stockInputEditText.getText().toString();
+            String stockString = holder.binding.stockInputEditText.getText().toString();
             int stock = 0;
             if (stockString.length() != 0) {
                 try {
@@ -142,28 +124,28 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
             // Convert buy/sell mode to boolean
             String[] buySellArray = context.getResources()
                     .getStringArray(R.array.buy_sell_array);
-            isSellingMode = holder.buyOrSellAutoCompleteTextView.getText().toString().equals(buySellArray[1]);
+            isSellingMode = holder.binding.buyOrSellAutoCompleteTextView.getText().toString().equals(buySellArray[1]);
 
             CommodityFinderSearch result = new CommodityFinderSearch(
-                    holder.commodityInputEditText.getText().toString(),
-                    holder.systemInputView.getText().toString(),
-                    holder.landingPadSizeAutoCompleteTextView.getText().toString(),
+                    holder.binding.commodityInputEditText.getText().toString(),
+                    holder.binding.systemInputView.getText().toString(),
+                    holder.binding.landingPadSizeAutoCompleteTextView.getText().toString(),
                     stock, isSellingMode);
 
             EventBus.getDefault().post(result);
         };
 
         // On submit stuff
-        holder.findButton.setOnClickListener(view -> onSubmit.run());
-        holder.stockInputEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
+        holder.binding.findButton.setOnClickListener(view -> onSubmit.run());
+        holder.binding.stockInputEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 onSubmit.run();
                 return true;
             }
             return false;
         });
-        holder.commodityInputEditText.setOnSubmit(onSubmit);
-        holder.systemInputView.setOnSubmit(onSubmit);
+        holder.binding.commodityInputEditText.setOnSubmit(onSubmit);
+        holder.binding.systemInputView.setOnSubmit(onSubmit);
     }
 
     @Override
@@ -176,10 +158,10 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 currentResult.getPriceDifferenceFromAverage());
         if (isSellingMode) {
             String sellPrice = numberFormat.format(currentResult.getSellPrice());
-            holder.priceTextView.setText(String.format("%s (%s%%)", sellPrice, priceDifference));
+            holder.binding.priceTextView.setText(String.format("%s (%s%%)", sellPrice, priceDifference));
         } else {
             String buyPrice = numberFormat.format(currentResult.getBuyPrice());
-            holder.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
+            holder.binding.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
         }
 
 
@@ -187,97 +169,47 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         String date = android.text.format.DateUtils.getRelativeTimeSpanString(
                 currentResult.getLastPriceUpdate().toEpochMilli(), Instant.now().toEpochMilli(),
                 0, FORMAT_ABBREV_RELATIVE).toString();
-        holder.lastUpdateTextView.setText(date);
+        holder.binding.lastUpdateTextView.setText(date);
 
         // Other informations
-        holder.titleTextView.setText(String.format("%s - %s", currentResult.getSystem(),
+        holder.binding.titleTextView.setText(String.format("%s - %s", currentResult.getSystem(),
                 currentResult.getStation()));
-        holder.permitRequiredTextView.setVisibility(
+        holder.binding.permitRequiredTextView.setVisibility(
                 currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
-        holder.isPlanetaryImageView.setVisibility(
+        holder.binding.isPlanetaryImageView.setVisibility(
                 currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
-        holder.landingPadTextView.setText(currentResult.getLandingPad());
-        holder.distanceTextView.setText(context.getString(R.string.distance_ly,
+        holder.binding.landingPadTextView.setText(currentResult.getLandingPad());
+        holder.binding.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
-        holder.distanceToStarTextView.setText(context.getString(R.string.distance_ls, numberFormat
+        holder.binding.distanceToStarTextView.setText(context.getString(R.string.distance_ls, numberFormat
                 .format(currentResult.getDistanceToStar())));
 
         // Set stock/demand depending on mode
         if (isSellingMode) {
-            holder.stockLabelTextView.setText(R.string.demand_label);
-            holder.stockTextView.setText(numberFormat.format(currentResult.getDemand()));
+            holder.binding.stockLabelTextView.setText(R.string.demand_label);
+            holder.binding.stockTextView.setText(numberFormat.format(currentResult.getDemand()));
         } else {
-            holder.stockLabelTextView.setText(R.string.stock_label);
-            holder.stockTextView.setText(numberFormat.format(currentResult.getStock()));
+            holder.binding.stockLabelTextView.setText(R.string.stock_label);
+            holder.binding.stockTextView.setText(numberFormat.format(currentResult.getStock()));
         }
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.titleTextView)
-        TextView titleTextView;
+        private final ListItemCommodityFinderResultBinding binding;
 
-        @BindView(R.id.isPlanetaryImageView)
-        LightDarkImageView isPlanetaryImageView;
-
-        @BindView(R.id.permitRequiredTextView)
-        TextView permitRequiredTextView;
-
-        @BindView(R.id.distanceTextView)
-        TextView distanceTextView;
-
-        @BindView(R.id.distanceToStarTextView)
-        TextView distanceToStarTextView;
-
-        @BindView(R.id.stockLabelTextView)
-        TextView stockLabelTextView;
-
-        @BindView(R.id.stockTextView)
-        TextView stockTextView;
-
-        @BindView(R.id.priceTextView)
-        TextView priceTextView;
-
-        @BindView(R.id.landingPadTextView)
-        TextView landingPadTextView;
-
-        @BindView(R.id.lastUpdateTextView)
-        TextView lastUpdateTextView;
-
-        public ResultViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public ResultViewHolder(ListItemCommodityFinderResultBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.systemInputView)
-        SystemInputView systemInputView;
+        private final FragmentFindCommodityHeaderBinding binding;
 
-        @BindView(R.id.commodityInputEditText)
-        DelayAutoCompleteTextView commodityInputEditText;
-
-        @BindView(R.id.landingPadSizeAutoCompleteTextView)
-        AppCompatAutoCompleteTextView landingPadSizeAutoCompleteTextView;
-
-        @BindView(R.id.buyOrSellAutoCompleteTextView)
-        AppCompatAutoCompleteTextView buyOrSellAutoCompleteTextView;
-
-        @BindView(R.id.stockInputEditText)
-        TextInputEditText stockInputEditText;
-
-        @BindView(R.id.stockInputLayout)
-        TextInputLayout stockInputLayout;
-
-        @BindView(R.id.findButton)
-        Button findButton;
-
-        @BindView(R.id.emptyText)
-        TextView emptyText;
-
-        public HeaderViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public HeaderViewHolder(FragmentFindCommodityHeaderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

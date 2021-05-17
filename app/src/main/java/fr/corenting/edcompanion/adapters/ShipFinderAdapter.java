@@ -1,34 +1,33 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 import org.threeten.bp.Instant;
 
 import java.text.NumberFormat;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
+import fr.corenting.edcompanion.databinding.FragmentFindShipHeaderBinding;
+import fr.corenting.edcompanion.databinding.ListItemShipFinderResultBinding;
 import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.events.ShipFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-import fr.corenting.edcompanion.views.DelayAutoCompleteTextView;
-import fr.corenting.edcompanion.views.LightDarkImageView;
-import fr.corenting.edcompanion.views.SystemInputView;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderViewHolder,
         ShipFinderAdapter.ResultViewHolder, ShipFinderResult> {
 
-    private final NumberFormat numberFormat;
+    protected final NumberFormat numberFormat;
 
     public ShipFinderAdapter(Context context) {
         super(context);
@@ -36,38 +35,26 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
     }
 
     @Override
-    protected RecyclerView.ViewHolder getNewHeaderViewHolder(View v) {
-        return new HeaderViewHolder(v);
+    protected RecyclerView.ViewHolder getHeaderViewHolder(@NonNull @NotNull ViewGroup parent) {
+        FragmentFindShipHeaderBinding headerBinding = FragmentFindShipHeaderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new HeaderViewHolder(headerBinding);
     }
 
     @Override
-    protected RecyclerView.ViewHolder getResultViewHolder(View v) {
-        return new ResultViewHolder(v);
+    protected RecyclerView.ViewHolder getResultViewHolder(@NonNull @NotNull ViewGroup parent) {
+        ListItemShipFinderResultBinding resultBinding = ListItemShipFinderResultBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ResultViewHolder(resultBinding);
     }
 
-    @Override
-    public TextView getEmptyTextView() {
-        return getHeader().emptyText;
-    }
-
-    @Override
-    protected int getHeaderResId() {
-        return R.layout.fragment_find_ship_header;
-    }
-
-    @Override
-    protected int getResultResId() {
-        return R.layout.list_item_ship_finder_result;
-    }
 
     @Override
     protected void bindHeaderViewHolder(final HeaderViewHolder holder) {
         // Ship autocomplete
-        holder.shipInputEditText.setThreshold(3);
-        holder.shipInputEditText.setAdapter(new AutoCompleteAdapter(context,
+        holder.binding.shipInputEditText.setThreshold(3);
+        holder.binding.shipInputEditText.setAdapter(new AutoCompleteAdapter(context,
                 AutoCompleteAdapter.TYPE_AUTOCOMPLETE_SHIPS));
-        holder.shipInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
-                holder.shipInputEditText.setText((String) adapterView.getItemAtPosition(position)));
+        holder.binding.shipInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
+                holder.binding.shipInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
         // Find button
         final Runnable onSubmit = () -> {
@@ -75,18 +62,18 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
                 return;
             }
 
-            ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
+            ViewUtils.hideSoftKeyboard(holder.binding.findButton.getRootView());
 
             ShipFinderSearch result = new ShipFinderSearch(
-                    holder.shipInputEditText.getText().toString(),
-                    holder.systemInputView.getText().toString());
+                    holder.binding.shipInputEditText.getText().toString(),
+                    holder.binding.systemInputView.getText().toString());
             EventBus.getDefault().post(result);
         };
 
         // On submit stuff
-        holder.findButton.setOnClickListener(view -> onSubmit.run());
-        holder.shipInputEditText.setOnSubmit(onSubmit);
-        holder.systemInputView.setOnSubmit(onSubmit);
+        holder.binding.findButton.setOnClickListener(view -> onSubmit.run());
+        holder.binding.shipInputEditText.setOnSubmit(onSubmit);
+        holder.binding.systemInputView.setOnSubmit(onSubmit);
     }
 
     @Override
@@ -94,74 +81,45 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         ShipFinderResult currentResult = results.get(position - 1);
 
         // Title
-        holder.titleTextView.setText(
+        holder.binding.titleTextView.setText(
                 String.format("%s - %s", currentResult.getSystemName(),
                         currentResult.getStationName())
         );
 
         // Other informations
-        holder.distanceTextView.setText(context.getString(R.string.distance_ly,
+        holder.binding.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
-        holder.starDistanceTextView.setText(context.getString(R.string.distance_ls,
+        holder.binding.starDistanceTextView.setText(context.getString(R.string.distance_ls,
                 numberFormat.format(currentResult.getDistanceToStar())));
-        holder.permitRequiredTextView.setVisibility(
+        holder.binding.permitRequiredTextView.setVisibility(
                 currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
-        holder.isPlanetaryImageView.setVisibility(
+        holder.binding.isPlanetaryImageView.setVisibility(
                 currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
-        holder.landingPadTextView.setText(currentResult.getMaxLandingPad());
+        holder.binding.landingPadTextView.setText(currentResult.getMaxLandingPad());
 
         // Update date
         String date = android.text.format.DateUtils.getRelativeTimeSpanString(
                 currentResult.getLastShipyardUpdate().toEpochMilli(), Instant.now().toEpochMilli(),
                 0, FORMAT_ABBREV_RELATIVE).toString();
-        holder.lastUpdateTextView.setText(date);
+        holder.binding.lastUpdateTextView.setText(date);
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.distanceTextView)
-        TextView distanceTextView;
+        private final ListItemShipFinderResultBinding binding;
 
-        @BindView(R.id.titleTextView)
-        TextView titleTextView;
-
-        @BindView(R.id.isPlanetaryImageView)
-        LightDarkImageView isPlanetaryImageView;
-
-        @BindView(R.id.permitRequiredTextView)
-        TextView permitRequiredTextView;
-
-        @BindView(R.id.lastUpdateTextView)
-        TextView lastUpdateTextView;
-
-        @BindView(R.id.landingPadTextView)
-        TextView landingPadTextView;
-
-        @BindView(R.id.starDistanceTextView)
-        TextView starDistanceTextView;
-
-        public ResultViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public ResultViewHolder(ListItemShipFinderResultBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.systemInputView)
-        SystemInputView systemInputView;
+        private final FragmentFindShipHeaderBinding binding;
 
-        @BindView(R.id.shipInputEditText)
-        DelayAutoCompleteTextView shipInputEditText;
-
-        @BindView(R.id.findButton)
-        Button findButton;
-
-        @BindView(R.id.emptyText)
-        TextView emptyText;
-
-        public HeaderViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public HeaderViewHolder(FragmentFindShipHeaderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

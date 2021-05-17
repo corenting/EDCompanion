@@ -2,24 +2,24 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
+import fr.corenting.edcompanion.databinding.FragmentFindSystemHeaderBinding;
+import fr.corenting.edcompanion.databinding.ListItemSystemFinderResultBinding;
 import fr.corenting.edcompanion.models.SystemFinderResult;
 import fr.corenting.edcompanion.models.events.SystemFinderSearch;
 import fr.corenting.edcompanion.utils.MiscUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-import fr.corenting.edcompanion.views.SystemInputView;
 
 public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.HeaderViewHolder,
         SystemFinderAdapter.ResultViewHolder, SystemFinderResult> {
@@ -29,28 +29,15 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
     }
 
     @Override
-    protected RecyclerView.ViewHolder getNewHeaderViewHolder(View v) {
-        return new HeaderViewHolder(v);
+    protected RecyclerView.ViewHolder getHeaderViewHolder(@NonNull @NotNull ViewGroup parent) {
+        FragmentFindSystemHeaderBinding headerBinding = FragmentFindSystemHeaderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new HeaderViewHolder(headerBinding);
     }
 
     @Override
-    protected RecyclerView.ViewHolder getResultViewHolder(View v) {
-        return new ResultViewHolder(v);
-    }
-
-    @Override
-    public TextView getEmptyTextView() {
-        return getHeader().emptyText;
-    }
-
-    @Override
-    protected int getHeaderResId() {
-        return R.layout.fragment_find_system_header;
-    }
-
-    @Override
-    protected int getResultResId() {
-        return R.layout.list_item_system_finder_result;
+    protected RecyclerView.ViewHolder getResultViewHolder(@NonNull @NotNull ViewGroup parent) {
+        ListItemSystemFinderResultBinding resultBinding = ListItemSystemFinderResultBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ResultViewHolder(resultBinding);
     }
 
     @Override
@@ -58,34 +45,34 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
         // Find button
         final Runnable onSubmit = () -> {
             // Don't launch search on empty strings or if find already in progress
-            if (!findButtonEnabled || holder.systemInputView.getText().length() == 0) {
+            if (!findButtonEnabled || holder.binding.systemInputView.getText().length() == 0) {
                 return;
             }
 
-            ViewUtils.hideSoftKeyboard(holder.findButton.getRootView());
+            ViewUtils.hideSoftKeyboard(holder.binding.findButton.getRootView());
 
             SystemFinderSearch result = new SystemFinderSearch(
-                    holder.systemInputView.getText().toString());
+                    holder.binding.systemInputView.getText().toString());
             EventBus.getDefault().post(result);
         };
-        holder.findButton.setOnClickListener(view -> onSubmit.run());
-        holder.systemInputView.setOnSubmit(onSubmit);
+        holder.binding.findButton.setOnClickListener(view -> onSubmit.run());
+        holder.binding.systemInputView.setOnSubmit(onSubmit);
     }
 
     @Override
     protected void bindResultViewHolder(ResultViewHolder holder, int position) {
         final SystemFinderResult currentResult = results.get(position - 1);
 
-        holder.titleTextView.setText(currentResult.getName());
-        holder.permitRequiredTextView.setVisibility(
+        holder.binding.titleTextView.setText(currentResult.getName());
+        holder.binding.permitRequiredTextView.setVisibility(
                 currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
 
-        holder.allegianceTextView.setText(getContentOrUnknown(currentResult.getAllegiance()));
-        holder.securityTextView.setText(getContentOrUnknown(currentResult.getSecurity()));
-        holder.governmentTextView.setText(getContentOrUnknown(currentResult.getGovernment()));
-        holder.economyTextView.setText(getContentOrUnknown(currentResult.getEconomy()));
+        holder.binding.allegianceTextView.setText(getContentOrUnknown(currentResult.getAllegiance()));
+        holder.binding.securityTextView.setText(getContentOrUnknown(currentResult.getSecurity()));
+        holder.binding.governmentTextView.setText(getContentOrUnknown(currentResult.getGovernment()));
+        holder.binding.economyTextView.setText(getContentOrUnknown(currentResult.getEconomy()));
 
-        holder.itemLayout.setOnClickListener(v -> {
+        holder.binding.itemLayout.setOnClickListener(v -> {
             Intent i = new Intent(context, SystemDetailsActivity.class);
             i.putExtra("data", currentResult.getName());
             MiscUtils.startIntentWithFadeAnimation(context, i);
@@ -98,47 +85,20 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
+        private final ListItemSystemFinderResultBinding binding;
 
-        @BindView(R.id.itemLayout)
-        RelativeLayout itemLayout;
-
-        @BindView(R.id.titleTextView)
-        TextView titleTextView;
-
-        @BindView(R.id.permitRequiredTextView)
-        TextView permitRequiredTextView;
-
-        @BindView(R.id.allegianceTextView)
-        TextView allegianceTextView;
-
-        @BindView(R.id.securityTextView)
-        TextView securityTextView;
-
-        @BindView(R.id.governmentTextView)
-        TextView governmentTextView;
-
-        @BindView(R.id.economyTextView)
-        TextView economyTextView;
-
-        public ResultViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public ResultViewHolder(ListItemSystemFinderResultBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.systemInputView)
-        SystemInputView systemInputView;
+        private final FragmentFindSystemHeaderBinding binding;
 
-        @BindView(R.id.findButton)
-        Button findButton;
-
-        @BindView(R.id.emptyText)
-        TextView emptyText;
-
-        public HeaderViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public HeaderViewHolder(FragmentFindSystemHeaderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

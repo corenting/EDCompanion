@@ -67,11 +67,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
-    // Butterknife
-    ext.butterKnifeVersion = '10.2.3'
-    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-
     // Glide
     ext.glideVersion = '4.12.0'
     implementation "com.github.bumptech.glide:glide:$glideVersion"

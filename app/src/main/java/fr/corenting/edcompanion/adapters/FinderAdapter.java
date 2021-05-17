@@ -1,23 +1,20 @@
 package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataType> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int TYPE_HEADER = 0;
+    protected static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
     protected final Context context;
-    private RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     protected boolean findButtonEnabled;
     protected List<TDataType> results;
 
@@ -27,24 +24,20 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         this.findButtonEnabled = true;
     }
 
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == TYPE_HEADER) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(getHeaderResId(),
-                    parent, false);
-            return getNewHeaderViewHolder(v);
-        } else {
-            View v = LayoutInflater.from(parent.getContext()).inflate(getResultResId(),
-                    parent, false);
-            return getResultViewHolder(v);
-        }
-    }
-
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         this.recyclerView = recyclerView;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == TYPE_HEADER) {
+            return getHeaderViewHolder(parent);
+        } else {
+            return getResultViewHolder(parent);
+        }
     }
 
     @Override
@@ -56,7 +49,8 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         }
     }
 
-    private boolean isHeader(int position) {
+
+    protected boolean isHeader(int position) {
         return position == 0;
     }
 
@@ -100,20 +94,11 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         });
     }
 
-    @SuppressWarnings("unchecked cast")
-    protected THeaderViewHolder getHeader() {
-        return (THeaderViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
-    }
+    protected abstract RecyclerView.ViewHolder getResultViewHolder(@NonNull  ViewGroup parent);
+    protected abstract RecyclerView.ViewHolder getHeaderViewHolder(@NonNull  ViewGroup parent);
 
-    public abstract TextView getEmptyTextView();
-
-    protected abstract RecyclerView.ViewHolder getNewHeaderViewHolder(View v);
-    protected abstract RecyclerView.ViewHolder getResultViewHolder(View v);
-
-    protected abstract int getHeaderResId();
-    protected abstract int getResultResId();
-
+    protected abstract void bindResultViewHolder(TResultViewHolder holder, int adapterPosition);
     protected abstract void bindHeaderViewHolder(THeaderViewHolder holder);
-    protected abstract void bindResultViewHolder(TResultViewHolder holder, int position);
+
 }
 
