@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.views
 
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.text.InputType
 import android.util.AttributeSet
@@ -41,7 +42,7 @@ class DelayAutoCompleteTextView(context: Context, attrs: AttributeSet) :
                 DEFAULT_AUTOCOMPLETE_DELAY.toLong())
     }
 
-    private class AutoCompleteHandler(private val view: DelayAutoCompleteTextView) : Handler() {
+    private class AutoCompleteHandler(private val view: DelayAutoCompleteTextView) : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             view.performFiltering(msg)
         }

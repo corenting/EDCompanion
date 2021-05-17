@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,10 +15,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;
+import fr.corenting.edcompanion.databinding.FragmentCommodityDetailsBinding;
 import fr.corenting.edcompanion.models.CommodityDetailsResult;
 import fr.corenting.edcompanion.utils.MathUtils;
 
@@ -27,48 +25,32 @@ public class CommodityDetailsFragment extends Fragment {
 
     public static final String COMMODITY_DETAILS_FRAGMENT = "commodity_details_fragment";
 
-    @BindView(R.id.swipeContainer)
-    public SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.commodityNameTextView)
-    public TextView commodityNameTextView;
-    @BindView(R.id.isRareTextView)
-    public TextView isRareTextView;
-    @BindView(R.id.categoryTextView)
-    public TextView categoryTextView;
-    @BindView(R.id.averageBuyTextView)
-    public TextView averageBuyTextView;
-    @BindView(R.id.averageSellTextView)
-    public TextView averageSellTextView;
-    @BindView(R.id.minBuyTextView)
-    public TextView minBuyTextView;
-    @BindView(R.id.maxSellTextView)
-    public TextView maxSellTextView;
-
+    private FragmentCommodityDetailsBinding binding;
     private NumberFormat numberFormat;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_commodity_details, container, false);
-        ButterKnife.bind(this, v);
+        binding = FragmentCommodityDetailsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
         //Swipe to refresh setup
         SwipeRefreshLayout.OnRefreshListener listener = () -> {
-            swipeRefreshLayout.setRefreshing(true);
+            binding.swipeContainer.setRefreshing(true);
             if (getActivity() != null) {
                 ((SystemDetailsActivity) getActivity()).getData();
             }
         };
-        swipeRefreshLayout.setOnRefreshListener(listener);
+        binding.swipeContainer.setOnRefreshListener(listener);
 
         // Init number format
         numberFormat = MathUtils.getNumberFormat(getContext());
 
         // Setup views
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(true);
+        binding.swipeContainer.setVisibility(View.VISIBLE);
+        binding.swipeContainer.setRefreshing(true);
 
-        return v;
+        return view;
     }
 
     @Override
@@ -100,22 +82,22 @@ public class CommodityDetailsFragment extends Fragment {
     }
 
     private void bindInformations(CommodityDetailsResult details) {
-        commodityNameTextView.setText(details.getName());
-        isRareTextView.setVisibility(details.isRare() ? View.VISIBLE : View.GONE);
-        categoryTextView.setText(details.getCategory().getName());
+        binding.commodityNameTextView.setText(details.getName());
+        binding.isRareTextView.setVisibility(details.isRare() ? View.VISIBLE : View.GONE);
+        binding.categoryTextView.setText(details.getCategory().getName());
 
-        averageBuyTextView.setText(getString(R.string.credits,
+        binding.averageBuyTextView.setText(getString(R.string.credits,
                 numberFormat.format(details.getAverageBuyPrice())));
-        averageSellTextView.setText(getString(R.string.credits,
+        binding.averageSellTextView.setText(getString(R.string.credits,
                 numberFormat.format(details.getAverageSellPrice())));
 
-        minBuyTextView.setText(getString(R.string.credits,
+        binding.minBuyTextView.setText(getString(R.string.credits,
                 numberFormat.format(details.getMinimumBuyPrice())));
-        maxSellTextView.setText(getString(R.string.credits,
+        binding.maxSellTextView.setText(getString(R.string.credits,
                 numberFormat.format(details.getMaximumSellPrice())));
     }
 
     public void endLoading() {
-        swipeRefreshLayout.setRefreshing(false);
+        binding.swipeContainer.setRefreshing(false);
     }
 }
