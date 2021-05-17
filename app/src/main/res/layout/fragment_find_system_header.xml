@@ -58,16 +58,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:text="@string/search" />
-
-            <TextView
-                android:id="@+id/emptyText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/findButton"
-                android:layout_marginTop="8dp"
-                android:text="@string/nothing_to_display"
-                android:textAlignment="center"
-                android:visibility="gone" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

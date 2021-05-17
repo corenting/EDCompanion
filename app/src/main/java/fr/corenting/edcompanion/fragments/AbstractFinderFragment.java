@@ -67,7 +67,7 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
 
     protected void endLoading(boolean isEmpty) {
         recyclerViewAdapter.setFindButtonEnabled(true);
-        //TODO : recyclerViewAdapter.getEmptyTextView().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        binding.emptyText.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         binding.swipeContainer.setRefreshing(false);
     }
 
@@ -75,7 +75,7 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
         recyclerViewAdapter.setFindButtonEnabled(false);
         recyclerViewAdapter.clearResults();
         binding.swipeContainer.setRefreshing(true);
-        // TODO:  recyclerViewAdapter.getEmptyTextView().setVisibility(View.GONE);
+        binding.emptyText.setVisibility(View.GONE);
     }
 
     public abstract TAdapter getNewRecyclerViewAdapter();
