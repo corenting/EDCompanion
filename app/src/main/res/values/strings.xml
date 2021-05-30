@@ -50,6 +50,7 @@
     <string name="cg_last_update">Last update: %1$s</string>
 
     <!--Errors-->
+    <string name="no_results">No results</string>
     <string name="nothing_to_display">Nothing to display</string>
     <string name="download_error">Error while downloading the content</string>
     <string name="edsm_error">You need to set your EDSM API key and your commander name in the settings</string>
@@ -339,11 +340,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.12</b><br />
+            <b>Version 2.13</b><br />
             <ul>
-                <li>Switch default tab to "Galnet" as Galnet is back</li><br />
-                <li>Re-enabled community goals</li><br />
-                <li>Updated for Android R and other internal changes</li><br />
+                <li>System input remember your last entered system</li><br />
+                <li>Internal changes</li><br />
             </ul>
         ]]>
     </string>

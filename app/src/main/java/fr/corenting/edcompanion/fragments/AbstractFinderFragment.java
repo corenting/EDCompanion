@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
+import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.FinderAdapter;
 import fr.corenting.edcompanion.databinding.FragmentFinderBinding;
+import fr.corenting.edcompanion.utils.NotificationsUtils;
 
 public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> extends Fragment {
 
@@ -67,15 +70,19 @@ public abstract class AbstractFinderFragment<TAdapter extends FinderAdapter> ext
 
     protected void endLoading(boolean isEmpty) {
         recyclerViewAdapter.setFindButtonEnabled(true);
-        binding.emptyText.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         binding.swipeContainer.setRefreshing(false);
+
+        Activity activity = getActivity();
+        if (activity != null && isEmpty) {
+            NotificationsUtils.displaySnackbar(getActivity(),
+                    getString(R.string.no_results));
+        }
     }
 
     protected void startLoading() {
         recyclerViewAdapter.setFindButtonEnabled(false);
         recyclerViewAdapter.clearResults();
         binding.swipeContainer.setRefreshing(true);
-        binding.emptyText.setVisibility(View.GONE);
     }
 
     public abstract TAdapter getNewRecyclerViewAdapter();
