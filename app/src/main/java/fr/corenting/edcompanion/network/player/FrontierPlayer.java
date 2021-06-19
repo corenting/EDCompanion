@@ -176,6 +176,7 @@ public class FrontierPlayer extends PlayerNetwork {
             Ship newShip = new Ship(
                     rawShip.get("id").getAsInt(),
                     InternalNamingUtils.getShipName(rawShip.get("name").getAsString()),
+                    rawShip.get("name").getAsString().toLowerCase(),
                     shipName,
                     rawShip.get("starsystem").getAsJsonObject().get("name").getAsString(),
                     rawShip.get("station").getAsJsonObject().get("name").getAsString(),

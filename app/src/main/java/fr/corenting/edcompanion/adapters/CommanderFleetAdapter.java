@@ -93,8 +93,9 @@ public class CommanderFleetAdapter extends ListAdapter<Ship,
         }
 
         // Ship picture
+        String shipUrl = String.format("https://ed.9cw.eu/ships/%s/picture", currentShip.getInternalModel());
         Glide.with(holder.viewBinding.shipImageView)
-                .load(String.format("https://ed-api.9cw.eu/ships/%s/picture", currentShip.getModel()))
+                .load(shipUrl)
                 .error(R.drawable.ship_placeholder)
                 .centerCrop()
                 .into(holder.viewBinding.shipImageView);
