@@ -36,6 +36,7 @@ public class SettingsUtils {
                 .getString(key, "");
     }
 
+
     public static void setString(Context c, String key, String value) {
         SharedPreferences preferenceManager = PreferenceManager.getDefaultSharedPreferences(c);
         SharedPreferences.Editor editor = preferenceManager.edit();

@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.DateFormat;
-import java.util.Date;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.format.FormatStyle;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.DetailsActivity;
@@ -26,7 +27,7 @@ public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsAr
         NewsAdapter.newsViewHolder> {
 
     private final Context context;
-    private final DateFormat dateFormat;
+    private final DateTimeFormatter dateFormatter;
     private final View.OnClickListener onClickListener;
     private final boolean isDetailsView;
 
@@ -44,14 +45,16 @@ public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsAr
             public boolean areContentsTheSame(@NonNull NewsArticle oldItem,
                                               @NonNull NewsArticle newItem) {
                 return oldItem.getTitle().equals(newItem.getTitle()) &&
-                        oldItem.getDateTimestamp() == newItem.getDateTimestamp();
+                        oldItem.getPublishedDate().equals(newItem.getPublishedDate());
             }
         });
 
         this.context = ctx;
         this.isDetailsView = isDetailsView;
-        this.dateFormat = DateFormat.getDateInstance(DateFormat.LONG,
-                DateUtils.getCurrentLocale(context));
+        this.dateFormatter = DateTimeFormatter
+                .ofLocalizedDate(FormatStyle.SHORT)
+                .withLocale(DateUtils.getCurrentLocale(context))
+                .withZone(ZoneId.systemDefault());
 
         this.onClickListener = v -> {
             int position = recyclerView.getChildAdapterPosition(v);
@@ -88,8 +91,7 @@ public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsAr
         }
 
         // Date subtitle
-        Date date = new Date(currentArticle.getDateTimestamp() * 1000);
-        holder.viewBinding.dateTextView.setText(dateFormat.format(date));
+        holder.viewBinding.dateTextView.setText(dateFormatter.format(currentArticle.getPublishedDate()));
 
         // Ship picture
         Glide.with(holder.viewBinding.galnetImageView)

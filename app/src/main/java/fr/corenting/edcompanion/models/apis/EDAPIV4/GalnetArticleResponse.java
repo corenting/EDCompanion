@@ -1,8 +1,10 @@
-package fr.corenting.edcompanion.models.apis.EDApi;
+package fr.corenting.edcompanion.models.apis.EDAPIV4;
 
 import com.google.gson.annotations.SerializedName;
 
-public class NewsArticleResponse {
+import java.util.Date;
+
+public class GalnetArticleResponse {
     @SerializedName("uri")
     public String Uri;
 
@@ -15,6 +17,6 @@ public class NewsArticleResponse {
     @SerializedName("picture")
     public String Picture;
 
-    @SerializedName("timestamp")
-    public long Timestamp;
+    @SerializedName("published_date")
+    public Date PublishedDate;
 }

@@ -15,6 +15,7 @@ import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformationResponse;
 import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenResponse;
 import fr.corenting.edcompanion.models.events.FrontierAuthNeeded;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
+import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.FrontierAuthRetrofit;
 import fr.corenting.edcompanion.network.retrofit.FrontierRetrofit;
@@ -34,6 +35,7 @@ public class RetrofitSingleton implements Serializable {
 
     private EDSMRetrofit edsmRetrofit;
     private EDApiRetrofit edApiRetrofit;
+    private EDApiV4Retrofit edApiV4Retrofit;
     private InaraRetrofit inaraRetrofit;
     private FrontierAuthRetrofit frontierAuthRetrofit;
     private FrontierRetrofit frontierRetrofit;
@@ -88,6 +90,18 @@ public class RetrofitSingleton implements Serializable {
                 .build()
                 .create(EDApiRetrofit.class);
         return edApiRetrofit;
+    }
+
+    public EDApiV4Retrofit getEdApiV4Retrofit(Context ctx) {
+        if (edApiV4Retrofit != null) {
+            return edApiV4Retrofit;
+        }
+
+        edApiV4Retrofit = getRetrofitInstance()
+                .baseUrl(ctx.getString(R.string.edapi_v4_base))
+                .build()
+                .create(EDApiV4Retrofit.class);
+        return edApiV4Retrofit;
     }
 
     public InaraRetrofit getInaraRetrofit(Context ctx) {

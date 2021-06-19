@@ -14,7 +14,7 @@ class GalnetFragment : AbstractListFragment<NewsAdapter>() {
     private lateinit var currentLanguage: String
 
     private val newsLanguage: String
-        get() = SettingsUtils.getString(context, getString(R.string.settings_galnet_lang))
+        get() = SettingsUtils.getString(context, getString(R.string.settings_news_lang))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

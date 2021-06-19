@@ -9,12 +9,12 @@
             app:title="@string/settings_dark_theme_title" />
 
         <androidx.preference.ListPreference
-            app:defaultValue="0"
-            app:entries="@array/settings_galnet_lang_entries"
-            app:entryValues="@array/settings_galnet_lang_entries_values"
-            app:key="@string/settings_galnet_lang"
-            app:summary="@string/settings_galnet_lang_summary"
-            app:title="@string/settings_galnet_lang_title" />
+            app:defaultValue="en"
+            app:entries="@array/settings_news_lang_entries"
+            app:entryValues="@array/settings_news_lang_entries_values"
+            app:key="@string/settings_news_lang"
+            app:summary="@string/settings_news_lang_summary"
+            app:title="@string/settings_news_lang_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_category_title">
