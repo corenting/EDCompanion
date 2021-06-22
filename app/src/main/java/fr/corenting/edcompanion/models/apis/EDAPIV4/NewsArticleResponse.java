@@ -14,6 +14,9 @@ public class NewsArticleResponse {
     @SerializedName("content")
     public String Content;
 
+    @SerializedName("picture")
+    public String Picture;
+
     @SerializedName("published_date")
     public Date PublishedDate;
 }
