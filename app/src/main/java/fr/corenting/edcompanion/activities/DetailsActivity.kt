@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter
 import fr.corenting.edcompanion.adapters.NewsAdapter
@@ -16,7 +17,7 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.setTheme(this)
+        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getThemeToUse(this))
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         val view = binding.root

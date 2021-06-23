@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.databinding.ActivityAboutBinding
@@ -18,7 +19,7 @@ class AboutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.setTheme(this)
+        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getThemeToUse(this))
         super.onCreate(savedInstanceState)
         binding = ActivityAboutBinding.inflate(layoutInflater)
         val view = binding.root

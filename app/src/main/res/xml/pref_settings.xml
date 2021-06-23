@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.preference.PreferenceCategory app:title="@string/pref_header_general">
-        <androidx.preference.SwitchPreference
-            app:key="@string/settings_dark_theme"
-            app:summary="@string/settings_dark_theme_summary"
-            app:title="@string/settings_dark_theme_title" />
+
+        <androidx.preference.ListPreference
+            app:defaultValue="Systen"
+            app:entries="@array/settings_theme_entries"
+            app:entryValues="@array/settings_theme_entries"
+            app:key="@string/settings_theme"
+            app:summary="@string/settings_theme_summary"
+            app:title="@string/settings_theme_title" />
 
         <androidx.preference.ListPreference
             app:defaultValue="en"

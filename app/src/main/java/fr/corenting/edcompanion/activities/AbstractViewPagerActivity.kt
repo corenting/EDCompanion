@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentPagerAdapter
 import fr.corenting.edcompanion.R
@@ -15,7 +16,7 @@ abstract class AbstractViewPagerActivity : AppCompatActivity() {
     protected lateinit var dataName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.setTheme(this)
+        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getThemeToUse(this))
         super.onCreate(savedInstanceState)
         binding = ActivityFragmentsWithTabsBinding.inflate(layoutInflater)
         val view = binding.root

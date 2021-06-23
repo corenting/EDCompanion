@@ -298,10 +298,6 @@
     <string name="settings_cmdr_oauth">Link your Frontier account</string>
     <string name="settings_cmdr_oauth_title">Link your Frontier account</string>
     <string name="settings_cmdr_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR informations</string>
-
-    <string name="settings_dark_theme_title">Dark theme</string>
-    <string name="settings_dark_theme">Dark theme</string>
-    <string name="settings_dark_theme_summary">You need to reload the app after changing theme</string>
     <string name="settings_notifications_category_title">Push notifications</string>
     <string name="settings_notifications_new_goal_title">New community goal</string>
     <string name="settings_notifications_new_goal_summary">Receive notifications for new community goals</string>
@@ -317,6 +313,14 @@
     <string name="settings_cmdr_help_title">Help</string>
     <string name="settings_cmdr_help_summary">Help about how to use the commander feature</string>
     <string name="settings_notifications_error_summary">Google Play Services are needed for this feature to be enabled</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_title">Application theme</string>
+    <string name="settings_theme_summary">Change the theme of the application</string>
+    <string-array name="settings_theme_entries">
+        <item>System</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
     <string-array name="settings_news_lang_entries">
         <item>English</item>
         <item>French</item>

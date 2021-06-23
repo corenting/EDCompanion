@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.fragments.SettingsFragment
@@ -11,7 +12,7 @@ import fr.corenting.edcompanion.utils.ThemeUtils
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.setTheme(this)
+        AppCompatDelegate.setDefaultNightMode(ThemeUtils.getThemeToUse(this))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
