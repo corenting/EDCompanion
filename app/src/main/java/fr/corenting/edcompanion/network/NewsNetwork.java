@@ -20,7 +20,7 @@ public class NewsNetwork {
     public static void getGalnetNews(Context ctx, String language) {
 
         // Set default language if none provided
-        if (language == null) {
+        if (language == null || language.equals("")) {
             language = "en";
         }
 
@@ -64,10 +64,9 @@ public class NewsNetwork {
     public static void getNews(Context ctx, String language) {
 
         // Set default language if none provided
-        if (language == null) {
+        if (language == null || language.equals("")) {
             language = "en";
         }
-        d
         EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 

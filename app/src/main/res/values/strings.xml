@@ -84,6 +84,8 @@
     <string name="rank_trading">Trade</string>
     <string name="rank_exploration">Exploration</string>
     <string name="rank_arena">Arena</string>
+    <string name="player_ranks">Player ranks</string>
+    <string name="faction_ranks">Faction ranks</string>
     <string-array name="ranks_combat">
         <item>Harmless</item>
         <item>Mostly Harmless</item>
@@ -267,6 +269,7 @@
         Space ship icon made by <a href="http://www.freepik.com">Freepik</a> from <a href="https://www.flaticon.com/">Flaticon</a> (<a href="http://creativecommons.org/licenses/by/3.0/">CC 3.0 BY license</a>)<br />
         Globe icon from <a href="https://fontawesome.com/">FontAwesome</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC 4.0 BY license</a>)<br />
         Elite Dangerous icons from <a href="http://edassets.org">EDAssets</a>, icons are fanmade or created by <a href="https://www.frontier.co.uk/">Frontier Developments</a><br />
+        Ships pictures from <a href="https://edsm.net">EDSM</a>, available on <a href="https://github.com/EDSM-NET/ED-Ships-ScreenShots">Github</a>
         ]]>
     </string>
     <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources."</string>
@@ -295,8 +298,7 @@
     <string name="settings_cmdr_oauth">Link your Frontier account</string>
     <string name="settings_cmdr_oauth_title">Link your Frontier account</string>
     <string name="settings_cmdr_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR informations</string>
-    <string name="player_ranks">Player ranks</string>
-    <string name="faction_ranks">Faction ranks</string>
+
     <string name="settings_dark_theme_title">Dark theme</string>
     <string name="settings_dark_theme">Dark theme</string>
     <string name="settings_dark_theme_summary">You need to reload the app after changing theme</string>
@@ -340,6 +342,7 @@
     <string name="notifications_new_goal_description">New community goal</string>
     <string name="notifications_finished_goal_description">Community goal finished</string>
     <string name="notifications_new_tier_description">Tier %1$d reached</string>
+    <string name="open">Open</string>
 
     <!--Changelog-->
     <string name="changelog_title">Changelog</string>
@@ -370,7 +373,8 @@
     <string name="login_dialog_text">Your browser will open to allow you to connect to your Frontier account.\n\nClick on the logo of the platform you play on to login, or login using your Frontier account if you play on PC without Steam.</string>
     <string name="login_dialog_error_title">Frontier login error</string>
     <string name="login_dialog_error_text">Error while linking your account, please try again.</string>
-    <string name="open">Open</string>
+
+    <!--System input cache-->
     <string name="first_system_cache_key">first_system_cache_key</string>
     <string name="second_system_cache_key">second_system_cache_key</string>
 
