@@ -17,8 +17,8 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 # Features
 
 - Community goals informations from Inara, with optional push notifications for updates
-- Galnet news (in French, German or English)
-- News from elitedangerous.com
+- Galnet news (in English, German, Russian, French or Spanish)
+- News from elitedangerous.com (in English, German, Russian, French or Spanish)
 - Commander informations (credits balance, current system, ranks, ships) from Frontier API, EDSM or Inara
 - Distance calculator (get the distance between two systems)
 - Ship finder tool (find the nearest station selling a specific ship)
