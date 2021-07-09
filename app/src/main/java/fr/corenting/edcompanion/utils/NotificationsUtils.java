@@ -10,7 +10,7 @@ import android.os.Build;
 import android.util.Pair;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailabilityLight;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -99,7 +99,7 @@ public class NotificationsUtils {
     }
 
     public static boolean pushNotificationsNotWorking(Context c) {
-        return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(c) !=
+        return GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(c) !=
                 ConnectionResult.SUCCESS;
     }
 
