@@ -54,12 +54,12 @@
     <string name="no_results">No results</string>
     <string name="nothing_to_display">Nothing to display</string>
     <string name="download_error">Error while downloading the content</string>
-    <string name="edsm_error">You need to set your EDSM API key and your commander name in the settings</string>
-    <string name="inara_error">You need to set your commander name in the settings</string>
-    <string name="frontier_error">You need to link your Frontier account in the settings</string>
     <string name="no_chart_error">No history chart to display</string>
     <string name="no_chart_snackbar_error">Error while download the history chart</string>
     <string name="my_location_error">Cannot get your current position</string>
+    <string name="no_commander_accounts_linked_error_message">You don\'t have any account enabled in the settings to get your commander informations. Enable at least one source in the settings.</string>
+    <string name="no_commander_accounts_linked_error_settings_button">Open settings</string>
+    <string name="error">Error</string>
 
     <!--Subtitles-->
     <string name="inara_credits">Data provided by inara.cz</string>
@@ -280,41 +280,39 @@
 
     <!--Settings-->
     <string name="title_activity_settings">Settings</string>
-    <string name="settings_cmdr_category_title">Commander</string>
-    <string name="settings_cmdr_source">CMDR source</string>
+    <string name="settings_cmdr_summary">Choose which accounts you want to use to fetch your commander informations</string>
+    <string name="settings_cmdr_category">Commander</string>
+    <string name="settings_cmdr_frontier_category_title">Frontier account</string>
+    <string name="settings_cmdr_inara_category_title">INARA</string>
+    <string name="settings_cmdr_edsm_category_title">EDSM</string>
     <string name="settings_news_lang">Galnet and news language</string>
-    <string name="settings_news_lang_title">Galnet and news language</string>
     <string name="settings_news_lang_summary">Change the language used for Galnet and news</string>
-    <string name="settings_cmdr_source_title">Commander data source</string>
-    <string name="settings_cmdr_source_summary">Choose the data source (Frontier, EDSM or Inara) you want to use for the commander tab</string>
-    <string name="settings_cmdr_edsm_password_title">EDSM API key</string>
-    <string name="settings_cmdr_edsm_password_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
-    <string name="settings_cmdr_username_title">Commander name</string>
-    <string name="settings_cmdr_username_summary">The ingame name of your CMDR (not your EDSM username)</string>
-    <string name="settings_cmdr_inara_password_title">Inara API key</string>
-    <string name="settings_cmdr_inara_password_summary">Your personal Inara API key. You can find it in the "Inara API" tab of the inara.cz website settings</string>
-    <string name="settings_cmdr_password">CMDR password</string>
-    <string name="settings_cmdr_username">CMDR name</string>
-    <string name="settings_cmdr_oauth">Link your Frontier account</string>
-    <string name="settings_cmdr_oauth_title">Link your Frontier account</string>
-    <string name="settings_cmdr_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR informations</string>
+    <string name="settings_cmdr_edsm_username">Commander name</string>
+    <string name="settings_cmdr_edsm_username_summary">The ingame name of your CMDR (not your EDSM username)</string>
+    <string name="settings_cmdr_edsm_api_key">EDSM API key</string>
+    <string name="settings_cmdr_edsm_api_key_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
+    <string name="settings_cmdr_frontier_oauth">Link your Frontier account</string>
+    <string name="settings_cmdr_frontier_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR informations</string>
+    <string name="settings_cmdr_frontier_enable">Enable Frontier account</string>
+    <string name="settings_cmdr_frontier_enable_summary">Use your Frontier account to fetch your CMDR informations</string>
+    <string name="settings_cmdr_inara_enable">Enable INARA</string>
+    <string name="settings_cmdr_inara_enable_summary">Use your INARA account to fetch your CMDR informations</string>
+    <string name="settings_cmdr_edsm_enable">Enable EDSM</string>
+    <string name="settings_cmdr_edsm_enable_summary">Use your EDSM account to fetch your CMDR informations</string>
+    <string name="settings_cmdr_inara_api_key">INARA API key</string>
+    <string name="settings_cmdr_inara_api_key_summary">Your personal Inara API key. You can find it in the "Inara API" tab of the inara.cz website settings</string>
     <string name="settings_notifications_category_title">Push notifications</string>
-    <string name="settings_notifications_new_goal_title">New community goal</string>
-    <string name="settings_notifications_new_goal_summary">Receive notifications for new community goals</string>
-    <string name="settings_notifications_new_tier_title">New tier reached in a community goal</string>
+    <string name="settings_notifications_new_tier">New tier</string>
     <string name="settings_notifications_new_tier_summary">Receive push notifications when new tiers are reached in community goals</string>
-    <string name="settings_notifications_finished_goal_title">Community goal finished</string>
+    <string name="settings_notifications_finished_goal">Finished goal</string>
     <string name="settings_notifications_finished_goal_summary">Receive push notifications when a community goal finish</string>
     <string name="settings_notifications_new_goal">New goal</string>
-    <string name="settings_notifications_new_tier">New tier</string>
-    <string name="settings_notifications_finished_goal">Finished goal</string>
+    <string name="settings_notifications_new_goal_summary">Receive notifications for new community goals</string>
     <string name="pref_header_general">General</string>
     <string name="settings_cmdr_help">Help</string>
-    <string name="settings_cmdr_help_title">Help</string>
     <string name="settings_cmdr_help_summary">Help about how to use the commander feature</string>
     <string name="settings_notifications_error_summary">Google Play Services are needed for this feature to be enabled</string>
     <string name="settings_theme">Theme</string>
-    <string name="settings_theme_title">Application theme</string>
     <string name="settings_theme_summary">Change the theme of the application</string>
     <string-array name="settings_theme_entries">
         <item>System</item>
@@ -388,5 +386,8 @@
     <!--System input cache-->
     <string name="first_system_cache_key">first_system_cache_key</string>
     <string name="second_system_cache_key">second_system_cache_key</string>
+
+    <!--Commander position cache-->
+    <string name="commander_position_cache_key">commander_position_cache_key</string>
 
 </resources>

@@ -5,15 +5,13 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformationResponse;
 import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenResponse;
-import fr.corenting.edcompanion.models.events.FrontierAuthNeeded;
+import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
@@ -146,9 +144,7 @@ public class RetrofitSingleton implements Serializable {
 
                 FrontierAccessTokenResponse responseBody = OAuthUtils.makeRefreshRequest(ctx);
                 if (responseBody == null) {
-                    // Send event to renew login
-                    EventBus.getDefault().post(new FrontierAuthNeeded(true));
-                    return response;
+                    throw new FrontierAuthNeededException();
                 }
 
                 // Retry request
@@ -161,7 +157,7 @@ public class RetrofitSingleton implements Serializable {
 
             // If still not ok, need login
             if (!response.isSuccessful() && (response.code() == 403 || response.code() == 422 || response.code() == 401)) {
-                EventBus.getDefault().post(new FrontierAuthNeeded(true));
+                throw new FrontierAuthNeededException();
             }
 
             return response;

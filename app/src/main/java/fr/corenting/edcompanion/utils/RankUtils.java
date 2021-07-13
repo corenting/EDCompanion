@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.animation.ProgressBarAnimation;
-import fr.corenting.edcompanion.models.events.Ranks;
+import fr.corenting.edcompanion.models.CommanderRank;
 
 public class RankUtils {
 
@@ -22,7 +22,7 @@ public class RankUtils {
         progressBar.setProgress(0);
     }
 
-    public static void setContent(Context ctx, View rootView, int logoId, Ranks.Rank rank, String description) {
+    public static void setContent(Context ctx, View rootView, int logoId, CommanderRank rank, String description) {
         ImageView logoView = rootView.findViewById(R.id.itemImageView);
         TextView titleView = rootView.findViewById(R.id.titleTextView);
         TextView progressView = rootView.findViewById(R.id.progressTextView);

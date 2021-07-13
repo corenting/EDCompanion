@@ -19,8 +19,8 @@ public class InaraProfileRequestBody {
         @SerializedName("appVersion")
         public String ApplicationVersion;
 
-        @SerializedName("isDeveloped")
-        public boolean IsDeveloped;
+        @SerializedName("isBeingDeveloped")
+        public boolean IsBeingDeveloped;
 
         @SerializedName("APIkey")
         public String ApiKey;

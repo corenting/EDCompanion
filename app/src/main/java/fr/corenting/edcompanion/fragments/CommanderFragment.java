@@ -39,7 +39,6 @@ public class CommanderFragment extends Fragment {
         }
         binding.tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
                 getResources().getColor(R.color.tabText));
-
         return view;
     }
 

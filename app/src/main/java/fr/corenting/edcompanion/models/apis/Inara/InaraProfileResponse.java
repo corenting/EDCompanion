@@ -15,6 +15,10 @@ public class InaraProfileResponse {
         public InaraProfileResponseEventData EventData;
 
         public class InaraProfileResponseEventData {
+
+            @SerializedName("commanderName")
+            public String CommanderName;
+
             @SerializedName("commanderRanksPilot")
             public List<InaraProfileResponseRanks> CommanderRanksPilot;
 

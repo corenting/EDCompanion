@@ -69,13 +69,18 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
     override fun onStart() {
         super.onStart()
 
-        // Register eventbus for the list data
-        EventBus.getDefault().register(this)
+        // Register eventbus for the list data if needed
+        if (needEventBus()) {
+            EventBus.getDefault().register(this)
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        EventBus.getDefault().unregister(this)
+
+        if (needEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
     }
 
     protected fun endLoading(empty: Boolean) {
@@ -91,6 +96,10 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
         binding.swipeContainer.isRefreshing = true
     }
 
+
+    open fun needEventBus(): Boolean {
+        return true
+    }
 
     internal abstract fun getData()
     internal abstract fun getNewRecyclerViewAdapter(): TAdapter

@@ -21,8 +21,9 @@ public class AutoCompleteNetwork {
         try {
             EDSMRetrofit edsmRetrofit = RetrofitSingleton.getInstance()
                     .getEDSMRetrofit(context.getApplicationContext());
-            Response<List<EDSMSystemResponse>> response = edsmRetrofit.getSystems(filter, 1,
-                    0, 0).execute();
+
+            Response<List<EDSMSystemResponse>> response = edsmRetrofit.getSystems(filter, 1, 0, 0).execute();
+
             List<EDSMSystemResponse> systems = response.body();
             if (!response.isSuccessful() || systems == null) {
                 return new ArrayList<>();
@@ -38,6 +39,7 @@ public class AutoCompleteNetwork {
                 }
                 return results;
             }
+
         } catch (Exception e) {
             return new ArrayList<>();
         }

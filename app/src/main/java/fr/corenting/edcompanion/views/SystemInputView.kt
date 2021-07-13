@@ -1,29 +1,21 @@
 package fr.corenting.edcompanion.views
 
-import android.app.Activity
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.RelativeLayout
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.adapters.AutoCompleteAdapter
 import fr.corenting.edcompanion.databinding.ViewSystemInputBinding
-import fr.corenting.edcompanion.models.events.CommanderPosition
-import fr.corenting.edcompanion.utils.NotificationsUtils
-import fr.corenting.edcompanion.utils.PlayerNetworkUtils
+import fr.corenting.edcompanion.utils.CommanderUtils
 import fr.corenting.edcompanion.utils.SettingsUtils
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 
 
 class SystemInputView : RelativeLayout {
 
     private lateinit var binding: ViewSystemInputBinding
-
-    private var bus: EventBus = EventBus.builder().build()
 
     constructor(context: Context) : super(context) {
         init()
@@ -73,16 +65,14 @@ class SystemInputView : RelativeLayout {
             }
         }
 
-        // Check if position can be get from commander
-        if (PlayerNetworkUtils.setupOk(context) &&
-            PlayerNetworkUtils.getCurrentPlayerNetwork(context).supportLocation()
-        ) {
-
+        // Set to commander position if asked
+        if (CommanderUtils.hasPositionData(context)) {
             binding.systemInputLayout.isEndIconVisible = true
             binding.systemInputLayout.setEndIconOnClickListener {
-                PlayerNetworkUtils.getCurrentPlayerNetwork(context).getCommanderPosition(bus)
+                binding.systemInputEditText.setText(CommanderUtils.getCachedCurrentCommanderPosition(context))
             }
-        } else {
+        }
+        else {
             binding.systemInputLayout.isEndIconVisible = false
         }
 
@@ -126,29 +116,5 @@ class SystemInputView : RelativeLayout {
 
     fun getText(): Editable {
         return binding.systemInputEditText.text
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        bus.register(this)
-    }
-
-    override fun onDetachedFromWindow() {
-        bus.unregister(this)
-        super.onDetachedFromWindow()
-    }
-
-    @Subscribe
-    fun onCommanderPositionEvent(event: CommanderPosition) {
-        if (event.success) {
-            binding.systemInputEditText.setText(event.systemName)
-        } else {
-            val activity = this.findViewById<View>(android.R.id.content).context as Activity
-            NotificationsUtils.displaySnackbar(
-                activity,
-                context.getString(R.string.my_location_error)
-            )
-
-        }
     }
 }

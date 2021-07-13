@@ -31,8 +31,7 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view:View?
-        view = if (convertView == null) {
+        val view:View? = if (convertView == null) {
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             inflater.inflate(android.R.layout.simple_dropdown_item_1line, parent,
                     false)

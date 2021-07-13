@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,12 +18,9 @@ import com.google.android.material.navigation.NavigationView
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.databinding.ActivityMainBinding
 import fr.corenting.edcompanion.fragments.*
-import fr.corenting.edcompanion.models.events.ServerStatus
-import fr.corenting.edcompanion.network.ServerStatusNetwork
 import fr.corenting.edcompanion.utils.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
+import fr.corenting.edcompanion.view_models.CommanderViewModel
+import fr.corenting.edcompanion.view_models.ServerStatusViewModel
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,6 +36,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var currentTitle: CharSequence
     private lateinit var currentSubtitle: CharSequence
     private lateinit var currentFragmentTag: String
+
+    private lateinit var serverStatusViewModel: ServerStatusViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(ThemeUtils.getThemeToUse(this))
@@ -76,9 +76,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             updateActionBar()
         }
 
-        // Update the server status
-        updateServerStatus()
-
         // Set listener on server status text to refresh it, and set theme
         val drawerSubtitleTextView = binding.navView.getHeaderView(0)
             .findViewById<TextView>(R.id.drawerSubtitleTextView)
@@ -115,6 +112,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Show changelog
         ChangelogUtils.showChangelog(this)
+
+        // Server status
+        val serverStatusModel: ServerStatusViewModel by viewModels()
+        serverStatusViewModel = serverStatusModel
+        serverStatusViewModel.getServerStatus().observe(this, { status ->
+            val content: String =
+                if (status?.error == null && status.data != null) status.data.status else getString(
+                    R.string.unknown
+                )
+            drawerSubtitleTextView.text = getString(R.string.server_status, content)
+        })
+        serverStatusViewModel.fetchServerStatus()
+
+        // Get commander position in background to update cached value
+        val commanderModel: CommanderViewModel by viewModels()
+        commanderModel.fetchPosition()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -122,16 +135,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         outState.putCharSequence(KEY_CURRENT_SUBTITLE, currentSubtitle)
         outState.putString(KEY_CURRENT_TAG, currentFragmentTag)
         super.onSaveInstanceState(outState)
-    }
-
-    public override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-
-    public override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
     }
 
     override fun onBackPressed() {
@@ -162,15 +165,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val textView = binding.navView.getHeaderView(0)
             .findViewById<TextView>(R.id.drawerSubtitleTextView)
         textView.text = getString(R.string.updating_server_status)
-        ServerStatusNetwork.getStatus(this)
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onServerStatusEvent(status: ServerStatus) {
-        val content = if (status.success) status.status else getString(R.string.unknown)
-        val textView = binding.navView.getHeaderView(0)
-            .findViewById<TextView>(R.id.drawerSubtitleTextView)
-        textView.text = getString(R.string.server_status, content)
+        serverStatusViewModel.fetchServerStatus()
     }
 
     private fun switchOnNavigation(title: String, id: Int): Boolean {
@@ -189,8 +184,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_cmdr -> {
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT)
-                val commanderName = SettingsUtils.getCommanderName(this)
-                currentTitle = if (commanderName == "")
+                val commanderName = CommanderUtils.getCommanderName(this)
+                currentTitle = if (commanderName.isNullOrEmpty())
                     getString(R.string.commander)
                 else
                     commanderName

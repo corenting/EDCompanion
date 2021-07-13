@@ -5,12 +5,12 @@
     <androidx.preference.PreferenceCategory app:title="@string/pref_header_general">
 
         <androidx.preference.ListPreference
-            app:defaultValue="Systen"
+            app:defaultValue="System"
             app:entries="@array/settings_theme_entries"
             app:entryValues="@array/settings_theme_entries"
             app:key="@string/settings_theme"
             app:summary="@string/settings_theme_summary"
-            app:title="@string/settings_theme_title" />
+            app:title="@string/settings_theme" />
 
         <androidx.preference.ListPreference
             app:defaultValue="en"
@@ -18,47 +18,70 @@
             app:entryValues="@array/settings_news_lang_entries_values"
             app:key="@string/settings_news_lang"
             app:summary="@string/settings_news_lang_summary"
-            app:title="@string/settings_news_lang_title" />
+            app:title="@string/settings_news_lang" />
     </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_category_title">
-        <androidx.preference.ListPreference
-            app:key="@string/settings_cmdr_source"
-            app:negativeButtonText="@android:string/cancel"
-            app:positiveButtonText="@android:string/ok"
-            app:summary="@string/settings_cmdr_source_summary"
-            app:title="@string/settings_cmdr_source_title" />
-        <androidx.preference.Preference
-            app:key="@string/settings_cmdr_oauth"
-            app:summary="@string/settings_cmdr_oauth_summary"
-            app:title="@string/settings_cmdr_oauth_title" />
-        <androidx.preference.EditTextPreference
-            app:key="@string/settings_cmdr_username"
-            app:negativeButtonText="@android:string/cancel"
-            app:positiveButtonText="@android:string/ok" />
-        <androidx.preference.EditTextPreference
-            app:key="@string/settings_cmdr_password"
-            app:negativeButtonText="@android:string/cancel"
-            app:positiveButtonText="@android:string/ok" />
+    <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_category">
+        <androidx.preference.Preference android:summary="@string/settings_cmdr_summary" />
         <androidx.preference.Preference
             app:key="@string/settings_cmdr_help"
             app:summary="@string/settings_cmdr_help_summary"
-            app:title="@string/settings_cmdr_help_title" />
+            app:title="@string/settings_cmdr_help" />
+        <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_frontier_category_title">
+            <androidx.preference.SwitchPreference
+                app:key="@string/settings_cmdr_frontier_enable"
+                app:summary="@string/settings_cmdr_frontier_enable_summary"
+                app:title="@string/settings_cmdr_frontier_enable" />
+            <androidx.preference.Preference
+                app:key="@string/settings_cmdr_frontier_oauth"
+                app:summary="@string/settings_cmdr_frontier_oauth_summary"
+                app:title="@string/settings_cmdr_frontier_oauth" />
+        </androidx.preference.PreferenceCategory>
+        <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_inara_category_title">
+            <androidx.preference.SwitchPreference
+                app:key="@string/settings_cmdr_inara_enable"
+                app:summary="@string/settings_cmdr_inara_enable_summary"
+                app:title="@string/settings_cmdr_inara_enable" />
+            <androidx.preference.EditTextPreference
+                app:key="@string/settings_cmdr_inara_api_key"
+                app:negativeButtonText="@android:string/cancel"
+                app:positiveButtonText="@android:string/ok"
+                app:summary="@string/settings_cmdr_inara_api_key_summary"
+                app:title="@string/settings_cmdr_inara_api_key" />
+        </androidx.preference.PreferenceCategory>
+        <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_edsm_category_title">
+            <androidx.preference.SwitchPreference
+                app:key="@string/settings_cmdr_edsm_enable"
+                app:summary="@string/settings_cmdr_edsm_enable_summary"
+                app:title="@string/settings_cmdr_edsm_enable" />
+            <androidx.preference.EditTextPreference
+                app:key="@string/settings_cmdr_edsm_username"
+                app:negativeButtonText="@android:string/cancel"
+                app:positiveButtonText="@android:string/ok"
+                app:summary="@string/settings_cmdr_edsm_username_summary"
+                app:title="@string/settings_cmdr_edsm_username" />
+            <androidx.preference.EditTextPreference
+                app:key="@string/settings_cmdr_edsm_api_key"
+                app:negativeButtonText="@android:string/cancel"
+                app:positiveButtonText="@android:string/ok"
+                app:summary="@string/settings_cmdr_edsm_api_key_summary"
+                app:title="@string/settings_cmdr_edsm_api_key" />
+        </androidx.preference.PreferenceCategory>
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory app:title="@string/settings_notifications_category_title">
         <androidx.preference.SwitchPreference
             app:key="@string/settings_notifications_new_goal"
             app:summary="@string/settings_notifications_new_goal_summary"
-            app:title="@string/settings_notifications_new_goal_title" />
+            app:title="@string/settings_notifications_new_goal" />
         <androidx.preference.SwitchPreference
             app:key="@string/settings_notifications_new_tier"
             app:summary="@string/settings_notifications_new_tier_summary"
-            app:title="@string/settings_notifications_new_tier_title" />
+            app:title="@string/settings_notifications_new_tier" />
         <androidx.preference.SwitchPreference
             app:key="@string/settings_notifications_finished_goal"
             app:summary="@string/settings_notifications_finished_goal_summary"
-            app:title="@string/settings_notifications_finished_goal_title" />
+            app:title="@string/settings_notifications_finished_goal" />
     </androidx.preference.PreferenceCategory>
 
 

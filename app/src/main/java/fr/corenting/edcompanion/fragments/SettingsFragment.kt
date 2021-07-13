@@ -7,29 +7,17 @@ import androidx.preference.*
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.activities.LoginActivity
 import fr.corenting.edcompanion.utils.NotificationsUtils
-import fr.corenting.edcompanion.utils.PlayerNetworkUtils
-import fr.corenting.edcompanion.utils.SettingsUtils
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_settings)
 
-        // Init commander tab source list
-        val cmdSourceList = findPreference<Preference>(getString(R.string.settings_cmdr_source)) as ListPreference?
-        if (cmdSourceList != null) {
-            cmdSourceList.entries = PlayerNetworkUtils.getSourcesList()
-            cmdSourceList.entryValues = PlayerNetworkUtils.getSourcesList()
-            cmdSourceList.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
-                initCmdrPreferences(newValue as String?)
-                true
-            }
-        }
         initPushPreferences()
-        initCmdrPreferences(null)
+        initCmdrPreferences()
     }
 
-    private fun initCmdrPreferences(newValue: String?) {
+    private fun initCmdrPreferences() {
         // Bind help preference
         val helpPreference = findPreference<Preference>(getString(R.string.settings_cmdr_help))
         if (helpPreference != null) {
@@ -41,40 +29,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        // If invoked with a specific value get network for it else get current one
-        val playerNetwork = if (newValue != null) PlayerNetworkUtils.getCurrentPlayerNetwork(context, newValue) else PlayerNetworkUtils.getCurrentPlayerNetwork(context)
-        val passwordPreference = findPreference<Preference>(getString(R.string.settings_cmdr_password)) as EditTextPreference?
-        val usernamePreference = findPreference<Preference>(getString(R.string.settings_cmdr_username)) as EditTextPreference?
-        val frontierPreference = findPreference<Preference>(getString(R.string.settings_cmdr_oauth))
+        // Bind preferences summary to values
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_edsm_username)))
 
-        // If preferences are null return immediately
-        if (passwordPreference == null || usernamePreference == null || frontierPreference == null) {
-            return
-        }
-        if (playerNetwork.useFrontierAuth()) {
-            usernamePreference.isVisible = false
-            passwordPreference.isVisible = false
-            frontierPreference.isVisible = true
-            frontierPreference.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                val i = Intent(context, LoginActivity::class.java)
-                activity?.startActivityForResult(i, FRONTIER_LOGIN_REQUEST_CODE)
-                true
-            }
-        } else {
-            frontierPreference.isVisible = false
-            usernamePreference.isVisible = playerNetwork.useUsername()
-            passwordPreference.isVisible = playerNetwork.usePassword()
-            bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_username)))
-            passwordPreference.text = SettingsUtils.getString(context, context?.getString(R.string.settings_cmdr_password))
-            playerNetwork.passwordSettingSetup(passwordPreference)
-            playerNetwork.usernameSettingSetup(usernamePreference)
+        val frontierPreference =
+            findPreference<Preference>(getString(R.string.settings_cmdr_frontier_oauth))
+        frontierPreference?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            val i = Intent(context, LoginActivity::class.java)
+            activity?.startActivityForResult(i, FRONTIER_LOGIN_REQUEST_CODE)
+            true
         }
     }
 
     private fun initPushPreferences() { // Get preferences
-        val newGoalPreference = findPreference<Preference>(getString(R.string.settings_notifications_new_goal))
-        val newTierPreference = findPreference<Preference>(getString(R.string.settings_notifications_new_tier))
-        val finishedGoalPreference = findPreference<Preference>(getString(R.string.settings_notifications_finished_goal))
+        val newGoalPreference =
+            findPreference<Preference>(getString(R.string.settings_notifications_new_goal))
+        val newTierPreference =
+            findPreference<Preference>(getString(R.string.settings_notifications_new_tier))
+        val finishedGoalPreference =
+            findPreference<Preference>(getString(R.string.settings_notifications_finished_goal))
 
         // Disable push notifications settings if Google Play Services are not available
         if (NotificationsUtils.pushNotificationsNotWorking(context)) {
@@ -85,10 +58,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         // Change Firebase subscriptions on preference change
         val context = context
-        val notificationsChangeListener = Preference.OnPreferenceChangeListener { preference: Preference, newValue: Any? ->
-            NotificationsUtils.refreshPushSubscription(context, preference.key, (newValue as Boolean?)!!)
-            true
-        }
+        val notificationsChangeListener =
+            Preference.OnPreferenceChangeListener { preference: Preference, newValue: Any? ->
+                NotificationsUtils.refreshPushSubscription(
+                    context,
+                    preference.key,
+                    (newValue as Boolean?)!!
+                )
+                true
+            }
         if (newGoalPreference != null) {
             newGoalPreference.onPreferenceChangeListener = notificationsChangeListener
         }
@@ -108,31 +86,35 @@ class SettingsFragment : PreferenceFragmentCompat() {
     companion object {
         private const val FRONTIER_LOGIN_REQUEST_CODE = 999
 
-        private val preferenceChangeListener = Preference.OnPreferenceChangeListener { preference: Preference, value: Any ->
-            val stringValue = value.toString()
-            when (preference) {
-                // For list preferences, look up the correct display value in the preference's 'entries' list.
-                is ListPreference -> {
-                    val index = preference.findIndexOfValue(stringValue)
-                    // Set the summary to reflect the new value.
-                    preference.setSummary(if (index >= 0) preference.entries[index] else null)
+        private val preferenceChangeListener =
+            Preference.OnPreferenceChangeListener { preference: Preference, value: Any ->
+                val stringValue = value.toString()
+                when (preference) {
+                    // For list preferences, look up the correct display value in the preference's 'entries' list.
+                    is ListPreference -> {
+                        val index = preference.findIndexOfValue(stringValue)
+
+                        // Set the summary to reflect the new value.
+                        preference.setSummary(if (index >= 0) preference.entries[index] else preference.summary)
+                    }
+                    // For all other preferences, set the summary to the value's simple string representation.
+                    else -> {
+                        preference.summary = stringValue
+                    }
                 }
-                // For all other preferences, set the summary to the value's simple string representation.
-                else -> {
-                    preference.summary = stringValue
-                }
+                true
             }
-            true
-        }
 
         private fun bindPreferenceSummaryToValue(preference: Preference?) { // Set the listener to watch for value changes.
             preference?.onPreferenceChangeListener = preferenceChangeListener
 
             // Trigger the listener immediately with the preference's current value.
-            preferenceChangeListener.onPreferenceChange(preference,
-                    PreferenceManager
-                            .getDefaultSharedPreferences(preference?.context)
-                            .getString(preference?.key, ""))
+            preferenceChangeListener.onPreferenceChange(
+                preference,
+                PreferenceManager
+                    .getDefaultSharedPreferences(preference?.context)
+                    .getString(preference?.key, "")
+            )
         }
     }
 }

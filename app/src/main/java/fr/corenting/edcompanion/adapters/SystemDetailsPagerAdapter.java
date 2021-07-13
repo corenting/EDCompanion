@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.SystemDetailsFragment;
 import fr.corenting.edcompanion.fragments.SystemFactionsFragment;
@@ -38,8 +39,6 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
 
         // Else return new one
         switch (position) {
-            case 0:
-                return new SystemDetailsFragment();
             case 1:
                 return new SystemStationsFragment();
             case 2:
@@ -52,8 +51,6 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
-                return context.getString(R.string.system);
             case 1:
                 return context.getString(R.string.stations);
             case 2:
@@ -66,8 +63,6 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
 
     private String getTag(int position) {
         switch (position) {
-            case 0:
-                return SystemDetailsFragment.SYSTEM_DETAILS_FRAGMENT;
             case 1:
                 return SystemStationsFragment.SYSTEM_STATIONS_FRAGMENT_TAG;
             case 2:
