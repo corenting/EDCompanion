@@ -44,51 +44,6 @@ public class FrontierPlayer extends PlayerNetwork {
                 .getFrontierRetrofit(context.getApplicationContext());
     }
 
-    @Override
-    public boolean useFrontierAuth() {
-        return true;
-    }
-
-    @Override
-    public boolean useUsername() {
-        return false;
-    }
-
-    @Override
-    public boolean usePassword() {
-        return false;
-    }
-
-    @Override
-    public boolean supportFleet() {
-        return true;
-    }
-
-    @Override
-    public boolean supportCredits() {
-        return true;
-    }
-
-    @Override
-    public boolean supportLocation() {
-        return true;
-    }
-
-    @Override
-    public void usernameSettingSetup(EditTextPreference preference) {
-    }
-
-    @Override
-    public void passwordSettingSetup(EditTextPreference preference) {
-    }
-
-
-    @Override
-    public String getErrorMessage() {
-        return context.getString(R.string.frontier_error);
-    }
-
-
     private Ranks getRanksFromApiBody(FrontierProfileResponse apiResponse) {
 
         FrontierProfileResponse.FrontierProfileCommanderRankResponse apiRanks =
@@ -268,8 +223,20 @@ public class FrontierPlayer extends PlayerNetwork {
     }
 
     @Override
-    public void getRanks() {
-        // Not implemented for now, not needed as getCommanderStatus does it all at once
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
+    protected void getRanks() {
+    }
+
+    @Override
+    protected void getCredits() {
+    }
+
+    @Override
+    protected void getFleet() {
     }
 
     @Override
@@ -303,13 +270,4 @@ public class FrontierPlayer extends PlayerNetwork {
         frontierRetrofit.getProfile().enqueue(callback);
     }
 
-    @Override
-    public void getCredits() {
-        // Not implemented for now, not needed as getCommanderStatus does it all at once
-    }
-
-    @Override
-    public void getFleet() {
-        getCommanderStatus(); // getCommanderStatus is already fetching all the informations for this
-    }
 }

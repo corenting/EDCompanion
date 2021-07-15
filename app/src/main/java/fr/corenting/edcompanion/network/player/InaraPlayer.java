@@ -1,8 +1,8 @@
 package fr.corenting.edcompanion.network.player;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
-import androidx.preference.EditTextPreference;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 import fr.corenting.edcompanion.BuildConfig;
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileRequestBody;
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileResponse;
+import fr.corenting.edcompanion.models.events.Ranks;
 import fr.corenting.edcompanion.network.retrofit.InaraRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import fr.corenting.edcompanion.utils.DateUtils;
@@ -25,12 +25,12 @@ public class InaraPlayer extends PlayerNetwork {
     private final Context context;
     private final InaraRetrofit inaraRetrofit;
 
-    private final String commanderName;
+    private final String apiKey;
 
     public InaraPlayer(Context context) {
 
         this.context = context;
-        commanderName = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_username));
+        apiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_inara_api_key));
 
         inaraRetrofit = RetrofitSingleton.getInstance()
                 .getInaraRetrofit(context.getApplicationContext());
@@ -41,7 +41,7 @@ public class InaraPlayer extends PlayerNetwork {
 
         // Build header
         res.header = new InaraProfileRequestBody.InaraRequestBodyHeader();
-        res.header.ApiKey = SettingsUtils.getString(context, context.getString(R.string.settings_cmdr_password));
+        res.header.ApiKey = this.apiKey;
         res.header.ApplicationName = context.getString(R.string.app_name);
         res.header.ApplicationVersion = BuildConfig.VERSION_NAME;
         res.header.IsDeveloped = BuildConfig.DEBUG;
@@ -59,54 +59,12 @@ public class InaraPlayer extends PlayerNetwork {
     }
 
     @Override
-    public boolean useFrontierAuth() {
+    public boolean isUsable() {
         return false;
     }
 
     @Override
-    public boolean useUsername() {
-        return false;
-    }
-
-    @Override
-    public boolean usePassword() {
-        return true;
-    }
-
-    @Override
-    public boolean supportFleet() {
-        return false;
-    }
-
-    @Override
-    public boolean supportCredits() {
-        return false;
-    }
-
-    @Override
-    public boolean supportLocation() {
-        return false;
-    }
-
-    @Override
-    public void usernameSettingSetup(EditTextPreference preference) {
-    }
-
-    @Override
-    public void passwordSettingSetup(EditTextPreference preference) {
-        preference.setTitle(context.getString(R.string.settings_cmdr_inara_password_title));
-        preference.setSummary(context.getString(R.string.settings_cmdr_inara_password_summary));
-        preference.setDialogTitle(context.getString(R.string.settings_cmdr_inara_password_title));
-
-    }
-
-    @Override
-    public String getErrorMessage() {
-        return context.getString(R.string.inara_error);
-    }
-
-    @Override
-    public void getRanks() {
+    protected void getRanks() {
 
         retrofit2.Callback<InaraProfileResponse> callback = new retrofit2.Callback<InaraProfileResponse>() {
             @Override
@@ -206,17 +164,17 @@ public class InaraPlayer extends PlayerNetwork {
     }
 
     @Override
+    protected void getCredits() {
+
+    }
+
+    @Override
+    protected void getFleet() {
+
+    }
+
+    @Override
     public void getCommanderPosition(EventBus bus) {
-
-    }
-
-    @Override
-    public void getCredits() {
-
-    }
-
-    @Override
-    public void getFleet() {
 
     }
 }
