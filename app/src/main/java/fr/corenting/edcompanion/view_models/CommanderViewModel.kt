@@ -27,6 +27,10 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
             viewModelScope.launch {
                 credits.postValue(edsmPlayer.getCredits())
             }
+        } else if (frontierPlayer.isUsable()) {
+            viewModelScope.launch {
+                credits.postValue(frontierPlayer.getCredits())
+            }
         }
     }
 
@@ -34,21 +38,31 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
         return credits
     }
 
+    private fun updateCachedPosition(newPosition: ProxyResult<CommanderPosition>) {
+        if (newPosition.data != null && newPosition.error == null) {
+            CommanderUtils.setCachedCurrentCommanderPosition(
+                getApplication(),
+                newPosition.data.systemName
+            )
+        }
+    }
+
     fun fetchPosition() {
         if (edsmPlayer.isUsable()) {
             viewModelScope.launch {
                 val newPosition = edsmPlayer.getPosition()
                 position.postValue(newPosition)
-
-                // Update cached name on success
-                if (newPosition.data != null && newPosition.error == null) {
-                    CommanderUtils.setCachedCurrentCommanderPosition(
-                        getApplication(),
-                        newPosition.data.systemName
-                    )
-                }
+                updateCachedPosition(newPosition)
+            }
+        } else if (frontierPlayer.isUsable()) {
+            viewModelScope.launch {
+                val newPosition = frontierPlayer.getPosition()
+                position.postValue(newPosition)
+                updateCachedPosition(newPosition)
             }
         }
+
+
     }
 
     fun getPosition(): LiveData<ProxyResult<CommanderPosition>> {
@@ -63,6 +77,10 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
         } else if (inaraPlayer.isUsable()) {
             viewModelScope.launch {
                 ranks.postValue(inaraPlayer.getRanks())
+            }
+        } else if (frontierPlayer.isUsable()) {
+            viewModelScope.launch {
+                ranks.postValue(frontierPlayer.getRanks())
             }
         }
     }

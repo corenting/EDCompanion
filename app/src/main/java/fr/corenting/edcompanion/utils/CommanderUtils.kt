@@ -7,36 +7,42 @@ import fr.corenting.edcompanion.network.player.FrontierPlayer
 import fr.corenting.edcompanion.network.player.InaraPlayer
 
 object CommanderUtils {
-    fun getCommanderName(context: Context): String? {
+    fun getCommanderName(context: Context): String {
         val edsmPlayer = EDSMPlayer(context)
-        val inaraPlayer = InaraPlayer(context)
 
         if (edsmPlayer.isUsable()) {
             return SettingsUtils.getString(
                 context,
                 context.getString(R.string.settings_cmdr_edsm_username)
             )
-        } else if (inaraPlayer.isUsable()) {
+        }
+
+        val inaraPlayer = InaraPlayer(context)
+        if (inaraPlayer.isUsable()) {
             return inaraPlayer.getCommanderName()
         }
 
-        return null
+        return context.getString(R.string.commander)
     }
 
     fun hasFleetData(context: Context): Boolean {
         val frontierPlayer = FrontierPlayer(context)
-
         if (frontierPlayer.isUsable()) {
             return  true
         }
+
         return false
     }
 
     fun hasCreditsData(context: Context): Boolean {
         val edsmPlayer = EDSMPlayer(context)
-
         if (edsmPlayer.isUsable()) {
             return true
+        }
+
+        val frontierPlayer = FrontierPlayer(context)
+        if (frontierPlayer.isUsable()) {
+            return  true
         }
 
         return false
@@ -44,9 +50,13 @@ object CommanderUtils {
 
     fun hasPositionData(context: Context): Boolean {
         val edsmPlayer = EDSMPlayer(context)
-
         if (edsmPlayer.isUsable()) {
             return true
+        }
+
+        val frontierPlayer = FrontierPlayer(context)
+        if (frontierPlayer.isUsable()) {
+            return  true
         }
 
         return false
@@ -55,8 +65,9 @@ object CommanderUtils {
     fun hasCommanderInformations(context: Context): Boolean {
         val edsmPlayer = EDSMPlayer(context)
         val inaraPlayer = InaraPlayer(context)
+        val frontierPlayer = FrontierPlayer(context)
 
-        return edsmPlayer.isUsable() || inaraPlayer.isUsable()
+        return edsmPlayer.isUsable() || inaraPlayer.isUsable() || frontierPlayer.isUsable()
     }
 
     fun setCachedCurrentCommanderPosition(context: Context, systemName: String) {

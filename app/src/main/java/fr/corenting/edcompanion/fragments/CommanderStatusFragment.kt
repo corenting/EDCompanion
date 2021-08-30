@@ -160,7 +160,7 @@ class CommanderStatusFragment : Fragment() {
         val currentContext = context
         if (currentContext != null) {
             val cmdrName = CommanderUtils.getCommanderName(currentContext)
-            if (!cmdrName.isNullOrEmpty()) {
+            if (cmdrName.isNotEmpty()) {
                 binding.commanderNameTextView.text = cmdrName
             }
         }
