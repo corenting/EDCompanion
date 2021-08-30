@@ -28,6 +28,8 @@ class CommanderStatusFragment : Fragment() {
         const val COMMANDER_STATUS_FRAGMENT = "commander_status_fragment"
     }
 
+    private var frontierLoginDialogOnDisplay: Boolean = false
+
     private var _binding: FragmentCommanderStatusBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CommanderViewModel by activityViewModels()
@@ -136,19 +138,28 @@ class CommanderStatusFragment : Fragment() {
         OAuthUtils.storeUpdatedTokens(context, "", "")
 
         // Show dialog
-        val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.login_again_dialog_title)
-            .setMessage(R.string.login_again_dialog_text)
-            .setPositiveButton(android.R.string.ok) { d: DialogInterface, _: Int ->
-                d.dismiss()
-                val i = Intent(context, LoginActivity::class.java)
-                startActivity(i)
+        synchronized(frontierLoginDialogOnDisplay) {
+            if (frontierLoginDialogOnDisplay) {
+                return
             }
-            .setNegativeButton(
-                android.R.string.cancel
-            ) { d: DialogInterface, _: Int -> d.dismiss() }
-            .create()
-        dialog.show()
+            frontierLoginDialogOnDisplay = true
+            val dialog = MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.login_again_dialog_title)
+                .setMessage(R.string.login_again_dialog_text)
+                .setPositiveButton(android.R.string.ok) { d: DialogInterface, _: Int ->
+                    d.dismiss()
+                    val i = Intent(context, LoginActivity::class.java)
+                    startActivity(i)
+                }
+                .setNegativeButton(
+                    android.R.string.cancel
+                ) { d: DialogInterface, _: Int -> d.dismiss() }
+                .setOnDismissListener {
+                    frontierLoginDialogOnDisplay = false
+                }
+                .create()
+            dialog.show()
+        }
     }
 
     private fun onSystemNameClick() {
