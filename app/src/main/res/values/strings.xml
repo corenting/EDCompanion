@@ -350,16 +350,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.14.1</b><br />
+            <b>Version 2.15.0</b><br />
             <ul>
-                <li>Fix detection of Play Services for push notifications</li><br />
-                <li>Internal changes</li><br />
-            </ul>
-            <b>Version 2.14</b><br />
-            <ul>
-                <li>Fix galnet and ships pictures</li><br />
-                <li>Add Russian and Spanish for news and Galnet languages</li><br />
-                <li>Rework theme switcher</li><br />
+                <li>Rework commander tab: you can now enable multiple sources (Inara, EDSM or Frontier) at the same time.</li><br />
                 <li>Internal changes</li><br />
             </ul>
         ]]>

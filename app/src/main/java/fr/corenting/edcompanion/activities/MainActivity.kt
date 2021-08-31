@@ -22,6 +22,7 @@ import fr.corenting.edcompanion.utils.*
 import fr.corenting.edcompanion.view_models.CommanderViewModel
 import fr.corenting.edcompanion.view_models.ServerStatusViewModel
 
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     companion object {

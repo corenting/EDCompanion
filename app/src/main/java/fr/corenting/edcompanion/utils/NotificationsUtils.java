@@ -36,18 +36,6 @@ public class NotificationsUtils {
         snackbar.show();
     }
 
-    public static void displaySnackbarWithActivityButton(Activity activity, String message,
-                                                         Class<?> activityToGo) {
-        Snackbar snackbar = Snackbar
-                .make(activity.findViewById(android.R.id.content),
-                        message, Snackbar.LENGTH_SHORT);
-        snackbar.setAction(R.string.open, v -> {
-            Intent i = new Intent(activity, activityToGo);
-            activity.startActivity(i);
-        });
-        snackbar.show();
-    }
-
     private static List<Pair<String, Boolean>> getNotificationsTopics(Context c) {
         List<Pair<String, Boolean>> res = new ArrayList<>();
 

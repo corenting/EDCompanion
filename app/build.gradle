@@ -11,8 +11,8 @@ android {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 54
-        versionName "2.14.1"
+        versionCode 55
+        versionName "2.15.0"
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "String", "FRONTIER_AUTH_CLIENT_ID", '"' + FRONTIER_AUTH_CLIENT_ID + '"'
@@ -85,8 +85,4 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-}
-
-repositories {
-    mavenCentral()
 }

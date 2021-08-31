@@ -23,13 +23,15 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
     private val fleet = MutableLiveData<ProxyResult<CommanderFleet>>()
 
     fun fetchCredits() {
-        if (edsmPlayer.isUsable()) {
-            viewModelScope.launch {
-                credits.postValue(edsmPlayer.getCredits())
-            }
-        } else if (frontierPlayer.isUsable()) {
-            viewModelScope.launch {
-                credits.postValue(frontierPlayer.getCredits())
+        val servicesToTries = listOf(edsmPlayer, frontierPlayer)
+
+        viewModelScope.launch {
+            for (service in servicesToTries) {
+                val retValue = service.getCredits()
+
+                if (retValue.error == null && retValue.data != null) {
+                    credits.postValue(retValue)
+                }
             }
         }
     }
@@ -48,21 +50,19 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun fetchPosition() {
-        if (edsmPlayer.isUsable()) {
-            viewModelScope.launch {
-                val newPosition = edsmPlayer.getPosition()
-                position.postValue(newPosition)
-                updateCachedPosition(newPosition)
-            }
-        } else if (frontierPlayer.isUsable()) {
-            viewModelScope.launch {
-                val newPosition = frontierPlayer.getPosition()
-                position.postValue(newPosition)
-                updateCachedPosition(newPosition)
+        val servicesToTries = listOf(edsmPlayer, frontierPlayer)
+
+        viewModelScope.launch {
+            for (service in servicesToTries) {
+                val retValue = service.getPosition()
+
+                if (retValue.error == null && retValue.data != null) {
+                    position.postValue(retValue)
+                    updateCachedPosition(retValue)
+
+                }
             }
         }
-
-
     }
 
     fun getPosition(): LiveData<ProxyResult<CommanderPosition>> {
@@ -70,17 +70,15 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun fetchRanks() {
-        if (edsmPlayer.isUsable()) {
-            viewModelScope.launch {
-                ranks.postValue(edsmPlayer.getRanks())
-            }
-        } else if (inaraPlayer.isUsable()) {
-            viewModelScope.launch {
-                ranks.postValue(inaraPlayer.getRanks())
-            }
-        } else if (frontierPlayer.isUsable()) {
-            viewModelScope.launch {
-                ranks.postValue(frontierPlayer.getRanks())
+        val servicesToTries = listOf(edsmPlayer, inaraPlayer, frontierPlayer)
+
+        viewModelScope.launch {
+            for (service in servicesToTries) {
+                val retValue = service.getRanks()
+
+                if (retValue.error == null && retValue.data != null) {
+                    ranks.postValue(retValue)
+                }
             }
         }
     }
