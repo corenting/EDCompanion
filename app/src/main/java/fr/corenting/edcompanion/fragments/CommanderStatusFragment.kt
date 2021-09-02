@@ -14,10 +14,8 @@ import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.activities.LoginActivity
 import fr.corenting.edcompanion.activities.SettingsActivity
 import fr.corenting.edcompanion.databinding.FragmentCommanderStatusBinding
-import fr.corenting.edcompanion.models.CommanderCredits
-import fr.corenting.edcompanion.models.CommanderPosition
-import fr.corenting.edcompanion.models.CommanderRanks
-import fr.corenting.edcompanion.models.ProxyResult
+import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.exceptions.DataNotInitializedException
 import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException
 import fr.corenting.edcompanion.utils.*
 import fr.corenting.edcompanion.view_models.CommanderViewModel
@@ -28,7 +26,7 @@ class CommanderStatusFragment : Fragment() {
         const val COMMANDER_STATUS_FRAGMENT = "commander_status_fragment"
     }
 
-    private var frontierLoginDialogOnDisplay: Boolean = false
+    private var frontierLoginNeeded: Boolean = false
 
     private var _binding: FragmentCommanderStatusBinding? = null
     private val binding get() = _binding!!
@@ -87,7 +85,6 @@ class CommanderStatusFragment : Fragment() {
             getString(R.string.rank_arena)
         )
 
-
         // Hide views according to supported informations from source
         val currentContext = context
         if (currentContext != null) {
@@ -97,6 +94,20 @@ class CommanderStatusFragment : Fragment() {
             if (!CommanderUtils.hasPositionData(currentContext)) {
                 binding.locationContainer.visibility = View.GONE
             }
+        }
+
+        // Setup observers
+        viewModel.getRanks().observe(viewLifecycleOwner) {
+            onRanksChange(it)
+        }
+        viewModel.getCredits().observe(viewLifecycleOwner) {
+            onCreditsChange(it)
+        }
+        viewModel.getPosition().observe(viewLifecycleOwner) {
+            onPositionChange(it)
+        }
+        viewModel.getFleet().observe(viewLifecycleOwner) {
+            onFleetChange(it)
         }
 
         // Display message if no source, else fetch informations
@@ -134,16 +145,18 @@ class CommanderStatusFragment : Fragment() {
     }
 
     private fun onFrontierLoginNeeded() {
+        // End loading and clear the data on the viewmodel has it's not valid without login
+        viewModel.clearCachedData()
         endLoading()
-        OAuthUtils.storeUpdatedTokens(context, "", "")
 
-        // Show dialog
-        synchronized(frontierLoginDialogOnDisplay) {
-            if (frontierLoginDialogOnDisplay) {
+        // Show dialog but only once
+        synchronized(frontierLoginNeeded) {
+            if (frontierLoginNeeded) {
                 return
             }
-            frontierLoginDialogOnDisplay = true
-            val dialog = MaterialAlertDialogBuilder(requireContext())
+
+            frontierLoginNeeded = true
+            val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.login_again_dialog_title)
                 .setMessage(R.string.login_again_dialog_text)
                 .setPositiveButton(android.R.string.ok) { d: DialogInterface, _: Int ->
@@ -155,10 +168,12 @@ class CommanderStatusFragment : Fragment() {
                     android.R.string.cancel
                 ) { d: DialogInterface, _: Int -> d.dismiss() }
                 .setOnDismissListener {
-                    frontierLoginDialogOnDisplay = false
+                    it.dismiss()
+                    frontierLoginNeeded = false
                 }
-                .create()
-            dialog.show()
+
+            val myDialog = dialogBuilder.create()
+            myDialog.show()
         }
     }
 
@@ -176,47 +191,51 @@ class CommanderStatusFragment : Fragment() {
             }
         }
 
-        viewModel.getRanks().observe(viewLifecycleOwner) {
-            onRanksChange(it)
-        }
-        viewModel.getCredits().observe(viewLifecycleOwner) {
-            onCreditsChange(it)
-        }
-        viewModel.getPosition().observe(viewLifecycleOwner) {
-            onPositionChange(it)
-        }
-
         viewModel.fetchCredits()
         viewModel.fetchPosition()
         viewModel.fetchRanks()
+
+        // we do not really need fleet except to preload for other tab and to display auth popup if needed
+        viewModel.fetchFleet()
     }
 
-    private fun onPositionChange(result: ProxyResult<CommanderPosition>?) {
+    private fun <T> handleResult(result: ProxyResult<T>, onSuccess: (ProxyResult<T>) -> Unit) {
         endLoading()
 
-        if (result?.error is FrontierAuthNeededException) {
+        if (result.error is FrontierAuthNeededException) {
             onFrontierLoginNeeded()
+            return
         }
 
-        if (result?.data == null || result.error != null) {
-            NotificationsUtils.displayGenericDownloadErrorSnackbar(activity)
+        if (result.data == null || result.error != null) {
+            if (result.error !is DataNotInitializedException) {
+                NotificationsUtils.displayGenericDownloadErrorSnackbar(activity)
+            }
         } else {
+            onSuccess(result)
+        }
+    }
+
+    private fun onFleetChange(result: ProxyResult<CommanderFleet>) {
+        handleResult(result) {}
+    }
+
+    private fun onPositionChange(result: ProxyResult<CommanderPosition>) {
+        handleResult(result) {
+            if (result.data == null) {
+                return@handleResult
+            }
             binding.locationTextView.text = result.data.systemName
         }
     }
 
-    private fun onCreditsChange(result: ProxyResult<CommanderCredits>?) {
-        endLoading()
+    private fun onCreditsChange(result: ProxyResult<CommanderCredits>) {
+        handleResult(result) {
+            if (result.data == null) {
+                return@handleResult
+            }
 
-        if (result?.error is FrontierAuthNeededException) {
-            onFrontierLoginNeeded()
-        }
-
-        if (result?.data == null || result.error != null || result.data.balance < 0) {
-            NotificationsUtils.displayGenericDownloadErrorSnackbar(activity)
-        } else {
             val numberFormat = MathUtils.getNumberFormat(context)
-
             val amount: String = numberFormat.format(result.data.balance)
             if (result.data.loan > 0) {
                 val loan: String = numberFormat.format(result.data.loan)
@@ -228,18 +247,15 @@ class CommanderStatusFragment : Fragment() {
                 binding.creditsTextView.text = resources.getString(R.string.credits, amount)
             }
         }
+
     }
 
-    private fun onRanksChange(result: ProxyResult<CommanderRanks>?) {
-        endLoading()
+    private fun onRanksChange(result: ProxyResult<CommanderRanks>) {
+        handleResult(result) {
+            if (result.data == null) {
+                return@handleResult
+            }
 
-        if (result?.error is FrontierAuthNeededException) {
-            onFrontierLoginNeeded()
-        }
-
-        if (result?.data == null || result.error != null) {
-            NotificationsUtils.displayGenericDownloadErrorSnackbar(activity)
-        } else {
             val ranks = result.data
             RankUtils.setContent(
                 context, binding.federationRankLayout.root, R.drawable.elite_federation,

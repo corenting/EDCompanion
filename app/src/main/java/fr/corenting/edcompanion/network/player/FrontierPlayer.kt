@@ -1,25 +1,20 @@
 package fr.corenting.edcompanion.network.player
 
 import android.content.Context
-import fr.corenting.edcompanion.models.*
-import fr.corenting.edcompanion.network.retrofit.FrontierRetrofit
-import fr.corenting.edcompanion.singletons.RetrofitSingleton
-import fr.corenting.edcompanion.utils.SettingsUtils
-import org.threeten.bp.Instant
-import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse
-
 import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-
 import com.google.gson.JsonParser
 import fr.corenting.edcompanion.R
-import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse.FrontierProfileCommanderRankResponse
+import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException
+import fr.corenting.edcompanion.network.retrofit.FrontierRetrofit
+import fr.corenting.edcompanion.singletons.RetrofitSingleton
 import fr.corenting.edcompanion.utils.InternalNamingUtils
-
-import fr.corenting.edcompanion.models.Ship
-
-import com.google.gson.JsonElement
+import fr.corenting.edcompanion.utils.SettingsUtils
+import org.threeten.bp.Instant
 
 
 class FrontierPlayer(val context: Context) : PlayerNetwork {
@@ -49,9 +44,7 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
     private fun shouldFetchNewData(): Boolean {
         synchronized(lastFetch) {
             val ret = when {
-                lastFetch.isBefore(Instant.now().minusSeconds(60)) -> {
-                    true
-                }
+                lastFetch.isBefore(Instant.now().minusSeconds(60)) -> true
                 else -> false
             }
 
@@ -114,20 +107,27 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
     }
 
     private suspend fun getProfile() {
+        try {
+            val apiResponse = frontierRetrofit.getProfileRaw()
+            val rawResponse = JsonParser.parseString(apiResponse.string()).asJsonObject
+            val profileResponse = Gson()
+                .fromJson(rawResponse, FrontierProfileResponse::class.java)
 
-        val apiResponse = frontierRetrofit.getProfileRaw()
-        val rawResponse = JsonParser.parseString(apiResponse.string()).asJsonObject
-        val profileResponse = Gson()
-            .fromJson(rawResponse, FrontierProfileResponse::class.java)
-
-        cachedPosition = CommanderPosition(
-            profileResponse.LastSystem.Name,
-            false
-        )
-        cachedCredits =
-            CommanderCredits(profileResponse.Commander.Credits, profileResponse.Commander.Debt)
-        cachedRanks = getRanksFromApiResponse(profileResponse)
-        cachedFleet = getFleetFromApiResponse(rawResponse)
+            cachedPosition = CommanderPosition(
+                profileResponse.LastSystem.Name,
+                false
+            )
+            cachedCredits =
+                CommanderCredits(profileResponse.Commander.Credits, profileResponse.Commander.Debt)
+            cachedRanks = getRanksFromApiResponse(profileResponse)
+            cachedFleet = getFleetFromApiResponse(rawResponse)
+        } catch (t: FrontierAuthNeededException) {
+            lastFetch = Instant.MIN
+            cachedCredits = null
+            cachedRanks = null
+            cachedFleet = null
+            throw t
+        }
     }
 
     private fun getFleetFromApiResponse(profileResponse: JsonObject): CommanderFleet {

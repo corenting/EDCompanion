@@ -13,4 +13,7 @@ public interface EDApiV4Retrofit {
 
     @GET("news")
     Call<List<NewsArticleResponse>> getNews(@Query("lang") String language);
+
+    @GET("systems/typeahead")
+    Call<List<String>> getSystemsTypeAhead(@Query("input_text") String systemName);
 }

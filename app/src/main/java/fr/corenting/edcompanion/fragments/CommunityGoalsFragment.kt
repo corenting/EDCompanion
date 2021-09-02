@@ -1,10 +1,9 @@
 package fr.corenting.edcompanion.fragments
 
 import androidx.fragment.app.activityViewModels
-import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter
-import fr.corenting.edcompanion.models.CommunityGoal
 import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.CommunityGoal
 import fr.corenting.edcompanion.models.events.CommunityGoals
 import fr.corenting.edcompanion.models.events.DistanceSearch
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork
@@ -44,12 +43,7 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
         val currentContext = context
         if (currentContext != null && CommanderUtils.hasPositionData(currentContext)) {
             viewModel.getPosition().observe(viewLifecycleOwner) { result ->
-                if (result?.data == null || result.error != null) {
-                    NotificationsUtils.displaySnackbar(
-                        activity,
-                        getString(R.string.cg_player_position_error)
-                    )
-                } else {
+                if (result?.data != null && result.error == null) {
                     refreshDisplayWithCommanderPosition(result.data)
                 }
             }
@@ -82,10 +76,6 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
         if (currentContext != null && CommanderUtils.hasPositionData(currentContext) &&
             !distanceSearch.success && playerSystemName != null
         ) {
-            NotificationsUtils.displaySnackbar(
-                activity,
-                getString(R.string.cg_player_distance_error)
-            )
             return
         }
 

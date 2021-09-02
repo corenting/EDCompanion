@@ -28,7 +28,6 @@ public class CommanderFragment extends Fragment {
         // Setup tablayout and viewpager
         binding.viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(),
                 getContext()));
-        binding.viewPager.setOffscreenPageLimit(2);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
 
         // Style

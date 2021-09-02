@@ -16,14 +16,14 @@ import fr.corenting.edcompanion.network.AutoCompleteNetwork
 
 class AutoCompleteAdapter(private val context: Context, private val autocompleteType: Int) :
         BaseAdapter(), Filterable {
-    private var resultList: List<NameId> = ArrayList()
+    private var resultList: List<String> = ArrayList()
 
     override fun getCount(): Int {
         return resultList.size
     }
 
     override fun getItem(index: Int): String {
-        return resultList[index].name
+        return resultList[index]
     }
 
     override fun getItemId(position: Int): Long {
@@ -49,7 +49,7 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
                 val filterResults = FilterResults()
                 if (constraint != null) {
 
-                    val results: List<NameId> = when (autocompleteType) {
+                    val results: List<String> = when (autocompleteType) {
                         TYPE_AUTOCOMPLETE_SYSTEMS -> AutoCompleteNetwork.searchSystems(context, constraint.toString())
                         TYPE_AUTOCOMPLETE_SHIPS -> AutoCompleteNetwork.searchShips(context, constraint.toString())
                         else -> AutoCompleteNetwork.searchCommodities(context, constraint.toString())
@@ -64,7 +64,7 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 if (results != null && results.count > 0) {
-                    val castedResults = (results.values as List<*>).filterIsInstance<NameId>()
+                    val castedResults = (results.values as List<*>).filterIsInstance<String>()
                     if (castedResults.isNotEmpty()) {
                         resultList = castedResults
                     }

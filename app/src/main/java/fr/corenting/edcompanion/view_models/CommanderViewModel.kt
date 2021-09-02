@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.exceptions.DataNotInitializedException
 import fr.corenting.edcompanion.network.player.EDSMPlayer
 import fr.corenting.edcompanion.network.player.FrontierPlayer
 import fr.corenting.edcompanion.network.player.InaraPlayer
@@ -22,15 +23,29 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
     private val ranks = MutableLiveData<ProxyResult<CommanderRanks>>()
     private val fleet = MutableLiveData<ProxyResult<CommanderFleet>>()
 
+    fun clearCachedData() {
+        // We set the values to a null result with a specific exception to mark it as not initialized
+        viewModelScope.launch {
+            credits.postValue(ProxyResult(null, DataNotInitializedException()))
+            position.postValue(ProxyResult(null, DataNotInitializedException()))
+            ranks.postValue(ProxyResult(null, DataNotInitializedException()))
+            fleet.postValue(ProxyResult(null, DataNotInitializedException()))
+        }
+    }
+
     fun fetchCredits() {
         val servicesToTries = listOf(edsmPlayer, frontierPlayer)
-
         viewModelScope.launch {
-            for (service in servicesToTries) {
+            for ((index, service) in servicesToTries.withIndex()) {
+                if (!service.isUsable()) {
+                    continue
+                }
+
                 val retValue = service.getCredits()
 
-                if (retValue.error == null && retValue.data != null) {
+                if (index == servicesToTries.size - 1 || (retValue.error == null && retValue.data != null)) {
                     credits.postValue(retValue)
+                    break
                 }
             }
         }
@@ -53,13 +68,17 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
         val servicesToTries = listOf(edsmPlayer, frontierPlayer)
 
         viewModelScope.launch {
-            for (service in servicesToTries) {
+            for ((index, service) in servicesToTries.withIndex()) {
+                if (!service.isUsable()) {
+                    continue
+                }
+
                 val retValue = service.getPosition()
 
-                if (retValue.error == null && retValue.data != null) {
+                if (index == servicesToTries.size - 1 || (retValue.error == null && retValue.data != null)) {
                     position.postValue(retValue)
                     updateCachedPosition(retValue)
-
+                    break
                 }
             }
         }
@@ -73,11 +92,15 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
         val servicesToTries = listOf(edsmPlayer, inaraPlayer, frontierPlayer)
 
         viewModelScope.launch {
-            for (service in servicesToTries) {
-                val retValue = service.getRanks()
+            for ((index, service) in servicesToTries.withIndex()) {
+                if (!service.isUsable()) {
+                    continue
+                }
 
-                if (retValue.error == null && retValue.data != null) {
+                val retValue = service.getRanks()
+                if (index == servicesToTries.size - 1 || (retValue.error == null && retValue.data != null)) {
                     ranks.postValue(retValue)
+                    break
                 }
             }
         }

@@ -2,6 +2,8 @@ package fr.corenting.edcompanion.fragments
 
 import androidx.fragment.app.activityViewModels
 import fr.corenting.edcompanion.adapters.CommanderFleetAdapter
+import fr.corenting.edcompanion.models.exceptions.DataNotInitializedException
+import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.view_models.CommanderViewModel
 
@@ -18,7 +20,11 @@ class CommanderFleetFragment : AbstractListFragment<CommanderFleetAdapter>() {
             endLoading(false)
 
             if (result?.data == null || result.error != null) {
-                NotificationsUtils.displayGenericDownloadErrorSnackbar(activity)
+
+                // For frontier auth error there will be a popup displayed by the other fragment anyway
+                if (result.error !is FrontierAuthNeededException && result.error !is DataNotInitializedException) {
+                    NotificationsUtils.displayGenericDownloadErrorSnackbar(activity)
+                }
             } else {
                 recyclerViewAdapter.submitList(result.data.ships)
             }
@@ -27,7 +33,7 @@ class CommanderFleetFragment : AbstractListFragment<CommanderFleetAdapter>() {
         viewModel.fetchFleet()
     }
 
-    override fun needEventBus():Boolean {
+    override fun needEventBus(): Boolean {
         return false
     }
 
