@@ -4,13 +4,14 @@ import androidx.fragment.app.activityViewModels
 import fr.corenting.edcompanion.adapters.CommunityGoalsAdapter
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommunityGoal
+import fr.corenting.edcompanion.models.ProxyResult
+import fr.corenting.edcompanion.models.SystemsDistance
 import fr.corenting.edcompanion.models.events.CommunityGoals
-import fr.corenting.edcompanion.models.events.DistanceSearch
 import fr.corenting.edcompanion.network.CommunityGoalsNetwork
-import fr.corenting.edcompanion.network.DistanceCalculatorNetwork
 import fr.corenting.edcompanion.utils.CommanderUtils
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.view_models.CommanderViewModel
+import fr.corenting.edcompanion.view_models.DistanceCalculatorViewModel
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
@@ -20,7 +21,8 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
     private var playerSystemName: String? = null
     private var communityGoals: List<CommunityGoal> = ArrayList()
 
-    private val viewModel: CommanderViewModel by activityViewModels()
+    private val commanderViewModel: CommanderViewModel by activityViewModels()
+    private val distanceViewModel: DistanceCalculatorViewModel by activityViewModels()
 
     override fun getNewRecyclerViewAdapter(): CommunityGoalsAdapter {
         return CommunityGoalsAdapter(context, binding.recyclerView, false)
@@ -39,16 +41,20 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
         communityGoals = goals.goalsList
         recyclerViewAdapter.submitList(communityGoals)
 
-
         val currentContext = context
         if (currentContext != null && CommanderUtils.hasPositionData(currentContext)) {
-            viewModel.getPosition().observe(viewLifecycleOwner) { result ->
+            commanderViewModel.getPosition().observe(viewLifecycleOwner) { result ->
                 if (result?.data != null && result.error == null) {
                     refreshDisplayWithCommanderPosition(result.data)
                 }
             }
-            viewModel.fetchPosition()
+            commanderViewModel.fetchPosition()
         }
+
+        // Setup player distance viewmodel observer
+        distanceViewModel.getDistanceBetweenSystemsResult().observe(viewLifecycleOwner, {
+            onDistanceResult(it)
+        })
     }
 
     private fun refreshDisplayWithCommanderPosition(position: CommanderPosition) {
@@ -65,17 +71,15 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
 
         // Send distance requests
         for (system in distancesToCompute) {
-            DistanceCalculatorNetwork.getDistance(context, position.systemName, system)
+            distanceViewModel.computeDistanceBetweenSystems(
+                position.systemName, system
+            )
         }
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onDistanceEvent(distanceSearch: DistanceSearch) {
-        val currentContext = context
-        if (currentContext != null && CommanderUtils.hasPositionData(currentContext) &&
-            !distanceSearch.success && playerSystemName != null
-        ) {
+    fun onDistanceResult(distanceResult: ProxyResult<SystemsDistance>) {
+        // Error
+        if (distanceResult.data == null || distanceResult.error != null) {
             return
         }
 
@@ -83,9 +87,8 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
         for (i in communityGoals.indices) {
             val communityGoal = communityGoals[i]
 
-            if (communityGoal.system == distanceSearch.endSystemName && playerSystemName == distanceSearch.startSystemName) {
-
-                communityGoal.distanceToPlayer = distanceSearch.distance
+            if (communityGoal.system == distanceResult.data.secondSystemName && playerSystemName == distanceResult.data.firstSystemName) {
+                communityGoal.distanceToPlayer = distanceResult.data.distanceInLy
             }
         }
 
@@ -98,7 +101,6 @@ class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {
     }
 
     companion object {
-
         const val COMMUNITY_GOALS_FRAGMENT_TAG = "community_goals_fragment"
     }
 }

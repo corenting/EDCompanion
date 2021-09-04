@@ -7,17 +7,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import androidx.lifecycle.ViewModelProvider;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.databinding.FragmentDistanceCalculatorBinding;
-import fr.corenting.edcompanion.models.events.DistanceSearch;
-import fr.corenting.edcompanion.network.DistanceCalculatorNetwork;
+import fr.corenting.edcompanion.models.ProxyResult;
+import fr.corenting.edcompanion.models.SystemsDistance;
 import fr.corenting.edcompanion.utils.NotificationsUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
+import fr.corenting.edcompanion.view_models.DistanceCalculatorViewModel;
 import fr.corenting.edcompanion.views.SystemInputView;
 
 public class DistanceCalculatorFragment extends Fragment {
@@ -25,6 +23,8 @@ public class DistanceCalculatorFragment extends Fragment {
     public static final String DISTANCE_CALCULATOR_FRAGMENT_TAG = "distance_calculator_fragment";
 
     private FragmentDistanceCalculatorBinding binding;
+
+    private DistanceCalculatorViewModel viewModel;
 
 
     @Override
@@ -39,15 +39,20 @@ public class DistanceCalculatorFragment extends Fragment {
 
         // Button event
         binding.findButton.setOnClickListener(this::onFindClick);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(DistanceCalculatorViewModel.class);
+        viewModel.getDistanceBetweenSystemsResult().observe(getViewLifecycleOwner(), result -> {
+            onDistanceResult(result);
+        });
+
         return view;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDistanceEvent(DistanceSearch distanceSearch) {
+    public void onDistanceResult(ProxyResult<SystemsDistance> result) {
         binding.progressBar.setVisibility(View.GONE);
 
         // Error
-        if (!distanceSearch.getSuccess()) {
+        if (result.getData() == null || result.getError() != null) {
             NotificationsUtils.displayGenericDownloadErrorSnackbar(getActivity());
             return;
         }
@@ -55,22 +60,23 @@ public class DistanceCalculatorFragment extends Fragment {
         binding.resultCardView.setVisibility(View.VISIBLE);
 
         // Display warning if permits are required
-        if (distanceSearch.getStartPermitRequired() && distanceSearch.getEndPermitRequired()) {
+        SystemsDistance data = result.getData();
+        if (data.getFirstSystemNeedsPermit() && data.getSecondSystemNeedsPermit()) {
             binding.warningTextView.setVisibility(View.VISIBLE);
             binding.warningTextView.setText(getContext().getString(R.string.permit_required_both,
-                    distanceSearch.getStartSystemName(), distanceSearch.getEndSystemName()));
-        } else if (distanceSearch.getStartPermitRequired()) {
+                    data.getFirstSystemName(), data.getSecondSystemName()));
+        } else if (data.getFirstSystemNeedsPermit()) {
             binding.warningTextView.setVisibility(View.VISIBLE);
             binding.warningTextView.setText(getContext().getString(R.string.permit_required,
-                    distanceSearch.getStartSystemName()));
-        } else if (distanceSearch.getEndPermitRequired()) {
+                    data.getFirstSystemName()));
+        } else if (data.getSecondSystemNeedsPermit()) {
             binding.warningTextView.setVisibility(View.VISIBLE);
             binding.warningTextView.setText(getContext().getString(R.string.permit_required,
-                    distanceSearch.getEndSystemName()));
+                    data.getSecondSystemName()));
         }
 
         binding.resultTextView.setText(getContext().getString(R.string.distance_result,
-                distanceSearch.getDistance()));
+                data.getDistanceInLy()));
     }
 
     @Override
@@ -80,21 +86,9 @@ public class DistanceCalculatorFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
     public void onFindClick(View view) {
@@ -102,8 +96,7 @@ public class DistanceCalculatorFragment extends Fragment {
         binding.resultCardView.setVisibility(View.GONE);
         binding.progressBar.setVisibility(View.VISIBLE);
 
-        DistanceCalculatorNetwork.getDistance(
-                getContext(),
+        viewModel.computeDistanceBetweenSystems(
                 binding.firstSystemInputView.getText().toString(),
                 binding.secondSystemInputView.getText().toString()
         );
