@@ -44,7 +44,7 @@ public class CommodityDetailsResponse {
     @SerializedName("minimum_buyers")
     public List<CommodityDetailsStationResponse> MinimumBuyers;
 
-    public class CommodityDetailsStationResponse {
+    public static class CommodityDetailsStationResponse {
 
         @SerializedName("collected_at")
         public Date CollectedAt;

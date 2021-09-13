@@ -16,7 +16,7 @@ interface EDApiV4Retrofit {
     @GET("systems/typeahead")
     fun getSystemsTypeAhead(@Query("input_text") systemName: String): Call<List<String>>
 
-    @GET("systems/distance_calcular")
+    @GET("systems/distance_calculator")
     suspend fun getSystemsDistance(
         @Query("first_system") firstSystemName: String,
         @Query("second_system") secondSystemName: String

@@ -194,7 +194,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         }
     }
 
-    public class ResultViewHolder extends RecyclerView.ViewHolder {
+    public static class ResultViewHolder extends RecyclerView.ViewHolder {
 
         private final ListItemCommodityFinderResultBinding binding;
 
@@ -204,7 +204,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         }
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
         private final FragmentFindCommodityHeaderBinding binding;
 
         public HeaderViewHolder(FragmentFindCommodityHeaderBinding binding) {

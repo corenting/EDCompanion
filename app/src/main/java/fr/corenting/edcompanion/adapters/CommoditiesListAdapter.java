@@ -98,7 +98,7 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
         });
     }
 
-    public class ResultViewHolder extends RecyclerView.ViewHolder {
+    public static class ResultViewHolder extends RecyclerView.ViewHolder {
         private final ListItemCommoditiesListResultBinding binding;
 
         public ResultViewHolder(ListItemCommoditiesListResultBinding binding) {
@@ -107,7 +107,7 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
         }
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
         private final FragmentListCommoditiesHeaderBinding binding;
 
         public HeaderViewHolder(FragmentListCommoditiesHeaderBinding binding) {

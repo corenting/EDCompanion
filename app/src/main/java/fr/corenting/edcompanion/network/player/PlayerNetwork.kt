@@ -1,4 +1,4 @@
-package fr.corenting.edcompanion.network.player;
+package fr.corenting.edcompanion.network.player
 
 import fr.corenting.edcompanion.models.*
 

@@ -8,11 +8,8 @@ import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-
-import java.util.ArrayList
-
-import fr.corenting.edcompanion.models.NameId
 import fr.corenting.edcompanion.network.AutoCompleteNetwork
+import java.util.*
 
 class AutoCompleteAdapter(private val context: Context, private val autocompleteType: Int) :
         BaseAdapter(), Filterable {

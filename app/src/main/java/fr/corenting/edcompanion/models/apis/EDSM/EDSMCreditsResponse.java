@@ -9,7 +9,7 @@ public class EDSMCreditsResponse extends EDSMBaseResponse {
     @SerializedName("credits")
     public List<EDSMInnerCredits> credits;
 
-    public class EDSMInnerCredits {
+    public static class EDSMInnerCredits {
         @SerializedName("balance")
         public long balance;
 

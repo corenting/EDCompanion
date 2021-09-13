@@ -46,8 +46,14 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoal,
 
         this.context = context;
         this.isDetailsView = isDetailsView;
-
+        setHasStableIds(true);
         onClickListener = v -> switchToDetailsView(recyclerView.getChildAdapterPosition(v));
+    }
+
+    @Override
+    public long getItemId(int position) {
+        final CommunityGoal currentGoal = getItem(position);
+        return currentGoal.getId();
     }
 
     @NonNull

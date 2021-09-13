@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_cmdr -> {
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT)
                 val commanderName = CommanderUtils.getCommanderName(this)
-                currentTitle = if (commanderName.isNullOrEmpty())
+                currentTitle = if (commanderName.isEmpty())
                     getString(R.string.commander)
                 else
                     commanderName

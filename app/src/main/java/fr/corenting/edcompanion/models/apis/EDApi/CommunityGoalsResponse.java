@@ -39,7 +39,7 @@ public class CommunityGoalsResponse {
     @SerializedName("tier_progress")
     public CommunityGoalTierProgress TierProgress;
 
-    public class CommunityGoalsDate {
+    public static class CommunityGoalsDate {
         @SerializedName("end")
         public Date End;
 
@@ -47,7 +47,7 @@ public class CommunityGoalsResponse {
         public Date LastUpdate;
     }
 
-    public class CommunityGoalsLocation {
+    public static class CommunityGoalsLocation {
         @SerializedName("station")
         public String Station;
 
@@ -55,7 +55,7 @@ public class CommunityGoalsResponse {
         public String System;
     }
 
-    public class CommunityGoalTierProgress {
+    public static class CommunityGoalTierProgress {
         @SerializedName("current")
         public int Current;
 
@@ -63,7 +63,7 @@ public class CommunityGoalsResponse {
         public int Total;
     }
 
-    public class CommunityGoalsRewards {
+    public static class CommunityGoalsRewards {
         @SerializedName("contributors")
         public String Contributors;
 

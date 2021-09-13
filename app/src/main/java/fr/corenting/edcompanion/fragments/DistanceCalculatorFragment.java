@@ -41,9 +41,7 @@ public class DistanceCalculatorFragment extends Fragment {
         binding.findButton.setOnClickListener(this::onFindClick);
 
         viewModel = new ViewModelProvider(requireActivity()).get(DistanceCalculatorViewModel.class);
-        viewModel.getDistanceBetweenSystemsResult().observe(getViewLifecycleOwner(), result -> {
-            onDistanceResult(result);
-        });
+        viewModel.getDistanceBetweenSystemsResult().observe(getViewLifecycleOwner(), this::onDistanceResult);
 
         return view;
     }

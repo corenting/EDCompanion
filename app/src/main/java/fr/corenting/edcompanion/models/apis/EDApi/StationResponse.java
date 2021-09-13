@@ -26,7 +26,7 @@ public class StationResponse {
     @SerializedName("system")
     public StationSystem System;
 
-    public class StationSystem {
+    public static class StationSystem {
         @SerializedName("name")
         public String Name;
 

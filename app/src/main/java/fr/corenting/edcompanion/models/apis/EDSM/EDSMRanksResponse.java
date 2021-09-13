@@ -12,7 +12,7 @@ public class EDSMRanksResponse extends EDSMBaseResponse {
     @SerializedName("ranksVerbose")
     public EDSMInnerRanksNames ranksNames;
 
-    public class EDSMInnerRanksNames {
+    public static class EDSMInnerRanksNames {
         @SerializedName("Combat")
         public String combat;
 
@@ -32,7 +32,7 @@ public class EDSMRanksResponse extends EDSMBaseResponse {
         public String empire;
     }
 
-    public class EDSMInnerRanks {
+    public static class EDSMInnerRanks {
         @SerializedName("Combat")
         public int combat;
 

@@ -25,7 +25,7 @@ public class FrontierProfileResponse {
         public FrontierProfileCommanderRankResponse Rank;
     }
 
-    public class FrontierProfileCommanderRankResponse {
+    public static class FrontierProfileCommanderRankResponse {
         @SerializedName("combat")
         public int Combat;
 
@@ -54,7 +54,7 @@ public class FrontierProfileResponse {
         public int Cqc;
     }
 
-    public class FrontierProfileSystemResponse {
+    public static class FrontierProfileSystemResponse {
         @SerializedName("name")
         public String Name;
     }

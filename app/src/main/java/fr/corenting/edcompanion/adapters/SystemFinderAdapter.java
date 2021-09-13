@@ -84,7 +84,7 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
                 context.getString(R.string.unknown) : content;
     }
 
-    public class ResultViewHolder extends RecyclerView.ViewHolder {
+    public static class ResultViewHolder extends RecyclerView.ViewHolder {
         private final ListItemSystemFinderResultBinding binding;
 
         public ResultViewHolder(ListItemSystemFinderResultBinding binding) {
@@ -93,7 +93,7 @@ public class SystemFinderAdapter extends FinderAdapter<SystemFinderAdapter.Heade
         }
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
         private final FragmentFindSystemHeaderBinding binding;
 
         public HeaderViewHolder(FragmentFindSystemHeaderBinding binding) {

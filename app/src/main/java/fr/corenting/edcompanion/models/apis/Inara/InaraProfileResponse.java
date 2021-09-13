@@ -9,7 +9,7 @@ public class InaraProfileResponse {
     @SerializedName("events")
     public List<InaraProfileInnerResponse> events;
 
-    public class InaraProfileInnerResponse {
+    public static class InaraProfileInnerResponse {
 
         @SerializedName("eventData")
         public InaraProfileResponseEventData EventData;

@@ -104,7 +104,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         holder.binding.lastUpdateTextView.setText(date);
     }
 
-    public class ResultViewHolder extends RecyclerView.ViewHolder {
+    public static class ResultViewHolder extends RecyclerView.ViewHolder {
 
         private final ListItemShipFinderResultBinding binding;
 
@@ -114,7 +114,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         }
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
         private final FragmentFindShipHeaderBinding binding;
 
         public HeaderViewHolder(FragmentFindShipHeaderBinding binding) {
