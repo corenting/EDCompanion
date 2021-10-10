@@ -1,5 +1,7 @@
 theme: minima
 title: EDCompanion
+author: corenting
+email: edcompanion@corenting.fr
 description: An Android companion app for Elite Dangerous
 
 header_pages:
