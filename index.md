@@ -1,6 +1,6 @@
 ---
 title: EDCompanion
-layout: page
+layout: home
 ---
 
 An Android companion app for Elite Dangerous.
