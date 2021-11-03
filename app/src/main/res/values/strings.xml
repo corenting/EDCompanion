@@ -348,14 +348,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.16</b><br />
+            <b>Version 2.17</b><br />
             <ul>
-                <li>Internal changes</li><br />
-            </ul>
-            <b>Version 2.15.*</b><br />
-            <ul>
-                <li>Rework commander tab: you can now enable multiple sources (Inara, EDSM or Frontier) at the same time.</li><br />
-                <li>Internal changes</li><br />
+                <li>Commander fleet: fix layout issues with long station or system names.</li><br />
             </ul>
         ]]>
     </string>
