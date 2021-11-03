@@ -40,3 +40,7 @@ These informations are stored locally on your device and are only transmitted wh
 When Inara authentication is used the application needs to store :
 - Your Inara API key
 This API key is stored locally on your device and is only transmitted when calling the Inara API to fetch your commander informations.
+
+# Contact
+
+For more informations about the privact policy, help on how to delete the data stored locally by EDCompanion or more informations about EDCompanion connect to Frontier, Inara or EDSM you can contact me at edcompanion@corenting.fr .
