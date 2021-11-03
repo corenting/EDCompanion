@@ -28,6 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/shipImageView"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:orientation="vertical"
             android:paddingLeft="24dp"
             android:paddingTop="24dp"
@@ -76,13 +78,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/currentShipLabelTextView"
                 android:layout_toEndOf="@id/systemLabelTextView"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
                 android:id="@+id/stationLabelTextView"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/systemLabelTextView"
+                android:layout_below="@id/systemTextView"
                 android:text="@string/station_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
@@ -91,15 +95,17 @@
                 android:id="@+id/stationTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/systemLabelTextView"
+                android:layout_below="@id/systemTextView"
                 android:layout_toEndOf="@id/stationLabelTextView"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
                 android:id="@+id/shipValueLabelTextView"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/stationLabelTextView"
+                android:layout_below="@id/stationTextView"
                 android:text="@string/ship_value"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
@@ -108,7 +114,7 @@
                 android:id="@+id/shipValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/stationLabelTextView"
+                android:layout_below="@id/stationTextView"
                 android:layout_toEndOf="@id/shipValueLabelTextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -116,7 +122,7 @@
                 android:id="@+id/cargoValueLabelTextView"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/shipValueLabelTextView"
+                android:layout_below="@id/shipValueTextView"
                 android:text="@string/cargo_value"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
@@ -125,8 +131,8 @@
                 android:id="@+id/cargoValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/shipValueLabelTextView"
-                android:layout_toEndOf="@id/shipValueLabelTextView"
+                android:layout_below="@id/shipValueTextView"
+                android:layout_toEndOf="@id/cargoValueLabelTextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
         </RelativeLayout>
 
