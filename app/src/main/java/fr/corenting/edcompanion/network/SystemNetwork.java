@@ -20,6 +20,7 @@ import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.models.events.SystemHistory;
 import fr.corenting.edcompanion.models.events.SystemStations;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
+import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
@@ -150,8 +151,8 @@ public class SystemNetwork {
     }
 
     public static void getSystemStations(Context ctx, String systemName) {
-        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(ctx.getApplicationContext());
+        EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<List<StationResponse>> callback = new retrofit2.Callback<List<StationResponse>>() {
             @Override

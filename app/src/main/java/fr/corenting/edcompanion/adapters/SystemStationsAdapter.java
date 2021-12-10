@@ -74,8 +74,7 @@ public class SystemStationsAdapter extends androidx.recyclerview.widget.ListAdap
         holder.viewBinding.typeTextView.setText(currentStation.getType());
         holder.viewBinding.starDistanceTextView.setText(context.getString(R.string.distance_ls,
                 numberFormat.format(currentStation.getDistanceToStar())));
-        holder.viewBinding.landingPadTextView.setText(currentStation.getMaxLandingPad());
-
+        holder.viewBinding.landingPadTextView.setText(currentStation.getMaxLandingPad() == null ? context.getString(R.string.unknown) : currentStation.getMaxLandingPad());
         holder.viewBinding.logoImageView.setVisibility(currentStation.isPlanetary() ? View.VISIBLE : View.GONE);
     }
 

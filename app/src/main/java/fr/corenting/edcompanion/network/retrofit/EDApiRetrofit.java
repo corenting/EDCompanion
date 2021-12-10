@@ -8,7 +8,6 @@ import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.StationResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
 import retrofit2.Call;
@@ -35,9 +34,6 @@ public interface EDApiRetrofit {
 
     @GET("system/{system}")
     Call<SystemResponse> getSystemDetails(@Path("system") String system);
-
-    @GET("system/{system}/stations")
-    Call<List<StationResponse>> getSystemStations(@Path("system") String system);
 
     @GET("system/{system}/history")
     Call<List<SystemHistoryResponse>> getSystemHistory(@Path("system") String system);
