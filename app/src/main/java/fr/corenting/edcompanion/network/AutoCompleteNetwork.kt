@@ -29,16 +29,16 @@ object AutoCompleteNetwork {
 
     fun searchShips(context: Context, filter: String): List<String> {
         return try {
-            val edApiRetrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(context.applicationContext)
+            val edApiV4Retrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(context.applicationContext)
 
-            val response = edApiRetrofit.getShips(filter).execute()
+            val response = edApiV4Retrofit.getShipsTypeAhead(filter).execute()
             val ships = response.body()
 
             if (!response.isSuccessful || ships == null) {
                 emptyList()
             } else {
-                ships.take(MAX_RESULTS).map { item -> item.Name }
+                ships.take(MAX_RESULTS)
             }
         } catch (e: Exception) {
             emptyList()
@@ -47,17 +47,17 @@ object AutoCompleteNetwork {
 
     fun searchCommodities(context: Context, filter: String): List<String> {
         return try {
-            val edApiRetrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(context.applicationContext)
+            val edApiV4Retrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(context.applicationContext)
 
-            val response = edApiRetrofit.getCommodities(filter).execute()
+            val response = edApiV4Retrofit.getCommoditiesTypeAhead(filter).execute()
             val commodities = response.body()
 
             if (!response.isSuccessful || commodities == null) {
                 ArrayList()
             } else {
 
-                commodities.take(MAX_RESULTS).map { result -> result.Name }
+                commodities.take(MAX_RESULTS)
             }
         } catch (e: Exception) {
             emptyList()
