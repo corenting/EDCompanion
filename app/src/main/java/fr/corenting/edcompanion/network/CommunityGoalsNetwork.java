@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommunityGoal;
-import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse;
 import fr.corenting.edcompanion.models.events.CommunityGoals;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
+import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 import retrofit2.internal.EverythingIsNonNull;
@@ -18,8 +19,8 @@ import retrofit2.internal.EverythingIsNonNull;
 public class CommunityGoalsNetwork {
     public static void getCommunityGoals(Context ctx) {
 
-        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(ctx.getApplicationContext());
+        EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(ctx.getApplicationContext());
         retrofit2.Callback<List<CommunityGoalsResponse>> callback = new retrofit2.Callback<List<CommunityGoalsResponse>>() {
             @Override
             @EverythingIsNonNull

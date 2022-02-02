@@ -5,7 +5,6 @@ import java.util.List;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityDetailsResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.CommunityGoalsResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse;
@@ -16,8 +15,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface EDApiRetrofit {
-    @GET("community_goals/")
-    Call<List<CommunityGoalsResponse>> getCommunityGoals();
+
 
     @GET("ships/")
     Call<List<ShipResponse>> getShips(@Query("name") String shipName);

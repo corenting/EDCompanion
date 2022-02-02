@@ -30,7 +30,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         // Bind preferences summary to values
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_cmdr_edsm_username)))
+        val pref: Preference? = findPreference(getString(R.string.settings_cmdr_edsm_username))
+        if (pref != null) {
+            bindPreferenceSummaryToValue(pref)
+        }
 
         val frontierPreference =
             findPreference<Preference>(getString(R.string.settings_cmdr_frontier_oauth))
@@ -105,15 +108,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
 
-        private fun bindPreferenceSummaryToValue(preference: Preference?) { // Set the listener to watch for value changes.
+        private fun bindPreferenceSummaryToValue(preference: Preference) { // Set the listener to watch for value changes.
             preference?.onPreferenceChangeListener = preferenceChangeListener
 
             // Trigger the listener immediately with the preference's current value.
             preferenceChangeListener.onPreferenceChange(
                 preference,
                 PreferenceManager
-                    .getDefaultSharedPreferences(preference?.context)
-                    .getString(preference?.key, "")
+                    .getDefaultSharedPreferences(preference.context)
+                    .getString(preference.key, "")
             )
         }
     }

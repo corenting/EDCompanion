@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.network.retrofit
 import fr.corenting.edcompanion.models.apis.EDAPIV4.DistanceResponse
 import retrofit2.http.GET
 import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse
 import fr.corenting.edcompanion.models.apis.EDApi.StationResponse
 import retrofit2.Call
 import retrofit2.http.Path
@@ -27,4 +28,7 @@ interface EDApiV4Retrofit {
     // TODO : convert to suspend/viewmodel etc...
     @GET("systems/{system}/stations")
     fun getSystemStations(@Path("system") system: String): Call<List<StationResponse>>
+
+    @GET("community_goals")
+    fun getCommunityGoals(): Call<List<CommunityGoalsResponse>>
 }
