@@ -106,8 +106,8 @@ public class SystemNetwork {
     }
 
     public static void getSystemHistory(Context ctx, String system) {
-        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(ctx.getApplicationContext());
+        EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<List<SystemHistoryResponse>> callback =
                 new retrofit2.Callback<List<SystemHistoryResponse>>() {

@@ -4,8 +4,8 @@ import fr.corenting.edcompanion.models.apis.EDAPIV4.DistanceResponse
 import retrofit2.http.GET
 import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse
 import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse
-import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityResponse
 import fr.corenting.edcompanion.models.apis.EDApi.StationResponse
+import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse
 import retrofit2.Call
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -41,4 +41,9 @@ interface EDApiV4Retrofit {
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/typeahead")
     fun getCommoditiesTypeAhead(@Query("input_text") commodityName: String): Call<List<String>>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("systems/{system}/factions_history")
+    fun getSystemHistory(@Path("system") systemName: String): Call<List<SystemHistoryResponse>>
+
 }

@@ -7,7 +7,7 @@ data class SystemHistoryResult(val name: String, val history: List<FactionHistor
         fun fromSystemHistoryResponse(res: SystemHistoryResponse): SystemHistoryResult {
             val history = ArrayList<FactionHistory>()
             res.History.mapTo(history) { FactionHistory.fromFactionHistoryResponse(it) }
-            return SystemHistoryResult(res.Name, history)
+            return SystemHistoryResult(res.FactionName, history)
         }
     }
 }

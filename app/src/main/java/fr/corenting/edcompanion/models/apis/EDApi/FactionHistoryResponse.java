@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 public class FactionHistoryResponse {
-    @SerializedName("system")
-    public String System;
-
     @SerializedName("state")
     public String State;
 

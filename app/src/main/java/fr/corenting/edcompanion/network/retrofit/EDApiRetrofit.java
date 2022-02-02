@@ -6,7 +6,6 @@ import fr.corenting.edcompanion.models.apis.EDApi.CommodityDetailsResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.ShipFinderResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.ShipResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
 import retrofit2.Call;
@@ -15,11 +14,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface EDApiRetrofit {
-
-
-    @GET("ships/")
-    Call<List<ShipResponse>> getShips(@Query("name") String shipName);
-
     @GET("commodities/")
     Call<List<CommodityResponse>> getCommodities(@Query("name") String filter);
 
@@ -32,9 +26,6 @@ public interface EDApiRetrofit {
 
     @GET("system/{system}")
     Call<SystemResponse> getSystemDetails(@Path("system") String system);
-
-    @GET("system/{system}/history")
-    Call<List<SystemHistoryResponse>> getSystemHistory(@Path("system") String system);
 
     @GET("commodity_finder/")
     Call<List<CommodityFinderResponse>> findCommodity(@Query("referenceSystem") String system,
