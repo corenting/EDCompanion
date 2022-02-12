@@ -4,7 +4,7 @@ import fr.corenting.edcompanion.models.apis.EDAPIV4.DistanceResponse
 import retrofit2.http.GET
 import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse
 import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse
-import fr.corenting.edcompanion.models.apis.EDApi.StationResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.StationResponse
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse
 import retrofit2.Call
 import retrofit2.http.Path

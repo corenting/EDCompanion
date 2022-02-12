@@ -65,6 +65,37 @@ public class CommodityDetailsResponse {
         public int PriceDifferencePercentage;
 
         @SerializedName("station")
-        public StationResponse Station;
+        public CommodityDetailStationDetailsResponse Station;
+
+        public static class CommodityDetailStationDetailsResponse {
+            @SerializedName("distance_to_star")
+            public int DistanceToStar;
+
+            @SerializedName("last_shipyard_update")
+            public Date LastShipyardUpdate;
+
+            @SerializedName("max_landing_pad")
+            public String MaxLandingPad;
+
+            @SerializedName("name")
+            public String Name;
+
+            @SerializedName("is_planetary")
+            public boolean IsPlanetary;
+
+            @SerializedName("type")
+            public String Type;
+
+            @SerializedName("system")
+            public CommodityDetailSystemDetailsResponse System;
+
+            public static class CommodityDetailSystemDetailsResponse {
+                @SerializedName("name")
+                public String Name;
+
+                @SerializedName("permit_required")
+                public boolean PermitRequired;
+            }
+        }
     }
 }

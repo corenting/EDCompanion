@@ -11,7 +11,7 @@ import fr.corenting.edcompanion.models.Station;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.SystemFinderResult;
 import fr.corenting.edcompanion.models.SystemHistoryResult;
-import fr.corenting.edcompanion.models.apis.EDApi.StationResponse;
+import fr.corenting.edcompanion.models.apis.EDAPIV4.StationResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemResponse;

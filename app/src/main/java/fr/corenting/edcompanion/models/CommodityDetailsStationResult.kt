@@ -13,7 +13,7 @@ data class CommodityDetailsStationResult(val collectedAt: Instant, val demand: L
             return CommodityDetailsStationResult(DateTimeUtils.toInstant(res.CollectedAt),
                     res.Demand, res.Supply, res.BuyPrice,
                     res.SellPrice, res.PriceDifferencePercentage,
-                    Station.fromStationResponse(res.Station))
+                    Station.fromCommodityDetailsStationResponse(res.Station))
         }
     }
 }

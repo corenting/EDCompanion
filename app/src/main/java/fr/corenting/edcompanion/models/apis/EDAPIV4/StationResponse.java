@@ -1,4 +1,4 @@
-package fr.corenting.edcompanion.models.apis.EDApi;
+package fr.corenting.edcompanion.models.apis.EDAPIV4;
 
 import com.google.gson.annotations.SerializedName;
 
