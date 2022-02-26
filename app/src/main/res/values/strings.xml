@@ -247,6 +247,11 @@
     <string name="no_factions">No factions in this system</string>
     <string name="influence">Influence</string>
 
+    <!--Stations-->
+    <string name="planetary">Planetary</string>
+    <string name="settlement">Settlement</string>
+    <string name="fleet_carrier">Fleet Carrier</string>
+
     <!--About-->
     <string name="title_activity_about">About</string>
     <string name="about_libs" translatable="false">
@@ -374,10 +379,10 @@
     <string name="login_dialog_error_text">Error while linking your account, please try again.</string>
 
     <!--System input cache-->
-    <string name="first_system_cache_key">first_system_cache_key</string>
-    <string name="second_system_cache_key">second_system_cache_key</string>
+    <string name="first_system_cache_key" translatable="false">first_system_cache_key</string>
+    <string name="second_system_cache_key" translatable="false">second_system_cache_key</string>
 
     <!--Commander position cache-->
-    <string name="commander_position_cache_key">commander_position_cache_key</string>
+    <string name="commander_position_cache_key" translatable="false">commander_position_cache_key</string>
 
 </resources>

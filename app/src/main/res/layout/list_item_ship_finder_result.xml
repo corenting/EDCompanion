@@ -38,20 +38,20 @@
             app:srcCompat="@drawable/ic_globe_gray600_24dp" />
 
         <TextView
-            android:id="@+id/permitRequiredTextView"
-            android:layout_width="110dp"
+            android:id="@+id/stationTypeTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
-            android:layout_marginTop="8dp"
-            android:text="@string/permit_required_label"
+            android:text="@string/station_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_marginTop="8dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/distanceLabelTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/permitRequiredTextView"
+            android:layout_below="@id/stationTypeTextView"
             android:text="@string/distance_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -60,7 +60,7 @@
             android:id="@+id/distanceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/permitRequiredTextView"
+            android:layout_below="@id/stationTypeTextView"
             android:layout_toEndOf="@id/distanceLabelTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -114,6 +114,7 @@
             android:layout_below="@id/lastUpdateLabelTextView"
             android:layout_toEndOf="@id/landingPadLabelTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
 
     </RelativeLayout>
 

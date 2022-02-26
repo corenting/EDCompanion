@@ -1,12 +1,13 @@
 package fr.corenting.edcompanion.network.retrofit
 
-import fr.corenting.edcompanion.models.apis.EDAPIV4.DistanceResponse
-import retrofit2.http.GET
-import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse
 import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.DistanceResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse
 import fr.corenting.edcompanion.models.apis.EDAPIV4.StationResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.ShipFinderResponse
 import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse
 import retrofit2.Call
+import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -15,12 +16,15 @@ interface EDApiV4Retrofit {
     @GET("ships/typeahead")
     fun getShipsTypeAhead(@Query("input_text") shipName: String): Call<List<String>>
 
+    // TODO : convert to suspend/viewmodel etc...
     @GET("galnet")
     fun getGalnetNews(@Query("lang") language: String): Call<List<NewsArticleResponse>>
 
+    // TODO : convert to suspend/viewmodel etc...
     @GET("news")
     fun getNews(@Query("lang") language: String): Call<List<NewsArticleResponse>>
 
+    // TODO : convert to suspend/viewmodel etc...
     @GET("systems/typeahead")
     fun getSystemsTypeAhead(@Query("input_text") systemName: String): Call<List<String>>
 
@@ -46,4 +50,10 @@ interface EDApiV4Retrofit {
     @GET("systems/{system}/factions_history")
     fun getSystemHistory(@Path("system") systemName: String): Call<List<SystemHistoryResponse>>
 
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("ships/search")
+    fun findShip(
+        @Query("reference_system") system: String?,
+        @Query("ship_model") ship: String?
+    ): Call<List<ShipFinderResponse>>
 }

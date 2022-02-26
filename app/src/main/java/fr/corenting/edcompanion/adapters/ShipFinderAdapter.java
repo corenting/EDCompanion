@@ -86,13 +86,29 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
                         currentResult.getStationName())
         );
 
+        // Display is special type (fleet carrier, settlement etc...)
+        boolean displayStationTypeText = false;
+        String stationType = null;
+        if (currentResult.isPlanetary()) {
+            displayStationTypeText = true;
+            stationType = context.getString(R.string.planetary);
+        }
+        if (currentResult.isFleetCarrier()) {
+            displayStationTypeText = true;
+            stationType = context.getString(R.string.fleet_carrier);
+        }
+        if (currentResult.isSettlement()) {
+            displayStationTypeText = true;
+            stationType = context.getString(R.string.settlement);
+        }
+        holder.binding.stationTypeTextView.setText(stationType);
+        holder.binding.stationTypeTextView.setVisibility(displayStationTypeText ? View.VISIBLE : View.GONE);
+
         // Other informations
         holder.binding.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
         holder.binding.starDistanceTextView.setText(context.getString(R.string.distance_ls,
                 numberFormat.format(currentResult.getDistanceToStar())));
-        holder.binding.permitRequiredTextView.setVisibility(
-                currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
         holder.binding.isPlanetaryImageView.setVisibility(
                 currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
         holder.binding.landingPadTextView.setText(currentResult.getMaxLandingPad());
