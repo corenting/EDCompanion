@@ -1,11 +1,8 @@
 package fr.corenting.edcompanion.network.retrofit
 
-import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse
-import fr.corenting.edcompanion.models.apis.EDAPIV4.DistanceResponse
-import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse
-import fr.corenting.edcompanion.models.apis.EDAPIV4.StationResponse
-import fr.corenting.edcompanion.models.apis.EDAPIV4.ShipFinderResponse
-import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.*
+import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse.SystemHistoryResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.SystemResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -56,4 +53,8 @@ interface EDApiV4Retrofit {
         @Query("reference_system") system: String?,
         @Query("ship_model") ship: String?
     ): Call<List<ShipFinderResponse>>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("systems/{system}")
+    fun getSystemDetails(@Path("system") system: String): Call<SystemResponse>
 }

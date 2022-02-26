@@ -11,15 +11,14 @@ import fr.corenting.edcompanion.models.Station;
 import fr.corenting.edcompanion.models.System;
 import fr.corenting.edcompanion.models.SystemFinderResult;
 import fr.corenting.edcompanion.models.SystemHistoryResult;
+import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse;
 import fr.corenting.edcompanion.models.apis.EDAPIV4.StationResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.SystemResponse;
+import fr.corenting.edcompanion.models.apis.EDAPIV4.SystemResponse;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemResponse;
 import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.models.events.SystemDetails;
 import fr.corenting.edcompanion.models.events.SystemHistory;
 import fr.corenting.edcompanion.models.events.SystemStations;
-import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
@@ -70,8 +69,8 @@ public class SystemNetwork {
     }
 
     public static void getSystemDetails(Context ctx, String system) {
-        EDApiRetrofit retrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(ctx.getApplicationContext());
+        EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<SystemResponse> callback = new retrofit2.Callback<SystemResponse>() {
             @Override
@@ -109,21 +108,21 @@ public class SystemNetwork {
         EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        retrofit2.Callback<List<SystemHistoryResponse>> callback =
-                new retrofit2.Callback<List<SystemHistoryResponse>>() {
+        retrofit2.Callback<List<NewsArticleResponse.SystemHistoryResponse>> callback =
+                new retrofit2.Callback<List<NewsArticleResponse.SystemHistoryResponse>>() {
                     @Override
                     @EverythingIsNonNull
-                    public void onResponse(Call<List<SystemHistoryResponse>> call,
-                                           retrofit2.Response<List<SystemHistoryResponse>> response) {
+                    public void onResponse(Call<List<NewsArticleResponse.SystemHistoryResponse>> call,
+                                           retrofit2.Response<List<NewsArticleResponse.SystemHistoryResponse>> response) {
 
-                        List<SystemHistoryResponse> body = response.body();
+                        List<NewsArticleResponse.SystemHistoryResponse> body = response.body();
                         if (!response.isSuccessful() || body == null) {
                             onFailure(call, new Exception("Invalid response"));
                         } else {
                             SystemHistory event;
                             try {
                                 List<SystemHistoryResult> results = new ArrayList<>();
-                                for (SystemHistoryResponse historyResult : body) {
+                                for (NewsArticleResponse.SystemHistoryResponse historyResult : body) {
                                     results.add(SystemHistoryResult.Companion
                                             .fromSystemHistoryResponse(historyResult));
                                 }
@@ -139,7 +138,7 @@ public class SystemNetwork {
 
                     @Override
                     @EverythingIsNonNull
-                    public void onFailure(Call<List<SystemHistoryResponse>> call,
+                    public void onFailure(Call<List<NewsArticleResponse.SystemHistoryResponse>> call,
                                           Throwable t) {
                         EventBus.getDefault().post(new SystemHistory(false,
                                 new ArrayList<>()));

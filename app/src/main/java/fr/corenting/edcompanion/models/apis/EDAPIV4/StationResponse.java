@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class StationResponse {
     @SerializedName("distance_to_arrival")
-    public int DistanceToArrival;
+    public float DistanceToArrival;
 
     @SerializedName("last_shipyard_update")
     public Date LastShipyardUpdate;
@@ -20,12 +20,13 @@ public class StationResponse {
     @SerializedName("is_planetary")
     public boolean IsPlanetary;
 
+    @SerializedName("is_settlement")
+    public boolean IsSettlement;
+
     @SerializedName("type")
     public String Type;
 
     @SerializedName("system_name")
     public String SystemName;
 
-    @SerializedName("system_permit_required")
-    public boolean SystemPermitRequired;
 }

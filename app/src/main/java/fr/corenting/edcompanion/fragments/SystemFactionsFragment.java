@@ -301,9 +301,9 @@ public class SystemFactionsFragment extends Fragment {
 
     private void bindInformations(System system) {
         // Current state
-        binding.controllingFactionTextView.setText(system.getControllingFaction());
-        binding.allegianceTextView.setText(system.getAllegiance());
-        binding.powerTextView.setText(String.format("%s (%s)", system.getPower(), system.getPowerState()));
+        binding.controllingFactionTextView.setText(system.getControllingFaction() != null ? system.getControllingFaction() : getString(R.string.unknown));
+        binding.allegianceTextView.setText(system.getAllegiance() != null ? system.getAllegiance() : getString(R.string.unknown));
+        binding.powerTextView.setText(system.getPower() != null ? String.format("%s (%s)", system.getPower(), system.getPowerState()) : getString(R.string.unknown));
 
         // Factions list
         if (system.getFactions().size() == 0) {

@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.models
 
-import fr.corenting.edcompanion.models.apis.EDApi.SystemHistoryResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse.SystemHistoryResponse
 
 data class SystemHistoryResult(val name: String, val history: List<FactionHistory>) {
     companion object {

@@ -106,26 +106,28 @@ public class SystemDetailsFragment extends Fragment {
         binding.permitRequiredTextView.setVisibility(system.isPermitRequired() ? View.VISIBLE : View.GONE);
         binding.coordsTextView.setText(getString(R.string.coordinates_num, system.getX(),
                 system.getY(), system.getZ()));
-        binding.allegianceTextView.setText(system.getAllegiance());
-        binding.powerTextView.setText(String.format("%s (%s)", system.getPower(), system.getPowerState()));
-        binding.securityTextView.setText(system.getSecurity());
-        binding.governmentTextView.setText(system.getGovernment());
-        binding.controllingFactionTextView.setText(system.getControllingFaction());
-        binding.economyTextView.setText(system.getPrimaryEconomy());
-        binding.stateTextView.setText(system.getState());
-        binding.populationTextView.setText(numberFormat.format(system.getPopulation()));
+        binding.allegianceTextView.setText(system.getAllegiance() != null ? system.getAllegiance() : getString(R.string.unknown));
+        binding.powerTextView.setText(system.getPower() != null ? String.format("%s (%s)", system.getPower(), system.getPowerState()): getString(R.string.unknown));
+        binding.securityTextView.setText(system.getSecurity() != null ? system.getSecurity() : getString(R.string.unknown));
+        binding.governmentTextView.setText(system.getGovernment() != null ? system.getGovernment() : getString(R.string.unknown));
+        binding.controllingFactionTextView.setText(system.getControllingFaction() != null ? system.getControllingFaction() : getString(R.string.unknown));
+        binding.economyTextView.setText(system.getPrimaryEconomy() != null ? system.getPrimaryEconomy() : getString(R.string.unknown));
+        binding.stateTextView.setText(system.getState() != null ? system.getState() : getString(R.string.unknown));
+        binding.populationTextView.setText(system.getPopulation() != null ? numberFormat.format(system.getPopulation()) : getString(R.string.unknown));
 
         // Logo
-        switch (system.getAllegiance()) {
-            case "Federation":
-                binding.logoImageView.setImageResource(R.drawable.elite_federation);
-                break;
-            case "Empire":
-                binding.logoImageView.setImageResource(R.drawable.elite_empire);
-                break;
-            case "Alliance":
-                binding.logoImageView.setImageResource(R.drawable.elite_alliance);
-                break;
+        if (system.getAllegiance() != null) {
+            switch (system.getAllegiance()) {
+                case "Federation":
+                    binding.logoImageView.setImageResource(R.drawable.elite_federation);
+                    break;
+                case "Empire":
+                    binding.logoImageView.setImageResource(R.drawable.elite_empire);
+                    break;
+                case "Alliance":
+                    binding.logoImageView.setImageResource(R.drawable.elite_alliance);
+                    break;
+            }
         }
     }
 

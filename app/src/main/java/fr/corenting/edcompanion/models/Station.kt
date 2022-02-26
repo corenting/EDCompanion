@@ -6,7 +6,7 @@ import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 
 data class Station(val name: String, val lastShipyardUpdate: Instant?,
-                   val distanceToStar: Int, val maxLandingPad: String?, val isPlanetary: Boolean,
+                   val distanceToStar: Float, val maxLandingPad: String?, val isPlanetary: Boolean,
                    val type: String, val systemName: String) {
 
     companion object {
@@ -16,7 +16,7 @@ data class Station(val name: String, val lastShipyardUpdate: Instant?,
                 lastShipyardUpdate =  DateTimeUtils.toInstant(res.LastShipyardUpdate)
             }
             return Station(res.Name, lastShipyardUpdate,
-                    res.DistanceToArrival, res.MaxLandingPad, res.IsPlanetary, res.Type,
+                    res.DistanceToArrival, res.MaxLandingPad, res.IsPlanetary || res.IsSettlement, res.Type,
                     res.SystemName
             )
         }
@@ -27,7 +27,7 @@ data class Station(val name: String, val lastShipyardUpdate: Instant?,
                 lastShipyardUpdate =  DateTimeUtils.toInstant(res.LastShipyardUpdate)
             }
             return Station(res.Name, lastShipyardUpdate,
-                res.DistanceToStar, res.MaxLandingPad, res.IsPlanetary, res.Type,
+                res.DistanceToStar.toFloat(), res.MaxLandingPad, res.IsPlanetary, res.Type,
                 res.System.Name
             )
         }

@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.models
 
-import fr.corenting.edcompanion.models.apis.EDApi.FactionHistoryResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse.FactionHistoryResponse
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 
