@@ -1,6 +1,6 @@
 package fr.corenting.edcompanion.models.events
 
-import fr.corenting.edcompanion.models.CommodityDetailsStationResult
+import fr.corenting.edcompanion.models.CommodityBestPricesStationResult
 
 data class CommodityDetailsSell(val success: Boolean,
-                                val stations: List<CommodityDetailsStationResult>)
+                                val stations: List<CommodityBestPricesStationResult>)

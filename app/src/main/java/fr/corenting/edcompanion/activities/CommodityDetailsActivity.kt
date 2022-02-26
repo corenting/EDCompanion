@@ -7,6 +7,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 import fr.corenting.edcompanion.adapters.CommodityDetailsPagerAdapter
+import fr.corenting.edcompanion.models.events.CommodityBestPrices
 import fr.corenting.edcompanion.models.events.CommodityDetails
 import fr.corenting.edcompanion.models.events.CommodityDetailsBuy
 import fr.corenting.edcompanion.models.events.CommodityDetailsSell
@@ -24,6 +25,7 @@ class CommodityDetailsActivity : AbstractViewPagerActivity() {
 
     override fun getData() {
         CommoditiesNetwork.getCommodityDetails(this, dataName)
+        CommoditiesNetwork.getCommoditiesBestPrices(this, dataName)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -31,15 +33,24 @@ class CommodityDetailsActivity : AbstractViewPagerActivity() {
         if (commodityDetailsEvent.success && commodityDetailsEvent.commodityDetails != null) {
 
             EventBus.getDefault().post(commodityDetailsEvent.commodityDetails)
-            EventBus.getDefault().post(
-                    CommodityDetailsSell(true,
-                            commodityDetailsEvent.commodityDetails.maximumSellers)
-            )
-            EventBus.getDefault().post(
-                    CommodityDetailsBuy(true,
-                            commodityDetailsEvent.commodityDetails.minimumBuyers)
-            )
+
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onCommodityBestPricesEvent(commodityBestPricesEvent: CommodityBestPrices) {
+        EventBus.getDefault().post(
+            CommodityDetailsSell(
+                true,
+                commodityBestPricesEvent.bestStationsToSell
+            )
+        )
+        EventBus.getDefault().post(
+            CommodityDetailsBuy(
+                true,
+                commodityBestPricesEvent.bestStationsToBuy
+            )
+        )
     }
 
     public override fun onStart() {

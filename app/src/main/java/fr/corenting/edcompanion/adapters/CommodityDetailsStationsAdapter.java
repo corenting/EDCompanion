@@ -15,12 +15,12 @@ import java.text.NumberFormat;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.databinding.ListItemCommodityDetailsStationBinding;
-import fr.corenting.edcompanion.models.CommodityDetailsStationResult;
+import fr.corenting.edcompanion.models.CommodityBestPricesStationResult;
 import fr.corenting.edcompanion.utils.MathUtils;
 
 import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
-public class CommodityDetailsStationsAdapter extends androidx.recyclerview.widget.ListAdapter<CommodityDetailsStationResult,
+public class CommodityDetailsStationsAdapter extends androidx.recyclerview.widget.ListAdapter<CommodityBestPricesStationResult,
         CommodityDetailsStationsAdapter.stationViewHolder> {
 
     private final NumberFormat numberFormat;
@@ -30,18 +30,18 @@ public class CommodityDetailsStationsAdapter extends androidx.recyclerview.widge
 
     public CommodityDetailsStationsAdapter(Context ctx, boolean isSellMode) {
         // Parent class setup
-        super(new DiffUtil.ItemCallback<CommodityDetailsStationResult>() {
+        super(new DiffUtil.ItemCallback<CommodityBestPricesStationResult>() {
             @Override
-            public boolean areItemsTheSame(@NonNull CommodityDetailsStationResult oldItem,
-                                           @NonNull CommodityDetailsStationResult newItem) {
+            public boolean areItemsTheSame(@NonNull CommodityBestPricesStationResult oldItem,
+                                           @NonNull CommodityBestPricesStationResult newItem) {
                 return areContentsTheSame(oldItem, newItem);
             }
 
             @Override
-            public boolean areContentsTheSame(@NonNull CommodityDetailsStationResult oldItem,
-                                              @NonNull CommodityDetailsStationResult newItem) {
-                return oldItem.getStation().getName().equals(newItem.getStation().getName()) &&
-                        oldItem.getStation().getSystemName().equals(newItem.getStation().getSystemName());
+            public boolean areContentsTheSame(@NonNull CommodityBestPricesStationResult oldItem,
+                                              @NonNull CommodityBestPricesStationResult newItem) {
+                return oldItem.getStationName().equals(newItem.getStationName()) &&
+                        oldItem.getSystemName().equals(newItem.getSystemName());
             }
         });
 
@@ -60,27 +60,25 @@ public class CommodityDetailsStationsAdapter extends androidx.recyclerview.widge
 
     @Override
     public void onBindViewHolder(@NonNull final stationViewHolder holder, final int position) {
-        CommodityDetailsStationResult currentStation = getItem(holder.getAdapterPosition());
+        CommodityBestPricesStationResult currentStation = getItem(holder.getAdapterPosition());
 
-        holder.viewBinding.titleTextView.setText(String.format("%s - %s", currentStation.getStation().getSystemName(),
-                currentStation.getStation().getName()));
-        holder.viewBinding.typeTextView.setText(currentStation.getStation().getType());
+        holder.viewBinding.titleTextView.setText(String.format("%s - %s", currentStation.getSystemName(),
+                currentStation.getStationName()));
+        holder.viewBinding.typeTextView.setText(currentStation.getStationType());
         holder.viewBinding.starDistanceTextView.setText(context.getString(R.string.distance_ls,
-                numberFormat.format(currentStation.getStation().getDistanceToStar())));
-        holder.viewBinding.landingPadTextView.setText(currentStation.getStation().getMaxLandingPad());
+                numberFormat.format(currentStation.getDistanceFromArrival())));
+        holder.viewBinding.landingPadTextView.setText(currentStation.getMaxLandingPadSize());
 
-        holder.viewBinding.logoImageView.setVisibility(currentStation.getStation().isPlanetary() ? View.VISIBLE : View.GONE);
+        holder.viewBinding.logoImageView.setVisibility(currentStation.getStationIsPlanetary() || currentStation.getStationIsSettlement() ? View.VISIBLE : View.GONE);
 
+        holder.viewBinding.priceTextView.setText(context.getString(R.string.credits, numberFormat.format(currentStation.getPrice())));
+        holder.viewBinding.stockTextView.setText(numberFormat.format(currentStation.getQuantity()));
         if (isSellMode) {
             holder.viewBinding.priceLabelTextView.setText(R.string.sell_price);
-            holder.viewBinding.priceTextView.setText(context.getString(R.string.credits, numberFormat.format(currentStation.getSellPrice())));
             holder.viewBinding.stockLabelTextView.setText(R.string.demand_label);
-            holder.viewBinding.stockTextView.setText(numberFormat.format(currentStation.getDemand()));
         } else {
             holder.viewBinding.priceLabelTextView.setText(R.string.buy_price);
-            holder.viewBinding.priceTextView.setText(context.getString(R.string.credits, numberFormat.format(currentStation.getBuyPrice())));
             holder.viewBinding.stockLabelTextView.setText(R.string.stock_label);
-            holder.viewBinding.stockTextView.setText(numberFormat.format(currentStation.getSupply()));
         }
         holder.viewBinding.priceDifferenceTextView.setText(String.format("%s %%",
                 MathUtils.getPriceDifferenceString(numberFormat,

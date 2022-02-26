@@ -84,7 +84,7 @@ public class CommodityDetailsFragment extends Fragment {
     private void bindInformations(CommodityDetailsResult details) {
         binding.commodityNameTextView.setText(details.getName());
         binding.isRareTextView.setVisibility(details.isRare() ? View.VISIBLE : View.GONE);
-        binding.categoryTextView.setText(details.getCategory().getName());
+        binding.categoryTextView.setText(details.getCategory());
 
         binding.averageBuyTextView.setText(getString(R.string.credits,
                 numberFormat.format(details.getAverageBuyPrice())));

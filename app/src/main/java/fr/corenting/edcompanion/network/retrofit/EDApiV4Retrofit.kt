@@ -59,5 +59,13 @@ interface EDApiV4Retrofit {
 
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/prices")
-    fun getCommodityPrices(@Query("filter") filter: String): Call<List<CommodityPricesResponse>>
+    fun getCommoditiesWithPrice(@Query("filter") filter: String): Call<List<CommodityWithPriceResponse>>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("commodities/{commodity}/prices")
+    fun getCommodityPrice(@Path("commodity") commodity_name: String): Call<CommodityWithPriceResponse>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("commodities/{commodity}/best_prices")
+    fun getCommodityBestPrices(@Path("commodity") commodity_name: String): Call<CommodityBestPricesResponse>
 }

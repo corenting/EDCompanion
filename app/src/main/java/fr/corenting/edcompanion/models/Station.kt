@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.models
 
 import fr.corenting.edcompanion.models.apis.EDAPIV4.StationResponse
-import fr.corenting.edcompanion.models.apis.EDApi.CommodityDetailsResponse
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 
@@ -21,15 +20,15 @@ data class Station(val name: String, val lastShipyardUpdate: Instant?,
             )
         }
 
-        fun fromCommodityDetailsStationResponse(res: CommodityDetailsResponse.CommodityDetailsStationResponse.CommodityDetailStationDetailsResponse): Station {
-            var lastShipyardUpdate: Instant? = null
-            if (res.LastShipyardUpdate != null) {
-                lastShipyardUpdate =  DateTimeUtils.toInstant(res.LastShipyardUpdate)
-            }
-            return Station(res.Name, lastShipyardUpdate,
-                res.DistanceToStar.toFloat(), res.MaxLandingPad, res.IsPlanetary, res.Type,
-                res.System.Name
-            )
-        }
+        //fun fromCommodityDetailsStationResponse(res: CommodityDetailsResponse.CommodityDetailsStationResponse.CommodityDetailStationDetailsResponse): Station {
+        //    var lastShipyardUpdate: Instant? = null
+        //    if (res.LastShipyardUpdate != null) {
+        //        lastShipyardUpdate =  DateTimeUtils.toInstant(res.LastShipyardUpdate)
+        //    }
+        //    return Station(res.Name, lastShipyardUpdate,
+        //        res.DistanceToStar.toFloat(), res.MaxLandingPad, res.IsPlanetary, res.Type,
+        //        res.System.Name
+        //    )
+        //}
     }
 }
