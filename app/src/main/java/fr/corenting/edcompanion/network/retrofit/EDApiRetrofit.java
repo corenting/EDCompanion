@@ -4,16 +4,12 @@ import java.util.List;
 
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityDetailsResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface EDApiRetrofit {
-    @GET("commodities/")
-    Call<List<CommodityResponse>> getCommodities(@Query("name") String filter);
-
     @GET("commodities/{name}")
     Call<CommodityDetailsResponse> getCommodityDetails(@Path("name") String name);
 

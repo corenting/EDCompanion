@@ -2,7 +2,6 @@ package fr.corenting.edcompanion.network.retrofit
 
 import fr.corenting.edcompanion.models.apis.EDAPIV4.*
 import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse.SystemHistoryResponse
-import fr.corenting.edcompanion.models.apis.EDAPIV4.SystemResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -57,4 +56,8 @@ interface EDApiV4Retrofit {
     // TODO : convert to suspend/viewmodel etc...
     @GET("systems/{system}")
     fun getSystemDetails(@Path("system") system: String): Call<SystemResponse>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("commodities/prices")
+    fun getCommodityPrices(@Query("filter") filter: String): Call<List<CommodityPricesResponse>>
 }

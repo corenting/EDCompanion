@@ -86,10 +86,12 @@ public class CommoditiesListAdapter extends FinderAdapter<CommoditiesListAdapter
         final CommoditiesListResult currentResult = results.get(position - 1);
 
         holder.binding.titleTextView.setText(currentResult.getName());
-        holder.binding.averagePriceTextView.setText(context.getString(R.string.credits,
-                numberFormat.format(currentResult.getAveragePrice())));
+        holder.binding.averageBuyPriceTextView.setText(context.getString(R.string.credits,
+                numberFormat.format(currentResult.getAverageBuyPrice())));
+        holder.binding.averageSellPriceTextView.setText(context.getString(R.string.credits,
+                numberFormat.format(currentResult.getAverageSellPrice())));
         holder.binding.isRareTextView.setVisibility(currentResult.isRare() ? View.VISIBLE : View.GONE);
-        holder.binding.categoryTextView.setText(currentResult.getCategory().getName());
+        holder.binding.categoryTextView.setText(currentResult.getCategory());
 
         holder.binding.itemLayout.setOnClickListener(v -> {
             Intent i = new Intent(context, CommodityDetailsActivity.class);

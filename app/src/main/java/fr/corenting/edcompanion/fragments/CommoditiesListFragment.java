@@ -47,6 +47,6 @@ public class CommoditiesListFragment extends AbstractFinderFragment<CommoditiesL
     public void onFindButtonEvent(CommoditiesListSearch event) {
         lastSearch = event;
         startLoading();
-        CommoditiesNetwork.findCommodity(getContext(), event.getCommodityName());
+        CommoditiesNetwork.getCommoditiesPrices(getContext(), event.getCommodityName());
     }
 }

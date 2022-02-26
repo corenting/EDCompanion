@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/categoryTextView"
-            android:layout_width="110dp"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
             android:layout_marginTop="8dp"
@@ -39,27 +39,45 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/averagePriceLabelTextView"
-            android:layout_width="110dp"
+            android:id="@+id/averageBuyPriceLabelTextView"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/categoryTextView"
-            android:text="@string/average_price"
+            android:text="@string/average_buy_price"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/averagePriceTextView"
+            android:id="@+id/averageBuyPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/categoryTextView"
-            android:layout_toEndOf="@id/categoryTextView"
+            android:layout_toEndOf="@id/averageBuyPriceLabelTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/isRareTextView"
-            android:layout_width="110dp"
+            android:id="@+id/averageSellPriceLabelTextView"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/averagePriceLabelTextView"
+            android:layout_below="@id/averageBuyPriceLabelTextView"
+            android:text="@string/average_sell_price"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/averageSellPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/averageBuyPriceLabelTextView"
+            android:layout_toEndOf="@id/averageSellPriceLabelTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+        <TextView
+            android:id="@+id/isRareTextView"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/averageSellPriceLabelTextView"
             android:text="@string/rare_commodity"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />

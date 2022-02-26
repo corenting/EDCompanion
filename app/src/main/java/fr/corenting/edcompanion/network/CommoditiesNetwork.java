@@ -9,40 +9,39 @@ import java.util.List;
 
 import fr.corenting.edcompanion.models.CommoditiesListResult;
 import fr.corenting.edcompanion.models.CommodityDetailsResult;
-import fr.corenting.edcompanion.models.SystemFinderResult;
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityPricesResponse;
 import fr.corenting.edcompanion.models.apis.EDApi.CommodityDetailsResponse;
-import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse;
 import fr.corenting.edcompanion.models.events.CommodityDetails;
 import fr.corenting.edcompanion.models.events.ResultsList;
 import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
+import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 import retrofit2.internal.EverythingIsNonNull;
 
 
 public class CommoditiesNetwork {
-    public static void findCommodity(Context ctx, String commodityName) {
-
+    public static void getCommoditiesPrices(Context ctx, String commodityName) {
         // Init retrofit instance
-        final EDApiRetrofit edApiRetrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(ctx.getApplicationContext());
+        final EDApiV4Retrofit edApiRetrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        final retrofit2.Callback<List<CommodityResponse>> callback = new retrofit2.Callback<List<CommodityResponse>>() {
+        final retrofit2.Callback<List<CommodityPricesResponse>> callback = new retrofit2.Callback<List<CommodityPricesResponse>>() {
             @Override
             @EverythingIsNonNull
-            public void onResponse(Call<List<CommodityResponse>> call,
-                                   retrofit2.Response<List<CommodityResponse>> response) {
+            public void onResponse(Call<List<CommodityPricesResponse>> call,
+                                   retrofit2.Response<List<CommodityPricesResponse>> response) {
 
-                List<CommodityResponse> body = response.body();
+                List<CommodityPricesResponse> body = response.body();
                 ResultsList<CommoditiesListResult> convertedResults;
                 if (!response.isSuccessful() || body == null) {
                     onFailure(call, new Exception("Invalid response"));
                 } else {
                     List<CommoditiesListResult> resultsList = new ArrayList<>();
                     try {
-                        for (CommodityResponse resultItem : body) {
+                        for (CommodityPricesResponse resultItem : body) {
                             resultsList.add(
-                                    CommoditiesListResult.Companion.fromEDApiCommodity(resultItem)
+                                    CommoditiesListResult.Companion.fromEDApiCommodityPrice(resultItem)
                             );
                         }
                         convertedResults = new ResultsList<>(true, resultsList);
@@ -57,13 +56,13 @@ public class CommoditiesNetwork {
 
             @Override
             @EverythingIsNonNull
-            public void onFailure(Call<List<CommodityResponse>> call, Throwable t) {
+            public void onFailure(Call<List<CommodityPricesResponse>> call, Throwable t) {
                 EventBus.getDefault().post(new ResultsList<>(false,
-                        new ArrayList<SystemFinderResult>()));
+                        new ArrayList<CommoditiesListResult>()));
             }
         };
 
-        edApiRetrofit.getCommodities(commodityName).enqueue(callback);
+        edApiRetrofit.getCommodityPrices(commodityName).enqueue(callback);
     }
 
     public static void getCommodityDetails(Context ctx, String commodityName) {

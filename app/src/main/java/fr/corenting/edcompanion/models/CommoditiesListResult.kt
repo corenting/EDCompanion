@@ -1,13 +1,21 @@
 package fr.corenting.edcompanion.models
 
-import fr.corenting.edcompanion.models.apis.EDApi.CommodityResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityPricesResponse
 
-data class CommoditiesListResult(val name: String, val id: Long, val averagePrice: Long,
-                                 val isRare:Boolean, val category: NameId) {
+data class CommoditiesListResult(
+    val name: String, val id: Long, val averageBuyPrice: Long, val averageSellPrice: Long,
+    val isRare: Boolean, val category: String
+) {
     companion object {
-        fun fromEDApiCommodity(res: CommodityResponse): CommoditiesListResult {
-            return CommoditiesListResult(res.Name, res.Id, res.AveragePrice, res.IsRare,
-                    res.Category)
+        fun fromEDApiCommodityPrice(res: CommodityPricesResponse): CommoditiesListResult {
+            return CommoditiesListResult(
+                res.Commodity.Name,
+                res.Commodity.Id,
+                res.AverageBuyPrice,
+                res.AverageSellPrice,
+                res.Commodity.IsRare,
+                res.Commodity.Category
+            )
         }
     }
 }
