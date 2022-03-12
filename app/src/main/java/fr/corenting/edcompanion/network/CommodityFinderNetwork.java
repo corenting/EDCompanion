@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommodityFinderResult;
-import fr.corenting.edcompanion.models.apis.EDApi.CommodityFinderResponse;
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityFinderResponse;
 import fr.corenting.edcompanion.models.events.ResultsList;
-import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
+import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;
 import retrofit2.internal.EverythingIsNonNull;
@@ -22,8 +22,8 @@ public class CommodityFinderNetwork {
                                      boolean isSellingMode) {
 
         // Init retrofit instance
-        final EDApiRetrofit edApiRetrofit = RetrofitSingleton.getInstance()
-                .getEdApiRetrofit(ctx.getApplicationContext());
+        final EDApiV4Retrofit edApiRetrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(ctx.getApplicationContext());
 
         final retrofit2.Callback<List<CommodityFinderResponse>> callback = new retrofit2.Callback<List<CommodityFinderResponse>>() {
             @Override
@@ -49,8 +49,13 @@ public class CommodityFinderNetwork {
             }
         };
 
-        edApiRetrofit.findCommodity(system, commodity, landingPad, minStockOrDemand,
-                minStockOrDemand, isSellingMode).enqueue(callback);
+        edApiRetrofit.findCommodity(
+                system,
+                commodity,
+                landingPad,
+                minStockOrDemand,
+                isSellingMode ? "sell" : "buy"
+        ).enqueue(callback);
     }
 
     private static void processResults(List<CommodityFinderResponse> responseBody) {

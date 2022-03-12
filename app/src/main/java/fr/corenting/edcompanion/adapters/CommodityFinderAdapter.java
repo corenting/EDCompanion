@@ -1,11 +1,12 @@
 package fr.corenting.edcompanion.adapters;
 
+import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -24,8 +25,6 @@ import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.events.CommodityFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-
-import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter.HeaderViewHolder, CommodityFinderAdapter.ResultViewHolder, CommodityFinderResult> {
 
@@ -57,6 +56,9 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         holder.binding.commodityInputEditText.setOnItemClickListener((adapterView, view, position, id) ->
                 holder.binding.commodityInputEditText.setText((String) adapterView.getItemAtPosition(position)));
 
+        // Default quantity
+        holder.binding.stockInputEditText.setText(Integer.toString(1));
+
         // Landing pad size adapter
         if (holder.binding.landingPadSizeAutoCompleteTextView.getAdapter() == null ||
                 holder.binding.landingPadSizeAutoCompleteTextView.getAdapter().getCount() == 0) {
@@ -66,6 +68,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
             ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                     android.R.layout.simple_dropdown_item_1line, landingPadSizeArray);
             holder.binding.landingPadSizeAutoCompleteTextView.setAdapter(adapter);
+            holder.binding.landingPadSizeAutoCompleteTextView.setText(landingPadSizeArray[0]);
         }
 
         // Buy or sell adapter
@@ -76,31 +79,8 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                     android.R.layout.simple_dropdown_item_1line, buySellArray);
+            holder.binding.buyOrSellAutoCompleteTextView.setText(buySellArray[0]);
             holder.binding.buyOrSellAutoCompleteTextView.setAdapter(adapter);
-
-            holder.binding.buyOrSellAutoCompleteTextView.setOnItemSelectedListener(
-                    new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            if (position == 0) {
-                                holder.binding.stockInputLayout.setHint(context
-                                        .getString(R.string.minimum_stock));
-                                holder.binding.stockInputEditText.setHint(context
-                                        .getString(R.string.minimum_stock));
-                            } else {
-                                holder.binding.stockInputLayout.setHint(context
-                                        .getString(R.string.minimum_demand));
-                                holder.binding.stockInputEditText.setHint(context
-                                        .getString(R.string.minimum_demand));
-                            }
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    }
-            );
         }
 
         // Find button
@@ -155,43 +135,30 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
         // For price, also display the difference with the avg galactic price
         String priceDifference = MathUtils.getPriceDifferenceString(
                 numberFormat,
-                currentResult.getPriceDifferenceFromAverage());
-        if (isSellingMode) {
-            String sellPrice = numberFormat.format(currentResult.getSellPrice());
-            holder.binding.priceTextView.setText(String.format("%s (%s%%)", sellPrice, priceDifference));
-        } else {
-            String buyPrice = numberFormat.format(currentResult.getBuyPrice());
-            holder.binding.priceTextView.setText(String.format("%s (%s%%)", buyPrice, priceDifference));
-        }
-
+                currentResult.getPricePercentageDifference());
+        String price = numberFormat.format(currentResult.getPrice());
+        holder.binding.priceTextView.setText(String.format("%s (%s%%)", price, priceDifference));
 
         // Update date
         String date = android.text.format.DateUtils.getRelativeTimeSpanString(
-                currentResult.getLastPriceUpdate().toEpochMilli(), Instant.now().toEpochMilli(),
+                currentResult.getLastMarketUpdate().toEpochMilli(), Instant.now().toEpochMilli(),
                 0, FORMAT_ABBREV_RELATIVE).toString();
         holder.binding.lastUpdateTextView.setText(date);
 
         // Other informations
         holder.binding.titleTextView.setText(String.format("%s - %s", currentResult.getSystem(),
                 currentResult.getStation()));
-        holder.binding.permitRequiredTextView.setVisibility(
-                currentResult.isPermitRequired() ? View.VISIBLE : View.GONE);
         holder.binding.isPlanetaryImageView.setVisibility(
                 currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
         holder.binding.landingPadTextView.setText(currentResult.getLandingPad());
         holder.binding.distanceTextView.setText(context.getString(R.string.distance_ly,
-                currentResult.getDistance()));
+                currentResult.getDistanceFromReferenceSystem()));
         holder.binding.distanceToStarTextView.setText(context.getString(R.string.distance_ls, numberFormat
-                .format(currentResult.getDistanceToStar())));
+                .format(currentResult.getDistanceToArrival())));
 
         // Set stock/demand depending on mode
-        if (isSellingMode) {
-            holder.binding.stockLabelTextView.setText(R.string.demand_label);
-            holder.binding.stockTextView.setText(numberFormat.format(currentResult.getDemand()));
-        } else {
-            holder.binding.stockLabelTextView.setText(R.string.stock_label);
-            holder.binding.stockTextView.setText(numberFormat.format(currentResult.getStock()));
-        }
+        holder.binding.stockLabelTextView.setText(isSellingMode ? R.string.demand_label : R.string.stock_label);
+        holder.binding.stockTextView.setText(numberFormat.format(currentResult.getQuantity()));
     }
 
     public static class ResultViewHolder extends RecyclerView.ViewHolder {

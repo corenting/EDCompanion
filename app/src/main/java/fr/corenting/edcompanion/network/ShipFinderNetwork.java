@@ -10,7 +10,6 @@ import java.util.List;
 import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.apis.EDAPIV4.ShipFinderResponse;
 import fr.corenting.edcompanion.models.events.ResultsList;
-import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;

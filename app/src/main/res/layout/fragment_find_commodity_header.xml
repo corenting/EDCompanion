@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/landingPadSizeLayout"
                 android:layout_marginTop="8dp"
-                android:hint="@string/minimum_stock">
+                android:hint="@string/minimum_stock_or_demand">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/stockInputEditText"

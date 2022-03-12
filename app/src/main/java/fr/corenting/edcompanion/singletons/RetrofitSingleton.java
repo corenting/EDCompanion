@@ -12,7 +12,6 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.models.apis.EDSM.EDSMSystemInformationResponse;
 import fr.corenting.edcompanion.models.apis.FrontierAuth.FrontierAccessTokenResponse;
 import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException;
-import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit;
 import fr.corenting.edcompanion.network.retrofit.FrontierAuthRetrofit;
@@ -32,7 +31,6 @@ public class RetrofitSingleton implements Serializable {
     private static volatile RetrofitSingleton instance;
 
     private EDSMRetrofit edsmRetrofit;
-    private EDApiRetrofit edApiRetrofit;
     private EDApiV4Retrofit edApiV4Retrofit;
     private InaraRetrofit inaraRetrofit;
     private FrontierAuthRetrofit frontierAuthRetrofit;
@@ -76,18 +74,6 @@ public class RetrofitSingleton implements Serializable {
                 .create(EDSMRetrofit.class);
 
         return edsmRetrofit;
-    }
-
-    public EDApiRetrofit getEdApiRetrofit(Context ctx) {
-        if (edApiRetrofit != null) {
-            return edApiRetrofit;
-        }
-
-        edApiRetrofit = getRetrofitInstance()
-                .baseUrl(ctx.getString(R.string.edapi_base))
-                .build()
-                .create(EDApiRetrofit.class);
-        return edApiRetrofit;
     }
 
     public EDApiV4Retrofit getEdApiV4Retrofit(Context ctx) {

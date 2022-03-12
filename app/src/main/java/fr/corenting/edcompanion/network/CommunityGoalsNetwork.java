@@ -10,7 +10,6 @@ import java.util.List;
 import fr.corenting.edcompanion.models.CommunityGoal;
 import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse;
 import fr.corenting.edcompanion.models.events.CommunityGoals;
-import fr.corenting.edcompanion.network.retrofit.EDApiRetrofit;
 import fr.corenting.edcompanion.network.retrofit.EDApiV4Retrofit;
 import fr.corenting.edcompanion.singletons.RetrofitSingleton;
 import retrofit2.Call;

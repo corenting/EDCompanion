@@ -48,17 +48,9 @@ public class CommodityFinderFragment extends AbstractFinderFragment<CommodityFin
     public void onFindButtonEvent(CommodityFinderSearch event) {
         startLoading();
 
-        // Don't send any as landing pad
-        String landingPadSize = event.getLandingPadSize();
-
-        if (event.getLandingPadSize().equals(
-                getResources().getStringArray(R.array.landing_pad_size)[0])) {
-            landingPadSize = null;
-        }
-
         lastSearch = event;
         CommodityFinderNetwork.findCommodity(getContext(), event.getSystemName(),
-                event.getCommodityName(), landingPadSize, event.getStockOrDemand(),
+                event.getCommodityName(), event.getLandingPadSize(), event.getStockOrDemand(),
                 event.isSellingMode());
     }
 }

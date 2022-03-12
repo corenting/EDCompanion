@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.network.retrofit
 
 import fr.corenting.edcompanion.models.apis.EDAPIV4.*
 import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse.SystemHistoryResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityFinderResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -68,4 +69,14 @@ interface EDApiV4Retrofit {
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/{commodity}/best_prices")
     fun getCommodityBestPrices(@Path("commodity") commodity_name: String): Call<CommodityBestPricesResponse>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("commodities/find")
+    open fun findCommodity(
+        @Query("reference_system") system: String,
+        @Query("commodity") commodity: String,
+        @Query("min_landing_pad_size") minLandingPad: String,
+        @Query("min_quantity") min_quantity: Int,
+        @Query("mode") searchMode: String
+    ): Call<List<CommodityFinderResponse>>
 }
