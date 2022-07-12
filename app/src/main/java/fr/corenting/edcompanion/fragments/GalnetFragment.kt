@@ -37,7 +37,7 @@ class GalnetFragment : AbstractListFragment<NewsAdapter>() {
     }
 
     override fun getNewRecyclerViewAdapter(): NewsAdapter {
-        return NewsAdapter(context, binding.recyclerView, false)
+        return NewsAdapter(context, binding.recyclerView, false, true)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

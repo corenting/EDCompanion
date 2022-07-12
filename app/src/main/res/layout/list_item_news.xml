@@ -55,7 +55,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dateTextView"
                 android:layout_marginTop="18dp"
+                android:autoLink="web"
                 android:ellipsize="end"
+                android:linksClickable="true"
                 android:maxLines="5"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
         </RelativeLayout>

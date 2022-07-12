@@ -64,6 +64,5 @@ public class MiscUtils {
         } else {
             textView.setText(Html.fromHtml(text));
         }
-        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

@@ -67,8 +67,8 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                     android.R.layout.simple_dropdown_item_1line, landingPadSizeArray);
-            holder.binding.landingPadSizeAutoCompleteTextView.setAdapter(adapter);
             holder.binding.landingPadSizeAutoCompleteTextView.setText(landingPadSizeArray[0]);
+            holder.binding.landingPadSizeAutoCompleteTextView.setAdapter(adapter);
         }
 
         // Buy or sell adapter

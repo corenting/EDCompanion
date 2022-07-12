@@ -33,7 +33,7 @@ class NewsFragment : AbstractListFragment<NewsAdapter>() {
     }
 
     override fun getNewRecyclerViewAdapter(): NewsAdapter {
-        return NewsAdapter(context, binding.recyclerView, false)
+        return NewsAdapter(context, binding.recyclerView, false, false)
     }
 
     override fun getData() {

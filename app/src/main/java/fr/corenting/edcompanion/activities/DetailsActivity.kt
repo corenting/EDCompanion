@@ -37,7 +37,8 @@ class DetailsActivity : AppCompatActivity() {
             val communityGoal = intent.extras?.getParcelable<CommunityGoal>("goal")
             val article = intent.extras?.getParcelable<NewsArticle>("article")
             if (communityGoal == null && article != null) {
-                galnetArticleSetup(article)
+                val isGalnet = intent.extras?.getBoolean("isGalnet") ?: false
+                newsArticleSetup(article, isGalnet)
             } else if (communityGoal != null) {
                 communityGoalSetup(communityGoal)
             }
@@ -55,11 +56,11 @@ class DetailsActivity : AppCompatActivity() {
         adapter.submitList(listOf(communityGoal))
     }
 
-    private fun galnetArticleSetup(article: NewsArticle) {
+    private fun newsArticleSetup(article: NewsArticle, isGalnet: Boolean) {
         supportActionBar?.title = article.title
 
         // Adapter view setup
-        val adapter = NewsAdapter(this, binding.recyclerView, true)
+        val adapter = NewsAdapter(this, binding.recyclerView, true, isGalnet)
         binding.recyclerView.adapter = adapter
         adapter.submitList(listOf(article))
     }
