@@ -6,11 +6,13 @@ public class InternalNamingUtils {
     public static String getShipName(String internalName) {
         switch (internalName) {
             case "SideWinder":
-                return "Sidewinder";
+                return "Sidewinder Mk I";
+            case "Eagle":
+                return "Eagle Mk II";
             case "Viper":
-                return "Viper MkIII";
+                return "Viper Mk III";
             case "CobraMkIII":
-                return "Cobra MkIII";
+                return "Cobra Mk III";
             case "Type6":
                 return "Type-6 Transporter";
             case "Type7":
@@ -44,9 +46,9 @@ public class InternalNamingUtils {
             case "Federation_Gunship":
                 return "Federal Gunship";
             case "Viper_MkIV":
-                return "Viper MkIV";
+                return "Viper Mk IV";
             case "CobraMkIV":
-                return "Cobra MkIV";
+                return "Cobra Mk IV";
             case "Independant_Trader":
                 return "Keelback";
             case "Asp_Scout":
@@ -54,7 +56,7 @@ public class InternalNamingUtils {
             case "Type9_Military":
                 return "Type-10 Defender";
             case "Krait_MkII":
-                return "Krait MkII";
+                return "Krait Mk II";
             case "TypeX":
                 return "Alliance Chieftain";
             case "TypeX_2":
