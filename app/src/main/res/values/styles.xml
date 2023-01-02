@@ -1,6 +1,10 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
 
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
     </style>
 </resources>

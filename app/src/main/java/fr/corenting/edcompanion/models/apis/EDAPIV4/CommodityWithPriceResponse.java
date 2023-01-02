@@ -2,8 +2,6 @@ package fr.corenting.edcompanion.models.apis.EDAPIV4;
 
 import com.google.gson.annotations.SerializedName;
 
-import fr.corenting.edcompanion.models.NameId;
-
 public class CommodityWithPriceResponse {
     @SerializedName("average_buy_price")
     public long AverageBuyPrice;

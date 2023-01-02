@@ -45,20 +45,24 @@ class FirebaseMessagingService : com.google.firebase.messaging.FirebaseMessaging
 
         // Intent to launch app
         val intent = Intent(this, MainActivity::class.java)
-        val contentIntent = PendingIntent.getActivity(this, 0,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val contentIntent = PendingIntent.getActivity(
+            this, 0,
+            intent, PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
-        val largeIcon = BitmapFactory.decodeResource(resources,
-                R.drawable.ic_notification)
+        val largeIcon = BitmapFactory.decodeResource(
+            resources,
+            R.drawable.ic_notification
+        )
 
         val mBuilder = NotificationCompat.Builder(this, channelId)
-                .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setLargeIcon(largeIcon)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(goalTitle)
-                .setAutoCancel(true)
-                .setContentText(NotificationsUtils.getNotificationContent(this, type, currentTier))
-                .setContentIntent(contentIntent)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setLargeIcon(largeIcon)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(goalTitle)
+            .setAutoCancel(true)
+            .setContentText(NotificationsUtils.getNotificationContent(this, type, currentTier))
+            .setContentIntent(contentIntent)
 
         val notificationManager = NotificationManagerCompat.from(this)
         notificationManager.notify(goalTitle.hashCode(), mBuilder.build())

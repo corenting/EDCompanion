@@ -28,7 +28,7 @@ object CommanderUtils {
     fun hasFleetData(context: Context): Boolean {
         val frontierPlayer = FrontierPlayer(context)
         if (frontierPlayer.isUsable()) {
-            return  true
+            return true
         }
 
         return false
@@ -42,7 +42,7 @@ object CommanderUtils {
 
         val frontierPlayer = FrontierPlayer(context)
         if (frontierPlayer.isUsable()) {
-            return  true
+            return true
         }
 
         return false
@@ -56,7 +56,7 @@ object CommanderUtils {
 
         val frontierPlayer = FrontierPlayer(context)
         if (frontierPlayer.isUsable()) {
-            return  true
+            return true
         }
 
         return false

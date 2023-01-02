@@ -9,10 +9,9 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import fr.corenting.edcompanion.network.AutoCompleteNetwork
-import java.util.*
 
 class AutoCompleteAdapter(private val context: Context, private val autocompleteType: Int) :
-        BaseAdapter(), Filterable {
+    BaseAdapter(), Filterable {
     private var resultList: List<String> = ArrayList()
 
     override fun getCount(): Int {
@@ -28,12 +27,14 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view:View? = if (convertView == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            inflater.inflate(android.R.layout.simple_dropdown_item_1line, parent,
-                    false)
-        }
-        else {
+        val view: View? = if (convertView == null) {
+            val inflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            inflater.inflate(
+                android.R.layout.simple_dropdown_item_1line, parent,
+                false
+            )
+        } else {
             convertView
         }
         (view?.findViewById<View>(android.R.id.text1) as TextView).text = getItem(position)
@@ -47,9 +48,18 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
                 if (constraint != null) {
 
                     val results: List<String> = when (autocompleteType) {
-                        TYPE_AUTOCOMPLETE_SYSTEMS -> AutoCompleteNetwork.searchSystems(context, constraint.toString())
-                        TYPE_AUTOCOMPLETE_SHIPS -> AutoCompleteNetwork.searchShips(context, constraint.toString())
-                        else -> AutoCompleteNetwork.searchCommodities(context, constraint.toString())
+                        TYPE_AUTOCOMPLETE_SYSTEMS -> AutoCompleteNetwork.searchSystems(
+                            context,
+                            constraint.toString()
+                        )
+                        TYPE_AUTOCOMPLETE_SHIPS -> AutoCompleteNetwork.searchShips(
+                            context,
+                            constraint.toString()
+                        )
+                        else -> AutoCompleteNetwork.searchCommodities(
+                            context,
+                            constraint.toString()
+                        )
                     }
 
                     // Assign the data to the FilterResults

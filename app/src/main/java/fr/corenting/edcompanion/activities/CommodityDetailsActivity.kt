@@ -1,17 +1,15 @@
 package fr.corenting.edcompanion.activities
 
 import androidx.fragment.app.FragmentPagerAdapter
-
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-
 import fr.corenting.edcompanion.adapters.CommodityDetailsPagerAdapter
 import fr.corenting.edcompanion.models.events.CommodityBestPrices
 import fr.corenting.edcompanion.models.events.CommodityDetails
 import fr.corenting.edcompanion.models.events.CommodityDetailsBuy
 import fr.corenting.edcompanion.models.events.CommodityDetailsSell
 import fr.corenting.edcompanion.network.CommoditiesNetwork
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class CommodityDetailsActivity : AbstractViewPagerActivity() {
 

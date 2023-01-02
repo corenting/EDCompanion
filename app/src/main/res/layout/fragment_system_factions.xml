@@ -20,14 +20,14 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardView"
-                    style="?attr/materialCardViewElevatedStyle"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/card_spacing"
                     android:layout_marginTop="@dimen/card_spacing"
                     android:layout_marginRight="@dimen/card_spacing"
 
-app:cardUseCompatPadding="true">
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:id="@+id/itemLayout"
@@ -111,7 +111,7 @@ app:cardUseCompatPadding="true">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/factionsCardView"
-                    style="?attr/materialCardViewElevatedStyle"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cardView"
@@ -119,7 +119,7 @@ app:cardUseCompatPadding="true">
                     android:layout_marginTop="@dimen/card_spacing"
                     android:layout_marginRight="@dimen/card_spacing"
 
-app:cardUseCompatPadding="true"
+                    app:cardUseCompatPadding="true"
 
                     >
 
@@ -157,7 +157,7 @@ app:cardUseCompatPadding="true"
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/historyCardView"
-                    style="?attr/materialCardViewElevatedStyle"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/factionsCardView"
@@ -165,8 +165,7 @@ app:cardUseCompatPadding="true"
                     android:layout_marginTop="@dimen/card_spacing"
                     android:layout_marginRight="@dimen/card_spacing"
 
-app:cardUseCompatPadding="true"
-                    >
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:id="@+id/historyItemLayout"

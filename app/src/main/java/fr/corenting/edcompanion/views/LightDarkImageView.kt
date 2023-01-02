@@ -25,12 +25,17 @@ class LightDarkImageView : AppCompatImageView {
 
     private fun commonInit() {
         if (ThemeUtils.isDarkThemeEnabled(context)) {
-            ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(
-                    ContextCompat.getColor(context, android.R.color.white)))
-        }
-        else {
-            ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(
-                    ContextCompat.getColor(context, android.R.color.black)))
+            ImageViewCompat.setImageTintList(
+                this, ColorStateList.valueOf(
+                    ContextCompat.getColor(context, android.R.color.white)
+                )
+            )
+        } else {
+            ImageViewCompat.setImageTintList(
+                this, ColorStateList.valueOf(
+                    ContextCompat.getColor(context, android.R.color.black)
+                )
+            )
         }
     }
 }

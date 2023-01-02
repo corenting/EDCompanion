@@ -13,7 +13,7 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 
 // Code from http://makovkastar.github.io/blog/2014/04/12/android-autocompletetextview-with-suggestions-from-a-web-service/
 class DelayAutoCompleteTextView(context: Context, attrs: AttributeSet) :
-        AppCompatAutoCompleteTextView(context, attrs) {
+    AppCompatAutoCompleteTextView(context, attrs) {
 
     private val mHandler: Handler = AutoCompleteHandler(this)
 
@@ -38,11 +38,14 @@ class DelayAutoCompleteTextView(context: Context, attrs: AttributeSet) :
 
     override fun performFiltering(text: CharSequence, keyCode: Int) {
         mHandler.removeMessages(MESSAGE_TEXT_CHANGED)
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(MESSAGE_TEXT_CHANGED, text),
-                DEFAULT_AUTOCOMPLETE_DELAY.toLong())
+        mHandler.sendMessageDelayed(
+            mHandler.obtainMessage(MESSAGE_TEXT_CHANGED, text),
+            DEFAULT_AUTOCOMPLETE_DELAY.toLong()
+        )
     }
 
-    private class AutoCompleteHandler(private val view: DelayAutoCompleteTextView) : Handler(Looper.getMainLooper()) {
+    private class AutoCompleteHandler(private val view: DelayAutoCompleteTextView) :
+        Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             view.performFiltering(msg)
         }

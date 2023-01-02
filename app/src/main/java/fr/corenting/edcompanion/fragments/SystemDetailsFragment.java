@@ -107,7 +107,7 @@ public class SystemDetailsFragment extends Fragment {
         binding.coordsTextView.setText(getString(R.string.coordinates_num, system.getX(),
                 system.getY(), system.getZ()));
         binding.allegianceTextView.setText(system.getAllegiance() != null ? system.getAllegiance() : getString(R.string.unknown));
-        binding.powerTextView.setText(system.getPower() != null ? String.format("%s (%s)", system.getPower(), system.getPowerState()): getString(R.string.unknown));
+        binding.powerTextView.setText(system.getPower() != null ? String.format("%s (%s)", system.getPower(), system.getPowerState()) : getString(R.string.unknown));
         binding.securityTextView.setText(system.getSecurity() != null ? system.getSecurity() : getString(R.string.unknown));
         binding.governmentTextView.setText(system.getGovernment() != null ? system.getGovernment() : getString(R.string.unknown));
         binding.controllingFactionTextView.setText(system.getControllingFaction() != null ? system.getControllingFaction() : getString(R.string.unknown));

@@ -2,7 +2,6 @@ package fr.corenting.edcompanion.network.retrofit
 
 import fr.corenting.edcompanion.models.apis.EDAPIV4.*
 import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse.SystemHistoryResponse
-import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityFinderResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

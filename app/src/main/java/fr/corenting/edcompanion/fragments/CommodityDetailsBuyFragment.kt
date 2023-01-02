@@ -1,11 +1,10 @@
 package fr.corenting.edcompanion.fragments
 
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-
 import fr.corenting.edcompanion.adapters.CommodityDetailsStationsAdapter
 import fr.corenting.edcompanion.models.events.CommodityDetailsBuy
 import fr.corenting.edcompanion.utils.NotificationsUtils
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class CommodityDetailsBuyFragment : AbstractListFragment<CommodityDetailsStationsAdapter>() {
     init {

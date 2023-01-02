@@ -18,8 +18,7 @@ public class EDSMDeserializer implements JsonDeserializer<EDSMSystemInformationR
             throws JsonParseException {
         if (element.isJsonArray()) {
             return null;
-        }
-        else {
+        } else {
             Gson gson = new Gson();
             return gson.fromJson(element.getAsJsonObject(), EDSMSystemInformationResponse.class);
         }

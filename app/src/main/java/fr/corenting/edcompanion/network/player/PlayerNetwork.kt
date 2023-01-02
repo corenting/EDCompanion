@@ -3,7 +3,7 @@ package fr.corenting.edcompanion.network.player
 import fr.corenting.edcompanion.models.*
 
 
-interface  PlayerNetwork {
+interface PlayerNetwork {
     fun isUsable(): Boolean
     fun getCommanderName(): String
 

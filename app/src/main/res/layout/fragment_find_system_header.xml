@@ -6,14 +6,14 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        style="?attr/materialCardViewElevatedStyle"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/card_spacing"
         android:layout_marginTop="@dimen/card_spacing"
         android:layout_marginRight="@dimen/card_spacing"
 
-app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:id="@+id/itemLayout"
@@ -55,7 +55,6 @@ app:cardUseCompatPadding="true">
                 android:id="@+id/findButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button"
                 android:layout_below="@id/systemInputView"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"

@@ -352,11 +352,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.21</b><br />
+            <b>Version 2.22</b><br />
             <ul>
-                <li>Fix missing landing pad sizes in commodity search</li><br />
-                <li>Fix click issues on GalNet and news items</li><br />
-                <li>Fix paragraphs in GalNet news</li><br />
+                <li>Update theme to Material 3</li><br />
+                <li>Fix some ships names in fleet tab</li><br />
             </ul>
         ]]>
     </string>

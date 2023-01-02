@@ -3,7 +3,6 @@ package fr.corenting.edcompanion.fragments;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommodityFinderAdapter;
 import fr.corenting.edcompanion.models.CommodityFinderResult;
 import fr.corenting.edcompanion.models.events.CommodityFinderSearch;

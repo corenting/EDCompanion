@@ -1,5 +1,7 @@
 package fr.corenting.edcompanion.adapters;
 
+import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +19,6 @@ import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.databinding.ListItemCommodityDetailsStationBinding;
 import fr.corenting.edcompanion.models.CommodityBestPricesStationResult;
 import fr.corenting.edcompanion.utils.MathUtils;
-
-import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class CommodityDetailsStationsAdapter extends androidx.recyclerview.widget.ListAdapter<CommodityBestPricesStationResult,
         CommodityDetailsStationsAdapter.stationViewHolder> {

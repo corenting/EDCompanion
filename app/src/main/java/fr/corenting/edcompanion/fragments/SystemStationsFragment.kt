@@ -1,12 +1,11 @@
 package fr.corenting.edcompanion.fragments
 
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-
 import fr.corenting.edcompanion.activities.SystemDetailsActivity
 import fr.corenting.edcompanion.adapters.SystemStationsAdapter
 import fr.corenting.edcompanion.models.events.SystemStations
 import fr.corenting.edcompanion.utils.NotificationsUtils
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class SystemStationsFragment : AbstractListFragment<SystemStationsAdapter>() {
     init {

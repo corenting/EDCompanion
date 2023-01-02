@@ -105,8 +105,7 @@ public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsAr
         // Adapt behavior if details or not
         if (isDetailsView) {
             holder.viewBinding.descriptionTextView.setMaxLines(Integer.MAX_VALUE);
-        }
-        else {
+        } else {
             holder.viewBinding.descriptionTextView.setOnClickListener(view -> {
                 TextView textView = (TextView) view;
                 //This condition will satisfy only when it is not an autolinked text

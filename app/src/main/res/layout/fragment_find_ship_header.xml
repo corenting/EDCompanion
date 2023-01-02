@@ -6,7 +6,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        style="?attr/materialCardViewElevatedStyle"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/card_spacing"
@@ -72,13 +72,13 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/findButton"
-                style="@style/Widget.Material3.Button"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/commodityInputLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
-                android:text="@string/find"/>
+                android:text="@string/find" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

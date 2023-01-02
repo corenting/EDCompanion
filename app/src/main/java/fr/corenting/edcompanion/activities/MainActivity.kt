@@ -3,24 +3,24 @@ package fr.corenting.edcompanion.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.shape.MaterialShapeDrawable
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.databinding.ActivityMainBinding
 import fr.corenting.edcompanion.fragments.*
 import fr.corenting.edcompanion.utils.*
 import fr.corenting.edcompanion.view_models.CommanderViewModel
 import fr.corenting.edcompanion.view_models.ServerStatusViewModel
+import java.security.AccessController.getContext
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -80,32 +80,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Set listener on server status text to refresh it, and set theme
         val drawerSubtitleTextView = binding.navView.getHeaderView(0)
             .findViewById<TextView>(R.id.drawerSubtitleTextView)
-        binding.navView.itemIconTintList = null
-        if (ThemeUtils.isDarkThemeEnabled(this)) {
-            val drawerHeader = binding.navView.getHeaderView(0)
-                .findViewById<LinearLayout>(R.id.headerLinearLayout)
-            drawerHeader.setBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.primaryColorDark
-                )
-            )
-
-            // Fix text color
-            val drawerTitleTextView = drawerHeader.findViewById<TextView>(R.id.drawerTitleTextView)
-            drawerTitleTextView.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    android.R.color.white
-                )
-            )
-            drawerSubtitleTextView.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    android.R.color.white
-                )
-            )
-        }
         drawerSubtitleTextView.setOnClickListener { updateServerStatus() }
 
         // Push notifications setup
@@ -117,13 +91,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Server status
         val serverStatusModel: ServerStatusViewModel by viewModels()
         serverStatusViewModel = serverStatusModel
-        serverStatusViewModel.getServerStatus().observe(this, { status ->
+        serverStatusViewModel.getServerStatus().observe(this) { status ->
             val content: String =
                 if (status?.error == null && status.data != null) status.data.status else getString(
                     R.string.unknown
                 )
             drawerSubtitleTextView.text = getString(R.string.server_status, content)
-        })
+        }
         serverStatusViewModel.fetchServerStatus()
 
         // Get commander position in background to update cached value
@@ -159,7 +133,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun updateActionBar() {
         supportActionBar?.subtitle = currentSubtitle
         title = currentTitle
-        fixToolbarElevation()
     }
 
     private fun updateServerStatus() {
@@ -170,8 +143,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun switchOnNavigation(title: String, id: Int): Boolean {
-        expandToolbar()
-
         // Set title and subtitle default values
         if (id != R.id.nav_settings && id != R.id.nav_about) {
             currentTitle = title
@@ -286,20 +257,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 tag
             )
             else -> ViewUtils.switchFragment(fragmentManager, CommunityGoalsFragment(), tag)
-        }
-    }
-
-    private fun expandToolbar() {
-        val appBarLayout = findViewById<AppBarLayout>(R.id.appBar)
-        appBarLayout?.setExpanded(true)
-    }
-
-    private fun fixToolbarElevation() {
-        // Set toolbar elevation to prevent shadow with tabLayout
-        if (currentFragmentTag == CommanderFragment.COMMANDER_FRAGMENT) {
-            ViewUtils.setToolbarElevation(binding.includeAppBar.appBar, 0f)
-        } else {
-            ViewUtils.setToolbarElevation(binding.includeAppBar.appBar, ViewUtils.dpToPx(this, 4))
         }
     }
 }

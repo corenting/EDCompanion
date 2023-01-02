@@ -1,5 +1,7 @@
 package fr.corenting.edcompanion.adapters;
 
+import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +23,6 @@ import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.events.ShipFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
-
-import static android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
 
 public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderViewHolder,
         ShipFinderAdapter.ResultViewHolder, ShipFinderResult> {

@@ -21,11 +21,17 @@ object ChangelogUtils {
 
         // Else show dialog
         val dialog = MaterialAlertDialogBuilder(c)
-                .setTitle(R.string.changelog_title)
-                .setMessage(HtmlCompat.fromHtml(c.getString(R.string.changelog_message), HtmlCompat.FROM_HTML_MODE_LEGACY))
-                .setPositiveButton(android.R.string.ok
-                ) { dialogInterface, _ -> dialogInterface.dismiss() }
-                .create()
+            .setTitle(R.string.changelog_title)
+            .setMessage(
+                HtmlCompat.fromHtml(
+                    c.getString(R.string.changelog_message),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
+            )
+            .setPositiveButton(
+                android.R.string.ok
+            ) { dialogInterface, _ -> dialogInterface.dismiss() }
+            .create()
         dialog.show()
 
         SettingsUtils.setInt(c, changelogKey, current)

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.corenting.edcompanion.models.CommoditiesListResult;
-import fr.corenting.edcompanion.models.CommodityDetailsResult;
 import fr.corenting.edcompanion.models.CommodityBestPricesStationResult;
+import fr.corenting.edcompanion.models.CommodityDetailsResult;
 import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityBestPricesResponse;
 import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityWithPriceResponse;
 import fr.corenting.edcompanion.models.events.CommodityBestPrices;

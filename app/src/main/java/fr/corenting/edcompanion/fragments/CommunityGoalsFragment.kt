@@ -14,14 +14,6 @@ import fr.corenting.edcompanion.view_models.CommanderViewModel
 import fr.corenting.edcompanion.view_models.DistanceCalculatorViewModel
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.util.*
-import androidx.recyclerview.widget.SimpleItemAnimator
-import androidx.recyclerview.widget.RecyclerView.ItemAnimator
-
-
-
-
-
 
 
 class CommunityGoalsFragment : AbstractListFragment<CommunityGoalsAdapter>() {

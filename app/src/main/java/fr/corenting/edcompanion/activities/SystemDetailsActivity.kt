@@ -1,5 +1,6 @@
 package fr.corenting.edcompanion.activities
 
+import android.os.Bundle
 import androidx.fragment.app.FragmentPagerAdapter
 
 import fr.corenting.edcompanion.adapters.SystemDetailsPagerAdapter

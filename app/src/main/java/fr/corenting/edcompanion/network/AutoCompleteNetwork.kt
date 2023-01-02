@@ -2,7 +2,6 @@ package fr.corenting.edcompanion.network
 
 import android.content.Context
 import fr.corenting.edcompanion.singletons.RetrofitSingleton
-import java.util.*
 
 object AutoCompleteNetwork {
 

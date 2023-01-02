@@ -25,7 +25,10 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
 
     override fun isUsable(): Boolean {
         val enabled =
-            SettingsUtils.getBoolean(context, context.getString(R.string.settings_cmdr_inara_enable))
+            SettingsUtils.getBoolean(
+                context,
+                context.getString(R.string.settings_cmdr_inara_enable)
+            )
         return enabled && !apiKey.isNullOrEmpty()
     }
 

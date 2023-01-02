@@ -6,13 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.core.app.ActivityOptionsCompat;
-
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityOptionsCompat;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.activities.SystemDetailsActivity;

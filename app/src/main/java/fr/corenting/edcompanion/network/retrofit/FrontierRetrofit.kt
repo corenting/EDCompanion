@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface FrontierRetrofit {
     @GET("profile")
-    suspend fun  getProfileRaw(): ResponseBody
+    suspend fun getProfileRaw(): ResponseBody
 }

@@ -68,8 +68,7 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
 
     @Override
     public int getItemCount() {
-        if (results == null)
-        {
+        if (results == null) {
             return 1;
         }
         return results.size() + 1;
@@ -94,10 +93,12 @@ public abstract class FinderAdapter<THeaderViewHolder, TResultViewHolder, TDataT
         });
     }
 
-    protected abstract RecyclerView.ViewHolder getResultViewHolder(@NonNull  ViewGroup parent);
-    protected abstract RecyclerView.ViewHolder getHeaderViewHolder(@NonNull  ViewGroup parent);
+    protected abstract RecyclerView.ViewHolder getResultViewHolder(@NonNull ViewGroup parent);
+
+    protected abstract RecyclerView.ViewHolder getHeaderViewHolder(@NonNull ViewGroup parent);
 
     protected abstract void bindResultViewHolder(TResultViewHolder holder, int adapterPosition);
+
     protected abstract void bindHeaderViewHolder(THeaderViewHolder holder);
 
 }

@@ -21,7 +21,7 @@ class EDSMPlayer(val context: Context) : PlayerNetwork {
     override fun getCommanderName(): String {
         return commanderName
     }
-    
+
     override fun isUsable(): Boolean {
         val enabled =
             SettingsUtils.getBoolean(context, context.getString(R.string.settings_cmdr_edsm_enable))

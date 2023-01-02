@@ -3,7 +3,10 @@ package fr.corenting.edcompanion.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.preference.*
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.activities.LoginActivity
 import fr.corenting.edcompanion.utils.NotificationsUtils
