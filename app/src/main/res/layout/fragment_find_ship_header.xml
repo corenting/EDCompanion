@@ -6,12 +6,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
+        style="?attr/materialCardViewElevatedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/card_spacing"
         android:layout_marginTop="@dimen/card_spacing"
         android:layout_marginRight="@dimen/card_spacing"
-        app:cardCornerRadius="@dimen/card_corner_radius"
+
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
@@ -54,7 +55,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commodityInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/systemInputView"
@@ -63,7 +64,7 @@
 
                 <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
                     android:id="@+id/shipInputEditText"
-                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textNoSuggestions" />
@@ -71,12 +72,13 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/findButton"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/commodityInputLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
-                android:text="@string/find" />
+                android:text="@string/find"/>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

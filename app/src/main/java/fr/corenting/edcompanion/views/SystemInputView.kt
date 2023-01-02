@@ -47,7 +47,6 @@ class SystemInputView : RelativeLayout {
                     -1
                 )
                 if (hintRef != -1) {
-                    binding.systemInputEditText.setHint(hintRef)
                     binding.systemInputLayout.hint = context.getString(hintRef)
                 }
 
@@ -69,10 +68,13 @@ class SystemInputView : RelativeLayout {
         if (CommanderUtils.hasPositionData(context)) {
             binding.systemInputLayout.isEndIconVisible = true
             binding.systemInputLayout.setEndIconOnClickListener {
-                binding.systemInputEditText.setText(CommanderUtils.getCachedCurrentCommanderPosition(context))
+                binding.systemInputEditText.setText(
+                    CommanderUtils.getCachedCurrentCommanderPosition(
+                        context
+                    )
+                )
             }
-        }
-        else {
+        } else {
             binding.systemInputLayout.isEndIconVisible = false
         }
 

@@ -11,7 +11,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/systemInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/system"
@@ -24,7 +24,7 @@
 
             <fr.corenting.edcompanion.views.DelayAutoCompleteTextView
                 android:id="@+id/systemInputEditText"
-                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textNoSuggestions" />

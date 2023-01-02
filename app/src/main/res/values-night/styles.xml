@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/primaryColorDark</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColorDark</item>
-        <item name="colorPrimaryVariant">@color/primaryLightColorDark</item>
-        <item name="colorSecondary">@color/secondaryColorDark</item>
-        <item name="colorSecondaryVariant">@color/secondaryLightColorDark</item>
-        <item name="actionBarTheme">@style/SettingsActionBar</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-    </style>
-
-    <style name="SettingsActionBar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
     </style>
 </resources>

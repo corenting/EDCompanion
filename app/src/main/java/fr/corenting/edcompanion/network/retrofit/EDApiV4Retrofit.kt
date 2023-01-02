@@ -72,7 +72,7 @@ interface EDApiV4Retrofit {
 
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/find")
-    open fun findCommodity(
+    fun findCommodity(
         @Query("reference_system") system: String,
         @Query("commodity") commodity: String,
         @Query("min_landing_pad_size") minLandingPad: String,

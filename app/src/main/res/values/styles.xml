@@ -1,19 +1,6 @@
 <resources>
-
-    <style name="AppTheme" parent="BaseTheme">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="AppDetailsTheme" parent="BaseTheme">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
-
-    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
-        <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+
     </style>
 </resources>
