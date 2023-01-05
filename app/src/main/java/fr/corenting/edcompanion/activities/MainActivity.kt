@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     companion object {
         private const val KEY_CURRENT_TITLE = "CURRENT_TITLE"
-        private const val KEY_CURRENT_SUBTITLE = "CURRENT_SUBTITLE"
         private const val KEY_CURRENT_TAG = "CURRENT_TAG"
     }
 
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var fragmentManager: FragmentManager
     private lateinit var currentTitle: CharSequence
-    private lateinit var currentSubtitle: CharSequence
     private lateinit var currentFragmentTag: String
 
     private lateinit var serverStatusViewModel: ServerStatusViewModel
@@ -70,7 +68,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             switchOnNavigation(getString(R.string.galnet), R.id.nav_galnet_news)
         } else {
             currentTitle = savedInstanceState.getCharSequence(KEY_CURRENT_TITLE).toString()
-            currentSubtitle = savedInstanceState.getCharSequence(KEY_CURRENT_SUBTITLE).toString()
             currentFragmentTag = savedInstanceState.getString(KEY_CURRENT_TAG).toString()
             val fragment = fragmentManager.findFragmentByTag(currentFragmentTag)
             ViewUtils.switchFragment(fragmentManager, fragment, currentFragmentTag)
@@ -107,7 +104,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putCharSequence(KEY_CURRENT_TITLE, currentTitle)
-        outState.putCharSequence(KEY_CURRENT_SUBTITLE, currentSubtitle)
         outState.putString(KEY_CURRENT_TAG, currentFragmentTag)
         super.onSaveInstanceState(outState)
     }
@@ -131,7 +127,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun updateActionBar() {
-        supportActionBar?.subtitle = currentSubtitle
         title = currentTitle
     }
 
@@ -146,13 +141,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Set title and subtitle default values
         if (id != R.id.nav_settings && id != R.id.nav_about) {
             currentTitle = title
-            currentSubtitle = ""
         }
 
         when (id) {
             R.id.nav_cg -> {
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG)
-                currentSubtitle = getString(R.string.inara_credits)
             }
             R.id.nav_cmdr -> {
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT)
@@ -170,23 +163,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_systems -> {
                 switchFragment(SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG)
-                currentSubtitle = getString(R.string.edsm_credits)
             }
             R.id.nav_distance_calculator -> {
                 switchFragment(DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG)
-                currentSubtitle = getString(R.string.eddb_credits)
             }
             R.id.nav_commodity_finder -> {
                 switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG)
-                currentSubtitle = getString(R.string.eddb_eddn_credits)
             }
             R.id.nav_commodities_list -> {
                 switchFragment(CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG)
-                currentSubtitle = getString(R.string.eddb_eddn_credits)
             }
             R.id.nav_ship_finder -> {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG)
-                currentSubtitle = getString(R.string.eddb_credits)
             }
             R.id.nav_about -> {
                 val i = Intent(this, AboutActivity::class.java)

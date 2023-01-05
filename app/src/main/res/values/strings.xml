@@ -59,12 +59,6 @@
     <string name="no_commander_accounts_linked_error_settings_button">Open settings</string>
     <string name="error">Error</string>
 
-    <!--Subtitles-->
-    <string name="inara_credits">Data provided by inara.cz</string>
-    <string name="eddb_credits">Data provided by eddb.io</string>
-    <string name="eddb_eddn_credits">Data provided by eddb.io and EDDN</string>
-    <string name="edsm_credits">Data provided by edsm.net</string>
-
     <!--Commander-->
     <string name="credits">%1$s credits</string>
     <string name="credits_with_loan">%1$s credits (with a %2$s credits loan)</string>
@@ -274,7 +268,7 @@
         Ships pictures from <a href="https://edsm.net">EDSM</a>, available on <a href="https://github.com/EDSM-NET/ED-Ships-ScreenShots">Github</a>
         ]]>
     </string>
-    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources."</string>
+    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources.\n\n See edcompanion.corenting.fr for more informations (help, data sourced used etc.)."</string>
     <string name="about_libs_title">Libraries and code used</string>
     <string name="about_icons_title">Icons used</string>
     <string name="about_contact_me_title">Contact me</string>
