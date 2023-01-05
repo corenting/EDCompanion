@@ -3,12 +3,12 @@ title: EDCompanion
 layout: home
 ---
 
-An Android companion app for Elite Dangerous.
+An unofficial Android companion app for Elite : Dangerous.
 
 
 # Download the app
 
-You can download the app on Google Play Store (recommended : auto-updates and smaller download size) here :
+You can download the app on Google Play Store (recommended: auto-updates and smaller download size) here :
 
 [![Play Store](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=fr.corenting.edcompanion&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 
@@ -26,6 +26,15 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 - Systems search (see system informations, factions informations and influence history)
 - Material design (light or dark theme)
 - No ads, free and open-source
+
+# Data sources
+
+For the galaxy data (stations, systems, commodities, ships etc.), the application relies on the following third-part data sources:
+- [EDDB API / Elite BGS](https://elitebgs.app/eddb/)
+- [EDSM](https://www.edsm.net/)
+- [FuelRats](https://fuelrats.com)
+- [Inara](https://inara.cz/)
+- [Spansh](https://spansh.co.uk)
 
 # Help
 
