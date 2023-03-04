@@ -346,10 +346,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.22</b><br />
+            <b>Version 2.23</b><br />
             <ul>
-                <li>Update theme to Material 3</li><br />
-                <li>Fix some ships names in fleet tab</li><br />
+                <li>Fix commander tab login with Frontier API: the login was broken due a change in the API behavior</li><br />
             </ul>
         ]]>
     </string>

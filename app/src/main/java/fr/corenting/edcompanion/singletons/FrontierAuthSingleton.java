@@ -87,7 +87,7 @@ public class FrontierAuthSingleton implements Serializable {
 
         return ctx.getString(R.string.frontier_auth_base) + "auth" +
                 "?audience=all" +
-                "&scope=capi" +
+                "&scope=auth%20capi" +
                 "&response_type=code" +
                 "&state=" + requestState +
                 "&client_id=" + BuildConfig.FRONTIER_AUTH_CLIENT_ID +
