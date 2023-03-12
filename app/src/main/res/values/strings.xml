@@ -346,9 +346,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.23</b><br />
+            <b>Version 2.24</b><br />
             <ul>
-                <li>Fix commander tab login with Frontier API: the login was broken due a change in the API behavior</li><br />
+                <li>Fix community goals push notifications</li><br />
             </ul>
         ]]>
     </string>
@@ -377,5 +377,12 @@
 
     <!--Commander position cache-->
     <string name="commander_position_cache_key" translatable="false">commander_position_cache_key</string>
+
+    <!--Asking for push permissions-->
+    <string name="permission_needed_for_push_notifications_title">Permission needed for push notifications</string>
+    <string name="permission_needed_for_push_notifications_message">For community goals notifications to work, you need to grant the push notification permission.</string>
+    <string name="permission_refused_for_push_notifications_title">Permission refused for push notifications</string>
+    <string name="permission_refused_for_push_notifications_message">You didn\'t grant the permission or disabled it in Android settings, so push notifications will not work. You can re-enable it later if you want in the Android application settings.</string>
+    <string name="no_thanks">No thanks</string>
 
 </resources>

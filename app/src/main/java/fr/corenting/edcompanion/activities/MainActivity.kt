@@ -11,16 +11,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.shape.MaterialShapeDrawable
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.databinding.ActivityMainBinding
 import fr.corenting.edcompanion.fragments.*
 import fr.corenting.edcompanion.utils.*
 import fr.corenting.edcompanion.view_models.CommanderViewModel
 import fr.corenting.edcompanion.view_models.ServerStatusViewModel
-import java.security.AccessController.getContext
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

@@ -2,15 +2,15 @@ package fr.corenting.edcompanion.services
 
 import android.app.PendingIntent
 import android.content.Intent
-import android.graphics.BitmapFactory
+import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.RemoteMessage
-import com.google.gson.JsonParser
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.activities.MainActivity
 import fr.corenting.edcompanion.utils.NotificationsUtils
+import java.lang.Integer.parseInt
 
 class FirebaseMessagingService : com.google.firebase.messaging.FirebaseMessagingService() {
 
@@ -37,27 +37,24 @@ class FirebaseMessagingService : com.google.firebase.messaging.FirebaseMessaging
 
     private fun handlePushMessage(remoteMessage: RemoteMessage) {
         val type = remoteMessage.from?.substring(8)
-        val json = JsonParser.parseString(remoteMessage.data["goal"]).asJsonObject
-        val goalTitle = json.get("title").asString
-        val currentTier = json.get("tier_progress").asJsonObject.get("current").asInt
+        val goalTitle = remoteMessage.data["title"]
+        val currentTier = parseInt(remoteMessage.data["current_tier"]!!)
 
-        val channelId = NotificationsUtils.createNotificationChannel(this, type)
+        val channelId = NotificationsUtils.getChannelNameAndDescription(this, type).first
 
         // Intent to launch app
+        var intentFlags = PendingIntent.FLAG_UPDATE_CURRENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            intentFlags = intentFlags or PendingIntent.FLAG_IMMUTABLE
+        }
         val intent = Intent(this, MainActivity::class.java)
         val contentIntent = PendingIntent.getActivity(
             this, 0,
-            intent, PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val largeIcon = BitmapFactory.decodeResource(
-            resources,
-            R.drawable.ic_notification
+            intent, intentFlags
         )
 
         val mBuilder = NotificationCompat.Builder(this, channelId)
             .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setLargeIcon(largeIcon)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(goalTitle)
             .setAutoCancel(true)

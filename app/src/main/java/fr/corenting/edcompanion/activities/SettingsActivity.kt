@@ -5,7 +5,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
-import com.google.android.material.shape.MaterialShapeDrawable
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.fragments.SettingsFragment
 import fr.corenting.edcompanion.utils.ThemeUtils

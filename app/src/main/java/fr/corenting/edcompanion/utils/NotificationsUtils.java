@@ -90,12 +90,18 @@ public class NotificationsUtils {
                 ConnectionResult.SUCCESS;
     }
 
-    public static String createNotificationChannel(Context c, String type) {
+    public static void createNotificationsChannelsIfNeeded(Context c) {
+        createNotificationChannel(c, newGoalTopic);
+        createNotificationChannel(c, newTierTopic);
+        createNotificationChannel(c, finishedGoalTopic);
+    }
+
+    private static void createNotificationChannel(Context c, String type) {
         Pair<String, String> nameAndDesc = getChannelNameAndDescription(c, type);
 
         // Ignore on Android <= O, but return channel id anyway
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            return nameAndDesc.first;
+            return;
         }
 
         NotificationManager notificationManager =
@@ -105,10 +111,9 @@ public class NotificationsUtils {
                 nameAndDesc.first, importance);
         mChannel.setDescription(nameAndDesc.second);
         notificationManager.createNotificationChannel(mChannel);
-        return nameAndDesc.first;
     }
 
-    private static Pair<String, String> getChannelNameAndDescription(Context c, String type) {
+    public static Pair<String, String> getChannelNameAndDescription(Context c, String type) {
         switch (type) {
             case newGoalTopic:
                 return new Pair<>(c.getString(R.string.notifications_new_goal_channel), c.getString(R.string.notifications_new_goal_channel_description));
