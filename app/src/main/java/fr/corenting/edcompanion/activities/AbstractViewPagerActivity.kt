@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentPagerAdapter
-import com.google.android.material.shape.MaterialShapeDrawable
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.databinding.ActivityFragmentsWithTabsBinding
 import fr.corenting.edcompanion.utils.ThemeUtils

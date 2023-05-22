@@ -2,7 +2,12 @@ package fr.corenting.edcompanion.network.player
 
 import android.content.Context
 import fr.corenting.edcompanion.R
-import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.CommanderCredits
+import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.CommanderRank
+import fr.corenting.edcompanion.models.CommanderRanks
+import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.network.retrofit.EDSMRetrofit
 import fr.corenting.edcompanion.singletons.RetrofitSingleton
 import fr.corenting.edcompanion.utils.SettingsUtils

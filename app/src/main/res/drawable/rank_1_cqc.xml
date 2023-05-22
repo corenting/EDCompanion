@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:viewportWidth="720.7391"
-    android:viewportHeight="740.7562"
     android:width="720.73904537406dp"
-    android:height="740.75614330995dp">
+    android:height="740.75614330995dp"
+    android:viewportWidth="720.7391"
+    android:viewportHeight="740.7562">
     <path
+        android:fillColor="#8a050c"
         android:pathData="M360.37 0l-20.02 100.103-100.103 20.02 100.103 20.02 20.02 100.103 20.02-100.103 100.103-20.02-100.103-20.02z"
-        android:fillColor="#8a050c"
         android:strokeLineJoin="round" />
     <path
-        android:pathData="M80.082 580.592l-16.016 64.066L0 660.674l64.066 16.016 16.016 64.066 16.016-64.066 64.066-16.016-64.066-16.016z"
-        android:fillColor="#8a050c" />
+        android:fillColor="#8a050c"
+        android:pathData="M80.082 580.592l-16.016 64.066L0 660.674l64.066 16.016 16.016 64.066 16.016-64.066 64.066-16.016-64.066-16.016z" />
     <path
+        android:fillColor="#8a050c"
         android:pathData="M22823.404 9370.715l-16.016-64.066-64.066-16.016 64.066-16.016 16.016-64.066 16.016 64.066 64.066 16.016-64.066 16.016z"
-        android:fillColor="#8a050c"
         android:strokeLineJoin="round" />
     <path
+        android:fillColor="#ff0507"
         android:pathData="M323.057 254.836l-6.045 77.806 10.182 9.087v26.535l33.183 29.147 33.167-29.147v-26.535l10.182-9.087-6.045-77.806-19.473 42.465-17.83 13.38-17.854-13.38zm-9.447 125.292l2.651 66.545 44.116 38.149 44.092-38.149 2.659-66.545-46.75 40.815zm-76.696 80.332l-44.827 120.365 168.29 153.892-44.28-225.403-46.376-47.525zm123.463 274.258l168.274-153.892-44.835-120.365-32.8 1.33-46.376 47.525zm-23.837-227.71l23.837 120.663 23.821-120.663h-23.821z"
-        android:strokeLineJoin="round"
-        android:fillColor="#ff0507" />
+        android:strokeLineJoin="round" />
 </vector>

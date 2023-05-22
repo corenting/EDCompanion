@@ -14,10 +14,19 @@ import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.activities.LoginActivity
 import fr.corenting.edcompanion.activities.SettingsActivity
 import fr.corenting.edcompanion.databinding.FragmentCommanderStatusBinding
-import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.CommanderCredits
+import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.CommanderRanks
+import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.models.exceptions.DataNotInitializedException
 import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException
-import fr.corenting.edcompanion.utils.*
+import fr.corenting.edcompanion.utils.CommanderUtils
+import fr.corenting.edcompanion.utils.InternalNamingUtils
+import fr.corenting.edcompanion.utils.MathUtils
+import fr.corenting.edcompanion.utils.MiscUtils
+import fr.corenting.edcompanion.utils.NotificationsUtils
+import fr.corenting.edcompanion.utils.RankUtils
 import fr.corenting.edcompanion.view_models.CommanderViewModel
 
 class CommanderStatusFragment : Fragment() {

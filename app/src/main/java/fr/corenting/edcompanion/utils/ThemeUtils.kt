@@ -16,14 +16,17 @@ object ThemeUtils {
             valuesArray[1] -> {
                 AppCompatDelegate.MODE_NIGHT_NO
             }
+
             valuesArray[2] -> {
                 AppCompatDelegate.MODE_NIGHT_YES
             }
+
             else -> {
                 when {
                     Build.VERSION.SDK_INT <= Build.VERSION_CODES.P -> {
                         AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
                     }
+
                     else -> {
                         AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
                     }
@@ -42,9 +45,11 @@ object ThemeUtils {
                     Configuration.UI_MODE_NIGHT_YES -> {
                         true
                     }
+
                     else -> false
                 }
             }
+
             else -> {
                 true
             }
