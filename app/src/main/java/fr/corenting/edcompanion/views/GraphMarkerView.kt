@@ -15,7 +15,7 @@ import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
-import java.util.*
+import java.util.Locale
 
 
 class GraphMarkerView(context: Context?) : MarkerView(context, R.layout.view_marker) {

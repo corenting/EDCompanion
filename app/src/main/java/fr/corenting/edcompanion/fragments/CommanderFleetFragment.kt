@@ -16,7 +16,7 @@ class CommanderFleetFragment : AbstractListFragment<CommanderFleetAdapter>() {
     }
 
     override fun getData() {
-        viewModel.getFleet().observe(viewLifecycleOwner, { result ->
+        viewModel.getFleet().observe(viewLifecycleOwner) { result ->
             endLoading(false)
 
             if (result?.data == null || result.error != null) {
@@ -29,7 +29,7 @@ class CommanderFleetFragment : AbstractListFragment<CommanderFleetAdapter>() {
                 recyclerViewAdapter.submitList(result.data.ships)
             }
 
-        })
+        }
         viewModel.fetchFleet()
     }
 

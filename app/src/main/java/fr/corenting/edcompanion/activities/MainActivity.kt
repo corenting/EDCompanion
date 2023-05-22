@@ -14,8 +14,21 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.databinding.ActivityMainBinding
-import fr.corenting.edcompanion.fragments.*
-import fr.corenting.edcompanion.utils.*
+import fr.corenting.edcompanion.fragments.CommanderFragment
+import fr.corenting.edcompanion.fragments.CommoditiesListFragment
+import fr.corenting.edcompanion.fragments.CommodityFinderFragment
+import fr.corenting.edcompanion.fragments.CommunityGoalsFragment
+import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment
+import fr.corenting.edcompanion.fragments.GalnetFragment
+import fr.corenting.edcompanion.fragments.NewsFragment
+import fr.corenting.edcompanion.fragments.ShipFinderFragment
+import fr.corenting.edcompanion.fragments.SystemFinderFragment
+import fr.corenting.edcompanion.utils.ChangelogUtils
+import fr.corenting.edcompanion.utils.CommanderUtils
+import fr.corenting.edcompanion.utils.HideKeyboardDrawerListener
+import fr.corenting.edcompanion.utils.NotificationsUtils
+import fr.corenting.edcompanion.utils.ThemeUtils
+import fr.corenting.edcompanion.utils.ViewUtils
 import fr.corenting.edcompanion.view_models.CommanderViewModel
 import fr.corenting.edcompanion.view_models.ServerStatusViewModel
 
@@ -144,6 +157,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_cg -> {
                 switchFragment(CommunityGoalsFragment.COMMUNITY_GOALS_FRAGMENT_TAG)
             }
+
             R.id.nav_cmdr -> {
                 switchFragment(CommanderFragment.COMMANDER_FRAGMENT)
                 val commanderName = CommanderUtils.getCommanderName(this)
@@ -152,32 +166,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 else
                     commanderName
             }
+
             R.id.nav_galnet_news -> {
                 switchFragment(GalnetFragment.GALNET_FRAGMENT_TAG)
             }
+
             R.id.nav_news -> {
                 switchFragment(NewsFragment.NEWS_FRAGMENT_TAG)
             }
+
             R.id.nav_systems -> {
                 switchFragment(SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG)
             }
+
             R.id.nav_distance_calculator -> {
                 switchFragment(DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG)
             }
+
             R.id.nav_commodity_finder -> {
                 switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG)
             }
+
             R.id.nav_commodities_list -> {
                 switchFragment(CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG)
             }
+
             R.id.nav_ship_finder -> {
                 switchFragment(ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG)
             }
+
             R.id.nav_about -> {
                 val i = Intent(this, AboutActivity::class.java)
                 startActivity(i)
                 return false
             }
+
             R.id.nav_settings -> {
                 val i = Intent(this, SettingsActivity::class.java)
                 startActivity(i)
@@ -206,41 +229,49 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 GalnetFragment(),
                 tag
             )
+
             NewsFragment.NEWS_FRAGMENT_TAG -> ViewUtils.switchFragment(
                 fragmentManager,
                 NewsFragment(),
                 tag
             )
+
             SystemFinderFragment.SYSTEM_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
                 fragmentManager,
                 SystemFinderFragment(),
                 tag
             )
+
             CommanderFragment.COMMANDER_FRAGMENT -> ViewUtils.switchFragment(
                 fragmentManager,
                 CommanderFragment(),
                 tag
             )
+
             DistanceCalculatorFragment.DISTANCE_CALCULATOR_FRAGMENT_TAG -> ViewUtils.switchFragment(
                 fragmentManager,
                 DistanceCalculatorFragment(),
                 tag
             )
+
             ShipFinderFragment.SHIP_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
                 fragmentManager,
                 ShipFinderFragment(),
                 tag
             )
+
             CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
                 fragmentManager,
                 CommodityFinderFragment(),
                 tag
             )
+
             CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG -> ViewUtils.switchFragment(
                 fragmentManager,
                 CommoditiesListFragment(),
                 tag
             )
+
             else -> ViewUtils.switchFragment(fragmentManager, CommunityGoalsFragment(), tag)
         }
     }

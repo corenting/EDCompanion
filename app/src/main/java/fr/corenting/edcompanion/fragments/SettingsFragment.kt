@@ -197,7 +197,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
 
         private fun bindPreferenceSummaryToValue(preference: Preference) { // Set the listener to watch for value changes.
-            preference?.onPreferenceChangeListener = preferenceChangeListener
+            preference.onPreferenceChangeListener = preferenceChangeListener
 
             // Trigger the listener immediately with the preference's current value.
             preferenceChangeListener.onPreferenceChange(

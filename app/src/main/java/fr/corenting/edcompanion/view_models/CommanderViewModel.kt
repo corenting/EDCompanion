@@ -5,7 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.CommanderCredits
+import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.CommanderRanks
+import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.models.exceptions.DataNotInitializedException
 import fr.corenting.edcompanion.network.player.EDSMPlayer
 import fr.corenting.edcompanion.network.player.FrontierPlayer

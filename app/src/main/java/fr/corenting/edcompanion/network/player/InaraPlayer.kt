@@ -3,7 +3,12 @@ package fr.corenting.edcompanion.network.player
 import android.content.Context
 import fr.corenting.edcompanion.BuildConfig
 import fr.corenting.edcompanion.R
-import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.CommanderCredits
+import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.CommanderRank
+import fr.corenting.edcompanion.models.CommanderRanks
+import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileRequestBody
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileRequestBody.InaraRequestBodyEvent
 import fr.corenting.edcompanion.models.apis.Inara.InaraProfileRequestBody.InaraRequestBodyEvent.InaraRequestBodyEventData
@@ -79,6 +84,7 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
                             (rank.RankProgress * 100).toInt()
                         )
                     }
+
                     "trade" -> {
                         tradeRank = CommanderRank(
                             context.resources
@@ -87,6 +93,7 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
                             (rank.RankProgress * 100).toInt()
                         )
                     }
+
                     "exploration" -> {
                         explorationRank = CommanderRank(
                             context.resources
@@ -95,6 +102,7 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
                             (rank.RankProgress * 100).toInt()
                         )
                     }
+
                     "cqc" -> {
                         cqcRank = CommanderRank(
                             context.resources
@@ -103,6 +111,7 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
                             (rank.RankProgress * 100).toInt()
                         )
                     }
+
                     "empire" -> {
                         empireRank = CommanderRank(
                             context.resources
@@ -111,6 +120,7 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
                             (rank.RankProgress * 100).toInt()
                         )
                     }
+
                     "federation" -> {
                         federationRank = CommanderRank(
                             context.resources

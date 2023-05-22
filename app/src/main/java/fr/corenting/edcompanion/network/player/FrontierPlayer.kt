@@ -6,7 +6,13 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import fr.corenting.edcompanion.R
-import fr.corenting.edcompanion.models.*
+import fr.corenting.edcompanion.models.CommanderCredits
+import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.CommanderRank
+import fr.corenting.edcompanion.models.CommanderRanks
+import fr.corenting.edcompanion.models.ProxyResult
+import fr.corenting.edcompanion.models.Ship
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse.FrontierProfileCommanderRankResponse
 import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException

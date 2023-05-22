@@ -52,10 +52,12 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
                             context,
                             constraint.toString()
                         )
+
                         TYPE_AUTOCOMPLETE_SHIPS -> AutoCompleteNetwork.searchShips(
                             context,
                             constraint.toString()
                         )
+
                         else -> AutoCompleteNetwork.searchCommodities(
                             context,
                             constraint.toString()
