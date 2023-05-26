@@ -89,6 +89,12 @@ public class InternalNamingUtils {
             case 8:
                 return R.drawable.rank_8_combat;
             case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                // there are no public icons for Elite I-V ranks
                 return R.drawable.rank_9_combat;
         }
     }
@@ -112,6 +118,12 @@ public class InternalNamingUtils {
             case 8:
                 return R.drawable.rank_8_trading;
             case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                // there are no public icons for Elite I-V ranks
                 return R.drawable.rank_9_trading;
         }
     }
@@ -135,6 +147,12 @@ public class InternalNamingUtils {
             case 8:
                 return R.drawable.rank_8_exploration;
             case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                // there are no public icons for Elite I-V ranks
                 return R.drawable.rank_9_exploration;
         }
     }
@@ -158,6 +176,12 @@ public class InternalNamingUtils {
             case 8:
                 return R.drawable.rank_8_cqc;
             case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                // there are no public icons for Elite I-V ranks
                 return R.drawable.rank_9_cqc;
         }
     }

@@ -88,6 +88,11 @@
         <item>Dangerous</item>
         <item>Deadly</item>
         <item>Elite</item>
+        <item>Elite I</item>
+        <item>Elite II</item>
+        <item>Elite III</item>
+        <item>Elite IV</item>
+        <item>Elite V</item>
     </string-array>
     <string-array name="ranks_trade">
         <item>Penniless</item>
@@ -99,6 +104,11 @@
         <item>Entrepreneur</item>
         <item>Tycoon</item>
         <item>Elite</item>
+        <item>Elite I</item>
+        <item>Elite II</item>
+        <item>Elite III</item>
+        <item>Elite IV</item>
+        <item>Elite V</item>
     </string-array>
     <string-array name="ranks_explorer">
         <item>Aimless</item>
@@ -110,6 +120,11 @@
         <item>Ranger</item>
         <item>Pioneer</item>
         <item>Elite</item>
+        <item>Elite I</item>
+        <item>Elite II</item>
+        <item>Elite III</item>
+        <item>Elite IV</item>
+        <item>Elite V</item>
     </string-array>
     <string-array name="ranks_cqc">
         <item>Helpless</item>
@@ -121,6 +136,11 @@
         <item>Hero</item>
         <item>Legend</item>
         <item>Elite</item>
+        <item>Elite I</item>
+        <item>Elite II</item>
+        <item>Elite III</item>
+        <item>Elite IV</item>
+        <item>Elite V</item>
     </string-array>
     <string-array name="ranks_federation">
         <item>None</item>
