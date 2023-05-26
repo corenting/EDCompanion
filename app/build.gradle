@@ -11,8 +11,8 @@ android {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 66
-        versionName "2.24"
+        versionCode 67
+        versionName "2.25"
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "String", "FRONTIER_AUTH_CLIENT_ID", '"' + FRONTIER_AUTH_CLIENT_ID + '"'

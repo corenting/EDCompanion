@@ -366,9 +366,11 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.24</b><br />
+            <b>Version 2.25</b><br />
             <ul>
-                <li>Fix community goals push notifications</li><br />
+                <li>New logo</li><br />
+                <li>Handle Elite I-V ranks in commander tab</li><br />
+                <li>Internal updates</li><br />
             </ul>
         ]]>
     </string>
