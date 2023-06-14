@@ -285,14 +285,14 @@
         Galaxy icon by Victoruler from <a href="https://thenounproject.com/browse/icons/term/galaxy/" target="_blank" title="Galaxy Icons">Noun Project</a><br />
         Globe icon from <a href="https://fontawesome.com/">FontAwesome</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC 4.0 BY license</a>)<br />
         Elite Dangerous icons from <a href="http://edassets.org">EDAssets</a>, icons are fanmade or created by <a href="https://www.frontier.co.uk/">Frontier Developments</a><br />
-        Ships pictures from <a href="https://edsm.net">EDSM</a>, available on <a href="https://github.com/EDSM-NET/ED-Ships-ScreenShots">Github</a>
+        Ships pictures from <a href="https://edsm.net">EDSM</a>, available on <a href="https://github.com/EDSM-NET/ED-Ships-ScreenShots">GitHub</a>
         ]]>
     </string>
-    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources.\n\n See edcompanion.corenting.fr for more informations (help, data sourced used etc.)."</string>
+    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources.\n\nSee edcompanion.corenting.fr for more informations (help, data sourced used etc.)."</string>
     <string name="about_libs_title">Libraries and code used</string>
     <string name="about_icons_title">Icons used</string>
     <string name="about_contact_me_title">Contact me</string>
-    <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…) : <a href="mailto:edcompanion@corenting.fr">edcompanion@corenting.fr</a>.]]></string>
+    <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…): <a href="mailto:edcompanion@corenting.fr">edcompanion@corenting.fr</a>.]]></string>
 
     <!--Settings-->
     <string name="title_activity_settings">Settings</string>

@@ -29,7 +29,7 @@ public class RankUtils {
         ProgressBar progressBar = rootView.findViewById(R.id.progressBar);
 
         logoView.setImageResource(logoId);
-        titleView.setText(String.format("%s : %s", description, rank.getName()));
+        titleView.setText(String.format("%s: %s", description, rank.getName()));
 
         // If rank progress is -1 it means it's not supported by the network used so hide it
         if (rank.getProgress() == -1) {
