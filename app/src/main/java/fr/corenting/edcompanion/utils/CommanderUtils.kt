@@ -62,6 +62,15 @@ object CommanderUtils {
         return false
     }
 
+    fun hasOdysseyRanks(context: Context): Boolean {
+        val frontierPlayer = FrontierPlayer(context)
+        if (frontierPlayer.isUsable()) {
+            return true
+        }
+
+        return false
+    }
+
     fun hasCommanderInformations(context: Context): Boolean {
         val edsmPlayer = EDSMPlayer(context)
         val inaraPlayer = InaraPlayer(context)

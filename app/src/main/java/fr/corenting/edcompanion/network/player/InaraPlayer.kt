@@ -139,6 +139,8 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
                     tradeRank,
                     explorationRank,
                     cqcRank,
+                    null,
+                    null,
                     federationRank,
                     empireRank
                 ), error = null

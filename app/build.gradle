@@ -42,7 +42,7 @@ android {
         }
     }
     namespace 'fr.corenting.edcompanion'
-}8
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

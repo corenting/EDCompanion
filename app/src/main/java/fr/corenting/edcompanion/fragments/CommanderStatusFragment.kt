@@ -93,15 +93,38 @@ class CommanderStatusFragment : Fragment() {
             binding.arenaRankLayout.root,
             getString(R.string.rank_arena)
         )
+        RankUtils.setTempContent(
+            context,
+            binding.exobiologistRankLayout.root,
+            getString(R.string.rank_exobiologist)
+        )
+        RankUtils.setTempContent(
+            context,
+            binding.mercenaryRankLayout.root,
+            getString(R.string.rank_mercenary)
+        )
 
         // Hide views according to supported informations from source
         val currentContext = context
         if (currentContext != null) {
             if (!CommanderUtils.hasCreditsData(currentContext)) {
                 binding.creditsContainer.visibility = View.GONE
+            } else {
+                binding.creditsContainer.visibility = View.VISIBLE
             }
+
             if (!CommanderUtils.hasPositionData(currentContext)) {
                 binding.locationContainer.visibility = View.GONE
+            } else {
+                binding.locationContainer.visibility = View.VISIBLE
+            }
+
+            if (!CommanderUtils.hasOdysseyRanks(currentContext)) {
+                binding.exobiologistRankLayout.rankRelativeLayout.visibility = View.GONE
+                binding.mercenaryRankLayout.rankRelativeLayout.visibility = View.GONE
+            } else {
+                binding.exobiologistRankLayout.rankRelativeLayout.visibility = View.VISIBLE
+                binding.mercenaryRankLayout.rankRelativeLayout.visibility = View.VISIBLE
             }
         }
 
@@ -294,6 +317,21 @@ class CommanderStatusFragment : Fragment() {
                 InternalNamingUtils.getCqcLogoId(ranks.cqc.value), ranks.cqc,
                 getString(R.string.rank_arena)
             )
+
+            if(ranks.exobiologist != null) {
+                RankUtils.setContent(
+                    context, binding.exobiologistRankLayout.root,
+                    InternalNamingUtils.getCqcLogoId(ranks.exobiologist.value), ranks.exobiologist,
+                    getString(R.string.rank_exobiologist)
+                )
+            }
+            if(ranks.mercenary != null) {
+                RankUtils.setContent(
+                    context, binding.mercenaryRankLayout.root,
+                    InternalNamingUtils.getCqcLogoId(ranks.mercenary.value), ranks.mercenary,
+                    getString(R.string.rank_mercenary)
+                )
+            }
         }
     }
 

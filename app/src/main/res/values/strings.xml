@@ -76,6 +76,8 @@
     <string name="rank_trading">Trade</string>
     <string name="rank_exploration">Exploration</string>
     <string name="rank_arena">Arena</string>
+    <string name="rank_mercenary">Mercenary</string>
+    <string name="rank_exobiologist">Exobiologist</string>
     <string name="player_ranks">Player ranks</string>
     <string name="faction_ranks">Faction ranks</string>
     <string-array name="ranks_combat">
@@ -135,6 +137,38 @@
         <item>Champion</item>
         <item>Hero</item>
         <item>Legend</item>
+        <item>Elite</item>
+        <item>Elite I</item>
+        <item>Elite II</item>
+        <item>Elite III</item>
+        <item>Elite IV</item>
+        <item>Elite V</item>
+    </string-array>
+    <string-array name="ranks_mercenary">
+        <item>Defenceless</item>
+        <item>Mostly Defenceless</item>
+        <item>Rookie</item>
+        <item>Soldier</item>
+        <item>Gunslinger</item>
+        <item>Warrior</item>
+        <item>Gladiator</item>
+        <item>Deadeye</item>
+        <item>Elite</item>
+        <item>Elite I</item>
+        <item>Elite II</item>
+        <item>Elite III</item>
+        <item>Elite IV</item>
+        <item>Elite V</item>
+    </string-array>
+    <string-array name="ranks_exobiologist">
+        <item>Directionless</item>
+        <item>Mostly Directionless</item>
+        <item>Compiler</item>
+        <item>Collector</item>
+        <item>Cataloguer</item>
+        <item>Taxonomist</item>
+        <item>Ecologist</item>
+        <item>Geneticist</item>
         <item>Elite</item>
         <item>Elite I</item>
         <item>Elite II</item>

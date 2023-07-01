@@ -153,6 +153,19 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/explorationRankLayout" />
 
+                <include
+                    android:id="@+id/mercenaryRankLayout"
+                    layout="@layout/include_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/arenaRankLayout" />
+
+                <include
+                    android:id="@+id/exobiologistRankLayout"
+                    layout="@layout/include_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mercenaryRankLayout" />
             </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>

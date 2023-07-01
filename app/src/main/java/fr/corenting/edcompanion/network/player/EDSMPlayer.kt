@@ -89,6 +89,8 @@ class EDSMPlayer(val context: Context) : PlayerNetwork {
                     tradeRank,
                     exploreRank,
                     cqcRank,
+                    null,
+                    null,
                     federationRank,
                     empireRank
                 ), error = null

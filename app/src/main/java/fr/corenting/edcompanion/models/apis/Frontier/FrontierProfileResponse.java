@@ -38,6 +38,12 @@ public class FrontierProfileResponse {
 
         @SerializedName("cqc")
         public int Cqc;
+
+        @SerializedName("soldier")
+        public int Mercenary;
+
+        @SerializedName("exobiologist")
+        public int Exobiologist;
     }
 
     public static class FrontierProfileSystemResponse {
