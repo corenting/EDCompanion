@@ -318,17 +318,17 @@ class CommanderStatusFragment : Fragment() {
                 getString(R.string.rank_arena)
             )
 
-            if(ranks.exobiologist != null) {
+            if (ranks.exobiologist != null) {
                 RankUtils.setContent(
                     context, binding.exobiologistRankLayout.root,
-                    InternalNamingUtils.getCqcLogoId(ranks.exobiologist.value), ranks.exobiologist,
+                    R.drawable.rank_placeholder, ranks.exobiologist,
                     getString(R.string.rank_exobiologist)
                 )
             }
-            if(ranks.mercenary != null) {
+            if (ranks.mercenary != null) {
                 RankUtils.setContent(
                     context, binding.mercenaryRankLayout.root,
-                    InternalNamingUtils.getCqcLogoId(ranks.mercenary.value), ranks.mercenary,
+                    R.drawable.rank_placeholder, ranks.mercenary,
                     getString(R.string.rank_mercenary)
                 )
             }

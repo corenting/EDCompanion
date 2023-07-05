@@ -25,6 +25,12 @@ public class EDSMRanksResponse extends EDSMBaseResponse {
         @SerializedName("CQC")
         public String cqc;
 
+        @SerializedName("Soldier")
+        public String mercenary;
+
+        @SerializedName("Exobiologist")
+        public String exobiologist;
+
         @SerializedName("Federation")
         public String federation;
 
@@ -44,6 +50,12 @@ public class EDSMRanksResponse extends EDSMBaseResponse {
 
         @SerializedName("CQC")
         public int cqc;
+
+        @SerializedName("Soldier")
+        public int mercenary;
+
+        @SerializedName("Exobiologist")
+        public int exobiologist;
 
         @SerializedName("Federation")
         public int federation;

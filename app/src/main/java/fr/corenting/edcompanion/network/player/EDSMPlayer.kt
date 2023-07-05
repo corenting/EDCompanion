@@ -72,6 +72,16 @@ class EDSMPlayer(val context: Context) : PlayerNetwork {
                 apiRanks.ranks.cqc,
                 apiRanks.progress.cqc
             )
+            val mercenaryRank = CommanderRank(
+                apiRanks.ranksNames.mercenary,
+                apiRanks.ranks.mercenary,
+                apiRanks.progress.mercenary
+            )
+            val exobiologistRank = CommanderRank(
+                apiRanks.ranksNames.exobiologist,
+                apiRanks.ranks.exobiologist,
+                apiRanks.progress.exobiologist
+            )
             val federationRank = CommanderRank(
                 apiRanks.ranksNames.federation,
                 apiRanks.ranks.federation,
@@ -89,8 +99,8 @@ class EDSMPlayer(val context: Context) : PlayerNetwork {
                     tradeRank,
                     exploreRank,
                     cqcRank,
-                    null,
-                    null,
+                    exobiologistRank,
+                    mercenaryRank,
                     federationRank,
                     empireRank
                 ), error = null

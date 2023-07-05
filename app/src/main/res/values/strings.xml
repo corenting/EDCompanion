@@ -400,12 +400,13 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.25</b><br />
+            <b>Version 2.26</b><br />
             <ul>
-                <li>New logo</li><br />
-                <li>Handle Elite I-V ranks in commander tab</li><br />
+                <li>Add exobiologist and mercenary ranks in commander tab (only if using Frontier or EDSM)</li><br />
+                <li>Fix some typos</li><br />
                 <li>Internal updates</li><br />
             </ul>
+            <p>Special thanks to the EDCompanion user who donated the Odyssey extension which will help developing Odyssey-related features!</p>
         ]]>
     </string>
 
