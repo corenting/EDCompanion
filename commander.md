@@ -21,8 +21,8 @@ Here is a summary of what is provided by each service:
 
 | Provider      | Ranks                                    | Position  | Credits | Fleet tab | How to connect                                                                               |
 | ------------- | ---------------------------------------- | --------  | ------- | --------- | --------------------------------------------------------------------------------------------- |
-| Frontier API  | ✅ (but without the progress percentage) | ✅        | ✅       | ✅        | Secure login through the Frontier website                                                     |
-| EDSM          | ✅                                       | ✅        | ✅       | ❌        | [API key from your EDSM settings](https://www.edsm.net/en/settings/api) and your CMDR name    |
-| Inara         | ✅                                       | ❌        | ❌       | ❌        | Your Inara account name (your profile must be public)                                         |
+| Frontier API  | ✅ (but without the progress percentage) | ✅        | ✅     | ✅        | Secure login through the Frontier website                                                     |
+| EDSM          | ✅                                       | ✅        | ✅     | ❌        | [API key from your EDSM settings](https://www.edsm.net/en/settings/api) and your CMDR name    |
+| Inara         | ✅ (no mercenary or exobiologist ranks)  | ❌        | ❌     | ❌        | Your Inara account name (your profile must be public)                                         |
 
 For example, if you enable only the Frontier API source, you will get all the data but without the ranks progress percentage. But if you also enable EDSM or Inara, you will get complete informations as the data will be merged.
