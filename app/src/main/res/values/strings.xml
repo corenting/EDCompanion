@@ -326,7 +326,7 @@
     <string name="about_libs_title">Libraries and code used</string>
     <string name="about_icons_title">Icons used</string>
     <string name="about_contact_me_title">Contact me</string>
-    <string name="about_contact_me"><![CDATA[You can contact me at this email address (bugs reports, suggestions…): <a href="mailto:edcompanion@corenting.fr">edcompanion@corenting.fr</a>.]]></string>
+    <string name="about_contact_me"><![CDATA[You can contact me at this email address (bug reports, suggestions…): <a href="mailto:edcompanion@corenting.fr">edcompanion@corenting.fr</a>.]]></string>
 
     <!--Settings-->
     <string name="title_activity_settings">Settings</string>
