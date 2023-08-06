@@ -118,7 +118,7 @@ public class SystemFactionsFragment extends Fragment {
         endLoading();
 
         if (systemDetails.getSuccess() && systemDetails.getSystem() != null) {
-            bindInformations(systemDetails.getSystem());
+            bindContent(systemDetails.getSystem());
         }
     }
 
@@ -299,7 +299,7 @@ public class SystemFactionsFragment extends Fragment {
         binding.historyChartView.invalidate();
     }
 
-    private void bindInformations(System system) {
+    private void bindContent(System system) {
         // Current state
         binding.controllingFactionTextView.setText(system.getControllingFaction() != null ? system.getControllingFaction() : getString(R.string.unknown));
         binding.allegianceTextView.setText(system.getAllegiance() != null ? system.getAllegiance() : getString(R.string.unknown));

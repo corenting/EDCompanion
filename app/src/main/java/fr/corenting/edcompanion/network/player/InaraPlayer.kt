@@ -5,6 +5,7 @@ import fr.corenting.edcompanion.BuildConfig
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.models.CommanderCredits
 import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderLoadout
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRank
 import fr.corenting.edcompanion.models.CommanderRanks
@@ -151,15 +152,19 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
     }
 
     override suspend fun getCredits(): ProxyResult<CommanderCredits> {
-        throw UnsupportedOperationException("Inara cannot fetch credits informations")
+        throw UnsupportedOperationException("Inara cannot fetch credits")
     }
 
     override suspend fun getFleet(): ProxyResult<CommanderFleet> {
-        throw UnsupportedOperationException("EDSM cannot fetch fleet informations")
+        throw UnsupportedOperationException("EDSM cannot fetch fleet")
+    }
+
+    override suspend fun getLoadout(): ProxyResult<CommanderLoadout> {
+        throw UnsupportedOperationException("Inara cannot fetch loadout")
     }
 
     override suspend fun getPosition(): ProxyResult<CommanderPosition> {
-        throw UnsupportedOperationException("Inara cannot fetch position informations")
+        throw UnsupportedOperationException("Inara cannot fetch position")
     }
 
 }

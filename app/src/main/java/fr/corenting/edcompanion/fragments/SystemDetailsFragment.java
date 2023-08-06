@@ -95,11 +95,11 @@ public class SystemDetailsFragment extends Fragment {
         endLoading();
 
         if (systemDetails.getSuccess() && systemDetails.getSystem() != null) {
-            bindInformations(systemDetails.getSystem());
+            bindContent(systemDetails.getSystem());
         }
     }
 
-    private void bindInformations(System system) {
+    private void bindContent(System system) {
 
         // Text
         binding.systemNameTextView.setText(system.getName());

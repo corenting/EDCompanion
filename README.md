@@ -9,19 +9,18 @@ Website : https://edcompanion.corenting.fr
 
 ## Download
 
-APKs are available [in the release section](https://github.com/corenting/EDCompanion/releases) or in
-the [Play Store](https://play.google.com/store/apps/details?id=fr.corenting.edcompanion)
+- [Play Store](https://play.google.com/store/apps/details?id=fr.corenting.edcompanion)
+- [Github releases](https://github.com/corenting/EDCompanion/releases)
 
 ## Features
 
-- Community goals informations from Inara, with optional push notifications for updates
+- Community goals news from Inara, with optional push notifications for updates
 - Galnet news (in English, German, Russian, French or Spanish)
 - News from elitedangerous.com (in English, German, Russian, French or Spanish)
-- Commander informations (credits balance, current system, ranks, ships) from Frontier API, EDSM or
-  Inara
+- Commander status (credits balance, current system, ranks, ships) from Frontier API, EDSM or Inara
 - Distance calculator (get the distance between two systems)
 - Ship finder tool (find the nearest station selling a specific ship)
 - Commodity finder tool (find the nearest station selling or buying a specific commodity)
-- Systems search (see system informations, factions informations and influence history)
+- Systems search (see system details, factions status and influence history)
 - Material design (light or dark theme)
 - No ads, free and open-source

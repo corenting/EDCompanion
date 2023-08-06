@@ -52,7 +52,7 @@ public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             default:
-                return context.getString(R.string.informations);
+                return context.getString(R.string.commodity);
             case 1:
                 return context.getString(R.string.where_to_sell);
             case 2:

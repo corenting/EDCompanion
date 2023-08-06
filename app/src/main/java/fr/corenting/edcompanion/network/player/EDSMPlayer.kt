@@ -4,6 +4,7 @@ import android.content.Context
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.models.CommanderCredits
 import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderLoadout
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRank
 import fr.corenting.edcompanion.models.CommanderRanks
@@ -126,6 +127,10 @@ class EDSMPlayer(val context: Context) : PlayerNetwork {
     }
 
     override suspend fun getFleet(): ProxyResult<CommanderFleet> {
-        throw UnsupportedOperationException("EDSM cannot fetch fleet informations")
+        throw UnsupportedOperationException("EDSM cannot fetch fleet")
+    }
+
+    override suspend fun getLoadout(): ProxyResult<CommanderLoadout> {
+        throw UnsupportedOperationException("EDSM cannot fetch loadout")
     }
 }

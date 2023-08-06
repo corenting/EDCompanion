@@ -145,7 +145,7 @@ public class CommodityFinderAdapter extends FinderAdapter<CommodityFinderAdapter
                 0, FORMAT_ABBREV_RELATIVE).toString();
         holder.binding.lastUpdateTextView.setText(date);
 
-        // Other informations
+        // Other information
         holder.binding.titleTextView.setText(String.format("%s - %s", currentResult.getSystem(),
                 currentResult.getStation()));
         holder.binding.isPlanetaryImageView.setVisibility(

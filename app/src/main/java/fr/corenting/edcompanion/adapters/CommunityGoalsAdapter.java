@@ -120,7 +120,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoal,
 
     private void setClickListeners(final int position, final TextView textView,
                                    final int labelResId) {
-        // Set long click listener for copying informations to clipboard
+        // Set long click listener for copying text to clipboard
         textView.setOnLongClickListener(null);
         textView.setOnLongClickListener(view -> {
             MiscUtils.putTextInClipboard(context, context.getString(labelResId),

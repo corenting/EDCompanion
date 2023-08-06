@@ -1,5 +1,6 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -91,11 +92,51 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/loadoutContainer"
+                    tools:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/locationContainer"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/loadoutTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/loadout"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+                    <TextView
+                        android:id="@+id/suitLabelTextView"
+                        android:layout_width="80dp"
+                        android:layout_below="@+id/loadoutTextView"
+                        android:layout_height="wrap_content"
+                        android:text="@string/suit"
+                        android:layout_marginTop="8dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/suitTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@+id/loadoutTextView"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/suitLabelTextView"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/factionsRanks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/locationContainer"
+                    android:layout_below="@+id/loadoutContainer"
                     android:layout_marginTop="8dp"
                     android:text="@string/faction_ranks"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />

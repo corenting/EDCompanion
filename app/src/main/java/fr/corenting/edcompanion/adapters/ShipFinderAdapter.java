@@ -104,7 +104,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         holder.binding.stationTypeTextView.setText(stationType);
         holder.binding.stationTypeTextView.setVisibility(displayStationTypeText ? View.VISIBLE : View.GONE);
 
-        // Other informations
+        // Other information
         holder.binding.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
         holder.binding.starDistanceTextView.setText(context.getString(R.string.distance_ls,

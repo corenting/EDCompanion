@@ -16,6 +16,7 @@ import fr.corenting.edcompanion.activities.SettingsActivity
 import fr.corenting.edcompanion.databinding.FragmentCommanderStatusBinding
 import fr.corenting.edcompanion.models.CommanderCredits
 import fr.corenting.edcompanion.models.CommanderFleet
+import fr.corenting.edcompanion.models.CommanderLoadout
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.ProxyResult
@@ -58,7 +59,7 @@ class CommanderStatusFragment : Fragment() {
         //Swipe to refresh setup
         val listener = OnRefreshListener {
             binding.swipeContainer.isRefreshing = true
-            this.refreshCommanderInformations()
+            this.refreshCommanderStatus()
         }
         binding.swipeContainer.setOnRefreshListener(listener)
 
@@ -104,7 +105,7 @@ class CommanderStatusFragment : Fragment() {
             getString(R.string.rank_mercenary)
         )
 
-        // Hide views according to supported informations from source
+        // Hide views according to supported content from source
         val currentContext = context
         if (currentContext != null) {
             if (!CommanderUtils.hasCreditsData(currentContext)) {
@@ -141,12 +142,15 @@ class CommanderStatusFragment : Fragment() {
         viewModel.getFleet().observe(viewLifecycleOwner) {
             onFleetChange(it)
         }
+        viewModel.getLoadout().observe(viewLifecycleOwner) {
+            onLoadoutChange(it)
+        }
 
-        // Display message if no source, else fetch informations
+        // Display message if no source, else fetch content
         if (currentContext != null) {
-            if (CommanderUtils.hasCommanderInformations(currentContext)) {
+            if (CommanderUtils.hasCommanderStatus(currentContext)) {
                 startLoading()
-                this.refreshCommanderInformations()
+                this.refreshCommanderStatus()
             } else {
 
                 val dialog = MaterialAlertDialogBuilder(currentContext)
@@ -214,7 +218,7 @@ class CommanderStatusFragment : Fragment() {
         MiscUtils.startIntentToSystemDetails(context, text)
     }
 
-    private fun refreshCommanderInformations() {
+    private fun refreshCommanderStatus() {
         val currentContext = context
         if (currentContext != null) {
             val cmdrName = CommanderUtils.getCommanderName(currentContext)
@@ -226,8 +230,9 @@ class CommanderStatusFragment : Fragment() {
         viewModel.fetchCredits()
         viewModel.fetchPosition()
         viewModel.fetchRanks()
+        viewModel.fetchLoadout()
 
-        // we do not really need fleet except to preload for other tab and to display auth popup if needed
+        // We do not really need fleet except to preload for other tab and to display auth popup if needed
         viewModel.fetchFleet()
     }
 
@@ -251,6 +256,22 @@ class CommanderStatusFragment : Fragment() {
     private fun onFleetChange(result: ProxyResult<CommanderFleet>) {
         handleResult(result) {}
     }
+
+    private fun onLoadoutChange(result: ProxyResult<CommanderLoadout>) {
+        handleResult(result) {
+            if (result.data == null) {
+                return@handleResult
+            }
+
+            if (result.data.hasLoadout) {
+                binding.loadoutContainer.visibility = View.VISIBLE
+                binding.suitTextView.text = result.data.suitName
+            } else {
+                binding.loadoutContainer.visibility = View.GONE
+            }
+        }
+    }
+
 
     private fun onPositionChange(result: ProxyResult<CommanderPosition>) {
         handleResult(result) {
@@ -279,7 +300,6 @@ class CommanderStatusFragment : Fragment() {
                 binding.creditsTextView.text = resources.getString(R.string.credits, amount)
             }
         }
-
     }
 
     private fun onRanksChange(result: ProxyResult<CommanderRanks>) {

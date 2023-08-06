@@ -55,7 +55,7 @@
     <string name="no_chart_error">No history chart to display</string>
     <string name="no_chart_snackbar_error">Error while download the history chart</string>
     <string name="my_location_error">Cannot get your current position</string>
-    <string name="no_commander_accounts_linked_error_message">You don\'t have any account enabled in the settings to get your commander informations. Enable at least one source in the settings.</string>
+    <string name="no_commander_accounts_linked_error_message">You don\'t have any account enabled in the settings to get your commander status. Enable at least one source in the settings.</string>
     <string name="no_commander_accounts_linked_error_settings_button">Open settings</string>
     <string name="error">Error</string>
 
@@ -68,6 +68,8 @@
     <string name="current_ship">Current ship</string>
     <string name="ship_value">Ship value</string>
     <string name="cargo_value">Cargo value</string>
+    <string name="suit">Suit</string>
+    <string name="loadout">Loadout</string>
 
     <!--Ranks-->
     <string name="rank_federation">Federation</string>
@@ -261,7 +263,6 @@
     <string name="average_sell_price">Average sell price</string>
     <string name="min_buy_price">Minimum buy price</string>
     <string name="max_sell_price">Maximum sell price</string>
-    <string name="informations">Informations</string>
     <string name="where_to_sell">Where to sell</string>
     <string name="where_to_buy">Where to buy</string>
     <string name="commodity_details">Commodity details</string>
@@ -322,7 +323,7 @@
         Ships pictures from <a href="https://edsm.net">EDSM</a>, available on <a href="https://github.com/EDSM-NET/ED-Ships-ScreenShots">GitHub</a>
         ]]>
     </string>
-    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources.\n\nSee edcompanion.corenting.fr for more informations (help, data sourced used etc.)."</string>
+    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources.\n\nSee edcompanion.corenting.fr for more details (help, data sourced used etc.)."</string>
     <string name="about_libs_title">Libraries and code used</string>
     <string name="about_icons_title">Icons used</string>
     <string name="about_contact_me_title">Contact me</string>
@@ -330,7 +331,7 @@
 
     <!--Settings-->
     <string name="title_activity_settings">Settings</string>
-    <string name="settings_cmdr_summary">Choose which accounts you want to use to fetch your commander informations</string>
+    <string name="settings_cmdr_summary">Choose which accounts you want to use to fetch your commander status</string>
     <string name="settings_cmdr_category">Commander</string>
     <string name="settings_cmdr_frontier_category_title">Frontier account</string>
     <string name="settings_cmdr_inara_category_title">INARA</string>
@@ -342,13 +343,13 @@
     <string name="settings_cmdr_edsm_api_key">EDSM API key</string>
     <string name="settings_cmdr_edsm_api_key_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
     <string name="settings_cmdr_frontier_oauth">Link your Frontier account</string>
-    <string name="settings_cmdr_frontier_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR informations</string>
+    <string name="settings_cmdr_frontier_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR status</string>
     <string name="settings_cmdr_frontier_enable">Enable Frontier account</string>
-    <string name="settings_cmdr_frontier_enable_summary">Use your Frontier account to fetch your CMDR informations</string>
+    <string name="settings_cmdr_frontier_enable_summary">Use your Frontier account to fetch your CMDR status</string>
     <string name="settings_cmdr_inara_enable">Enable INARA</string>
-    <string name="settings_cmdr_inara_enable_summary">Use your INARA account to fetch your CMDR informations</string>
+    <string name="settings_cmdr_inara_enable_summary">Use your INARA account to fetch your CMDR status</string>
     <string name="settings_cmdr_edsm_enable">Enable EDSM</string>
-    <string name="settings_cmdr_edsm_enable_summary">Use your EDSM account to fetch your CMDR informations</string>
+    <string name="settings_cmdr_edsm_enable_summary">Use your EDSM account to fetch your CMDR status</string>
     <string name="settings_cmdr_inara_api_key">INARA API key</string>
     <string name="settings_cmdr_inara_api_key_summary">Your personal Inara API key. You can find it in the "Inara API" tab of the inara.cz website settings</string>
     <string name="settings_notifications_category_title">Push notifications</string>

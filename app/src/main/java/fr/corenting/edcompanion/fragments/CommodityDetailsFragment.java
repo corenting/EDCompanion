@@ -78,10 +78,10 @@ public class CommodityDetailsFragment extends Fragment {
     public void onCommodityDetailsEvent(CommodityDetailsResult commodityDetailsResult) {
         endLoading();
 
-        bindInformations(commodityDetailsResult);
+        bindContent(commodityDetailsResult);
     }
 
-    private void bindInformations(CommodityDetailsResult details) {
+    private void bindContent(CommodityDetailsResult details) {
         binding.commodityNameTextView.setText(details.getName());
         binding.isRareTextView.setVisibility(details.isRare() ? View.VISIBLE : View.GONE);
         binding.categoryTextView.setText(details.getCategory());

@@ -11,6 +11,7 @@ import fr.corenting.edcompanion.models.CommanderFleet
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRank
 import fr.corenting.edcompanion.models.CommanderRanks
+import fr.corenting.edcompanion.models.CommanderLoadout
 import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.models.Ship
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse
@@ -34,6 +35,7 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
     private var cachedCredits: CommanderCredits? = null
     private var cachedPosition: CommanderPosition? = null
     private var cachedFleet: CommanderFleet? = null
+    private var cachedLoadout: CommanderLoadout? = null
 
     override fun isUsable(): Boolean {
         return SettingsUtils.getBoolean(
@@ -141,12 +143,34 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
                 CommanderCredits(profileResponse.Commander.Credits, profileResponse.Commander.Debt)
             cachedRanks = getRanksFromApiResponse(profileResponse)
             cachedFleet = getFleetFromApiResponse(rawResponse)
+            cachedLoadout = getLoadoutFromApiResponse(rawResponse)
         } catch (t: FrontierAuthNeededException) {
             lastFetch = Instant.MIN
             cachedCredits = null
             cachedRanks = null
             cachedFleet = null
+            cachedLoadout = null
             throw t
+        }
+    }
+
+    private fun getLoadoutFromApiResponse(profileResponse: JsonObject): CommanderLoadout {
+        // FIXME: detect if no odyssey
+        try {
+            val loadoutElement = profileResponse.get("loadout")
+
+            val suitName =
+                loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString
+
+            return CommanderLoadout(
+                true,
+                suitName
+            )
+        } catch (t: Throwable) {
+            return CommanderLoadout(
+                false,
+                ""
+            )
         }
     }
 
@@ -235,6 +259,19 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         return try {
             getProfile()
             ProxyResult(cachedFleet)
+        } catch (t: Throwable) {
+            ProxyResult(data = null, error = t)
+        }
+    }
+
+    override suspend fun getLoadout(): ProxyResult<CommanderLoadout> {
+        if (!shouldFetchNewData() && cachedLoadout != null) {
+            return ProxyResult(cachedLoadout)
+        }
+
+        return try {
+            getProfile()
+            ProxyResult(cachedLoadout)
         } catch (t: Throwable) {
             ProxyResult(data = null, error = t)
         }
