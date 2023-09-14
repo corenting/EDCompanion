@@ -33,7 +33,8 @@ class InaraPlayer(val context: Context) : PlayerNetwork {
         val enabled =
             SettingsUtils.getBoolean(
                 context,
-                context.getString(R.string.settings_cmdr_inara_enable)
+                context.getString(R.string.settings_cmdr_inara_enable),
+                false
             )
         return enabled && !apiKey.isNullOrEmpty()
     }

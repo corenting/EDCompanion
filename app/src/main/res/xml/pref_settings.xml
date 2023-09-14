@@ -36,6 +36,11 @@
                 app:key="@string/settings_cmdr_frontier_oauth"
                 app:summary="@string/settings_cmdr_frontier_oauth_summary"
                 app:title="@string/settings_cmdr_frontier_oauth" />
+            <androidx.preference.SwitchPreference
+                app:defaultValue="true"
+                app:key="@string/settings_cmdr_loadout_display_enable"
+                app:summary="@string/settings_cmdr_loadout_display_enable_summary"
+                app:title="@string/settings_cmdr_loadout_display_enable" />
         </androidx.preference.PreferenceCategory>
         <androidx.preference.PreferenceCategory app:title="@string/settings_cmdr_inara_category_title">
             <androidx.preference.SwitchPreference

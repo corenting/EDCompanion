@@ -69,6 +69,10 @@
     <string name="ship_value">Ship value</string>
     <string name="cargo_value">Cargo value</string>
     <string name="suit">Suit</string>
+    <string name="first_primary_weapon">Primary weapon #1</string>
+    <string name="second_primary_weapon">Primary weapon #2</string>
+    <string name="secondary_weapon">Secondary weapon</string>
+    <string name="weapon_display">%1$s (%2$s)</string>
     <string name="loadout">Loadout</string>
 
     <!--Ranks-->
@@ -340,6 +344,8 @@
     <string name="settings_news_lang_summary">Change the language used for GalNet and news</string>
     <string name="settings_cmdr_edsm_username">Commander name</string>
     <string name="settings_cmdr_edsm_username_summary">The ingame name of your CMDR (not your EDSM username)</string>
+    <string name="settings_cmdr_loadout_display_enable">Display CMDR loadout</string>
+    <string name="settings_cmdr_loadout_display_enable_summary">Display the loadout of your CMDR in the commander tab</string>
     <string name="settings_cmdr_edsm_api_key">EDSM API key</string>
     <string name="settings_cmdr_edsm_api_key_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
     <string name="settings_cmdr_frontier_oauth">Link your Frontier account</string>
@@ -401,10 +407,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.26</b><br />
+            <b>Version 2.27</b><br />
             <ul>
-                <li>Add exobiologist and mercenary ranks in commander tab (only if using Frontier or EDSM)</li><br />
-                <li>Fix some typos</li><br />
+                <li>Add CMDR loadout in commander tab (only if using Frontier)</li><br />
                 <li>Internal updates</li><br />
             </ul>
             <p>Special thanks to the EDCompanion user who donated the Odyssey extension which will help developing Odyssey-related features!</p>

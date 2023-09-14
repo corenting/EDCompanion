@@ -12,6 +12,7 @@ import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRank
 import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.CommanderLoadout
+import fr.corenting.edcompanion.models.CommanderLoadoutWeapon
 import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.models.Ship
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse
@@ -40,7 +41,8 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
     override fun isUsable(): Boolean {
         return SettingsUtils.getBoolean(
             context,
-            context.getString(R.string.settings_cmdr_frontier_enable)
+            context.getString(R.string.settings_cmdr_frontier_enable),
+            false
         )
     }
 
@@ -135,6 +137,7 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
             val profileResponse = Gson()
                 .fromJson(rawResponse, FrontierProfileResponse::class.java)
 
+            cachedLoadout = getLoadoutFromApiResponse(rawResponse)
             cachedPosition = CommanderPosition(
                 profileResponse.LastSystem.Name,
                 false
@@ -143,7 +146,6 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
                 CommanderCredits(profileResponse.Commander.Credits, profileResponse.Commander.Debt)
             cachedRanks = getRanksFromApiResponse(profileResponse)
             cachedFleet = getFleetFromApiResponse(rawResponse)
-            cachedLoadout = getLoadoutFromApiResponse(rawResponse)
         } catch (t: FrontierAuthNeededException) {
             lastFetch = Instant.MIN
             cachedCredits = null
@@ -154,22 +156,52 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         }
     }
 
+    private fun getWeaponFromLoadoutResponse(
+        slotsObject: JsonObject,
+        weaponSlotName: String
+    ): CommanderLoadoutWeapon? {
+        try {
+            if (!slotsObject.has(weaponSlotName)) {
+                return null
+            }
+
+            val weaponObject = slotsObject.get(weaponSlotName).asJsonObject
+
+            var magazineName: String? = null
+            if (weaponObject.get("slots").asJsonObject.has("Magazine")) {
+                val magazine = weaponObject.get("slots").asJsonObject.get("Magazine").asJsonObject
+                magazineName = magazine.get("locName").asString
+            }
+
+            return CommanderLoadoutWeapon(
+                name = weaponObject.get("locName").asString,
+                magazineName = magazineName,
+            )
+        } catch (t: Throwable) {
+            return null
+        }
+    }
+
     private fun getLoadoutFromApiResponse(profileResponse: JsonObject): CommanderLoadout {
-        // FIXME: detect if no odyssey
         try {
             val loadoutElement = profileResponse.get("loadout")
-
-            val suitName =
-                loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString
+            val slotsObject = loadoutElement.asJsonObject.get("slots").asJsonObject
 
             return CommanderLoadout(
                 true,
-                suitName
+                loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString,
+                getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon1"),
+                getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon2"),
+                getWeaponFromLoadoutResponse(slotsObject, "SecondaryWeapon")
             )
+
         } catch (t: Throwable) {
             return CommanderLoadout(
                 false,
-                ""
+                context.getString(R.string.unknown),
+                null,
+                null,
+                null
             )
         }
     }
