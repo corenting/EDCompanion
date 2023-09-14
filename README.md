@@ -5,6 +5,8 @@
 
 An unofficial Android companion app for Elite : Dangerous.
 
+The application only works for the "Live" version of the game.
+
 Website : https://edcompanion.corenting.fr
 
 ## Download
