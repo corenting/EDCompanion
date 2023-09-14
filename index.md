@@ -5,6 +5,8 @@ layout: home
 
 An unofficial Android companion app for Elite : Dangerous.
 
+The application only works for the "Live" version of the game.
+
 
 # Download the app
 
@@ -16,25 +18,26 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 
 # Features
 
-- Community goals informations from Inara, with optional push notifications for updates
+- Community goals news from Inara, with optional push notifications for updates
 - Galnet news (in English, German, Russian, French or Spanish)
 - News from elitedangerous.com (in English, German, Russian, French or Spanish)
-- Commander informations (credits balance, current system, ranks, ships) from Frontier API, EDSM or Inara
+- Commander status (credits balance, current system, ranks, ships) from Frontier API, EDSM or Inara
 - Distance calculator (get the distance between two systems)
 - Ship finder tool (find the nearest station selling a specific ship)
 - Commodity finder tool (find the nearest station selling or buying a specific commodity)
-- Systems search (see system informations, factions informations and influence history)
+- Systems search (see system details, factions status and influence history)
 - Material design (light or dark theme)
 - No ads, free and open-source
 
 # Data sources
 
 For the galaxy data (stations, systems, commodities, ships etc.), the application relies on the following third-part data sources:
-- [EDDB API / Elite BGS](https://elitebgs.app/eddb/)
 - [EDSM](https://www.edsm.net/)
 - [FuelRats](https://fuelrats.com)
 - [Inara](https://inara.cz/)
 - [Spansh](https://spansh.co.uk)
+
+See also [ED-API](https://github.com/corenting/ED-API) which is the backend used for most features.
 
 # Help
 
