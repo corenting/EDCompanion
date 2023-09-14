@@ -38,9 +38,9 @@ public class NotificationsUtils {
     private static List<Pair<String, Boolean>> getNotificationsTopics(Context c) {
         List<Pair<String, Boolean>> res = new ArrayList<>();
 
-        res.add(new Pair<>(newGoalTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_new_goal))));
-        res.add(new Pair<>(newTierTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_new_tier))));
-        res.add(new Pair<>(finishedGoalTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_finished_goal))));
+        res.add(new Pair<>(newGoalTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_new_goal), false)));
+        res.add(new Pair<>(newTierTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_new_tier), false)));
+        res.add(new Pair<>(finishedGoalTopic, SettingsUtils.getBoolean(c, c.getString(R.string.settings_notifications_finished_goal), false)));
 
         return res;
     }

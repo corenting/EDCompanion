@@ -30,7 +30,11 @@ class EDSMPlayer(val context: Context) : PlayerNetwork {
 
     override fun isUsable(): Boolean {
         val enabled =
-            SettingsUtils.getBoolean(context, context.getString(R.string.settings_cmdr_edsm_enable))
+            SettingsUtils.getBoolean(
+                context,
+                context.getString(R.string.settings_cmdr_edsm_enable),
+                false
+            )
         return enabled && !commanderName.isNullOrEmpty() && !apiKey.isNullOrEmpty()
     }
 

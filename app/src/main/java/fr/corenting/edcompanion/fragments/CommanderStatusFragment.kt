@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
@@ -17,6 +18,7 @@ import fr.corenting.edcompanion.databinding.FragmentCommanderStatusBinding
 import fr.corenting.edcompanion.models.CommanderCredits
 import fr.corenting.edcompanion.models.CommanderFleet
 import fr.corenting.edcompanion.models.CommanderLoadout
+import fr.corenting.edcompanion.models.CommanderLoadoutWeapon
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.ProxyResult
@@ -28,6 +30,7 @@ import fr.corenting.edcompanion.utils.MathUtils
 import fr.corenting.edcompanion.utils.MiscUtils
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.RankUtils
+import fr.corenting.edcompanion.utils.SettingsUtils
 import fr.corenting.edcompanion.view_models.CommanderViewModel
 
 class CommanderStatusFragment : Fragment() {
@@ -257,7 +260,37 @@ class CommanderStatusFragment : Fragment() {
         handleResult(result) {}
     }
 
+    private fun setLoadoutWeaponDisplay(
+        weapon: CommanderLoadoutWeapon?,
+        labelTextView: TextView,
+        textView: TextView
+    ) {
+        if (weapon != null) {
+            labelTextView.visibility = View.VISIBLE
+            textView.visibility = View.VISIBLE
+            textView.text = getString(
+                R.string.weapon_display,
+                weapon.name,
+                weapon.magazineName
+            )
+        } else {
+            labelTextView.visibility = View.GONE
+            textView.visibility = View.GONE
+        }
+    }
+
     private fun onLoadoutChange(result: ProxyResult<CommanderLoadout>) {
+        // Don't display if not enabled
+        if (!SettingsUtils.getBoolean(
+                context,
+                getString(R.string.settings_cmdr_loadout_display_enable),
+                true
+            )
+        ) {
+            binding.loadoutContainer.visibility = View.GONE
+            return
+        }
+
         handleResult(result) {
             if (result.data == null) {
                 return@handleResult
@@ -266,6 +299,24 @@ class CommanderStatusFragment : Fragment() {
             if (result.data.hasLoadout) {
                 binding.loadoutContainer.visibility = View.VISIBLE
                 binding.suitTextView.text = result.data.suitName
+
+                // Weapons
+                setLoadoutWeaponDisplay(
+                    result.data.firstPrimaryWeapon,
+                    binding.firstPrimaryWeaponLabelTextView,
+                    binding.firstPrimaryWeaponTextView
+                )
+                setLoadoutWeaponDisplay(
+                    result.data.secondPrimaryWeapon,
+                    binding.secondaryPrimaryWeaponLabelTextView,
+                    binding.secondaryPrimaryWeaponTextView
+                )
+                setLoadoutWeaponDisplay(
+                    result.data.secondaryWeapon,
+                    binding.secondaryWeaponLabelTextView,
+                    binding.secondarWeaponTextView
+                )
+
             } else {
                 binding.loadoutContainer.visibility = View.GONE
             }
