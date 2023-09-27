@@ -5,6 +5,7 @@ import fr.corenting.edcompanion.models.CommanderFleet
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.CommanderLoadout
+import fr.corenting.edcompanion.models.CommanderLoadouts
 import fr.corenting.edcompanion.models.ProxyResult
 
 
@@ -16,5 +17,6 @@ interface PlayerNetwork {
     suspend fun getRanks(): ProxyResult<CommanderRanks>
     suspend fun getCredits(): ProxyResult<CommanderCredits>
     suspend fun getFleet(): ProxyResult<CommanderFleet>
-    suspend fun getLoadout(): ProxyResult<CommanderLoadout>
+    suspend fun getCurrentLoadout(): ProxyResult<CommanderLoadout>
+    suspend fun getAllLoadouts(): ProxyResult<CommanderLoadouts>
 }

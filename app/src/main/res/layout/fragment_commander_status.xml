@@ -92,109 +92,19 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/loadoutContainer"
+                <include
+                    android:id="@+id/currentLoadoutLayout"
+                    layout="@layout/include_loadout_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/locationContainer"
-                    android:layout_marginTop="8dp"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <TextView
-                        android:id="@+id/loadoutTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/loadout"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-                    <TextView
-                        android:id="@+id/suitLabelTextView"
-                        android:layout_width="124dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/loadoutTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/suit"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/suitTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/suitLabelTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/unknown"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-
-                    <TextView
-                        android:id="@+id/firstPrimaryWeaponLabelTextView"
-                        android:layout_width="124dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/suitTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/first_primary_weapon"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/firstPrimaryWeaponTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/firstPrimaryWeaponLabelTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/unknown"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                    <TextView
-                        android:id="@+id/secondaryPrimaryWeaponLabelTextView"
-                        android:layout_width="124dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/firstPrimaryWeaponTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/second_primary_weapon"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/secondaryPrimaryWeaponTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/secondaryPrimaryWeaponLabelTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/unknown"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                    <TextView
-                        android:id="@+id/secondaryWeaponLabelTextView"
-                        android:layout_width="124dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/secondaryPrimaryWeaponTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/secondary_weapon"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/secondarWeaponTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/secondaryWeaponLabelTextView"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/unknown"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-
-                </RelativeLayout>
+                    android:layout_marginTop="8dp" />
 
                 <TextView
                     android:id="@+id/factionsRanks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/loadoutContainer"
+                    android:layout_below="@+id/currentLoadoutLayout"
                     android:layout_marginTop="8dp"
                     android:text="@string/faction_ranks"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
