@@ -73,7 +73,10 @@
     <string name="second_primary_weapon">Primary weapon #2</string>
     <string name="secondary_weapon">Secondary weapon</string>
     <string name="weapon_display">%1$s (%2$s)</string>
+    <string name="weapon_display_without_magazine">%1$s</string>
     <string name="loadout">Loadout</string>
+    <string name="loadout_with_number">Loadout #%1$d</string>
+    <string name="loadouts">Loadouts</string>
 
     <!--Ranks-->
     <string name="rank_federation">Federation</string>

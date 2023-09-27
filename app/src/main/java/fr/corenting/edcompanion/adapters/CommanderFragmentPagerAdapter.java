@@ -9,8 +9,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.fragments.CommanderFleetFragment;
+import fr.corenting.edcompanion.fragments.CommanderLoadoutsFragment;
 import fr.corenting.edcompanion.fragments.CommanderStatusFragment;
 import fr.corenting.edcompanion.utils.CommanderUtils;
+import fr.corenting.edcompanion.utils.SettingsUtils;
 
 public class CommanderFragmentPagerAdapter extends FragmentPagerAdapter {
 
@@ -25,13 +27,13 @@ public class CommanderFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return CommanderUtils.INSTANCE.hasFleetData(context) ? 2 : 1;
+        boolean displayFleet = SettingsUtils.getBoolean(context, context.getString(R.string.settings_cmdr_loadout_display_enable), true) && CommanderUtils.INSTANCE.hasLoadoutData(context);
+        return 1 + (CommanderUtils.INSTANCE.hasFleetData(context) ? 1 : 0) + (displayFleet ? 1 : 0);
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
         // Try to find existing fragment
         String tag = getTag(position);
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
@@ -40,24 +42,27 @@ public class CommanderFragmentPagerAdapter extends FragmentPagerAdapter {
         }
 
         // Else return new one
-        if (position == 1) {
-            return new CommanderFleetFragment();
-        }
-        return new CommanderStatusFragment();
+        return switch (position) {
+            case 1 -> new CommanderFleetFragment();
+            case 2 -> new CommanderLoadoutsFragment();
+            default -> new CommanderStatusFragment();
+        };
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position == 1) {
-            return context.getString(R.string.fleet);
-        }
-        return context.getString(R.string.commander);
+        return switch (position) {
+            case 1 -> context.getString(R.string.fleet);
+            case 2 -> context.getString(R.string.loadouts);
+            default -> context.getString(R.string.commander);
+        };
     }
 
     private String getTag(int position) {
-        if (position == 1) {
-            return CommanderFleetFragment.COMMANDER_FLEET_FRAGMENT_TAG;
-        }
-        return CommanderStatusFragment.COMMANDER_STATUS_FRAGMENT;
+        return switch (position) {
+            case 1 -> CommanderFleetFragment.COMMANDER_FLEET_FRAGMENT_TAG;
+            case 2 -> CommanderLoadoutsFragment.COMMANDER_LOADOUTS_FRAGMENT_TAG;
+            default -> CommanderStatusFragment.COMMANDER_STATUS_FRAGMENT;
+        };
     }
 }

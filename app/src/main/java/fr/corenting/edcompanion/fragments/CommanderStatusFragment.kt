@@ -233,10 +233,11 @@ class CommanderStatusFragment : Fragment() {
         viewModel.fetchCredits()
         viewModel.fetchPosition()
         viewModel.fetchRanks()
-        viewModel.fetchLoadout()
+        viewModel.fetchCurrentLoadout()
 
-        // We do not really need fleet except to preload for other tab and to display auth popup if needed
+        // We do not really need fleet/loadouts except to preload for other tab and to display auth popup if needed
         viewModel.fetchFleet()
+        viewModel.fetchAllLoadouts()
     }
 
     private fun <T> handleResult(result: ProxyResult<T>, onSuccess: (ProxyResult<T>) -> Unit) {
@@ -287,7 +288,7 @@ class CommanderStatusFragment : Fragment() {
                 true
             )
         ) {
-            binding.loadoutContainer.visibility = View.GONE
+            binding.currentLoadoutLayout.loadoutContainer.visibility = View.GONE
             return
         }
 
@@ -297,28 +298,28 @@ class CommanderStatusFragment : Fragment() {
             }
 
             if (result.data.hasLoadout) {
-                binding.loadoutContainer.visibility = View.VISIBLE
-                binding.suitTextView.text = result.data.suitName
+                binding.currentLoadoutLayout.loadoutContainer.visibility = View.VISIBLE
+                binding.currentLoadoutLayout.suitTextView.text = result.data.suitName
 
                 // Weapons
                 setLoadoutWeaponDisplay(
                     result.data.firstPrimaryWeapon,
-                    binding.firstPrimaryWeaponLabelTextView,
-                    binding.firstPrimaryWeaponTextView
+                    binding.currentLoadoutLayout.firstPrimaryWeaponLabelTextView,
+                    binding.currentLoadoutLayout.firstPrimaryWeaponTextView
                 )
                 setLoadoutWeaponDisplay(
                     result.data.secondPrimaryWeapon,
-                    binding.secondaryPrimaryWeaponLabelTextView,
-                    binding.secondaryPrimaryWeaponTextView
+                    binding.currentLoadoutLayout.secondaryPrimaryWeaponLabelTextView,
+                    binding.currentLoadoutLayout.secondaryPrimaryWeaponTextView
                 )
                 setLoadoutWeaponDisplay(
                     result.data.secondaryWeapon,
-                    binding.secondaryWeaponLabelTextView,
-                    binding.secondarWeaponTextView
+                    binding.currentLoadoutLayout.secondaryWeaponLabelTextView,
+                    binding.currentLoadoutLayout.secondarWeaponTextView
                 )
 
             } else {
-                binding.loadoutContainer.visibility = View.GONE
+                binding.currentLoadoutLayout.loadoutContainer.visibility = View.GONE
             }
         }
     }

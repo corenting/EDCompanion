@@ -13,6 +13,7 @@ import fr.corenting.edcompanion.models.CommanderRank
 import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.CommanderLoadout
 import fr.corenting.edcompanion.models.CommanderLoadoutWeapon
+import fr.corenting.edcompanion.models.CommanderLoadouts
 import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.models.Ship
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse
@@ -36,7 +37,9 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
     private var cachedCredits: CommanderCredits? = null
     private var cachedPosition: CommanderPosition? = null
     private var cachedFleet: CommanderFleet? = null
-    private var cachedLoadout: CommanderLoadout? = null
+    private var cachedCurrentLoadout: CommanderLoadout? = null
+    private var cachedAllLoadouts: CommanderLoadouts? = null
+
 
     override fun isUsable(): Boolean {
         return SettingsUtils.getBoolean(
@@ -137,7 +140,6 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
             val profileResponse = Gson()
                 .fromJson(rawResponse, FrontierProfileResponse::class.java)
 
-            cachedLoadout = getLoadoutFromApiResponse(rawResponse)
             cachedPosition = CommanderPosition(
                 profileResponse.LastSystem.Name,
                 false
@@ -145,13 +147,17 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
             cachedCredits =
                 CommanderCredits(profileResponse.Commander.Credits, profileResponse.Commander.Debt)
             cachedRanks = getRanksFromApiResponse(profileResponse)
+            cachedAllLoadouts = getAllLoadoutsFromApiResponse(rawResponse)
+            cachedCurrentLoadout =
+                getCurrentLoadoutFromApiResponse(rawResponse) // cannot get from the list as it has less informations
             cachedFleet = getFleetFromApiResponse(rawResponse)
         } catch (t: FrontierAuthNeededException) {
             lastFetch = Instant.MIN
             cachedCredits = null
             cachedRanks = null
             cachedFleet = null
-            cachedLoadout = null
+            cachedCurrentLoadout = null
+            cachedAllLoadouts = null
             throw t
         }
     }
@@ -166,10 +172,12 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
             }
 
             val weaponObject = slotsObject.get(weaponSlotName).asJsonObject
-
             var magazineName: String? = null
-            if (weaponObject.get("slots").asJsonObject.has("Magazine")) {
-                val magazine = weaponObject.get("slots").asJsonObject.get("Magazine").asJsonObject
+
+            // If getting weapon for all loadouts the slots are not included in the response
+            if (weaponObject.has("slots") && weaponObject.get("slots").asJsonObject.has("Magazine")) {
+                val magazine =
+                    weaponObject.get("slots").asJsonObject.get("Magazine").asJsonObject
                 magazineName = magazine.get("locName").asString
             }
 
@@ -182,13 +190,14 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         }
     }
 
-    private fun getLoadoutFromApiResponse(profileResponse: JsonObject): CommanderLoadout {
+    private fun getCurrentLoadoutFromApiResponse(profileResponse: JsonObject): CommanderLoadout {
         try {
             val loadoutElement = profileResponse.get("loadout")
             val slotsObject = loadoutElement.asJsonObject.get("slots").asJsonObject
 
             return CommanderLoadout(
                 true,
+                loadoutElement.asJsonObject.get("loadoutSlotId").asInt,
                 loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString,
                 getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon1"),
                 getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon2"),
@@ -198,12 +207,37 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         } catch (t: Throwable) {
             return CommanderLoadout(
                 false,
+                -1,
                 context.getString(R.string.unknown),
                 null,
                 null,
                 null
             )
         }
+    }
+
+    private fun getAllLoadoutsFromApiResponse(loadoutsElement: JsonObject): CommanderLoadouts {
+        val loadouts = mutableListOf<CommanderLoadout>()
+
+        loadoutsElement.getAsJsonArray("loadouts").forEach { loadoutElement ->
+            try {
+                val slotsObject = loadoutElement.asJsonObject.get("slots").asJsonObject
+
+                loadouts.add(
+                    CommanderLoadout(
+                        true,
+                        loadoutElement.asJsonObject.get("loadoutSlotId").asInt,
+                        loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString,
+                        getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon1"),
+                        getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon2"),
+                        getWeaponFromLoadoutResponse(slotsObject, "SecondaryWeapon")
+                    )
+                )
+            } catch (_: Throwable) {
+            }
+        }
+
+        return CommanderLoadouts(loadouts = loadouts)
     }
 
     private fun getFleetFromApiResponse(profileResponse: JsonObject): CommanderFleet {
@@ -296,14 +330,27 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         }
     }
 
-    override suspend fun getLoadout(): ProxyResult<CommanderLoadout> {
-        if (!shouldFetchNewData() && cachedLoadout != null) {
-            return ProxyResult(cachedLoadout)
+    override suspend fun getCurrentLoadout(): ProxyResult<CommanderLoadout> {
+        if (!shouldFetchNewData() && cachedCurrentLoadout != null) {
+            return ProxyResult(cachedCurrentLoadout)
         }
 
         return try {
             getProfile()
-            ProxyResult(cachedLoadout)
+            ProxyResult(cachedCurrentLoadout)
+        } catch (t: Throwable) {
+            ProxyResult(data = null, error = t)
+        }
+    }
+
+    override suspend fun getAllLoadouts(): ProxyResult<CommanderLoadouts> {
+        if (!shouldFetchNewData() && cachedAllLoadouts != null) {
+            return ProxyResult(cachedAllLoadouts)
+        }
+
+        return try {
+            getProfile()
+            ProxyResult(cachedAllLoadouts)
         } catch (t: Throwable) {
             ProxyResult(data = null, error = t)
         }

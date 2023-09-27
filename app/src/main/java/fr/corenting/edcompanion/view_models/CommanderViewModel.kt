@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import fr.corenting.edcompanion.models.CommanderCredits
 import fr.corenting.edcompanion.models.CommanderFleet
 import fr.corenting.edcompanion.models.CommanderLoadout
+import fr.corenting.edcompanion.models.CommanderLoadouts
 import fr.corenting.edcompanion.models.CommanderPosition
 import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.ProxyResult
@@ -27,7 +28,8 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
     private val position = MutableLiveData<ProxyResult<CommanderPosition>>()
     private val ranks = MutableLiveData<ProxyResult<CommanderRanks>>()
     private val fleet = MutableLiveData<ProxyResult<CommanderFleet>>()
-    private val loadout = MutableLiveData<ProxyResult<CommanderLoadout>>()
+    private val currentLoadout = MutableLiveData<ProxyResult<CommanderLoadout>>()
+    private val allLoadouts = MutableLiveData<ProxyResult<CommanderLoadouts>>()
 
     fun clearCachedData() {
         // We set the values to a null result with a specific exception to mark it as not initialized
@@ -36,7 +38,7 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
             position.postValue(ProxyResult(null, DataNotInitializedException()))
             ranks.postValue(ProxyResult(null, DataNotInitializedException()))
             fleet.postValue(ProxyResult(null, DataNotInitializedException()))
-            loadout.postValue(ProxyResult(null, DataNotInitializedException()))
+            currentLoadout.postValue(ProxyResult(null, DataNotInitializedException()))
         }
     }
 
@@ -129,16 +131,28 @@ class CommanderViewModel(application: Application) : AndroidViewModel(applicatio
         return fleet
     }
 
-    fun fetchLoadout() {
+    fun fetchCurrentLoadout() {
         if (frontierPlayer.isUsable()) {
             viewModelScope.launch {
-                loadout.postValue(frontierPlayer.getLoadout())
+                currentLoadout.postValue(frontierPlayer.getCurrentLoadout())
             }
         }
     }
 
     fun getLoadout(): LiveData<ProxyResult<CommanderLoadout>> {
-        return loadout
+        return currentLoadout
+    }
+
+    fun fetchAllLoadouts() {
+        if (frontierPlayer.isUsable()) {
+            viewModelScope.launch {
+                allLoadouts.postValue(frontierPlayer.getAllLoadouts())
+            }
+        }
+    }
+
+    fun getAllLoadouts(): LiveData<ProxyResult<CommanderLoadouts>> {
+        return allLoadouts
     }
 
 
