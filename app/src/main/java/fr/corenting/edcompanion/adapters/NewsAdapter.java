@@ -37,7 +37,7 @@ public class NewsAdapter extends androidx.recyclerview.widget.ListAdapter<NewsAr
 
     public NewsAdapter(Context ctx, final RecyclerView recyclerView, boolean isDetailsView, boolean isGalnet) {
         // Parent class setup
-        super(new DiffUtil.ItemCallback<NewsArticle>() {
+        super(new DiffUtil.ItemCallback<>() {
             @Override
             public boolean areItemsTheSame(@NonNull NewsArticle oldItem,
                                            @NonNull NewsArticle newItem) {

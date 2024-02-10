@@ -20,7 +20,7 @@ public class CommunityGoalsNetwork {
 
         EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
-        retrofit2.Callback<List<CommunityGoalsResponse>> callback = new retrofit2.Callback<List<CommunityGoalsResponse>>() {
+        retrofit2.Callback<List<CommunityGoalsResponse>> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<List<CommunityGoalsResponse>> call,

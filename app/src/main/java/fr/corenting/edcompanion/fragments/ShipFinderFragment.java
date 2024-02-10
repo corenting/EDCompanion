@@ -47,6 +47,6 @@ public class ShipFinderFragment extends AbstractFinderFragment<ShipFinderAdapter
     public void onFindButtonEvent(ShipFinderSearch event) {
         lastSearch = event;
         startLoading();
-        ShipFinderNetwork.findShip(getContext(), event.getSystemName(), event.getShipName());
+        ShipFinderNetwork.findShip(requireContext(), event.getSystemName(), event.getShipName());
     }
 }

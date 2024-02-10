@@ -89,7 +89,7 @@ public class SystemFactionsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        userLocale = DateUtils.getCurrentLocale(getContext());
+        userLocale = DateUtils.getCurrentLocale(requireContext());
         dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
     }
 
@@ -162,15 +162,12 @@ public class SystemFactionsFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE:
-                        v.getParent().requestDisallowInterceptTouchEvent(true);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        v.getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
-                    default:
-                        break;
+                    case MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE ->
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                    case MotionEvent.ACTION_UP ->
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                    default -> {
+                    }
                 }
                 return super.onTouch(v, event);
             }
@@ -258,7 +255,7 @@ public class SystemFactionsFragment extends Fragment {
         binding.historyChartView.setDescription(desc);
 
         // Color for dark theme
-        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
+        if (ThemeUtils.isDarkThemeEnabled(requireContext())) {
             int color = Color.parseColor("#ffffff");
             binding.historyChartView.getAxisLeft().setTextColor(color);
             binding.historyChartView.getXAxis().setTextColor(color);

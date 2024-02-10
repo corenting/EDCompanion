@@ -43,8 +43,8 @@
             android:layout_height="18dp"
             android:layout_below="@+id/objectiveTextView"
             android:layout_marginTop="8dp"
-            android:tint="#757575"
-            app:srcCompat="@drawable/ic_update_black_24dp" />
+            app:srcCompat="@drawable/ic_update_black_24dp"
+            app:tint="#757575" />
 
         <TextView
             android:id="@+id/updateTextView"
@@ -64,8 +64,8 @@
             android:layout_height="18dp"
             android:layout_below="@+id/updateTextView"
             android:layout_marginTop="8dp"
-            android:tint="#757575"
-            app:srcCompat="@drawable/elite_map_marker" />
+            app:srcCompat="@drawable/elite_map_marker"
+            app:tint="#757575" />
 
         <TextView
             android:id="@+id/locationTextView"
@@ -85,8 +85,8 @@
             android:layout_height="18dp"
             android:layout_below="@+id/locationTextView"
             android:layout_marginTop="8dp"
-            android:tint="#757575"
-            app:srcCompat="@drawable/ic_remaining_grey600_24dp" />
+            app:srcCompat="@drawable/ic_remaining_grey600_24dp"
+            app:tint="#757575" />
 
         <TextView
             android:id="@+id/remainingTextView"
@@ -106,8 +106,8 @@
             android:layout_height="18dp"
             android:layout_below="@+id/remainingTextView"
             android:layout_marginTop="8dp"
-            android:tint="#757575"
-            app:srcCompat="@drawable/ic_people_grey600_24dp" />
+            app:srcCompat="@drawable/ic_people_grey600_24dp"
+            app:tint="#757575" />
 
         <TextView
             android:id="@+id/peopleTextView"
@@ -127,8 +127,8 @@
             android:layout_height="18dp"
             android:layout_below="@+id/peopleTextView"
             android:layout_marginTop="8dp"
-            android:tint="#757575"
-            app:srcCompat="@drawable/ic_tier_grey600_254dp" />
+            app:srcCompat="@drawable/ic_tier_grey600_254dp"
+            app:tint="#757575" />
 
         <TextView
             android:id="@+id/tierTextView"

@@ -47,6 +47,6 @@ public class SystemFinderFragment extends AbstractFinderFragment<SystemFinderAda
     public void onFindButtonEvent(SystemFinderSearch event) {
         lastSearch = event;
         startLoading();
-        SystemNetwork.findSystem(getContext(), event.getSystemName());
+        SystemNetwork.findSystem(requireContext(), event.getSystemName());
     }
 }

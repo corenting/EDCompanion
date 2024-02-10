@@ -3,7 +3,8 @@ package fr.corenting.edcompanion.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 public class SettingsUtils {
     public static boolean getBoolean(Context c, String key, Boolean defaultValue) {

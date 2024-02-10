@@ -25,7 +25,7 @@ public class CommodityFinderNetwork {
         final EDApiV4Retrofit edApiRetrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        final retrofit2.Callback<List<CommodityFinderResponse>> callback = new retrofit2.Callback<List<CommodityFinderResponse>>() {
+        final retrofit2.Callback<List<CommodityFinderResponse>> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<List<CommodityFinderResponse>> call,

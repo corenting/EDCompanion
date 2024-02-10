@@ -107,7 +107,7 @@ public class FrontierAuthSingleton implements Serializable {
                 .getFrontierAuthRetrofit(ctx);
 
         retrofit2.Callback<FrontierAccessTokenResponse> callback =
-                new retrofit2.Callback<FrontierAccessTokenResponse>() {
+                new retrofit2.Callback<>() {
                     @Override
                     @EverythingIsNonNull
                     public void onResponse(Call<FrontierAccessTokenResponse> call,

@@ -28,7 +28,7 @@ public class CommunityGoalsAdapter extends ListAdapter<CommunityGoal,
 
     public CommunityGoalsAdapter(final Context context, final RecyclerView recyclerView, boolean isDetailsView) {
         // Parent class setup
-        super(new DiffUtil.ItemCallback<CommunityGoal>() {
+        super(new DiffUtil.ItemCallback<>() {
             @Override
             public boolean areItemsTheSame(@NonNull CommunityGoal oldItem,
                                            @NonNull CommunityGoal newItem) {

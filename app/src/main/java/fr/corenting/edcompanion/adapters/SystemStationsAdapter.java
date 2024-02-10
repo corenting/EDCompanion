@@ -25,7 +25,7 @@ public class SystemStationsAdapter extends androidx.recyclerview.widget.ListAdap
 
     public SystemStationsAdapter(Context ctx, final RecyclerView recyclerView) {
         // Parent class setup
-        super(new DiffUtil.ItemCallback<Station>() {
+        super(new DiffUtil.ItemCallback<>() {
             @Override
             public boolean areItemsTheSame(@NonNull Station oldItem,
                                            @NonNull Station newItem) {

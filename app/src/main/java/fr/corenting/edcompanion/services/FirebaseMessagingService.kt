@@ -1,9 +1,12 @@
 package fr.corenting.edcompanion.services
 
+import android.Manifest
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.RemoteMessage
@@ -62,6 +65,12 @@ class FirebaseMessagingService : com.google.firebase.messaging.FirebaseMessaging
             .setContentIntent(contentIntent)
 
         val notificationManager = NotificationManagerCompat.from(this)
-        notificationManager.notify(goalTitle.hashCode(), mBuilder.build())
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationManager.notify(goalTitle.hashCode(), mBuilder.build())
+        }
     }
 }

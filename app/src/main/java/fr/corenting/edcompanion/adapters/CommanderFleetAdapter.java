@@ -28,7 +28,7 @@ public class CommanderFleetAdapter extends ListAdapter<Ship,
 
     public CommanderFleetAdapter(Context ctx) {
         // Parent class setup
-        super(new DiffUtil.ItemCallback<Ship>() {
+        super(new DiffUtil.ItemCallback<>() {
             @Override
             public boolean areItemsTheSame(@NonNull Ship oldItem,
                                            @NonNull Ship newItem) {

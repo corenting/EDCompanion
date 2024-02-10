@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -27,6 +28,7 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
         return 3;
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
 
@@ -38,37 +40,27 @@ public class SystemDetailsPagerAdapter extends FragmentPagerAdapter {
         }
 
         // Else return new one
-        switch (position) {
-            case 1:
-                return new SystemStationsFragment();
-            case 2:
-                return new SystemFactionsFragment();
-            default:
-                return new SystemDetailsFragment();
-        }
+        return switch (position) {
+            case 1 -> new SystemStationsFragment();
+            case 2 -> new SystemFactionsFragment();
+            default -> new SystemDetailsFragment();
+        };
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 1:
-                return context.getString(R.string.stations);
-            case 2:
-                return context.getString(R.string.factions);
-            default:
-                return context.getString(R.string.system);
-
-        }
+        return switch (position) {
+            case 1 -> context.getString(R.string.stations);
+            case 2 -> context.getString(R.string.factions);
+            default -> context.getString(R.string.system);
+        };
     }
 
     private String getTag(int position) {
-        switch (position) {
-            case 1:
-                return SystemStationsFragment.SYSTEM_STATIONS_FRAGMENT_TAG;
-            case 2:
-                return SystemFactionsFragment.SYSTEM_FACTIONS_FRAGMENT;
-            default:
-                return SystemDetailsFragment.SYSTEM_DETAILS_FRAGMENT;
-        }
+        return switch (position) {
+            case 1 -> SystemStationsFragment.SYSTEM_STATIONS_FRAGMENT_TAG;
+            case 2 -> SystemFactionsFragment.SYSTEM_FACTIONS_FRAGMENT;
+            default -> SystemDetailsFragment.SYSTEM_DETAILS_FRAGMENT;
+        };
     }
 }

@@ -24,7 +24,7 @@ public class InaraProfileResponse {
 
         }
 
-        public class InaraProfileResponseRanks {
+        public static class InaraProfileResponseRanks {
             @SerializedName("rankName")
             public String RankName;
 

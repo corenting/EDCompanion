@@ -27,7 +27,7 @@ public class CommoditiesNetwork {
         final EDApiV4Retrofit edApiRetrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        final retrofit2.Callback<List<CommodityWithPriceResponse>> callback = new retrofit2.Callback<List<CommodityWithPriceResponse>>() {
+        final retrofit2.Callback<List<CommodityWithPriceResponse>> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<List<CommodityWithPriceResponse>> call,
@@ -72,7 +72,7 @@ public class CommoditiesNetwork {
         final EDApiV4Retrofit edApiRetrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        final retrofit2.Callback<CommodityWithPriceResponse> callback = new retrofit2.Callback<CommodityWithPriceResponse>() {
+        final retrofit2.Callback<CommodityWithPriceResponse> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<CommodityWithPriceResponse> call,
@@ -113,7 +113,7 @@ public class CommoditiesNetwork {
         final EDApiV4Retrofit edApiRetrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        final retrofit2.Callback<CommodityBestPricesResponse> callback = new retrofit2.Callback<CommodityBestPricesResponse>() {
+        final retrofit2.Callback<CommodityBestPricesResponse> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<CommodityBestPricesResponse> call,

@@ -51,7 +51,7 @@ public class FrontierProfileResponse {
         public String Name;
     }
 
-    public class FrontierProfileCommanderResponse {
+    public static class FrontierProfileCommanderResponse {
         @SerializedName("name")
         public String Name;
 

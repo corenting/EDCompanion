@@ -30,7 +30,7 @@ public class CommodityDetailsStationsAdapter extends androidx.recyclerview.widge
 
     public CommodityDetailsStationsAdapter(Context ctx, boolean isSellMode) {
         // Parent class setup
-        super(new DiffUtil.ItemCallback<CommodityBestPricesStationResult>() {
+        super(new DiffUtil.ItemCallback<>() {
             @Override
             public boolean areItemsTheSame(@NonNull CommodityBestPricesStationResult oldItem,
                                            @NonNull CommodityBestPricesStationResult newItem) {

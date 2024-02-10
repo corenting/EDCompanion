@@ -61,19 +61,19 @@ public class DistanceCalculatorFragment extends Fragment {
         SystemsDistance data = result.getData();
         if (data.getFirstSystemNeedsPermit() && data.getSecondSystemNeedsPermit()) {
             binding.warningTextView.setVisibility(View.VISIBLE);
-            binding.warningTextView.setText(getContext().getString(R.string.permit_required_both,
+            binding.warningTextView.setText(requireContext().getString(R.string.permit_required_both,
                     data.getFirstSystemName(), data.getSecondSystemName()));
         } else if (data.getFirstSystemNeedsPermit()) {
             binding.warningTextView.setVisibility(View.VISIBLE);
-            binding.warningTextView.setText(getContext().getString(R.string.permit_required,
+            binding.warningTextView.setText(requireContext().getString(R.string.permit_required,
                     data.getFirstSystemName()));
         } else if (data.getSecondSystemNeedsPermit()) {
             binding.warningTextView.setVisibility(View.VISIBLE);
-            binding.warningTextView.setText(getContext().getString(R.string.permit_required,
+            binding.warningTextView.setText(requireContext().getString(R.string.permit_required,
                     data.getSecondSystemName()));
         }
 
-        binding.resultTextView.setText(getContext().getString(R.string.distance_result,
+        binding.resultTextView.setText(requireContext().getString(R.string.distance_result,
                 data.getDistanceInLy()));
     }
 

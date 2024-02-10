@@ -56,9 +56,9 @@ public class SystemDetailsFragment extends Fragment {
         binding.swipeContainer.setRefreshing(true);
 
         // Fix icon on black theme
-        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
+        if (ThemeUtils.isDarkThemeEnabled(requireContext())) {
             ImageViewCompat.setImageTintList(binding.logoImageView, ColorStateList.valueOf(
-                    ContextCompat.getColor(getContext(), android.R.color.white)));
+                    ContextCompat.getColor(requireContext(), android.R.color.white)));
         }
 
         return view;
@@ -118,15 +118,11 @@ public class SystemDetailsFragment extends Fragment {
         // Logo
         if (system.getAllegiance() != null) {
             switch (system.getAllegiance()) {
-                case "Federation":
-                    binding.logoImageView.setImageResource(R.drawable.elite_federation);
-                    break;
-                case "Empire":
-                    binding.logoImageView.setImageResource(R.drawable.elite_empire);
-                    break;
-                case "Alliance":
-                    binding.logoImageView.setImageResource(R.drawable.elite_alliance);
-                    break;
+                case "Federation" ->
+                        binding.logoImageView.setImageResource(R.drawable.elite_federation);
+                case "Empire" -> binding.logoImageView.setImageResource(R.drawable.elite_empire);
+                case "Alliance" ->
+                        binding.logoImageView.setImageResource(R.drawable.elite_alliance);
             }
         }
     }

@@ -27,7 +27,7 @@ public class NewsNetwork {
         EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        retrofit2.Callback<List<NewsArticleResponse>> callback = new retrofit2.Callback<List<NewsArticleResponse>>() {
+        retrofit2.Callback<List<NewsArticleResponse>> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<List<NewsArticleResponse>> call,
@@ -70,7 +70,7 @@ public class NewsNetwork {
         EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        retrofit2.Callback<List<NewsArticleResponse>> callback = new retrofit2.Callback<List<NewsArticleResponse>>() {
+        retrofit2.Callback<List<NewsArticleResponse>> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<List<NewsArticleResponse>> call,

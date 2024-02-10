@@ -2,6 +2,7 @@ package fr.corenting.edcompanion.adapters;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -27,6 +28,7 @@ public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
         return 3;
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
 
@@ -38,36 +40,27 @@ public class CommodityDetailsPagerAdapter extends FragmentPagerAdapter {
         }
 
         // Else return new one
-        switch (position) {
-            default:
-                return new CommodityDetailsFragment();
-            case 1:
-                return new CommodityDetailsSellFragment();
-            case 2:
-                return new CommodityDetailsBuyFragment();
-        }
+        return switch (position) {
+            default -> new CommodityDetailsFragment();
+            case 1 -> new CommodityDetailsSellFragment();
+            case 2 -> new CommodityDetailsBuyFragment();
+        };
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            default:
-                return context.getString(R.string.commodity);
-            case 1:
-                return context.getString(R.string.where_to_sell);
-            case 2:
-                return context.getString(R.string.where_to_buy);
-        }
+        return switch (position) {
+            default -> context.getString(R.string.commodity);
+            case 1 -> context.getString(R.string.where_to_sell);
+            case 2 -> context.getString(R.string.where_to_buy);
+        };
     }
 
     private String getTag(int position) {
-        switch (position) {
-            default:
-                return CommodityDetailsFragment.COMMODITY_DETAILS_FRAGMENT;
-            case 1:
-                return CommodityDetailsSellFragment.COMMODITY_DETAILS_SELL_FRAGMENT_TAG;
-            case 2:
-                return CommodityDetailsBuyFragment.COMMODITY_DETAILS_BUY_FRAGMENT_TAG;
-        }
+        return switch (position) {
+            default -> CommodityDetailsFragment.COMMODITY_DETAILS_FRAGMENT;
+            case 1 -> CommodityDetailsSellFragment.COMMODITY_DETAILS_SELL_FRAGMENT_TAG;
+            case 2 -> CommodityDetailsBuyFragment.COMMODITY_DETAILS_BUY_FRAGMENT_TAG;
+        };
     }
 }

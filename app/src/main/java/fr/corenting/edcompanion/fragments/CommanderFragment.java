@@ -31,7 +31,7 @@ public class CommanderFragment extends Fragment {
         binding.tabLayout.setupWithViewPager(binding.viewPager);
 
         // Style
-        if (ThemeUtils.isDarkThemeEnabled(getContext())) {
+        if (ThemeUtils.isDarkThemeEnabled(requireContext())) {
             binding.tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColorDark));
         } else {
             binding.tabLayout.setBackgroundColor(getResources().getColor(R.color.primaryColor));

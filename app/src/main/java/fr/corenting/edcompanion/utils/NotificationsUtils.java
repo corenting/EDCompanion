@@ -114,24 +114,22 @@ public class NotificationsUtils {
     }
 
     public static Pair<String, String> getChannelNameAndDescription(Context c, String type) {
-        switch (type) {
-            case newGoalTopic:
-                return new Pair<>(c.getString(R.string.notifications_new_goal_channel), c.getString(R.string.notifications_new_goal_channel_description));
-            case newTierTopic:
-                return new Pair<>(c.getString(R.string.notifications_new_tier_channel), c.getString(R.string.notifications_new_tier_channel_description));
-            default:
-                return new Pair<>(c.getString(R.string.notifications_finished_goal_channel), c.getString(R.string.notifications_finished_goal_channel_description));
-        }
+        return switch (type) {
+            case newGoalTopic ->
+                    new Pair<>(c.getString(R.string.notifications_new_goal_channel), c.getString(R.string.notifications_new_goal_channel_description));
+            case newTierTopic ->
+                    new Pair<>(c.getString(R.string.notifications_new_tier_channel), c.getString(R.string.notifications_new_tier_channel_description));
+            default ->
+                    new Pair<>(c.getString(R.string.notifications_finished_goal_channel), c.getString(R.string.notifications_finished_goal_channel_description));
+        };
     }
 
     public static String getNotificationContent(Context c, String type, int currentTier) {
-        switch (type) {
-            case newGoalTopic:
-                return c.getString(R.string.notifications_new_goal_description);
-            case newTierTopic:
-                return c.getString(R.string.notifications_new_tier_description, currentTier);
-            default:
-                return c.getString(R.string.notifications_finished_goal_description);
-        }
+        return switch (type) {
+            case newGoalTopic -> c.getString(R.string.notifications_new_goal_description);
+            case newTierTopic ->
+                    c.getString(R.string.notifications_new_tier_description, currentTier);
+            default -> c.getString(R.string.notifications_finished_goal_description);
+        };
     }
 }

@@ -2,7 +2,6 @@
     <string name="app_name">EDCompanion</string>
 
     <!--URLs-->
-    <string name="edapi_base">https://ed-api.9cw.eu/</string>
     <string name="edapi_v4_base">https://ed.9cw.eu/</string>
     <string name="edsm_base">https://www.edsm.net/</string>
     <string name="inara_api_base">https://inara.cz/</string>
@@ -36,9 +35,6 @@
     <string name="finished">Finished</string>
     <string name="community_goal_description">Community goal description</string>
     <string name="objective">Objective</string>
-    <string name="tier">Tier</string>
-    <string name="contributions">Contributions</string>
-    <string name="reward">Reward</string>
     <string name="no_description_yet">No description yet</string>
     <string name="no_objective_yet">No objective yet</string>
     <string name="cg_system_distance">System: %1$s</string>
@@ -54,7 +50,6 @@
     <string name="download_error">Error while downloading the content</string>
     <string name="no_chart_error">No history chart to display</string>
     <string name="no_chart_snackbar_error">Error while download the history chart</string>
-    <string name="my_location_error">Cannot get your current position</string>
     <string name="no_commander_accounts_linked_error_message">You don\'t have any account enabled in the settings to get your commander status. Enable at least one source in the settings.</string>
     <string name="no_commander_accounts_linked_error_settings_button">Open settings</string>
     <string name="error">Error</string>
@@ -265,7 +260,6 @@
     <!--Commodities list-->
     <string name="commodities_list_subtitle">Find the average price of a commodity, the top stations to buy/sell from…</string>
     <string name="rare_commodity">Rare commodity</string>
-    <string name="average_price">Average price</string>
     <string name="average_buy_price">Average buy price</string>
     <string name="average_sell_price">Average sell price</string>
     <string name="min_buy_price">Minimum buy price</string>
@@ -404,7 +398,6 @@
     <string name="notifications_new_goal_description">New community goal</string>
     <string name="notifications_finished_goal_description">Community goal finished</string>
     <string name="notifications_new_tier_description">Tier %1$d reached</string>
-    <string name="open">Open</string>
 
     <!--Changelog-->
     <string name="changelog_title">Changelog</string>

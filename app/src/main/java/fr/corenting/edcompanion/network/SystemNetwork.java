@@ -30,7 +30,7 @@ public class SystemNetwork {
         EDSMRetrofit retrofit = RetrofitSingleton.getInstance()
                 .getEDSMRetrofit(ctx.getApplicationContext());
 
-        retrofit2.Callback<List<EDSMSystemResponse>> callback = new retrofit2.Callback<List<EDSMSystemResponse>>() {
+        retrofit2.Callback<List<EDSMSystemResponse>> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<List<EDSMSystemResponse>> call,
@@ -72,7 +72,7 @@ public class SystemNetwork {
         EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        retrofit2.Callback<SystemResponse> callback = new retrofit2.Callback<SystemResponse>() {
+        retrofit2.Callback<SystemResponse> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<SystemResponse> call,
@@ -109,7 +109,7 @@ public class SystemNetwork {
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
         retrofit2.Callback<List<NewsArticleResponse.SystemHistoryResponse>> callback =
-                new retrofit2.Callback<List<NewsArticleResponse.SystemHistoryResponse>>() {
+                new retrofit2.Callback<>() {
                     @Override
                     @EverythingIsNonNull
                     public void onResponse(Call<List<NewsArticleResponse.SystemHistoryResponse>> call,
@@ -153,7 +153,7 @@ public class SystemNetwork {
         EDApiV4Retrofit retrofit = RetrofitSingleton.getInstance()
                 .getEdApiV4Retrofit(ctx.getApplicationContext());
 
-        retrofit2.Callback<List<StationResponse>> callback = new retrofit2.Callback<List<StationResponse>>() {
+        retrofit2.Callback<List<StationResponse>> callback = new retrofit2.Callback<>() {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<List<StationResponse>> call,

@@ -11,19 +11,14 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.NumberFormat;
-
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.databinding.ListItemLoadoutBinding;
 import fr.corenting.edcompanion.models.CommanderLoadout;
 import fr.corenting.edcompanion.models.CommanderLoadoutWeapon;
-import fr.corenting.edcompanion.models.Ship;
-import fr.corenting.edcompanion.utils.MathUtils;
 
 public class CommanderLoadoutsAdapter extends ListAdapter<CommanderLoadout,
         CommanderLoadoutsAdapter.loadoutViewHolder> {
 
-    private final NumberFormat numberFormat;
     private final Context context;
 
 
@@ -44,7 +39,6 @@ public class CommanderLoadoutsAdapter extends ListAdapter<CommanderLoadout,
         });
 
         this.context = ctx;
-        this.numberFormat = MathUtils.getNumberFormat(ctx);
     }
 
     @NonNull
@@ -86,9 +80,6 @@ public class CommanderLoadoutsAdapter extends ListAdapter<CommanderLoadout,
 
         holder.viewBinding.currentLoadoutLayout.loadoutTextView.setText(context.getString(R.string.loadout_with_number, currentLoadout.getLoadoutId() ));
         holder.viewBinding.currentLoadoutLayout.suitTextView.setText(currentLoadout.getSuitName());
-
-        // Change text appearance
-        holder.viewBinding.currentLoadoutLayout.loadoutTextView.setTextAppearance(androidx.appcompat.R.style.TextAppearance_AppCompat_Title);
 
         // Weapons
         setLoadoutWeaponDisplay(
