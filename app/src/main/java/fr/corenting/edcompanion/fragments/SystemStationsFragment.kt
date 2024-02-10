@@ -33,8 +33,4 @@ class SystemStationsFragment : AbstractListFragment<SystemStationsAdapter>() {
         endLoading(stations.stations.isEmpty())
         recyclerViewAdapter.submitList(stations.stations)
     }
-
-    companion object {
-        const val SYSTEM_STATIONS_FRAGMENT_TAG = "system_stations"
-    }
 }

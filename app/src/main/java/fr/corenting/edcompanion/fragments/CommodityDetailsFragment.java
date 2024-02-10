@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.text.NumberFormat;
 
 import fr.corenting.edcompanion.R;
-import fr.corenting.edcompanion.activities.SystemDetailsActivity;
+import fr.corenting.edcompanion.activities.CommodityDetailsActivity;
 import fr.corenting.edcompanion.databinding.FragmentCommodityDetailsBinding;
 import fr.corenting.edcompanion.models.CommodityDetailsResult;
 import fr.corenting.edcompanion.utils.MathUtils;
@@ -38,7 +38,7 @@ public class CommodityDetailsFragment extends Fragment {
         SwipeRefreshLayout.OnRefreshListener listener = () -> {
             binding.swipeContainer.setRefreshing(true);
             if (getActivity() != null) {
-                ((SystemDetailsActivity) getActivity()).getData();
+                ((CommodityDetailsActivity) getActivity()).getData();
             }
         };
         binding.swipeContainer.setOnRefreshListener(listener);

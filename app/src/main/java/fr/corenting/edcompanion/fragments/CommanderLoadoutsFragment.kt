@@ -37,8 +37,4 @@ class CommanderLoadoutsFragment : AbstractListFragment<CommanderLoadoutsAdapter>
     override fun needEventBus(): Boolean {
         return false
     }
-
-    companion object {
-        const val COMMANDER_LOADOUTS_FRAGMENT_TAG = "commander_loadouts_fragment"
-    }
 }

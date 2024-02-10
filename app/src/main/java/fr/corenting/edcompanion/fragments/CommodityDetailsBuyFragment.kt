@@ -31,8 +31,4 @@ class CommodityDetailsBuyFragment : AbstractListFragment<CommodityDetailsStation
         endLoading(stations.stations.isEmpty())
         recyclerViewAdapter.submitList(stations.stations)
     }
-
-    companion object {
-        const val COMMODITY_DETAILS_BUY_FRAGMENT_TAG = "commodity_details_buy"
-    }
 }

@@ -36,8 +36,4 @@ class CommanderFleetFragment : AbstractListFragment<CommanderFleetAdapter>() {
     override fun needEventBus(): Boolean {
         return false
     }
-
-    companion object {
-        const val COMMANDER_FLEET_FRAGMENT_TAG = "commander_fleet_fragment"
-    }
 }
