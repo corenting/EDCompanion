@@ -348,7 +348,7 @@
     <string name="settings_cmdr_edsm_username">Commander name</string>
     <string name="settings_cmdr_edsm_username_summary">The ingame name of your CMDR (not your EDSM username)</string>
     <string name="settings_cmdr_loadout_display_enable">Display CMDR loadout</string>
-    <string name="settings_cmdr_loadout_display_enable_summary">Display the loadout of your CMDR in the commander tab</string>
+    <string name="settings_cmdr_loadout_display_enable_summary">Display loadouts details (current loadout and the list of your loadouts)</string>
     <string name="settings_cmdr_edsm_api_key">EDSM API key</string>
     <string name="settings_cmdr_edsm_api_key_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
     <string name="settings_cmdr_frontier_oauth">Link your Frontier account</string>
