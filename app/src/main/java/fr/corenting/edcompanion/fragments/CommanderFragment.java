@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayoutMediator;
+
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.adapters.CommanderFragmentPagerAdapter;
 import fr.corenting.edcompanion.databinding.FragmentCommanderBinding;
@@ -26,9 +28,11 @@ public class CommanderFragment extends Fragment {
         View view = binding.getRoot();
 
         // Setup tablayout and viewpager
-        binding.viewPager.setAdapter(new CommanderFragmentPagerAdapter(getChildFragmentManager(),
-                getContext()));
-        binding.tabLayout.setupWithViewPager(binding.viewPager);
+        binding.viewPager.setAdapter(new CommanderFragmentPagerAdapter(this));
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager,
+                (tab, position) -> tab.setText(getTabTitle(position))
+
+        ).attach();
 
         // Style
         if (ThemeUtils.isDarkThemeEnabled(requireContext())) {
@@ -39,6 +43,14 @@ public class CommanderFragment extends Fragment {
         binding.tabLayout.setTabTextColors(getResources().getColor(R.color.tabTextSelected),
                 getResources().getColor(R.color.tabText));
         return view;
+    }
+
+    private String getTabTitle(int position) {
+        return switch (position) {
+            case 1 -> this.getString(R.string.fleet);
+            case 2 -> this.getString(R.string.loadouts);
+            default -> this.getString(R.string.commander);
+        };
     }
 
     @Override
