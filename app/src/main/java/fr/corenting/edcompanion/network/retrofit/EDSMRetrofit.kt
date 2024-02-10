@@ -25,9 +25,6 @@ interface EDSMRetrofit {
         @Query("commanderName") commanderName: String?
     ): EDSMRanksResponse
 
-    @GET("api-status-v1/elite-server")
-    suspend fun getServerStatus(): EDSMServerStatusResponse
-
     @GET("api-v1/systems")
     fun getSystems(
         @Query("systemName") systemName: String?,

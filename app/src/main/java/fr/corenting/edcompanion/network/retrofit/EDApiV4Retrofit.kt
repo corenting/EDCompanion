@@ -78,4 +78,7 @@ interface EDApiV4Retrofit {
         @Query("min_quantity") min_quantity: Int,
         @Query("mode") searchMode: String
     ): Call<List<CommodityFinderResponse>>
+
+    @GET("game_server_health")
+    suspend fun getGameServerHealth(): GameServerHealthResponse
 }

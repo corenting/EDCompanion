@@ -9,13 +9,13 @@ object ServerStatusNetwork {
 
     suspend fun getStatus(ctx: Context): ProxyResult<ServerStatus> {
 
-        val edsmRetrofit = RetrofitSingleton.getInstance()
-            .getEDSMRetrofit(ctx.applicationContext)
+        val edApiRetrofit = RetrofitSingleton.getInstance()
+            .getEdApiV4Retrofit(ctx.applicationContext)
 
         return try {
-            val edsmServerStatus = edsmRetrofit.getServerStatus()
+            val serverStatus = edApiRetrofit.getGameServerHealth()
             ProxyResult(
-                ServerStatus(edsmServerStatus.Message)
+                ServerStatus(serverStatus.Status)
             )
         } catch (t: Throwable) {
             ProxyResult(null, t)
