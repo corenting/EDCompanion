@@ -32,8 +32,4 @@ class CommanderFleetFragment : AbstractListFragment<CommanderFleetAdapter>() {
         }
         viewModel.fetchFleet()
     }
-
-    override fun needEventBus(): Boolean {
-        return false
-    }
 }

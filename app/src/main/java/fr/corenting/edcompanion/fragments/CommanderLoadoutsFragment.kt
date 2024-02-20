@@ -1,7 +1,6 @@
 package fr.corenting.edcompanion.fragments
 
 import androidx.fragment.app.activityViewModels
-import fr.corenting.edcompanion.adapters.CommanderFleetAdapter
 import fr.corenting.edcompanion.adapters.CommanderLoadoutsAdapter
 import fr.corenting.edcompanion.models.exceptions.DataNotInitializedException
 import fr.corenting.edcompanion.models.exceptions.FrontierAuthNeededException
@@ -32,9 +31,5 @@ class CommanderLoadoutsFragment : AbstractListFragment<CommanderLoadoutsAdapter>
 
         }
         viewModel.fetchAllLoadouts()
-    }
-
-    override fun needEventBus(): Boolean {
-        return false
     }
 }

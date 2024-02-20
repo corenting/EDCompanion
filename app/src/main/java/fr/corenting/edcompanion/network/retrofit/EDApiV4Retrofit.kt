@@ -11,14 +11,12 @@ interface EDApiV4Retrofit {
     // TODO : convert to suspend/viewmodel etc...
     @GET("ships/typeahead")
     fun getShipsTypeAhead(@Query("input_text") shipName: String): Call<List<String>>
-
-    // TODO : convert to suspend/viewmodel etc...
+    
     @GET("galnet")
-    fun getGalnetNews(@Query("lang") language: String): Call<List<NewsArticleResponse>>
+    suspend fun getGalnetNews(@Query("lang") language: String): List<NewsArticleResponse>
 
-    // TODO : convert to suspend/viewmodel etc...
     @GET("news")
-    fun getNews(@Query("lang") language: String): Call<List<NewsArticleResponse>>
+    suspend fun getNews(@Query("lang") language: String): List<NewsArticleResponse>
 
     // TODO : convert to suspend/viewmodel etc...
     @GET("systems/typeahead")
@@ -34,9 +32,8 @@ interface EDApiV4Retrofit {
     @GET("systems/{system}/stations")
     fun getSystemStations(@Path("system") system: String): Call<List<StationResponse>>
 
-    // TODO : convert to suspend/viewmodel etc...
     @GET("community_goals")
-    fun getCommunityGoals(): Call<List<CommunityGoalsResponse>>
+    suspend fun getCommunityGoals(): List<CommunityGoalsResponse>
 
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/typeahead")

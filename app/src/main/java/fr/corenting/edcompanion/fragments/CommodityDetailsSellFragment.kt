@@ -3,6 +3,7 @@ package fr.corenting.edcompanion.fragments
 import fr.corenting.edcompanion.adapters.CommodityDetailsStationsAdapter
 import fr.corenting.edcompanion.models.events.CommodityDetailsSell
 import fr.corenting.edcompanion.utils.NotificationsUtils
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -14,6 +15,18 @@ class CommodityDetailsSellFragment : AbstractListFragment<CommodityDetailsStatio
 
     override fun getNewRecyclerViewAdapter(): CommodityDetailsStationsAdapter {
         return CommodityDetailsStationsAdapter(context, true)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        EventBus.getDefault().unregister(this)
     }
 
     override fun getData() {
