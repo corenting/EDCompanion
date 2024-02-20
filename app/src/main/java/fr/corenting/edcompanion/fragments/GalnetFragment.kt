@@ -1,56 +1,69 @@
 package fr.corenting.edcompanion.fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.adapters.NewsAdapter
-import fr.corenting.edcompanion.models.events.GalnetNews
-import fr.corenting.edcompanion.network.NewsNetwork
+import fr.corenting.edcompanion.models.ProxyResult
+import fr.corenting.edcompanion.models.events.News
 import fr.corenting.edcompanion.utils.NotificationsUtils
 import fr.corenting.edcompanion.utils.SettingsUtils
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
+import fr.corenting.edcompanion.view_models.GalnetViewModel
 
 class GalnetFragment : AbstractListFragment<NewsAdapter>() {
     private lateinit var currentLanguage: String
+    private val viewModel: GalnetViewModel by activityViewModels()
 
     private val newsLanguage: String
         get() = SettingsUtils.getString(context, getString(R.string.settings_news_lang))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         currentLanguage = newsLanguage
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = super.onCreateView(inflater, container, savedInstanceState)
+
+        viewModel.getGalnet().observe(viewLifecycleOwner, ::onNewsEvent)
+        return view
+    }
+
 
     override fun onResume() {
         super.onResume()
 
         // Refresh if language changed
         if (currentLanguage != newsLanguage) {
-            currentLanguage = newsLanguage
             getData()
         }
     }
 
     override fun getData() {
-        NewsNetwork.getGalnetNews(context, currentLanguage)
+        viewModel.fetchGalnet(currentLanguage)
     }
 
     override fun getNewRecyclerViewAdapter(): NewsAdapter {
         return NewsAdapter(context, binding.recyclerView, false, true)
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onNewsEvent(news: GalnetNews) {
+    private fun onNewsEvent(news: ProxyResult<News>) {
         // Error case
-        if (!news.success) {
+        if (news.error != null || news.data == null) {
             endLoading(true)
             NotificationsUtils.displayGenericDownloadErrorSnackbar(activity)
             return
         }
 
-        endLoading(news.articles.isEmpty())
-        recyclerViewAdapter.submitList(news.articles)
+        endLoading(news.data.articles.isEmpty())
+        recyclerViewAdapter.submitList(news.data.articles)
     }
 
     companion object {

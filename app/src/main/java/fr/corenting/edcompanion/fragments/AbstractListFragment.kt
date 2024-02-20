@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.corenting.edcompanion.databinding.FragmentListBinding
-import org.greenrobot.eventbus.EventBus
 
 abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.ListAdapter<*, *>> :
     Fragment() {
@@ -23,6 +22,7 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -66,23 +66,6 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
         retainInstance = true
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        // Register eventbus for the list data if needed
-        if (needEventBus()) {
-            EventBus.getDefault().register(this)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        if (needEventBus()) {
-            EventBus.getDefault().unregister(this)
-        }
-    }
-
     protected fun endLoading(empty: Boolean) {
         binding.emptySwipe.visibility = if (empty) View.VISIBLE else View.GONE
         binding.emptySwipe.isRefreshing = false
@@ -94,11 +77,6 @@ abstract class AbstractListFragment<TAdapter : androidx.recyclerview.widget.List
         binding.emptySwipe.visibility = View.GONE
         binding.swipeContainer.visibility = View.VISIBLE
         binding.swipeContainer.isRefreshing = true
-    }
-
-
-    open fun needEventBus(): Boolean {
-        return true
     }
 
     internal abstract fun getData()
