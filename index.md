@@ -5,7 +5,7 @@ layout: home
 
 An unofficial Android companion app for Elite : Dangerous.
 
-The application only works for the "Live" version of the game.
+ℹ️ The application only works for the "Live" version of the game. It doesn't work for the "Legacy" version (including the console versions).
 
 
 # Download the app
@@ -31,13 +31,7 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 
 # Data sources
 
-For the galaxy data (stations, systems, commodities, ships etc.), the application relies on the following third-part data sources:
-- [EDSM](https://www.edsm.net/)
-- [FuelRats](https://fuelrats.com)
-- [Inara](https://inara.cz/)
-- [Spansh](https://spansh.co.uk)
-
-See also [ED-API](https://github.com/corenting/ED-API) which is the backend used for most features.
+See [ED-API](https://github.com/corenting/ED-API), which is the backend used for most features of the application.
 
 # Help
 
