@@ -62,4 +62,23 @@ object AutoCompleteNetwork {
             emptyList()
         }
     }
+
+    fun searchOutfittings(context: Context, filter: String): List<String> {
+        return try {
+            val edApiV4Retrofit = RetrofitSingleton.getInstance()
+                .getEdApiV4Retrofit(context.applicationContext)
+
+            val response = edApiV4Retrofit.getOutfittingTypeAhead(filter).execute()
+            val outfittings = response.body()
+
+            if (!response.isSuccessful || outfittings == null) {
+                ArrayList()
+            } else {
+
+                outfittings.take(MAX_RESULTS)
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 }

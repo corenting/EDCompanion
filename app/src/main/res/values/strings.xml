@@ -20,6 +20,7 @@
     <string name="ship_finder">Ship finder</string>
     <string name="commodity_finder">Commodity finder</string>
     <string name="commodities_list">Commodities</string>
+    <string name="outfitting_finder">Outfitting finder</string>
 
     <string name="about">About</string>
     <string name="commander">Commander</string>
@@ -256,6 +257,10 @@
         <item>Buy</item>
         <item>Sell</item>
     </string-array>
+
+    <!--Outfitting finder-->
+    <string name="outfitting_finder_subtitle">Find the nearest station selling or buying a specific outfitting</string>
+    <string name="outfitting">Outfitting</string>
 
     <!--Commodities list-->
     <string name="commodities_list_subtitle">Find the average price of a commodity, the top stations to buy/sell from…</string>

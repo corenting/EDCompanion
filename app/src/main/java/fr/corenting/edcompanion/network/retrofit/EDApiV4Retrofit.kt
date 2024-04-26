@@ -1,7 +1,17 @@
 package fr.corenting.edcompanion.network.retrofit
 
-import fr.corenting.edcompanion.models.apis.EDAPIV4.*
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityBestPricesResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityFinderResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommodityWithPriceResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.CommunityGoalsResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.DistanceResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.GameServerHealthResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse
 import fr.corenting.edcompanion.models.apis.EDAPIV4.NewsArticleResponse.SystemHistoryResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.OutfittingFinderResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.ShipFinderResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.StationResponse
+import fr.corenting.edcompanion.models.apis.EDAPIV4.SystemResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,7 +21,7 @@ interface EDApiV4Retrofit {
     // TODO : convert to suspend/viewmodel etc...
     @GET("ships/typeahead")
     fun getShipsTypeAhead(@Query("input_text") shipName: String): Call<List<String>>
-    
+
     @GET("galnet")
     suspend fun getGalnetNews(@Query("lang") language: String): List<NewsArticleResponse>
 
@@ -60,11 +70,15 @@ interface EDApiV4Retrofit {
 
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/{commodity}/prices")
-    fun getCommodityPrice(@Path("commodity") commodity_name: String): Call<CommodityWithPriceResponse>
+    fun getCommodityPrice(@Path("commodity") commodityName: String): Call<CommodityWithPriceResponse>
 
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/{commodity}/best_prices")
-    fun getCommodityBestPrices(@Path("commodity") commodity_name: String): Call<CommodityBestPricesResponse>
+    fun getCommodityBestPrices(@Path("commodity") commodityName: String): Call<CommodityBestPricesResponse>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("outfitting/typeahead")
+    fun getOutfittingTypeAhead(@Query("input_text") outfittingName: String): Call<List<String>>
 
     // TODO : convert to suspend/viewmodel etc...
     @GET("commodities/find")
@@ -72,9 +86,17 @@ interface EDApiV4Retrofit {
         @Query("reference_system") system: String,
         @Query("commodity") commodity: String,
         @Query("min_landing_pad_size") minLandingPad: String,
-        @Query("min_quantity") min_quantity: Int,
+        @Query("min_quantity") minQuantity: Int,
         @Query("mode") searchMode: String
     ): Call<List<CommodityFinderResponse>>
+
+    // TODO : convert to suspend/viewmodel etc...
+    @GET("outfitting/find")
+    fun findOutfitting(
+        @Query("reference_system") system: String,
+        @Query("outfitting") outfitting: String,
+        @Query("min_landing_pad_size") minLandingPad: String,
+    ): Call<List<OutfittingFinderResponse>>
 
     @GET("game_server_health")
     suspend fun getGameServerHealth(): GameServerHealthResponse

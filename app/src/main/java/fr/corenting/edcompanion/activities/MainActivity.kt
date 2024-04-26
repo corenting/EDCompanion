@@ -21,6 +21,7 @@ import fr.corenting.edcompanion.fragments.CommunityGoalsFragment
 import fr.corenting.edcompanion.fragments.DistanceCalculatorFragment
 import fr.corenting.edcompanion.fragments.GalnetFragment
 import fr.corenting.edcompanion.fragments.NewsFragment
+import fr.corenting.edcompanion.fragments.OutfittingFinderFragment
 import fr.corenting.edcompanion.fragments.ShipFinderFragment
 import fr.corenting.edcompanion.fragments.SystemFinderFragment
 import fr.corenting.edcompanion.utils.ChangelogUtils
@@ -187,6 +188,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 switchFragment(CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG)
             }
 
+            R.id.nav_oufitting_finder -> {
+                switchFragment(OutfittingFinderFragment.OUTFITTING_FINDER_FRAGMENT_TAG)
+            }
+
             R.id.nav_commodities_list -> {
                 switchFragment(CommoditiesListFragment.COMMODITIES_LIST_FRAGMENT_TAG)
             }
@@ -263,6 +268,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             CommodityFinderFragment.COMMODITY_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
                 fragmentManager,
                 CommodityFinderFragment(),
+                tag
+            )
+
+            OutfittingFinderFragment.OUTFITTING_FINDER_FRAGMENT_TAG -> ViewUtils.switchFragment(
+                fragmentManager,
+                OutfittingFinderFragment(),
                 tag
             )
 

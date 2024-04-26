@@ -58,7 +58,12 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
                             constraint.toString()
                         )
 
-                        else -> AutoCompleteNetwork.searchCommodities(
+                        TYPE_AUTOCOMPLETE_COMMODITIES -> AutoCompleteNetwork.searchCommodities(
+                            context,
+                            constraint.toString()
+                        )
+
+                        else -> AutoCompleteNetwork.searchOutfittings(
                             context,
                             constraint.toString()
                         )
@@ -87,5 +92,6 @@ class AutoCompleteAdapter(private val context: Context, private val autocomplete
         const val TYPE_AUTOCOMPLETE_SYSTEMS = 0
         const val TYPE_AUTOCOMPLETE_SHIPS = 1
         const val TYPE_AUTOCOMPLETE_COMMODITIES = 2
+        const val TYPE_AUTOCOMPLETE_OUTFITTINGS = 3
     }
 }
