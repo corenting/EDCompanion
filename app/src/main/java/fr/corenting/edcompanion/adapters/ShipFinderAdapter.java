@@ -18,10 +18,11 @@ import java.text.NumberFormat;
 
 import fr.corenting.edcompanion.R;
 import fr.corenting.edcompanion.databinding.FragmentFindShipHeaderBinding;
-import fr.corenting.edcompanion.databinding.ListItemShipFinderResultBinding;
+import fr.corenting.edcompanion.databinding.ListStationFinderResultBinding;
 import fr.corenting.edcompanion.models.ShipFinderResult;
 import fr.corenting.edcompanion.models.events.ShipFinderSearch;
 import fr.corenting.edcompanion.utils.MathUtils;
+import fr.corenting.edcompanion.utils.StationTypeUtils;
 import fr.corenting.edcompanion.utils.ViewUtils;
 
 public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderViewHolder,
@@ -42,7 +43,7 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
     @Override
     protected RecyclerView.ViewHolder getResultViewHolder(@NonNull @NotNull ViewGroup parent) {
-        ListItemShipFinderResultBinding resultBinding = ListItemShipFinderResultBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ListStationFinderResultBinding resultBinding = ListStationFinderResultBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ResultViewHolder(resultBinding);
     }
 
@@ -80,6 +81,12 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
     protected void bindResultViewHolder(ResultViewHolder holder, int position) {
         ShipFinderResult currentResult = results.get(position - 1);
 
+        // Hide unused fields
+        holder.binding.stockLabelTextView.setVisibility(View.GONE);
+        holder.binding.stockTextView.setVisibility(View.GONE);
+        holder.binding.priceLabelTextView.setVisibility(View.GONE);
+        holder.binding.priceTextView.setVisibility(View.GONE);
+
         // Title
         holder.binding.titleTextView.setText(
                 String.format("%s - %s", currentResult.getSystemName(),
@@ -87,27 +94,19 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
         );
 
         // Display is special type (fleet carrier, settlement etc...)
-        boolean displayStationTypeText = false;
-        String stationType = null;
-        if (currentResult.isPlanetary()) {
-            displayStationTypeText = true;
-            stationType = context.getString(R.string.planetary);
-        }
-        if (currentResult.isFleetCarrier()) {
-            displayStationTypeText = true;
-            stationType = context.getString(R.string.fleet_carrier);
-        }
-        if (currentResult.isSettlement()) {
-            displayStationTypeText = true;
-            stationType = context.getString(R.string.settlement);
-        }
+        String stationType = StationTypeUtils.INSTANCE.getStationTypeText(
+                context,
+                currentResult.isPlanetary(),
+                currentResult.isFleetCarrier(),
+                currentResult.isSettlement()
+        );
         holder.binding.stationTypeTextView.setText(stationType);
-        holder.binding.stationTypeTextView.setVisibility(displayStationTypeText ? View.VISIBLE : View.GONE);
+        holder.binding.stationTypeTextView.setVisibility(stationType != null ? View.VISIBLE : View.GONE);
 
         // Other information
         holder.binding.distanceTextView.setText(context.getString(R.string.distance_ly,
                 currentResult.getDistance()));
-        holder.binding.starDistanceTextView.setText(context.getString(R.string.distance_ls,
+        holder.binding.distanceToStarTextView.setText(context.getString(R.string.distance_ls,
                 numberFormat.format(currentResult.getDistanceToStar())));
         holder.binding.isPlanetaryImageView.setVisibility(
                 currentResult.isPlanetary() ? View.VISIBLE : View.GONE);
@@ -122,9 +121,9 @@ public class ShipFinderAdapter extends FinderAdapter<ShipFinderAdapter.HeaderVie
 
     public static class ResultViewHolder extends RecyclerView.ViewHolder {
 
-        private final ListItemShipFinderResultBinding binding;
+        private final ListStationFinderResultBinding binding;
 
-        public ResultViewHolder(ListItemShipFinderResultBinding binding) {
+        public ResultViewHolder(ListStationFinderResultBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

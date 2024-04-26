@@ -39,7 +39,7 @@ public class ShipFinderFragment extends AbstractFinderFragment<ShipFinderAdapter
             return;
         }
 
-        endLoading(results.getResults().size() == 0);
+        endLoading(results.getResults().isEmpty());
         recyclerViewAdapter.setResults(results.getResults());
     }
 

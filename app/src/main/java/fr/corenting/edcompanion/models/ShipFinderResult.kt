@@ -6,7 +6,7 @@ import org.threeten.bp.Instant
 
 data class ShipFinderResult(
     val distance: Float,
-    val DistanceToStar: Float,
+    val distanceToStar: Float,
     val lastShipyardUpdate: Instant,
     val maxLandingPad: String,
     val stationName: String,

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
 
     android:layout_width="match_parent"
@@ -29,7 +30,8 @@
             android:layout_toStartOf="@id/isPlanetaryImageView"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:text="Colonia" />
 
         <fr.corenting.edcompanion.views.LightDarkImageView
             android:id="@+id/isPlanetaryImageView"
@@ -39,11 +41,22 @@
             app:srcCompat="@drawable/ic_globe_gray600_24dp" />
 
         <TextView
-            android:id="@+id/distanceLabelTextView"
-            android:layout_width="110dp"
+            android:id="@+id/stationTypeTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
             android:layout_marginTop="8dp"
+            android:text="@string/station_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold"
+            tools:text="Fleet carrier" />
+
+
+        <TextView
+            android:id="@+id/distanceLabelTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stationTypeTextView"
             android:text="@string/distance_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -52,8 +65,7 @@
             android:id="@+id/distanceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextView"
-            android:layout_marginTop="8dp"
+            android:layout_below="@id/stationTypeTextView"
             android:layout_toEndOf="@id/distanceLabelTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -71,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/distanceTextView"
-            android:layout_toEndOf="@id/distanceLabelTextView"
+            android:layout_toEndOf="@id/distanceToStarLabelTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
