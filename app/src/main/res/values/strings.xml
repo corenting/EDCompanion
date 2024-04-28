@@ -408,12 +408,11 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.28</b><br />
+            <b>Version 2.29</b><br />
             <ul>
-                <li>Add a "loadouts" tab in the commander tab (only if using Frontier, can be disabled in the settings)</li><br />
-                <li>Internal updates</li><br />
+                <li>Add an outfitting finder tool</li><br />
+                <li>Add station type in commodity finder</li><br />
             </ul>
-            <p>Special thanks to the EDCompanion user who donated the Odyssey extension which will help developing Odyssey-related features!</p>
         ]]>
     </string>
 
