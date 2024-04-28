@@ -25,6 +25,7 @@ Alternatively, you can download the latest APK from the [Github releases](https:
 - Distance calculator (get the distance between two systems)
 - Ship finder tool (find the nearest station selling a specific ship)
 - Commodity finder tool (find the nearest station selling or buying a specific commodity)
+- Outfitting finder tool (find the nearest station selling a specific outfitting)
 - Systems search (see system details, factions status and influence history)
 - Material design (light or dark theme)
 - No ads, free and open-source
