@@ -8,12 +8,12 @@ import com.google.gson.JsonParser
 import fr.corenting.edcompanion.R
 import fr.corenting.edcompanion.models.CommanderCredits
 import fr.corenting.edcompanion.models.CommanderFleet
-import fr.corenting.edcompanion.models.CommanderPosition
-import fr.corenting.edcompanion.models.CommanderRank
-import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.CommanderLoadout
 import fr.corenting.edcompanion.models.CommanderLoadoutWeapon
 import fr.corenting.edcompanion.models.CommanderLoadouts
+import fr.corenting.edcompanion.models.CommanderPosition
+import fr.corenting.edcompanion.models.CommanderRank
+import fr.corenting.edcompanion.models.CommanderRanks
 import fr.corenting.edcompanion.models.ProxyResult
 import fr.corenting.edcompanion.models.Ship
 import fr.corenting.edcompanion.models.apis.Frontier.FrontierProfileResponse
@@ -216,24 +216,35 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         }
     }
 
+    private fun getLoadoutFromApiResponseItem(loadoutElement: JsonElement): CommanderLoadout? {
+        try {
+            val slotsObject = loadoutElement.asJsonObject.get("slots").asJsonObject
+
+            return CommanderLoadout(
+                true,
+                loadoutElement.asJsonObject.get("loadoutSlotId").asInt,
+                loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString,
+                getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon1"),
+                getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon2"),
+                getWeaponFromLoadoutResponse(slotsObject, "SecondaryWeapon")
+            )
+
+        } catch (_: Throwable) {
+        }
+        return null
+    }
+
     private fun getAllLoadoutsFromApiResponse(loadoutsElement: JsonObject): CommanderLoadouts {
         val loadouts = mutableListOf<CommanderLoadout>()
 
-        loadoutsElement.getAsJsonArray("loadouts").forEach { loadoutElement ->
-            try {
-                val slotsObject = loadoutElement.asJsonObject.get("slots").asJsonObject
-
-                loadouts.add(
-                    CommanderLoadout(
-                        true,
-                        loadoutElement.asJsonObject.get("loadoutSlotId").asInt,
-                        loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString,
-                        getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon1"),
-                        getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon2"),
-                        getWeaponFromLoadoutResponse(slotsObject, "SecondaryWeapon")
-                    )
-                )
-            } catch (_: Throwable) {
+        // Sometimes the cAPI return an array, sometimes an object with indexes
+        if (loadoutsElement.get("loadouts").isJsonObject) {
+            for ((_, loadout) in loadoutsElement.get("loadouts").asJsonObject.entrySet()) {
+                getLoadoutFromApiResponseItem(loadout)?.let { loadouts.add(it) }
+            }
+        } else {
+            for (loadout in loadoutsElement.get("loadouts").asJsonArray) {
+                getLoadoutFromApiResponseItem(loadout)?.let { loadouts.add(it) }
             }
         }
 
