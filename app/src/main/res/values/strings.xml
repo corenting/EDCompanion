@@ -408,10 +408,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.29</b><br />
+            <b>Version 2.30</b><br />
             <ul>
-                <li>Add an outfitting finder tool</li><br />
-                <li>Add station type in commodity finder</li><br />
+                <li>Fix an issue loading loadouts data from Frontier for some users</li><br />
             </ul>
         ]]>
     </string>
