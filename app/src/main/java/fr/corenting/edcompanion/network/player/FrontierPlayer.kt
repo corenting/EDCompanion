@@ -28,8 +28,8 @@ import org.threeten.bp.Instant
 
 class FrontierPlayer(val context: Context) : PlayerNetwork {
 
-    private val frontierRetrofit: FrontierRetrofit = RetrofitSingleton.getInstance()
-        .getFrontierRetrofit(context.applicationContext)
+    private val frontierRetrofit: FrontierRetrofit =
+        RetrofitSingleton.getInstance().getFrontierRetrofit(context.applicationContext)
 
     private var lastFetch: Instant = Instant.MIN
 
@@ -43,9 +43,7 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
 
     override fun isUsable(): Boolean {
         return SettingsUtils.getBoolean(
-            context,
-            context.getString(R.string.settings_cmdr_frontier_enable),
-            false
+            context, context.getString(R.string.settings_cmdr_frontier_enable), false
         )
     }
 
@@ -73,63 +71,67 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
 
         // Combat
         val combatRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_combat)[apiRanks.Combat],
-            apiRanks.Combat, -1
+            context.resources.getStringArray(R.array.ranks_combat)[apiRanks.Combat],
+            apiRanks.Combat,
+            -1
         )
 
         // Trade
         val tradeRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_trade)[apiRanks.Trade],
-            apiRanks.Trade, -1
+            context.resources.getStringArray(R.array.ranks_trade)[apiRanks.Trade],
+            apiRanks.Trade,
+            -1
         )
 
         // Explore
         val exploreRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_explorer)[apiRanks.Explore],
-            apiRanks.Explore, -1
+            context.resources.getStringArray(R.array.ranks_explorer)[apiRanks.Explore],
+            apiRanks.Explore,
+            -1
         )
 
         // CQC
         val cqcRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_cqc)[apiRanks.Cqc],
-            apiRanks.Cqc, -1
+            context.resources.getStringArray(R.array.ranks_cqc)[apiRanks.Cqc], apiRanks.Cqc, -1
         )
 
         // Merceneray
         val mercenaryRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_mercenary)[apiRanks.Mercenary],
-            apiRanks.Mercenary, -1
+            context.resources.getStringArray(R.array.ranks_mercenary)[apiRanks.Mercenary],
+            apiRanks.Mercenary,
+            -1
         )
 
         // Exobiologist
         val exobiologistRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_exobiologist)[apiRanks.Exobiologist],
-            apiRanks.Exobiologist, -1
+            context.resources.getStringArray(R.array.ranks_exobiologist)[apiRanks.Exobiologist],
+            apiRanks.Exobiologist,
+            -1
         )
 
         // Federation
         val federationRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_federation)[apiRanks.Federation],
-            apiRanks.Federation, -1
+            context.resources.getStringArray(R.array.ranks_federation)[apiRanks.Federation],
+            apiRanks.Federation,
+            -1
         )
 
         // Empire
         val empireRank = CommanderRank(
-            context.resources
-                .getStringArray(R.array.ranks_empire)[apiRanks.Empire],
-            apiRanks.Empire, -1
+            context.resources.getStringArray(R.array.ranks_empire)[apiRanks.Empire],
+            apiRanks.Empire,
+            -1
         )
 
         return CommanderRanks(
-            combatRank, tradeRank, exploreRank,
-            cqcRank, exobiologistRank, mercenaryRank, federationRank, empireRank
+            combatRank,
+            tradeRank,
+            exploreRank,
+            cqcRank,
+            exobiologistRank,
+            mercenaryRank,
+            federationRank,
+            empireRank
         )
     }
 
@@ -137,12 +139,10 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         try {
             val apiResponse = frontierRetrofit.getProfileRaw()
             val rawResponse = JsonParser.parseString(apiResponse.string()).asJsonObject
-            val profileResponse = Gson()
-                .fromJson(rawResponse, FrontierProfileResponse::class.java)
+            val profileResponse = Gson().fromJson(rawResponse, FrontierProfileResponse::class.java)
 
             cachedPosition = CommanderPosition(
-                profileResponse.LastSystem.Name,
-                false
+                profileResponse.LastSystem.Name, false
             )
             cachedCredits =
                 CommanderCredits(profileResponse.Commander.Credits, profileResponse.Commander.Debt)
@@ -163,8 +163,7 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
     }
 
     private fun getWeaponFromLoadoutResponse(
-        slotsObject: JsonObject,
-        weaponSlotName: String
+        slotsObject: JsonObject, weaponSlotName: String
     ): CommanderLoadoutWeapon? {
         try {
             if (!slotsObject.has(weaponSlotName)) {
@@ -176,8 +175,7 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
 
             // If getting weapon for all loadouts the slots are not included in the response
             if (weaponObject.has("slots") && weaponObject.get("slots").asJsonObject.has("Magazine")) {
-                val magazine =
-                    weaponObject.get("slots").asJsonObject.get("Magazine").asJsonObject
+                val magazine = weaponObject.get("slots").asJsonObject.get("Magazine").asJsonObject
                 magazineName = magazine.get("locName").asString
             }
 
@@ -195,9 +193,15 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
             val loadoutElement = profileResponse.get("loadout")
             val slotsObject = loadoutElement.asJsonObject.get("slots").asJsonObject
 
+            var loadoutName: String? = null
+            if (loadoutElement.asJsonObject.has("name")) {
+                loadoutName = loadoutElement.asJsonObject.get("name").asString
+            }
+
             return CommanderLoadout(
                 true,
                 loadoutElement.asJsonObject.get("loadoutSlotId").asInt,
+                loadoutName,
                 loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString,
                 getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon1"),
                 getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon2"),
@@ -206,12 +210,7 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
 
         } catch (t: Throwable) {
             return CommanderLoadout(
-                false,
-                -1,
-                context.getString(R.string.unknown),
-                null,
-                null,
-                null
+                false, -1, null, context.getString(R.string.unknown), null, null, null
             )
         }
     }
@@ -220,9 +219,15 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
         try {
             val slotsObject = loadoutElement.asJsonObject.get("slots").asJsonObject
 
+            var loadoutName: String? = null
+            if (loadoutElement.asJsonObject.has("name")) {
+                loadoutName = loadoutElement.asJsonObject.get("name").asString
+            }
+
             return CommanderLoadout(
                 true,
                 loadoutElement.asJsonObject.get("loadoutSlotId").asInt,
+                loadoutName,
                 loadoutElement.asJsonObject.get("suit").asJsonObject.get("locName").asString,
                 getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon1"),
                 getWeaponFromLoadoutResponse(slotsObject, "PrimaryWeapon2"),
@@ -252,10 +257,8 @@ class FrontierPlayer(val context: Context) : PlayerNetwork {
     }
 
     private fun getFleetFromApiResponse(profileResponse: JsonObject): CommanderFleet {
-        val currentShipId: Int = profileResponse.get("commander")
-            .asJsonObject
-            .get("currentShipId")
-            .asInt
+        val currentShipId: Int =
+            profileResponse.get("commander").asJsonObject.get("currentShipId").asInt
 
         // Sometimes the cAPI return an array, sometimes an object with indexes
         val responseList: MutableList<JsonElement> = ArrayList()

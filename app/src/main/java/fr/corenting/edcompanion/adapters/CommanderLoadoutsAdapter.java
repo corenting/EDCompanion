@@ -78,7 +78,13 @@ public class CommanderLoadoutsAdapter extends ListAdapter<CommanderLoadout,
     public void onBindViewHolder(@NonNull final loadoutViewHolder holder, final int position) {
         CommanderLoadout currentLoadout = getItem(holder.getAdapterPosition());
 
-        holder.viewBinding.currentLoadoutLayout.loadoutTextView.setText(context.getString(R.string.loadout_with_number, currentLoadout.getLoadoutId() ));
+        // Name
+        if (currentLoadout.getLoadoutName() != null) {
+            holder.viewBinding.currentLoadoutLayout.loadoutTextView.setText(currentLoadout.getLoadoutName());
+        } else {
+            holder.viewBinding.currentLoadoutLayout.loadoutTextView.setText(context.getString(R.string.loadout_with_number, currentLoadout.getLoadoutId()));
+        }
+
         holder.viewBinding.currentLoadoutLayout.suitTextView.setText(currentLoadout.getSuitName());
 
         // Weapons

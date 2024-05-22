@@ -269,11 +269,20 @@ class CommanderStatusFragment : Fragment() {
         if (weapon != null) {
             labelTextView.visibility = View.VISIBLE
             textView.visibility = View.VISIBLE
-            textView.text = getString(
-                R.string.weapon_display,
-                weapon.name,
-                weapon.magazineName
-            )
+
+            if (weapon.magazineName != null) {
+                textView.text = getString(
+                    R.string.weapon_display,
+                    weapon.name,
+                    weapon.magazineName
+                )
+            } else {
+                textView.text = getString(
+                    R.string.weapon_display_without_magazine,
+                    weapon.name
+                )
+            }
+
         } else {
             labelTextView.visibility = View.GONE
             textView.visibility = View.GONE
