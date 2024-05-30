@@ -67,7 +67,7 @@ dependencies {
     // Play services / Firebase
     implementation platform('com.google.firebase:firebase-bom:33.0.0')
     implementation 'com.google.firebase:firebase-messaging-ktx'
-    implementation 'com.google.android.gms:play-services-base:18.4.0'
+    implementation 'com.google.android.gms:play-services-base:18.5.0'
 
     // Retrofit
     ext.retrofitVersion = '2.11.0'
