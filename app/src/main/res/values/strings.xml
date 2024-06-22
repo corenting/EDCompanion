@@ -408,6 +408,10 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
+            <b>Version 2.30.2</b><br />
+            <ul>
+                <li>Fix Python Mk II displayed as "Python_NX"</li><br />
+            </ul>
             <b>Version 2.30.1</b><br />
             <ul>
                 <li>Fix some issues displaying loadouts details</li><br />

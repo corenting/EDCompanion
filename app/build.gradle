@@ -11,8 +11,8 @@ android {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 73
-        versionName "2.30.1"
+        versionCode 74
+        versionName "2.30.2"
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "String", "FRONTIER_AUTH_CLIENT_ID", '"' + FRONTIER_AUTH_CLIENT_ID + '"'
@@ -60,12 +60,12 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     // Lifecycle
-    def lifecycleVersion = '2.8.1'
+    def lifecycleVersion = '2.8.2'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     // Play services / Firebase
-    implementation platform('com.google.firebase:firebase-bom:33.1.0')
+    implementation platform('com.google.firebase:firebase-bom:33.1.1')
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.android.gms:play-services-base:18.5.0'
 

@@ -31,3 +31,6 @@ project.properties
 gradle.properties
 target
 res/xml/tracker.xml
+
+# kotlin
+.kotlin/
