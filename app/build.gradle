@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdk 34
-    buildToolsVersion = "34.0.0"
+    compileSdk 35
+    buildToolsVersion = "35.0.0"
 
     defaultConfig {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 74
         versionName "2.30.2"
         vectorDrawables.useSupportLibrary = true
