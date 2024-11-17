@@ -329,7 +329,7 @@
         Ships pictures from <a href="https://edsm.net">EDSM</a>, available on <a href="https://github.com/EDSM-NET/ED-Ships-ScreenShots">GitHub</a>
         ]]>
     </string>
-    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources.\n\nSee edcompanion.corenting.fr for more details (help, data sourced used etc.)."</string>
+    <string name="about_text">"This app was created by corenting.\nIt is an unofficial app, not affiliated with Frontier Developments or the websites used as sources.\n\nSee edcompanion.corenting.fr for more details (help, data sources used etc.)."</string>
     <string name="about_libs_title">Libraries and code used</string>
     <string name="about_icons_title">Icons used</string>
     <string name="about_contact_me_title">Contact me</string>
@@ -349,7 +349,7 @@
     <string name="settings_cmdr_loadout_display_enable">Display CMDR loadout</string>
     <string name="settings_cmdr_loadout_display_enable_summary">Display loadouts details (current loadout and the list of your loadouts)</string>
     <string name="settings_cmdr_edsm_api_key">EDSM API key</string>
-    <string name="settings_cmdr_edsm_api_key_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings.</string>
+    <string name="settings_cmdr_edsm_api_key_summary">Your personal EDSM API key. You can find it in the "API key" tab of the EDSM.net website settings</string>
     <string name="settings_cmdr_frontier_oauth">Link your Frontier account</string>
     <string name="settings_cmdr_frontier_oauth_summary">Click here to (re)authorize EDCompanion to fetch your CMDR status</string>
     <string name="settings_cmdr_frontier_enable">Enable Frontier account</string>
