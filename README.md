@@ -17,7 +17,7 @@ An unofficial Android companion app for Elite : Dangerous.
 
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
      alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=fr.corenting.edcompanionc&utm_source=github_readme)
+     height="80">](https://play.google.com/store/apps/details?id=fr.corenting.edcompanion&utm_source=github_readme)
 [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
      alt="Get it on Github"
      height="80">](https://github.com/corenting/EDCompanion/releases/latest)
