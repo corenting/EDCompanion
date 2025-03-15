@@ -40,10 +40,12 @@ class CommanderStatusFragment : Fragment() {
     }
 
     private var frontierLoginNeeded: Boolean = false
+    private val frontierLoginNeededLock = Any()
 
     private var _binding: FragmentCommanderStatusBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CommanderViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -189,7 +191,7 @@ class CommanderStatusFragment : Fragment() {
         endLoading()
 
         // Show dialog but only once
-        synchronized(frontierLoginNeeded) {
+        synchronized(frontierLoginNeededLock) {
             if (frontierLoginNeeded) {
                 return
             }
