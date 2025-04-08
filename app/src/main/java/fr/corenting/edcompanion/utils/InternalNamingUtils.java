@@ -6,37 +6,49 @@ public class InternalNamingUtils {
     public static String getShipName(String internalName) {
         String nameToMatch = internalName.toLowerCase();
         return switch (nameToMatch) {
-            case "sidewinder" -> "Sidewinder Mk I";
-            case "eagle" -> "Eagle Mk II";
-            case "viper" -> "Viper Mk III";
-            case "cobramkiii" -> "Cobra Mk III";
-            case "type6" -> "Type-6 Transporter";
-            case "type7" -> "Type-7 Transporter";
-            case "asp" -> "Asp Explorer";
-            case "empire_trader" -> "Imperial Clipper";
-            case "federation_dropship" -> "Federal Dropship";
-            case "type9" -> "Type-9 Heavy";
-            case "belugaliner" -> "Beluga Liner";
-            case "ferdelance" -> "Fer-de-Lance";
-            case "federation_corvette" -> "Federal Corvette";
-            case "cutter" -> "Imperial Cutter";
-            case "diamondback" -> "Diamondback Scout";
-            case "empire_courier" -> "Imperial Courier";
-            case "diamondbackxl" -> "Diamondback Explorer";
-            case "empire_eagle" -> "Imperial Eagle";
-            case "federation_dropship_mkii" -> "Federal Assault Ship";
-            case "federation_gunship" -> "Federal Gunship";
-            case "viper_mkiv" -> "Viper Mk IV";
-            case "cobramkiv" -> "Cobra Mk IV";
-            case "independant_trader" -> "Keelback";
-            case "asp_scout" -> "Asp Scout";
-            case "type9_military" -> "Type-10 Defender";
-            case "krait_mkii" -> "Krait Mk II";
-            case "typex" -> "Alliance Chieftain";
-            case "typex_2" -> "Alliance Crusader";
-            case "typex_3" -> "Alliance Challenger";
-            case "krait_light" -> "Krait Phantom";
-            case "python_nx" -> "Python Mk II";
+            case "adder" -> "Adder",
+            case "anaconda" -> "Anaconda",
+            case "asp" -> "Asp Explorer",
+            case "asp_scout" -> "Asp Scout",
+            case "belugaliner" -> "Beluga Liner",
+            case "cobramkiii" -> "Cobra Mk III",
+            case "cobramkiv" -> "Cobra Mk IV",
+            case "cobramkv" -> "Cobra Mk V",
+            case "clipper" -> "Panther Clipper",
+            case "cutter" -> "Imperial Cutter",
+            case "diamondback" -> "Diamondback Scout",
+            case "diamondbackxl" -> "Diamondback Explorer",
+            case "dolphin" -> "Dolphin",
+            case "eagle" -> "Eagle",
+            case "empire_courier" -> "Imperial Courier",
+            case "empire_eagle" -> "Imperial Eagle",
+            case "empire_trader" -> "Imperial Clipper",
+            case "federation_corvette" -> "Federal Corvette",
+            case "federation_dropship" -> "Federal Dropship",
+            case "federation_dropship_mkii" -> "Federal Assault Ship",
+            case "federation_gunship" -> "Federal Gunship",
+            case "ferdelance" -> "Fer-de-Lance",
+            case "hauler" -> "Hauler",
+            case "independant_trader" -> "Keelback",
+            case "krait_mkii" -> "Krait Mk II",
+            case "krait_light" -> "Krait Phantom",
+            case "mamba" -> "Mamba",
+            case "mandalay" -> "Mandalay",
+            case "orca" -> "Orca",
+            case "python" -> "Python",
+            case "python_nx" -> "Python Mk II",
+            case "sidewinder" -> "Sidewinder",
+            case "type6" -> "Type-6 Transporter",
+            case "type7" -> "Type-7 Transporter",
+            case "type8" -> "Type-8 Transporter",
+            case "type9" -> "Type-9 Heavy",
+            case "type9_military" -> "Type-10 Defender",
+            case "typex" -> "Alliance Chieftain",
+            case "typex_2" -> "Alliance Crusader",
+            case "typex_3" -> "Alliance Challenger",
+            case "viper" -> "Viper Mk III",
+            case "viper_mkiv" -> "Viper Mk IV",
+            case "vulture" -> "Vulture",
             default -> internalName;
         };
     }
