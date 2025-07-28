@@ -14,8 +14,8 @@ public class InternalNamingUtils {
             case "cobramkiii" -> "Cobra Mk III";
             case "cobramkiv" -> "Cobra Mk IV";
             case "cobramkv" -> "Cobra Mk V";
-            case "clipper" -> "Panther Clipper";
-            case "cutter" -> "Imperial Cutter";
+            case "corsair" -> "Corsair";
+            case "cutter" -> "Cutter";
             case "diamondback" -> "Diamondback Scout";
             case "diamondbackxl" -> "Diamondback Explorer";
             case "dolphin" -> "Dolphin";
@@ -30,11 +30,12 @@ public class InternalNamingUtils {
             case "ferdelance" -> "Fer-de-Lance";
             case "hauler" -> "Hauler";
             case "independant_trader" -> "Keelback";
-            case "krait_mkii" -> "Krait Mk II";
             case "krait_light" -> "Krait Phantom";
+            case "krait_mkii" -> "Krait Mk II";
             case "mamba" -> "Mamba";
             case "mandalay" -> "Mandalay";
             case "orca" -> "Orca";
+            case "panthermkii" -> "Panther Clipper Mk II";
             case "python" -> "Python";
             case "python_nx" -> "Python Mk II";
             case "sidewinder" -> "Sidewinder";
