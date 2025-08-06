@@ -408,11 +408,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.31</b><br />
+            <b>Version 2.32</b><br />
             <ul>
-                <li>Update for Android 16</li><br />
-                <li>Fix header in menu being cut</li><br />
-                <li>Fix typos</li><br />
+                <li>Fix name for new ship</li><br />
             </ul>
         ]]>
     </string>
