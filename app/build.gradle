@@ -1,18 +1,20 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdk 36
-    buildToolsVersion = "36.0.0"
+    compileSdk = 36
+    buildToolsVersion = "36.1.0"
 
     defaultConfig {
         applicationId "fr.corenting.edcompanion"
         minSdkVersion 23
         targetSdkVersion 36
-        versionCode 76
-        versionName "2.32"
+        versionCode 77
+        versionName "2.33"
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "String", "FRONTIER_AUTH_CLIENT_ID", '"' + FRONTIER_AUTH_CLIENT_ID + '"'
@@ -23,8 +25,10 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+        }
     }
 
     buildFeatures {
@@ -36,7 +40,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             multiDexEnabled true
@@ -51,23 +55,23 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // AndroidX
-    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.core:core-ktx:1.17.0'
     implementation 'androidx.preference:preference-ktx:1.2.1'
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.material:material:1.13.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0"
 
     // Lifecycle
-    def lifecycleVersion = '2.9.2'
+    def lifecycleVersion = '2.10.0'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     // Play services / Firebase
-    implementation platform('com.google.firebase:firebase-bom:34.0.0')
+    implementation platform('com.google.firebase:firebase-bom:34.6.0')
     implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.android.gms:play-services-base:18.7.2'
+    implementation 'com.google.android.gms:play-services-base:18.9.0'
 
     // Retrofit
     ext.retrofitVersion = '3.0.0'
@@ -81,7 +85,7 @@ dependencies {
 
     // Other
     implementation 'com.makeramen:roundedimageview:2.3.0'
-    implementation 'com.google.code.gson:gson:2.13.1'
+    implementation 'com.google.code.gson:gson:2.13.2'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.9'
     implementation 'org.greenrobot:eventbus:3.3.1'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'

@@ -408,9 +408,9 @@
     <string name="changelog_title">Changelog</string>
     <string name="changelog_message">
         <![CDATA[
-            <b>Version 2.32</b><br />
+            <b>Version 2.33</b><br />
             <ul>
-                <li>Fix name for new ship</li><br />
+                <li>Fix name for new ships</li><br />
             </ul>
         ]]>
     </string>

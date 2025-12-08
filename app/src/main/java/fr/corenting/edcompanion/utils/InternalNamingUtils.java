@@ -23,6 +23,7 @@ public class InternalNamingUtils {
             case "empire_courier" -> "Imperial Courier";
             case "empire_eagle" -> "Imperial Eagle";
             case "empire_trader" -> "Imperial Clipper";
+            case "explorer_nx" -> "Caspian Explorer";
             case "federation_corvette" -> "Federal Corvette";
             case "federation_dropship" -> "Federal Dropship";
             case "federation_dropship_mkii" -> "Federal Assault Ship";
@@ -32,6 +33,7 @@ public class InternalNamingUtils {
             case "independant_trader" -> "Keelback";
             case "krait_light" -> "Krait Phantom";
             case "krait_mkii" -> "Krait Mk II";
+            case "lakonminer" -> "Type-11 Prospector";
             case "mamba" -> "Mamba";
             case "mandalay" -> "Mandalay";
             case "orca" -> "Orca";
