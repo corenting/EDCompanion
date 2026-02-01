@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdk = 36
+    compileSdk = 36.1
     buildToolsVersion = "36.1.0"
 
     defaultConfig {
@@ -69,9 +69,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     // Play services / Firebase
-    implementation platform('com.google.firebase:firebase-bom:34.6.0')
+    implementation platform('com.google.firebase:firebase-bom:34.8.0')
     implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.android.gms:play-services-base:18.9.0'
+    implementation 'com.google.android.gms:play-services-base:18.10.0'
 
     // Retrofit
     ext.retrofitVersion = '3.0.0'
