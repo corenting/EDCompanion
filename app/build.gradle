@@ -79,7 +79,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Glide
-    ext.glideVersion = '4.16.0'
+    ext.glideVersion = '5.0.5'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
