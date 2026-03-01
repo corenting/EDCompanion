@@ -41,6 +41,7 @@ public class InternalNamingUtils {
             case "python" -> "Python";
             case "python_nx" -> "Python Mk II";
             case "sidewinder" -> "Sidewinder";
+            case "smallcombat01_nx" -> "Kestrel Mk II";
             case "type6" -> "Type-6 Transporter";
             case "type7" -> "Type-7 Transporter";
             case "type8" -> "Type-8 Transporter";
