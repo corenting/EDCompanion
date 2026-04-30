@@ -36,6 +36,7 @@ public class InternalNamingUtils {
             case "lakonminer" -> "Type-11 Prospector";
             case "mamba" -> "Mamba";
             case "mandalay" -> "Mandalay";
+            case "mediumtransport01" -> "Lynx Highliner";
             case "orca" -> "Orca";
             case "panthermkii" -> "Panther Clipper Mk II";
             case "python" -> "Python";
